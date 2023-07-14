@@ -1,0 +1,2556 @@
+{
+    "scenario_name": "test_Mummies",
+    "scenario_description": "We went to the museum to see the new Mummy exhibit. It was amazing to see all these dead artifacts. They have been maintained for all these years. They showed the different processes of mummification. I was amazed and was glad to have gone.",
+    "last_ended": "end",
+    "agents": {
+        "Visitor_1": {
+            "knowledge_base": [
+                "BEL(Visitor_1, visited_museum) = True",
+                "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                "BEL(Visitor_1, exhibits_well_maintained) = True",
+                "BEL(Visitor_1, amazed_by_exhibit) = True",
+                "DES(Visitor_1, learn_about_mummification) = True",
+                "DES(Visitor_1, enjoy_museum_visit) = True",
+                "DES(Visitor_1, take_photos_of_exhibit) = True"
+            ],
+            "intentions": {
+                "INTENT(Visitor_1, observe_mummy_exhibit) = True": {
+                    "action_plan": [
+                        "Move(Visitor_1, Museum)",
+                        "Enter(Visitor_1, Museum)",
+                        "Observe(Visitor_1, MummyExhibit)",
+                        "TakePhotos(Visitor_1, MummyExhibit)",
+                        "Leave(Visitor_1, Museum)"
+                    ]
+                },
+                "INTENT(Visitor_1, learn_about_mummification) = True": {
+                    "action_plan": [
+                        "Move(Visitor_1, Museum, direction='north')",
+                        "Enter(Visitor_1, Museum)",
+                        "Pay(Visitor_1, Museum)",
+                        "Move(Visitor_1, Museum, direction='west')",
+                        "Look(Visitor_1, Exhibit)",
+                        "TakePhoto(Visitor_1, Exhibit)",
+                        "Read(Visitor_1, Exhibit, 'mummification processes')",
+                        "FeelAmazed(Visitor_1)",
+                        "Move(Visitor_1, Museum, direction='south')",
+                        "Exit(Visitor_1, Museum)"
+                    ]
+                },
+                "INTENT(Visitor_1, enjoy_museum_visit) = True": {
+                    "action_plan": [
+                        "Move(Visitor_1, Museum, Entry)",
+                        "Observe(Visitor_1, Exhibit, Mummy)",
+                        "Take(Visitor_1, Photo, Mummy Exhibit)",
+                        "Talk(Visitor_1, Guide, Learn About Mummification)",
+                        "Observe(Visitor_1, Exhibits, Other Galleries)",
+                        "Move(Visitor_1, Museum, Exit)"
+                    ]
+                },
+                "INTENT(Visitor_1, take_photos_of_exhibit) = True": {
+                    "action_plan": [
+                        "INTENT(Visitor_1, take_photos_of_exhibit) = True",
+                        "Move(Visitor_1, Mummy_Exhibit)",
+                        "Take_Photo(Visitor_1, Mummy_Exhibit, Flash_Off)",
+                        "Check_Photo_Quality(Visitor_1, Mummy_Exhibit)",
+                        "Save_Photo(Visitor_1, Smartphone, Mummy_Exhibit_Photo)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Visitor_1, take_photos_of_exhibit) = True": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, has_mummy_exhibit_photo) = True",
+                        "BEL(Visitor_1, has_photo_of_good_quality) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Move(Visitor_1, Mummy_Exhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Take_Photo(Visitor_1, Mummy_Exhibit, Flash_Off)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "BEL(Mummy_Exhibit, exhibit_lit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, has_taken_photo) = True",
+                        "DES(Visitor_1, share_photo_on_social_media) = True",
+                        "BEL(Mummy_Exhibit, exhibit_new_photo) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Check_Photo_Quality(Visitor_1, Mummy_Exhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_1, has_smartphone) = True",
+                        "BEL(Visitor_1, at_museum) = True",
+                        "BEL(Visitor_1, took_photo_of_Mummy_Exhibit) = True",
+                        "BEL(Visitor_1, photo_quality_checked) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, photo_quality_checked) = True",
+                        "BEL(Visitor_1, photo_quality_good) = True",
+                        "DES(Visitor_1, share_photo_with_friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Save_Photo(Visitor_1, Smartphone, Mummy_Exhibit_Photo)": {
+                    "conditions": [
+                        "BEL(Visitor_1, take_photos_of_exhibit) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, has_mummy_exhibit_photo) = True",
+                        "BEL(Visitor_1, took_photo_of_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Move(Visitor_1, Museum)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, visited_museum) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Enter(Visitor_1, Museum)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = False",
+                        "BEL(Museum, is_open) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, visited_museum) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Observe(Visitor_1, MummyExhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "TakePhotos(Visitor_1, MummyExhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True"
+                    ],
+                    "effects": [
+                        "DES(Visitor_1, share_photos_with_friends) = True",
+                        "BEL(Visitor_1, has_photos_of_mummy_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Leave(Visitor_1, Museum)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, visited_museum) = False",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = False",
+                        "BEL(Visitor_1, exhibits_well_maintained) = False",
+                        "BEL(Visitor_1, amazed_by_exhibit) = False",
+                        "DES(Visitor_1, learn_about_mummification) = False",
+                        "DES(Visitor_1, enjoy_museum_visit) = False",
+                        "DES(Visitor_1, take_photos_of_exhibit) = False",
+                        "BEL(Visitor_1, left_museum) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Move(Visitor_1, Museum, direction='north')": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Museum, is_open) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, at_Museum_north_entrance) = True",
+                        "BEL(Visitor_1, at_Museum_south_entrance) = False"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Pay(Visitor_1, Museum)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = False",
+                        "BEL(Visitor_1, museum_entry_fee) = 10",
+                        "BEL(Visitor_1, has_enough_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, museum_entry_fee) = 0",
+                        "BEL(Visitor_1, has_enough_money) = False",
+                        "BEL(Museum, has_visitor(Visitor_1)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Move(Visitor_1, Museum, direction='west')": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Look(Visitor_1, Exhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = False",
+                        "BEL(Museum, exhibit_present) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = False",
+                        "BEL(Visitor_1, tired) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, interested_in_mummification) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "BEL(Visitor_1, curious_about_other_exhibits) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "TakePhoto(Visitor_1, Exhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, has_photo_of_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Read(Visitor_1, Exhibit, 'mummification processes')": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, learned_about_mummification) = True",
+                        "BEL(Visitor_1, read_exhibit_info) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "FeelAmazed(Visitor_1)": {
+                    "conditions": [
+                        "BEL(Visitor_1, amazed_by_exhibit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, amazed_by_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Move(Visitor_1, Museum, direction='south')": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, visited_museum_south) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Exit(Visitor_1, Museum)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, visited_museum) = False",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = False",
+                        "BEL(Visitor_1, exhibits_well_maintained) = False",
+                        "BEL(Visitor_1, amazed_by_exhibit) = False",
+                        "DES(Visitor_1, learn_about_mummification) = False",
+                        "DES(Visitor_1, enjoy_museum_visit) = False",
+                        "DES(Visitor_1, take_photos_of_exhibit) = False",
+                        "BEL(Visitor_1, has_left_museum) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Move(Visitor_1, Museum, Entry)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = False",
+                        "BEL(Visitor_1, has_ticket) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, at_location) = Entry"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Observe(Visitor_1, Exhibit, Mummy)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Take(Visitor_1, Photo, Mummy Exhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, took_photo_of_mummy_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Talk(Visitor_1, Guide, Learn About Mummification)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Guide, knowledgeable_about_mummification) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, learned_about_mummification) = True",
+                        "BEL(Guide, shared_knowledge_about_mummification) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Observe(Visitor_1, Exhibits, Other Galleries)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, observed_other_exhibits) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Move(Visitor_1, Museum, Exit)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "BEL(Visitor_1, talked_to_guide) = True",
+                        "BEL(Visitor_1, observed_other_exhibits) = True",
+                        "INTENT(Visitor_1, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, left_museum) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, Greeting, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True or DES(Visitor_1, enjoy_museum_visit) = True or DES(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Greeting, Question, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "@Relief"
+                    ]
+                },
+                "Speak(Question, Answer, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True"
+                    ],
+                    "effects": [
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "INTENT(Visitor_1, observe_mummy_exhibit) = True",
+                        "INTENT(Visitor_1, learn_about_mummification) = True",
+                        "INTENT(Visitor_1, enjoy_museum_visit) = True",
+                        "INTENT(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Answer, Response, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "INTENT(Visitor_1, observe_mummy_exhibit) = True",
+                        "INTENT(Visitor_1, learn_about_mummification) = True",
+                        "INTENT(Visitor_1, enjoy_museum_visit) = True",
+                        "INTENT(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "emotion"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Response, Opinion, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "INTENT(Visitor_1, observe_mummy_exhibit) = True",
+                        "INTENT(Visitor_1, learn_about_mummification) = True",
+                        "INTENT(Visitor_1, enjoy_museum_visit) = True",
+                        "INTENT(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, spoke) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Opinion, Feedback, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "BEL(Visitor_1, has_photos_of_exhibit) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Feedback, Bye, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "INTENT(Visitor_1, observe_mummy_exhibit) = True",
+                        "INTENT(Visitor_1, learn_about_mummification) = True",
+                        "INTENT(Visitor_1, enjoy_museum_visit) = True",
+                        "INTENT(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Speak(Question, Smalltalk, Personality, Friendly)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "INTENT(Visitor_1, observe_mummy_exhibit) = True",
+                        "INTENT(Visitor_1, learn_about_mummification) = True",
+                        "INTENT(Visitor_1, enjoy_museum_visit) = True",
+                        "INTENT(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": []
+                },
+                "Speak(Smalltalk, Feedback, Personality, Friendly)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "INTENT(Visitor_1, observe_mummy_exhibit) = True",
+                        "INTENT(Visitor_1, learn_about_mummification) = True",
+                        "INTENT(Visitor_1, enjoy_museum_visit) = True",
+                        "INTENT(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, spoke_to_someone_about_museum) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Answer, Smalltalk, Personality, Friendly)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "INTENT(Visitor_1, observe_mummy_exhibit) = True",
+                        "INTENT(Visitor_1, learn_about_mummification) = True",
+                        "INTENT(Visitor_1, enjoy_museum_visit) = True",
+                        "INTENT(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, talked_about_favorite_exhibit) = True",
+                        "BEL(Visitor_1, learned_about_mummification) = True",
+                        "BEL(Visitor_1, enjoyed_museum_visit) = True",
+                        "BEL(Visitor_1, took_photos_of_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "no emotion",
+                        "neutral"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Start, Bye, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_1, visited_museum) = True",
+                        "BEL(Visitor_1, saw_mummy_exhibit) = True",
+                        "BEL(Visitor_1, exhibits_well_maintained) = True",
+                        "BEL(Visitor_1, amazed_by_exhibit) = True",
+                        "DES(Visitor_1, learn_about_mummification) = True",
+                        "DES(Visitor_1, enjoy_museum_visit) = True",
+                        "DES(Visitor_1, take_photos_of_exhibit) = True",
+                        "INTENT(Visitor_1, observe_mummy_exhibit) = True",
+                        "INTENT(Visitor_1, learn_about_mummification) = True",
+                        "INTENT(Visitor_1, enjoy_museum_visit) = True",
+                        "INTENT(Visitor_1, take_photos_of_exhibit) = True"
+                    ],
+                    "effects": [
+                        "None"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": []
+                }
+            }
+        },
+        "Visitor_2": {
+            "knowledge_base": [
+                "BEL(Visitor_2, at_museum) = True",
+                "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                "DES(Visitor_2, see_mummy_exhibit) = True",
+                "DES(Visitor_2, learn_about_mummies) = True",
+                "DES(Visitor_2, enjoy_museum_visit) = True"
+            ],
+            "intentions": {
+                "INTENT(Visitor_2, see_mummy_exhibit) = True": {
+                    "action_plan": [
+                        "Agent(Visitor_2)",
+                        "INTENT(Visitor_2, see_mummy_exhibit)",
+                        "GoToMuseum(Visitor_2, Museum)",
+                        "FindMummyExhibit(Visitor_2, Mummy_Exhibit)",
+                        "ObserveMummificationProcesses(Visitor_2, Mummy_Exhibit)",
+                        "AskQuestionsToGuide(Visitor_2, Guide, Mummy_Exhibit)",
+                        "ReflectOnVisit(Visitor_2)"
+                    ]
+                },
+                "INTENT(Visitor_2, learn_about_mummies) = True": {
+                    "action_plan": [
+                        "INTENT(Visitor_2, learn_about_mummies) = True",
+                        "Move(Visitor_2, to_museum, (ticket))",
+                        "Observe(Visitor_2, mummy_exhibit,())",
+                        "Listen(Visitor_2, to_guide, (mummy_exhibit))",
+                        "Read(Visitor_2, exhibit_information, (mummies))",
+                        "Interact(Visitor_2, with_museum_interactive, (mummification_process))",
+                        "Reflect(Visitor_2, on_museum_visit,())"
+                    ]
+                },
+                "INTENT(Visitor_2, enjoy_museum_visit) = True": {
+                    "action_plan": [
+                        "MoveTo(Visitor_2, Museum)",
+                        "ObserveExhibit(Visitor_2, NewMummyExhibit)",
+                        "LearnAboutMummies(Visitor_2, NewMummyExhibit)",
+                        "ExperienceAmazement(Visitor_2, NewMummyExhibit)",
+                        "ExploreMuseum(Visitor_2)",
+                        "LeaveMuseum(Visitor_2)"
+                    ]
+                }
+            },
+            "actions": {
+                "MoveTo(Visitor_2, Museum)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = False",
+                        "BEL(Visitor_2, in_queue) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, at_museum) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ObserveExhibit(Visitor_2, NewMummyExhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, observed_new_mummy_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Amazement"
+                    ]
+                },
+                "LearnAboutMummies(Visitor_2, NewMummyExhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, learned_about_mummies_in_NewMummyExhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "ExperienceAmazement(Visitor_2, NewMummyExhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = False",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = Unknown"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "ExploreMuseum(Visitor_2)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, has_explored_museum) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "LeaveMuseum(Visitor_2)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, left_museum) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, at_museum) = False",
+                        "BEL(Visitor_2, left_museum) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Agent(Visitor_2)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_home) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, at_museum) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "INTENT(Visitor_2, see_mummy_exhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, seen_mummy_exhibit) = True",
+                        "BEL(Visitor_2, visited_museum) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "GoToMuseum(Visitor_2, Museum)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_home) = False",
+                        "BEL(Visitor_2, at_museum) = False",
+                        "BEL(Museum, open) = True",
+                        "BEL(Museum, has_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, at_museum) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "FindMummyExhibit(Visitor_2, Mummy_Exhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, Mummy_Exhibit_location_known) = False"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, Mummy_Exhibit_location_known) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Excitement"
+                    ]
+                },
+                "ObserveMummificationProcesses(Visitor_2, Mummy_Exhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Mummy_Exhibit, processes_are_being_shown) = True",
+                        "BEL(Mummy_Exhibit, visitor_2_has_not_observed_processes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, observed_mummification_processes) = True",
+                        "BEL(Mummy_Exhibit, visitor_2_has_observed_processes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "AskQuestionsToGuide(Visitor_2, Guide, Mummy_Exhibit)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Guide, available_to_answer_questions) = True",
+                        "BEL(Guide, knowledgeable_about_mummies) = True",
+                        "BEL(Guide, present_in_museum) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, has_asked_questions) = True",
+                        "BEL(Guide, has_answered_questions_about_mummies) = True",
+                        "BEL(Guide, available_to_answer_questions) = False",
+                        "DES(Visitor_2, satisfy_curiosity_about_mummies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "ReflectOnVisit(Visitor_2)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, reflected_on_museum_visit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "INTENT(Visitor_2, learn_about_mummies) = True": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = False",
+                        "DES(Visitor_2, see_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(Visitor_2, to_museum, (ticket))": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_home) = False",
+                        "BEL(Visitor_2, at_museum) = False",
+                        "BEL(Visitor_2, has_ticket) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, at_home) = False",
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, has_ticket) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Observe(Visitor_2, mummy_exhibit,())": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, observed_mummy_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Listen(Visitor_2, to_guide, (mummy_exhibit))": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True",
+                        "BEL(Guide, present, mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, listened_to_guide_information) = True",
+                        "DES(Visitor_2, ask_guide_questions) = True",
+                        "BEL(Guide, listened_to, Visitor_2) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Read(Visitor_2, exhibit_information, (mummies))": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, learned_about_mummification) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Interact(Visitor_2, with_museum_interactive, (mummification_process))": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, interacted_with_museum_interactive) = True",
+                        "BEL(Visitor_2, learned_about_mummification_process) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Reflect(Visitor_2, on_museum_visit,())": {
+                    "conditions": [
+                        "INTENT(Visitor_2, learn_about_mummies) = True",
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True",
+                        "BEL(Visitor_2, visited_museum) = True"
+                    ],
+                    "effects": [
+                        "DES(Visitor_2, share_experience) = True",
+                        "BEL(Visitor_2, reflected_on_museum_visit) = True"
+                    ],
+                    "occ_emotion": [
+                        "satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, Greeting, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [
+                        "None"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Greeting, Question, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True",
+                        "INTENT(Visitor_2, see_mummy_exhibit) = True",
+                        "INTENT(Visitor_2, learn_about_mummies) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Question, Answer, None, None)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Curiosity",
+                        "Interest"
+                    ]
+                },
+                "Speak(Answer, Opinion, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Visitor_2, see_mummy_exhibit) = False",
+                        "BEL(Visitor_2, see_mummy_exhibit) = True",
+                        "INTENT(Visitor_2, learn_about_mummies) = False",
+                        "BEL(Visitor_2, learn_about_mummies) = True",
+                        "INTENT(Visitor_2, enjoy_museum_visit) = False",
+                        "BEL(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Speak(Opinion, Response, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "INTENT(Visitor_2, see_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, see_mummy_exhibit) = False",
+                        "INTENT(Visitor_2, learn_about_mummies) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Response, Smalltalk, Personality, Friendly)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Speak(Smalltalk, Opinion, Personality, Friendly)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "INTENT(Visitor_2, see_mummy_exhibit) = True",
+                        "INTENT(Visitor_2, learn_about_mummies) = True",
+                        "INTENT(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [
+                        "None"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Speak(Opinion, Feedback, Personality, Friendly)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Speak(Greeting, Smalltalk, Personality, Curious)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "admiration",
+                        "satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "curiosity"
+                    ]
+                },
+                "Speak(Smalltalk, Feedback, Personality, Curious)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Question, Feedback, Personality, Curious)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "INTENT(Visitor_2, see_mummy_exhibit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Feedback, Opinion, Personality, Curious)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, spoke_about_mummy_exhibit) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Opinion, Bye, Personality, Curious)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "INTENT(Visitor_2, see_mummy_exhibit) = True",
+                        "INTENT(Visitor_2, learn_about_mummies) = True",
+                        "INTENT(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": []
+                },
+                "Speak(Start, Bye, None, None)": {
+                    "conditions": [
+                        "BEL(Visitor_2, at_museum) = True",
+                        "BEL(Visitor_2, new_mummy_exhibit_exists) = True",
+                        "BEL(Visitor_2, mummy_exhibit_is_amazing) = True",
+                        "BEL(Visitor_2, mummies_are_dead_artifacts) = True",
+                        "BEL(Visitor_2, mummies_were_maintained_for_years) = True",
+                        "BEL(Visitor_2, mummification_processes_are_shown) = True",
+                        "DES(Visitor_2, see_mummy_exhibit) = True",
+                        "DES(Visitor_2, learn_about_mummies) = True",
+                        "DES(Visitor_2, enjoy_museum_visit) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": []
+                }
+            }
+        },
+        "Guide": {
+            "knowledge_base": [
+                "BEL(Guide, familiar_with_museum_layout) = True",
+                "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                "BEL(Guide, has_museum_informational_materials) = True",
+                "BEL(Guide, emergency_procedure_knowledge) = True",
+                "DES(Guide, provide_accurate_information_about_exhibit)",
+                "DES(Guide, ensure_safety_of_visitors)",
+                "DES(Guide, provide_assistance_to_visitors_if_needed)",
+                "DES(Guide, make_the_experience_enjoyable_for_the_visitors)"
+            ],
+            "intentions": {
+                "INTENT(Guide, provide_accurate_information_about_exhibit) = True": {
+                    "action_plan": [
+                        "Greet(Guide, Visitors)",
+                        "Inquire_about_interests(Guide, Visitors)",
+                        "Provide_informational_materials(Guide, Visitors)",
+                        "Explain_mummy_exhibit(Guide, Visitors)",
+                        "Answer_questions(Guide, Visitors)",
+                        "Ensure_safety(Guide, Visitors)",
+                        "Assist_visitors(Guide, Visitors, Assistance_Type)",
+                        "Thank(Guide, Visitors)"
+                    ]
+                },
+                "INTENT(Guide, ensure_safety_of_visitors) = True": {
+                    "action_plan": [
+                        "Greet(Guide, Visitor_1)",
+                        "Ask(Visitor_1, if_they_have_any_questions)",
+                        "Answer(Guide, Visitor_1, Question)",
+                        "Inform(Visitor_1, about_emergency_procedures)",
+                        "Direct(Visitor_1, towards_the_mummy_exhibit)",
+                        "Monitor(Visitor_1, and_other_visitors_in_the_area_of_the_mummy_exhibit)",
+                        "Approach(Visitor_in_distress, and_offer_assistance)",
+                        "Warn(Visitor_engaging_in_unsafe_behavior)",
+                        "Escort(Visitor_engaging_in_unsafe_behavior, out_of_the_exhibit_area)",
+                        "Greet(Guide, Visitor_2)",
+                        "Ask(Visitor_2, if_they_have_any_questions)",
+                        "Answer(Guide, Visitor_2, Question)",
+                        "Inform(Visitor_2, about_emergency_procedures)",
+                        "Direct(Visitor_2, towards_the_mummy_exhibit)",
+                        "Monitor(Visitor_2, and_other_visitors_in_the_area_of_the_mummy_exhibit)",
+                        "Approach(Visitor_in_distress, and_offer_assistance)",
+                        "Warn(Visitor_engaging_in_unsafe_behavior)",
+                        "Escort(Visitor_engaging_in_unsafe_behavior, out_of_the_exhibit_area)",
+                        "Thank(Visitor_1, for_visiting_the_museum)",
+                        "Thank(Visitor_2, for_visiting_the_museum)"
+                    ]
+                },
+                "INTENT(Guide, provide_assistance_to_visitors_if_needed) = True": {
+                    "action_plan": [
+                        "GreetVisitor(Guide,Visitor_1)",
+                        "GreetVisitor(Guide,Visitor_2)",
+                        "ProvideInformation(Guide,Visitor_1,mummy_exhibit)",
+                        "ProvideInformation(Guide,Visitor_2,mummy_exhibit)",
+                        "OfferMap(Guide,Visitor_1)",
+                        "OfferMap(Guide,Visitor_2)",
+                        "MonitorVisitors(Guide,Security_Guard)",
+                        "AssistVisitors(Guide,Visitor_1)",
+                        "AssistVisitors(Guide,Visitor_2)",
+                        "EngageVisitors(Guide,Visitor_1)",
+                        "EngageVisitors(Guide,Visitor_2)"
+                    ]
+                },
+                "INTENT(Guide, make_the_experience_enjoyable_for_the_visitors) = True": {
+                    "action_plan": [
+                        "Greet( Guide, Visitors )",
+                        "Provide( Guide, Informational_Materials, Visitors )",
+                        "Accompany( Guide, Visitors, Mummy_Exhibit )",
+                        "Answer( Guide, Visitor_Questions, Visitors )",
+                        "Ensure( Guide, Safety_of_Visitors, Visitors )",
+                        "Assist( Guide, Visitors_if_needed, Visitors )",
+                        "Express( Guide, Appreciation, Visitors )"
+                    ]
+                }
+            },
+            "actions": {
+                "Greet( Guide, Visitors )": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitors, arrived) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, greeted_visitors) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Provide( Guide, Informational_Materials, Visitors )": {
+                    "conditions": [
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Guide, familiar_with_museum_layout) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitors, received_informational_materials) = True",
+                        "BEL(Guide, has_museum_informational_materials) = False",
+                        "DES(Guide, provide_accurate_information_about_exhibit) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Accompany( Guide, Visitors, Mummy_Exhibit )": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitors, interested_in_Mummy_Exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, staying_with_Visitors) = True",
+                        "BEL(Visitors, accompanied_by_Guide) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Answer( Guide, Visitor_Questions, Visitors )": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Visitors, have_questions) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, provide_accurate_information_about_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Ensure( Guide, Safety_of_Visitors, Visitors )": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, emergency_procedure_knowledge) = True",
+                        "BEL(Visitors, in_a_potentially_dangerous_situation) = True"
+                    ],
+                    "effects": [
+                        "DES(Guide, ensure_safety_of_visitors) = True",
+                        "BEL(Guide, successfully_ensured_safety_of_visitors) = True",
+                        "BEL(Visitors, safe) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Assist( Guide, Visitors_if_needed, Visitors )": {
+                    "conditions": [
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Guide, assist_visitors) = True",
+                        "BEL(Visitor, needs_assistance) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, assisted_visitor) = True",
+                        "BEL(Visitor, received_assistance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Compassion"
+                    ]
+                },
+                "Express( Guide, Appreciation, Visitors )": {
+                    "conditions": [
+                        "BEL(Guide, make_the_experience_enjoyable_for_the_visitors) = True",
+                        "BEL(Guide, greeted_visitors) = True"
+                    ],
+                    "effects": [
+                        "DES(Visitor_1, feels_appreciated_by_guide) = True",
+                        "DES(Visitor_2, feels_appreciated_by_guide) = True",
+                        "BEL(Guide, succeeded_in_making_experience_enjoyable) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Greet(Guide, Visitors)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, greeted_visitors) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Inquire_about_interests(Guide, Visitors)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "DES(Guide, provide_accurate_information_about_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, has_information_about_visitors_interests) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "curiosity"
+                    ]
+                },
+                "Provide_informational_materials(Guide, Visitors)": {
+                    "conditions": [
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitors, interested_in_museum_information) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, provided_visitors_with_informational_materials) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Explain_mummy_exhibit(Guide, Visitors)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_mummy_exhibit_layout) = True",
+                        "BEL(Guide, knowledge_about_mummies) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitors, interested_in_mummies) = True",
+                        "BEL(Visitors, curious_about_egyptian_history) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, successfully_explained_mummy_exhibit) = True",
+                        "BEL(Visitors, informed_about_mummy_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Answer_questions(Guide, Visitors)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitors, have_questions_about_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, have_answered_visitors_questions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Ensure_safety(Guide, Visitors)": {
+                    "conditions": [
+                        "BEL(Guide, emergency_procedure_knowledge) = True",
+                        "BEL(Visitors, in_danger) = False"
+                    ],
+                    "effects": [
+                        "BEL(Guide, ensured_safety) = True",
+                        "BEL(Visitors, safe) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Assist_visitors(Guide, Visitors, Assistance_Type)": {
+                    "conditions": [
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Visitors, need_assistance) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, successfully_assisted_visitors) = True",
+                        "DES(Guide, make_the_experience_enjoyable_for_the_visitors) = True",
+                        "DES(Visitors, assisted_by_guide) = True",
+                        "BEL(Visitors, satisfied_with_experience) = True",
+                        "BEL(Visitors, increased_knowledge_about_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Compassion"
+                    ]
+                },
+                "Thank(Guide, Visitors)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Guide, emergency_procedure_knowledge) = True",
+                        "BEL(Visitors, visited_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "DES(Guide, make_the_experience_enjoyable_for_the_visitors) = True",
+                        "BEL(Guide, provided_accurate_information_about_exhibit) = True",
+                        "BEL(Visitors, felt_satisfied_with_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Greet(Guide, Visitor_1)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Ask(Visitor_1, if_they_have_any_questions)": {
+                    "conditions": [
+                        "BEL(Guide, is_present_at_the_museum) = True",
+                        "BEL(Guide, has_knowledge_of_museum_layout) = True",
+                        "BEL(Visitor_1, is_in_the_area)",
+                        "BEL(Guide, has_answerable_information)"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, has_been_asked_for_questions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Answer(Guide, Visitor_1, Question)": {
+                    "conditions": [
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Visitor_1, has_question_about_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, received_answer_to_question) = True",
+                        "BEL(Guide, has_shared_information_about_mummy_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Inform(Visitor_1, about_emergency_procedures)": {
+                    "conditions": [
+                        "BEL(Guide, emergency_procedure_knowledge) = True",
+                        "BEL(Visitor_1, in_museum) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, aware_of_emergency_procedures) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Direct(Visitor_1, towards_the_mummy_exhibit)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, on_the_way_to_mummy_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Monitor(Visitor_1, and_other_visitors_in_the_area_of_the_mummy_exhibit)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "Monitor_Ongoing(Guide) = False",
+                        "VISITING(Visitor_1) = True"
+                    ],
+                    "effects": [
+                        "Monitor_Ongoing(Guide) = True",
+                        "BEL(Visitor_1, being_monitored) = True",
+                        "BEL(Visitor_1, in_mummy_exhibit_area) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Approach(Visitor_in_distress, and_offer_assistance)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Guide, emergency_procedure_knowledge) = True",
+                        "BEL(Visitor_in_distress, in_museum) = True"
+                    ],
+                    "effects": [
+                        "DES(Guide, provide_assistance_to_visitors_if_needed)",
+                        "BEL(Visitor_in_distress, feels_helped) = True"
+                    ],
+                    "occ_emotion": [
+                        "compassion"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "Warn(Visitor_engaging_in_unsafe_behavior)": {
+                    "conditions": [
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitor_engaging_in_unsafe_behavior, behaving_unsafely) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_engaging_in_unsafe_behavior, warned_about_unsafe_behavior) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Escort(Visitor_engaging_in_unsafe_behavior, out_of_the_exhibit_area)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, ensure_safety_of_visitors) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_engaging_in_unsafe_behavior, escorted_out_of_exhibit_area) = True",
+                        "BEL(Guide, maintaining_safety_of_visitors) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Greet(Guide, Visitor_2)": {
+                    "conditions": [
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, greeted_by_Guide) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Ask(Visitor_2, if_they_have_any_questions)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitor_2, visited_museum) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, asked_questions_about_mummy_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "hope"
+                    ]
+                },
+                "Answer(Guide, Visitor_2, Question)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitor_2, has_question) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, question_answered) = True",
+                        "BEL(Guide, informational_materials_decreased) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Inform(Visitor_2, about_emergency_procedures)": {
+                    "conditions": [
+                        "BEL(Guide, emergency_procedure_knowledge) = True",
+                        "BEL(Visitor_2, interested_in_emergency_procedures) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, informed_about_emergency_procedures) = True"
+                    ],
+                    "occ_emotion": [
+                        "relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Direct(Visitor_2, towards_the_mummy_exhibit)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitor_2, is_in_museum) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, is_in_mummy_exhibit) = True",
+                        "BEL(Visitor_2, has_information_about_mummies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "(Hope)"
+                    ]
+                },
+                "Monitor(Visitor_2, and_other_visitors_in_the_area_of_the_mummy_exhibit)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Guide, monitoring_is_needed) = True",
+                        "BEL(Visitor_2, in_the_mummy_exhibit_area) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, visitor_2_is_monitored) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Thank(Visitor_1, for_visiting_the_museum)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitor_1, visited_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, expressed_gratitude_to_Visitor_1) = True",
+                        "DES(Guide, improve_visitor_experience) += 1",
+                        "BEL(Visitor_1, felt_welcomed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Thank(Visitor_2, for_visiting_the_museum)": {
+                    "conditions": [
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Visitor_2, visited_museum_before) = False"
+                    ],
+                    "effects": [
+                        "DES(Guide, make_the_experience_enjoyable_for_the_visitors) = True",
+                        "BEL(Visitor_2, visited_museum_before) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "GreetVisitor(Guide,Visitor_1)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "GreetVisitor(Guide,Visitor_2)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, greeted_by_guide) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "ProvideInformation(Guide,Visitor_1,mummy_exhibit)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitor_1, interested_in_mummies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, informed_about_mummy_exhibit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "satisfaction"
+                    ]
+                },
+                "ProvideInformation(Guide,Visitor_2,mummy_exhibit)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitor_2, has_question_about_mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, received_information_about_mummy_exhibit) = True",
+                        "BEL(Guide, provided_information_to_visitor_2) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "OfferMap(Guide,Visitor_1)": {
+                    "conditions": [
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitor_1, wants_a_map) = True",
+                        "BEL(Visitor_1, has_not_received_a_map) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, has_received_a_map) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "OfferMap(Guide,Visitor_2)": {
+                    "conditions": [
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Visitor_2, wants_to_see_museum_layout) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, knows_museum_layout) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MonitorVisitors(Guide,Security_Guard)": {
+                    "conditions": [
+                        "BEL(Guide, ensure_safety_of_visitors) = True",
+                        "BEL(Guide, familiar_with_museum_layout) = True"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, informed_about_visitors) = True"
+                    ],
+                    "occ_emotion": [
+                        "Vigilance"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "AssistVisitors(Guide,Visitor_1)": {
+                    "conditions": [
+                        "BEL(Guide, provide_assistance_to_visitors_if_needed) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Visitor_1, need_assistance) = True",
+                        "BEL(Guide, able_to_assist) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_1, received_assistance) = True",
+                        "BEL(Guide, provided_assistance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "AssistVisitors(Guide,Visitor_2)": {
+                    "conditions": [
+                        "BEL(Guide, has_museum_informational_materials) = True",
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "DES(Guide, provide_assistance_to_visitors_if_needed) = True",
+                        "BEL(Visitor_2, needs_assistance) = True",
+                        "BEL(Guide, can_adequately_assist_visitor_2) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitor_2, received_assistance_from_guide) = True",
+                        "BEL(Guide, successfully_assisted_visitor_2) = True",
+                        "BEL(Guide, building_rapport_with_visitor_2) = True",
+                        "DES(Guide, make_the_experience_enjoyable_for_the_visitors) -= 1"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "EngageVisitors(Guide,Visitor_1)": {
+                    "conditions": [
+                        "BEL(Guide, has_engaged_visitor_1) = False",
+                        "BEL(Visitor_1, interested_in_Mummy_exhibit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guide, has_engaged_visitor_1) = True",
+                        "DES(Guide, build_a_positive_experience_for_visitors) += 1",
+                        "BEL(Visitor_1, feels_engaged_by_guide) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "EngageVisitors(Guide,Visitor_2)": {
+                    "conditions": [
+                        "BEL(Guide, familiar_with_museum_layout) = True",
+                        "BEL(Guide, knowledge_about_mummy_exhibit) = True",
+                        "BEL(Visitor_2, is_interested_in_mummy_exhibit) = True",
+                        "BEL(Visitor_2, is_not_busy) = True",
+                        "DES(Visitor_2, would_like_to_learn_more_about_mummies) = True",
+                        "BEL(Guide, feeling_friendly) = True"
+                    ],
+                    "effects": [
+                        "DES(Visitor_2, learned_more_about_mummies) = True",
+                        "BEL(Visitor_2, is_engaged) = True",
+                        "BEL(Guide, feeling_satisfied_with_assistance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [],
+            "speak_actions": {}
+        },
+        "Security_Guard": {
+            "knowledge_base": [],
+            "intentions": {
+                "INTENT(Security_Guard, Protect_mummy) = True": {
+                    "action_plan": [
+                        "Stand_Guard(Security_Guard, Mummy_Exhibit)",
+                        "Inspect_Bags(Security_Guard, Visitors)",
+                        "Monitor_Visitors(Security_Guard, Mummy_Exhibit)",
+                        "Intervene(Security_Guard, Visitors, Rule_Breaking)",
+                        "Report(Security_Guard, Management, Unauthorized_Behaviour)"
+                    ]
+                },
+                "INTENT(Security_Guard, Enforce_security) = True": {
+                    "action_plan": [
+                        "Notify_Supervisor(Security_Guard, Supervisor)",
+                        "Monitor_Visitors(Security_Guard, None)",
+                        "Intervene(Security_Guard, Disruptive_Visitor)",
+                        "Control_Access(Security_Guard, Museum_Entrance)",
+                        "Inspect_Exhibits(Security_Guard, Mummy_Exhibit)",
+                        "Communicate_Information(Security_Guard, Visitors)"
+                    ]
+                }
+            },
+            "actions": {
+                "Notify_Supervisor(Security_Guard, Supervisor)": {
+                    "conditions": [
+                        "BEL(Supervisor, available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, notified_supervisor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Monitor_Visitors(Security_Guard, None)": {
+                    "conditions": [
+                        "BEL(Museum_Open, None) = True",
+                        "BEL(Security_Cameras_Functional, None) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitors_Behaving, None) = True",
+                        "BEL(Potential_Danger_Locations, None) = discovered",
+                        "BEL(Potential_Dangerous_Visitors, None) = detected",
+                        "DES(Security_Guard_Warning_Visitors, None) = True"
+                    ],
+                    "occ_emotion": [
+                        "Boredom"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Intervene(Security_Guard, Disruptive_Visitor)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Is_Trained) = True",
+                        "BEL(Security_Guard, Is_On_Duty) = True",
+                        "BEL(Security_Guard, Has_Radio) = True",
+                        "BEL(Disruptive_Visitor, Is_Disturbing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Disruptive_Visitor, Is_Disturbing) = False",
+                        "BEL(Security_Guard, Is_Enforcing_Security) = True",
+                        "BEL(Security_Guard, Has_Resolved_Incident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Control_Access(Security_Guard, Museum_Entrance)": {
+                    "conditions": [
+                        "BEL(Security_Guard, On_Duty) = True",
+                        "BEL(Museum_Entrance, Access_Control_Enabled) = True"
+                    ],
+                    "effects": [
+                        "BEL(Museum_Entrance, Access_Controlled) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Inspect_Exhibits(Security_Guard, Mummy_Exhibit)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Mummy_Exhibit_Inspected) = False"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, Mummy_Exhibit_Inspected) = True",
+                        "BEL(Visitor, Mummy_Exhibit_Inspected) = True",
+                        "DES(Security_Guard, Enforce_Security) = True",
+                        "DES(Visitor_1, Feel_Safe) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Communicate_Information(Security_Guard, Visitors)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Knows_Information(Visitors)) = True",
+                        "BEL(Visitors, Interest_In_Information) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitors, Attentive) = True",
+                        "BEL(Visitors, Informed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Stand_Guard(Security_Guard, Mummy_Exhibit)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Knows_Mummy_Exhibit) = True",
+                        "BEL(Security_Guard, On_Duty) = True"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, Protecting_Mummy) = True",
+                        "BEL(Security_Guard, Alert) = False",
+                        "BEL(Security_Guard, Idle) = False",
+                        "DES(Security_Guard, Follow_Rules) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Vigilance"
+                    ]
+                },
+                "Inspect_Bags(Security_Guard, Visitors)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Has_Authority) = True",
+                        "BEL(Visitor_1, Has_Bag) = True",
+                        "BEL(Visitor_2, Has_Bag) = True"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, Suspicious_Behaviour_Found) = True",
+                        "BEL(Visitor_1, Checked_Bag) = True",
+                        "BEL(Visitor_2, Checked_Bag) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Monitor_Visitors(Security_Guard, Mummy_Exhibit)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Knows_Visitors) = True",
+                        "BEL(Security_Guard, Aware_of_Rule_Breaking) = False",
+                        "BEL(Security_Guard, Have_Enough_Resources) = True"
+                    ],
+                    "effects": [
+                        "DES(Security_Guard, Prevent_Rule_Breaking) = True",
+                        "BEL(Security_Guard, Monitoring_Visitor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Intervene(Security_Guard, Visitors, Rule_Breaking)": {
+                    "conditions": [
+                        "BEL(Security_Guard, At_Mummy_Exhibit) = True",
+                        "BEL(Visitors, Rules_Breaking) = True"
+                    ],
+                    "effects": [
+                        "BEL(Visitors, Disciplined) = True",
+                        "DES(Security_Guard, Maintain_Order) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Report(Security_Guard, Management, Unauthorized_Behaviour)": {
+                    "conditions": [
+                        "BEL(Visitor_1, Rule_Breaking) = True",
+                        "BEL(Visitor_2, Rule_Breaking) = True"
+                    ],
+                    "effects": [
+                        "BEL(Management, Unauthorized_Behaviour_Reported) = True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Reproach"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, Greeting, None, None)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Enforce_security) = True",
+                        "INTENT(Security_Guard, Protect_mummy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, Spoke) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Greeting, Question, None, None)": {
+                    "conditions": [
+                        "BEL(Security_Guard, knows_about_unauthorized_visit) = True",
+                        "INTENT(Security_Guard, Enforce_security) = True"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, sees_unknown_person) = True",
+                        "BEL(Security_Guard, Unauthorized_person_identified) = True",
+                        "INTENT(Security_Guard, Apprehend_suspect) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Speak(Question, Smalltalk, Personality, Professional)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Protect_mummy) = True",
+                        "BEL(Security_Guard, Enforce_security) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Smalltalk, Opinion, None, None)": {
+                    "conditions": [
+                        "BEL(Security_Guard, present) = True",
+                        "INTENT(Security_Guard, Enforce_security) = True"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, spoke_to_visitor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride",
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(Opinion, Information, None, None)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Aware_of_incoming_visitor)",
+                        "INTENT(Security_Guard, Enforce_security)"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, Speaking) = True",
+                        "DES(Security_Guard, Communicate) = True",
+                        "INTENT(Security_Guard, None)",
+                        "BEL(Security_Guard, Aware_of_visitor_location)"
+                    ],
+                    "occ_emotion": [
+                        "Pride",
+                        "Shame",
+                        "Admiration",
+                        "Reproach"
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(Information, Feedback, None, None)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Protect_mummy) = True",
+                        "BEL(Security_Guard, Enforce_security) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy",
+                        "Satisfaction",
+                        "Shame",
+                        "Remorse"
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(Smalltalk, Feedback, Personality, Professional)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Knows_code) = True",
+                        "INTENT(Security_Guard, Protect_mummy) = True",
+                        "INTENT(Security_Guard, Enforce_security) = True"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, Informed_visitor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Speak(Start, Bye, None, None)": {
+                    "conditions": [
+                        "BEL(Security_Guard, Knows_museum_security_procedures) = True",
+                        "DES(Security_Guard, Enforce_security) = True",
+                        "INTENT(Security_Guard, Protect_mummy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Security_Guard, Speaking) = True",
+                        "BEL(Security_Guard, Knows_mummy_favorite_exhibit) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": []
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, Greeting, None, None, \"Hey! Did you enjoy the Museum Tour?\">",
+        "<Greeting, Question, None, None, \"Yes I did. Did you have a favorite exhibit?\">",
+        "<Question, Answer, None, None, \"Yes, the Mummies were my favorite. What about you?\">",
+        "<Answer, Response, None, None, \"I really enjoyed the different processes of mummification. It was very interesting to learn about the history behind it.\">",
+        "<Response, Opinion, None, None, \"That's really cool. I had no idea about that. What do you think of other exhibits in the museum?\">",
+        "<Opinion, Feedback, None, None, \"I am a big fan of History and Archeology. There were definitely many exhibits in the museum that caught my eye.\">",
+        "<Feedback, Bye, None, None, \"That sounds great! It was nice talking to you. Bye!\">",
+        "<Question, Smalltalk, Personality, Friendly, \"So, do you visit museums often?\">",
+        "<Smalltalk, Feedback, Personality, Friendly, \"Yes, I enjoy visiting museums and learning more about History and Culture.\">",
+        "<Answer, Smalltalk, Personality, Friendly, \"Yeah I really like the artifacts and learning more about how people lived in ancient times.\">",
+        "<Smalltalk, Feedback, Personality, Friendly, \"That's really fascinating! It was nice talking to you. Bye!\">",
+        "<Start, Bye, None, None, \"I have to go now, but it was great to talk to you. Bye!\">"
+    ]
+}

@@ -1,0 +1,614 @@
+{
+    "scenario_name": "Tina and Boyfriend",
+    "scenario_description": "Tina and her boyfriend talk about her cake",
+    "last_ended": "conditions_effects",
+    "agents": {
+        "Tina": {
+            "knowledge_base": [
+                "BEL(Tina, HasCake) = True",
+                "BEL(Tina, CakeIsDelicious) = True",
+                "BEL(Tina, BoyfriendCares) = True",
+                "DES(Tina, ShareCake) = True",
+                "DES(Tina, BoyfriendAppreciatesCake) = True"
+            ],
+            "intentions": {
+                "INTENT(Tina, ChooseCakeSlice) = True": {
+                    "action_plan": [
+                        "CheckCake(Tina)",
+                        "CutSlice(Tina, Cake)",
+                        "OfferSlice(Tina, Boyfriend, CakeSlice)",
+                        "WaitForResponse(Tina)",
+                        "FeelHurt(Tina)",
+                        "ShareCake(Tina, Boyfriend)",
+                        "FeelHappy(Tina)"
+                    ]
+                },
+                "INTENT(Tina, OfferCakeSlice(Tina, Boyfriend)) = True": {
+                    "action_plan": [
+                        "GoToKitchen(Tina)",
+                        "CutSliceOfCake(Tina, Cake)",
+                        "PutSliceOnPlate(Tina, Plate, CakeSlice)",
+                        "TakePlateToBoyfriend(Tina, Plate, Boyfriend)",
+                        "OfferCakeSlice(Tina, Boyfriend, CakeSlice)",
+                        "WaitForResponse(Tina, Boyfriend)",
+                        "FeelHappy(Tina)",
+                        "ThankBoyfriend(Tina, Boyfriend)",
+                        "FeelDisappointed(Tina)",
+                        "AskWhyDeclined(Tina, Boyfriend)",
+                        "CleanUp(Tina)"
+                    ]
+                },
+                "INTENT(Tina, WaitForBoyfriendReaction) = True": {
+                    "action_plan": [
+                        "TakeCake(Tina, Self)",
+                        "WaitForReaction(Tina, Boyfriend)",
+                        "AskOpinion(Tina, Boyfriend, CakeIsDelicious)",
+                        "ShareCake(Tina, Boyfriend)",
+                        "WaitForAppreciation(Tina, Boyfriend)",
+                        "FeelHappy(Tina, Self, BoyfriendAppreciatesCake)"
+                    ]
+                }
+            },
+            "actions": {
+                "TakeCake(Tina, Self)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True"
+                    ],
+                    "effects": [
+                        "~BEL(Tina, HasCake) = True"
+                    ]
+                },
+                "WaitForReaction(Tina, Boyfriend)": {
+                    "conditions": [
+                        "BEL(Boyfriend, HasAlreadyTalked) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina, BoyfriendListened) = True",
+                        "BEL(Tina, WaitForBoyfriendReaction) = False",
+                        "BEL(Boyfriend, HasAlreadyTalked) = True"
+                    ]
+                },
+                "AskOpinion(Tina, Boyfriend, CakeIsDelicious)": {
+                    "conditions": [
+                        "BEL(Tina, BoyfriendCares) = True",
+                        "BEL(Boyfriend, status) = happy"
+                    ],
+                    "effects": [
+                        "BEL(Tina, BoyfriendLikesCake) = True"
+                    ]
+                },
+                "ShareCake(Tina, Boyfriend)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True",
+                        "BEL(Tina, BoyfriendCares) = True",
+                        "BEL(Boyfriend, WaitingForCake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, HasCake) = False",
+                        "BEL(Boyfriend, HasEatenCake) = True",
+                        "DES(Tina, BoyfriendAppreciatesCake) = True"
+                    ]
+                },
+                "WaitForAppreciation(Tina, Boyfriend)": {
+                    "conditions": [
+                        "BEL(Tina, BoyfriendCares) = True",
+                        "BEL(Boyfriend, HeardAboutCake) = True",
+                        "DES(Tina, ShareCake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, BoyfriendLikesCake) = True"
+                    ]
+                },
+                "FeelHappy(Tina, Self, BoyfriendAppreciatesCake)": {
+                    "conditions": [
+                        "BEL(Tina, BoyfriendAppreciatesCake) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina, Happy) = True"
+                    ]
+                },
+                "CheckCake(Tina)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True"
+                    ],
+                    "effects": []
+                },
+                "CutSlice(Tina, Cake)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True",
+                        "BEL(Tina, CakeIsDelicious) = True",
+                        "DES(Tina, ShareCake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, CakeSlice) = True",
+                        "BEL(Tina, HasCake) = False",
+                        "DES(Tina, BoyfriendAppreciatesCake) = True"
+                    ]
+                },
+                "OfferSlice(Tina, Boyfriend, CakeSlice)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True",
+                        "BEL(Tina, BoyfriendCares) = True",
+                        "INTENT(Boyfriend, EatCake) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina, OfferedCakeSlice) = True",
+                        "DES(Tina, BoyfriendAppreciatesCakeSlice) = True",
+                        "BEL(Boyfriend, OfferedCakeSlice) = True"
+                    ]
+                },
+                "WaitForResponse(Tina)": {
+                    "conditions": [
+                        "BEL(Tina, BoyfriendCares) = True",
+                        "BEL(Boyfriend, CakeOpinion) = Undecided"
+                    ],
+                    "effects": [
+                        "BEL(Tina, BoyfriendResponded) = True"
+                    ]
+                },
+                "FeelHurt(Tina)": {
+                    "conditions": [
+                        "BEL(Tina, BoyfriendCares) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina, ShareCake) = False",
+                        "DES(Tina, BoyfriendAppreciatesCake) = False",
+                        "DES(Tina, MakeBoyfriendHappy) = False",
+                        "DES(Tina, ShowLoveToBoyfriend) = False",
+                        "BEL(Tina, HurtByBoyfriend) = True"
+                    ]
+                },
+                "FeelHappy(Tina)": {
+                    "conditions": [
+                        "DES(Tina, OfferCakeSlice(Tina, Boyfriend)) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina, FeelHappy(Tina)) = True"
+                    ]
+                },
+                "GoToKitchen(Tina)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True"
+                    ],
+                    "effects": []
+                },
+                "CutSliceOfCake(Tina, Cake)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, CakeSliceOnPlate) = True",
+                        "BEL(Tina, RemainingCake) = Cake - Slice"
+                    ]
+                },
+                "PutSliceOnPlate(Tina, Plate, CakeSlice)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True",
+                        "BEL(Tina, CakeSlice) = CakeSlice",
+                        "BEL(Tina, Plate) = Plate",
+                        "BEL(Plate, IsClean) = True"
+                    ],
+                    "effects": [
+                        "BEL(Plate, HasCakeSlice) = CakeSlice",
+                        "BEL(Plate, IsClean) = False"
+                    ]
+                },
+                "TakePlateToBoyfriend(Tina, Plate, Boyfriend)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True",
+                        "BEL(Tina, BoyfriendCares) = True",
+                        "BEL(Tina, PlateInKitchen) = True",
+                        "BEL(Tina, CakeSliceOnPlate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, PlateInHand, Plate) = True",
+                        "BEL(Tina, HandEmpty) = False",
+                        "BEL(Tina, Boyfriend, Boyfriend) = True",
+                        "BEL(Tina, AtTable) = False",
+                        "BEL(Tina, PlateOnTable, Plate)",
+                        "BEL(Tina, CakeSliceOnPlate, CakeSlice)"
+                    ]
+                },
+                "OfferCakeSlice(Tina, Boyfriend, CakeSlice)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True",
+                        "BEL(Tina, BoyfriendCares) = True",
+                        "BEL(Tina, CakeIsDelicious) = True",
+                        "DES(Tina, ShareCake) = True",
+                        "DES(Tina, BoyfriendAppreciatesCake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Boyfriend, ReceivedCakeSlice(Tina)) = True",
+                        "BEL(Boyfriend, HasCakeSlice(Tina)) = True",
+                        "DES(Boyfriend, TasteCakeSlice(Tina)) = True",
+                        "DES(Tina, CakeSliceOffered(Boyfriend)) = True"
+                    ]
+                },
+                "WaitForResponse(Tina, Boyfriend)": {
+                    "conditions": [
+                        "BEL(Boyfriend, CakeSliceAccepted(Tina)) = False"
+                    ],
+                    "effects": [
+                        "DES(Tina, CakeSliceDeclined(Boyfriend)) = True",
+                        "BEL(Boyfriend, AskedForCakeSlice(Tina)) = True"
+                    ]
+                },
+                "ThankBoyfriend(Tina, Boyfriend)": {
+                    "conditions": [
+                        "BEL(Tina, BoyfriendCares) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, BoyfriendAppreciatedCake) = True",
+                        "DES(Tina, FeelGrateful) = True"
+                    ]
+                },
+                "FeelDisappointed(Tina)": {
+                    "conditions": [
+                        "BEL(Tina, BoyfriendCares) = True",
+                        "BEL(Tina, CakeIsDelicious) = True",
+                        "BEL(Tina, HasCake) = True",
+                        "INTENT(Tina, OfferCakeSlice(Tina, Boyfriend)) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina, BoyfriendAppreciatesCake) = False",
+                        "DES(Tina, ShareCake) = False",
+                        "DES(Tina, NotDisappointed) = False",
+                        "DES(Tina, IsDisappointed) = True"
+                    ]
+                },
+                "AskWhyDeclined(Tina, Boyfriend)": {
+                    "conditions": [
+                        "BEL(Tina, HasCake) = True",
+                        "BEL(Tina, BoyfriendCares) = True",
+                        "INTENT(Tina, OfferCakeSlice(Tina, Boyfriend)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, AskedWhyDeclined) = True"
+                    ]
+                },
+                "CleanUp(Tina)": {
+                    "conditions": [
+                        "BEL(Tina, TableIsMessy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, TableIsMessy) = False"
+                    ]
+                }
+            }
+        },
+        "Tina's_boyfriend": {
+            "knowledge_base": [
+                "BEL(Tina, is_baking_cake) = True",
+                "BEL(Tina, is_talented_baker) = True",
+                "BEL(Tina, likes_chocolate) = True",
+                "DES(Tina's_boyfriend, taste_delicious_cake) = True",
+                "DES(Tina, feel_happy) = True"
+            ],
+            "intentions": {
+                "INTENT(Tina's_boyfriend, ask_about_the_cake_flavour) = True": {
+                    "action_plan": [
+                        "Ask(Tina's_boyfriend, Tina, \"How's the cake coming along?\")",
+                        "Listen(Tina's_boyfriend, Tina)",
+                        "Ask(Tina's_boyfriend, Tina, \"What kind of cake are you making?\")",
+                        "Listen(Tina's_boyfriend, Tina)",
+                        "Ask(Tina's_boyfriend, Tina, \"Is it a chocolate cake?\")",
+                        "Listen(Tina's_boyfriend, Tina)",
+                        "Ask(Tina's_boyfriend, Tina, \"How do you think the cake is turning out?\")",
+                        "Listen(Tina's_boyfriend, Tina)",
+                        "Ask(Tina's_boyfriend, Tina, \"Can I taste a piece of cake when it's finished?\")",
+                        "Listen(Tina's_boyfriend, Tina)",
+                        "Compliment(Tina's_boyfriend, Tina, \"I bet it's going to be amazing. Your baking always makes me so happy!\")"
+                    ]
+                },
+                "INTENT(Tina's_boyfriend, complement_about_the_cake) = True": {
+                    "action_plan": [
+                        "Ask(Tina, Are you baking a cake today?)",
+                        "Express(AGENT, Compliment, Tina)",
+                        "Taste(AGENT, Cake)",
+                        "Express(AGENT, Appreciation, Tina)"
+                    ]
+                },
+                "INTENT(Tina's_boyfriend, suggest_to_decorate_with_chocolate) = True": {
+                    "action_plan": [
+                        "Ask(Tina, Tina's_boyfriend, \"Can I help you bake the cake?\")",
+                        "Buy_Ingredients(Tina's_boyfriend, Grocery_Store, Chocolate)",
+                        "Suggest(Tina's_boyfriend, Tina, \"Why not decorate the cake with chocolate?\")",
+                        "Offer(Tina's_boyfriend, Tina, \"I can melt the chocolate and help you decorate the cake.\")",
+                        "Thank(Tina's_boyfriend, Tina, \"Thanks for baking such a delicious cake! It tastes amazing with the chocolate decoration.\")",
+                        "Compliment(Tina's_boyfriend, Tina, \"You're an amazing baker, and your cakes always taste delicious.\")",
+                        "Kiss(Tina's_boyfriend, Tina)"
+                    ]
+                },
+                "INTENT(Tina's_boyfriend, offer_help_to_decorate_cake) = False": {
+                    "action_plan": [
+                        "Greet(Tina's_boyfriend, Tina)",
+                        "Ask(Tina's_boyfriend, Tina, \"How can I help you with the cake?\")",
+                        "Listen(Tina's_boyfriend, Tina)",
+                        "Suggest(Tina's_boyfriend, Tina, \"I can help you decorate the cake with chocolate shavings or berries\")",
+                        "Negotiate(Tina's_boyfriend, Tina, \"Which decoration do you prefer?\")",
+                        "Agree(Tina's_boyfriend, Tina, \"Let's decorate the cake with chocolate shavings\")",
+                        "Assist(Tina's_boyfriend, Tina, \"Helps decorate the cake with chocolate shavings\")",
+                        "Admire(Tina's_boyfriend, Tina, \"This looks amazing, great job Tina! We make a great team\")",
+                        "Enjoy(Tina's_boyfriend, Tina, \"Eats cake together and talk about how delicious it is\")",
+                        "Thank(Tina's_boyfriend, Tina, \"Thanks for letting me help with the cake and sharing it with me\")"
+                    ]
+                }
+            },
+            "actions": {
+                "Greet(Tina's_boyfriend, Tina)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, greeted_Tina) = True"
+                    ]
+                },
+                "Ask(Tina's_boyfriend, Tina, \"How can I help you with the cake?\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina's_boyfriend, INTENT(Tina's_boyfriend, offer_help_to_decorate_cake)) = False"
+                    ],
+                    "effects": []
+                },
+                "Listen(Tina's_boyfriend, Tina)": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina's_boyfriend, is_present) = True"
+                    ],
+                    "effects": []
+                },
+                "Suggest(Tina's_boyfriend, Tina, \"I can help you decorate the cake with chocolate shavings or berries\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina's_boyfriend, taste_delicious_cake) = True",
+                        "DES(Tina, feel_happy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, can_help_decorate_cake) = True",
+                        "DES(Tina's_boyfriend, assist_tina_with_cake_decor) = True"
+                    ]
+                },
+                "Negotiate(Tina's_boyfriend, Tina, \"Which decoration do you prefer?\")": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, is_capable_negotiating) = True",
+                        "BEL(Tina, desires_to_decorate_cake) = True",
+                        "BEL(Tina's_boyfriend, knows_possible_decorations) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, has_common_understanding) = True",
+                        "DES(Tina's_boyfriend, understands_Tina's_decoration_preference) = True"
+                    ]
+                },
+                "Agree(Tina's_boyfriend, Tina, \"Let's decorate the cake with chocolate shavings\")": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, is_present) = True",
+                        "BEL(Tina, is_baking_cake) = True",
+                        "DES(Tina's_boyfriend, taste_delicious_cake) = True",
+                        "BEL(Tina, likes_chocolate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, agrees_to_decorate_cake) = True",
+                        "BEL(Tina's_boyfriend, believes_cake_will_be_better_with_chocolate) = True"
+                    ]
+                },
+                "Assist(Tina's_boyfriend, Tina, \"Helps decorate the cake with chocolate shavings\")": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, is_available) = True",
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, needs_help_decorating_cake) = True",
+                        "DES(Tina's_boyfriend, taste_delicious_cake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, is_helping_decorate_cake) = True",
+                        "BEL(Tina's_boyfriend, chocolate_shavings_have_been_added_to_cake) = True",
+                        "DES(Tina's_boyfriend, feel_useful) = True",
+                        "DES(Tina, feel_grateful_for_help) = True",
+                        "DES(Tina's_boyfriend, taste_delicious_cake) = True"
+                    ]
+                },
+                "Admire(Tina's_boyfriend, Tina, \"This looks amazing, great job Tina! We make a great team\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, is_talented_baker) = True",
+                        "DES(Tina's_boyfriend, taste_delicious_cake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, admiring_cake) = True",
+                        "DES(Tina's_boyfriend, feel_proud) = True"
+                    ]
+                },
+                "Enjoy(Tina's_boyfriend, Tina, \"Eats cake together and talk about how delicious it is\")": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, taste_delicious_cake) = True",
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, likes_chocolate) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, feel_happy) = True",
+                        "DES(Tina, feel_happy) = True",
+                        "BEL(Tina's_boyfriend, ate_cake) = True",
+                        "BEL(Tina, shared_cake_with_boyfriend) = True"
+                    ]
+                },
+                "Thank(Tina's_boyfriend, Tina, \"Thanks for letting me help with the cake and sharing it with me\")": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, has_helped_with_cake) = False",
+                        "BEL(Tina, has_accepted_help) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, feel_appreciated) = True",
+                        "BEL(Tina's_boyfriend, has_helped_with_cake) = True",
+                        "BEL(Tina's_boyfriend, feels_closer_to_Tina) = True"
+                    ]
+                },
+                "Ask(Tina's_boyfriend, Tina, \"How's the cake coming along?\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina's_boyfriend, knows_about_Tina's_baking) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, knows_about_Tina's_baking) = True"
+                    ]
+                },
+                "Ask(Tina's_boyfriend, Tina, \"What kind of cake are you making?\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, is_talented_baker) = True"
+                    ],
+                    "effects": []
+                },
+                "Ask(Tina's_boyfriend, Tina, \"Is it a chocolate cake?\")": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, is_present) = True",
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, likes_chocolate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, asked_chocolate_cake) = True"
+                    ]
+                },
+                "Ask(Tina's_boyfriend, Tina, \"How do you think the cake is turning out?\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina's_boyfriend, INTENT(Tina's_boyfriend, ask_about_the_cake_flavour)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, knows_how_the_cake_is_turning_out)",
+                        "BEL(Tina's_boyfriend, BEL(Tina, how_the_cake_is_turning_out)"
+                    ]
+                },
+                "Ask(Tina's_boyfriend, Tina, \"Can I taste a piece of cake when it's finished?\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, likes_chocolate) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, taste_delicious_cake) = True"
+                    ]
+                },
+                "Compliment(Tina's_boyfriend, Tina, \"I bet it's going to be amazing. Your baking always makes me so happy!\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, is_talented_baker) = True",
+                        "DES(Tina's_boyfriend, taste_delicious_cake) = True",
+                        "DES(Tina, feel_happy) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, feel_happier) = True",
+                        "BEL(Tina's_boyfriend, complimented_Tina) = True"
+                    ]
+                },
+                "Ask(Tina, Are you baking a cake today?)": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True"
+                    ],
+                    "effects": []
+                },
+                "Express(AGENT, Compliment, Tina)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, taste_delicious_cake) = False",
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, is_talented_baker) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, taste_delicious_cake) = True",
+                        "DES(Tina, feel_happy) = True",
+                        "DES(Tina's_boyfriend, express_appreciation) = True"
+                    ]
+                },
+                "Taste(AGENT, Cake)": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, taste_delicious_cake) = True",
+                        "BEL(Tina, has_receieved_feedback) = True",
+                        "BEL(Tina's_boyfriend, enjoyed_cake) = True"
+                    ]
+                },
+                "Express(AGENT, Appreciation, Tina)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, taste_delicious_cake) = True",
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, is_talented_baker) = True",
+                        "BEL(Tina, likes_chocolate) = True",
+                        "DES(Tina's_boyfriend, taste_delicious_cake) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, complement_about_the_cake) = True",
+                        "DES(Tina, feel_happy) = True"
+                    ]
+                },
+                "Ask(Tina, Tina's_boyfriend, \"Can I help you bake the cake?\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, is_talented_baker) = True"
+                    ],
+                    "effects": []
+                },
+                "Buy_Ingredients(Tina's_boyfriend, Grocery_Store, Chocolate)": {
+                    "conditions": [
+                        "BEL(Grocery_Store, has_chocolate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, has_chocolate) = True",
+                        "BEL(Grocery_Store, has_chocolate) = False"
+                    ]
+                },
+                "Suggest(Tina's_boyfriend, Tina, \"Why not decorate the cake with chocolate?\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, likes_chocolate) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, suggest_to_decorate_with_chocolate) = True",
+                        "BEL(Tina's_boyfriend, has_suggested_chocolate) = True"
+                    ]
+                },
+                "Offer(Tina's_boyfriend, Tina, \"I can melt the chocolate and help you decorate the cake.\")": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, is_present) = True",
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina, has_not_refused_help) = True",
+                        "BEL(Tina's_boyfriend, knows_how_to_melt_chocolate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, is_helping_Tina) = True",
+                        "BEL(Tina's_boyfriend, is_in_kitchen) = True",
+                        "DES(Tina's_boyfriend, contribute_to_cake_making) = True",
+                        "DES(Tina's_boyfriend, bonding_with_Tina) = True"
+                    ]
+                },
+                "Thank(Tina's_boyfriend, Tina, \"Thanks for baking such a delicious cake! It tastes amazing with the chocolate decoration.\")": {
+                    "conditions": [
+                        "BEL(Tina, is_baking_cake) = True",
+                        "BEL(Tina's_boyfriend, taste_delicious_cake) = True",
+                        "BEL(Tina, likes_chocolate) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, feel_happy) = True"
+                    ]
+                },
+                "Compliment(Tina's_boyfriend, Tina, \"You're an amazing baker, and your cakes always taste delicious.\")": {
+                    "conditions": [
+                        "BEL(Tina, is_talented_baker) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, feel_happy) = True], [BEL(Tina's_boyfriend, admire_Tina) = True"
+                    ]
+                },
+                "Kiss(Tina's_boyfriend, Tina)": {
+                    "conditions": [
+                        "BEL(Tina, is_in_a_romantic_relationship_with, Tina's_boyfriend)",
+                        "BEL(Tina's_boyfriend, is_happy)",
+                        "BEL(Tina's_boyfriend, feels_romantic)",
+                        "BEL(Tina, feels_romantic)"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, has_kissed, Tina)",
+                        "DES(Tina's_boyfriend, feel_romantic)",
+                        "DES(Tina, feel_happy)"
+                    ]
+                }
+            }
+        }
+    }
+}

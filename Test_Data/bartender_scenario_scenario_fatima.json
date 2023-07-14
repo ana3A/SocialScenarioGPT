@@ -1,0 +1,1525 @@
+{
+  "root": {
+    "classId": 0,
+    "ScenarioName": "bartender scenario",
+    "Description": "social scenario with a bartender and two customers",
+    "Characters": [
+      {
+        "KnowledgeBase": {
+          "Perspective": "Agent_A",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Agent_A, Bartender)": "True, 1",
+              "BEL(Agent_A, Busy)": "False, 1",
+              "BEL(Agent_A, Service)": "True, 1",
+              "BEL(Agent_A, Good_service)": "False, 1",
+              "BEL(Agent_A, Sales)": "False, 1",
+              "BEL(Agent_A, Music)": "True, 1",
+              "DES(Agent_A, Excellent_service)": "True, 1",
+              "DES(Agent_A, Increase_sales)": "True, 1",
+              "DES(Agent_A, Good_time)": "True, 1",
+              "DES(Agent_A, Controlled_environment)": "True, 1",
+              "DES(Agent_A, Customers_satisfied)": "False, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 7,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Agent_B",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Agent_B, at_bar)": "True, 1",
+              "BEL(Agent_B, with_friends)": "True, 1",
+              "BEL(Agent_B, wants_to_socialize)": "True, 1",
+              "BEL(Agent_B, likes_drinks)": "True, 1",
+              "BEL(Agent_B, knows_drinks)": "True, 1",
+              "DES(Agent_B, have_a_good_time)": "True, 1",
+              "DES(Agent_B, try_new_drinks)": "True, 1",
+              "DES(Agent_B, be_entertained)": "True, 1",
+              "DES(Agent_B, avoid_conflict)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Agent_C",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Agent_C, is_at_bar)": "True, 1",
+              "BEL(Agent_C, emotional_state)": "sad, 1",
+              "BEL(Agent_C, reason_for_drinking)": "breakup, 1",
+              "BEL(Agent_C, prefers_solitude)": "True, 1",
+              "DES(Agent_C, forget_breakup)": "True, 1",
+              "DES(Agent_C, avoid_interactions)": "True, 1",
+              "DES(Agent_C, numb_the_pain)": "True, 1",
+              "DES(Agent_C, anonymity)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": -7,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      }
+    ],
+    "WorldModel": {
+      "Effects": {
+        "dictionary": [
+          {
+            "key": "Event(Action-End, Agent_A, Believes(Agent_A, service_job), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Bartender)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Service)",
+                "NewValue": "False",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, Believes(Agent_A, objective__provide_customers_good_time), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Good_time)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, Believes(Agent_A, objective_increase_sales), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Bartender)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Increase_sales)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, Wants(Agent_A, objective_provide_excellent_service), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Excellent_service)",
+                "NewValue": "False",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, OfferRecommendation(Agent_A, Agent_B, drink_type), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Bartender)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, Customer)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Good_service)",
+                "NewValue": "False",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, EngageInConversation(Agent_A, Agent_B), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Bartender)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Good_time)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, Customer)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, ListenAndSupport(Agent_A, Agent_C, sensitive_topic), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, AtBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "DES(Agent_C, ExpressEmotion)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Controlled_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, MonitorAndDiffuse(Agent_A, Agent_B, disturbance_caused_by_intoxication), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Controlled_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Good_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Good_time)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, Intoxicated)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, Disturbance_caused)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, CallForBackup(Agent_A, security, belligerent_customer), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Controlled_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(security, Available)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(belligerent_customer, Present)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, AccommodateNeeds(Agent_A, Agent_B, intoxicated_customer), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Bartender)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Busy)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Controlled_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, Wants_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(intoxicated_customer, Ability_to_pay)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, EnforceBarRules(Agent_A, Agent_B), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Bartender)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, Customer)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, Intoxicated)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, Causing_disturbance)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, RemoveFromPremises(Agent_A, Agent_C, belligerent_customer), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Controlled_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Good_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, belligerent_customer)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "5",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, FeelRelieved(Agent_A), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Customers_satisfied)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Controlled_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Increase_sales)",
+                "NewValue": "False",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, FeelHappy(Agent_A), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Good_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "DES(Agent_A, Excellent_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, FeelAccomplished(Agent_A), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Good_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, Service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "DES(Agent_A, Excellent_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "1",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_A, FeelGrateful(Agent_A), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_A, Good_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "DES(Agent_A, Excellent_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_A"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_A"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_B, AskForDrinkRecommendation(Agent_B, Agent_A), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_B, at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, bartender)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, knows_drinks)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_B"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_B, ExpressGratitude(Agent_B, Agent_A), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_B, served_by_Agent_A)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, provided_good_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "DES(Agent_A, be_appreciated)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_B"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_B, OrderAnotherDrink(Agent_B, Agent_A), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_B, at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, is_bartender)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, can_serve_another_drink)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "2",
+                "ObserverAgent": "Agent_B"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_B, DanceWithFriends(Agent_B), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_B, at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, wants_to_socialize)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, avoid_conflict)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_B"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_B, LaughAndMakeJokes(Agent_B), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_B, at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, wants_to_socialize)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "DES(Agent_B, be_entertained)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "DES(Agent_B, avoid_conflict)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_B"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_B, PayTheBill(Agent_B, Agent_A), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_B, at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, accepts_payment)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_B"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_B, ApologizeForAccidentallySpillingDrink(Agent_B, Agent_A), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_B, at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, knows_Agent_A)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "BEL(Agent_B, accidentally_spilled_drink)",
+                "NewValue": "False",
+                "ObserverAgent": "Agent_B"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_B"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, OrderDrink(Agent_C, Agent_A, Whiskey_Soda), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, prefers_solitude)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, can_serve_drink)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, ActivatePhone(Agent_C), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, prefers_solitude)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, LookAround(Agent_C, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "DES(Agent_C, avoid_interactions)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Sigh(Agent_C, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, PayBill(Agent_C, Agent_A, Amount), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, has_enough_money)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, is_ready_to_receive_payment)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, has_provided_service)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_A, service_cost)",
+                "NewValue": "Amount",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, LeaveBar(Agent_C, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, prefers_solitude)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Start, Greeting2, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, prefers_solitude)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, reason_for_drinking)",
+                "NewValue": "breakup",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Greeting2, DrinkOrder, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, prefers_solitude)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(DrinkOrder, Sad, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "DES(Agent_C, avoid_interactions)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Sad, Concerned, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, reason_for_drinking)",
+                "NewValue": "breakup",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "DES(Agent_C, avoid_interactions)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Concerned, Empathetic, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "DES(Agent_C, avoid_interactions)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Empathetic, Goodbye2, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(DrinkOrder, Intoxicated, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, prefers_solitude)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Intoxicated, Concerned2, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "DES(Agent_C, avoid_interactions)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Concerned2, Observant, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Observant, Angry, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, prefers_solitude)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-6",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Angry, Calming, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, prefers_solitude)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Calming, Goodbye3, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, prefers_solitude)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-2",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Observant, Goodbye, None, None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Agent_C, is_at_bar)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, emotional_state)",
+                "NewValue": "sad",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "BEL(Agent_C, reason_for_drinking)",
+                "NewValue": "breakup",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "DES(Agent_C, avoid_interactions)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "DES(Agent_C, anonymity)",
+                "NewValue": "True",
+                "ObserverAgent": "Agent_C"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-10",
+                "ObserverAgent": "Agent_C"
+              }
+            ]
+          }
+        ]
+      },
+      "Priorities": {
+        "dictionary": [
+          {
+            "key": "Event(Action-End, Agent_A, Believes(Agent_A, service_job), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, Believes(Agent_A, objective__provide_customers_good_time), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, Believes(Agent_A, objective_increase_sales), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, Wants(Agent_A, objective_provide_excellent_service), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, OfferRecommendation(Agent_A, Agent_B, drink_type), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, EngageInConversation(Agent_A, Agent_B), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, ListenAndSupport(Agent_A, Agent_C, sensitive_topic), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, MonitorAndDiffuse(Agent_A, Agent_B, disturbance_caused_by_intoxication), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, CallForBackup(Agent_A, security, belligerent_customer), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, AccommodateNeeds(Agent_A, Agent_B, intoxicated_customer), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, EnforceBarRules(Agent_A, Agent_B), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, RemoveFromPremises(Agent_A, Agent_C, belligerent_customer), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, FeelRelieved(Agent_A), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, FeelHappy(Agent_A), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, FeelAccomplished(Agent_A), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_A, FeelGrateful(Agent_A), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_B, AskForDrinkRecommendation(Agent_B, Agent_A), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_B, ExpressGratitude(Agent_B, Agent_A), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_B, OrderAnotherDrink(Agent_B, Agent_A), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_B, DanceWithFriends(Agent_B), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_B, LaughAndMakeJokes(Agent_B), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_B, PayTheBill(Agent_B, Agent_A), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_B, ApologizeForAccidentallySpillingDrink(Agent_B, Agent_A), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, OrderDrink(Agent_C, Agent_A, Whiskey_Soda), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, ActivatePhone(Agent_C), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, LookAround(Agent_C, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Sigh(Agent_C, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, PayBill(Agent_C, Agent_A, Amount), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, LeaveBar(Agent_C, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Start, Greeting2, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Greeting2, DrinkOrder, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(DrinkOrder, Sad, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Sad, Concerned, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Concerned, Empathetic, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Empathetic, Goodbye2, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(DrinkOrder, Intoxicated, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Intoxicated, Concerned2, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Concerned2, Observant, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Observant, Angry, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Angry, Calming, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Calming, Goodbye3, None, None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Agent_C, Speak(Observant, Goodbye, None, None), [t])",
+            "value": 1
+          }
+        ]
+      }
+    },
+    "Dialogues": [
+      {
+        "CurrentState": "Start",
+        "NextState": " Greeting",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"Hi",
+        "UtteranceId": "TTS-0CCR48B64KOS7VSQG3ZR7R9TTAJ828NO"
+      },
+      {
+        "CurrentState": "Greeting",
+        "NextState": " DrinkOrder",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"Sure! What would you like to order?\"",
+        "UtteranceId": "TTS-0CCMKEEPCFDUXO6I7BG7ZX77P14DW8TH"
+      },
+      {
+        "CurrentState": "DrinkOrder",
+        "NextState": " Recommendation",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"What do you recommend?\"",
+        "UtteranceId": "TTS-0CCR2KQ8ZK4C11UM870S1Z9IOSUH363Q"
+      },
+      {
+        "CurrentState": "Recommendation",
+        "NextState": " DrinkOrder",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"I recommend trying our signature cocktail",
+        "UtteranceId": "TTS-0CCFEPG381R7VG6264H4AQDKTMFM27PK"
+      },
+      {
+        "CurrentState": "DrinkOrder",
+        "NextState": " Happy",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"That sounds great! I'll try that.\"",
+        "UtteranceId": "TTS-0CCD04CHKTAW8073T97H6AVDORQI2MDQ"
+      },
+      {
+        "CurrentState": "Happy",
+        "NextState": " Goodbye",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"Thanks a lot",
+        "UtteranceId": "TTS-0CCT5RNPC6UBVV6TTE36VWG46C8DTO4W"
+      },
+      {
+        "CurrentState": "Start",
+        "NextState": " Greeting2",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"Excuse me",
+        "UtteranceId": "TTS-0CC7P9A01LOG1IU44XDIWPLLU4VUY6FZ"
+      },
+      {
+        "CurrentState": "Greeting2",
+        "NextState": " DrinkOrder2",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"Of course",
+        "UtteranceId": "TTS-0CCGWQBX0WGV5I83TBVNR22YM4N3K6XL"
+      },
+      {
+        "CurrentState": "DrinkOrder2",
+        "NextState": " Sad",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"Just a whiskey neat.\"",
+        "UtteranceId": "TTS-0CCB7ACQJY1F4RVHDT8W31KU4BYJ0S5A"
+      },
+      {
+        "CurrentState": "Sad",
+        "NextState": " Concerned",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"Is everything okay? You seem a bit down.\"",
+        "UtteranceId": "TTS-0CCJHU4ONV9WPJFCITZXPNCSO75ERBOR"
+      },
+      {
+        "CurrentState": "Concerned",
+        "NextState": " Empathetic",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"It's just been a tough week",
+        "UtteranceId": "TTS-0CCXWDF1WL9WVK4KI5T0QJU6G3OVSL9L"
+      },
+      {
+        "CurrentState": "Empathetic",
+        "NextState": " Goodbye2",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"I completely understand",
+        "UtteranceId": "TTS-0CCPJXDTBSKRT1UERA965650UYJLAKST"
+      },
+      {
+        "CurrentState": "DrinkOrder",
+        "NextState": " Intoxicated",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"Hey man",
+        "UtteranceId": "TTS-0CCWUVOW1TAGB95XNKR492ODKIFYY7TI"
+      },
+      {
+        "CurrentState": "Intoxicated",
+        "NextState": " Firm",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"I'm sorry but I have to ask you to leave. You've had too much to drink and you're starting to cause a disturbance.\"",
+        "UtteranceId": "TTS-0CCXKLU1X77ZPWD2M5WJU8F8C753NPI3"
+      },
+      {
+        "CurrentState": "Firm",
+        "NextState": " Angry",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"This is ridiculous",
+        "UtteranceId": "TTS-0CCEV3T6EFCQGVWLXKTSTMECJK8WCPGR"
+      },
+      {
+        "CurrentState": "Angry",
+        "NextState": " Calming",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"I'm not trying to pick on you",
+        "UtteranceId": "TTS-0CCVCV775CXKUITZYTEM2RB9P7ZI3UZN"
+      },
+      {
+        "CurrentState": "Calming",
+        "NextState": " Goodbye3",
+        "Meaning": " None",
+        "Style": " None",
+        "Utterance": " \"Okay",
+        "UtteranceId": "TTS-0CCXW0E1AHX3AKS2IOOVY0QSRNGGOWV3"
+      }
+    ]
+  },
+  "types": [
+    {
+      "TypeId": 0,
+      "ClassName": "IntegratedAuthoringTool.IntegratedAuthoringToolAsset, IntegratedAuthoringTool, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null"
+    }
+  ]
+}

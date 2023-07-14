@@ -1,0 +1,1333 @@
+{
+    "scenario_name": "test_Blindfolded",
+    "scenario_description": "Al wore a blindfold to see what it was like being blind. He bumped into his stove and stubbed his toe. Al tried to get an ice pack but he couldn't find the freezer. Al took off his blindfold and gave up the experiment. He ran to his freezer for an ice pack.",
+    "last_ended": "end",
+    "agents": {
+        "Al": {
+            "knowledge_base": [
+                "BEL(Al, Blindfolded)",
+                "BEL(Al, Bumped_Stove)",
+                "BEL(Al, Stubbed_Toe)",
+                "BEL(Al, Looking_for_Ice_pack)",
+                "BEL(Al, Blindfolded_and_Can't_Find_Freezer)",
+                "DES(Al, Take_Off_Blindfold)",
+                "DES(Al, Find_Ice_Pack)",
+                "DES(Al, Stop_Experiment)"
+            ],
+            "intentions": {
+                "INTENT(Al, Take_Off_Blindfold) = True": {
+                    "action_plan": [
+                        "Move(Al, Stove)",
+                        "Touch(Al, Stove, hand)",
+                        "BEL(Al, Bumped_Stove = True)",
+                        "BEL(Al, Stubbed_Toe = True)",
+                        "Move(Al, Kitchen_Island)",
+                        "BEL(Al, Looking_for_Ice_pack = True)",
+                        "Move(Al, Kitchen)",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer = True)",
+                        "Move(Al, Freezer)",
+                        "Open(Al, Freezer)",
+                        "BEL(Al, Find_Ice_Pack = True)",
+                        "Move(Al, Kitchen_Island)",
+                        "Take_Off(Al, Blindfold)",
+                        "BEL(Al, Blindfolded = False)",
+                        "BEL(Al, Stop_Experiment = True)"
+                    ]
+                },
+                "INTENT(Al, Find_Ice_Pack) = True": {
+                    "action_plan": [
+                        "Move(Al, Stove)",
+                        "Touch(Al, Stove)",
+                        "BEL(Al, Stove_Location, Stove)",
+                        "BEL(Al, Bumped_Stove, True)",
+                        "BEL(Al, Pain, Toes)",
+                        "Move(Al, Wall)",
+                        "Move(Al, Counter)",
+                        "Move(Al, Sink)",
+                        "Move(Al, Kitchen_Island)",
+                        "BEL(Al, Looking_for_Ice_pack, True)",
+                        "Move(Al, Freezer)",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer, True)",
+                        "Take_Off_Blindfold(Al)",
+                        "BEL(Al, Blindfolded, False)",
+                        "Find_Ice_Pack(Al, Freezer)",
+                        "BEL(Al, Found_Ice_pack, True)"
+                    ]
+                },
+                "INTENT(Al, Stop_Experiment) = True": {
+                    "action_plan": [
+                        "Move(Al, null, Bumped_Stove)",
+                        "Move(Al, null, Stubbed_Toe)",
+                        "Move(Al, null, Looking_for_Ice_pack)",
+                        "Move(Al, null, Blindfolded_and_Can't_Find_Freezer)",
+                        "Move(Al, null, Take_Off_Blindfold)",
+                        "Move(Al, null, Stop_Experiment)",
+                        "Move(Al, Freezer, Find_Ice_Pack)",
+                        "Take(Al, Freezer, Ice_Pack)",
+                        "Move(Al, null, null)"
+                    ]
+                }
+            },
+            "actions": {
+                "Move(Al, null, Bumped_Stove)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Bumped_Stove) = True",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Move(Al, null, Stubbed_Toe)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Stubbed_Toe) = False",
+                        "BEL(Al, Looking_for_Ice_pack) = False",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = False"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Bumped_Stove) = False",
+                        "BEL(Al, Stubbed_Toe) = True",
+                        "BEL(Al, Looking_for_Ice_pack) = False",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = False",
+                        "BEL(Al, Stop_Experiment)",
+                        "~BEL(Al, null)"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Move(Al, null, Looking_for_Ice_pack)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Looking_for_Ice_pack) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(Al, null, Blindfolded_and_Can't_Find_Freezer)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "@Fear"
+                    ]
+                },
+                "Move(Al, null, Take_Off_Blindfold)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Move(Al, null, Stop_Experiment)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded)",
+                        "DES(Al, Stop_Experiment) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Move(Al, Freezer, Find_Ice_Pack)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer)",
+                        "BEL(Freezer, Location)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Looking_for_Ice_pack)",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer)",
+                        "BEL(Al, Distance_to_Freezer)",
+                        "BEL(Al, Distance_to_Ice_Pack)",
+                        "BEL(Freezer, Location)",
+                        "BEL(Freezer, Distance_to_Al)"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Take(Al, Freezer, Ice_Pack)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer)",
+                        "BEL(Freezer, Contains_Ice_Pack)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Found_Ice_Pack)",
+                        "DES(Al, Relieved_Pain)",
+                        "BEL(Freezer, Contains_Ice_Pack)",
+                        "BEL(Al, Looking_for_Ice_pack)",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer)",
+                        "BEL(Al, Can_See)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Move(Al, null, null)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = False"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(Al, Stove)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = False",
+                        "BEL(Al, Found_Ice_pack, False)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Current_Location, Stove)",
+                        "BEL(Al, Distance_to_Stove, 0)",
+                        "BEL(Al, Distance_to_Freezer, Distance_to_Freezer+1)"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Touch(Al, Stove, hand)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Bumped_Stove) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pain"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BEL(Al, Bumped_Stove = True)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Bumped_Stove) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BEL(Al, Stubbed_Toe = True)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Move(Al, Kitchen_Island)": {
+                    "conditions": [
+                        "BEL(Al, Found_Ice_pack, False)",
+                        "BEL(Al, Kitchen_Island_Location, True)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Kitchen_Island_Location, True)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Al, Looking_for_Ice_pack = True)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded = True)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(Al, Kitchen)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = False"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BEL(Al, Blindfolded_and_Can't_Find_Freezer = True)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Freezer_Exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Move(Al, Freezer)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded, True)",
+                        "BEL(Al, Freezer_Location, Freezer)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Freezer_Close, True)",
+                        "BEL(Al, Location, Freezer)"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Open(Al, Freezer)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = False",
+                        "BEL(Al, Find_Ice_Pack) = False",
+                        "BEL(Freezer, Closed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = False",
+                        "BEL(Al, Looking_for_Ice_pack) = True",
+                        "BEL(Freezer, Closed) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Al, Find_Ice_Pack = True)": {
+                    "conditions": [
+                        "BEL(Al, Looking_for_Ice_pack) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Find_Ice_Pack) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Take_Off(Al, Blindfold)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "BEL(Al, Blindfolded = False)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "BEL(Al, Stop_Experiment = True)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Stop_Experiment) = False"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded) = False",
+                        "BEL(Al, Stop_Experiment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Touch(Al, Stove)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Stove_Location, Stove) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Bumped_Stove, True)",
+                        "BEL(Al, Pain, Toes)"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BEL(Al, Stove_Location, Stove)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Stove_Location, ?)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Bumped_Stove, True)"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BEL(Al, Bumped_Stove, True)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Stove_Location, Stove)",
+                        "DES(Al, Stop_Experiment) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BEL(Al, Pain, Toes)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Move(Al, Wall)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Location, Wall)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Move(Al, Counter)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded)",
+                        "BEL(Al, Found_Ice_pack)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Counter_Location, Counter)",
+                        "BEL(Al, Wall_Location, Wall)",
+                        "BEL(Al, Sink_Location, Sink)",
+                        "BEL(Al, Kitchen_Island_Location, Kitchen_Island)",
+                        "BEL(Al, Freezer_Location, Freezer)"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(Al, Sink)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded, True)",
+                        "BEL(Al, Found_Ice_pack, False)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Current_Location, Sink)",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer, True)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "BEL(Al, Looking_for_Ice_pack, True)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded, True)",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer, False)",
+                        "BEL(Al, Found_Ice_pack, False)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Al, Blindfolded_and_Can't_Find_Freezer, True)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded, True)",
+                        "BEL(Al, Found_Freezer, False)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Take_Off_Blindfold(Al)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded, True)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded, False)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "BEL(Al, Blindfolded, False)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Find_Ice_Pack(Al, Freezer)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded, False)"
+                    ],
+                    "effects": [
+                        "BEL(Al, Found_Ice_pack, True)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Al, Found_Ice_pack, True)": {
+                    "conditions": [
+                        "BEL(Al, Looking_for_Ice_pack, True)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, 1, Begin Conversation, Neutral)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Al, Looking_for_Ice_pack) = False",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = False",
+                        "DES(Al, Find_Ice_Pack) = False",
+                        "INTENT(Al, Stop_Experiment) = True",
+                        "BEL(Al, Looking_for_Ice_pack) = True",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = True",
+                        "DES(Al, Find_Ice_Pack) = True",
+                        "INTENT(Al, Stop_Experiment) = False"
+                    ],
+                    "occ_emotion": [
+                        "[Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(2, 3, Reject Assistance, Stubborn)": {
+                    "conditions": [
+                        "BEL(Al, Looking_for_Ice_pack) = True",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Looking_for_Ice_pack) = False",
+                        "INTENT(Al, Find_Ice_Pack) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Speak(4, 5, Refuse Help, Polite)": {
+                    "conditions": [
+                        "BEL(Al, Blindfolded) = True",
+                        "BEL(Al, Looking_for_Ice_pack) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Blindfolded) = False",
+                        "DES(Al, Take_Off_Blindfold) = True",
+                        "DES(Al, Find_Ice_Pack) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "[Distress"
+                    ]
+                },
+                "Speak(6, 7, Accept Help Gratefully, Gratitude)": {
+                    "conditions": [
+                        "INTENT(Al, Stop_Experiment) = True"
+                    ],
+                    "effects": [
+                        "DES(Al, Stop_Experiment) = False",
+                        "DES(Al, Take_Off_Blindfold) = True",
+                        "DES(Al, Find_Ice_Pack) = True",
+                        "INTENT(Al, Take_Off_Blindfold) = True",
+                        "INTENT(Al, Find_Ice_Pack) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(7, End, End Conversation, Neutral)": {
+                    "conditions": [
+                        "BEL(Al, Looking_for_Ice_pack) = True",
+                        "BEL(Al, Blindfolded_and_Can't_Find_Freezer) = True",
+                        "INTENT(Al, Find_Ice_Pack) = True"
+                    ],
+                    "effects": [
+                        "BEL(Al, Looking_for_Ice_pack) = False",
+                        "BEL(Al, Found_Ice_Pack) = True"
+                    ],
+                    "occ_emotion": [
+                        "End Conversation, End, Satisfaction, Gratitude, \"I think I'll skip the blindfold experiment for a while.\""
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                }
+            }
+        },
+        "Stove": {
+            "knowledge_base": [
+                "BEL(Stove_SEEN_BY_Al) = True",
+                "BEL(Stove_FUNCTIONING) = True",
+                "DES(Stove_NOT_GETTING_DAMAGED) = True",
+                "DES(Stove_NOT_CAUSING_HARM) = True"
+            ],
+            "intentions": {
+                "INTENT(Stove, NOT_GETTING_DAMAGED) = True": {
+                    "action_plan": [
+                        "Move(Stove, AwayFromObstacles)",
+                        "Test(Stove, Functionality)",
+                        "Communicate(Stove, MessageToAl, \"Please be careful and don't bump into me!\")",
+                        "Monitor(Stove, Surroundings)",
+                        "Alert(Stove, Al, WhenHazardPresent, \"Please be careful, there is a hazard near me!\")"
+                    ]
+                },
+                "INTENT(Stove, NOT_CAUSING_HARM) = True": {
+                    "action_plan": [
+                        "INTENT(Stove, NOT_CAUSING_HARM) = True",
+                        "Monitor(Stove, Stove, temperature)",
+                        "Activate(Stove, Stove, safety_lock)",
+                        "Activate(Stove, Stove, cooling_fan)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Stove, NOT_CAUSING_HARM) = True": {
+                    "conditions": [
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "BEL(Stove_SEEN_BY_Al) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Monitor(Stove, Stove, temperature)": {
+                    "conditions": [
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "BEL(Stove_SEEN_BY_Al) = True"
+                    ],
+                    "effects": [
+                        "BEL(Stove_HIGH_TEMPERATURE) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Activate(Stove, Stove, safety_lock)": {
+                    "conditions": [
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "INTENT(Stove, NOT_CAUSING_HARM) = True",
+                        "BEL(Stove, safety_lock_status) = False"
+                    ],
+                    "effects": [
+                        "BEL(Stove, safety_lock_status) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Activate(Stove, Stove, cooling_fan)": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "BEL(Stove_TEMPERATURE_HIGH) = True"
+                    ],
+                    "effects": [
+                        "BEL(Stove_COOLING_FAN_ON) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(Stove, AwayFromObstacles)": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_NOT_COLLIDING_WITH_OTHER_OBJECTS) = False"
+                    ],
+                    "effects": [
+                        "BEL(Stove_NOT_COLLIDING_WITH_OTHER_OBJECTS) = True",
+                        "BEL(Stove_DISTANCE_FROM_OBSTACLES) > 0"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Test(Stove, Functionality)": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_FUNCTIONING) = True"
+                    ],
+                    "effects": [
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "BEL(Stove_FUNCTIONING) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Communicate(Stove, MessageToAl, \"Please be careful and don't bump into me!\")": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True"
+                    ],
+                    "effects": [
+                        "Al"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Monitor(Stove, Surroundings)": {
+                    "conditions": [
+                        "BEL(Stove_FUNCTIONING) = True"
+                    ],
+                    "effects": [
+                        "BEL(Stove_SEEN_BY_Al) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Alert(Stove, Al, WhenHazardPresent, \"Please be careful, there is a hazard near me!\")": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_FUNCTIONING) = True"
+                    ],
+                    "effects": [
+                        "BEL(Stove_SEEN_BY_Al, When_Al_Sees_Hazard_Near_Stove) = True",
+                        "BEL(Stove_OBSERVING_AL, When_Al_Sees_Hazard_Near_Stove) = True",
+                        "DES(Stove_ALERTING_AL, When_Al_Sees_Hazard_Near_Stove) = True",
+                        "BEL(Stove_HAZARD_PRESENT) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                ""
+            ],
+            "speak_actions": {
+                "Speak(Start, 1, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "INTENT(Stove, NOT_GETTING_DAMAGED) = True",
+                        "INTENT(Stove, NOT_CAUSING_HARM) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Speak(2, 2, Express Empathy, Empathy)": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "INTENT(Stove, NOT_GETTING_DAMAGED) = True",
+                        "INTENT(Stove, NOT_CAUSING_HARM) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(4, 4, Confirm Request, Confirm)": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "DES(Stove_NOT_GETTING_DAMAGED) = True",
+                        "DES(Stove_NOT_CAUSING_HARM) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Displeased about"
+                    ]
+                },
+                "Speak(5, 5, Get Ice Pack, Neutral)": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "INTENT(Stove, NOT_GETTING_DAMAGED) = True",
+                        "INTENT(Stove, NOT_CAUSING_HARM) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Speak(6, 6, Express Concern, Concern)": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "INTENT(Stove, NOT_GETTING_DAMAGED) = True",
+                        "INTENT(Stove, NOT_CAUSING_HARM) = True"
+                    ],
+                    "effects": [
+                        "BEL(Stove_FUNCTIONING) = False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(End, End, End Conversation, Neutral)": {
+                    "conditions": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "DES(Stove_NOT_GETTING_DAMAGED) = True",
+                        "DES(Stove_NOT_CAUSING_HARM) = True",
+                        "INTENT(Stove, NOT_GETTING_DAMAGED) = True",
+                        "INTENT(Stove, NOT_CAUSING_HARM) = True"
+                    ],
+                    "effects": [
+                        "BEL(Stove_SEEN_BY_Al) = True",
+                        "BEL(Stove_FUNCTIONING) = True",
+                        "DES(Stove_NOT_GETTING_DAMAGED) = True",
+                        "DES(Stove_NOT_CAUSING_HARM) = True",
+                        "INTENT(Stove, NOT_GETTING_DAMAGED) = True",
+                        "INTENT(Stove, NOT_CAUSING_HARM) = True",
+                        "BEL(Stove_FUNCTIONING) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            }
+        },
+        "Freezer": {
+            "knowledge_base": [
+                "BEL(Freezer, has_ice) = True",
+                "DES(Freezer, dispense_ice) = True",
+                "BEL(Freezer, current_temperature) = 0",
+                "BEL(Freezer, location) = Kitchen",
+                "BEL(Freezer, connectivity) = Connected",
+                "DES(Freezer, maintain_temperature) = True",
+                "BEL(Freezer, shelf_life_duration) = 180",
+                "DES(Freezer, preserve_food) = True",
+                "BEL(Freezer, ice_pack_available) = True",
+                "DES(Freezer, dispense_ice_pack) = True"
+            ],
+            "intentions": {
+                "INTENT(Freezer, maintain_temperature) = True": {
+                    "action_plan": [
+                        "INT(Freezer, maintain_temperature) = True",
+                        "Activate(Freezer, None)",
+                        "CheckTemperature(Freezer, None)",
+                        "CheckConnectivity(Freezer, None)",
+                        "MonitorTemperature(Freezer, None)",
+                        "DispenseIce(Freezer, Store, Amount)",
+                        "MonitorShelfLife(Freezer, None)",
+                        "DispenseIcePack(Freezer, Store, Amount)"
+                    ]
+                },
+                "INTENT(Freezer, dispense_ice_pack) = True": {
+                    "action_plan": [
+                        "CheckConnectivity(Freezer, ConnectionStatus)",
+                        "CheckTemperature(Freezer, CurrentTemperature)",
+                        "CheckShelfLifeDuration(Freezer, ShelfLifeDuration)",
+                        "CheckIcePackAvailability(Freezer, IcePackAvailability)",
+                        "DispenseIcePack(Freezer, Al)"
+                    ]
+                },
+                "INTENT(Freezer, preserve_food) = True": {
+                    "action_plan": [
+                        "INTENT(Freezer, preserve_food) = True",
+                        "MaintainTemperature(Freezer, null, null)",
+                        "DispenseIce(Freezer, Al, null)",
+                        "DispenseIcePack(Freezer, Al, null)",
+                        "UpdateBelief(Freezer, has_ice_pack=FALSE, null)",
+                        "UpdateBelief(Freezer, shelf_life_duration=179, null)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Freezer, preserve_food) = True": {
+                    "conditions": [
+                        "BEL(Freezer, shelf_life_duration) = 180",
+                        "BEL(Freezer, connectivity) = Connected",
+                        "BEL(Freezer, location) = Kitchen"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "MaintainTemperature(Freezer, null, null)": {
+                    "conditions": [
+                        "BEL(Freezer, connectivity) = Connected",
+                        "BEL(Freezer, current_temperature) < 0"
+                    ],
+                    "effects": [
+                        "UpdateBelief(Freezer, current_temperature, +1)"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DispenseIce(Freezer, Al, null)": {
+                    "conditions": [
+                        "BEL(Freezer, has_ice) = True",
+                        "BEL(Freezer, connectivity) = Connected",
+                        "DES(Freezer, dispense_ice) = True"
+                    ],
+                    "effects": [
+                        "UpdateBelief(Freezer, has_ice=FALSE, null)",
+                        "UpdateBelief(Al, has_ice=TRUE, null)",
+                        "UpdateBelief(Freezer, shelf_life_duration=179, null)"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "DispenseIcePack(Freezer, Al, null)": {
+                    "conditions": [
+                        "BEL(Freezer, ice_pack_available) = True"
+                    ],
+                    "effects": [
+                        "UpdateBelief(Freezer, has_ice_pack=TRUE, null)"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "UpdateBelief(Freezer, has_ice_pack=FALSE, null)": {
+                    "conditions": [
+                        "BEL(Freezer, ice_pack_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, has_ice_pack) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "UpdateBelief(Freezer, shelf_life_duration=179, null)": {
+                    "conditions": [
+                        "BEL(Freezer, shelf_life_duration) = 180"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, shelf_life_duration) = 179"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "INT(Freezer, maintain_temperature) = True": {
+                    "conditions": [
+                        "BEL(Freezer, connectivity) = Connected",
+                        "BEL(Freezer, current_temperature) =/= 4",
+                        "BEL(Freezer, current_temperature) =/= -4"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Activate(Freezer, None)": {
+                    "conditions": [
+                        "BEL(Freezer, connectivity) = Disconnected"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, connectivity) = Connected"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckTemperature(Freezer, None)": {
+                    "conditions": [
+                        "BEL(Freezer, location) = Kitchen",
+                        "BEL(Freezer, connectivity) = Connected",
+                        "BEL(Freezer, current_temperature)"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, current_temperature) = Temperature",
+                        "BEL(Freezer, working_order) = True",
+                        "BEL(Freezer, working_order) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CheckConnectivity(Freezer, None)": {
+                    "conditions": [
+                        "BEL(Freezer, connectivity) = Connected"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "MonitorTemperature(Freezer, None)": {
+                    "conditions": [
+                        "BEL(Freezer, maintain_temperature) = True",
+                        "BEL(Freezer, current_temperature) > 0",
+                        "BEL(Freezer, last_temperature_reading) != BEL(Freezer, current_temperature)"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, last_temperature_reading) = BEL(Freezer, current_temperature)"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DispenseIce(Freezer, Store, Amount)": {
+                    "conditions": [
+                        "BEL(Freezer, has_ice) = True",
+                        "BEL(Freezer, current_temperature) < 0",
+                        "Store <= BEL(Freezer, has_ice)"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, has_ice) = BEL(Freezer, has_ice) - Store",
+                        "BEL(Freezer, is_dispensing_ice) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MonitorShelfLife(Freezer, None)": {
+                    "conditions": [
+                        "BEL(Freezer, shelf_life_duration) = ShelfLife",
+                        "BEL(Freezer, preserve_food) = True"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, shelf_life_duration) = ShelfLife-1"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DispenseIcePack(Freezer, Store, Amount)": {
+                    "conditions": [
+                        "BEL(Freezer, ice_pack_available) = True",
+                        "BEL(Store, location) = Kitchen",
+                        "BEL(Freezer, current_temperature) <= -15",
+                        "BEL(Freezer, shelf_life_duration) >= 0"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, ice_pack_available) = False",
+                        "BEL(Freezer, shelf_life_duration) = 180",
+                        "DES(Freezer, preserve_food) = True",
+                        "BEL(Store, location) = Kitchen",
+                        "BEL(Freezer, location) = Store",
+                        "BEL(Freezer, current_temperature) = -15",
+                        "BEL(Freezer, connectivity) = Connected"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "CheckConnectivity(Freezer, ConnectionStatus)": {
+                    "conditions": [
+                        "BEL(Freezer, connectivity) = Connected"
+                    ],
+                    "effects": [
+                        "BEL(ConnectionStatus, Connected) = True",
+                        "BEL(Freezer, connectivity) = Connected"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CheckTemperature(Freezer, CurrentTemperature)": {
+                    "conditions": [
+                        "BEL(Freezer, connectivity) = Connected"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, current_temperature) = CurrentTemperature"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CheckShelfLifeDuration(Freezer, ShelfLifeDuration)": {
+                    "conditions": [
+                        "BEL(Freezer, shelf_life_duration) = ShelfLifeDuration"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckIcePackAvailability(Freezer, IcePackAvailability)": {
+                    "conditions": [
+                        "BEL(Freezer, ice_pack_available) = False"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, ice_pack_available) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DispenseIcePack(Freezer, Al)": {
+                    "conditions": [
+                        "BEL(Freezer, ice_pack_available) = True",
+                        "BEL(Freezer, location) = Kitchen",
+                        "BEL(Al, ice_pack_needed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Freezer, ice_pack_available) = False",
+                        "BEL(Al, ice_pack_needed) = False",
+                        "BEL(Al, has_ice_pack) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "neutral"
+            ],
+            "speak_actions": {}
+        }
+    },
+    "dialogue_tree": [
+        "<Start, 1, Begin Conversation, Neutral, \"Hello, Al. What happened to your foot?\">",
+        "<1, 2, Express Empathy, Empathy, \"That must have hurt. Can I help you with anything?\">",
+        "<2, 3, Offer Assistance, Concern, \"I have some ice packs in my freezer, would you like me to get you one?\">",
+        "<3, 4, Confirm Request, Confirm, \"Sure, that would be great. Please be careful with the steps.\">",
+        "<4, 5, Walk To Kitchen, Neutral, \"Let's head to the kitchen.\">",
+        "<5, 6, Get Ice Pack, Neutral, \"Here's the ice pack. Do you need help applying it?\">",
+        "<6, 7, Express Gratitude, Gratitude, \"Thank you so much, I really appreciate your help.\">",
+        "<7, End, End Conversation, Neutral, \"I think I'll skip the blindfold experiment for a while.\">"
+    ]
+}

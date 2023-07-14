@@ -1,0 +1,1572 @@
+{
+    "scenario_name": "test_The dock",
+    "scenario_description": "Harry went to the sock every day to relax and watch the sunset. He always enjoyed watching the sun disappear over the horizon. one day someone was sitting on his bench and he was a little upset. When he went to confront the person, he discovered it was a woman. He talked with her instead and made a good friend.",
+    "last_ended": "end",
+    "agents": {
+        "Harry": {
+            "knowledge_base": [
+                "BEL(Harry, hasDailyRoutine) = True",
+                "BEL(Harry, likesWatchingSunset) = True",
+                "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = True",
+                "BEL(Harry, benchIsReservedForHim) = False",
+                "DES(Harry, protectHisRoutine) = True",
+                "DES(Harry, makeFriends) = False"
+            ],
+            "intentions": {
+                "INTENT(Harry, approachWoman) = True": {
+                    "action_plan": [
+                        "Move(Harry, bench, newLocation)",
+                        "Check(Harry, benchIsReservedForHim)",
+                        "Check(Harry, hasDailyRoutine), Check(Harry, likesWatchingSunset)",
+                        "Check(Harry, getsUpsetWhenRoutineIsInterrupted)",
+                        "Approach(Harry, Woman)",
+                        "Greet(Harry, Woman)",
+                        "Ask(Harry, Woman, aboutSittingOnBench)",
+                        "Listen(Harry, Woman)",
+                        "Talk(Harry, Woman, aboutSunsets)",
+                        "Share(Harry, Woman, hisReasoningForApproaching)",
+                        "Bond(Harry, Woman) "
+                    ]
+                },
+                "INTENT(Harry, talkWithWoman) = True": {
+                    "action_plan": [
+                        "Move(Harry, bench, targetLocation=nextToWoman)",
+                        "Greet(Harry, Woman)",
+                        "Ask(Harry, Woman, question=\"May I join you?\")",
+                        "Listen(Harry, Woman)",
+                        "StartConversation(Harry, Woman)",
+                        "Learn(Harry, Woman)",
+                        "Invite(Harry, Woman, proposal=\"Do you want to come watch the sunset with me again sometime?\")",
+                        "ExchangeContactInformation(Harry, Woman)"
+                    ]
+                },
+                "INTENT(Harry, makeFriend) = True": {
+                    "action_plan": [
+                        "INTENT(Harry, makeFriend) = True",
+                        "CHECK(BEL(Harry, benchIsReservedForHim))",
+                        "IF(BEL(Harry, benchIsReservedForHim) = False)",
+                        "ACTION(Harry, reserveBench)",
+                        "ACTION(Harry, approachWoman)",
+                        "ACTION(Harry, expressHisInitialFrustration)",
+                        "ACTION(Harry, makeSmallTalk)",
+                        "ACTION(Harry, exchangeContactInformation)",
+                        "ACTION(Harry, sayGoodbye)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Harry, makeFriend) = True": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False"
+                    ],
+                    "effects": [
+                        "BEL(Harry, benchIsReservedForHim) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CHECK(BEL(Harry, benchIsReservedForHim))": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Frustration"
+                    ],
+                    "emotion_condition": [
+                        "Upset"
+                    ]
+                },
+                "IF(BEL(Harry, benchIsReservedForHim) = False)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "upset"
+                    ]
+                },
+                "ACTION(Harry, reserveBench)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False"
+                    ],
+                    "effects": [
+                        "BEL(Harry, benchIsReservedForHim) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Frustration"
+                    ]
+                },
+                "ACTION(Harry, approachWoman)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False"
+                    ],
+                    "effects": [
+                        "BEL(Harry, hasMetWoman) = True",
+                        "BEL(Harry, knowsWomanName) = True",
+                        "DES(Harry, makeFriends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ACTION(Harry, expressHisInitialFrustration)": {
+                    "conditions": [
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = True",
+                        "BEL(Harry, benchIsReservedForHim) = False"
+                    ],
+                    "effects": [
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "ACTION(Harry, makeSmallTalk)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "BEL(Harry, likesWatchingSunset) = True",
+                        "BEL(Woman, isPresent) = True",
+                        "BEL(Harry, knowsHowToMakeSmallTalk) = True",
+                        "BEL(Woman, seemsApproachable) = True",
+                        "DES(Harry, makeFriends) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, isTalkingToWoman) = True",
+                        "BEL(Harry, likesTalkingToWoman) = True",
+                        "BEL(Harry, feelsComfortableTalkingToWoman) = True",
+                        "BEL(Woman, likesTalkingToHarry) = True",
+                        "BEL(Woman, feelsComfortableTalkingToHarry) = True",
+                        "DES(Harry, makeFriends) = False",
+                        "DES(Harry, maintainConversation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ACTION(Harry, exchangeContactInformation)": {
+                    "conditions": [
+                        "BEL(Harry, makeFriend) = True",
+                        "BEL(Harry, exchangedContactInformation) = False",
+                        "BEL(Woman, exchangedContactInformation) = False"
+                    ],
+                    "effects": [
+                        "BEL(Harry, exchangedContactInformation) = True",
+                        "BEL(Woman, exchangedContactInformation) = True"
+                    ],
+                    "occ_emotion": [
+                        "joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ACTION(Harry, sayGoodbye)": {
+                    "conditions": [
+                        "BEL(Harry, makeFriend) = True",
+                        "BEL(Harry, hasContactInformation) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, makeFriend) = False",
+                        "BEL(Harry, hasContactInformation) = False",
+                        "BEL(Harry, hasNewFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Move(Harry, bench, newLocation)": {
+                    "conditions": [
+                        "BEL(Harry, bench) = oldLocation",
+                        "BEL(Harry, locatedAt) = oldLocation"
+                    ],
+                    "effects": [
+                        "BEL(Harry, bench) = newLocation",
+                        "BEL(Harry, locatedAt) = newLocation"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check(Harry, benchIsReservedForHim)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Frustration"
+                    ]
+                },
+                "Check(Harry, hasDailyRoutine), Check(Harry, likesWatchingSunset)": {
+                    "conditions": [
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "BEL(Harry, likesWatchingSunset) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Check(Harry, getsUpsetWhenRoutineIsInterrupted)": {
+                    "conditions": [
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Approach(Harry, Woman)": {
+                    "conditions": [
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Harry, approachWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Greet(Harry, Woman)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False"
+                    ],
+                    "effects": [
+                        "None(Harry)"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Ask(Harry, Woman, aboutSittingOnBench)": {
+                    "conditions": [
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "CheckIf(Woman, isSittingOnBench)"
+                    ],
+                    "effects": [
+                        "BEL(Harry, benchIsReservedForHim) = True",
+                        "CheckIf(Woman, isSittingOnBench)",
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "CheckIf(Woman, isSittingOnBench)"
+                    ],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Listen(Harry, Woman)": {
+                    "conditions": [
+                        "BEL(Harry, listeningToWoman) = False",
+                        "BEL(Woman, talkingToHarry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, listeningToWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Talk(Harry, Woman, aboutSunsets)": {
+                    "conditions": [
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "BEL(Harry, likesWatchingSunset) = True",
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "BEL(Woman, isInterestedInSunsets) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, hasSharedInterest) = True",
+                        "DES(Harry, makeFriends) = True",
+                        "DES(Harry, shareMoreAboutInterest) = True",
+                        "DES(Woman, feelUnderstood) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Share(Harry, Woman, hisReasoningForApproaching)": {
+                    "conditions": [
+                        "BEL(Harry, makeFriends) = False",
+                        "BEL(Harry, likesWatchingSunset) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, makeFriends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Bond(Harry, Woman) ": {
+                    "conditions": [
+                        "BEL(Harry, makeFriends) = False",
+                        "BEL(Woman, isInterestedInFriendshipWithHarry) = True"
+                    ],
+                    "effects": [
+                        "DES(Harry, makeFriends) = True",
+                        "DES(Woman, makeFriends) = True",
+                        "BEL(Harry, hasFriend) = True",
+                        "BEL(Woman, hasFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Love"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Move(Harry, bench, targetLocation=nextToWoman)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "BEL(Harry, hasDailyRoutine) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, benchIsReservedForHim) = True",
+                        "BEL(Harry, atNewLocation) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ask(Harry, Woman, question=\"May I join you?\")": {
+                    "conditions": [
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = True",
+                        "BEL(Harry, benchIsReservedForHim) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "StartConversation(Harry, Woman)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "BEL(Woman, isSittingOnHarryBench) = True",
+                        "BEL(Harry, hasMetWomanBefore) = False"
+                    ],
+                    "effects": [
+                        "DES(Harry, makeFriends) = True",
+                        "DES(Harry, protectHisRoutine) = False",
+                        "BEL(Harry, hasMetWomanBefore) = True",
+                        "BEL(Woman, isFriendOfHarry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Learn(Harry, Woman)": {
+                    "conditions": [
+                        "BEL(Harry, likesLearning) = True",
+                        "BEL(Woman, hasKnowledgeToShare) = True",
+                        "BEL(Woman, willingToShareKnowledge) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, learnedSomethingNew) = True",
+                        "BEL(Harry, knowledgeAcquiredFromWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Happy-for"
+                    ]
+                },
+                "Invite(Harry, Woman, proposal=\"Do you want to come watch the sunset with me again sometime?\")": {
+                    "conditions": [
+                        "BEL(Harry, makeFriends) = False",
+                        "BEL(Woman, exchangedContactInfoWithHarry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, hasFriend) = True",
+                        "BEL(Harry, makeFriends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ExchangeContactInformation(Harry, Woman)": {
+                    "conditions": [
+                        "BEL(Harry, makeFriends) = True",
+                        "BEL(Harry, gotAlongWithWoman) = True",
+                        "BEL(Woman, gotAlongWithHarry) = True",
+                        "BEL(Harry, exchangedContactInformationWithWoman) = False",
+                        "BEL(Woman, exchangedContactInformationWithHarry) = False"
+                    ],
+                    "effects": [
+                        "BEL(Harry, exchangedContactInformationWithWoman) = True",
+                        "BEL(Woman, exchangedContactInformationWithHarry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, A1, None, None)": {
+                    "conditions": [
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "BEL(Harry, likesWatchingSunset) = True",
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = True",
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "DES(Harry, protectHisRoutine) = True",
+                        "DES(Harry, makeFriends) = False",
+                        "INTENT(Harry, approachWoman) = True",
+                        "INTENT(Harry, talkWithWoman) = True",
+                        "INTENT(Harry, makeFriend) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Harry, talkWithWoman) = False",
+                        "INTENT(Harry, makeFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Speak(A1, A2, None, None)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "DES(Harry, protectHisRoutine) = True",
+                        "INTENT(Harry, approachWoman) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Harry, talkWithWoman) = True",
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = False"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Harry, Sarah, None, None)",
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "ACTION(Harry, approachWoman), Listen(Harry, Woman), Hope",
+                        "ACTION(Harry, expressHisInitialFrustration), Talk(Harry, Woman, aboutSunsets), Distress",
+                        "ACTION(Harry, makeSmallTalk), Talk(Harry, Woman, aboutSunsets), Joy",
+                        "ACTION(Harry, exchangeContactInformation), Bond(Harry, Woman), Gratification",
+                        "Move(Harry, bench, targetLocation=nextToWoman), Ask(Harry, Woman, question=\"May I join you?\"), Hope",
+                        "StartConversation(Harry, Woman), Learn(Harry, Woman), Joy",
+                        "Invite(Harry, Woman, proposal=\"Do you want to come watch the sunset with me again sometime?\"), Hope"
+                    ]
+                },
+                "Speak(A2, A3, None, None)": {
+                    "conditions": [
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "BEL(Harry, likesWatchingSunset) = True",
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = True",
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "DES(Harry, protectHisRoutine) = True",
+                        "DES(Harry, makeFriends) = False",
+                        "INTENT(Harry, approachWoman) = True",
+                        "INTENT(Harry, talkWithWoman) = True",
+                        "INTENT(Harry, makeFriend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, benchIsReservedForHim) = True",
+                        "DES(Harry, makeFriends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "ExpressInitialFrustration, MakeSmallTalk, Anger, None"
+                    ]
+                },
+                "Speak(A3, A4, None, None)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "DES(Harry, protectHisRoutine) = True",
+                        "INTENT(Harry, approachWoman) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Harry, talkWithWoman) = True",
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = False"
+                    ],
+                    "occ_emotion": [
+                        "BEL(Harry, benchIsReservedForHim)=False], [BEL(Harry, benchIsReservedForHim)=True",
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Bond(Harry, Woman), Gratification, None, None"
+                    ]
+                },
+                "Speak(A4, A5, None, None)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "DES(Harry, protectHisRoutine) = True",
+                        "INTENT(Harry, talkWithWoman) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Harry, makeFriend) = True",
+                        "BEL(Harry, benchIsReservedForHim) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(A5, A6, None, None)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "DES(Harry, protectHisRoutine) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Harry, approachWoman) = True",
+                        "INTENT(Harry, talkWithWoman) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "GrabbingBench, ThinkingAboutApproaching, None, None",
+                        "ThinkingAboutApproaching, Approach, None, None",
+                        "Approach, Greet, None, None, \"Hi there!\"",
+                        "Greet, Ask, None, None, \"Excuse me, but is something wrong?\"",
+                        "Ask, Listen, None, None, \"Just wondering why you're sitting on my bench.\"",
+                        "Listen, Anger, Anger, None, \"I come here every day and it's my spot. I was upset to see someone sitting here.\""
+                    ]
+                },
+                "Speak(A6, A7, None, None)": {
+                    "conditions": [
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "BEL(Harry, likesWatchingSunset) = True",
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = True",
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "INTENT(Harry, talkWithWoman) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Harry, makeFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Speak(A7, A8, None, None)": {
+                    "conditions": [
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "BEL(Harry, likesWatchingSunset) = True",
+                        "BEL(Harry, getsUpsetWhenRoutineIsInterrupted) = True",
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "INTENT(Harry, approachWoman) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Harry, talkWithWoman) = True",
+                        "DES(Harry, makeFriends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Start(A0), CHECK(BEL(Harry, benchIsReservedForHim))(A1), None, None",
+                        "IF(BEL(Harry, benchIsReservedForHim) = False), ACTION(Harry, reserveBench)(A2), None, None",
+                        "ACTION(Harry, approachWoman)(A3), None, None, None",
+                        "ACTION(Harry, expressHisInitialFrustration)(A4), None, Fear, None",
+                        "ACTION(Harry, makeSmallTalk)(A5), None, None, None",
+                        "ACTION(Harry, exchangeContactInformation)(A6), None, Gratification, None",
+                        "ACTION(Harry, sayGoodbye)(A7), End(A8), None, None"
+                    ]
+                },
+                "Speak(A8, End, None, None)": {
+                    "conditions": [
+                        "BEL(Harry, benchIsReservedForHim) = False",
+                        "BEL(Harry, hasDailyRoutine) = True",
+                        "DES(Harry, protectHisRoutine) = True",
+                        "INTENT(Harry, approachWoman) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, benchIsReservedForHim) = True",
+                        "INTENT(Harry, talkWithWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Bond(Harry, Woman)"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            }
+        },
+        "Woman": {
+            "knowledge_base": [
+                "BEL(Woman, SitOnBench) = True",
+                "BEL(Woman, EnjoySunset) = True",
+                "BEL(Woman, OpenToTalk) = True",
+                "DES(Woman, MakeFriend) = True",
+                "DES(Woman, ExperienceNature) = True"
+            ],
+            "intentions": {
+                "INTENT(Woman, SitOnBench) = True": {
+                    "action_plan": [
+                        "INTENT(Woman, SitOnBench) = True",
+                        "Move(Woman, Bench)",
+                        "Sit(Woman, Bench)",
+                        "Observe(Woman, Sunset)",
+                        "Think(Woman)",
+                        "OpenToTalk(Woman)",
+                        "Wait(Woman, Harry)",
+                        "Talk(Woman, Harry)",
+                        "Leave(Woman)",
+                        "Talk(Woman, Harry)",
+                        "Leave(Woman)"
+                    ]
+                },
+                "INTENT(Woman, EnjoySunset) = True": {
+                    "action_plan": [
+                        "ExperienceNature",
+                        "Move(Woman, To(Bench))",
+                        "Sit(Woman, On(Bench))",
+                        "BEL(Woman, EnjoySunset) = True",
+                        "Watch(Woman, Sunset)",
+                        "Observe(Woman, Surroundings)",
+                        "BEL(Woman, OpenToTalk) = True",
+                        "Talk(Woman, To(Harry))",
+                        "BEL(Woman, MakeFriend) = True",
+                        "Introduce(Woman, To(Harry))",
+                        "Listen(Woman, To(Harry))",
+                        "Share(Woman, CommonInterestsWith(Harry))",
+                        "End(Woman, ExperienceNature)"
+                    ]
+                },
+                "INTENT(Woman, StartConversation, Harry) = True": {
+                    "action_plan": [
+                        "MoveTo(Woman, Bench)",
+                        "Greet(Woman, Harry)",
+                        "EngageInSmallTalk(Woman, Harry)",
+                        "AskAboutHarry(Woman, Harry)",
+                        "ShareOwnStory(Woman, Harry)",
+                        "ExpressInterestInFriendship(Woman, Harry)",
+                        "ExchangeContactInformation(Woman, Harry)"
+                    ]
+                },
+                "INTENT(Woman, MakeFriend) = True": {
+                    "action_plan": [
+                        "SitOnBench(Woman, Harry)",
+                        "ObserveSunset(Woman, None)",
+                        "AskAboutHarry(Woman, Harry)",
+                        "ShareInformation(Woman, Harry, PersonalInfo)",
+                        "Listen(Harry, Woman)",
+                        "FindCommonInterest(Woman, Harry)",
+                        "ExchangeContactInfo(Woman, Harry)",
+                        "Part(Woman, Harry)"
+                    ]
+                },
+                "INTENT(Woman, ExperienceNature) = True": {
+                    "action_plan": [
+                        "Move(Woman, Sock), Location(Sock)",
+                        "Sit(Woman, Bench), Target(Bench)",
+                        "Notice(Woman, Harry), Target(Harry)",
+                        "Greet(Woman, Harry), Target(Harry)",
+                        "Listen(Woman, Harry), Target(Harry)",
+                        "Share(Woman, Harry), Target(Harry), Argument(ExperienceNature)",
+                        "Watch(Woman, Sunset), Target(Sunset)",
+                        "ExchangeContactInfo(Woman, Harry), Target(Harry)"
+                    ]
+                }
+            },
+            "actions": {
+                "Move(Woman, Sock), Location(Sock)": {
+                    "conditions": [
+                        "BEL(Woman, AtLocation) =! Sock"
+                    ],
+                    "effects": [
+                        "BEL(Woman, AtLocation) = Sock"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Sit(Woman, Bench), Target(Bench)": {
+                    "conditions": [
+                        "BEL(Woman, At(Bench)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Woman, At(Bench)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Notice(Woman, Harry), Target(Harry)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Harry, InSock) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, Notice(Harry)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest/Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "Surprise"
+                    ]
+                },
+                "Greet(Woman, Harry), Target(Harry)": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, Present) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, MeetHarry) = True",
+                        "BEL(Harry, MeetWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Listen(Woman, Harry), Target(Harry)": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, WantsToTalk) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, FeelsListened) = True",
+                        "DES(Woman, MakeFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Share(Woman, Harry), Target(Harry), Argument(ExperienceNature)": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, IsPresent) = True",
+                        "BEL(Woman, ExperienceNature) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, MakeFriend) = True",
+                        "BEL(Harry, MakeFriend) = True",
+                        "DES(Woman, EnjoyFriendship) = True",
+                        "DES(Harry, EnjoyFriendship) = True",
+                        "DES(Woman, ShareExperiences) = True",
+                        "BEL(Woman, BelievesInHarry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Watch(Woman, Sunset), Target(Sunset)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, EnjoySunset) = True",
+                        "BEL(Sunset, Visible) = True"
+                    ],
+                    "effects": [
+                        "DES(Woman, ExperienceNature) = True",
+                        "BEL(Woman, EnjoySunset) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "ExchangeContactInfo(Woman, Harry), Target(Harry)": {
+                    "conditions": [
+                        "BEL(Woman, MakeFriend) = True",
+                        "BEL(Harry, MakeFriend) = True",
+                        "BEL(Woman, Location) = Sock",
+                        "BEL(Harry, Location) = Sock"
+                    ],
+                    "effects": [
+                        "BEL(Woman, HasContactInfo(Harry)) = True",
+                        "BEL(Harry, HasContactInfo(Woman)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "INTENT(Woman, SitOnBench) = True": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, IsSitting) = True",
+                        "BEL(Woman, ObservingSunset) = True",
+                        "BEL(Woman, IsThinking) = True",
+                        "DES(Woman, MakeFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(Woman, Bench)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Bench, Vacant) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, NearBench) = True",
+                        "NOT BEL(Bench, Vacant)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Sit(Woman, Bench)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, Sitting) = True",
+                        "BEL(Woman, NextToHarry) = True",
+                        "BEL(Woman, Not(Occupied(Bench))) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Observe(Woman, Sunset)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, EnjoySunset) = True",
+                        "DES(Woman, ExperienceNature) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Think(Woman)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, EnjoySunset) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, ExploredThoughts) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "OpenToTalk(Woman)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, OpenToTalk) = False"
+                    ],
+                    "effects": [
+                        "BEL(Woman, OpenToTalk) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Wait(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Woman, MakeFriend) = True",
+                        "BEL(Harry, ApproachedByWoman) = False"
+                    ],
+                    "effects": [
+                        "BEL(Harry, ApproachedByWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Talk(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, OpenToTalk) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, MakeFriend(Harry)) = True",
+                        "BEL(Harry, MakeFriend(Woman)) = True",
+                        "DES(Woman, MakeFriend) -= 1",
+                        "DES(Harry, MakeFriend) -= 1"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Comfort"
+                    ]
+                },
+                "Leave(Woman)": {
+                    "conditions": [
+                        "BEL(Woman, TalkedWithHarry) = True",
+                        "DES(Woman, MakeFriend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, TalkedWithHarry) = False",
+                        "BEL(Woman, MetNewPerson) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "ExperienceNature": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, ExperienceNature) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "\"Joy\""
+                    ]
+                },
+                "Move(Woman, To(Bench))": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, OnBench) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Sit(Woman, On(Bench))": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Bench, Available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, At(Bench)) = True",
+                        "BEL(Bench, OccupiedBy(Woman)) = True",
+                        "BEL(Bench, Available) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Woman, EnjoySunset) = True": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Watch(Woman, Sunset)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, EnjoySunset) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, EnjoyedSunset) = True",
+                        "BEL(Woman, EmotionalState) += Positive",
+                        "DES(Woman, TalkAboutSunset) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Observe(Woman, Surroundings)": {
+                    "conditions": [
+                        "BEL(Woman, ExperienceNature) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, NoticeDetails) = True",
+                        "BEL(Woman, AppreciateSurroundings) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Woman, OpenToTalk) = True": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Talk(Woman, To(Harry))": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, Present) = True",
+                        "BEL(Woman, Knows(Harry)) = False"
+                    ],
+                    "effects": [
+                        "DES(Woman, MakeFriend) = True",
+                        "BEL(Woman, Knows(Harry)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Woman, MakeFriend) = True": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Woman, MakeFriend) = False",
+                        "BEL(Harry, OpenToTalk) = True"
+                    ],
+                    "effects": [
+                        "BEL(Harry, MakeFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Introduce(Woman, To(Harry))": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, OpenToTalk) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, Knows(Harry)) = True",
+                        "BEL(Harry, Knows(Woman)) = True",
+                        "DES(Woman, MakeFriend) = False",
+                        "DES(Harry, MakeFriend) = False",
+                        "DES(Woman, EnjoySunset) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Listen(Woman, To(Harry))": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, WantToShare) = True"
+                    ],
+                    "effects": [
+                        "DES(Woman, EnjoyConversationWithHarry) = True",
+                        "BEL(Harry, BeingListenedTo) = True",
+                        "BEL(Harry, FindingNewFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Share(Woman, CommonInterestsWith(Harry))": {
+                    "conditions": [
+                        "BEL(Woman, MakeFriend) = True",
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, MakeFriend) = True",
+                        "BEL(Harry, OpenToTalk) = True",
+                        "BEL(Woman, CommonInterestsWith(Harry)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Woman, CommonInterestsWith(Harry)) = True",
+                        "BEL(Harry, CommonInterestsWith(Woman)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "End(Woman, ExperienceNature)": {
+                    "conditions": [
+                        "BEL(Woman, ExperienceNature) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, ExperienceNature) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "MoveTo(Woman, Bench)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, AtBench) = True",
+                        "BEL(Woman, SitOnBench) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Greet(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, ApproachingWoman) = False"
+                    ],
+                    "effects": [
+                        "BEL(Harry, ApproachingWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EngageInSmallTalk(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, SitOnBench) = True"
+                    ],
+                    "effects": [
+                        "DES(Woman, HaveConversation) = True",
+                        "DES(Woman, EnjoyConversation) = True",
+                        "BEL(Woman, MetHarry) = True",
+                        "BEL(Harry, MetWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AskAboutHarry(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Harry, SittingOnBench) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, InformationShared) = True",
+                        "BEL(Harry, InterestInWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "ShareOwnStory(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Woman, ShareExperience) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, ConnectedToHarry) = True",
+                        "DES(Woman, MaintainFriendshipWithHarry) = True",
+                        "BEL(Woman, ExchangedContacts) = True",
+                        "BEL(Woman, LearnedAboutHarry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "ExpressInterestInFriendship(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, LikedTalking) = True",
+                        "BEL(Woman, OpenToFriendship) = True"
+                    ],
+                    "effects": [
+                        "DES(Woman, HaveNewFriend) = True",
+                        "BEL(Woman, BelievesInHarry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ExchangeContactInformation(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, HasToExchangeContactInformation) = True",
+                        "BEL(Harry, HasToExchangeContactInformation) = True"
+                    ],
+                    "effects": [
+                        "[BEL(Woman, HasContactInformationOfHarry) = True",
+                        "[BEL(Harry, HasContactInformationOfWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "SitOnBench(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Harry, SitOnBench) = False"
+                    ],
+                    "effects": [
+                        "BEL(Woman, SitOnBench(Harry)) = True",
+                        "BEL(Harry, SitOnBench) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Happy-for"
+                    ]
+                },
+                "ObserveSunset(Woman, None)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, ObserveSunset(None)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "ShareInformation(Woman, Harry, PersonalInfo)": {
+                    "conditions": [
+                        "BEL(Woman, KnowsHarry) = False",
+                        "BEL(Woman, HasPersonalInfo) = True",
+                        "BEL(Harry, WantsToKnowWoman) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, KnowsHarry) = True",
+                        "BEL(Harry, KnowsWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Trust"
+                    ]
+                },
+                "Listen(Harry, Woman)": {
+                    "conditions": [
+                        "BEL(Harry, Speaking) = True",
+                        "BEL(Harry, Trusting) = True",
+                        "DES(Woman, Listen) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, UnderstandingHarry) = True",
+                        "BEL(Woman, EmpathizingWithHarry) = True",
+                        "DES(Woman, FindCommonGround) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "FindCommonInterest(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, Knows(Harry))] and [BEL(Harry, Knows(Woman))",
+                        "BEL(Woman, HaveInterest(Interest))] and [BEL(Harry, HaveInterest(Interest))"
+                    ],
+                    "effects": [
+                        "DES(Woman, BondingWithHarry) = True",
+                        "DES(Harry, BondingWithWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ExchangeContactInfo(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, HasCommonInterest) = True",
+                        "BEL(Harry, HasCommonInterest) = True",
+                        "DES(Woman, ExchangeContactInfo) = True",
+                        "DES(Harry, ExchangeContactInfo) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, GotContactInfoFromHarry) = True",
+                        "BEL(Harry, GotContactInfoFromWoman) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Part(Woman, Harry)": {
+                    "conditions": [
+                        "BEL(Woman, HaveContactInfo(Harry)) = True",
+                        "BEL(Woman, EnjoyedTimeWithHarry) = True",
+                        "DES(Woman, KeepInTouchWithHarry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, HaveFriend(Harry)) = True",
+                        "DES(Woman, SpendMoreTimeWithHarry) = True",
+                        "BEL(Harry, HaveFriend(Woman)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "surprise"
+            ],
+            "speak_actions": {
+                "Speak(B1, B2, None, None)": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "INTENT(Woman, MakeFriend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, MadeFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(B1, B2, None, None), None, Joy, None, \"Oh, I'm sorry! I didn't realize someone owned this bench.\""
+                    ],
+                    "emotion_condition": [
+                        "Greet(Woman, Harry), B2, None, None",
+                        "Neutral",
+                        "Talk(Woman, Harry), B3, None, None",
+                        "Neutral",
+                        "Share(Woman, Harry), B4, None, None",
+                        "Neutral",
+                        "ExchangeContactInfo(Woman, Harry), B5, None, None",
+                        "Neutral",
+                        "Part(Woman, Harry), End, None, None",
+                        "Neutral"
+                    ]
+                },
+                "Speak(B2, B3, None, None)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, EnjoySunset) = True",
+                        "BEL(Woman, OpenToTalk) = True",
+                        "INTENT(Woman, StartConversation, Harry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, MakeFriend) = True",
+                        "INTENT(Woman, MakeFriend) = True",
+                        "INTENT(Woman, ExperienceNature) = True"
+                    ],
+                    "occ_emotion": [
+                        "Appreciation, None, None, None"
+                    ],
+                    "emotion_condition": [
+                        "Greet(Woman, Harry), None, Joy, None, \"Hi there! Nice evening today.\""
+                    ]
+                },
+                "Speak(B4, B5, None, None)": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, EnjoySunset) = True",
+                        "INTENT(Woman, StartConversation, Harry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, MakeFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy",
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Greeting, InitiatedConversation, None, None",
+                        "InitiatedConversation, Listening, None, None",
+                        "Listening, ShareInterest, None, None",
+                        "ShareInterest, ExchangeContact, None, None",
+                        "ExchangeContact, EndConversation, None, None",
+                        "Joy, Greeting, None, None",
+                        "InitiatedConversation, Listening, None, None",
+                        "Listening, ShareInterest, None, None",
+                        "ShareInterest, ExchangeContact, None, None",
+                        "ExchangeContact, EndConversation, None, None"
+                    ]
+                },
+                "Speak(B6, B7, None, None)": {
+                    "conditions": [
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, OpenToTalk) = True",
+                        "INTENT(Woman, StartConversation, Harry) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Woman, StartConversation, Harry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(B6, B7, None, None), None, Joy, None, \"Nice to meet you, Harry.\""
+                    ],
+                    "emotion_condition": [
+                        "Speak(B6, B7, Joy, None)"
+                    ]
+                },
+                "Speak(B8, End, None, None)": {
+                    "conditions": [
+                        "BEL(Woman, OpenToTalk) = True",
+                        "BEL(Woman, SitOnBench) = True",
+                        "BEL(Woman, EnjoySunset) = True"
+                    ],
+                    "effects": [
+                        "BEL(Woman, MadeConversationWithHarry) = True",
+                        "INTENT(Woman, MakeFriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak, End, None, None, \"That sounds nice. I'll have to come back and join you sometime.\"",
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Listen(Woman, Harry), None, 'Joy', None"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, B1, None, None, \"Excuse me, that's my bench. Can you please move?\">",
+        "<B1, B2, None, None, \"Oh, I'm sorry! I didn't realize someone owned this bench.\">",
+        "<B2, B3, None, None, \"It's okay. I just like to come here every day and watch the sunset.\">",
+        "<B3, B4, None, None, \"It's a beautiful view, isn't it?\">",
+        "<B4, B5, None, None, \"Yes, it is. My name is Harry, by the way.\">",
+        "<B5, B6, None, None, \"Nice to meet you, Harry. I'm Sarah.\">",
+        "<B6, B7, None, None, \"So, what brings you here to the bench?\">",
+        "<B7, B8, None, None, \"Just to relax and enjoy the view. I come here every day.\">",
+        "<B8, End, None, None, \"That sounds nice. I'll have to come back and join you sometime.\">"
+    ]
+}

@@ -1,0 +1,1006 @@
+{
+    "scenario_name": "test_Taste Testing",
+    "scenario_description": "I once got a job as a taste tester. The first tasting was wine. I really couldn't figure out the differences between the wines. I eventually gave up trying to distinguish the flavors. I ended up getting fired because i was unqualified for this work.",
+    "last_ended": "end",
+    "agents": {
+        "Taste_Tester": {
+            "knowledge_base": [
+                "BEL(Taste_Tester, qualified_for_taste_testing) = False",
+                "DES(Taste_Tester, distinguish_wine_flavors) = True",
+                "BEL(Taste_Tester, expertise_in_wine_tasting) = False",
+                "DES(Taste_Tester, improve_wine_tasting_skills) = True",
+                "BEL(Taste_Tester, taste_testing_job) = True",
+                "DES(Taste_Tester, keep_taste_testing_job) = True"
+            ],
+            "intentions": {
+                "INTENT(Taste_Tester, improve_wine_tasting_skills) = True": {
+                    "action_plan": [
+                        "Study(Taste_Tester, Wine_Tasting_Book)",
+                        "Join(Taste_Tester, Wine_Tasting_Club)",
+                        "Practice(Taste_Tester, Wine_Tasting)",
+                        "GetFeedback(Taste_Tester, Wine_Expert)",
+                        "Apply(Taste_Tester, Taste_Testing_Company)"
+                    ]
+                },
+                "INTENT(Taste_Tester, keep_taste_testing_job) = True": {
+                    "action_plan": [
+                        "Learn_Wine_Tasting(Taste_Tester, None)",
+                        "Practice_Wine_Tasting(Taste_Tester, None)",
+                        "Research_Wine_Basics(Taste_Tester, None)",
+                        "Observe_Other_Tasters(Taste_Tester, Other_Taste_Testers)",
+                        "Ask_For_Feedback(Taste_Tester, Other_Taste_Testers, Feedback)",
+                        "Analyze_Feedback(Taste_Tester, Feedback)",
+                        "Apply_Feedback(Taste_Tester, Feedback)",
+                        "Retaste_Wines(Taste_Tester, None)",
+                        "Identify_Flavors(Taste_Tester, None)",
+                        "Document_Findings(Taste_Tester, None)",
+                        "Communicate_Results(Taste_Tester, Taste_Testing_Manager, Results)",
+                        "Receive_Training(Taste_Tester, Wine_Tasting_Trainer)",
+                        "Continue_Practicing(Taste_Tester, None)",
+                        "Retake_Taste_Testing_Job(Taste_Tester, Taste_Testing_Manager)"
+                    ]
+                },
+                "INTENT(Taste_Tester, distinguish_wine_flavors) = False": {
+                    "action_plan": [
+                        "Learn(Taste_Tester, Wine_Tasting_Expert, Null)",
+                        "Practice(Taste_Tester, Wine_Tasting_Kit, Null)",
+                        "Research(Taste_Tester, Online_Resources, Null)",
+                        "Attend(Taste_Tester, Wine_Tasting_Events, Null)",
+                        "Demonstrate(Taste_Tester, Wine_Tasting_Competition, Null)",
+                        "Evaluate(Taste_Tester, Taste_Testing_Employer, Null)",
+                        "Retest(Taste_Tester, Wine_Tasting_Exam, Null)"
+                    ]
+                }
+            },
+            "actions": {
+                "Learn(Taste_Tester, Wine_Tasting_Expert, Null)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Practice(Taste_Tester, Wine_Tasting_Kit, Null)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = True",
+                        "BEL(Taste_Tester, has_wine_tasting_kit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, more_familiar_with_wine_tasting_kit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Research(Taste_Tester, Online_Resources, Null)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, knowledge_from_online_resources) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Attend(Taste_Tester, Wine_Tasting_Events, Null)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False"
+                    ],
+                    "effects": [
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Demonstrate(Taste_Tester, Wine_Tasting_Competition, Null)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True",
+                        "DES(Taste_Tester, keep_taste_testing_job) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, qualified_for_taste_testing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Evaluate(Taste_Tester, Taste_Testing_Employer, Null)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True"
+                    ],
+                    "effects": [
+                        "DES(Taste_Tester, distinguish_wine_flavors) = True",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = False",
+                        "BEL(Taste_Tester, qualified_for_taste_testing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Retest(Taste_Tester, Wine_Tasting_Exam, Null)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "BEL(Taste_Tester, qualified_for_taste_testing) = False",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = False"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, qualified_for_taste_testing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Study(Taste_Tester, Wine_Tasting_Book)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Join(Taste_Tester, Wine_Tasting_Club)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, join_wine_tasting_club) = False",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, join_wine_tasting_club) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Practice(Taste_Tester, Wine_Tasting)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False",
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GetFeedback(Taste_Tester, Wine_Expert)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False",
+                        "BEL(Wine_Expert, availability) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = False"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Apply(Taste_Tester, Taste_Testing_Company)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True",
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "DES(Taste_Tester, keep_taste_testing_job) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, qualified_for_taste_testing) = True",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = False",
+                        "DES(Taste_Tester, keep_taste_testing_job) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Learn_Wine_Tasting(Taste_Tester, None)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Practice_Wine_Tasting(Taste_Tester, None)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, practice_wine_tasting) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False",
+                        "BEL(Taste_Tester, taste_testing_job) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Research_Wine_Basics(Taste_Tester, None)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, wine_basics_researched) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Observe_Other_Tasters(Taste_Tester, Other_Taste_Testers)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = True",
+                        "BEL(Other_Taste_Testers, tasted_wines) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, observed_other_tasters) = True",
+                        "BEL(Taste_Tester, learned_from_other_tasters) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Ask_For_Feedback(Taste_Tester, Other_Taste_Testers, Feedback)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "BEL(Taste_Tester, improve_wine_tasting_skills) = True",
+                        "BEL(Other_Taste_Testers, knows_about_wine) = True",
+                        "BEL(Other_Taste_Testers, willing_to_provide_feedback) = True"
+                    ],
+                    "effects": [
+                        "DES(Taste_Tester, receive_feedback) = True",
+                        "BEL(Taste_Tester, received_feedback) = True",
+                        "BEL(Feedback, knowledge_about_wine) = True",
+                        "BEL(Feedback, useful_feedback) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Analyze_Feedback(Taste_Tester, Feedback)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = True",
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "ARG(Feedback) is not None"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True",
+                        "BEL(Taste_Tester, wine_tasting_feedback) = Feedback"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Apply_Feedback(Taste_Tester, Feedback)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False",
+                        "BEL(Taste_Tester, distinguish_wine_flavors) = True",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True",
+                        "BEL(Taste_Tester, distinguish_wine_flavors) = False",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = False",
+                        "DES(Taste_Tester, keep_taste_testing_job) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Retaste_Wines(Taste_Tester, None)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, distinguished_wine_flavors) = True",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = False",
+                        "DES(Taste_Tester, keep_taste_testing_job) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Identify_Flavors(Taste_Tester, None)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, wine_flavors_identified) = True",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = False",
+                        "DES(Taste_Tester, keep_taste_testing_job) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Frustration"
+                    ]
+                },
+                "Document_Findings(Taste_Tester, None)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, findings_documented) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Communicate_Results(Taste_Tester, Taste_Testing_Manager, Results)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "INTENT(Taste_Tester, communicate_results) = True",
+                        "BEL(Taste_Testing_Manager, wine_tasting_results) = None"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Testing_Manager, wine_tasting_results) = Results"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Receive_Training(Taste_Tester, Wine_Tasting_Trainer)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "BEL(Taste_Tester, qualified_for_taste_testing) = False",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = True",
+                        "DES(Wine_Tasting_Trainer, train_taste_testers) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, qualified_for_taste_testing) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Continue_Practicing(Taste_Tester, None)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, keep_taste_testing_job) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = False"
+                    ],
+                    "effects": [
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = True",
+                        "BEL(Taste_Tester, continue_practicing_wine_tasting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Retake_Taste_Testing_Job(Taste_Tester, Taste_Testing_Manager)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = False",
+                        "BEL(Taste_Tester, qualified_for_taste_testing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, taste_testing_job) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, A, None, None)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "INTENT(Taste_Tester, improve_wine_tasting_skills) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True",
+                        "DES(Taste_Tester, distinguish_wine_flavors) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Start, A, None, None)], [A, B, None, None, \"Yes, I have a tasting job related question.\"], [B, C, None, None, \"Of course, what do you need to know?\"], [C, D, Job, Curious, \"I was a taste tester once, and I got fired because I couldn't distinguish the wines. Have you ever had that problem?\"], [D, E, None, None, \"Well, occasionally, but that's not something you should worry about. Your training will help you be able to distinguish the flavors better.\"], [E, F, Job, Encouraging, \"That's good to know, I want to make sure I do the job well.\"], [F, End, None, None, \"Thank you so much for the help!\"",
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Speak(Start, A, None, None), Speak(B, C, None, None), None, None, None"
+                    ]
+                },
+                "Speak(D, E, None, None)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "INTENT(Taste_Tester, keep_taste_testing_job) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True",
+                        "BEL(Taste_Tester, qualified_for_taste_testing) = True",
+                        "DES(Taste_Tester, distinguish_wine_flavors) = False",
+                        "INTENT(Taste_Tester, distinguish_wine_flavors) = True",
+                        "DES(Taste_Tester, improve_wine_tasting_skills) = False",
+                        "INTENT(Taste_Tester, improve_wine_tasting_skills) = True"
+                    ],
+                    "occ_emotion": [
+                        "D, E, Job, Encouraging, \"That's good to know, I want to make sure I do the job well.\"",
+                        "E, None, Satisfaction, None, \"I feel relieved that my concern was addressed and I feel motivated to improve my wine tasting skills.\""
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(F, End, None, None)": {
+                    "conditions": [
+                        "BEL(Taste_Tester, taste_testing_job) = True",
+                        "DES(Taste_Tester, keep_taste_testing_job) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taste_Tester, qualified_for_taste_testing) = True",
+                        "BEL(Taste_Tester, expertise_in_wine_tasting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(F, End, None, None), None, Joy, None, None"
+                    ],
+                    "emotion_condition": [
+                        "\"Start\", \"A\", None, None, \"Hello, can I help you with something?\"",
+                        "\"A\", \"B\", None, None, \"Yes, I have a tasting job related question.\"",
+                        "\"B\", \"C\", None, None, \"Of course, what do you need to know?\"",
+                        "\"C\", \"D\", \"Curious\", None, \"I was a taste tester once, and I got fired because I couldn't distinguish the wines. Have you ever had that problem?\"",
+                        "\"D\", \"E\", \"Hope\", None, \"Well, occasionally, but that's not something you should worry about. Your training will help you be able to distinguish the flavors better.\"",
+                        "\"E\", \"F\", \"Encouraging\", None, \"That's good to know, I want to make sure I do the job well.\"",
+                        "\"F\", \"G\", \"Joy\", None, \"Great, I am eager to learn about wine tasting!\"",
+                        "\"G\", \"H\", None, None, \"I will start by learning from Wine Tasting Expert.\"",
+                        "\"H\", \"I\", None, None, \"I will practice with my Wine Tasting Kit.\"",
+                        "\"I\", \"J\", \"Hope\", None, \"I will also do some research online and attend some Wine Tasting Events to become more knowledgeable.\"",
+                        "\"J\", \"K\", None, None, \"I will demonstrate my skills in a Wine Tasting Competition.\"",
+                        "\"K\", \"L\", \"Satisfaction\", None, \"After the competition, I will evaluate my skills and share my experience with my Taste Testing Employer.\"",
+                        "\"L\", \"M\", \"Pride\", None, \"I will also study Wine Tasting from books and join a Wine Tasting Club.\"",
+                        "\"M\", \"N\", None, None, \"I will continue practicing Wine Tasting and get feedback from Wine Experts.\"",
+                        "\"N\", \"O\", \"Joy\", None, \"I will apply for a Taste Testing Company and use my learned skills to do a great job.\"",
+                        "\"O\", \"P\", None, None, \"I will schedule some training with Wine Tasting Trainer.\"",
+                        "\"P\", \"Q\", None, None, \"I am so happy that I am becoming an expert in Wine Tasting!\"",
+                        "\"Q\", \"R\", None, None, \"I can't wait to retake the Taste Testing Job and showcase all my new skills.\"",
+                        "\"R\", \"S\", \"Satisfaction\", None, \"It's so satisfying to see what I can accomplish through learning and practicing!\"",
+                        "\"S\", \"End\", None, None, \"Thank you so much for the help!\""
+                    ]
+                }
+            }
+        },
+        "Boss": {
+            "knowledge_base": [
+                "BEL(Boss, qualified_for_taste_testing) = True",
+                "BEL(Boss, wine_tasting_is_difficult) = True",
+                "DES(Boss, hire_qualified_tasters) = True",
+                "DES(Boss, maintain_high_quality_of_taste_testing) = True"
+            ],
+            "intentions": {
+                "INTENT(Boss, hire_qualified_tasters) = True": {
+                    "action_plan": [
+                        "Verify_Qualifications(Boss, Taster1)",
+                        "Interview_Taster(Boss, Taster1)",
+                        "Test_Wine(Boss, Taster1)",
+                        "Hire_Taster(Boss, Taster1)",
+                        "Train_Taster(Boss, Taster1)",
+                        "Monitor_Taster_Performance(Boss, Taster1)"
+                    ]
+                },
+                "INTENT(Boss, maintain_high_quality_of_taste_testing) = True": {
+                    "action_plan": [
+                        "Plan(Boss, search_for_qualified_tasters)",
+                        "Plan(Boss, conduct_interviews, candidates)",
+                        "Plan(Boss, hire_qualified_tasters, new_staff)",
+                        "Plan(Boss, provide_training, new_staff)",
+                        "Plan(Boss, monitor_taste_testing, new_staff)",
+                        "Plan(Boss, evaluate_taste_testing_results)",
+                        "Plan(Boss, provide_feedback, new_staff)",
+                        "Plan(Boss, reward_high_performance, new_staff)",
+                        "Plan(Boss, maintain_quality_control_system)"
+                    ]
+                }
+            },
+            "actions": {
+                "Plan(Boss, search_for_qualified_tasters)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "DES(Boss, maintain_high_quality_of_taste_testing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Boss, search_for_qualified_tasters) = True",
+                        "BEL(Boss, potential_tasters_exist) = True",
+                        "DES(Boss, hire_qualified_tasters) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Plan(Boss, conduct_interviews, candidates)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Boss, wine_tasting_is_difficult) = True",
+                        "DES(Boss, hire_qualified_tasters) = True",
+                        "DES(Boss, maintain_high_quality_of_taste_testing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Boss, interviewed_candidates) = candidates",
+                        "DES(Boss, select_high_potential_candidates) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Plan(Boss, hire_qualified_tasters, new_staff)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Boss, hire_qualified_tasters) = True",
+                        "BEL(Boss, wine_tasting_is_difficult) = True"
+                    ],
+                    "effects": [
+                        "BEL(new_staff, qualified_for_taste_testing) = True",
+                        "BEL(new_staff, training_received) = True",
+                        "DES(Boss, maintain_high_quality_of_taste_testing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Plan(Boss, provide_training, new_staff)": {
+                    "conditions": [
+                        "BEL(Boss, hire_qualified_tasters, new_staff) = True",
+                        "BEL(new_staff, knowledge_of_wine_tasting) = False"
+                    ],
+                    "effects": [
+                        "BEL(new_staff, knowledge_of_wine_tasting) = True",
+                        "DES(Boss, maintain_high_quality_of_taste_testing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Plan(Boss, monitor_taste_testing, new_staff)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Boss, wine_tasting_is_difficult) = True",
+                        "DES(Boss, maintain_high_quality_of_taste_testing) = True",
+                        "BEL(new_staff, trained_for_taste_testing) = True"
+                    ],
+                    "effects": [
+                        "BEL(new_staff, performing_well_in_taste_testing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction",
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "hope"
+                    ]
+                },
+                "Plan(Boss, evaluate_taste_testing_results)": {
+                    "conditions": [
+                        "BEL(Boss, new_staff_trained) = True",
+                        "BEL(Boss, quality_control_system_implemented) = True"
+                    ],
+                    "effects": [
+                        "BEL(Boss, taste_testing_results_evaluated) = True",
+                        "DES(Boss, provide_feedback_to_staff) = True",
+                        "DES(Boss, reward_staff_for_high_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Plan(Boss, provide_feedback, new_staff)": {
+                    "conditions": [
+                        "BEL(Boss, maintain_high_quality_of_taste_testing) = True",
+                        "BEL(new_staff, performed_taste_testing) = True"
+                    ],
+                    "effects": [
+                        "BEL(new_staff, received_feedback) = True",
+                        "BEL(new_staff, knowledge_of_taste_testing_improved) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Plan(Boss, reward_high_performance, new_staff)": {
+                    "conditions": [
+                        "BEL(Boss, maintain_high_quality_of_taste_testing) = True",
+                        "BEL(new_staff, high_performance) = True"
+                    ],
+                    "effects": [
+                        "DES(new_staff, motivation_to_maintain_high_performance) = True",
+                        "BEL(new_staff, rewarded_for_high_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Plan(Boss, maintain_quality_control_system)": {
+                    "conditions": [
+                        "BEL(Boss, maintain_high_quality_of_taste_testing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Boss, quality_control_system_in_place) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Verify_Qualifications(Boss, Taster1)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Taster1, has_submitted_application) = True"
+                    ],
+                    "effects": [
+                        "BEL(Boss, considering_Taster1_for_hire) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Interview_Taster(Boss, Taster1)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Boss, wine_tasting_is_difficult) = True",
+                        "BEL(Taster1, has_experience_tasting_wine) = True",
+                        "BEL(Taster1, has_knowledge_of_wine) = True"
+                    ],
+                    "effects": [
+                        "BEL(Boss, has_interviewed_taster1) = True",
+                        "BEL(Taster1, interviewed_by_Boss) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Test_Wine(Boss, Taster1)": {
+                    "conditions": [
+                        "BEL(Boss, wine_tasting_is_difficult) = True",
+                        "BEL(Taster1, knowledge_of_wine_tasting) = True",
+                        "BEL(Taster1, experience_with_wine_tasting) = True"
+                    ],
+                    "effects": [
+                        "DES(Boss, maintain_high_quality_of_taste_testing) = True",
+                        "BEL(Taster1, tasted_wine) = True",
+                        "DES(Taster1, identify_wine_flavors) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction",
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Hire_Taster(Boss, Taster1)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Taster1, has_qualifications) = True",
+                        "BEL(Taster1, available_for_job) = True"
+                    ],
+                    "effects": [
+                        "BEL(Boss, has_taster) = True",
+                        "BEL(Boss, taster) = Taster1",
+                        "BEL(Taster1, has_job) = True",
+                        "BEL(Taster1, job) = Taste Tester",
+                        "DES(Boss, maintain_high_quality_of_taste_testing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Train_Taster(Boss, Taster1)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Taster1, needs_training) = True"
+                    ],
+                    "effects": [
+                        "BEL(Taster1, trained_for_taste_testing) = True",
+                        "BEL(Boss, maintains_high_quality_of_taste_testing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Monitor_Taster_Performance(Boss, Taster1)": {
+                    "conditions": [
+                        "BEL(Boss, wine_tasting_is_difficult) = True",
+                        "BEL(Taster1, has_received_training) = True",
+                        "BEL(Taster1, consistently_identifies_wine_flavors) = True"
+                    ],
+                    "effects": [
+                        "DES(Boss, ensure_quality_of_taste_testing) = True",
+                        "BEL(Taster1, in_good_standings_with_Boss) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Indifference"
+            ],
+            "speak_actions": {
+                "Speak(Start, A, None, None)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "DES(Boss, hire_qualified_tasters) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "[Plan(Boss, search_for_qualified_tasters), A, None, None], [Plan(Boss, search_for_qualified_tasters), Distress, None, None"
+                    ],
+                    "emotion_condition": [
+                        "Start, A, None, None"
+                    ]
+                },
+                "Speak(A, B, Business, Formal)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Speak(A, B, Business, Formal), None, None, None,  Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Hope",
+                        "",
+                        "Joy",
+                        "Hope",
+                        "Hope",
+                        "Disappointment",
+                        "Gratification",
+                        "Pride",
+                        "Hope",
+                        "",
+                        "",
+                        "",
+                        "Joy",
+                        "Hope",
+                        "Hope"
+                    ]
+                },
+                "Speak(B, C, Business, Formal)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Boss, wine_tasting_is_difficult) = True",
+                        "DES(Boss, hire_qualified_tasters) = True",
+                        "INTENT(Boss, maintain_high_quality_of_taste_testing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Boss, know_applicant_taste_tester_ability) = True",
+                        "BEL(Boss, applicant_qualified_for_job) = True",
+                        "INTENT(Boss, consider_applicant_for_hiring) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(B, C, Business, Formal)], [None, None, None, None, None, Joy"
+                    ],
+                    "emotion_condition": [
+                        "Plan(Boss, search_for_qualified_tasters), Verify_Qualifications(Boss, Taster1), None, None, None",
+                        "Verify_Qualifications(Boss, Taster1), Interview_Taster(Boss, Taster1), None, None, None",
+                        "Interview_Taster(Boss, Taster1), Test_Wine(Boss, Taster1), None, None, None",
+                        "Test_Wine(Boss, Taster1), Fear, None, None, None",
+                        "Test_Wine(Boss, Taster1), Hire_Taster(Boss, Taster1), Relief, None, None",
+                        "Hire_Taster(Boss, Taster1), Train_Taster(Boss, Taster1), Gratification, None, None",
+                        "Train_Taster(Boss, Taster1), Monitor_Taster_Performance(Boss, Taster1), None, None, None",
+                        "Monitor_Taster_Performance(Boss, Taster1), Distress, None, None, None"
+                    ]
+                },
+                "Speak(C, D, Job, Curious)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Boss, wine_tasting_is_difficult) = True",
+                        "DES(Boss, maintain_high_quality_of_taste_testing) = True"
+                    ],
+                    "effects": [
+                        "DES(Boss, hire_qualified_tasters) = True",
+                        "INTENT(Boss, hire_qualified_tasters) = True"
+                    ],
+                    "occ_emotion": [
+                        "Curious"
+                    ],
+                    "emotion_condition": [
+                        "Speak(C, D, Job, Curious), Verify_Qualifications(Boss, Taster1), Hope"
+                    ]
+                },
+                "Speak(D, E, Job, Sympathetic)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Boss, wine_tasting_is_difficult) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Plan(Boss, search_for_qualified_tasters), Verify_Qualifications(Boss, Taster1), None, None, None"
+                    ]
+                },
+                "Speak(E, F, Business, Formal)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Boss, wine_tasting_is_difficult) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "None, None, Hope, None",
+                        "Hope, None, None, None",
+                        "Hope, Gratification, None, None",
+                        "Gratification, None, None, None",
+                        "None, None, None, None",
+                        "None, None, None, None",
+                        "None, None, Gratification, None",
+                        "Gratification, None, Joy, None",
+                        "None, None, None, None",
+                        "None, None, None, None",
+                        "None, None, None, None",
+                        "None, Fear, None, None",
+                        "Gratification, None, None, None",
+                        "Gratification, None, None, None",
+                        "Gratification, None, None, None"
+                    ]
+                },
+                "Speak(F, End, None, None)": {
+                    "conditions": [
+                        "BEL(Boss, qualified_for_taste_testing) = True",
+                        "BEL(Boss, wine_tasting_is_difficult) = True",
+                        "INTENT(Boss, hire_qualified_tasters) = True"
+                    ],
+                    "effects": [
+                        "DES(Boss, maintain_high_quality_of_taste_testing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Boss, End, Satisfaction, None, \"Great job team, the new tasters are doing fantastic!\""
+                    ],
+                    "emotion_condition": [
+                        "Plan, Verify_Qualifications(Boss, Taster1), None, None, Joy",
+                        "Plan, Interview_Taster(Boss, Taster1), None, None, Hope",
+                        "Test_Wine(Boss, Taster1), Hire_Taster(Boss, Taster1), None, None, Satisfaction",
+                        "Plan, Train_Taster(Boss, Taster1), None, None, Hope",
+                        "Monitor_Taster_Performance(Boss, Taster1), None, None, None, None",
+                        "Plan, Speak(Boss, End, None, None), None, None, Gratification"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, A, None, None, \"Hello, can I help you with something?\">",
+        "<A, B, None, None, \"Yes, I have a tasting job related question.\">",
+        "<B, C, None, None, \"Of course, what do you need to know?\">",
+        "<C, D, Job, Curious, \"I was a taste tester once, and I got fired because I couldn't distinguish the wines. Have you ever had that problem?\">",
+        "<D, E, None, None, \"Well, occasionally, but that's not something you should worry about. Your training will help you be able to distinguish the flavors better.\">",
+        "<E, F, Job, Encouraging, \"That's good to know, I want to make sure I do the job well.\">",
+        "<F, End, None, None, \"Thank you so much for the help!\">"
+    ]
+}

@@ -1,0 +1,943 @@
+{
+    "scenario_name": "test_Brother",
+    "scenario_description": "My brother had been feeling sick all day. My mom called the school and told them he wouldn't be able to come in. The teacher gave him all the work he needed. My brother began to do the homework but fell asleep. It is a good thing that he did not have school the next day.",
+    "last_ended": "end",
+    "agents": {
+        "brother": {
+            "knowledge_base": [
+                "BEL(brother, feeling_sick) = True",
+                "BEL(brother, have_homework) = True",
+                "BEL(brother, fell_asleep) = True",
+                "DES(brother, do_homework) = True",
+                "DES(brother, rest) = True"
+            ],
+            "intentions": {
+                "INTENT(brother, homework, do) = True": {
+                    "action_plan": [
+                        "WAKE_UP(brother)",
+                        "CHECK_HOMEWORK(brother, teacher)",
+                        "BEL(brother, have_homework)",
+                        "START_HOMEWORK(brother)",
+                        "BEL(brother, fell_asleep)",
+                        "REST(brother)",
+                        "WAKE_UP(brother)",
+                        "CONTINUE_HOMEWORK(brother)",
+                        "DES(brother, rest)",
+                        "REST(brother)"
+                    ]
+                },
+                "INTENT(brother, rest) = True": {
+                    "action_plan": [
+                        "INTENT(brother, rest) = True",
+                        "GoToBed(brother, None)",
+                        "SetAlarm(brother, None, 'in 8 hours')"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(brother, rest) = True": {
+                    "conditions": [
+                        "BEL(brother, feeling_sick) = True",
+                        "BEL(brother, have_homework) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, fell_asleep) = True",
+                        "DES(brother, do_homework) = False",
+                        "DES(brother, rest) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "GoToBed(brother, None)": {
+                    "conditions": [
+                        "BEL(brother, fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, rested) = True",
+                        "BEL(brother, feeling_sick) = False",
+                        "DES(brother, do_homework) = False",
+                        "DES(brother, rest) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "\"Relief\""
+                    ]
+                },
+                "SetAlarm(brother, None, 'in 8 hours')": {
+                    "conditions": [
+                        "BEL(brother, rest) = True",
+                        "BEL(brother, fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, alarm_set) = True",
+                        "BEL(brother, wake_up_time) = current_time + 'in 8 hours'"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WAKE_UP(brother)": {
+                    "conditions": [
+                        "BEL(brother, fell_asleep)"
+                    ],
+                    "effects": [
+                        "BEL(brother, awake)",
+                        "BEL(brother, fell_asleep)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CHECK_HOMEWORK(brother, teacher)": {
+                    "conditions": [
+                        "BEL(brother, have_homework) = True",
+                        "DES(teacher, give_homework) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, homework_done) = True",
+                        "BEL(brother, homework_checked) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "BEL(brother, have_homework)": {
+                    "conditions": [
+                        "BEL(brother, have_homework) = False"
+                    ],
+                    "effects": [
+                        "BEL(brother, have_homework) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "START_HOMEWORK(brother)": {
+                    "conditions": [
+                        "BEL(brother, have_homework) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, do_homework) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BEL(brother, fell_asleep)": {
+                    "conditions": [
+                        "BEL(brother, feel_sick) = True",
+                        "DES(brother, do_homework) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, fell_asleep) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "REST(brother)": {
+                    "conditions": [
+                        "BEL(brother, fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, rested) = True",
+                        "DES(brother, rest) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "CONTINUE_HOMEWORK(brother)": {
+                    "conditions": [
+                        "BEL(brother, have_homework) = True",
+                        "BEL(brother, feeling_sick) = False"
+                    ],
+                    "effects": [
+                        "BEL(brother, homework_in_progress) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "DES(brother, rest)": {
+                    "conditions": [
+                        "BEL(brother, have_homework) = True",
+                        "BEL(brother, tiredness) >= 6"
+                    ],
+                    "effects": [
+                        "BEL(brother, tiredness) -= 3",
+                        "DES(brother, rest) = False",
+                        "DES(brother, continue_homework) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, Greeting, None, None)": {
+                    "conditions": [
+                        "BEL(brother, feeling_sick) = True",
+                        "BEL(brother, have_homework) = True",
+                        "INTENT(brother, homework, do) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, fell_asleep) = True",
+                        "INTENT(brother, homework, do) = False",
+                        "DES(brother, rest) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Start, Greeting, None, None)"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Greeting, Homework, None, None)": {
+                    "conditions": [
+                        "BEL(brother, have_homework) = True",
+                        "BEL(brother, fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "INTENT(brother, homework, do) = True"
+                    ],
+                    "occ_emotion": [
+                        "[Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Homework, Sleep, Homework-Completion, Neutral)": {
+                    "conditions": [
+                        "BEL(brother, feeling_sick) = True",
+                        "BEL(brother, have_homework) = True",
+                        "INTENT(brother, homework, do) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, fell_asleep) = True",
+                        "DES(brother, rest) = True",
+                        "INTENT(brother, homework, do) = False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Sleep, Conclusion, None, None)": {
+                    "conditions": [
+                        "BEL(brother, feeling_sick) = True",
+                        "BEL(brother, have_homework) = True",
+                        "INTENT(brother, homework, do) = True"
+                    ],
+                    "effects": [
+                        "INTENT(brother, homework, do) = False"
+                    ],
+                    "occ_emotion": [
+                        "[Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Sleep, Conclusion, Relief, None, \"Get some rest and feel better soon.\""
+                    ]
+                }
+            }
+        },
+        "mom": {
+            "knowledge_base": [
+                "BEL(mom, brother_feeling_sick) = True",
+                "BEL(mom, school_called) = True",
+                "BEL(mom, homework_given) = True",
+                "BEL(mom, son_fell_asleep) = True",
+                "DES(mom, son_rests_and_feels_better) = True"
+            ],
+            "intentions": {
+                "INTENT(mom, make sure brother rests and feels better) = True": {
+                    "action_plan": [
+                        "Call(Dialer=mom, Receiver=school, Arguments=(brother_feeling_sick, homework_given))",
+                        "Notify(Notifier=mom, Receiver=brother, Arguments=(homework_given))",
+                        "Comfort(Comforter=mom, Comfortee=brother, Arguments=(son_fell_asleep))",
+                        "Cancel(Dialer=mom, Receiver=school, Arguments=(homework_given))",
+                        "Rest(Agent=brother, Arguments=(son_fell_asleep))"
+                    ]
+                },
+                "INTENT(mom, inform school that brother is not going to attend) = True": {
+                    "action_plan": [
+                        "CallSchool(mom, teacher, brother_is_sick)",
+                        "ReceiveHomework(mom, teacher, son_homework)",
+                        "CheckOnSon(mom, brother)",
+                        "NoticeSonSleeping(mom, brother)",
+                        "LetBrotherRest(mom, None)",
+                        "NotifySchool(mom, teacher, son_will_not_do_homework_today)"
+                    ]
+                },
+                "INTENT(mom, collect homework from teacher) = True": {
+                    "action_plan": [
+                        "INTENT(mom, collect homework from teacher) = True",
+                        "FindPhone(mom, None)",
+                        "DialNumber(mom, teacher)",
+                        "AskForHomework(mom, teacher, brother)",
+                        "PickUpHomework(mom, teacher, None)",
+                        "DeliverHomework(mom, brother, homework)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(mom, collect homework from teacher) = True": {
+                    "conditions": [
+                        "BEL(mom, brother_feeling_sick) = True",
+                        "BEL(mom, school_called) = True",
+                        "DES(mom, collect_homework) = True"
+                    ],
+                    "effects": [
+                        "BEL(mom, homework_given) = True",
+                        "BEL(teacher, homework_delivered) = True",
+                        "DES(mom, son_rests_and_feels_better) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "FindPhone(mom, None)": {
+                    "conditions": [
+                        "BEL(mom, phone_in_house) = True"
+                    ],
+                    "effects": [
+                        "BEL(mom, phone_found) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DialNumber(mom, teacher)": {
+                    "conditions": [
+                        "BEL(mom, has_phone) = True",
+                        "BEL(teacher, available_to_receive_call) = True"
+                    ],
+                    "effects": [
+                        "BEL(mom, in_call) = True",
+                        "BEL(mom, talking_to_teacher) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AskForHomework(mom, teacher, brother)": {
+                    "conditions": [
+                        "BEL(mom, school_called) = True",
+                        "BEL(teacher, homework_given_to_mom) = True",
+                        "BEL(brother, feeling_sick) = True"
+                    ],
+                    "effects": [
+                        "BEL(mom, homework_received) = True",
+                        "DES(mom, deliver_homework_to_brother) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PickUpHomework(mom, teacher, None)": {
+                    "conditions": [
+                        "BEL(mom, at_teacher_location) = True",
+                        "BEL(teacher, homework_available) = True",
+                        "BEL(mom, in_vehicle) = True"
+                    ],
+                    "effects": [
+                        "BEL(mom, has_homework) = True",
+                        "BEL(teacher, gave_homework) = True",
+                        "BEL(mom, at_teacher_location) = False",
+                        "BEL(mom, in_vehicle) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "DeliverHomework(mom, brother, homework)": {
+                    "conditions": [
+                        "BEL(mom, homework_given) = True",
+                        "BEL(mom, son_fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, homework_done) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "Call(Dialer=mom, Receiver=school, Arguments=(brother_feeling_sick, homework_given))": {
+                    "conditions": [
+                        "BEL(mom, brother_feeling_sick) = True",
+                        "BEL(mom, school_called) = False"
+                    ],
+                    "effects": [
+                        "BEL(mom, school_called) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Notify(Notifier=mom, Receiver=brother, Arguments=(homework_given))": {
+                    "conditions": [
+                        "BEL(mom, homework_given) = True",
+                        "BEL(brother, homework_received) = False"
+                    ],
+                    "effects": [
+                        "BEL(brother, homework_received) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Comfort(Comforter=mom, Comfortee=brother, Arguments=(son_fell_asleep))": {
+                    "conditions": [
+                        "BEL(mom, son_fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "BEL(mom, son_comforted) = True",
+                        "DES(mom, make son feel better) = True",
+                        "DES(mom, spend time with son) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Cancel(Dialer=mom, Receiver=school, Arguments=(homework_given))": {
+                    "conditions": [
+                        "BEL(mom, homework_given) = True"
+                    ],
+                    "effects": [
+                        "BEL(mom, homework_given) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Rest(Agent=brother, Arguments=(son_fell_asleep))": {
+                    "conditions": [
+                        "BEL(brother, feeling_sick) = True",
+                        "BEL(mom, son_fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, rested) = True",
+                        "DES(brother, feeling_better) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "CallSchool(mom, teacher, brother_is_sick)": {
+                    "conditions": [
+                        "BEL(mom, brother_feeling_sick) = True",
+                        "BEL(mom, school_called) = False"
+                    ],
+                    "effects": [
+                        "BEL(mom, school_called) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ReceiveHomework(mom, teacher, son_homework)": {
+                    "conditions": [
+                        "BEL(mom, school_called) = True",
+                        "BEL(teacher, brother_feeling_sick) = True"
+                    ],
+                    "effects": [
+                        "BEL(mom, homework_given) = True",
+                        "BEL(mom, son_is_busy) = True",
+                        "BEL(mom, has_homework_to_check) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckOnSon(mom, brother)": {
+                    "conditions": [
+                        "BEL(mom, brother_feeling_sick) = True",
+                        "BEL(brother, asleep) = False"
+                    ],
+                    "effects": [
+                        "BEL(brother, asleep) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "NoticeSonSleeping(mom, brother)": {
+                    "conditions": [
+                        "BEL(mom, son_fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, sleeping) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "LetBrotherRest(mom, None)": {
+                    "conditions": [
+                        "BEL(mom, son_fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "BEL(mom, son_resting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "NotifySchool(mom, teacher, son_will_not_do_homework_today)": {
+                    "conditions": [
+                        "BEL(mom, school_called) = True",
+                        "BEL(mom, son_fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "BEL(mom, son_homework) = None",
+                        "BEL(mom, son_will_not_do_homework_today) = True",
+                        "BEL(teacher, son_sick) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, Greeting, None, None)": {
+                    "conditions": [
+                        "BEL(mom, brother_feeling_sick) = True",
+                        "BEL(mom, school_called) = True",
+                        "BEL(mom, homework_given) = True"
+                    ],
+                    "effects": [
+                        "DES(mom, son_rests_and_feels_better) = True",
+                        "INTENT(mom, make sure brother rests and feels better) = True",
+                        "INTENT(mom, inform school that brother is not going to attend) = True",
+                        "INTENT(mom, collect homework from teacher) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Greeting, Homework, None, None)": {
+                    "conditions": [
+                        "BEL(mom, son_fell_asleep) = True"
+                    ],
+                    "effects": [
+                        "DES(mom, son_rests_and_feels_better) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Homework, Sleep, Homework-Completion, Caring)": {
+                    "conditions": [
+                        "BEL(mom, brother_feeling_sick) = True",
+                        "BEL(mom, school_called) = True",
+                        "BEL(mom, homework_given) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Frustration"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Sleep, Conclusion, None, None)": {
+                    "conditions": [
+                        "BEL(mom, brother_feeling_sick) = True",
+                        "BEL(mom, school_called) = True",
+                        "BEL(mom, homework_given) = True",
+                        "INTENT(mom, make sure brother rests and feels better) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, rested) = True",
+                        "BEL(brother, feeling_better) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                }
+            }
+        },
+        "teacher": {
+            "knowledge_base": [
+                "BEL(teacher, has_information_about_brother_s_health) = True",
+                "BEL(teacher, brother_can_do_homework_at_home) = True",
+                "DES(teacher, brother_to_complete_homework) = True",
+                "DES(teacher, brother_to_catch_up_on_missed_material_when_back) = True",
+                "BEL(teacher, believes_that_rest_is_important_for_recovery) = True"
+            ],
+            "intentions": {
+                "INTENT(teacher, provide homework for brother) = True": {
+                    "action_plan": [
+                        "NotifySchool(teacher, school, brother_s_absence)",
+                        "GatherWork(teacher, homework, brother)",
+                        "ProvideInstructions(teacher, instructions, brother)",
+                        "CheckOnBrother(teacher, brother)",
+                        "SetReminder(teacher, reminder, brother_s_return)"
+                    ]
+                },
+                "INTENT(teacher, ensure brother catches up on missed work upon return) = True": {
+                    "action_plan": [
+                        "AssessInformation(teacher, brother, brother's health)",
+                        "ReviewContent(teacher, course material)",
+                        "PrepareHomework(teacher, brother)",
+                        "DeliverHomework(teacher, brother)",
+                        "FollowUp(teacher, brother)"
+                    ]
+                }
+            },
+            "actions": {
+                "AssessInformation(teacher, brother, brother's health)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True"
+                    ],
+                    "effects": [
+                        "BEL(teacher, believes_that_brother_is_unwell)",
+                        "DES(teacher, help_brother_recover_from_illness) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "ReviewContent(teacher, course material)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True",
+                        "BEL(teacher, believes_that_homework_is_important) = True"
+                    ],
+                    "effects": [
+                        "BEL(teacher, has_understood_content) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PrepareHomework(teacher, brother)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True",
+                        "BEL(brother, is_available_to_do_homework) = True"
+                    ],
+                    "effects": [
+                        "BEL(teacher, homework_prepared_for_brother) = True",
+                        "DES(teacher, homework_prepared_for_brother) += 1"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction",
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "DeliverHomework(teacher, brother)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True",
+                        "BEL(brother, is_able_to_do_homework) = True",
+                        "DES(teacher, brother_to_complete_homework) = True",
+                        "BEL(teacher, believes_that_rest_is_important_for_recovery) = True",
+                        "BEL(teacher, homework_is_prepared) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, has_homework) = True",
+                        "BEL(brother, homework_is_delivered) = True",
+                        "BEL(brother, will_catch_up_on_homework) = True",
+                        "DES(brother, catch_up_on_missed_material) = True",
+                        "DES(teacher, homework_preparation_is_completed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "concern"
+                    ]
+                },
+                "FollowUp(teacher, brother)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True",
+                        "BEL(teacher, believes_that_rest_is_important_for_recovery) = True",
+                        "DES(teacher, brother_to_catch_up_on_missed_material_when_back) = True",
+                        "DES(teacher, brother_to_complete_homework) = True",
+                        "BEL(brother, received_homework) = True"
+                    ],
+                    "effects": [
+                        "BEL(teacher, brother_caught_up_on_missed_material) = True",
+                        "BEL(teacher, followed_up_with_brother) = True",
+                        "DES(teacher, brother_to_stay_on_top_of_homework) = True"
+                    ],
+                    "occ_emotion": [
+                        "relief"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "NotifySchool(teacher, school, brother_s_absence)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True"
+                    ],
+                    "effects": [
+                        "BEL(school, is_notified_of_brother_s_absence) = True",
+                        "BEL(teacher, has_fulfilled_homework_instructions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "GatherWork(teacher, homework, brother)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True"
+                    ],
+                    "effects": [
+                        "BEL(teacher, has_provided_homework_to_brother) = True",
+                        "BEL(brother, has_homework_assigned) = True",
+                        "BEL(brother, knows_what_homework_to_do) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "ProvideInstructions(teacher, instructions, brother)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True",
+                        "BEL(brother, is_asleep) = True"
+                    ],
+                    "effects": [
+                        "BEL(brother, has_homework_instructions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckOnBrother(teacher, brother)": {
+                    "conditions": [
+                        "BEL(teacher, brother_is_home) = True",
+                        "BEL(teacher, brother_is_still_sleeping) = True"
+                    ],
+                    "effects": [
+                        "DES(teacher, ensure_brother_s_wellbeing) = True",
+                        "BEL(teacher, brother_has_slept_enough) = True",
+                        "BEL(teacher, homework_is_still_undone) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "SetReminder(teacher, reminder, brother_s_return)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, believes_that_rest_is_important_for_recovery) = True"
+                    ],
+                    "effects": [
+                        "BEL(reminder, has_been_set) = True",
+                        "BEL(reminder, brother_s_return_date) = [brother_s_return_date"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Hope"
+            ],
+            "speak_actions": {
+                "Speak(Start, Greeting, None, None)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True",
+                        "DES(teacher, brother_to_complete_homework) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Greeting, Homework, None, None)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True",
+                        "INTENT(teacher, provide homework for brother) = True"
+                    ],
+                    "effects": [
+                        "SPEAK ACTION"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Homework, FinanceHelp, None, None)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True"
+                    ],
+                    "effects": [
+                        "BEL(teacher, has_spoken_to_brother_about_homework) = True",
+                        "INTENT(teacher, provide_homework_for_brother) = True",
+                        "DES(teacher, brother_to_complete_homework) = True",
+                        "DES(teacher, brother_to_catch_up_on_missed_material_when_back) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(FinanceHelp, Conclusion, None, None)": {
+                    "conditions": [
+                        "BEL(teacher, has_information_about_brother_s_health) = True",
+                        "BEL(teacher, brother_can_do_homework_at_home) = True",
+                        "DES(teacher, brother_to_complete_homework) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief, Speak(FinanceHelp, Conclusion, None, None)"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, Greeting, None, None, \"Hey, how are you feeling today?\">",
+        "<Greeting, Homework, None, None, \"Did you manage to do all the homework the teacher gave you?\">",
+        "<Homework, Sleep, Homework-Completion, Polite, \"I see you fell asleep when doing your homework, that's okay. At least you didn't have school today, so you can finish it when you wake up.\">",
+        "<Sleep, Conclusion, None, None, \"Get some rest and feel better soon.\">"
+    ]
+}

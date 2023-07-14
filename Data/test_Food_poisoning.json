@@ -1,0 +1,1689 @@
+{
+    "scenario_name": "test_Food poisoning",
+    "scenario_description": "Kelly went to the local Mexican restaurant yesterday. She bought the food was amazing. Yet unfortunately when she got home she felt sick. She threw up. Kelly realized she had food poisoning.",
+    "last_ended": "end",
+    "agents": {
+        "Kelly": {
+            "knowledge_base": [
+                "BEL(Kelly, ate_at_mexican_restaurant) = True",
+                "BEL(Kelly, food_was_amazing) = True",
+                "BEL(Kelly, felt_sick) = True",
+                "BEL(Kelly, food_poisoning) = True",
+                "BEL(Kelly, called_restaurant_owner) = False",
+                "BEL(Kelly, called_doctor) = False",
+                "BEL(Kelly, told_friend_1) = False",
+                "BEL(Kelly, told_friend_2) = False",
+                "DES(Kelly, get_medical_attention) = True",
+                "DES(Kelly, warn_others_about_restaurant) = True",
+                "DES(Kelly, seek_compensation_from_restaurant_owner) = False",
+                "DES(Kelly, seek_emotional_support_from_friends) = True"
+            ],
+            "intentions": {
+                "INTENT(Kelly, call_restaurant_owner) = True": {
+                    "action_plan": [
+                        "CheckPhone(Kelly)",
+                        "DialNumber(Kelly, RestaurantOwner)",
+                        "ExplainSituation(Kelly, RestaurantOwner, Beliefs)",
+                        "AskForCompensation(Kelly, RestaurantOwner)",
+                        "EndCall(Kelly, RestaurantOwner)"
+                    ]
+                },
+                "INTENT(Kelly, call_doctor) = True": {
+                    "action_plan": [
+                        "Call(Kelly, Doctor)",
+                        "BeliefRevision(Kelly, called_doctor, True)",
+                        "UpdatePlan(Kelly, {get_medical_attention})",
+                        "Tell(Kelly, Friend1, \"I have food poisoning and have called the doctor.\")",
+                        "BeliefRevision(Kelly, told_friend_1, True)",
+                        "Tell(Kelly, Friend2, \"I have food poisoning and have called the doctor.\")",
+                        "BeliefRevision(Kelly, told_friend_2, True)",
+                        "EndPlan(Kelly, {get_medical_attention})",
+                        "AddPlan(Kelly, {seek_emotional_support_from_friends, seek_compensation_from_restaurant_owner})"
+                    ]
+                },
+                "INTENT(Kelly, tell_friend_1) = True": {
+                    "action_plan": [
+                        "Search(Kelly, phone)",
+                        "Dial(Kelly, friend_1)",
+                        "Wait(Kelly, friend_1_pickup)",
+                        "Greet(Kelly, friend_1)",
+                        "Explain(Kelly, friend_1, food_poisoning_situation)",
+                        "Listen(Kelly, friend_1, friend_response)",
+                        "ExpressAppreciation(Kelly, friend_1)"
+                    ]
+                },
+                "INTENT(Kelly, tell_friend_2) = True": {
+                    "action_plan": [
+                        "Check phone",
+                        "CallDoctor",
+                        "CallRestaurantOwner",
+                        "PostOnSocialMedia",
+                        "OpenChat",
+                        "SendTextMessage"
+                    ]
+                }
+            },
+            "actions": {
+                "Check phone": {
+                    "conditions": [
+                        "BEL(Kelly, called_doctor) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_doctor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CallDoctor": {
+                    "conditions": [
+                        "BEL(Kelly, called_doctor) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_doctor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CallRestaurantOwner": {
+                    "conditions": [
+                        "BEL(Kelly, called_restaurant_owner) = False",
+                        "BEL(Kelly, food_poisoning) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_restaurant_owner) = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "resentment"
+                    ]
+                },
+                "PostOnSocialMedia": {
+                    "conditions": [
+                        "BEL(Kelly, called_restaurant_owner) = False",
+                        "BEL(Kelly, called_doctor) = True",
+                        "DES(Kelly, warn_others_about_restaurant) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, posted_on_social_media) = True",
+                        "BEL(Kelly, told_friend_2) = True",
+                        "DES(Kelly, seek_compensation_from_restaurant_owner) = True",
+                        "DES(Kelly, seek_emotional_support_from_friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "OpenChat": {
+                    "conditions": [
+                        "BEL(Kelly, called_doctor) = False",
+                        "BEL(Kelly, called_restaurant_owner) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, opened_chat) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "SendTextMessage": {
+                    "conditions": [
+                        "BEL(Kelly, called_doctor) = True",
+                        "BEL(Kelly, called_restaurant_owner) = True",
+                        "BEL(Kelly, told_friend_2) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, told_friend_2) = True",
+                        "DES(Kelly, seek_emotional_support_from_friends) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "CheckPhone(Kelly)": {
+                    "conditions": [
+                        "BEL(Kelly, called_restaurant_owner) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_restaurant_owner) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DialNumber(Kelly, RestaurantOwner)": {
+                    "conditions": [
+                        "BEL(Kelly, called_restaurant_owner) = False",
+                        "BEL(Kelly, felt_sick) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_restaurant_owner) = True",
+                        "BEL(Kelly, get_medical_attention) = True",
+                        "DES(Kelly, seek_emotional_support_from_friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "ExplainSituation(Kelly, RestaurantOwner, Beliefs)": {
+                    "conditions": [
+                        "BEL(Kelly, called_restaurant_owner) = False",
+                        "BEL(Kelly, food_poisoning) = True"
+                    ],
+                    "effects": [
+                        "BEL(RestaurantOwner, received_call_from_Kelly) = True",
+                        "DES(RestaurantOwner, compensate_Kelly_for_food_poisoning) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "AskForCompensation(Kelly, RestaurantOwner)": {
+                    "conditions": [
+                        "BEL(Kelly, called_restaurant_owner) = False",
+                        "BEL(Kelly, food_poisoning) = True",
+                        "BEL(Kelly, seek_compensation_from_restaurant_owner) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_restaurant_owner) = True",
+                        "DES(Kelly, seek_compensation_from_restaurant_owner) = False",
+                        "BEL(RestaurantOwner, called_by_Kelly) = True",
+                        "BEL(RestaurantOwner, Kelly_reported_illness) = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "EndCall(Kelly, RestaurantOwner)": {
+                    "conditions": [
+                        "BEL(Kelly, called_restaurant_owner) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_restaurant_owner) = True",
+                        "DES(Kelly, seek_compensation_from_restaurant_owner) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief",
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Call(Kelly, Doctor)": {
+                    "conditions": [
+                        "BEL(Kelly, food_poisoning) = True",
+                        "BEL(Kelly, called_doctor) = False"
+                    ],
+                    "effects": [
+                        "BeliefRevision(Kelly, called_doctor, True)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BeliefRevision(Kelly, called_doctor, True)": {
+                    "conditions": [
+                        "BEL(Kelly, called_doctor) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_doctor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "UpdatePlan(Kelly, {get_medical_attention})": {
+                    "conditions": [
+                        "BEL(Kelly, called_doctor) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Tell(Kelly, Friend1, \"I have food poisoning and have called the doctor.\")": {
+                    "conditions": [
+                        "BEL(Kelly, called_doctor) = False",
+                        "BEL(Kelly, told_friend_1) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_doctor) = True",
+                        "BEL(Kelly, told_friend_1) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BeliefRevision(Kelly, told_friend_1, True)": {
+                    "conditions": [
+                        "BEL(Kelly, told_friend_1) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, told_friend_1) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Tell(Kelly, Friend2, \"I have food poisoning and have called the doctor.\")": {
+                    "conditions": [
+                        "BEL(Kelly, called_doctor) = False",
+                        "BEL(Kelly, told_friend_1) = True",
+                        "BEL(Kelly, told_friend_2) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, told_friend_2) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BeliefRevision(Kelly, told_friend_2, True)": {
+                    "conditions": [
+                        "BEL(Kelly, told_friend_2) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, told_friend_2) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "EndPlan(Kelly, {get_medical_attention})": {
+                    "conditions": [
+                        "INTENT(Kelly, call_doctor) = True",
+                        "BEL(Kelly, called_doctor) = False",
+                        "INTERRUPT(Kelly, Error) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Kelly, call_doctor) = False",
+                        "INTERRUPT(Kelly, Error) = True",
+                        "BeliefRevision(Kelly, get_medical_attention, False)",
+                        "BeliefRevision(Kelly, seek_emotional_support_from_friends, True)",
+                        "BeliefRevision(Kelly, seek_compensation_from_restaurant_owner, True)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AddPlan(Kelly, {seek_emotional_support_from_friends, seek_compensation_from_restaurant_owner})": {
+                    "conditions": [
+                        "BEL(Kelly, called_doctor) = True"
+                    ],
+                    "effects": [
+                        "UpdatePlan(Kelly, {seek_emotional_support_from_friends, seek_compensation_from_restaurant_owner})"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Search(Kelly, phone)": {
+                    "conditions": [
+                        "BEL(Kelly, phone_on_hand) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, phone_on_hand) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Dial(Kelly, friend_1)": {
+                    "conditions": [
+                        "BEL(Kelly, told_friend_1) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, told_friend_1) = True",
+                        "BEL(Kelly, called_doctor) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Wait(Kelly, friend_1_pickup)": {
+                    "conditions": [
+                        "BEL(Kelly, told_friend_1) = False",
+                        "BEL(Kelly, friend_1_pickup_phone) = False",
+                        "BEL(friend_1, able_to_pickup_phone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, friend_1_pickup_phone) = True",
+                        "BEL(Kelly, told_friend_1) = False"
+                    ],
+                    "occ_emotion": [
+                        "gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Greet(Kelly, friend_1)": {
+                    "conditions": [
+                        "BEL(Kelly, phone_found) = True",
+                        "BEL(Kelly, friend_1_phone_number_known) = True",
+                        "BEL(Kelly, friend_1_not_busy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, greeted_friend_1) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Explain(Kelly, friend_1, food_poisoning_situation)": {
+                    "conditions": [
+                        "BEL(Kelly, called_doctor) = False",
+                        "BEL(Kelly, told_friend_1) = False",
+                        "BEL(Kelly, food_poisoning) = True",
+                        "BEL(Kelly, seek_emotional_support_from_friends) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, told_friend_1) = True",
+                        "BEL(friend_1, food_poisoning_information_received_from_Kelly) = True",
+                        "DES(Kelly, seek_emotional_support_from_friends) = False"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Listen(Kelly, friend_1, friend_response)": {
+                    "conditions": [
+                        "BEL(Kelly, told_friend_1) = False",
+                        "BEL(Kelly, friend_1_pickup) = True",
+                        "BEL(Kelly, food_poisoning) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, told_friend_1) = True",
+                        "DES(Kelly, seek_emotional_support_from_friends) = False",
+                        "DES(Kelly, seek_compensation_from_restaurant_owner) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "ExpressAppreciation(Kelly, friend_1)": {
+                    "conditions": [
+                        "BEL(Kelly, friend_1) = True",
+                        "BEL(Kelly, food_poisoning) = True",
+                        "BEL(Kelly, told_friend_1) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, told_friend_1) = True",
+                        "DES(Kelly, seek_emotional_support_from_friends) = False",
+                        "BEL(Kelly, gratitude_for_friend_1) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, End, Politeness, Neutral)": {
+                    "conditions": [
+                        "SPEAK ACTION 1",
+                        "BEL(Kelly, ate_at_mexican_restaurant) = True",
+                        "BEL(Kelly, food_was_amazing) = True",
+                        "BEL(Kelly, felt_sick) = True",
+                        "BEL(Kelly, food_poisoning) = True",
+                        "BEL(Kelly, called_restaurant_owner) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_restaurant_owner) = True",
+                        "DES(Kelly, seek_compensation_from_restaurant_owner) = True",
+                        "SPEAK ACTION 2",
+                        "BEL(Kelly, ate_at_mexican_restaurant) = True",
+                        "BEL(Kelly, food_was_amazing) = True",
+                        "BEL(Kelly, felt_sick) = True",
+                        "BEL(Kelly, food_poisoning) = True",
+                        "BEL(Kelly, called_doctor) = False",
+                        "BEL(Kelly, called_doctor) = True",
+                        "DES(Kelly, get_medical_attention) = False",
+                        "SPEAK ACTION 3",
+                        "BEL(Kelly, ate_at_mexican_restaurant) = True",
+                        "BEL(Kelly, food_was_amazing) = True",
+                        "BEL(Kelly, felt_sick) = True",
+                        "BEL(Kelly, food_poisoning) = True",
+                        "BEL(Kelly, told_friend_1) = False",
+                        "BEL(Kelly, told_friend_1) = True",
+                        "DES(Kelly, seek_emotional_support_from_friends) = False",
+                        "SPEAK ACTION 4",
+                        "BEL(Kelly, ate_at_mexican_restaurant) = True",
+                        "BEL(Kelly, food_was_amazing) = True",
+                        "BEL(Kelly, felt_sick) = True",
+                        "BEL(Kelly, food_poisoning) = True",
+                        "BEL(Kelly, told_friend_2) = False",
+                        "BEL(Kelly, told_friend_2) = True",
+                        "DES(Kelly, seek_emotional_support_from_friends) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Start, End, Hope, Neutral"
+                    ]
+                },
+                "Speak(A, End, Gratitude, Neutral)": {
+                    "conditions": [
+                        "BEL(Kelly, ate_at_mexican_restaurant) = True",
+                        "BEL(Kelly, food_was_amazing) = True",
+                        "BEL(Kelly, felt_sick) = True",
+                        "BEL(Kelly, called_restaurant_owner) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Kelly, call_restaurant_owner) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(C, End, Explanation, Neutral)": {
+                    "conditions": [
+                        "BEL(Kelly, called_restaurant_owner) = False",
+                        "BEL(Kelly, called_doctor) = False",
+                        "BEL(Kelly, told_friend_1) = False",
+                        "BEL(Kelly, told_friend_2) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_restaurant_owner) = True",
+                        "INTENT(Kelly, seek_compensation_from_restaurant_owner) = True",
+                        "DES(Kelly, warn_others_about_restaurant) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope",
+                        "Distress",
+                        "Gratitude",
+                        "Reproach",
+                        "Concern",
+                        "Relief"
+                    ]
+                },
+                "Speak(D, End, Gratitude, Neutral)": {
+                    "conditions": [
+                        "BEL(Kelly, called_restaurant_owner) = False",
+                        "BEL(Kelly, called_doctor) = False",
+                        "BEL(Kelly, told_friend_1) = False",
+                        "BEL(Kelly, told_friend_2) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, called_restaurant_owner) = True",
+                        "DES(Kelly, seek_compensation_from_restaurant_owner) = True",
+                        "DES(Kelly, warn_others_about_restaurant) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "EndPlan(Kelly, {get_medical_attention}), AddPlan(Kelly, {seek_emotional_support_from_friends, seek_compensation_from_restaurant_owner}), Relief, Neutral"
+                    ]
+                },
+                "Speak(E, End, Agreement, Sympathetic)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Kelly, ate_at_mexican_restaurant) = True",
+                        "BEL(Kelly, food_was_amazing) = True",
+                        "BEL(Kelly, felt_sick) = True",
+                        "BEL(Kelly, food_poisoning) = True",
+                        "INTENT(Kelly, call_restaurant_owner) = False",
+                        "INTENT(Kelly, call_doctor) = False",
+                        "INTENT(Kelly, tell_friend_1) = False",
+                        "INTENT(Kelly, tell_friend_2) = False",
+                        "INTENT(Kelly, call_restaurant_owner) = True",
+                        "INTENT(Kelly, call_doctor) = True",
+                        "INTENT(Kelly, tell_friend_1) = True",
+                        "INTENT(Kelly, tell_friend_2) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "End, E, Suggestion, Sympathetic, \"Maybe you should rest a bit and take it easy today.\""
+                    ]
+                },
+                "Speak(F, End, Gratitude, Sympathetic)": {
+                    "conditions": [
+                        "BEL(Kelly, ate_at_mexican_restaurant) = True",
+                        "BEL(Kelly, food_was_amazing) = True",
+                        "BEL(Kelly, felt_sick) = True",
+                        "BEL(Kelly, food_poisoning) = True",
+                        "INTENT(Kelly, call_restaurant_owner) = False",
+                        "INTENT(Kelly, call_doctor) = False",
+                        "INTENT(Kelly, tell_friend_1) = False",
+                        "INTENT(Kelly, tell_friend_2) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Kelly, call_restaurant_owner) = True",
+                        "INTENT(Kelly, call_doctor) = True",
+                        "INTENT(Kelly, tell_friend_1) = True",
+                        "INTENT(Kelly, tell_friend_2) = True",
+                        "DES(Kelly, seek_emotional_support_from_friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "End, End, Gratification, Sympathetic, \"I'm glad we're friends and you were there for me. Thank you.\"",
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Speak(F, End, Gratitude, Sympathetic, Gratification)"
+                    ]
+                }
+            }
+        },
+        "Restaurant": {
+            "knowledge_base": [],
+            "intentions": {
+                "Provide_Safe_Food(Restaurant, Quality) = True": {
+                    "action_plan": [
+                        "Assess_Food_Preparation_Methods(Restaurant, Kitchen)",
+                        "Consult_Health_And_Safety_Inspector(Restaurant, Inspector)",
+                        "Implement_Food_Safety_Measures(Restaurant, Kitchen, SafetyMeasures)",
+                        "Train_Staff(Restaurant, Staff)",
+                        "Monitor_Effectiveness(Restaurant, SafetyMeasures)",
+                        "Continuously_Improve_Food_Safety(Restaurant, Kitchen, SafetyMeasures)"
+                    ]
+                },
+                "Maintain_Good_Reputation(Restaurant, Reputation_Level) = True": {
+                    "action_plan": [
+                        "Investigate_Food_Quality(Restaurant, Kelly_Food_Order)",
+                        "Improve_Sanitation_Practices(Restaurant)",
+                        "Apologize(Kelly)",
+                        "Give_Complimentary_Meal(Restaurant, Kelly, Same_Food_Type)",
+                        "Offer_Discount(Restaurant, Kelly, Future_Orders)",
+                        "Advertise_Improved_Sanitation_Practices(Restaurant)"
+                    ]
+                }
+            },
+            "actions": {
+                "Investigate_Food_Quality(Restaurant, Kelly_Food_Order)": {
+                    "conditions": [
+                        "BEL(Restaurant, Sanitation_Level) >= Moderate",
+                        "BEL(Kelly_Food_Order, Taste_Quality) >= Good",
+                        "DES(Restaurant, Maintain_Good_Reputation) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly_Food_Order, Safety_Quality) = Poor",
+                        "BEL(Restaurant, Sanitation_Level) <= Moderate",
+                        "BEL(Restaurant, Food_Quality) = Poor",
+                        "DES(Restaurant, Maintain_Good_Reputation) = False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Improve_Sanitation_Practices(Restaurant)": {
+                    "conditions": [
+                        "BEL(Restaurant, Sanitation_Level) = Low"
+                    ],
+                    "effects": [
+                        "BEL(Restaurant, Sanitation_Level) = High"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Apologize(Kelly)": {
+                    "conditions": [
+                        "BEL(Restaurant, Reputation_Level) < 3",
+                        "BEL(Kelly, Sickness) = True"
+                    ],
+                    "effects": [
+                        "BEL(Restaurant, Apologized_to_Kelly) = True",
+                        "DES(Restaurant, Maintain_Good_Reputation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Give_Complimentary_Meal(Restaurant, Kelly, Same_Food_Type)": {
+                    "conditions": [
+                        "BEL(Restaurant, Has_Complimentary_Meal) = True",
+                        "BEL(Kelly, Ate_Restaurant_Food) = True",
+                        "BEL(Restaurant, Same_Food_Type_Available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, Received_Complimentary_Meal) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Offer_Discount(Restaurant, Kelly, Future_Orders)": {
+                    "conditions": [
+                        "BEL(Restaurant, Have_Improved_Sanitation_Practices) = True",
+                        "DES(Kelly, Accept_Restaurant_Offer) = True"
+                    ],
+                    "effects": [
+                        "DES(Restaurant, Increase_Future_Orders) = True",
+                        "BEL(Kelly, Feel_Valued) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Regret"
+                    ]
+                },
+                "Advertise_Improved_Sanitation_Practices(Restaurant)": {
+                    "conditions": [
+                        "BEL(Restaurant, Good_Sanitation_Practices) = False",
+                        "DES(Restaurant, Maintain_Good_Reputation) = True"
+                    ],
+                    "effects": [
+                        "BEL(Restaurant, Good_Sanitation_Practices) = True",
+                        "BEL(Restaurant, Improved_Sanitation_Practices) = True",
+                        "DES(Restaurant, Maintain_Good_Reputation) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Assess_Food_Preparation_Methods(Restaurant, Kitchen)": {
+                    "conditions": [
+                        "BEL(Restaurant, Good_Reviews) = True"
+                    ],
+                    "effects": [
+                        "BEL(Restaurant, Safe_Food) = True",
+                        "BEL(Kitchen, Good_Hygiene_Practices) = True",
+                        "BEL(Restaurant, Quality) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Consult_Health_And_Safety_Inspector(Restaurant, Inspector)": {
+                    "conditions": [
+                        "BEL(Inspector, Inspector_Training) = True",
+                        "BEL(Inspector, Experience) > 5",
+                        "DES(Restaurant, Food_Safety) = True"
+                    ],
+                    "effects": [
+                        "BEL(Restaurant, Inspector_Confidence) = True",
+                        "BEL(Restaurant, Inspector_Approval) = True",
+                        "BEL(Restaurant, Food_Safety_Measures_Implemented) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "@Fear"
+                    ]
+                },
+                "Implement_Food_Safety_Measures(Restaurant, Kitchen, SafetyMeasures)": {
+                    "conditions": [
+                        "BEL(Restaurant, Quality) = True",
+                        "BEL(Restaurant, Kitchen) = Clean",
+                        "BEL(Restaurant, Staff) = Trained",
+                        "BEL(Restaurant, SafetyMeasures) = Implemented"
+                    ],
+                    "effects": [
+                        "DES(Restaurant, SafetyMeasures) = Improved_Quality_and_Safety",
+                        "BEL(Restaurant, SafetyMeasures) = Implemented",
+                        "BEL(Restaurant, Kitchen) = Safer",
+                        "BEL(Restaurant, Staff) = More_Knowledgeable"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Train_Staff(Restaurant, Staff)": {
+                    "conditions": [
+                        "BEL(Inspector, knowledgeable_about_food_safety) = True",
+                        "BEL(Staff, in need of training) = True"
+                    ],
+                    "effects": [
+                        "BEL(Staff, trained) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Monitor_Effectiveness(Restaurant, SafetyMeasures)": {
+                    "conditions": [
+                        "BEL(Restaurant, Quality_Safety_Assurance) = True",
+                        "BEL(Restaurant, Kitchen_Is_Using_Approved_Equipment) = True",
+                        "BEL(Restaurant, Kitchen_Is_Clean) = True",
+                        "BEL(Restaurant, Food_Storage_Is_Correct) = True",
+                        "BEL(Restaurant, Staff_Is_Trained) = True",
+                        "BEL(Restaurant, SafetyMeasures_Are_Implemented) = True",
+                        "BEL(Restaurant, SafetyMeasures_Are_Monitored) = False",
+                        "DES(Restaurant, Continuously_Improve_Food_Safety_Rating) = True"
+                    ],
+                    "effects": [
+                        "BEL(Restaurant, SafetyMeasures_Are_Monitored) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Continuously_Improve_Food_Safety(Restaurant, Kitchen, SafetyMeasures)": {
+                    "conditions": [
+                        "BEL(Kitchen, Clean) = True",
+                        "BEL(Kitchen, Equipped) = True",
+                        "BEL(Restaurant, Quality) = True"
+                    ],
+                    "effects": [
+                        "DES(Restaurant, Improved_Safety) = True",
+                        "BEL(SafetyMeasures, Up_To_Date) = True",
+                        "BEL(SafetyMeasures, Strict_Standards) = True",
+                        "BEL(Kitchen, Updated_Equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Disappointment"
+            ],
+            "speak_actions": {
+                "Speak(Start, A, Greeting, Neutral)": {
+                    "conditions": [
+                        "BEL(Restaurant, Quality) = Good",
+                        "INTENT(Restaurant, Provide_Safe_Food(Restaurant, Quality)) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(A, B, Inquiry, Neutral)": {
+                    "conditions": [
+                        "BEL(Restaurant, Provide_Safe_Food(self, Quality)) = True",
+                        "BEL(Restaurant, Maintain_Good_Reputation(self, Reputation_Level)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Restaurant, Customers_Safe_Food) = True/False",
+                        "BEL(Restaurant, Positive_Reviews) = True/False"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Fear",
+                        "Hope",
+                        "Remorse",
+                        "Gratitude",
+                        "Gratitude",
+                        "Hope",
+                        "Fear",
+                        "Fear",
+                        "Hope",
+                        "Hope",
+                        "Hope",
+                        "Hope"
+                    ]
+                },
+                "Speak(B, C, Suggestion, Neutral)": {
+                    "conditions": [
+                        "BEL(Restaurant, Quality)=Low",
+                        "DES(Restaurant, Provide_Safe_Food(Restaurant, Quality))=True"
+                    ],
+                    "effects": [
+                        "BEL(Restaurant, Quality)=Moderate",
+                        "BEL(Restaurant, Food_Safety)=High "
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(C, D, Inquiry, Neutral)": {
+                    "conditions": [
+                        "BEL(Restaurant, Quality) = Good",
+                        "BEL(Restaurant, Reputation_Level) = High"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Investigate_Food_Quality, Speak(Restaurant, Kelly, Distress, Apology), Shame",
+                        "Improve_Sanitation_Practices, Speak(Restaurant, Kelly, Joy, Compliment), Pride",
+                        "Apologize, None, Relief, None, None",
+                        "Give_Complimentary_Meal, None, Joy, None, None",
+                        "Offer_Discount, Speak(Restaurant, Kelly, Hope, Offer), Gratification",
+                        "Advertise_Improved_Sanitation_Practices, None, Joy, None, None",
+                        "Assess_Food_Preparation_Methods, None, None, Inquiry, None",
+                        "Consult_Health_And_Safety_Inspector, None, Fear, Inquiry, None",
+                        "Implement_Food_Safety_Measures, None, Joy, None, None",
+                        "Train_Staff, None, Joy, None, None",
+                        "Monitor_Effectiveness, None, Hope, Inquiry, None",
+                        "Continuously_Improve_Food_Safety, None, Joy, None, None"
+                    ]
+                },
+                "Speak(D, E, Offer, Friendly)": {
+                    "conditions": [
+                        "BEL(Restaurant, Quality) = Good",
+                        "DES(Restaurant, Maintain_Good_Reputation) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Speak(E, F, Concern, Friendly)": {
+                    "conditions": [
+                        "BEL(Restaurant, Quality) = Good"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear",
+                        "Hope",
+                        "Remorse",
+                        "Gratitude",
+                        "Satisfaction",
+                        "Gratification",
+                        "Fear",
+                        "Disappointment",
+                        "Hope",
+                        "Admiration",
+                        "Hope",
+                        "Hope"
+                    ]
+                },
+                "Speak(F, G, Inquiry, Concerned)": {
+                    "conditions": [
+                        "BEL(Restaurant, Provide_Safe_Food, Quality) = True",
+                        "BEL(Restaurant, Maintain_Good_Reputation, Reputation_Level) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Fear",
+                        "Hope",
+                        "Remorse",
+                        "Gratitude",
+                        "Hope",
+                        "Gratification",
+                        "Concern",
+                        "Fear",
+                        "Hope",
+                        "Hope",
+                        "Satisfaction",
+                        "Hope"
+                    ]
+                },
+                "Speak(G, End, Farewell, Neutral)": {
+                    "conditions": [
+                        "BEL(Restaurant, Provide_Safe_Food, Quality) = True",
+                        "DES(Restaurant, Maintain_Good_Reputation, Reputation_Level) = True"
+                    ],
+                    "effects": [
+                        "BEL(Restaurant, Quality_Safe, True)",
+                        "INTENT(Restaurant, Speak, Greeting) = True",
+                        "INTENT(Restaurant, Speak, Concern) = True",
+                        "INTENT(Restaurant, Speak, Explanation) = True",
+                        "INTENT(Restaurant, Speak, Suggestion) = True",
+                        "INTENT(Restaurant, Speak, Agreement) = True",
+                        "INTENT(Restaurant, Speak, Appreciation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Restaurant, End, Farewell, Neutral)], [Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Start, Investigate_Food_Quality, Hope, Neutral",
+                        "Investigate_Food_Quality, Assess_Food_Preparation_Methods, Fear, Neutral",
+                        "Assess_Food_Preparation_Methods, Implement_Food_Safety_Measures, Distress, Neutral",
+                        "Implement_Food_Safety_Measures, Train_Staff, Joy, Neutral",
+                        "Train_Staff, Monitor_Effectiveness, Hope, Neutral",
+                        "Monitor_Effectiveness, Continuously_Improve_Food_Safety, Satisfaction, Neutral",
+                        "Investigate_Food_Quality, Improve_Sanitation_Practices, Joy, Neutral",
+                        "Improve_Sanitation_Practices, Advertise_Improved_Sanitation_Practices, Hope, Neutral",
+                        "Advertise_Improved_Sanitation_Practices, Consult_Health_And_Safety_Inspector, Happy-for, Neutral",
+                        "Consult_Health_And_Safety_Inspector, Implementation_of_Food_Safety_Measures, Relief, Neutral",
+                        "Implementation_of_Food_Safety_Measures, Apologize, Shame, Neutral",
+                        "Apologize, Offer_Discount, Remorse, Neutral",
+                        "Offer_Discount, Give_Complimentary_Meal, Guilt, Neutral"
+                    ]
+                }
+            }
+        },
+        "Doctor": {
+            "knowledge_base": [
+                "BEL(Doctor, has_medical_degree) = True",
+                "BEL(Doctor, has_experience) = True",
+                "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                "BEL(Doctor, access_to_medical_resources) = True",
+                "DES(Doctor, diagnose_illness) = True",
+                "DES(Doctor, provide_effective_treatment) = True",
+                "DES(Doctor, communicate_clearly_with_patients) = True"
+            ],
+            "intentions": {
+                "INTENT(Doctor, diagnose_illness) = True": {
+                    "action_plan": [
+                        "GatherInformation(Doctor, Kelly)",
+                        "Examine(Patient, Kelly)",
+                        "OrderTests(Doctor, Hospital)",
+                        "AnalyzeResults(Doctor, Hospital)",
+                        "RecommendTreatment(Doctor, Kelly)",
+                        "MonitorProgress(Doctor, Kelly)",
+                        "CommunicateWithPatient(Doctor, Kelly)"
+                    ]
+                },
+                "INTENT(Doctor, provide_effective_treatment) = True": {
+                    "action_plan": [
+                        "Examine(Doctor, Patient)",
+                        "Diagnose(Doctor, Patient, Illness)",
+                        "Prescribe_Medicine(Doctor, Patient, Medicine)",
+                        "Explain_Treatment(Doctor, Patient, Treatment)",
+                        "Schedule_Follow-up(Doctor, Patient)"
+                    ]
+                },
+                "INTENT(Doctor, communicate_clearly_with_patients) = True": {
+                    "action_plan": [
+                        "AssessSymptoms(Doctor, Kelly)",
+                        "DiagnoseIllness(Doctor, Kelly)",
+                        "PrescribeTreatment(Doctor, Kelly)",
+                        "ExplainTreatment(Doctor, Kelly)",
+                        "ProvideWrittenInstructions(Doctor, Kelly)",
+                        "SetNextAppointment(Doctor, Kelly)"
+                    ]
+                }
+            },
+            "actions": {
+                "AssessSymptoms(Doctor, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, has_assessed_symptoms(Kelly)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DiagnoseIllness(Doctor, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "BEL(Kelly, experiencing_symptoms) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, has_diagnosed, Kelly) = True",
+                        "BEL(Kelly, diagnosed_illness) = True",
+                        "DES(Doctor, provide_effective_treatment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "PrescribeTreatment(Doctor, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "BEL(Kelly, experienced_symptoms) = True"
+                    ],
+                    "effects": [
+                        "DES(Kelly, receive_treatment) = True",
+                        "BEL(Kelly, prescribed_treatment) = True",
+                        "BEL(Kelly, following_treatment_instructions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ExplainTreatment(Doctor, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "DES(Doctor, diagnose_illness) = True",
+                        "DES(Doctor, provide_effective_treatment) = True",
+                        "BEL(Kelly, diagnosed_illness) = True",
+                        "BEL(Kelly, prescribed_treatment) = True",
+                        "DES(Kelly, understand_treatment) = False"
+                    ],
+                    "effects": [
+                        "DES(Kelly, understand_treatment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "ProvideWrittenInstructions(Doctor, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, communicate_clearly_with_patients) = True",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "DES(Doctor, provide_effective_treatment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, received_written_instructions) = True",
+                        "BEL(Kelly, understands_treatment) = True",
+                        "BEL(Doctor, fulfilled_communication_goal) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "SetNextAppointment(Doctor, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, access_to_calendar) = True",
+                        "BEL(Kelly, has_agreed_to_next_appointment) = False"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, access_to_calendar) = False",
+                        "BEL(Kelly, has_agreed_to_next_appointment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": []
+                },
+                "GatherInformation(Doctor, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, has_information_about_Kelly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Gathering information about Kelly's situation, the Doctor is likely feeling Fear"
+                    ]
+                },
+                "Examine(Patient, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "BEL(Patient, Kelly, is_consious) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, patient_examination_result) = Evaluated",
+                        "BEL(Doctor, patient_symptoms) = Identified",
+                        "BEL(Doctor, patient_information) = Gathered"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "OrderTests(Doctor, Hospital)": {
+                    "conditions": [
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Patient, experienced_food_poisoning) = True"
+                    ],
+                    "effects": [
+                        "DES(Doctor, diagnose_illness) = True",
+                        "BEL(Doctor, has_ordered_tests) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AnalyzeResults(Doctor, Hospital)": {
+                    "conditions": [
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "DES(Doctor, diagnose_illness) = True",
+                        "BEL(Hospital, has_laboratory) = True",
+                        "BEL(Hospital, laboratory_results_available) = False"
+                    ],
+                    "effects": [
+                        "BEL(Hospital, laboratory_results_available) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "RecommendTreatment(Doctor, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "DES(Doctor, diagnose_illness) = True",
+                        "BEL(Patient, has_food_poisoning) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, prescribed_treatment) = True",
+                        "BEL(Kelly, medical_condition) = Treated",
+                        "DES(Doctor, provide_effective_treatment) = Satisfied"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MonitorProgress(Doctor, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "INTENT(Doctor, diagnose_illness) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Patient, diagnosed_with_illness) = True"
+                    ],
+                    "effects": [
+                        "DES(Doctor, monitor_patient_progress) = True",
+                        "BEL(Patient, receiving_treatment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "CommunicateWithPatient(Doctor, Kelly)": {
+                    "conditions": [
+                        "BEL(Doctor, communicate_clearly_with_patients) = True",
+                        "BEL(Patient, aware_of_illness) = True"
+                    ],
+                    "effects": [
+                        "DES(Patient, informed_about_condition) = True",
+                        "BEL(Patient, understanding_of_condition) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Examine(Doctor, Patient)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, examined_patient) = Patient",
+                        "BEL(Patient, visited_doctor) = Doctor"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Diagnose(Doctor, Patient, Illness)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "BEL(Patient, symptoms) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, diagnosed_patients)",
+                        "BEL(Patient, diagnosis) = Illness"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Prescribe_Medicine(Doctor, Patient, Medicine)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "BEL(Patient, is_sick) = True"
+                    ],
+                    "effects": [
+                        "BEL(Patient, is_treated_with_medicine) = Medicine",
+                        "BEL(Patient, knows_about_treatment) = True",
+                        "BEL(Doctor, has_prescribed_medicine) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "Recommendation"
+                    ]
+                },
+                "Explain_Treatment(Doctor, Patient, Treatment)": {
+                    "conditions": [
+                        "BEL(Doctor, communicate_clearly_with_patients) = True",
+                        "BEL(Doctor, diagnose_illness) = True",
+                        "BEL(Patient, understands_treatment) = False",
+                        "DES(Doctor, provide_effective_treatment) = True",
+                        "BEL(Patient, present_with_symptoms) = True"
+                    ],
+                    "effects": [
+                        "BEL(Patient, understands_treatment) = True",
+                        "BEL(Doctor, believes_treatment_was_successful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Explain_Treatment(Doctor, Patient, Treatment)"
+                    ]
+                },
+                "Schedule_Follow-up(Doctor, Patient)": {
+                    "conditions": [
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "DES(Doctor, diagnose_illness) = True",
+                        "DES(Doctor, communicate_clearly_with_patients) = True"
+                    ],
+                    "effects": [
+                        "BEL(Patient, need_to_schedule_follow_up) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Fear"
+            ],
+            "speak_actions": {
+                "Speak(C, D1, Inquiry, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "INTENT(Doctor, communicate_clearly_with_patients) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Doctor, diagnose_illness) = True",
+                        "INTENT(Doctor, provide_effective_treatment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(D1, E1, Suggestion, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "INTENT(Doctor, diagnose_illness) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, has_diagnosed) = True",
+                        "DES(Doctor, provide_effective_treatment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(E1, F1, Agreement, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "INTENT(Doctor, diagnose_illness) = True",
+                        "INTENT(Doctor, provide_effective_treatment) = True",
+                        "INTENT(Doctor, communicate_clearly_with_patients) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, diagnosed_illness) = True",
+                        "BEL(Doctor, prescribed_correct_treatment) = True",
+                        "BEL(Doctor, communicated_clearly) = True",
+                        "DES(Doctor, ensure_patient_recovery) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(F1, End, Closure, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor, has_medical_degree) = True",
+                        "BEL(Doctor, has_experience) = True",
+                        "BEL(Doctor, knowledge_of_symptoms_and_treatment) = High",
+                        "BEL(Doctor, access_to_medical_resources) = True",
+                        "DES(Doctor, communicate_clearly_with_patients) = True",
+                        "INTENT(Doctor, diagnose_illness) = True",
+                        "INTENT(Doctor, provide_effective_treatment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, patient_is_examined) = True",
+                        "BEL(Doctor, diagnosis_made) = True",
+                        "DES(Doctor, prescribe_treatment) = True",
+                        "DES(Doctor, explain_treatment_to_patient) = True",
+                        "INTENT(Doctor, monitor_patient_progress) = True",
+                        "INTENT(Doctor, schedule_follow_up_appointment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Examine(Doctor, Kelly), Speak(Doctor, End, Closure, Professional), Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                }
+            }
+        },
+        "Friend": {
+            "knowledge_base": [],
+            "intentions": {
+                "OfferHelp(Friend, Kelly) = True": {
+                    "action_plan": [
+                        "Visit(Friend, Kelly)",
+                        "Listen(Friend, Kelly)",
+                        "Ask(Friend, Kelly, \"What kind of help do you need?\")",
+                        "Research(Friend, \"Food Poisoning\")",
+                        "Suggest(Friend, Kelly, \"Best practices for food poisoning\")",
+                        "Accompany(Friend, Kelly, \"Doctor Appointment\")",
+                        "Bring(Friend, Kelly, \"Soup and Medicines\")",
+                        "TakeCare(Friend, Kelly)"
+                    ]
+                }
+            },
+            "actions": {
+                "Visit(Friend, Kelly)": {
+                    "conditions": [
+                        "BEL(Friend, Knows(Kelly))"
+                    ],
+                    "effects": [
+                        "BEL(Friend, PresentAt(Kelly))"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Listen(Friend, Kelly)": {
+                    "conditions": [
+                        "BEL(Kelly, hasFoodPoisoning) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Empathy"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Ask(Friend, Kelly, \"What kind of help do you need?\")": {
+                    "conditions": [
+                        "BEL(Friend, at(Kelly))",
+                        "BEL(Kelly, hasFoodPoisoning)"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, needsHelp)",
+                        "BEL(Friend, willingToHelp)",
+                        "BEL(Friend, knowsHowToHelp)",
+                        "BEL(Friend, askedForHelp)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Research(Friend, \"Food Poisoning\")": {
+                    "conditions": [
+                        "BEL(Friend, KnowsAbout(Food_Poisoning)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend, KnowsAbout(Food_Poisoning)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Suggest(Friend, Kelly, \"Best practices for food poisoning\")": {
+                    "conditions": [
+                        "BEL(Friend, KnowsFoodPoisoning) = True",
+                        "BEL(Kelly, NeedingMedicalAdvice) = False",
+                        "BEL(Kelly, NeedingMedicalAttention) = False",
+                        "BEL(Kelly, TrustsFriend) = True",
+                        "BEL(Kelly, OpenToSuggestions) = True"
+                    ],
+                    "effects": [
+                        "DES(Friend, HelpedKelly) = True",
+                        "BEL(Kelly, NeedsAdvice) = True",
+                        "BEL(Kelly, KnowsFoodPoisoning) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Accompany(Friend, Kelly, \"Doctor Appointment\")": {
+                    "conditions": [
+                        "BEL(Friend, knows_about_doctors) = True",
+                        "BEL(Friend, has_available_time) = True",
+                        "BEL(Kelly, sick) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend, accompanied_Kelly_to_doctor) = True",
+                        "BEL(Kelly, received_medical_attention) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Bring(Friend, Kelly, \"Soup and Medicines\")": {
+                    "conditions": [
+                        "BEL(Friend, OfferHelp(Friend, Kelly)) = True",
+                        "BEL(Kelly, HasFoodPoisoning) = True",
+                        "BEL(Kelly, FeelingSick) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend, HasHelped(Kelly)) = True",
+                        "DES(Friend, HelpedSomeone) = True",
+                        "BEL(Kelly, HasReceivedHelp) = True",
+                        "BEL(Kelly, FeelingBetter) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Compassion"
+                    ]
+                },
+                "TakeCare(Friend, Kelly)": {
+                    "conditions": [
+                        "BEL(Friend, OfferHelp(Friend, Kelly)) = True",
+                        "BEL(Kelly, Sick) = True",
+                        "BEL(Kelly, DoctorAppointment) = True",
+                        "DES(Friend, TakeCare(Friend, Kelly)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend, TookCare(Friend, Kelly)) = True",
+                        "BEL(Kelly, Comforted) = True",
+                        "BEL(Kelly, Grateful) = True",
+                        "DES(Friend, OfferHelp(Friend, Kelly)) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Compassion"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {}
+        }
+    },
+    "dialogue_tree": [
+        "<Start, A, Greeting, Neutral, \"Hi there, how are you feeling today?\">",
+        "<A, B, Concern, Neutral, \"I heard you were sick yesterday. Is everything okay now?\">",
+        "<B, C, Explanation, Neutral, \"Oh no, that's terrible. What happened?\">",
+        "<C, D, Explanation, Neutral, \"Food poisoning? That's awful, did you go to the doctor?\">",
+        "<D, E, Suggestion, Sympathetic, \"Maybe you should rest a bit and take it easy today.\">",
+        "<E, F, Agreement, Sympathetic, \"Yes, that's a good idea. Thanks for your concern.\">",
+        "<F, End, Appreciation, Sympathetic, \"I appreciate your kindness and support. It means a lot.\">"
+    ]
+}

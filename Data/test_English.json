@@ -1,0 +1,414 @@
+{
+    "scenario_name": "test_English",
+    "scenario_description": "Minh was failing English class. He knew he had to better his grade. He started studying every night for an hour or more. In a few months, Minh's grade had risen to a B! Minh was very proud of his perseverance.",
+    "last_ended": "end",
+    "agents": {
+        "Minh": {
+            "knowledge_base": [
+                "Minh_knows_english_class_grade",
+                "Minh_study_english_every_night",
+                "Minh_grade",
+                "Minh_improve_grade"
+            ],
+            "intentions": {
+                "INTENT(Minh, study) = True": {
+                    "action_plan": [
+                        "Go_to_school(Minh)",
+                        "Attend_English_Class(Minh)",
+                        "Talk_to_Teacher(Minh, English_Teacher)",
+                        "Create_Study_Plan(Minh, English_Class_Materials)",
+                        "Study_English(Minh, English_Class_Materials, Textbook, Notebook)",
+                        "Take_Practice_Tests(Minh, Practice_Test_Materials)",
+                        "Track_Progress(Minh, Study_Log)",
+                        "Reward_Self(Minh, Self_Esteem)"
+                    ]
+                },
+                "INTENT(Minh, raise_grade) = True": {
+                    "action_plan": [
+                        "Attend( Min,his English class)",
+                        "Read(Minh, English textbooks)",
+                        "Practice(Minh, grammar exercises)",
+                        "Ask(Minh, English teacher, for extra support)",
+                        "Attend(Minh, English tutoring sessions)",
+                        "Write(Minh, practice essays)",
+                        "Review(Minh, previous tests and assignments)",
+                        "Take(Minh, English practice exams)",
+                        "Attend(Minh, English discussion groups)"
+                    ]
+                }
+            },
+            "actions": {
+                "Attend( Min,his English class)": {
+                    "conditions": [
+                        "BEL(Min, Minh_knows_english_class_grade) = False"
+                    ],
+                    "effects": [
+                        "BEL(Min, Minh_knows_english_class_grade) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Read(Minh, English textbooks)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "BEL(Minh_study_english_every_night) = True"
+                    ],
+                    "effects": [
+                        "BEL(Minh_english_textbook_knowledge) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Practice(Minh, grammar exercises)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "BEL(Minh_study_english_every_night) = True",
+                        "DES(Minh_improve_grade) = True"
+                    ],
+                    "effects": [
+                        "BEL(Minh_knows_grammar) = True",
+                        "DES(Minh_improve_grade) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ask(Minh, English teacher, for extra support)": {
+                    "conditions": [
+                        "BEL(Minh_study_english_every_night) = True",
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "BEL(Minh_grade < 'B')"
+                    ],
+                    "effects": [
+                        "DES(Minh_improve_grade) = True",
+                        "BEL(Minh_knows_english_class_grade) = False",
+                        "BEL(Minh_study_english_every_night) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Attend(Minh, English tutoring sessions)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade, ) = True"
+                    ],
+                    "effects": [
+                        "BEL(Minh_attends_english_tutoring_sessions, ) = True",
+                        "DES(Minh_passes_english_class, ) = True",
+                        "DES(Minh_improve_grade, ) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Write(Minh, practice essays)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "BEL(Minh_study_english_every_night) = True",
+                        "DES(Minh_improve_grade) = True",
+                        "BEL(Minh_grade) = \"B\""
+                    ],
+                    "effects": [
+                        "BEL(Minh_has_written_practice_essays) = True",
+                        "BEL(Minh_has_practiced_writing_essays) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Review(Minh, previous tests and assignments)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "BEL(Minh_grade) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "DES(Minh_improve_grade) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Take(Minh, English practice exams)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "DES(Minh_improve_grade) = True"
+                    ],
+                    "effects": [
+                        "BEL(Minh_grade_change) = True",
+                        "BEL(Minh_grade) = Good",
+                        "BEL(Minh_grade) != Poor"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Attend(Minh, English discussion groups)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "BEL(Minh_improve_grade) = True",
+                        "BEL(Minh_study_english_every_night)=True"
+                    ],
+                    "effects": [
+                        "DES(Minh_become_more_confident_in_English)=True",
+                        "BEL(Minh_knows_more_about_English) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Go_to_school(Minh)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = False"
+                    ],
+                    "effects": [
+                        "BEL(Minh_knows_english_class_grade) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "",
+                        "Hope"
+                    ]
+                },
+                "Attend_English_Class(Minh)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = False"
+                    ],
+                    "effects": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "BEL(Minh_study_english_every_night) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Talk_to_Teacher(Minh, English_Teacher)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "BEL(Minh_grade) < \"B\"",
+                        "BEL(English_Teacher) = Minh's teacher"
+                    ],
+                    "effects": [
+                        "DES(Minh_improve_grade) = True",
+                        "BEL(Minh_grade) >= \"B\""
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Create_Study_Plan(Minh, English_Class_Materials)": {
+                    "conditions": [
+                        "BEL(Minh, know_english_class_grade) = True",
+                        "BEL(Minh, study_english_every_night) = True",
+                        "BEL(Minh, English_Class_Materials) = True"
+                    ],
+                    "effects": [
+                        "BEL(Minh, Study_Plan_Created) = True",
+                        "BEL(Minh, Know_What_To_Study) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Study_English(Minh, English_Class_Materials, Textbook, Notebook)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "BEL(Minh_study_english_every_night) = True",
+                        "BEL(English_Class_Materials) = True",
+                        "BEL(Textbook) = True",
+                        "BEL(Notebook) = True"
+                    ],
+                    "effects": [
+                        "DES(Minh_grade, Numerical_Value) += 5",
+                        "BEL(Minh_improve_grade) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Take_Practice_Tests(Minh, Practice_Test_Materials)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = False",
+                        "DES(Minh_improve_grade) = True"
+                    ],
+                    "effects": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "Practice_Test_Materials"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Track_Progress(Minh, Study_Log)": {
+                    "conditions": [
+                        "BEL(Minh_knows_english_class_grade) = True",
+                        "BEL(Minh_study_english_every_night) = True",
+                        "BEL(Minh_grade) != 'A'",
+                        "DES(Minh_improve_grade) = True"
+                    ],
+                    "effects": [
+                        "BEL(Minh_grade) = Previous(Minh_grade) + Current(English_Class_Materials)",
+                        "BEL(Minh_study_english_every_night) = Previous(Minh_study_english_every_night) and Success(Minh_study_english_every_night)",
+                        "BEL(Minh_knows_english_class_grade) = Previous(Minh_knows_english_class_grade) and Success(Minh_knows_english_class_grade)",
+                        "DES(Minh_improve_grade) = False",
+                        "BEL(Study_Log) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Reward_Self(Minh, Self_Esteem)": {
+                    "conditions": [
+                        "BEL(Minh_improve_grade) = True"
+                    ],
+                    "effects": [
+                        "DES(Minh_reward_self, Self_Esteem) = Increase"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [],
+            "speak_actions": {
+                "Speak(Start, A1, Greeting, Neutral)": {
+                    "conditions": [
+                        "Minh_knows_english_class_grade = False"
+                    ],
+                    "effects": [
+                        "Minh_knows_english_class_grade = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(A1, B1, Neutral, Neutral)": {
+                    "conditions": [
+                        "BEL(Minh, knows_english_class_grade) = True",
+                        "DES(Minh, improve_grade) = True",
+                        "INTENT(Minh, study) = True"
+                    ],
+                    "effects": [
+                        "BEL(Minh, study_english_every_night) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(D1, E2, Excitement, Positive)": {
+                    "conditions": [
+                        "BEL(Minh, Minh_knows_english_class_grade) = True",
+                        "DES(Minh, Minh_improve_grade) = True",
+                        "INTENT(Minh, study) = True"
+                    ],
+                    "effects": [
+                        "BEL(Minh, Minh_study_english_every_night) = True"
+                    ],
+                    "occ_emotion": [
+                        "Happiness"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(E2, F2, Neutral, Neutral)": {
+                    "conditions": [
+                        "BEL(Minh, knows_english_class_grade) = True",
+                        "BEL(Minh, study_english_every_night) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(F2, End, Grateful, Appreciative)": {
+                    "conditions": [
+                        "BEL(Minh, Minh_knows_english_class_grade) = True",
+                        "BEL(Minh, Minh_study_english_every_night) = True",
+                        "INTENT(Minh, study) = True"
+                    ],
+                    "effects": [
+                        "BEL(Minh, Minh_grade) = B",
+                        "DES(Minh, Minh_improve_grade) = True",
+                        "INTENT(Minh, raise_grade) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, B1, Greeting, Neutral, \"Hi Minh, how are you doing?\">",
+        "<B1, C1, Inquiry, Friendly, \"I heard you were struggling in English, is everything okay?\">",
+        "<C1, D1, Neutral, Neutral, \"Yeah, I was having a hard time keeping up with the material.\">",
+        "<D1, E1, Encouragement, Supportive, \"That's understandable, but I'm glad to hear you're working on it!\">",
+        "<E1, F1, Neutral, Neutral, \"Thanks, it's been tough but it's paying off.\">",
+        "<F1, End, Congratulatory, Proud, \"I'm proud of you for sticking to it and improving your grade!\">"
+    ]
+}

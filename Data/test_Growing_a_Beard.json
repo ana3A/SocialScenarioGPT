@@ -1,0 +1,2336 @@
+{
+    "scenario_name": "test_Growing a Beard",
+    "scenario_description": "Jim decided to grow a beard. At first he liked how it looked. After a while it was too itchy and scraggly. Jim tried clinging on to it for a bit longer. After a while he gave up and shaved.",
+    "last_ended": "end",
+    "agents": {
+        "Jim": {
+            "knowledge_base": [
+                "BEL(Jim, has_beard) = True",
+                "BEL(Jim, beard_is_itchy) = True",
+                "BEL(Jim, beard_is_scraggly) = True",
+                "DES(Jim, look_good_with_beard) = True",
+                "DES(Jim, avoid_shaving) = True"
+            ],
+            "intentions": {
+                "INTENT(Jim, grow_beard) = True": {
+                    "action_plan": [
+                        "CheckBeard(AGENT=Jim)",
+                        "Research(AGENT=Jim, TARGET=internet, ARGUMENTS=search_criteria)",
+                        "BuyProducts(AGENT=Jim, TARGET=store, ARGUMENTS=beard_products)",
+                        "Consult(AGENT=Jim, TARGET=Barber, ARGUMENTS=advice)",
+                        "GrowBeard(AGENT=Jim)",
+                        "Reassess(AGENT=Jim)",
+                        "Reconsider(AGENT=Jim)",
+                        "Shave(AGENT=Jim)"
+                    ]
+                },
+                "INTENT(Jim, maintain_beard) = True": {
+                    "action_plan": [
+                        "Decide(Jim, maintain_beard)",
+                        "Assess(Jim, beard_condition)",
+                        "IF(HasProperty(Jim, beard_is_itchy), ScratchBeard(Jim), null)",
+                        "IF(HasProperty(Jim, beard_is_scraggly), BrushBeard(Jim), null)",
+                        "IF(HasProperty(Jim, beard_is_scraggly) AND HasProperty(Jim, beard_is_itchy), TrimBeard(Jim), null)",
+                        "BEL(Jim, has_beard) = True",
+                        "IF(HasProperty(Jim, beard_is_scraggly) OR HasProperty(Jim, beard_is_itchy), RepeatFromStep2(Jim), null)",
+                        "Observer(Barber, Jim)",
+                        "DES(Barber, groom_beard) = True",
+                        "Ask(Barber, Jim, \"Would you like me to groom your beard?\")",
+                        "IF(JimAgrees(Barber, Jim), GroomBeard(Barber, Jim), null)",
+                        "IF(JimDisagrees(Barber, Jim), ThankBarber(Jim), null)",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "BEL(Jim, look_good_with_beard) = True",
+                        "BEL(Jim, avoid_shaving) = True",
+                        "Decide(Jim, maintain_beard)",
+                        "Assess(Jim, beard_condition)",
+                        "IF(condition, action, null)",
+                        "ScratchBeard(Jim)",
+                        "BrushBeard(Jim)",
+                        "TrimBeard(Jim)",
+                        "RepeatFromStep2(Jim)",
+                        "Observer(Barber, Jim)",
+                        "Ask(Barber, Jim, \"Would you like me to groom your beard?\")",
+                        "GroomBeard(Barber, Jim)",
+                        "ThankBarber(Jim)"
+                    ]
+                },
+                "INTENT(Jim, tolerate_beard_itchiness) = True": {
+                    "action_plan": [
+                        "ChooseClothing(Jim, casual)",
+                        "TakeShower(Jim)",
+                        "TrimBeard(Jim, self)",
+                        "ApplyBeardOil(Jim)",
+                        "ApplyBeardBalm(Jim)",
+                        "PurchaseSofteningBeardShampoo(Jim)",
+                        "WashBeard(Jim, with_softening_shampoo)",
+                        "TakeVitaminSupplement(Jim, for_better_beard_health)",
+                        "AvoidScratchingBeard(Jim)",
+                        "RemainPositiveAttitude(Jim)"
+                    ]
+                },
+                "INTENT(Jim, endure_scraggly_beard) = True": {
+                    "action_plan": [
+                        "EndureBeard(Jim, Jim, beard)",
+                        "AvoidTouchingBeard(Jim, Jim, beard)",
+                        "UseBeardOil(Jim, Jim, beard)",
+                        "TrimBeard(Jim, Jim, beard)",
+                        "ReevaluateBeard(Jim, Jim)",
+                        "ShaveBeard(Jim, Jim, beard)"
+                    ]
+                },
+                "INTENT(Jim, look_good_with_beard) = True": {
+                    "action_plan": [
+                        "Decide-To-Grow-Beard(Jim)",
+                        "Trim-Beard(Jim, Barber)",
+                        "Believe-Beard-Is-Itchy(Jim)",
+                        "Desire-To-Keep-Beard(Jim)",
+                        "Avoid-Shaving-Beard(Jim)",
+                        "Believe-Beard-Is-Scraggly(Jim)",
+                        "Intend-To-Look-Good-With-Beard(Jim)",
+                        "Shave-Beard(Jim)"
+                    ]
+                },
+                "INTENT(Jim, avoid_shaving) = True": {
+                    "action_plan": [
+                        "ActionName(Jim, barber, make_appointment)",
+                        "ActionName(Jim, self, wait)",
+                        "ActionName(Jim, self, go_to_barber_shop)",
+                        "ActionName(Jim, barber, sit_in_chair)",
+                        "ActionName(Jim, barber, tell_how_to_cut_hair)",
+                        "ActionName(Jim, barber, shave_beard)",
+                        "ActionName(Jim, barber, pay_for_service)",
+                        "ActionName(Jim, self, leave_barber_shop)"
+                    ]
+                },
+                "INTENT(Jim, overcome_beard_itchiness) = False": {
+                    "action_plan": [
+                        "INTENT(Jim, overcome_beard_itchiness) = False",
+                        "Decide(Jim, null, BEARD_ITCHINESS)",
+                        "Search(Jim, null, SOLUTIONS_TO_BEARD_ITCHINESS)",
+                        "Find(Jim, null, BARBER)",
+                        "Ask(Jim, Barner, ADVICE_ON_BEARD)",
+                        "Receive(Jim, Barner, ADVICE_FROM_BARBER)",
+                        "Buy(Jim, SHOP, BEARD_PRODUCTS)",
+                        "Use(Jim, SHOP, BEARD_PRODUCTS)",
+                        "Evaluate(Jim, null, OUTCOME_OF_BEARD_PRODUCTS)",
+                        "Decide(Jim, null, SHAVE_BEARD)",
+                        "Perform(Jim, null, SHAVE_BEARD)",
+                        "Update(Jim, null, BEARD_STATUS)"
+                    ]
+                },
+                "INTENT(Jim, fix_scraggly_beard) = False": {
+                    "action_plan": [
+                        "ChangeBelief(Jim, BEL(Jim, beard_is_scraggly), False)",
+                        "ChangeDesire(Jim, DES(Jim, look_good_with_beard), False)",
+                        "GetInformation(Jim, Barber, \"Can you recommend a good beard oil?\")",
+                        "Purchase(Jim, BeardOil, \"organic\", \"cedar scent\")",
+                        "Apply(Jim, BeardOil, \"1-2 drops\", \"daily\")",
+                        "ChangeBelief(Jim, BEL(Jim, beard_is_itchy), False)",
+                        "ChangeDesire(Jim, DES(Jim, avoid_shaving), True)",
+                        "ChangeBelief(Jim, BEL(Jim, has_beard), True)"
+                    ]
+                },
+                "INTENT(Jim, shave) = False": {
+                    "action_plan": [
+                        "Assess_Beard(Jim)",
+                        "Research_Beard_Care(Jim)",
+                        "Experiment_Beard_Care(Jim)",
+                        "Evaluate_Beard_Care(Jim)",
+                        "Reflect_On_Desires(Jim)",
+                        "Reassess_Beard(Jim)",
+                        "Decide_To_Shave(Jim)",
+                        "Go_To_Barber_Shop(Jim, Barber_Shop)",
+                        "Ask_For_Shaving_Services(Jim, Barber)",
+                        "Get_Shaved(Jim, Barber)",
+                        "Pay_For_Services(Jim, Barber)",
+                        "Leave_Barber_Shop(Jim, Barber_Shop)"
+                    ]
+                }
+            },
+            "actions": {
+                "Assess_Beard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Research_Beard_Care(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, found_beard_care_tips) = True",
+                        "BEL(Jim, read_beard_care_articles) = True",
+                        "BEL(Jim, watched_beard_care_videos) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Experiment_Beard_Care(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, uses_beard_care_products) = True",
+                        "DES(Jim, improve_bear_condition) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Evaluate_Beard_Care(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True or BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard_care) = True",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Reflect_On_Desires(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = False",
+                        "DES(Jim, look_good_with_beard) = False",
+                        "DES(Jim, avoid_shaving) = False",
+                        "DES(Jim, look_good_clean_shaven) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Reassess_Beard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Decide_To_Shave(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, look_good_with_beard) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Jim, shave) = True",
+                        "BEL(Jim, has_beard) = False",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "DES(Jim, look_good_with_beard) = False",
+                        "DES(Jim, avoid_shaving) = False",
+                        "DES(Jim, look_good_clean_shaven) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Go_To_Barber_Shop(Jim, Barber_Shop)": {
+                    "conditions": [
+                        "BEL(Jim, has_car) = True",
+                        "BEL(Jim, has_money) = True",
+                        "BEL(Jim, is_near_Barber_Shop) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, is_at_Barber_Shop) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ask_For_Shaving_Services(Jim, Barber)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_shaving) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Jim, avoid_shaving) = False",
+                        "BEL(Jim, wants_beard_shaved) = True",
+                        "BEL(Jim, knows_barber_can_provide_shaving_services) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Get_Shaved(Jim, Barber)": {
+                    "conditions": [
+                        "BEL(Jim, at_Barber_Shop) = True",
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Barber, available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = False",
+                        "BEL(Jim, looks_good) = True",
+                        "BEL(Jim, clean_shaven) = True",
+                        "BEL(Barber, increased_wealth) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Pay_For_Services(Jim, Barber)": {
+                    "conditions": [
+                        "BEL(Jim, has_enough_money) = True",
+                        "BEL(Barber, provides_shaving_services) = True",
+                        "BEL(Jim, received_shaving_services) = False"
+                    ],
+                    "effects": [
+                        "DES(Jim, feels_relieved_after_shaving) = True",
+                        "BEL(Jim, has_beard) = False",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "BEL(Jim, has_less_hair_on_face) = True",
+                        "BEL(Jim, has_more_money) = False",
+                        "BEL(Jim, received_shaving_services) = True",
+                        "BEL(Barber, has_more_money) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Leave_Barber_Shop(Jim, Barber_Shop)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = False",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False"
+                    ],
+                    "effects": [
+                        "DES(Jim, look_good_with_beard) = False",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "CheckBeard(AGENT=Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Research(AGENT=Jim, TARGET=internet, ARGUMENTS=search_criteria)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, found_beard_grooming_tips) = True",
+                        "BEL(Jim, knows_how_to_take_care_of_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BuyProducts(AGENT=Jim, TARGET=store, ARGUMENTS=beard_products)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard_products) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Consult(AGENT=Jim, TARGET=Barber, ARGUMENTS=advice)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, barber_advice) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GrowBeard(AGENT=Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Reassess(AGENT=Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True or BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = True or BEL(Jim, has_beard) = False",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "DES(Jim, look_good_with_beard) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Reconsider(AGENT=Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_shaving) = True",
+                        "DES(Jim, look_good_with_beard) = False"
+                    ],
+                    "effects": [
+                        "DES(Jim, avoid_shaving) = False",
+                        "DES(Jim, look_good_with_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Shave(AGENT=Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_shaving) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = False",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "DES(Jim, look_good_with_beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Decide(Jim, maintain_beard)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Assess(Jim, beard_condition)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Jim, maintain_beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = True/False",
+                        "BEL(Jim, beard_is_scraggly) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "IF(HasProperty(Jim, beard_is_itchy), ScratchBeard(Jim), null)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "IF(HasProperty(Jim, beard_is_scraggly), BrushBeard(Jim), null)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Discomfort"
+                    ]
+                },
+                "IF(HasProperty(Jim, beard_is_scraggly) AND HasProperty(Jim, beard_is_itchy), TrimBeard(Jim), null)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Jim, maintain_beard) = True",
+                        "INTENT(Jim, trim_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Discomfort"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BEL(Jim, has_beard) = True": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "IF(HasProperty(Jim, beard_is_scraggly) OR HasProperty(Jim, beard_is_itchy), RepeatFromStep2(Jim), null)": {
+                    "conditions": [
+                        "HasProperty(Jim, beard_is_scraggly) = True",
+                        "HasProperty(Jim, beard_is_itchy) = True"
+                    ],
+                    "effects": [
+                        "RepeatFromStep2(Jim)"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Observer(Barber, Jim)": {
+                    "conditions": [
+                        "BEL(Jim, look_good_with_beard) = True",
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Barber, groom_beard) = True"
+                    ],
+                    "effects": [
+                        "Ask(Barber, Jim, \"Would you like me to groom your beard?\")"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DES(Barber, groom_beard) = True": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "Beliefs and desires specific to grooming a beard, such as having grooming equipment, being skilled at grooming, etc."
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "Beliefs and desires specific to having a well-groomed beard, such as feeling more confident, looking better, etc."
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ask(Barber, Jim, \"Would you like me to groom your beard?\")": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Barber, groom_beard) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Jim, groom_beard) = True",
+                        "BEL(Jim, asked_barber_to_groom_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "IF(JimAgrees(Barber, Jim), GroomBeard(Barber, Jim), null)": {
+                    "conditions": [
+                        "BEL(Barber, can_groom_beard) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "BEL(Jim, look_good_with_beard) = True",
+                        "BEL(Barber, can_groom_beard) = False",
+                        "DES(Barber, groom_beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "IF(JimDisagrees(Barber, Jim), ThankBarber(Jim), null)": {
+                    "conditions": [
+                        "JimDisagrees(Barber, Jim)"
+                    ],
+                    "effects": [
+                        "ThankBarber(Jim)"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Resentment"
+                    ]
+                },
+                "BEL(Jim, beard_is_itchy) = False": {
+                    "conditions": [
+                        "BEL(Jim, beard_is_itchy) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "BEL(Jim, beard_is_scraggly) = False": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "BEL(Jim, look_good_with_beard) = True": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "BEL(Jim, avoid_shaving) = True": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "IF(condition, action, null)": {
+                    "conditions": [],
+                    "effects": [
+                        "IF(HasProperty(Jim, beard_is_itchy), ScratchBeard(Jim), null)",
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "DES(Jim, relieve_beard_itch) = True",
+                        "IF(HasProperty(Jim, beard_is_scraggly), BrushBeard(Jim), null)",
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, neaten_beard) = True",
+                        "IF(HasProperty(Jim, beard_is_scraggly) AND HasProperty(Jim, beard_is_itchy), TrimBeard(Jim), null)",
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "DES(Jim, tidy_beard) = True",
+                        "IF(HasProperty(Jim, beard_is_scraggly) OR HasProperty(Jim, beard_is_itchy), RepeatFromStep2(Jim), null)",
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "INTENT(Jim, maintain_beard) = True",
+                        "IF(JimAgrees(Barber, Jim), GroomBeard(Barber, Jim), null)",
+                        "ASK(Barber, Jim, \"Would you like me to groom your beard?\") = True",
+                        "JimAgrees(Barber, Jim) = True",
+                        "DES(Barber, groom_beard) = True",
+                        "IF(JimDisagrees(Barber, Jim), ThankBarber(Jim), null)",
+                        "ASK(Barber, Jim, \"Would you like me to groom your beard?\") = True",
+                        "JimAgrees(Barber, Jim) = False",
+                        "DES(Jim, maintain_beard) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress",
+                        "Joy",
+                        "Hope",
+                        "Fear",
+                        "Happy-for",
+                        "Hope",
+                        "Joy",
+                        "Gratitude",
+                        "Distress",
+                        "Hope",
+                        "Fear",
+                        "Distress",
+                        "Joy",
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Distress",
+                        "Distress",
+                        "Distress",
+                        "Hope",
+                        "Satisfaction",
+                        "Disappointment"
+                    ]
+                },
+                "ScratchBeard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BrushBeard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "BEL(Jim, look_good_with_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "TrimBeard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, beard_is_itchy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "BEL(Jim, beard_is_itchy) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "RepeatFromStep2(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, beard_is_scraggly) = True OR BEL(Jim, beard_is_itchy) = True"
+                    ],
+                    "effects": [
+                        "NoNewEffect"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "GroomBeard(Barber, Jim)": {
+                    "conditions": [
+                        "BEL(Barber, has_clippers) = True",
+                        "BEL(Barber, is_professional) = True",
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, avoid_shaving) = True",
+                        "Ask(Barber, Jim, \"Would you like me to groom your beard?\")",
+                        "JimAgrees(Barber, Jim) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_tidy_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "BEL(Jim, look_good_with_beard) = True",
+                        "DES(Jim, avoid_shaving) = True",
+                        "DES(Jim, look_professional) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "ThankBarber(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "DES(Jim, feel_grateful_to_Barber) = True",
+                        "DES(Barber, feel_appreciated_by_Jim) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "ChooseClothing(Jim, casual)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "TakeShower(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, clean) = True",
+                        "BEL(Jim, refreshed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "TrimBeard(Jim, self)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, beard_length_short) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "BEL(Jim, beard_length_short) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "ApplyBeardOil(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_soft) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "ApplyBeardBalm(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_soft) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "PurchaseSofteningBeardShampoo(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, funds_sufficient) = False",
+                        "BEL(Jim, has_time_for_shopping) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_softening_beard_shampoo) = True",
+                        "DES(Jim, avoid_scratching_beard) = True",
+                        "BEL(Jim, funds_sufficient) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WashBeard(Jim, with_softening_shampoo)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, using_softening_shampoo) = False",
+                        "BEL(Jim, has_softening_beard_shampoo) = True",
+                        "BEL(Jim, using_vitamin_supplement) = True",
+                        "DES(Jim, have_soft_beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, using_softening_shampoo) = True",
+                        "DES(Jim, have_soft_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "TakeVitaminSupplement(Jim, for_better_beard_health)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, improve_beard_health) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_improved_beard_health) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AvoidScratchingBeard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, avoid_scratching_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Discomfort"
+                    ]
+                },
+                "RemainPositiveAttitude(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, positive_attitude_towards_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EndureBeard(Jim, Jim, beard)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "AvoidTouchingBeard(Jim, Jim, beard)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_touching_beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_touching_beard) = True",
+                        "BEL(Jim, touched_beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Discomfort"
+                    ]
+                },
+                "UseBeardOil(Jim, Jim, beard)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "DES(Jim, look_good_with_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "TrimBeard(Jim, Jim, beard)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_trimmed_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "DES(Jim, look_good_with_beard) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "ReevaluateBeard(Jim, Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True OR BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "DES(Jim, look_good_with_beard) = False",
+                        "DES(Jim, avoid_shaving) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ShaveBeard(Jim, Jim, beard)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "DES(Jim, avoid_shaving) = False",
+                        "DES(Jim, look_good_with_beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "DES(Jim, look_good_with_beard) = False",
+                        "DES(Jim, avoid_shaving) = False",
+                        "DES(Jim, try_new_look) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Decide-To-Grow-Beard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Trim-Beard(Jim, Barber)": {
+                    "conditions": [
+                        "BEL(Barber, is_available) = True",
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Jim, avoid_beard_cutting_mistakes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_well_trimmed_beard) = True",
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Barber, is_busy) = True",
+                        "DES(Jim, look_good_with_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Believe-Beard-Is-Itchy(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Desire-To-Keep-Beard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False"
+                    ],
+                    "effects": [
+                        "DES(Jim, keep_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Avoid-Shaving-Beard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "DES(Jim, avoid_shaving) = False",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Believe-Beard-Is-Scraggly(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Displeased (Distress)"
+                    ]
+                },
+                "Intend-To-Look-Good-With-Beard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Jim, look_good_with_beard) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Jim, look_good_with_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Shave-Beard(Jim)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Jim, avoid_shaving) = True",
+                        "DES(Jim, look_good_with_beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = False",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "DES(Jim, avoid_shaving) = False",
+                        "DES(Jim, look_good_with_beard) = False",
+                        "DES(Jim, avoid_shaving_in_future) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "ActionName(Jim, barber, make_appointment)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, appointment_needed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jim, appointment_made) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ActionName(Jim, self, wait)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ActionName(Jim, self, go_to_barber_shop)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = False",
+                        "DES(Jim, look_good_with_beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ActionName(Jim, barber, sit_in_chair)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, is_at_barber_shop) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jim, is_at_barber_shop) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ActionName(Jim, barber, tell_how_to_cut_hair)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, want_haircut) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "ActionName(Jim, barber, shave_beard)": {
+                    "conditions": [
+                        "BEL(Jim, in_barber_chair) = True",
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = False",
+                        "DES(Jim, look_good_with_beard) = False",
+                        "DES(Jim, avoid_shaving) = False",
+                        "BEL(Jim, just_shaved) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "ActionName(Jim, barber, pay_for_service)": {
+                    "conditions": [
+                        "BEL(Jim, has_money) = True",
+                        "BEL(Jim, paid_for_service) = False",
+                        "BEL(barber, is_present) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_money) = False",
+                        "BEL(Jim, paid_for_service) = True",
+                        "BEL(barber, has_money) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "ActionName(Jim, self, leave_barber_shop)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = False",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "BEL(Jim, has_haircut) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = False",
+                        "DES(Jim, look_good_with_beard) = False",
+                        "DES(Jim, avoid_shaving) = False",
+                        "DES(Jim, have_smooth_skin) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "INTENT(Jim, overcome_beard_itchiness) = False": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Jim, overcome_beard_itchiness) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Decide(Jim, null, BEARD_ITCHINESS)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Jim, overcome_beard_itchiness) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Search(Jim, null, SOLUTIONS_TO_BEARD_ITCHINESS)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, solutions_to_beard_itchiness_found) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Find(Jim, null, BARBER)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "Barber"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ask(Jim, Barner, ADVICE_ON_BEARD)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "FIND(Jim, null, BARBER)"
+                    ],
+                    "effects": [
+                        "BEL(Jim, received_advice) = True",
+                        "BEL(Barner, gave_advice) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Receive(Jim, Barner, ADVICE_FROM_BARBER)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "FOLLOWS(Jim, Barner) = True",
+                        "BEL(Barner, is_barber) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, received_advice) = True",
+                        "BEL(Jim, advice_received_from) = Barner"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Buy(Jim, SHOP, BEARD_PRODUCTS)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard_products) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Use(Jim, SHOP, BEARD_PRODUCTS)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, satisfied_with_beard_products) = False",
+                        "DES(Jim, avoid_shaving) = True",
+                        "FIND(Jim, null, BARBER) = False",
+                        "BUY(Jim, SHOP, BEARD_PRODUCTS) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jim, satisfied_with_beard_products) = True",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Evaluate(Jim, null, OUTCOME_OF_BEARD_PRODUCTS)": {
+                    "conditions": [
+                        "BEL(Jim, using_beard_products) = True",
+                        "BEL(Jim, satisfied_with_beard) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jim, satisfied_with_beard) = True",
+                        "BEL(Jim, satisfied_with_beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Decide(Jim, null, SHAVE_BEARD)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = False",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "DES(Jim, look_good_with_beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Perform(Jim, null, SHAVE_BEARD)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard) = False",
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = False",
+                        "DES(Jim, look_good_with_beard) = False",
+                        "DES(Jim, avoid_shaving) = False",
+                        "BEL(Jim, has_shaved_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Update(Jim, null, BEARD_STATUS)": {
+                    "conditions": [
+                        "INTENT(Jim, overcome_beard_itchiness) = True",
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = False",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "BEL(Jim, has_beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "ChangeBelief(Jim, BEL(Jim, beard_is_scraggly), False)": {
+                    "conditions": [
+                        "BEL(Jim, beard_is_scraggly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_scraggly) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "ChangeDesire(Jim, DES(Jim, look_good_with_beard), False)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "DES(Jim, look_good_with_beard) = True"
+                    ],
+                    "effects": [
+                        "DES(Jim, look_good_with_beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "GetInformation(Jim, Barber, \"Can you recommend a good beard oil?\")": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Barber, knows_about_beard_care) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, received_beard_oil_recommendation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Purchase(Jim, BeardOil, \"organic\", \"cedar scent\")": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_scraggly) = True",
+                        "DES(Jim, avoid_shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_BeardOil) = True",
+                        "BEL(Jim, BeardOil_scent) = \"cedar\"",
+                        "BEL(Jim, BeardOil_type) = \"organic\""
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Apply(Jim, BeardOil, \"1-2 drops\", \"daily\")": {
+                    "conditions": [
+                        "BEL(Jim, has_beard) = True",
+                        "BEL(Jim, beard_is_itchy) = True",
+                        "BEL(Jim, beard_is_scraggly) = False"
+                    ],
+                    "effects": [
+                        "ChangeBelief(Jim, BEL(Jim, beard_is_itchy), False)",
+                        "ChangeBelief(Jim, BEL(Jim, has_beard), True)"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "ChangeBelief(Jim, BEL(Jim, beard_is_itchy), False)": {
+                    "conditions": [
+                        "BEL(Jim, beard_is_itchy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, beard_is_itchy) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "ChangeDesire(Jim, DES(Jim, avoid_shaving), True)": {
+                    "conditions": [
+                        "BEL(Jim, beard_is_itchy)",
+                        "BEL(Jim, has_beard)",
+                        "DES(Jim, avoid_shaving)"
+                    ],
+                    "effects": [
+                        "DES(Jim, avoid_shaving)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "ChangeBelief(Jim, BEL(Jim, has_beard), True)": {
+                    "conditions": [
+                        "BEL(Jim, has_beard)"
+                    ],
+                    "effects": [
+                        "BEL(Jim, has_beard)"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {}
+        },
+        "Barber": {
+            "knowledge_base": [
+                "BEL(Barber, Jim_Has_Beard)",
+                "BEL(Barber, Beard_Styling_Is_Important)",
+                "DES(Barber, Jim_Should_Get_A_Haircut)",
+                "DES(Barber, Jim_Should_Trim_Beard)",
+                "DES(Barber, Jim_Should_Shave_Beard)"
+            ],
+            "intentions": {
+                "INTENT(Barber, Jim_Should_Trim_Beard) = True": {
+                    "action_plan": [
+                        "CheckIfJimIsAvailable(Barber, Jim)",
+                        "CheckIfJimHasABeard(Barber, Jim)",
+                        "AskJimWhatHeWantsToDo(Barber, Jim)",
+                        "PrepareTheTools(Barber, Jim)",
+                        "TrimBeard(Barber, Jim, Trimmer)",
+                        "AskJimWhatHeWantsToDo(Barber, Jim)",
+                        "PrepareTheTools(Barber, Jim)",
+                        "ShaveBeard(Barber, Jim, Razor)"
+                    ]
+                },
+                "INTENT(Barber, Jim_Should_Shave_Beard) = False": {
+                    "action_plan": [
+                        "BEL(Barber, Jim_Has_Beard)",
+                        "DES(Barber, Jim_Should_Shave_Beard)",
+                        "Action(Barber, Jim, Ask_Jim_How_He_Feels_About_His_Beard)",
+                        "Action(Barber, Jim, Recommend_A_Beard_Style_For_Jim)",
+                        "Action(Barber, Jim, Explain_The_Styling_Options)",
+                        "Action(Barber, Jim, Suggest_Shaving)",
+                        "Action(Barber, Jim, Offer_To_Shave_Jim)",
+                        "Action(Barber, Jim, Assist_Jim_With_Shaving)",
+                        "INTENT(Barber, Jim_Should_Shave_Beard) = True"
+                    ]
+                },
+                "INTENT(Barber, Jim_Should_Get_A_Haircut) = False": {
+                    "action_plan": [
+                        "INTENT(Barber, Jim_Should_Get_A_Haircut) = False",
+                        "Ask(Barber, Jim, \"How are you?\")",
+                        "Offer(Barber, Jim, \"Would you like a beard trim?\")",
+                        "Listen(Barber, Jim)",
+                        "Assure(Barber, Jim, \"Don't worry, I'll take good care of your beard.\")",
+                        "Trim(Barber, Jim, Beard)",
+                        "Ask(Barber, Jim, \"Is this length okay?\")",
+                        "Assure(Barber, Jim, \"Would you like me to style it?\")",
+                        "Listen(Barber, Jim)",
+                        "Shave(Barber, Jim, Beard)",
+                        "BidFarewell(Barber, Jim)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Barber, Jim_Should_Get_A_Haircut) = False": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Barber, Jim_Should_Get_A_Haircut) = True"
+                    ],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Ask(Barber, Jim, \"How are you?\")": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Offer(Barber, Jim, \"Would you like a beard trim?\")": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "DES(Barber, Jim_Should_Trim_Beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Listen(Barber, Jim)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "LISTENED(Barber, Jim) = False"
+                    ],
+                    "effects": [
+                        "LISTENED(Barber, Jim) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Assure(Barber, Jim, \"Don't worry, I'll take good care of your beard.\")": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Trim(Barber, Jim, Beard)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True",
+                        "DES(Barber, Jim_Should_Trim_Beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Barber, Jim_Has_Beard_Length) = Trimmed",
+                        "BEL(Barber, Jim_Has_Beard_Style) = Styled",
+                        "DES(Barber, Jim_Should_Trim_Beard) = False",
+                        "BEL(Jim, Beard_Is_Trimmed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ask(Barber, Jim, \"Is this length okay?\")": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Assure(Barber, Jim, \"Would you like me to style it?\")": {
+                    "conditions": [
+                        "BEL(Barber, Styling_Available) = True",
+                        "DES(Barber, Jim_Willing_To_Have_Style) = True"
+                    ],
+                    "effects": [
+                        "BEL(Barber, Beard_Styled) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Shave(Barber, Jim, Beard)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Barber, Jim_Has_Beard) = False",
+                        "DES(Barber, Jim_Should_Trim_Beard) = False",
+                        "DES(Barber, Jim_Should_Shave_Beard) = False",
+                        "BEL(Barber, Jim_Beard_Is_Trimmed) = False",
+                        "BEL(Barber, Jim_Beard_Is_Shaven) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "BidFarewell(Barber, Jim)": {
+                    "conditions": [
+                        "INTENT(Barber, Jim_Should_Get_A_Haircut) = False",
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Barber, Jim_Has_Beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "CheckIfJimIsAvailable(Barber, Jim)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckIfJimHasABeard(Barber, Jim)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AskJimWhatHeWantsToDo(Barber, Jim)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True"
+                    ],
+                    "effects": [
+                        "Jim"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PrepareTheTools(Barber, Jim)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Is_In_The_Shop) = True",
+                        "BEL(Barber, Tools_Are_Not_Already_Prepared) = True"
+                    ],
+                    "effects": [
+                        "BEL(Barber, Tools_Are_Prepared) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TrimBeard(Barber, Jim, Trimmer)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True",
+                        "DES(Barber, Jim_Should_Trim_Beard) = True",
+                        "BEL(Barber, Have_Trimmer) = True",
+                        "BEL(Jim, Is_Available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, Beard_Is_Trimmed) = True",
+                        "BEL(Jim, Beard_Length)",
+                        "BEL(Barber, Have_Trimmer) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ShaveBeard(Barber, Jim, Razor)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True",
+                        "DES(Barber, Jim_Should_Shave_Beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, Has_Beard) = False",
+                        "BEL(Jim, Is_Shaven) = True",
+                        "BEL(Barber, Jim_Has_Beard) = False",
+                        "DES(Barber, Jim_Should_Shave_Beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BEL(Barber, Jim_Has_Beard)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "DES(Barber, Jim_Should_Shave_Beard)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [
+                        "DES(Barber, Jim_Should_Shave_Beard) = True",
+                        "BEL(Barber, Jim_Has_Beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Sympathy"
+                    ]
+                },
+                "Action(Barber, Jim, Ask_Jim_How_He_Feels_About_His_Beard)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Action(Barber, Jim, Recommend_A_Beard_Style_For_Jim)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, Recommended_Beard_Style) = New_Beard_Style",
+                        "BEL(Barber, Recommended_Beard_Style) = New_Beard_Style"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Action(Barber, Jim, Explain_The_Styling_Options)": {
+                    "conditions": [
+                        "BEL(Barber, Beard_Styling_Is_Important) = True",
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Barber, Explained_Styling_Options_To_Jim) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Action(Barber, Jim, Suggest_Shaving)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True",
+                        "DES(Barber, Jim_Should_Shave_Beard) = False"
+                    ],
+                    "effects": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "DES(Barber, Jim_Should_Shave_Beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Action(Barber, Jim, Offer_To_Shave_Jim)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, Jim_Will_Get_Help_Shaving) = True",
+                        "BEL(Barber, Jim_Has_Beard) = False",
+                        "DES(Barber, Jim_Should_Shave_Beard) = False",
+                        "DES(Barber, Jim_Should_Get_A_Haircut) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Compassion"
+                    ]
+                },
+                "Action(Barber, Jim, Assist_Jim_With_Shaving)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Should_Shave_Beard) = True",
+                        "BEL(Barber, Jim_Has_A_Razor)",
+                        "BEL(Barber, Jim_Is_Able_To_Hold_A_Razor)",
+                        "BEL(Jim, Jim_Wants_To_Be_Assisted_With_Shaving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jim, Jim_Has_Beard) = False",
+                        "BEL(Jim, Jim_Feels_Fresh_And_Clean) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "INTENT(Barber, Jim_Should_Shave_Beard) = True": {
+                    "conditions": [
+                        "BEL(Jim, Jim_Has_Beard) = True"
+                    ],
+                    "effects": [
+                        "DES(Barber, Jim_Should_Shave_Beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, F, None, None)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Barber, Jim_Should_Trim_Beard) = True",
+                        "INTENT(Barber, Jim_Should_Shave_Beard) = False",
+                        "INTENT(Barber, Jim_Should_Get_A_Haircut) = False"
+                    ],
+                    "occ_emotion": [
+                        "Start, F, None, None, \"Barber asks Jim how he is.\"",
+                        "F, End, Joy, None, \"Barber feels joy for having a pleasant conversation with Jim.\""
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(F, G, None, None)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True"
+                    ],
+                    "effects": [
+                        "DES(Barber, Jim_Should_Get_A_Haircut) = False",
+                        "DES(Barber, Jim_Should_Trim_Beard) = True",
+                        "DES(Barber, Jim_Should_Shave_Beard) = False"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Barber, Jim, None, None)], [Joy"
+                    ],
+                    "emotion_condition": [
+                        "Speak(Barber, Jim, None, None)",
+                        "Listen(Barber, Jim, None, None)",
+                        "Assure(Barber, Jim, \"Don't worry, I'll take good care of your beard.\", None, None)",
+                        "Offer(Barber, Jim, \"Would you like a beard trim?\", None, None)",
+                        "Ask(Barber, Jim, \"Is this length okay?\", None, None)",
+                        "Assure(Barber, Jim, \"Would you like me to style it?\", None, None)",
+                        "Shave(Barber, Jim, Beard, None, None)",
+                        "BidFarewell(Barber, Jim, None, None, None)"
+                    ]
+                },
+                "Speak(G, H, None, None)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Barber, Jim_Should_Trim_Beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Barber, Jim, None, None)], [Ask, Listen, None, None, \"How are you?\""
+                    ],
+                    "emotion_condition": [
+                        "Speak(Barber, Jim, None, None)",
+                        "Emotion(Barber, Jim, Happy-for)",
+                        "Speak(Barber, Jim, None, None)",
+                        "Emotion(Barber, Jim, Hope)",
+                        "Speak(Barber, Jim, None, None)",
+                        "Emotion(Barber, Jim, Gratification)",
+                        "Speak(Barber, Jim, None, None)",
+                        "Emotion(Barber, Jim, Fear)",
+                        "Speak(Barber, Jim, None, None)",
+                        "Emotion(Barber, Jim, Satisfaction)",
+                        "Speak(Barber, Jim, None, None)",
+                        "Emotion(Barber, Jim, Relief)",
+                        "Speak(Barber, Jim, None, None)",
+                        "Emotion(Barber, Jim, Gratitude)"
+                    ]
+                },
+                "Speak(H, I, \"Negative Opinion\", \"Critical\")": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "BEL(Barber, Beard_Styling_Is_Important) = True",
+                        "DES(Barber, Jim_Should_Trim_Beard) = True",
+                        "INTENT(Barber, Jim_Should_Trim_Beard) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Barber, Jim_Should_Trim_Beard) = False",
+                        "INTENT(Barber, Jim_Should_Shave_Beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Speak(I, E, None, None)": {
+                    "conditions": [
+                        "BEL(Barber, Jim_Has_Beard) = True",
+                        "OR DES(Barber, Jim_Should_Trim_Beard) = True][DES(Barber, Jim_Should_Shave_Beard) = True][DES(Barber, Jim_Should_Get_A_Haircut) = True"
+                    ],
+                    "effects": [
+                        "BEL(Barber, Jim_Has_Beard) = False",
+                        "NOT DES(Barber, Jim_Should_Trim_Beard) = True",
+                        "DES(Barber, Jim_Should_Shave_Beard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Barber, Jim, None, None)",
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Speak(Barber, E, Happy-for, None)",
+                        "Speak(Barber, E, Pity, None)",
+                        "Speak(Barber, E, Admiration, None)",
+                        "Speak(Barber, E, Relief, None)"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, A, None, None, \"Jim decides to grow a beard.\">",
+        "<A, B, None, None, \"Jim likes the way his beard looks.\">",
+        "<B, C, None, None, \"Jim's beard becomes itchy and scraggly.\">",
+        "<C, D, None, None, \"Jim tries to hold on to his beard a little longer.\">",
+        "<D, E, None, None, \"Jim gives up and shaves his beard.\">",
+        "<E, End, None, None, \"Conversation ends.\">"
+    ]
+}

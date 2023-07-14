@@ -1,0 +1,888 @@
+{
+    "scenario_name": "test_Guitar",
+    "scenario_description": "The man practiced guitar. He wanted to play rock and roll. His acoustic guitar was not loud enough. He traded it in for an electric guitar. His practice sessions were louder from then on.",
+    "last_ended": "end",
+    "agents": {
+        "man": {
+            "knowledge_base": [
+                "BEL(man, practiced_guitar) = True",
+                "BEL(man, genre_preference_rock) = True",
+                "BEL(man, guitar_type_acoustic) = True",
+                "BEL(man, guitar_volume_loud) = False",
+                "DES(man, play_rock_and_roll) = True",
+                "DES(man, increase_guitar_volume) = True",
+                "DES(man, acquire_electric_guitar) = True"
+            ],
+            "intentions": {
+                "INTENT(man, trade_in_guitar, guitar_type_acoustic, guitar_type_electric) = True": {
+                    "action_plan": [
+                        "CheckInventory(AGENT, guitar_type_acoustic)",
+                        "SwapGuitar(AGENT, guitar_type_acoustic, guitar_type_electric)",
+                        "UpdateBelief(AGENT, BEL(man, guitar_type_acoustic), False)",
+                        "UpdateBelief(AGENT, BEL(man, guitar_type_electric), True)",
+                        "UpdateDesire(AGENT, DES(man, increase_guitar_volume), True)",
+                        "UpdateDesire(AGENT, DES(man, acquire_electric_guitar), False)"
+                    ]
+                },
+                "INTENT(man, play_music_louder, increase_guitar_volume) = True": {
+                    "action_plan": [
+                        "TradeInGuitar(AGENT, AGENT, acoustic_guitar, electric_guitar)",
+                        "PlugGuitarInAmp(AGENT, electric_guitar, amp)",
+                        "PlayGuitar(AGENT, electric_guitar)"
+                    ]
+                }
+            },
+            "actions": {
+                "TradeInGuitar(AGENT, AGENT, acoustic_guitar, electric_guitar)": {
+                    "conditions": [
+                        "BEL(man, guitar_type_acoustic) = True",
+                        "DES(man, acquire_electric_guitar) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, guitar_type_acoustic) = False",
+                        "BEL(man, guitar_type_electric) = True",
+                        "DES(man, acquire_electric_guitar) = False",
+                        "BEL(man, acoustic_guitar) = False",
+                        "BEL(man, electric_guitar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PlugGuitarInAmp(AGENT, electric_guitar, amp)": {
+                    "conditions": [
+                        "BEL(man, guitar_type_acoustic) = False",
+                        "BEL(man, guitar_volume_loud) = False",
+                        "BEL(man, practicing_music) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, guitar_type_electric) = True",
+                        "BEL(man, guitar_volume_loud) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PlayGuitar(AGENT, electric_guitar)": {
+                    "conditions": [
+                        "BEL(man, practiced_guitar) = True",
+                        "BEL(man, guitar_type_acoustic) = False",
+                        "BEL(man, guitar_type_electric) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, guitar_volume_loud) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "CheckInventory(AGENT, guitar_type_acoustic)": {
+                    "conditions": [
+                        "BEL(man, guitar_type_acoustic) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "SwapGuitar(AGENT, guitar_type_acoustic, guitar_type_electric)": {
+                    "conditions": [
+                        "BEL(man, guitar_type_acoustic) = True",
+                        "BEL(man, guitar_type_electric) = False"
+                    ],
+                    "effects": [
+                        "UPDATE(BEL(man, guitar_type_acoustic), False)",
+                        "UPDATE(BEL(man, guitar_type_electric), True)"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "UpdateBelief(AGENT, BEL(man, guitar_type_acoustic), False)": {
+                    "conditions": [
+                        "BEL(man, guitar_type_acoustic) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, guitar_type_acoustic) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "UpdateBelief(AGENT, BEL(man, guitar_type_electric), True)": {
+                    "conditions": [
+                        "BEL(man, guitar_type_acoustic) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, guitar_type_electric) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "UpdateDesire(AGENT, DES(man, increase_guitar_volume), True)": {
+                    "conditions": [
+                        "BEL(man, guitar_type_electric) = True",
+                        "DES(man, increase_guitar_volume) = True"
+                    ],
+                    "effects": [
+                        "UpdateDesire(AGENT, DES(man, increase_guitar_volume), False)",
+                        "UpdateDesire(AGENT, DES(man, play_rock_and_roll), True)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "UpdateDesire(AGENT, DES(man, acquire_electric_guitar), False)": {
+                    "conditions": [
+                        "BEL(man, guitar_type_electric) = False",
+                        "DES(man, acquire_electric_guitar) = True"
+                    ],
+                    "effects": [
+                        "DES(man, acquire_electric_guitar) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Hope"
+            ],
+            "speak_actions": {
+                "Speak(Start, Belief1, Guitar, Neutral)": {
+                    "conditions": [
+                        "BEL(man, practiced_guitar) = True",
+                        "BEL(man, guitar_type_acoustic) = True",
+                        "DES(man, acquire_electric_guitar) = True",
+                        "INTENT(man, trade_in_guitar, guitar_type_acoustic, guitar_type_electric) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, guitar_type_electric) = True",
+                        "BEL(man, practiced_guitar) = True",
+                        "DES(man, increase_guitar_volume) = True",
+                        "INTENT(man, play_music_louder, increase_guitar_volume) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Belief1, Desire1, Guitar, Neutral)": {
+                    "conditions": [
+                        "BEL(man, practiced_guitar) = True",
+                        "BEL(man, guitar_type_acoustic) = True",
+                        "DES(man, acquire_electric_guitar) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, guitar_type_electric) = True",
+                        "BEL(man, practiced_guitar) = True",
+                        "BEL(man, guitar_volume_loud) = True",
+                        "DES(man, increase_guitar_volume) = False",
+                        "INTENT(man, trade_in_guitar, guitar_type_acoustic, guitar_type_electric) = False",
+                        "INTENT(man, play_music_louder, increase_guitar_volume) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Desire1, Intention1, Guitar, Neutral)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Intention1, Belief2, Guitar, Neutral)": {
+                    "conditions": [
+                        "BEL(man, practiced_guitar) = True",
+                        "BEL(man, genre_preference_rock) = True",
+                        "BEL(man, guitar_type_acoustic) = True",
+                        "DES(man, acquire_electric_guitar) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, practiced_guitar) = True",
+                        "BEL(man, genre_preference_rock) = True",
+                        "BEL(man, guitar_type_acoustic) = False",
+                        "BEL(man, guitar_type_electric) = True",
+                        "BEL(man, guitar_volume_loud) = True",
+                        "DES(man, acquire_electric_guitar) = False",
+                        "DES(man, increase_guitar_volume) = True",
+                        "INTENT(man, trade_in_guitar, guitar_type_acoustic, guitar_type_electric) = False",
+                        "INTENT(man, play_music_louder, increase_guitar_volume) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Belief2, End, Guitar, Neutral)": {
+                    "conditions": [
+                        "BEL(man, guitar_type_acoustic) = True",
+                        "BEL(man, guitar_volume_loud) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, guitar_type_electric) = True",
+                        "BEL(man, guitar_volume_loud) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            }
+        },
+        "music_store_salesperson": {
+            "knowledge_base": [
+                "BEL(music_store_salesperson, has_electric_guitar) = False",
+                "BEL(music_store_salesperson, has_acoustic_guitar) = True",
+                "DES(music_store_salesperson, sell_electric_guitar) = True",
+                "DES(music_store_salesperson, provide_musician_with_a_suitable_instrument) = True",
+                "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                "BEL(music_store_salesperson, offers_acoustic_guitars) = True"
+            ],
+            "intentions": {
+                "INTENT(music_store_salesperson, suggest_trade_in_service, has_acoustic_guitar, offers_electric_guitars) = True": {
+                    "action_plan": [
+                        "music_store_salesperson",
+                        "suggest_trade_in_service",
+                        "CheckStock(music_store_salesperson, offers_electric_guitars)",
+                        "CheckInventory(music_store_salesperson, offers_acoustic_guitars)",
+                        "AskCustomer(music_store_salesperson, AGENT, \"Can I help you find a suitable guitar?\")",
+                        "IdentifyCustomerNeed(music_store_salesperson, AGENT, \"What kind of music do you play?\")",
+                        "SuggestElectricGuitar(music_store_salesperson, AGENT, electric_guitar)",
+                        "ProvideTradeInValue(music_store_salesperson, AGENT, acoustic_guitar, trade_in_value)",
+                        "FinalizeTradeIn(music_store_salesperson, AGENT, electric_guitar, trade_in_amount)",
+                        "ConfirmSatisfaction(music_store_salesperson, AGENT, \"Are you satisfied with your new guitar?\")"
+                    ]
+                },
+                "INTENT(music_store_salesperson, provide_electric_guitar, has_electric_guitar) = False": {
+                    "action_plan": [
+                        "CheckAvailability(music_store_salesperson, electric_guitar)",
+                        "RecommendProduct(music_store_salesperson, electric_guitar, man)",
+                        "NegotiatePrice(music_store_salesperson, electric_guitar, man, discount)",
+                        "SellProduct(music_store_salesperson, electric_guitar, man)",
+                        "UpdateInventory(music_store_salesperson, electric_guitar)"
+                    ]
+                },
+                "INTENT(music_store_salesperson, sell_electric_guitar, provide_musician_with_a_suitable_instrument, offers_electric_guitars) = True": {
+                    "action_plan": [
+                        "FindInstrument(music_store_salesperson, None)",
+                        "OfferInstrument(music_store_salesperson, customer_agent, electric_guitar)",
+                        "SellInstrument(music_store_salesperson, customer_agent, electric_guitar)",
+                        "RetrieveAcousticGuitar(music_store_salesperson, None)",
+                        "OfferInstrument(music_store_salesperson, customer_agent, acoustic_guitar)",
+                        "SellInstrument(music_store_salesperson, customer_agent, acoustic_guitar)",
+                        "UpdateBelief(music_store_salesperson, has_acoustic_guitar, False)",
+                        "UpdateBelief(music_store_salesperson, has_electric_guitar, True)",
+                        "UpdateBelief(music_store_salesperson, offers_acoustic_guitars, False)",
+                        "UpdateBelief(music_store_salesperson, offers_electric_guitars, True)"
+                    ]
+                }
+            },
+            "actions": {
+                "FindInstrument(music_store_salesperson, None)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "OfferInstrument(music_store_salesperson, customer_agent, electric_guitar)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, has_electric_guitar) = True",
+                        "BEL(customer_agent, interested_in_buying_instrument) = True",
+                        "DES(customer_agent, have_money_for_purchase) = True",
+                        "DES(customer_agent, prefer_electric_guitar) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, sold_instrument) = True",
+                        "BEL(customer_agent, owns_instrument) = True",
+                        "BEL(customer_agent, owns_electric_guitar) = True",
+                        "DES(music_store_salesperson, increase_profit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SellInstrument(music_store_salesperson, customer_agent, electric_guitar)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = True",
+                        "BEL(customer_agent, has_enough_money_to_buy_electric_guitar) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, has_money_from_sale_of_electric_guitar) = True",
+                        "BEL(music_store_salesperson, made_sale_of_electric_guitar) = True",
+                        "DES(customer_agent, acquire_electric_guitar) = True",
+                        "BEL(customer_agent, has_electric_guitar) = True",
+                        "BEL(customer_agent, has_enough_money_to_buy_electric_guitar) = False",
+                        "BEL(customer_agent, has_less_money_after_buying_electric_guitar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "RetrieveAcousticGuitar(music_store_salesperson, None)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = False",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "OfferInstrument(music_store_salesperson, customer_agent, acoustic_guitar)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True",
+                        "BEL(customer_agent, has_no_acoustic_guitar) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = False",
+                        "BEL(customer_agent, has_acoustic_guitar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SellInstrument(music_store_salesperson, customer_agent, acoustic_guitar)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = True",
+                        "BEL(customer_agent, has_enough_money_to_buy) = True",
+                        "BEL(customer_agent, interested_in_acoustic_guitar) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = False",
+                        "BEL(customer_agent, has_acoustic_guitar) = True",
+                        "BEL(customer_agent, has_enough_money_to_buy) = False",
+                        "DES(customer_agent, learn_to_play_acoustic_guitar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "UpdateBelief(music_store_salesperson, has_acoustic_guitar, False)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "UpdateBelief(music_store_salesperson, has_electric_guitar, True)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "UpdateBelief(music_store_salesperson, offers_acoustic_guitars, False)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "UpdateBelief(music_store_salesperson, offers_electric_guitars, True)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = False"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "music_store_salesperson": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = True",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "suggest_trade_in_service": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True",
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = True",
+                        "BEL(AGENT, uses_acoustic_guitar) = True",
+                        "BEL(AGENT, genre) = \"Rock and Roll\""
+                    ],
+                    "effects": [
+                        "DES(music_store_salesperson, sell_electric_guitar) = True",
+                        "BEL(music_store_salesperson, has_electric_guitar) = True",
+                        "BEL(AGENT, uses_electric_guitar) = True",
+                        "BEL(AGENT, genre) = \"Rock and Roll\"",
+                        "DES(music_store_salesperson, provide_musician_with_a_suitable_instrument) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckStock(music_store_salesperson, offers_electric_guitars)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_sufficient_stock_electric_guitar) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckInventory(music_store_salesperson, offers_acoustic_guitars)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_empty_inventory) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AskCustomer(music_store_salesperson, AGENT, \"Can I help you find a suitable guitar?\")": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "IdentifyCustomerNeed(music_store_salesperson, AGENT, \"What kind of music do you play?\")": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(AGENT, interested_in_electric_guitar) = True",
+                        "BEL(music_store_salesperson, knows_customer_need) = True"
+                    ],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "SuggestElectricGuitar(music_store_salesperson, AGENT, electric_guitar)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(AGENT, plays_rock_n_roll) = True"
+                    ],
+                    "effects": [
+                        "BEL(AGENT, has_electric_guitar) = True",
+                        "BEL(AGENT, has_acoustic_guitar) = False",
+                        "DES(AGENT, play_louder_music) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ProvideTradeInValue(music_store_salesperson, AGENT, acoustic_guitar, trade_in_value)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True",
+                        "BEL(AGENT, owns_acoustic_guitar) = True",
+                        "BEL(AGENT, wants_electric_guitar) = True",
+                        "BEL(acoustic_guitar, is_tradeable) = True",
+                        "BEL(music_store_salesperson, can_provide_trade_in_service) = True"
+                    ],
+                    "effects": [
+                        "BEL(AGENT, owns_acoustic_guitar) = False",
+                        "BEL(AGENT, owns_electric_guitar) = False",
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = True",
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, store_balance) = store_balance + trade_in_value",
+                        "BEL(AGENT, has_paid_amount) = True",
+                        "BEL(AGENT, owns_electric_guitar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "FinalizeTradeIn(music_store_salesperson, AGENT, electric_guitar, trade_in_amount)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True",
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = True",
+                        "BEL(AGENT, is_customer) = True",
+                        "BEL(AGENT, has_acoustic_guitar) = True",
+                        "BEL(AGENT, is_satisfied) = False"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = False",
+                        "BEL(music_store_salesperson, has_electric_guitar) = True",
+                        "BEL(AGENT, has_acoustic_guitar) = False",
+                        "BEL(AGENT, has_electric_guitar) = True",
+                        "DES(music_store_salesperson, sell_electric_guitar) -= trade_in_amount",
+                        "DES(music_store_salesperson, provide_musician_with_a_suitable_instrument) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(AGENT, is_satisfied) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ConfirmSatisfaction(music_store_salesperson, AGENT, \"Are you satisfied with your new guitar?\")": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, confirm_goods_satisfaction) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = True",
+                        "BEL(AGENT, has_electric_guitar) = True",
+                        "BEL(music_store_salesperson, sold_goods) = True",
+                        "BEL(music_store_salesperson, customer_satisfied) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "CheckAvailability(music_store_salesperson, electric_guitar)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "RecommendProduct(music_store_salesperson, electric_guitar, man)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = True",
+                        "DES(music_store_salesperson, provide_musician_with_a_suitable_instrument) = True",
+                        "BEL(man, wants_to_buy_electric_guitar) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, recommended_electric_guitar_to_man) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "NegotiatePrice(music_store_salesperson, electric_guitar, man, discount)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(man, wants_electric_guitar) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, increase_sales) = True",
+                        "BEL(music_store_salesperson, has_electric_guitar) = True",
+                        "BEL(music_store_salesperson, decreased_inventory) = True",
+                        "BEL(man, has_electric_guitar) = True",
+                        "BEL(man, paid_reasonable_price) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SellProduct(music_store_salesperson, electric_guitar, man)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True",
+                        "BEL(man, has_acoustic_guitar) = True",
+                        "DES(music_store_salesperson, sell_electric_guitar) = True",
+                        "DES(music_store_salesperson, provide_musician_with_a_suitable_instrument) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = True",
+                        "BEL(man, has_acoustic_guitar) = False",
+                        "BEL(man, has_electric_guitar) = True",
+                        "DES(music_store_salesperson, sell_electric_guitar) = False",
+                        "DES(music_store_salesperson, provide_musician_with_a_suitable_instrument) = False",
+                        "DES(music_store_salesperson, increase_revenue) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "UpdateInventory(music_store_salesperson, electric_guitar)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, has_electric_guitar) = False"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, has_electric_guitar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Neutrality"
+            ],
+            "speak_actions": {
+                "Speak(Start, Response1, Greeting, Friendly)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, provide_musician_with_a_suitable_instrument) = True",
+                        "INTENT(music_store_salesperson, suggest_trade_in_service, has_acoustic_guitar, offers_electric_guitars) = True"
+                    ],
+                    "occ_emotion": [
+                        "Response1, None, Joy, Friendly, \"Hi there! How can I help you today?\""
+                    ],
+                    "emotion_condition": [
+                        "Start, Response1, Greeting, Friendly, \"Hello! How can I help you today?\""
+                    ]
+                },
+                "Speak(Response1, Response2, Guitar, Neutral)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "DES(music_store_salesperson, provide_musician_with_a_suitable_instrument) = True",
+                        "INTENT(music_store_salesperson, sell_electric_guitar, provide_musician_with_a_suitable_instrument, offers_electric_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Response2, Response3, Guitar, Neutral)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True",
+                        "INTENT(music_store_salesperson, suggest_trade_in_service, has_acoustic_guitar, offers_electric_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = True",
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = False",
+                        "INTENT(music_store_salesperson, provide_electric_guitar, has_electric_guitar) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Response3, Belief1, Guitar, Neutral)": {
+                    "conditions": [
+                        "INTENT(music_store_salesperson, suggest_trade_in_service, has_acoustic_guitar, offers_electric_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = True",
+                        "INTENT(music_store_salesperson, sell_electric_guitar, provide_musician_with_a_suitable_instrument, offers_electric_guitars) = True"
+                    ],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "Happy-for"
+                    ]
+                },
+                "Speak(Belief1, Desire1, Guitar, Neutral)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "INTENT(music_store_salesperson, suggest_trade_in_service, [Any], offers_electric_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = False"
+                    ],
+                    "occ_emotion": [
+                        "[Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Desire1, Response4, Guitar, Neutral)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "DES(music_store_salesperson, provide_musician_with_a_suitable_instrument) = True"
+                    ],
+                    "effects": [
+                        "INTENT(music_store_salesperson, suggest_trade_in_service, has_acoustic_guitar, offers_electric_guitars) = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Response4, End, Guitar, Neutral)": {
+                    "conditions": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = False",
+                        "BEL(music_store_salesperson, offers_electric_guitars) = True",
+                        "BEL(music_store_salesperson, offers_acoustic_guitars) = True"
+                    ],
+                    "effects": [
+                        "BEL(music_store_salesperson, has_electric_guitar) = True",
+                        "BEL(music_store_salesperson, has_acoustic_guitar) = False",
+                        "DES(music_store_salesperson, sell_electric_guitar) = False",
+                        "INTENT(music_store_salesperson, sell_electric_guitar, provide_musician_with_a_suitable_instrument, offers_electric_guitars) = True",
+                        "INTENT(music_store_salesperson, provide_electric_guitar, has_electric_guitar) = True"
+                    ],
+                    "occ_emotion": [
+                        "SellProduct(music_store_salesperson, electric_guitar, man)",
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, Belief1, Guitar, Neutral, \"I want to play rock and roll, but my acoustic guitar is not loud enough.\">",
+        "<Belief1, Desire1, Guitar, Neutral, \"I need to get an electric guitar if I want to play loud rock and roll.\">",
+        "<Desire1, Intention1, Guitar, Neutral, \"I will trade in my acoustic guitar for an electric one.\">",
+        "<Intention1, Belief2, Guitar, Neutral, \"I got a new electric guitar.\">",
+        "<Belief2, End, Guitar, Neutral, \"My practice sessions will be louder now.\">"
+    ]
+}

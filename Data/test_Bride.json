@@ -1,0 +1,463 @@
+{
+    "scenario_name": "test_Bride",
+    "scenario_description": "The bride smiled at the groom. She was missing a tooth. The groom thought that was cute. He remembered that moment. He shared it at her funeral.",
+    "last_ended": "end",
+    "agents": {
+        "bride": {
+            "knowledge_base": [
+                "BEL(bride, missing_tooth) = True",
+                "BEL(bride, groom_liked_missing_tooth) = True",
+                "DES(bride, be_happy) = True",
+                "DES(bride, marry_groom) = True"
+            ],
+            "intentions": {
+                "INTENT(bride, share_happy_moments_with_groom) = True": {
+                    "action_plan": [
+                        "INTENT(bride, share_happy_moments_with_groom) = True",
+                        "Think(bride, NULL, remember_happy_moment)",
+                        "Look(bride, groom, smile)",
+                        "Plan(bride, groom, future_happy_events)"
+                    ]
+                },
+                "INTENT(bride, get_married_to_groom) = True": {
+                    "action_plan": [
+                        "AppearPresentable(bride, None)",
+                        "SmileWithMissingTooth(bride, groom)",
+                        "EngageInConversation(bride, groom)",
+                        "DisplayAffection(bride, groom)",
+                        "AcceptGroom'sProposal(bride, groom)",
+                        "PlanWedding(bride, groom, wedding_planner)",
+                        "LiveHappilyEverAfter(bride, groom)"
+                    ]
+                },
+                "INTENT(bride, be_happy) = True": {
+                    "action_plan": [
+                        "Go_to_Dentist(bride, tooth, missing)",
+                        "Get_dental_impantation(bride, tooth)",
+                        "Take_care_of_dental_implant(bride, tooth)",
+                        "Get_married(bride, groom)",
+                        "Share_memory_of_tooth_with_groom(bride, groom)"
+                    ]
+                }
+            },
+            "actions": {
+                "Go_to_Dentist(bride, tooth, missing)": {
+                    "conditions": [
+                        "BEL(bride, missing_tooth) = True"
+                    ],
+                    "effects": [
+                        "BEL(bride, tooth_pain) = False",
+                        "BEL(bride, dental_implant_needed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Get_dental_impantation(bride, tooth)": {
+                    "conditions": [
+                        "BEL(bride, missing_tooth) = True",
+                        "BEL(bride, dental_implant) = False"
+                    ],
+                    "effects": [
+                        "BEL(bride, dental_implant) = True",
+                        "BEL(bride, missing_tooth) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Take_care_of_dental_implant(bride, tooth)": {
+                    "conditions": [
+                        "BEL(bride, tooth_implanted) = True",
+                        "DES(bride, have_good_dental_health) = True"
+                    ],
+                    "effects": [
+                        "BEL(bride, tooth_pain) = False",
+                        "BEL(bride, dental_implant_stable) = True",
+                        "BEL(bride, able_to_eat) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Get_married(bride, groom)": {
+                    "conditions": [
+                        "BEL(bride, marry_groom) = True",
+                        "BEL(groom, marry_bride) = True"
+                    ],
+                    "effects": [
+                        "BEL(bride, married_to_groom) = True",
+                        "BEL(groom, married_to_bride) = True",
+                        "DES(bride, be_happy) = True",
+                        "DES(groom, make_bride_happy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Share_memory_of_tooth_with_groom(bride, groom)": {
+                    "conditions": [
+                        "BEL(bride, married_to_groom) = True",
+                        "BEL(bride, missing_tooth) = True",
+                        "BEL(groom, remembers_missing_tooth) = True"
+                    ],
+                    "effects": [
+                        "DES(bride, reminisce_about_missing_tooth) = True",
+                        "DES(groom, feel_emotional) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "INTENT(bride, share_happy_moments_with_groom) = True": {
+                    "conditions": [
+                        "BEL(bride, missing_tooth) = True",
+                        "BEL(bride, groom_liked_missing_tooth) = True",
+                        "DES(bride, be_happy) = True",
+                        "DES(bride, marry_groom) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Think(bride, NULL, remember_happy_moment)": {
+                    "conditions": [
+                        "BEL(bride, missing_tooth) = True"
+                    ],
+                    "effects": [
+                        "BEL(bride, remembered_happy_moment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Look(bride, groom, smile)": {
+                    "conditions": [
+                        "BEL(bride, groom_liked_missing_tooth) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Plan(bride, groom, future_happy_events)": {
+                    "conditions": [
+                        "BEL(bride, marry_groom) = True",
+                        "BEL(bride, groom_happy) = True"
+                    ],
+                    "effects": [
+                        "DES(bride, have_happy_life_with_groom) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AppearPresentable(bride, None)": {
+                    "conditions": [
+                        "BEL(bride, has_not_appeared_presentable) = True"
+                    ],
+                    "effects": [
+                        "BEL(bride, appears_presentable) = True",
+                        "BEL(bride, has_not_appeared_presentable) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SmileWithMissingTooth(bride, groom)": {
+                    "conditions": [
+                        "BEL(bride, missing_tooth) = True",
+                        "BEL(bride, groom_liked_missing_tooth) = False"
+                    ],
+                    "effects": [
+                        "BEL(bride, groom_liked_missing_tooth) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "EngageInConversation(bride, groom)": {
+                    "conditions": [
+                        "BEL(bride, groom_liked_missing_tooth) = True",
+                        "DES(bride, be_happy) = True",
+                        "DES(bride, marry_groom) = True"
+                    ],
+                    "effects": [
+                        "BEL(bride, in_conversation_with_groom) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DisplayAffection(bride, groom)": {
+                    "conditions": [
+                        "BEL(bride, engaged_to_groom) = True",
+                        "BEL(bride, willing_to_display_affection) = True",
+                        "BEL(groom, willing_to_receive_affection) = True"
+                    ],
+                    "effects": [
+                        "DES(bride, feel_closer_to_groom) = True",
+                        "BEL(bride, currently_displaying_affection) = True"
+                    ],
+                    "occ_emotion": [
+                        "Love"
+                    ],
+                    "emotion_condition": [
+                        "Love"
+                    ]
+                },
+                "AcceptGroom'sProposal(bride, groom)": {
+                    "conditions": [
+                        "BEL(bride, engaged_to_groom) = False",
+                        "BEL(groom, proposed_to_bride) = True",
+                        "BEL(groom, loves_bride) = True",
+                        "BEL(bride, be_happy) = True",
+                        "DES(bride, marry_groom) = True"
+                    ],
+                    "effects": [
+                        "BEL(bride, engaged_to_groom) = True",
+                        "BEL(groom, engaged_to_bride) = True",
+                        "BEL(bride, be_happy) = True",
+                        "DES(bride, marry_groom) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PlanWedding(bride, groom, wedding_planner)": {
+                    "conditions": [
+                        "BEL(bride, engaged_to_groom) = True",
+                        "BEL(wedding_planner, available) = True",
+                        "BEL(wedding_date, planned) = False"
+                    ],
+                    "effects": [
+                        "DES(bride, excited_for_wedding) = True",
+                        "BEL(wedding_planner, hired_by_bride) = True",
+                        "BEL(wedding_date, planned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "LiveHappilyEverAfter(bride, groom)": {
+                    "conditions": [
+                        "BEL(bride, married_to_groom) = True",
+                        "DES(bride, be_fulfilled) = True",
+                        "BEL(groom, married_to_bride) = True",
+                        "DES(groom, be_happy_with_bride) = True"
+                    ],
+                    "effects": [
+                        "BEL(bride, happy_with_groom) = True",
+                        "BEL(groom, happy_with_bride) = True",
+                        "DES(bride, live_happily_ever_after) = True",
+                        "DES(groom, live_happily_ever_after) = True"
+                    ],
+                    "occ_emotion": [
+                        "Bride",
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Initial, BrideSmiles, Happiness, Neutral)": {
+                    "conditions": [
+                        "BEL(bride, happy) = True",
+                        "BEL(bride, missing_tooth) = True",
+                        "DES(bride, be_happy) = True",
+                        "INTENT(bride, share_happy_moments_with_groom) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            }
+        },
+        "groom": {
+            "knowledge_base": [
+                "BEL(groom_knows_bride_missing_tooth) = True",
+                "BEL(groom_finds_bride_missing_tooth_cute) = True",
+                "BEL(groom_has_memories_of_wedding) = True",
+                "DES(groom_wants_to_remember_bride) = True",
+                "DES(groom_wants_to_share_memory) = True"
+            ],
+            "intentions": {
+                "INTENT(groom, remember_bride) = True": {
+                    "action_plan": [
+                        "Remember(bride, wedding_memory)",
+                        "Write(memory, memory_book)",
+                        "Share_memory(groom, funeral_attendees, memory)"
+                    ]
+                }
+            },
+            "actions": {
+                "Remember(bride, wedding_memory)": {
+                    "conditions": [
+                        "BEL(groom_knows_bride_missing_tooth) = True",
+                        "BEL(groom_has_memories_of_wedding) = True"
+                    ],
+                    "effects": [
+                        "DES(groom_remembered_bride_wedding_memory) = True",
+                        "BEL(groom_has_remembered_bride_wedding_memory) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Write(memory, memory_book)": {
+                    "conditions": [
+                        "BEL(groom_has_memories_of_wedding) = True",
+                        "DES(groom_wants_to_remember_bride) = True"
+                    ],
+                    "effects": [
+                        "BEL(groom_has_wedding_memory_book) = True",
+                        "DES(groom_wants_to_add_memories_to_book) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Share_memory(groom, funeral_attendees, memory)": {
+                    "conditions": [
+                        "BEL(groom_has_memories_of_wedding) = True",
+                        "DES(groom_wants_to_share_memory) = True",
+                        "memory",
+                        "memory_book"
+                    ],
+                    "effects": [
+                        "BEL(memory_shared_by_groom) = True",
+                        "DES(groom_wants_to_share_memory) = False"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Sadness"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(BrideSmiles, GroomLikesSmile, Attraction, Neutral)": {
+                    "conditions": [
+                        "BEL(groom_has_memories_of_wedding) = True",
+                        "BEL(groom_knows_bride_missing_tooth) = True",
+                        "BEL(groom_finds_bride_missing_tooth_cute) = True",
+                        "DES(groom_wants_to_remember_bride) = True",
+                        "DES(groom_wants_to_share_memory) = True",
+                        "INTENT(groom, remember_bride) = True"
+                    ],
+                    "effects": [
+                        "BEL(groom_shared_memory_at_funeral) = True",
+                        "DES(groom_wants_to_share_memory) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(GroomLikesSmile, GroomRemembersMoment, Nostalgia, Neutral)": {
+                    "conditions": [
+                        "BEL(groom_has_memories_of_wedding) = True",
+                        "DES(groom_wants_to_remember_bride) = True"
+                    ],
+                    "effects": [
+                        "INTENT(groom, remember_bride) = False",
+                        "DES(groom_wants_to_share_memory) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(GroomRemembersMoment, GroomSharesMemory, Sadness, Reflective)": {
+                    "conditions": [
+                        "BEL(groom_has_memories_of_wedding) = True",
+                        "BEL(groom_knows_bride_missing_tooth) = True",
+                        "BEL(groom_finds_bride_missing_tooth_cute) = True",
+                        "DES(groom_wants_to_share_memory) = True"
+                    ],
+                    "effects": [
+                        "INTENT(groom, remember_bride) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Sadness"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Initial, BrideSmiles, Happiness, Neutral, \"The bride smiled at the groom.\">",
+        "<BrideSmiles, GroomLikesSmile, Attraction, Neutral, \"The groom thought that was cute.\">",
+        "<GroomLikesSmile, GroomRemembersMoment, Nostalgia, Neutral, \"He remembered that moment.\">",
+        "<GroomRemembersMoment, GroomSharesMemory, Sadness, Reflective, \"He shared it at her funeral.\">"
+    ]
+}

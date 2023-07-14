@@ -1,0 +1,717 @@
+{
+    "scenario_name": "test_The Fall",
+    "scenario_description": "It was a beautiful November day in Minnesota. Amy was at her mothers and decided to go for a walk. Her niece and nephew asked to go with. At an intersection her nephew almost ran in front of a car. Amy taught the kids how to look both ways before crossing the street.",
+    "last_ended": "conditions_effects",
+    "agents": {
+        "Amy": {
+            "knowledge_base": [
+                "BEL(Amy, isAtMotherHouse) = True",
+                "BEL(Amy, isNovember) = True",
+                "BEL(Amy, isDaytime) = True",
+                "BEL(Amy, isMinnesota) = True",
+                "BEL(Amy, isWalking) = True",
+                "BEL(niece, isWithAmy) = True",
+                "BEL(nephew, isWithAmy) = True",
+                "BEL(nephew, almostHitByCar) = False",
+                "BEL(nephew, hasBeenTaughtToLookBothWays) = False",
+                "DES(Amy, goForWalk) = True",
+                "DES(Amy, enjoyNature) = True",
+                "DES(niece, spendTimeWithAmy) = True",
+                "DES(nephew, spendTimeWithAmy) = True",
+                "DES(nephew, learnToCrossTheStreet) = True"
+            ],
+            "intentions": {
+                "INTENT(Amy, initiateWalk) = True": {
+                    "action_plan": [
+                        "Move(Amy, OutsideMotherHouse)",
+                        "LookAround(Amy, OutsideMotherHouse)",
+                        "StartWalking(Amy, Direction)",
+                        "WalkWithNiece(Amy, niece)",
+                        "WalkWithNephew(Amy, nephew)",
+                        "StopAtIntersection(Amy, Intersection)",
+                        "TeachKid(Amy, nephew, LookBothWays)",
+                        "CheckIfSafeToCross(Amy, Street)",
+                        "CrossStreet(Amy, Street)"
+                    ]
+                },
+                "INTENT(Amy, ensureNephewSafety) = True": {
+                    "action_plan": [
+                        "LookBothWays(Amy, nephew)",
+                        "CrossStreet(Amy, niece, nephew)",
+                        "HoldHands(Amy, niece, nephew)"
+                    ]
+                },
+                "INTENT(Amy, teachNephewToCross) = True": {
+                    "action_plan": [
+                        "Move(Amy, Intersection)",
+                        "Stop(Amy, Nephew)",
+                        "Explain(Amy, Nephew, \"Look both ways before crossing\")",
+                        "Demonstrate(Amy, Nephew, \"Look left and right before crossing\")",
+                        "Cross(Amy, Nephew, Intersection)",
+                        "Praise(Amy, Nephew, \"Well done!\")",
+                        "UpdateBelief(Amy, nephew, hasBeenTaughtToLookBothWays)"
+                    ]
+                }
+            },
+            "actions": {
+                "Move(Amy, Intersection)": {
+                    "conditions": [
+                        "BEL(Amy, isWalking) = True",
+                        "BEL(Amy, isAtHome) = False",
+                        "BEL(Amy, isAtIntersection) = False"
+                    ],
+                    "effects": [
+                        "BEL(Amy, isWalking) = False",
+                        "BEL(Amy, isAtIntersection) = True"
+                    ]
+                },
+                "Stop(Amy, Nephew)": {
+                    "conditions": [
+                        "BEL(Amy, isWalking) = True",
+                        "BEL(nephew, almostHitByCar) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, isStopped) = True"
+                    ]
+                },
+                "Explain(Amy, Nephew, \"Look both ways before crossing\")": {
+                    "conditions": [
+                        "BEL(Amy, isAtMotherHouse) = True",
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = False",
+                        "BEL(nephew, almostHitByCar) = False"
+                    ],
+                    "effects": [
+                        "BEL(Amy, explaining) = True",
+                        "BEL(nephew, listening) = True"
+                    ]
+                },
+                "Demonstrate(Amy, Nephew, \"Look left and right before crossing\")": {
+                    "conditions": [
+                        "BEL(Amy, isWalking) = True",
+                        "BEL(niece, isWithAmy) = True",
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = False"
+                    ],
+                    "effects": [
+                        "BEL(Amy, isDemonstrating) = True",
+                        "BEL(nephew, isLearningToLookBothWays) = True"
+                    ]
+                },
+                "Cross(Amy, Nephew, Intersection)": {
+                    "conditions": [
+                        "BEL(Amy, isAtIntersection) = True",
+                        "BEL(Amy, isWithNephew) = True",
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = True",
+                        "BEL(nephew, isAwareOfDanger) = True"
+                    ],
+                    "effects": [
+                        "BEL(Amy, hasCrossedIntersection) = True",
+                        "BEL(nephew, hasCrossedIntersection) = True"
+                    ]
+                },
+                "Praise(Amy, Nephew, \"Well done!\")": {
+                    "conditions": [
+                        "BEL(Amy, isAtMotherHouse) = True",
+                        "BEL(Amy, isNovember) = True",
+                        "BEL(Amy, isDaytime) = True",
+                        "BEL(Amy, isMinnesota) = True",
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = False"
+                    ],
+                    "effects": [
+                        "DES(Amy, makeNephewFeelGood) = True",
+                        "BEL(nephew, feelsProud) = True"
+                    ]
+                },
+                "UpdateBelief(Amy, nephew, hasBeenTaughtToLookBothWays)": {
+                    "conditions": [
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = True"
+                    ]
+                },
+                "Move(Amy, OutsideMotherHouse)": {
+                    "conditions": [
+                        "BEL(Amy, isAtMotherHouse) = True"
+                    ],
+                    "effects": [
+                        "BEL(Amy, isAtMotherHouse) = False",
+                        "BEL(Amy, isOutsideMotherHouse) = True"
+                    ]
+                },
+                "LookAround(Amy, OutsideMotherHouse)": {
+                    "conditions": [
+                        "BEL(Amy, isAtMotherHouse) = True"
+                    ],
+                    "effects": [
+                        "BEL(Amy, hasLookedAround) = True"
+                    ]
+                },
+                "StartWalking(Amy, Direction)": {
+                    "conditions": [
+                        "BEL(Amy, isAtMotherHouse) = True",
+                        "BEL(Amy, isWalking) = False"
+                    ],
+                    "effects": [
+                        "BEL(Amy, isAtMotherHouse) = False",
+                        "BEL(Amy, isWalking) = True",
+                        "BEL(Amy, walkingDirection) = Direction"
+                    ]
+                },
+                "WalkWithNiece(Amy, niece)": {
+                    "conditions": [
+                        "BEL(Amy, isWalking) = True",
+                        "BEL(niece, isWithAmy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Amy, isWalkingWithNiece) = True",
+                        "BEL(niece, isWalkingWithAmy) = True"
+                    ]
+                },
+                "WalkWithNephew(Amy, nephew)": {
+                    "conditions": [
+                        "BEL(Amy, isWalking) = True",
+                        "BEL(nephew, isWithAmy) = True"
+                    ],
+                    "effects": [
+                        "BEL(nephew, isWalkingWithAmy) = True"
+                    ]
+                },
+                "StopAtIntersection(Amy, Intersection)": {
+                    "conditions": [
+                        "BEL(Amy, isWalking) = True",
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = True"
+                    ]
+                },
+                "TeachKid(Amy, nephew, LookBothWays)": {
+                    "conditions": [
+                        "BEL(nephew, almostHitByCar) = False",
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = True"
+                    ]
+                },
+                "CheckIfSafeToCross(Amy, Street)": {
+                    "conditions": [
+                        "BEL(Amy, isWalking) = True",
+                        "BEL(Amy, isAtIntersection) = True",
+                        "BEL(Amy, knowsHowToLookBothWays) = True",
+                        "BEL(car, isPresentAtIntersection) = True",
+                        "BEL(car, isMovingTowardsIntersection) = True"
+                    ],
+                    "effects": [
+                        "BEL(nephew, isSafeToCross) = True",
+                        "BEL(nephew, isSafeToCross) = False"
+                    ]
+                },
+                "CrossStreet(Amy, Street)": {
+                    "conditions": [
+                        "BEL(Amy, isWalking) = True",
+                        "BEL(Amy, isAtIntersection) = True",
+                        "BEL(Amy, isLookingBothWays) = True",
+                        "BEL(car, isApproaching) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, almostHitByCar) = False",
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = True",
+                        "BEL(Amy, isCrossingStreet) = True",
+                        "BEL(Amy, isAtIntersection) = False",
+                        "DES(niece, continueWalk) = True",
+                        "DES(nephew, continueWalk) = True",
+                        "DES(Amy, accomplishWalk) = True"
+                    ]
+                },
+                "LookBothWays(Amy, nephew)": {
+                    "conditions": [
+                        "BEL(nephew, almostHitByCar) = False"
+                    ],
+                    "effects": [
+                        "BEL(Amy, looksBothWays) = True"
+                    ]
+                },
+                "CrossStreet(Amy, niece, nephew)": {
+                    "conditions": [
+                        "BEL(Amy, isAtIntersection) = True",
+                        "BEL(nephew, knowsToLookBothWays) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, knowsToLookBothWays) = True"
+                    ]
+                },
+                "HoldHands(Amy, niece, nephew)": {
+                    "conditions": [
+                        "BEL(Amy, isWalking) = True",
+                        "BEL(niece, isWithAmy) = True",
+                        "BEL(nephew, isWithAmy) = True",
+                        "BEL(nephew, almostHitByCar) = False",
+                        "BEL(nephew, hasBeenTaughtToLookBothWays) = True"
+                    ],
+                    "effects": [
+                        "BEL(nephew, isHoldingHands) = True"
+                    ]
+                }
+            }
+        },
+        "niece": {
+            "knowledge_base": [
+                "niece, knows_how_to_look_both_ways",
+                "niece, trusts_Amy",
+                "niece, stay_safe_on_walk",
+                "niece, have_fun_on_walk"
+            ],
+            "intentions": {
+                "INTENT(niece, look_both_ways) = True": {
+                    "action_plan": [
+                        "StartWalking(niece, \\)]",
+                        "AskAmy(niece, Amy, \"can you teach me how to cross the street safely?\")",
+                        "ListenToAmy(niece, Amy\\)]",
+                        "PracticeLooking(niece, \\)]",
+                        "CrossStreetSafely(niece, \\)]",
+                        "Celebrate(niece, , \"Yay, we crossed the street safely!\")"
+                    ]
+                },
+                "INTENT(niece, stay_safe_on_walk) = True": {
+                    "action_plan": [
+                        "stay_safe_on_walk",
+                        "Observe(niece, surroundings)",
+                        "Signal(niece, nephew)",
+                        "Teach(niece, nephew, how_to_look_both_ways)",
+                        "Guide(niece, nephew, across_street)",
+                        "Monitor(niece, nephew)"
+                    ]
+                },
+                "INTENT(niece, have_fun_on_walk) = True": {
+                    "action_plan": [
+                        "INTENT(niece, have_fun_on_walk)",
+                        "CheckTrafficLight(niece, intersection)",
+                        "HoldHand(niece, Amy)",
+                        "PointOutNature(niece, surroundings)",
+                        "PlayGame(niece, nephew)",
+                        "TakePhotos(niece, surroundings)",
+                        "Compliment(niece, Amy)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(niece, have_fun_on_walk)": {
+                    "conditions": [
+                        "niece, stay_safe_on_walk",
+                        "niece, have_fun_on_walk",
+                        "niece, knows_how_to_look_both_ways",
+                        "niece, trusts_Amy",
+                        "Amy, hold_hand",
+                        "intersection, traffic_light"
+                    ],
+                    "effects": [
+                        "niece, happy",
+                        "niece, excited",
+                        "niece, know_more_about_nature",
+                        "niece, photos_taken",
+                        "Amy, feels_appreciated"
+                    ]
+                },
+                "CheckTrafficLight(niece, intersection)": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_look_both_ways) = True",
+                        "BEL(car, is_approaching_intersection) = True"
+                    ],
+                    "effects": [
+                        "BEL(niece, made_decision_based_on_environment ) = True"
+                    ]
+                },
+                "HoldHand(niece, Amy)": {
+                    "conditions": [
+                        "niece, trusts_Amy = True",
+                        "Amy, holding_hand = False"
+                    ],
+                    "effects": [
+                        "Amy, holding_hand_with_niece = True",
+                        "niece, feels_safe_with_Amy = True"
+                    ]
+                },
+                "PointOutNature(niece, surroundings)": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_look_both_ways) = True",
+                        "BEL(niece, stay_safe_on_walk) = True",
+                        "BEL(niece, sees_surroundings) = True"
+                    ],
+                    "effects": [
+                        "BEL(niece, feels_happy_pointing_out_nature) = True"
+                    ]
+                },
+                "PlayGame(niece, nephew)": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_play) = True",
+                        "BEL(niece, with_nephew) = True",
+                        "DES(niece, have_fun_on_walk) = True"
+                    ],
+                    "effects": [
+                        "DES(niece, spend_quality_time_with_nephew) = True",
+                        "BEL(niece, happy) = True"
+                    ]
+                },
+                "TakePhotos(niece, surroundings)": {
+                    "conditions": [
+                        "niece, has_phone",
+                        "BEL(niece, in_surroundings(PhotoOpportunity)) = True"
+                    ],
+                    "effects": [
+                        "BEL(niece, has_photos) = True",
+                        "BEL(niece, in_surroundings(PhotoOpportunity)) = False"
+                    ]
+                },
+                "Compliment(niece, Amy)": {
+                    "conditions": [
+                        "niece, trusts_Amy"
+                    ],
+                    "effects": [
+                        "niece, feels_happy_about_walk_with_Amy",
+                        "niece, admires_Amy"
+                    ]
+                },
+                "StartWalking(niece, \\)]": {
+                    "conditions": [
+                        "niece, stay_safe_on_walk",
+                        "niece, have_fun_on_walk"
+                    ],
+                    "effects": []
+                },
+                "AskAmy(niece, Amy, \"can you teach me how to cross the street safely?\")": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_look_both_ways)=False",
+                        "BEL(niece, stay_safe_on_walk)=True",
+                        "BEL(niece, have_fun_on_walk)=True",
+                        "BEL(niece, trusts_Amy)=True"
+                    ],
+                    "effects": [
+                        "BEL(niece, knows_how_to_look_both_ways)=True"
+                    ]
+                },
+                "ListenToAmy(niece, Amy\\)]": {
+                    "conditions": [
+                        "BEL(niece, trusts_Amy) = True",
+                        "BEL(niece, knows_how_to_look_both_ways) = False"
+                    ],
+                    "effects": [
+                        "BEL(niece, knows_how_to_look_both_ways) = True"
+                    ]
+                },
+                "PracticeLooking(niece, \\)]": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_look_both_ways) = False",
+                        "BEL(niece, trusts_Amy) = True"
+                    ],
+                    "effects": [
+                        "BEL(niece, knows_how_to_look_both_ways) = True"
+                    ]
+                },
+                "CrossStreetSafely(niece, \\)]": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_look_both_ways) = True",
+                        "BEL(niece, stay_safe_on_walk) = True",
+                        "BEL(niece, trusts_Amy) = True"
+                    ],
+                    "effects": [
+                        "BEL(niece, crossed_street_safely) = True",
+                        "DES(niece, have_fun_on_walk) = True"
+                    ]
+                },
+                "Celebrate(niece, , \"Yay, we crossed the street safely!\")": {
+                    "conditions": [
+                        "niece, look_both_ways"
+                    ],
+                    "effects": [
+                        "niece, celebrate_event"
+                    ]
+                },
+                "stay_safe_on_walk": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_look_both_ways) = True",
+                        "BEL(niece, stay_safe_on_walk) = True"
+                    ],
+                    "effects": []
+                },
+                "Observe(niece, surroundings)": {
+                    "conditions": [
+                        "BEL(niece, stay_safe_on_walk) = True",
+                        "BEL(niece, knows_how_to_look_both_ways) = True",
+                        "BEL(niece, sees_surroundings) = False"
+                    ],
+                    "effects": [
+                        "BEL(niece, sees_surroundings) = True"
+                    ]
+                },
+                "Signal(niece, nephew)": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_look_both_ways) = True",
+                        "BEL(niece, trusts_Amy) = True",
+                        "INTENT(niece, stay_safe_on_walk) = True"
+                    ],
+                    "effects": [
+                        "BEL(nephew, signaled_by_niece) = True"
+                    ]
+                },
+                "Teach(niece, nephew, how_to_look_both_ways)": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_look_both_ways) = False",
+                        "BEL(niece, trusts_Amy) = True"
+                    ],
+                    "effects": [
+                        "BEL(niece, knows_how_to_look_both_ways) = True"
+                    ]
+                },
+                "Guide(niece, nephew, across_street)": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_look_both_ways) = True",
+                        "BEL(niece, stay_safe_on_walk) = True",
+                        "BEL(niece, trusts_Amy) = True",
+                        "BEL(nephew, crossed_street) = False"
+                    ],
+                    "effects": [
+                        "BEL(niece, guided_nephew) = True",
+                        "BEL(nephew, crossed_street) = True"
+                    ]
+                },
+                "Monitor(niece, nephew)": {
+                    "conditions": [
+                        "BEL(niece, knows_how_to_look_both_ways) = True",
+                        "BEL(nephew, needs_to_be_monitored) = True"
+                    ],
+                    "effects": [
+                        "BEL(niece, is_observing) = True",
+                        "DES(niece, protect_nephew_and_niece) = True",
+                        "BEL(nephew, needs_to_be_monitored) = False"
+                    ]
+                }
+            }
+        },
+        "nephew": {
+            "knowledge_base": [
+                "BEL(nephew, at_intersection) = True",
+                "BEL(nephew, learned_crossing) = False",
+                "DES(nephew, learn_crossing) = True",
+                "DES(nephew, avoid_accidents) = True"
+            ],
+            "intentions": {
+                "INTENT(nephew, cross_street) = False": {
+                    "action_plan": [
+                        "LookBothWays(nephew, None)",
+                        "CrossStreet(nephew, None)",
+                        "ReceiveFeedback(nephew, Amy, good_job)",
+                        "BEL(nephew, learned_crossing) = True"
+                    ]
+                },
+                "INTENT(nephew, learn_crossing) = True": {
+                    "action_plan": [
+                        "LookBothWays(nephew, None)",
+                        "CrossStreet(nephew, None)",
+                        "AskQuestions(nephew, Amy, \"How do I cross the street safely?\")",
+                        "ObserveAndLearn(nephew, Amy, \"Watch how I do it.\")",
+                        "PracticeCrossing(nephew, None)",
+                        "DemonstrateKnowledge(nephew, niece, \"Let me show you how to cross the street safely!\")",
+                        "CelebrateSuccess(nephew, niece, \"Great job! We did it safely!\")"
+                    ]
+                },
+                "INTENT(nephew, avoid_accidents) = True": {
+                    "action_plan": [
+                        "INTENT(nephew, avoid_accidents) = True",
+                        "LookAround(nephew, intersection)",
+                        "IdentifySafeCrossing(nephew, intersection)",
+                        "AMY",
+                        "niece",
+                        "CrossIntersection(nephew, intersection, [AMY, niece])",
+                        "IdentifyCrosswalkLocation(nephew)",
+                        "ReflectOnCrossing(nephew)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(nephew, avoid_accidents) = True": {
+                    "conditions": [
+                        "BEL(nephew, at_intersection) = True",
+                        "BEL(nephew, learned_crossing) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, learned_crossing) = True",
+                        "DES(nephew, learn_crossing) = False"
+                    ]
+                },
+                "LookAround(nephew, intersection)": {
+                    "conditions": [
+                        "BEL(nephew, at_intersection) = True"
+                    ],
+                    "effects": [
+                        "BEL(nephew, saw_car) = True/False",
+                        "BEL(nephew, saw_amy) = True/False",
+                        "BEL(nephew, saw_niece) = True/False",
+                        "BEL(nephew, looked_around) = True"
+                    ]
+                },
+                "IdentifySafeCrossing(nephew, intersection)": {
+                    "conditions": [
+                        "BEL(nephew, at_intersection) = True",
+                        "BEL(nephew, learned_crossing) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, safe_crossing_identified) = True"
+                    ]
+                },
+                "AMY": {
+                    "conditions": [
+                        "BEL(nephew, at_intersection) = True",
+                        "BEL(nephew, learned_crossing) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, at_intersection) = False",
+                        "BEL(nephew, learned_crossing) = True"
+                    ]
+                },
+                "niece": {
+                    "conditions": [
+                        "BEL(nephew, at_intersection) = True",
+                        "BEL(nephew, learned_crossing) = False",
+                        "BEL(niece, at_intersection) = True"
+                    ],
+                    "effects": [
+                        "BEL(nephew, learned_crossing) = True"
+                    ]
+                },
+                "CrossIntersection(nephew, intersection, [AMY, niece])": {
+                    "conditions": [
+                        "BEL(nephew, learned_crossing) = False",
+                        "BEL(nephew, at_intersection) = True",
+                        "BEL(AMY, present_intersection) = True",
+                        "BEL(niece, present_intersection) = True"
+                    ],
+                    "effects": [
+                        "BEL(nephew, learned_crossing) = True",
+                        "BEL(nephew, at_intersection) = False",
+                        "BEL(nephew, crossed_intersection) = True"
+                    ]
+                },
+                "IdentifyCrosswalkLocation(nephew)": {
+                    "conditions": [
+                        "BEL(nephew, learned_crossing) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, identified_crosswalk_location) = True"
+                    ]
+                },
+                "ReflectOnCrossing(nephew)": {
+                    "conditions": [
+                        "BEL(nephew, learned_crossing) = True",
+                        "BEL(AMY, at_intersection) = True"
+                    ],
+                    "effects": [
+                        "DES(nephew, learn_crossing) = False",
+                        "BEL(nephew, at_intersection) = False",
+                        "BEL(nephew, identified_safe_crossing) = False",
+                        "BEL(nephew, reflected_on_crossing) = True",
+                        "BEL(nephew, identified_crosswalk_location) = True"
+                    ]
+                },
+                "LookBothWays(nephew, None)": {
+                    "conditions": [
+                        "BEL(nephew, at_intersection) = True",
+                        "BEL(nephew, learned_crossing) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, looks_both_ways) = True"
+                    ]
+                },
+                "CrossStreet(nephew, None)": {
+                    "conditions": [
+                        "BEL(nephew, at_intersection) = True",
+                        "DES(nephew, learn_crossing) = True",
+                        "NOT BEL(nephew, crossed_street)"
+                    ],
+                    "effects": [
+                        "BEL(nephew, crossed_street) = True",
+                        "NOT BEL(nephew, at_intersection)",
+                        "NOT DES(nephew, learn_crossing)"
+                    ]
+                },
+                "ReceiveFeedback(nephew, Amy, good_job)": {
+                    "conditions": [
+                        "BEL(Amy, is_family_member(nephew)) = True",
+                        "BEL(Amy, observed_crossing(nephew)) = True",
+                        "DES(nephew, learn_crossing) = True"
+                    ],
+                    "effects": [
+                        "BEL(nephew, learned_crossing) = True",
+                        "DES(nephew, avoid_accidents) = True"
+                    ]
+                },
+                "BEL(nephew, learned_crossing) = True": {
+                    "conditions": [
+                        "BEL(nephew, cross_street) = True"
+                    ],
+                    "effects": []
+                },
+                "AskQuestions(nephew, Amy, \"How do I cross the street safely?\")": {
+                    "conditions": [
+                        "BEL(nephew, learned_crossing) = False"
+                    ],
+                    "effects": [
+                        "BEL(Amy, can_teach_crossing) = True",
+                        "BEL(nephew, learned_crossing) = True"
+                    ]
+                },
+                "ObserveAndLearn(nephew, Amy, \"Watch how I do it.\")": {
+                    "conditions": [
+                        "BEL(Amy, at_intersection) = True",
+                        "BEL(nephew, at_intersection) = True",
+                        "BEL(nephew, learned_crossing) = False"
+                    ],
+                    "effects": [
+                        "BEL(nephew, learned_crossing) = True",
+                        "DES(nephew, learn_crossing) = False"
+                    ]
+                },
+                "PracticeCrossing(nephew, None)": {
+                    "conditions": [
+                        "BEL(nephew, at_intersection) = True",
+                        "BEL(nephew, learned_crossing) = False",
+                        "INTENT(nephew, learn_crossing) = True"
+                    ],
+                    "effects": [
+                        "BEL(nephew, practiced_crossing) = True"
+                    ]
+                },
+                "DemonstrateKnowledge(nephew, niece, \"Let me show you how to cross the street safely!\")": {
+                    "conditions": [
+                        "BEL(nephew, learned_crossing) = False",
+                        "BEL(nephew, at_intersection) = True",
+                        "DES(nephew, learn_crossing) = True",
+                        "BEL(nephew, observed_crossing) = True"
+                    ],
+                    "effects": [
+                        "BEL(niece, learned_crossing) = True",
+                        "BEL(nephew, taught_crossing) = True",
+                        "DES(nephew, avoid_accidents) = True"
+                    ]
+                },
+                "CelebrateSuccess(nephew, niece, \"Great job! We did it safely!\")": {
+                    "conditions": [
+                        "BEL(nephew, at_intersection) = True",
+                        "BEL(niece, at_intersection) = True",
+                        "BEL(niece, learned_crossing) = False",
+                        "DES(nephew, learn_crossing) = True"
+                    ],
+                    "effects": [
+                        "BEL(nephew, celebrated_success) = True",
+                        "BEL(niece, learned_crossing) = True",
+                        "DES(niece, avoid_accidents) = True"
+                    ]
+                }
+            }
+        },
+        "car": {
+            "knowledge_base": [],
+            "intentions": {}
+        }
+    }
+}

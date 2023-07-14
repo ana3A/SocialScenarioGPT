@@ -1,0 +1,3599 @@
+{
+  "root": {
+    "classId": 0,
+    "ScenarioName": "hurricane",
+    "Description": " \tMorgan and her family lived in Florida. They heard a hurricane was coming. They decided to evacuate to a relative's house. They arrived and learned from the news that it was a terrible storm. They felt lucky they had evacuated when they did.",
+    "Characters": [
+      {
+        "KnowledgeBase": {
+          "Perspective": "Emily",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Emily, Evacuation_Needed)": "True, 1",
+              "BEL(Emily, Hurricane_Approaching)": "True, 1",
+              "BEL(Emily, Family_Members_Require_Assistance)": "False, 1",
+              "BEL(Emily, Need_to_Check_on_Neighbors)": "False, 1",
+              "BEL(Emily, Property_Damage_Likely)": "True, 1",
+              "DES(Emily, Ensure_Family_Safety)": "True, 1",
+              "DES(Emily, Assist_in_Neighbor_Evacuation)": "False, 1",
+              "DES(Emily, Check_Neighbors_Property)": "False, 1",
+              "DES(Emily, Secure_Home_Before_Evacuating)": "True, 1",
+              "DES(Emily, Help_Rebuild_Neighbors_Property)": "False, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Morgan",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Morgan, believes_hurricane_approaching)": "True, 1",
+              "BEL(Morgan, believes_home_is_not_safe)": "True, 1",
+              "BEL(Morgan, believes_evacuation_is_necessary)": "True, 1",
+              "BEL(Morgan, believes_need_to_protect_family)": "True, 1",
+              "BEL(Morgan, believes_power_outage_is_likely)": "True, 1",
+              "DES(Morgan, desires_to_evacuate)": "True, 1",
+              "DES(Morgan, desires_family_safety)": "True, 1",
+              "DES(Morgan, desires_information_about_storm)": "True, 1",
+              "DES(Morgan, desires_adequate_shelter)": "True, 1",
+              "DES(Morgan, desires_to_stay_in_contact_with_extended_family)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": -8,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Grace",
+          "Knowledge": {
+            "SELF": {}
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": -8,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Rescue_Worker_1",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Rescue_Worker_1, in_urgent_situation)": "True, 1",
+              "BEL(Rescue_Worker_1, trained_for_rescue_operations)": "True, 1",
+              "BEL(Rescue_Worker_1, familiar_with_the_area)": "True, 1",
+              "BEL(Rescue_Worker_1, has_access_to_medical_supplies)": "True, 1",
+              "BEL(Rescue_Worker_1, has_radio_communication)": "True, 1",
+              "DES(Rescue_Worker_1, rescue_people_in_need)": "True, 1",
+              "DES(Rescue_Worker_1, provide_medical_assistance)": "True, 1",
+              "DES(Rescue_Worker_1, coordinate_with_other_rescue_workers)": "True, 1",
+              "DES(Rescue_Worker_1, maintain_safe_distance_from_dangerous_areas)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Rescue_Worker_2",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Rescue_Worker_2, aware_of_hurricane)": "True, 1",
+              "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters)": "True, 1",
+              "BEL(Rescue_Worker_2, equipped_with_rescue_gear)": "True, 1",
+              "DES(Rescue_Worker_2, assist_in_rescuing_people)": "True, 1",
+              "DES(Rescue_Worker_2, ensure_safety_of_individuals)": "True, 1",
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies)": "True, 1",
+              "BEL(Rescue_Worker_2, communication_systems_working)": "True, 1",
+              "DES(Rescue_Worker_2, coordinate_efficiently_with_other_rescue_workers)": "True, 1",
+              "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route)": "True, 1",
+              "DES(Rescue_Worker_2, help_evacuate_people_safely)": "True, 1",
+              "BEL(Rescue_Worker_2, physically_and_mentally_prepared)": "True, 1",
+              "DES(Rescue_Worker_2, maintain_calm_and_composure_during_rescue_efforts)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Neighbor_1",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Neighbor_1, KnowsAboutHurricane)": "True, 1",
+              "BEL(Neighbor_1, HouseIsNotSafe)": "True, 1",
+              "BEL(Neighbor_1, NeedsHelpEvacuating)": "True, 1",
+              "BEL(Neighbor_1, BelievesEmilyIsTrustworthy)": "True, 1",
+              "DES(Neighbor_1, WantsToEvacuate)": "True, 1",
+              "DES(Neighbor_1, WantsAssistance)": "True, 1",
+              "DES(Neighbor_1, WantsToFeelSafe)": "True, 1",
+              "DES(Neighbor_1, WantsToReuniteWithFamily)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Neighbor_2",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Neighbor_2, believes_in_approaching_hurricane)": "True, 1",
+              "BEL(Neighbor_2, believes_his_house_is_not_strong_enough)": "True, 1",
+              "BEL(Neighbor_2, believes_he_is_not_prepared)": "True, 1",
+              "BEL(Neighbor_2, believes_he_needs_help)": "False, 1",
+              "DES(Neighbor_2, desires_to_evacuate_safely)": "True, 1",
+              "DES(Neighbor_2, desires_to_reinforce_his_house)": "True, 1",
+              "DES(Neighbor_2, desires_to_prepare_survival_kit)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": -7,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Neighbor_3",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Neighbor_3,knows_about_hurricane)": "True, 1",
+              "BEL(Neighbor_3,house_is_not_safe)": "True, 1",
+              "BEL(Neighbor_3,wants_to_evacuate)": "True, 1",
+              "BEL(Neighbor_3,limited_financial_resources)": "True, 1",
+              "DES(Neighbor_3,find_a_way_to_afford_evacuation)": "True, 1",
+              "DES(Neighbor_3,get_help_from_neighbors)": "True, 1",
+              "DES(Neighbor_3,reach_out_to_rescue_workers)": "True, 1",
+              "DES(Neighbor_3,secure_their_property)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      }
+    ],
+    "WorldModel": {
+      "Effects": {
+        "dictionary": [
+          {
+            "key": "Event(Action-End, Emily, Convince(Morgan, Emily, SafeLocation), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, In_Panic)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Evacuation_Needed)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Hurricane_Approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Emily, Reassure(Grace, Emily), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, Hurricane_Approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Family_Members_Require_Assistance)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Emily, Prepare(Emily, House), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, Evacuation_Needed)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Hurricane_Approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Property_Damage_Likely)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Emily, Evacuate(Emily, Neighbor_1), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, Evacuation_Needed)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Hurricane_Approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Family_Members_Require_Assistance)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Need_to_Check_on_Neighbors)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Property_Damage_Likely)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Emily, Care(Emily, InjuredNeighbor_2), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, Hurricane_Approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Family_Members_Require_Assistance)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(InjuredNeighbor_2, Injury)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Property_Damage_Likely)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Evacuation_Needed)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Emily, Rebuild(Emily, House), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, Help_Rebuild_Neighbors_Property)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Property_Damage_Likely)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, House_Damaged)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Emily, Help(Emily, Rescue_Worker_1, CleanUp), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, Hurricane_Approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Evacuation_Needed)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Family_Members_Require_Assistance)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, Available_for_Help)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, Has_Requested_Help)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Emily, Report(Emily, FallenTree), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, Evacuation_Needed)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Hurricane_Approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Family_Members_Require_Assistance)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Property_Damage_Likely)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, FallenTree_Reported)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Emily, Search(Emily, MissingPet), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, Evacuation_Needed)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Hurricane_Approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Property_Damage_Likely)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Family_Members_Require_Assistance)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Emily, Donate(Emily, FoodSupplies), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, Evacuation_Needed)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "BEL(Emily, Property_Damage_Likely)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "DES(Emily, Assist_in_Neighbor_Evacuation)",
+                "NewValue": "False",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Emily, Speak(EmilyIntro, MorganPanic, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, Evacuation_Needed)",
+                "NewValue": "True",
+                "ObserverAgent": "Emily"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Emily"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, Panic(Morgan), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, CheckWeather(Morgan), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_information_about_storm)",
+                "NewValue": "False",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, PackBags(Morgan, null), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_home_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, desires_to_evacuate)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, CallFamily(Morgan, null, Grace, Emily), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_need_to_protect_family)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_home_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "DES(Morgan, desires_to_stay_in_contact_with_extended_family)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "1",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, SearchForImportantDocuments(Morgan), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, desires_information_about_storm)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, AskNeighborsForHelp(Morgan, Neighbor_1, Can_you_help_me_carry_these_bags_to_the_car), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_home_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, believes_in_helping_others)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-3",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, GetInCar(Morgan, null), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_home_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, desires_adequate_shelter)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, FollowEvacuationRoute(Morgan, null), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "DES(Morgan, desires_to_evacuate)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, ExpressGratitude(Morgan, Rescue_Worker_1, null), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_need_to_protect_family)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_evacuation_is_necessary)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, desires_to_help_people)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, StayCalm(Morgan), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_home_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_evacuation_is_necessary)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_family_is_accounted_for)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "5",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(Start, MorganIntro, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(MorganIntro, EmilyExplanation, Confusion, Urgent), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_home_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_evacuation_is_necessary)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_need_to_protect_family)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(EmilyExplanation, MorganPanic, Confusion, Urgent), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_home_is_not_safe)",
+                "NewValue": "False",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(MorganPanic, EmilyHelp, Panic, Emotional), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_home_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_evacuation_is_necessary)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, desires_to_evacuate)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, desires_family_safety)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(EmilyHelp, MorganReassurance, Support, Comforting), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_home_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "DES(Morgan, desires_family_safety)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(MorganReassurance, End, Gratitude, Appreciative), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Morgan, believes_hurricane_approaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_evacuation_is_necessary)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "BEL(Morgan, believes_need_to_protect_family)",
+                "NewValue": "True",
+                "ObserverAgent": "Morgan"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Morgan"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Talk(Grace, Emily, Reassurance), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Grace, Scared)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "BEL(Emily, Safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Hide(Grace, Under_The_Table), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Grace, Panic)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "BEL(Emily, Comforting)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-8",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Cry(Grace, Null), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Grace, scared)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Hug(Grace, Emily), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Grace, IsFeelingScared)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "BEL(Emily, IsCloseToGrace)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "5",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Listen(Grace, Neighbor_1, Worries), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Grace, Is_Listening)",
+                "NewValue": "False",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, Has_Worries)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Watch_TV(Grace, Null), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Grace, Watched_TV)",
+                "NewValue": "False",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Play_Board_Game(Grace, Emily), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Grace, knows_how_to_play_board_game)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "BEL(Emily, likes_board_games)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "BEL(Grace, wants_to_bond_with_Emily)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "2",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Sleep(Grace, Null), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Grace, Awake)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(Start, GraceIntro, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Emily, inHome)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(GraceIntro, EmilyTask, SmallTalk, Casual), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Grace, knowsEmily)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(EmilyTask, GraceTask, SmallTalk, Casual), [t])",
+            "value": [
+              {
+                "PropertyName": "DES(GraceTask)",
+                "NewValue": "None",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "BEL(Weather, HurricaneApproaching)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(GraceTask, EmilyFear, Concern, Worried), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(EmilyEvacuated)",
+                "NewValue": "False",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "DES(GraceTask)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(EmilyFear, GraceComfort, Support, Comforting), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(EmilyFear)",
+                "NewValue": "True",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(GraceComfort, End, Gratitude, Appreciative), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(GraceFear)",
+                "NewValue": "False",
+                "ObserverAgent": "Grace"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Grace"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, MoveTo(Rescue_Worker_1, Location_Shelter), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, familiar_with_the_area)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_radio_communication)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, maintain_safe_distance_from_dangerous_areas)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Evacuate(Neighbor_1), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_access_to_medical_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, is_in_need_of_rescue)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, is_in_safe_distance)",
+                "NewValue": "False",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "5",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Evacuate(Neighbor_2), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_radio_communication)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, in_need_of_rescue)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Evacuate(Neighbor_3), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, stranded_in_dangerous_area)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, ClearDebris(Rescue_Worker_1, Road), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, familiar_with_the_area)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_radio_communication)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Road, blocked_with_debris)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "5",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, HelpInjured(Rescue_Worker_1, Injured_Neighbor_1, FirstAid_Kit), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_access_to_medical_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, familiar_with_the_area)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Injured_Neighbor_1, requires_medical_assistance)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "5",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, HelpInjured(Rescue_Worker_1, Injured_Neighbor_2, FirstAid_Kit), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_access_to_medical_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Injured_Neighbor_2, requires_first_aid)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, maintain_safe_distance_from_dangerous_areas)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, AssistWithRebuilding(Rescue_Worker_1, Neighbor_1), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "False",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, trained_for_rescue_operations)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_access_to_medical_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, needs_help_with_rebuilding)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, has_tools_and_materials_for_rebuilding)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, familiar_with_rebuilding_procedures)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, AssistWithRebuilding(Rescue_Worker_1, Neighbor_2), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, able_to_help_others)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, in_need_of_assistance)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_tools_and_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, AssistWithRebuilding(Rescue_Worker_1, Neighbor_3), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "False",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, injured)",
+                "NewValue": "False",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, in_need_of_help)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_access_to_tools)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(Start, RW1Intro, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_radio_communication)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(RW1Intro, RW1Concern, Neutral, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, trained_for_rescue_operations)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(RW1Concern, RW1Action, Concern, Sympathetic), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, trained_for_rescue_operations)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_radio_communication)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(RW1Action, RW1Neighbor, Initiative, Helpful), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_radio_communication)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(RW1Neighbor, need_of_help)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(RW1Neighbor, RW1Safety, Neutral, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_radio_communication)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(RW1Neighbor, is_in_danger)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(RW1Safety, End, Neutral, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, in_urgent_situation)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, has_radio_communication)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Rescue_Worker_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Move(Rescue_Worker_2, Neighbor_3, Location-Type), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, aware_of_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, equipped_with_rescue_gear)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, physically_and_mentally_prepared)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, access_to_emergency_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Assess_Damage(Rescue_Worker_2, Neighbor_3), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, aware_of_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, equipped_with_rescue_gear)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, access_to_emergency_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, is_in_need_of_rescue)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Clear_Rubble(Rescue_Worker_2, Neighbor_3), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, equipped_with_rescue_gear)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, access_to_emergency_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, trapped_under_rubble)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "2",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Provide_Food(Rescue_Worker_2, Neighbor_3, Food-Type), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, access_to_emergency_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, in_need_of_food)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Reassure(Rescue_Worker_2, Neighbor_3, Message), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, scared)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Evacuate(Rescue_Worker_2, Neighbor_3, Destination-Type), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, aware_of_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, equipped_with_rescue_gear)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, access_to_emergency_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, in_need_of_evacuation)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Repair(Rescue_Worker_2, Neighbor_3, Item-Type), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, aware_of_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "DES(Rescue_Worker_2, assist_in_rescuing_people)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, equipped_with_rescue_gear)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, access_to_emergency_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, requires_item_repair)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, familiar_with_type_of_item_to_be_repaired)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, physically_and_mentally_prepared)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(Start, RescueWorkerIntro, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, equipped_with_rescue_gear)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(RescueWorkerIntro, MorganPanic, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, aware_of_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(MorganPanic, RescueWorkerPlan, Confusion, Authoritative), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(MorganPanic, is_safe)",
+                "NewValue": "False",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, access_to_emergency_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, physically_and_mentally_prepared)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Bel(MorganPanic, available_for_rescue)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(RescueWorkerPlan, NeighborConcerned, Explanation, Calm), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, equipped_with_rescue_gear)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, access_to_emergency_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, physically_and_mentally_prepared)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(NeighborConcerned, aware_of_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(NeighborConcerned, RescueWorkerAssist, Assistance, Friendly), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, aware_of_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, equipped_with_rescue_gear)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(NeighborConcerned, in_need_of_assistance)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, access_to_emergency_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, physically_and_mentally_prepared)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(RescueWorkerAssist, End, Assistance, Helpful), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, aware_of_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, equipped_with_rescue_gear)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, access_to_emergency_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, communication_systems_working)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_2, physically_and_mentally_prepared)",
+                "NewValue": "True",
+                "ObserverAgent": "Rescue_Worker_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Rescue_Worker_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Evacuate(Neighbor_1, Safe_Location), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, KnowsAboutHurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, HouseIsNotSafe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "DES(Neighbor_1, WantsToEvacuate)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Check_On(Neighbor_1, Neighbor_2), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, KnowsAboutHurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, NeedsHelpEvacuating)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, BelievesEmilyIsTrustworthy)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, IsCloseBy)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Check_On(Neighbor_1, Neighbor_3), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, KnowsAboutHurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, NeedsHelpEvacuating)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, BelievesEmilyIsTrustworthy)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, IsInHouse)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Help_Out(Neighbor_1, Clear_Debri, time_2_hours), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, HouseIsNotSafe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, KnowsAboutHurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "DES(Neighbor_1, WantsAssistance)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Request_Assistance(Neighbor_1, Rescue_Worker_1, typeMedical, severityLow), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, NeedsHelpEvacuating)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, KnowsAboutMedicalAssistance)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, IsAvailableForAssistance)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Collect_Food(Neighbor_1, Neighbor_2, quantity5), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, KnowsAboutHurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, KnowsAboutHurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, NeedsHelpEvacuating)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "DES(Neighbor_1, WantsAssistance)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, HasFood)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, BelievesEmilyIsTrustworthy)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(Start, NeighborIntro, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, KnowsAboutHurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, HouseIsNotSafe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(NeighborIntro, EmilyApproach, Introduction, Friendly), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, KnowsAboutHurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, BelievesEmilyIsTrustworthy)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(EmilyApproach, NeighborAnxious, SmallTalk, Friendly), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, KnowsAboutHurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, HouseIsNotSafe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, NeedsHelpEvacuating)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, BelievesEmilyIsTrustworthy)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "1",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(NeighborAnxious, EmilyReassurance, Anxiety, Emotional), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, KnowsAboutHurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, HouseIsNotSafe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, NeedsHelpEvacuating)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, BelievesEmilyIsTrustworthy)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(EmilyReassurance, NeighborGrateful, Advice, Encouraging), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, NeedsHelpEvacuating)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, BelievesEmilyIsTrustworthy)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "5",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(NeighborGrateful, End, Gratitude, Appreciative), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_1, NeedsHelpEvacuating)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, BelievesEmilyIsTrustworthy)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_1"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_1"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Call(Neighbor_2, Rescue_Worker_1), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_in_approaching_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_needs_help)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "DES(Neighbor_2, desires_to_evacuate_safely)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "DES(Neighbor_2, desires_to_prepare_survival_kit)",
+                "NewValue": "False",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "DES(Neighbor_2, desires_to_reinforce_his_house)",
+                "NewValue": "False",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, AskForHelp(Neighbor_2, Rescue_Worker_1), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_needs_help)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, believes_he_can_provide_help)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Thank(Rescue_Worker_1, Neighbor_2), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_needs_help)",
+                "NewValue": "False",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1, is_present_at_Neighbor_2_house)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, RepairHouse(Neighbor_2, Neighbor_1), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_his_house_is_not_strong_enough)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_needs_help)",
+                "NewValue": "False",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, believes_she_can_help_neighbor_2)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "DES(Neighbor_2, desires_to_reinforce_his_house)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, OfferSupplies(Neighbor_2, Neighbor_1, Water), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, desires_to_prepare_survival_kit)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_needs_help)",
+                "NewValue": "False",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_his_house_is_not_strong_enough)",
+                "NewValue": "False",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_in_approaching_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, desires_to_evacuate_safely)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, has_need_for_water)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, ReceiveSupplies(Neighbor_1, Neighbor_2, Food), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_needs_help)",
+                "NewValue": "False",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_1, has_supplies)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_in_approaching_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-3",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, GiveInstructions(Neighbor_2, Neighbor_3, EvacuationPlan), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, desires_to_evacuate_safely)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_in_approaching_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, is_willing_to_evacuate)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, FollowInstructions(Neighbor_3, Neighbor_2), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3, is_present_in_the_area)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, desires_to_evacuate_safely)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(Start, NeighborIntro, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_in_approaching_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(NeighborIntro, MorganPanic, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_in_approaching_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_is_not_prepared)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(MorganPanic, NeighborHelp, Explanation, Concerned), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_in_approaching_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_is_not_prepared)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_needs_help)",
+                "NewValue": "False",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(NeighborHelp, EmilyRescueWorker, Initiative, Grateful), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_in_approaching_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_needs_help)",
+                "NewValue": "False",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(EmilyRescueWorker, NeighborGratitude, Grateful, Appreciative), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_needs_help)",
+                "NewValue": "False",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_in_approaching_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(NeighborGratitude, End, Grateful, Appreciative), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_in_approaching_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_his_house_is_not_strong_enough)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_2, believes_he_is_not_prepared)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_2"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_2"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Evacuate(Neighbor_3, Safe_Location), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3, house_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, wants_to_evacuate)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Seek_Help(Neighbor_3, Rescue_Worker_1), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3,knows_about_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3,wants_to_evacuate)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3,limited_financial_resources)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Rescue_Worker_1,available)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Communicate(Neighbor_3, Other_Neighbors, Storm_Update), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3, knows_about_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, house_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, limited_financial_resources)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Check_On_Elderly_Neighbor(Neighbor_3, Elderly_Neighbor), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3,knows_about_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3,limited_financial_resources)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Clear_Debris(Neighbor_3, Street), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3, house_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, limited_financial_resources)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Provide_Food_And_Water(Neighbor_3, Displaced_Neighbors), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3,limited_financial_resources)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3,knows_about_Displaced_Neighbors)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(Start, Neighbor3Intro, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3, knows_about_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, house_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(Neighbor3Intro, EmilyApproach, Introduction, Neutral), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3,knows_about_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "DES(Neighbor_3,secure_their_property)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(EmilyApproach, Neighbor3Grateful, Initiative, Helpful), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3, limited_financial_resources)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, house_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(Neighbor3Grateful, EmilyCarry, Grateful, Appreciative), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3,wants_to_evacuate)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3,limited_financial_resources)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(EmilyCarry, Neighbor3Safe, Initiative, Helpful), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3, house_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, knows_about_hurricane)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "BEL(Neighbor_3, limited_financial_resources)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(Neighbor3Safe, End, Gratitude, Appreciative), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Neighbor_3, house_is_not_safe)",
+                "NewValue": "True",
+                "ObserverAgent": "Neighbor_3"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Neighbor_3"
+              }
+            ]
+          }
+        ]
+      },
+      "Priorities": {
+        "dictionary": [
+          {
+            "key": "Event(Action-End, Emily, Convince(Morgan, Emily, SafeLocation), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Emily, Reassure(Grace, Emily), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Emily, Prepare(Emily, House), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Emily, Evacuate(Emily, Neighbor_1), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Emily, Care(Emily, InjuredNeighbor_2), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Emily, Rebuild(Emily, House), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Emily, Help(Emily, Rescue_Worker_1, CleanUp), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Emily, Report(Emily, FallenTree), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Emily, Search(Emily, MissingPet), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Emily, Donate(Emily, FoodSupplies), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Emily, Speak(EmilyIntro, MorganPanic, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, Panic(Morgan), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, CheckWeather(Morgan), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, PackBags(Morgan, null), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, CallFamily(Morgan, null, Grace, Emily), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, SearchForImportantDocuments(Morgan), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, AskNeighborsForHelp(Morgan, Neighbor_1, Can_you_help_me_carry_these_bags_to_the_car), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, GetInCar(Morgan, null), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, FollowEvacuationRoute(Morgan, null), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, ExpressGratitude(Morgan, Rescue_Worker_1, null), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, StayCalm(Morgan), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(Start, MorganIntro, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(MorganIntro, EmilyExplanation, Confusion, Urgent), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(EmilyExplanation, MorganPanic, Confusion, Urgent), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(MorganPanic, EmilyHelp, Panic, Emotional), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(EmilyHelp, MorganReassurance, Support, Comforting), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Morgan, Speak(MorganReassurance, End, Gratitude, Appreciative), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Talk(Grace, Emily, Reassurance), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Hide(Grace, Under_The_Table), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Cry(Grace, Null), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Hug(Grace, Emily), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Listen(Grace, Neighbor_1, Worries), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Watch_TV(Grace, Null), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Play_Board_Game(Grace, Emily), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Sleep(Grace, Null), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(Start, GraceIntro, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(GraceIntro, EmilyTask, SmallTalk, Casual), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(EmilyTask, GraceTask, SmallTalk, Casual), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(GraceTask, EmilyFear, Concern, Worried), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(EmilyFear, GraceComfort, Support, Comforting), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Grace, Speak(GraceComfort, End, Gratitude, Appreciative), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, MoveTo(Rescue_Worker_1, Location_Shelter), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Evacuate(Neighbor_1), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Evacuate(Neighbor_2), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Evacuate(Neighbor_3), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, ClearDebris(Rescue_Worker_1, Road), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, HelpInjured(Rescue_Worker_1, Injured_Neighbor_1, FirstAid_Kit), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, HelpInjured(Rescue_Worker_1, Injured_Neighbor_2, FirstAid_Kit), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, AssistWithRebuilding(Rescue_Worker_1, Neighbor_1), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, AssistWithRebuilding(Rescue_Worker_1, Neighbor_2), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, AssistWithRebuilding(Rescue_Worker_1, Neighbor_3), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(Start, RW1Intro, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(RW1Intro, RW1Concern, Neutral, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(RW1Concern, RW1Action, Concern, Sympathetic), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(RW1Action, RW1Neighbor, Initiative, Helpful), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(RW1Neighbor, RW1Safety, Neutral, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_1, Speak(RW1Safety, End, Neutral, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Move(Rescue_Worker_2, Neighbor_3, Location-Type), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Assess_Damage(Rescue_Worker_2, Neighbor_3), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Clear_Rubble(Rescue_Worker_2, Neighbor_3), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Provide_Food(Rescue_Worker_2, Neighbor_3, Food-Type), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Reassure(Rescue_Worker_2, Neighbor_3, Message), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Evacuate(Rescue_Worker_2, Neighbor_3, Destination-Type), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Repair(Rescue_Worker_2, Neighbor_3, Item-Type), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(Start, RescueWorkerIntro, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(RescueWorkerIntro, MorganPanic, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(MorganPanic, RescueWorkerPlan, Confusion, Authoritative), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(RescueWorkerPlan, NeighborConcerned, Explanation, Calm), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(NeighborConcerned, RescueWorkerAssist, Assistance, Friendly), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Rescue_Worker_2, Speak(RescueWorkerAssist, End, Assistance, Helpful), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Evacuate(Neighbor_1, Safe_Location), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Check_On(Neighbor_1, Neighbor_2), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Check_On(Neighbor_1, Neighbor_3), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Help_Out(Neighbor_1, Clear_Debri, time_2_hours), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Request_Assistance(Neighbor_1, Rescue_Worker_1, typeMedical, severityLow), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Collect_Food(Neighbor_1, Neighbor_2, quantity5), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(Start, NeighborIntro, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(NeighborIntro, EmilyApproach, Introduction, Friendly), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(EmilyApproach, NeighborAnxious, SmallTalk, Friendly), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(NeighborAnxious, EmilyReassurance, Anxiety, Emotional), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(EmilyReassurance, NeighborGrateful, Advice, Encouraging), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_1, Speak(NeighborGrateful, End, Gratitude, Appreciative), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Call(Neighbor_2, Rescue_Worker_1), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, AskForHelp(Neighbor_2, Rescue_Worker_1), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Thank(Rescue_Worker_1, Neighbor_2), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, RepairHouse(Neighbor_2, Neighbor_1), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, OfferSupplies(Neighbor_2, Neighbor_1, Water), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, ReceiveSupplies(Neighbor_1, Neighbor_2, Food), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, GiveInstructions(Neighbor_2, Neighbor_3, EvacuationPlan), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, FollowInstructions(Neighbor_3, Neighbor_2), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(Start, NeighborIntro, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(NeighborIntro, MorganPanic, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(MorganPanic, NeighborHelp, Explanation, Concerned), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(NeighborHelp, EmilyRescueWorker, Initiative, Grateful), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(EmilyRescueWorker, NeighborGratitude, Grateful, Appreciative), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_2, Speak(NeighborGratitude, End, Grateful, Appreciative), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Evacuate(Neighbor_3, Safe_Location), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Seek_Help(Neighbor_3, Rescue_Worker_1), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Communicate(Neighbor_3, Other_Neighbors, Storm_Update), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Check_On_Elderly_Neighbor(Neighbor_3, Elderly_Neighbor), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Clear_Debris(Neighbor_3, Street), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Provide_Food_And_Water(Neighbor_3, Displaced_Neighbors), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(Start, Neighbor3Intro, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(Neighbor3Intro, EmilyApproach, Introduction, Neutral), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(EmilyApproach, Neighbor3Grateful, Initiative, Helpful), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(Neighbor3Grateful, EmilyCarry, Grateful, Appreciative), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(EmilyCarry, Neighbor3Safe, Initiative, Helpful), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Neighbor_3, Speak(Neighbor3Safe, End, Gratitude, Appreciative), [t])",
+            "value": 1
+          }
+        ]
+      }
+    },
+    "Dialogues": [
+      {
+        "CurrentState": "Start",
+        "NextState": " EmilyIntro",
+        "Meaning": " Introduction",
+        "Style": " Neutral",
+        "Utterance": " \"Hey",
+        "UtteranceId": "TTS-0CCQGAOD7QESW9EF8L9KKD9Q801JJRX1"
+      },
+      {
+        "CurrentState": "EmilyIntro",
+        "NextState": " MorganPanic",
+        "Meaning": " Introduction",
+        "Style": " Neutral",
+        "Utterance": " \"Why are we packing all our stuff?\"",
+        "UtteranceId": "TTS-0CCUO9XVC3MQO2GCE61QHH08QY1CBLL2"
+      },
+      {
+        "CurrentState": "MorganPanic",
+        "NextState": " EmilyCalm",
+        "Meaning": " Confusion",
+        "Style": " Urgent",
+        "Utterance": " \"Mom",
+        "UtteranceId": "TTS-0CCBXT5B14N6B4HVL8E3GMUKVUC16BN5"
+      },
+      {
+        "CurrentState": "EmilyCalm",
+        "NextState": " MorganPanic",
+        "Meaning": " Explanation",
+        "Style": " Calm",
+        "Utterance": " \"There's a hurricane coming",
+        "UtteranceId": "TTS-0CC7EWG3WLKLB9NEUG1DBOQ3VZSDFXMO"
+      },
+      {
+        "CurrentState": "MorganPanic",
+        "NextState": " EmilyHelp",
+        "Meaning": " Panic",
+        "Style": " Emotional",
+        "Utterance": " \"Oh no! What should we do?\"",
+        "UtteranceId": "TTS-0CC730MWLUTZVBLUUVR67CODHEXVVBP8"
+      },
+      {
+        "CurrentState": "EmilyHelp",
+        "NextState": " GraceFear",
+        "Meaning": " Concern",
+        "Style": " Helpful",
+        "Utterance": " \"Grace",
+        "UtteranceId": "TTS-0CC7BZ1EAQZ19OOBZR9FWPVQ43H84773"
+      },
+      {
+        "CurrentState": "GraceFear",
+        "NextState": " EmilyComfort",
+        "Meaning": " Fear",
+        "Style": " Emotional",
+        "Utterance": " \"I'm so scared",
+        "UtteranceId": "TTS-0CCSJ0NOXAWPZISDBQ4O6ZBKA29J3YPI"
+      },
+      {
+        "CurrentState": "EmilyComfort",
+        "NextState": " GraceCalm",
+        "Meaning": " Support",
+        "Style": " Comforting",
+        "Utterance": " \"It's okay",
+        "UtteranceId": "TTS-0CCTX5QI198R5P8W9C0QKKMZTQ2DKY8D"
+      },
+      {
+        "CurrentState": "GraceCalm",
+        "NextState": " EmilyRescueWorker",
+        "Meaning": " Gratitude",
+        "Style": " Appreciative",
+        "Utterance": " \"Thank you",
+        "UtteranceId": "TTS-0CCK0G2Q8W52J3IH4WGX2ADFC1OIJ0LO"
+      },
+      {
+        "CurrentState": "EmilyRescueWorker",
+        "NextState": " NeighborApproach",
+        "Meaning": " Initiative",
+        "Style": " Appreciative",
+        "Utterance": " \"Hi",
+        "UtteranceId": "TTS-0CC5O69L98NS30SYOF7WGINIJGP0XEDB"
+      },
+      {
+        "CurrentState": "NeighborApproach",
+        "NextState": " EmilyThankYou",
+        "Meaning": " Gratitude",
+        "Style": " Appreciative",
+        "Utterance": " \"Thank you so much for your help",
+        "UtteranceId": "TTS-0CCN7CPTTTIPHMHLCH5GV2O4FFY6P13D"
+      },
+      {
+        "CurrentState": "EmilyThankYou",
+        "NextState": " End",
+        "Meaning": " Gratitude",
+        "Style": " Appreciative",
+        "Utterance": " \"You're welcome. I'm glad I could help.\"",
+        "UtteranceId": "TTS-0CCWPV12WGOYCG0Q61HMHCOP8YMTQJFJ"
+      }
+    ]
+  },
+  "types": [
+    {
+      "TypeId": 0,
+      "ClassName": "IntegratedAuthoringTool.IntegratedAuthoringToolAsset, IntegratedAuthoringTool, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null"
+    }
+  ]
+}

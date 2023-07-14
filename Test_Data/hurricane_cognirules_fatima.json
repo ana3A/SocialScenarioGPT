@@ -1,0 +1,3323 @@
+[
+  "EmotionalDecisionMakingAsset",
+  {
+    "root": {
+      "classId": 0,
+      "ActionTendencies": [
+        {
+          "Action": "Convince(Morgan, Emily, SafeLocation)",
+          "Target": "Emily",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, In_Panic) = True",
+              "BEL(Emily, Evacuation_Needed) = True",
+              "BEL(Emily, Hurricane_Approaching) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Reassure(Grace, Emily)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Emily, Hurricane_Approaching) = True",
+              "BEL(Emily, Family_Members_Require_Assistance) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Prepare(SELF, House)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Emily, Evacuation_Needed) = True",
+              "BEL(Emily, Hurricane_Approaching) = True",
+              "BEL(Emily, Property_Damage_Likely) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Evacuate(SELF, Neighbor_1)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Emily, Evacuation_Needed) = True",
+              "BEL(Emily, Hurricane_Approaching) = True",
+              "BEL(Emily, Family_Members_Require_Assistance) = False",
+              "BEL(Emily, Need_to_Check_on_Neighbors) = False",
+              "BEL(Emily, Property_Damage_Likely) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Care(SELF, InjuredNeighbor_2)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Emily, Hurricane_Approaching) = True",
+              "BEL(Emily, Family_Members_Require_Assistance) = True",
+              "BEL(InjuredNeighbor_2, Injury) = True",
+              "BEL(Emily, Property_Damage_Likely) = True",
+              "BEL(Emily, Evacuation_Needed) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Rebuild(SELF, House)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Emily, Help_Rebuild_Neighbors_Property) = True",
+              "BEL(Emily, Property_Damage_Likely) = True",
+              "BEL(Neighbor_1, House_Damaged) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Help(SELF, Rescue_Worker_1, CleanUp)",
+          "Target": "Rescue_Worker_1",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Emily, Hurricane_Approaching) = True",
+              "BEL(Emily, Evacuation_Needed) = True",
+              "BEL(Emily, Family_Members_Require_Assistance) = False",
+              "BEL(Rescue_Worker_1, Available_for_Help) = True",
+              "BEL(Rescue_Worker_1, Has_Requested_Help) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Report(SELF, FallenTree)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Emily, Evacuation_Needed) = True",
+              "BEL(Emily, Hurricane_Approaching) = True",
+              "BEL(Emily, Family_Members_Require_Assistance) = False",
+              "BEL(Emily, Property_Damage_Likely) = True",
+              "BEL(Emily, FallenTree_Reported) = False",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Search(SELF, MissingPet)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Emily, Evacuation_Needed) = False",
+              "BEL(Emily, Hurricane_Approaching) = True",
+              "BEL(Emily, Property_Damage_Likely) = True",
+              "BEL(Emily, Family_Members_Require_Assistance) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Donate(SELF, FoodSupplies)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Emily, Evacuation_Needed) = False",
+              "BEL(Emily, Property_Damage_Likely) = False",
+              "DES(Emily, Assist_in_Neighbor_Evacuation) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(EmilyIntro, MorganPanic, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Emily, Evacuation_Needed) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Panic(Morgan)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "CheckWeather(Morgan)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, believes_information_about_storm) = False",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "PackBags(Morgan, null)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, believes_home_is_not_safe) = True",
+              "BEL(Morgan, desires_to_evacuate) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "CallFamily(Morgan, null, Grace, Emily)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, believes_need_to_protect_family) = True",
+              "BEL(Morgan, believes_home_is_not_safe) = True",
+              "DES(Morgan, desires_to_stay_in_contact_with_extended_family) = True",
+              "Mood(SELF) = 1"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "SearchForImportantDocuments(Morgan)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, desires_information_about_storm) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "AskNeighborsForHelp(Morgan, Neighbor_1, Can_you_help_me_carry_these_bags_to_the_car)",
+          "Target": "Neighbor_1",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, believes_home_is_not_safe) = True",
+              "BEL(Neighbor_1, believes_in_helping_others) = True",
+              "Mood(SELF) = -3"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "GetInCar(Morgan, null)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, believes_home_is_not_safe) = True",
+              "BEL(Morgan, desires_adequate_shelter) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "FollowEvacuationRoute(Morgan, null)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "DES(Morgan, desires_to_evacuate) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ExpressGratitude(Morgan, Rescue_Worker_1, null)",
+          "Target": "Rescue_Worker_1",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, believes_need_to_protect_family) = True",
+              "BEL(Morgan, believes_evacuation_is_necessary) = True",
+              "BEL(Rescue_Worker_1, desires_to_help_people) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "StayCalm(Morgan)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, believes_home_is_not_safe) = True",
+              "BEL(Morgan, believes_evacuation_is_necessary) = True",
+              "BEL(Morgan, believes_family_is_accounted_for) = True",
+              "Mood(SELF) = 5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start, MorganIntro, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(MorganIntro, EmilyExplanation, Confusion, Urgent)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, believes_home_is_not_safe) = True",
+              "BEL(Morgan, believes_evacuation_is_necessary) = True",
+              "BEL(Morgan, believes_need_to_protect_family) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(EmilyExplanation, MorganPanic, Confusion, Urgent)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, believes_home_is_not_safe) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(MorganPanic, EmilyHelp, Panic, Emotional)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, believes_home_is_not_safe) = True",
+              "BEL(Morgan, believes_evacuation_is_necessary) = True",
+              "BEL(Morgan, desires_to_evacuate) = True",
+              "BEL(Morgan, desires_family_safety) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(EmilyHelp, MorganReassurance, Support, Comforting)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, believes_home_is_not_safe) = True",
+              "DES(Morgan, desires_family_safety) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(MorganReassurance, End, Gratitude, Appreciative)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Morgan, believes_hurricane_approaching) = True",
+              "BEL(Morgan, believes_evacuation_is_necessary) = True",
+              "BEL(Morgan, believes_need_to_protect_family) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Talk(Grace, Emily, Reassurance)",
+          "Target": "Emily",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Grace, Scared) = True",
+              "BEL(Emily, Safe) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Hide(Grace, Under_The_Table)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Grace, Panic) = True",
+              "BEL(Emily, Comforting) = True",
+              "Mood(SELF) = -8"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Cry(Grace, Null)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Grace, scared) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Hug(Grace, Emily)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Grace, IsFeelingScared) = True",
+              "BEL(Emily, IsCloseToGrace) = True",
+              "Mood(SELF) = 5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Listen(Grace, Neighbor_1, Worries)",
+          "Target": "Neighbor_1",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Grace, Is_Listening) = False",
+              "BEL(Neighbor_1, Has_Worries) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Watch_TV(Grace, Null)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Grace, Watched_TV) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Play_Board_Game(Grace, Emily)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Grace, knows_how_to_play_board_game) = True",
+              "BEL(Emily, likes_board_games) = True",
+              "BEL(Grace, wants_to_bond_with_Emily) = True",
+              "Mood(SELF) = 2"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Sleep(Grace, Null)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Grace, Awake) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start, GraceIntro, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Emily, inHome) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(GraceIntro, EmilyTask, SmallTalk, Casual)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Grace, knowsEmily) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(EmilyTask, GraceTask, SmallTalk, Casual)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "DES(GraceTask) = None",
+              "BEL(Weather, HurricaneApproaching) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(GraceTask, EmilyFear, Concern, Worried)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(EmilyEvacuated) = False",
+              "DES(GraceTask) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(EmilyFear, GraceComfort, Support, Comforting)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(EmilyFear) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(GraceComfort, End, Gratitude, Appreciative)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(GraceFear) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "MoveTo(Rescue_Worker_1, Location_Shelter)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+              "BEL(Rescue_Worker_1, familiar_with_the_area) = True",
+              "BEL(Rescue_Worker_1, has_radio_communication) = True",
+              "BEL(Rescue_Worker_1, maintain_safe_distance_from_dangerous_areas) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Evacuate(Neighbor_1)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+              "BEL(Rescue_Worker_1, has_access_to_medical_supplies) = True",
+              "BEL(Neighbor_1, is_in_need_of_rescue) = True",
+              "BEL(Neighbor_1, is_in_safe_distance) = False",
+              "Mood(SELF) = 5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Evacuate(Neighbor_2)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+              "BEL(Rescue_Worker_1, has_radio_communication) = True",
+              "BEL(Neighbor_2, in_need_of_rescue) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Evacuate(Neighbor_3)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+              "BEL(Neighbor_3, stranded_in_dangerous_area) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ClearDebris(Rescue_Worker_1, Road)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+              "BEL(Rescue_Worker_1, familiar_with_the_area) = True",
+              "BEL(Rescue_Worker_1, has_radio_communication) = True",
+              "BEL(Road, blocked_with_debris) = True",
+              "Mood(SELF) = 0",
+              "Mood(SELF) = 5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "HelpInjured(Rescue_Worker_1, Injured_Neighbor_1, FirstAid_Kit)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_1, has_access_to_medical_supplies) = True",
+              "BEL(Rescue_Worker_1, familiar_with_the_area) = True",
+              "BEL(Injured_Neighbor_1, requires_medical_assistance) = True",
+              "Mood(SELF) = 5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "HelpInjured(Rescue_Worker_1, Injured_Neighbor_2, FirstAid_Kit)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_1, has_access_to_medical_supplies) = True",
+              "BEL(Injured_Neighbor_2, requires_first_aid) = True",
+              "BEL(Rescue_Worker_1, maintain_safe_distance_from_dangerous_areas) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "AssistWithRebuilding(Rescue_Worker_1, Neighbor_1)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_1, in_urgent_situation) = False",
+              "BEL(Rescue_Worker_1, trained_for_rescue_operations) = True",
+              "BEL(Rescue_Worker_1, has_access_to_medical_supplies) = True",
+              "BEL(Neighbor_1, needs_help_with_rebuilding) = True",
+              "BEL(Neighbor_1, has_tools_and_materials_for_rebuilding) = True",
+              "BEL(Neighbor_1, familiar_with_rebuilding_procedures) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "AssistWithRebuilding(Rescue_Worker_1, Neighbor_2)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_1, able_to_help_others) = True",
+              "BEL(Neighbor_2, in_need_of_assistance) = True",
+              "BEL(Rescue_Worker_1, has_tools_and_supplies) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "AssistWithRebuilding(Rescue_Worker_1, Neighbor_3)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_1, in_urgent_situation) = False",
+              "BEL(Neighbor_3, injured) = False",
+              "BEL(Neighbor_3, in_need_of_help) = True",
+              "BEL(Rescue_Worker_1, has_access_to_tools) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start, RW1Intro, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_1, has_radio_communication) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(RW1Intro, RW1Concern, Neutral, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+              "BEL(Rescue_Worker_1, trained_for_rescue_operations) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(RW1Concern, RW1Action, Concern, Sympathetic)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+              "BEL(Rescue_Worker_1, trained_for_rescue_operations) = True",
+              "BEL(Rescue_Worker_1, has_radio_communication) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(RW1Action, RW1Neighbor, Initiative, Helpful)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+              "BEL(Rescue_Worker_1, has_radio_communication) = True",
+              "BEL(RW1Neighbor, need_of_help) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(RW1Neighbor, RW1Safety, Neutral, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_1, has_radio_communication) = True",
+              "BEL(RW1Neighbor, is_in_danger) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(RW1Safety, End, Neutral, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+              "BEL(Rescue_Worker_1, has_radio_communication) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Move(Rescue_Worker_2, Neighbor_3, Location-Type)",
+          "Target": "Neighbor_3",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+              "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters) = True",
+              "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+              "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+              "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "Mood(SELF) = 0",
+              "Mood(SELF) = 0",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Assess_Damage(Rescue_Worker_2, Neighbor_3)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+              "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+              "BEL(Neighbor_3, is_in_need_of_rescue) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Clear_Rubble(Rescue_Worker_2, Neighbor_3)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+              "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+              "BEL(Neighbor_3, trapped_under_rubble) = True",
+              "Mood(SELF) = 2"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Provide_Food(Rescue_Worker_2, Neighbor_3, Food-Type)",
+          "Target": "Neighbor_3",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+              "BEL(Neighbor_3, in_need_of_food) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Reassure(Rescue_Worker_2, Neighbor_3, Message)",
+          "Target": "Neighbor_3",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "BEL(Neighbor_3, scared) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Evacuate(Rescue_Worker_2, Neighbor_3, Destination-Type)",
+          "Target": "Neighbor_3",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+              "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+              "BEL(Neighbor_3, in_need_of_evacuation) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Repair(Rescue_Worker_2, Neighbor_3, Item-Type)",
+          "Target": "Neighbor_3",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+              "DES(Rescue_Worker_2, assist_in_rescuing_people) = True",
+              "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "BEL(Neighbor_3, requires_item_repair) = True",
+              "BEL(Rescue_Worker_2, familiar_with_type_of_item_to_be_repaired) = True",
+              "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start, RescueWorkerIntro, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(RescueWorkerIntro, MorganPanic, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(MorganPanic, RescueWorkerPlan, Confusion, Authoritative)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(MorganPanic, is_safe) = False",
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+              "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+              "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters) = True",
+              "Bel(MorganPanic, available_for_rescue) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(RescueWorkerPlan, NeighborConcerned, Explanation, Calm)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+              "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+              "BEL(NeighborConcerned, aware_of_hurricane) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(NeighborConcerned, RescueWorkerAssist, Assistance, Friendly)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+              "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+              "BEL(NeighborConcerned, in_need_of_assistance) = True",
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(RescueWorkerAssist, End, Assistance, Helpful)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+              "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters) = True",
+              "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+              "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+              "BEL(Rescue_Worker_2, communication_systems_working) = True",
+              "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+              "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Evacuate(Neighbor_1, Safe_Location)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+              "BEL(Neighbor_1, HouseIsNotSafe) = True",
+              "DES(Neighbor_1, WantsToEvacuate) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Check_On(Neighbor_1, Neighbor_2)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+              "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+              "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+              "BEL(Neighbor_2, IsCloseBy) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Check_On(Neighbor_1, Neighbor_3)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+              "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+              "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+              "BEL(Neighbor_3, IsInHouse) = True",
+              "Mood(SELF) = 0",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Help_Out(Neighbor_1, Clear_Debri, time_2_hours)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_1, HouseIsNotSafe) = True",
+              "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+              "DES(Neighbor_1, WantsAssistance) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Request_Assistance(Neighbor_1, Rescue_Worker_1, typeMedical, severityLow)",
+          "Target": "Rescue_Worker_1",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+              "BEL(Rescue_Worker_1, KnowsAboutMedicalAssistance) = True",
+              "BEL(Rescue_Worker_1, IsAvailableForAssistance) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Collect_Food(Neighbor_1, Neighbor_2, quantity5)",
+          "Target": "Neighbor_2",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+              "BEL(Neighbor_2, KnowsAboutHurricane) = True",
+              "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+              "DES(Neighbor_1, WantsAssistance) = True",
+              "BEL(Neighbor_2, HasFood) = True",
+              "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start, NeighborIntro, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+              "BEL(Neighbor_1, HouseIsNotSafe) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(NeighborIntro, EmilyApproach, Introduction, Friendly)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+              "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(EmilyApproach, NeighborAnxious, SmallTalk, Friendly)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+              "BEL(Neighbor_1, HouseIsNotSafe) = True",
+              "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+              "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+              "Mood(SELF) = 1"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(NeighborAnxious, EmilyReassurance, Anxiety, Emotional)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+              "BEL(Neighbor_1, HouseIsNotSafe) = True",
+              "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+              "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(EmilyReassurance, NeighborGrateful, Advice, Encouraging)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+              "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+              "Mood(SELF) = 5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(NeighborGrateful, End, Gratitude, Appreciative)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+              "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Call(Neighbor_2, Rescue_Worker_1)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+              "BEL(Neighbor_2, believes_he_needs_help) = True",
+              "DES(Neighbor_2, desires_to_evacuate_safely) = True",
+              "DES(Neighbor_2, desires_to_prepare_survival_kit) = False",
+              "DES(Neighbor_2, desires_to_reinforce_his_house) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "AskForHelp(Neighbor_2, Rescue_Worker_1)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_2, believes_he_needs_help) = True",
+              "BEL(Rescue_Worker_1, believes_he_can_provide_help) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Thank(Rescue_Worker_1, Neighbor_2)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_2, believes_he_needs_help) = False",
+              "BEL(Rescue_Worker_1, is_present_at_Neighbor_2_house) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "RepairHouse(Neighbor_2, Neighbor_1)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_2, believes_his_house_is_not_strong_enough) = True",
+              "BEL(Neighbor_2, believes_he_needs_help) = False",
+              "BEL(Neighbor_1, believes_she_can_help_neighbor_2) = True",
+              "DES(Neighbor_2, desires_to_reinforce_his_house) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "OfferSupplies(Neighbor_2, Neighbor_1, Water)",
+          "Target": "Neighbor_1",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_2, desires_to_prepare_survival_kit) = True",
+              "BEL(Neighbor_2, believes_he_needs_help) = False",
+              "BEL(Neighbor_2, believes_his_house_is_not_strong_enough) = False",
+              "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+              "BEL(Neighbor_1, desires_to_evacuate_safely) = True",
+              "BEL(Neighbor_1, has_need_for_water) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ReceiveSupplies(Neighbor_1, Neighbor_2, Food)",
+          "Target": "Neighbor_2",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_2, believes_he_needs_help) = False",
+              "BEL(Neighbor_1, has_supplies) = True",
+              "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+              "Mood(SELF) = -3"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "GiveInstructions(Neighbor_2, Neighbor_3, EvacuationPlan)",
+          "Target": "Neighbor_3",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_2, desires_to_evacuate_safely) = True",
+              "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+              "BEL(Neighbor_3, is_willing_to_evacuate) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "FollowInstructions(Neighbor_3, Neighbor_2)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_3, is_present_in_the_area) = True",
+              "BEL(Neighbor_2, desires_to_evacuate_safely) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start, NeighborIntro, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(NeighborIntro, MorganPanic, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+              "BEL(Neighbor_2, believes_he_is_not_prepared) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(MorganPanic, NeighborHelp, Explanation, Concerned)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+              "BEL(Neighbor_2, believes_he_is_not_prepared) = True",
+              "BEL(Neighbor_2, believes_he_needs_help) = False",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(NeighborHelp, EmilyRescueWorker, Initiative, Grateful)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+              "BEL(Neighbor_2, believes_he_needs_help) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(EmilyRescueWorker, NeighborGratitude, Grateful, Appreciative)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_2, believes_he_needs_help) = False",
+              "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(NeighborGratitude, End, Grateful, Appreciative)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+              "BEL(Neighbor_2, believes_his_house_is_not_strong_enough) = True",
+              "BEL(Neighbor_2, believes_he_is_not_prepared) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Evacuate(Neighbor_3, Safe_Location)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_3, house_is_not_safe) = True",
+              "BEL(Neighbor_3, wants_to_evacuate) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Seek_Help(Neighbor_3, Rescue_Worker_1)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_3,knows_about_hurricane) = True",
+              "BEL(Neighbor_3,wants_to_evacuate) = True",
+              "BEL(Neighbor_3,limited_financial_resources) = True",
+              "BEL(Rescue_Worker_1,available) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Communicate(Neighbor_3, Other_Neighbors, Storm_Update)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_3, knows_about_hurricane) = True",
+              "BEL(Neighbor_3, house_is_not_safe) = True",
+              "BEL(Neighbor_3, limited_financial_resources) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Check_On_Elderly_Neighbor(Neighbor_3, Elderly_Neighbor)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_3,knows_about_hurricane) = True",
+              "BEL(Neighbor_3,limited_financial_resources) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Clear_Debris(Neighbor_3, Street)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_3, house_is_not_safe) = True",
+              "BEL(Neighbor_3, limited_financial_resources) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Provide_Food_And_Water(Neighbor_3, Displaced_Neighbors)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Neighbor_3,limited_financial_resources) = True",
+              "BEL(Neighbor_3,knows_about_Displaced_Neighbors) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start, Neighbor3Intro, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_3, knows_about_hurricane) = True",
+              "BEL(Neighbor_3, house_is_not_safe) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Neighbor3Intro, EmilyApproach, Introduction, Neutral)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_3,knows_about_hurricane) = True",
+              "DES(Neighbor_3,secure_their_property) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(EmilyApproach, Neighbor3Grateful, Initiative, Helpful)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_3, limited_financial_resources) = True",
+              "BEL(Neighbor_3, house_is_not_safe) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Neighbor3Grateful, EmilyCarry, Grateful, Appreciative)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_3,wants_to_evacuate) = True",
+              "BEL(Neighbor_3,limited_financial_resources) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(EmilyCarry, Neighbor3Safe, Initiative, Helpful)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_3, house_is_not_safe) = True",
+              "BEL(Neighbor_3, knows_about_hurricane) = True",
+              "BEL(Neighbor_3, limited_financial_resources) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Neighbor3Safe, End, Gratitude, Appreciative)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Neighbor_3, house_is_not_safe) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        }
+      ]
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "EmotionalDecisionMaking.EmotionalDecisionMakingAsset, EmotionalDecisionMaking, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "EmotionalAppraisalAsset",
+  {
+    "root": {
+      "classId": 0,
+      "Description": null,
+      "AppraisalRules": {
+        "AppraisalWeight": 1,
+        "Rules": [
+          {
+            "EventName": "Event(Action-End, Emily, Convince(Morgan, Emily, SafeLocation), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Emily, Reassure(Grace, Emily), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Emily, Prepare(Emily, House), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Emily, Evacuate(Emily, Neighbor_1), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Emily, Rebuild(Emily, House), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Emily, Help(Emily, Rescue_Worker_1, CleanUp), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Emily, Report(Emily, FallenTree), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Emily, Search(Emily, MissingPet), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Emily, Donate(Emily, FoodSupplies), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Emily, Speak(EmilyIntro, MorganPanic, Introduction, Neutral), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, Panic(Morgan), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.4,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, CheckWeather(Morgan), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.4,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, PackBags(Morgan, null), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, CallFamily(Morgan, null, Grace, Emily), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, SearchForImportantDocuments(Morgan), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, AskNeighborsForHelp(Morgan, Neighbor_1, Can_you_help_me_carry_these_bags_to_the_car), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, GetInCar(Morgan, null), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, FollowEvacuationRoute(Morgan, null), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, ExpressGratitude(Morgan, Rescue_Worker_1, null), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, StayCalm(Morgan), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, Speak(MorganIntro, EmilyExplanation, Confusion, Urgent), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.4,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, Speak(EmilyExplanation, MorganPanic, Confusion, Urgent), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.4,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, Speak(MorganPanic, EmilyHelp, Panic, Emotional), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, Speak(EmilyHelp, MorganReassurance, Support, Comforting), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Morgan, Speak(MorganReassurance, End, Gratitude, Appreciative), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Talk(Grace, Emily, Reassurance), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Hide(Grace, Under_The_Table), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.4,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Cry(Grace, Null), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Hug(Grace, Emily), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Listen(Grace, Neighbor_1, Worries), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                },
+                {
+                  "Name": "Desirability for others",
+                  "Value": -5,
+                  "Target": "[target]"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Watch_TV(Grace, Null), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Play_Board_Game(Grace, Emily), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Sleep(Grace, Null), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Speak(EmilyTask, GraceTask, SmallTalk, Casual), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Speak(EmilyFear, GraceComfort, Support, Comforting), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Grace, Speak(GraceComfort, End, Gratitude, Appreciative), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, MoveTo(Rescue_Worker_1, Location_Shelter), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, Evacuate(Neighbor_1), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, Evacuate(Neighbor_2), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, Evacuate(Neighbor_3), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, ClearDebris(Rescue_Worker_1, Road), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, HelpInjured(Rescue_Worker_1, Injured_Neighbor_1, FirstAid_Kit), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, HelpInjured(Rescue_Worker_1, Injured_Neighbor_2, FirstAid_Kit), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, AssistWithRebuilding(Rescue_Worker_1, Neighbor_1), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, AssistWithRebuilding(Rescue_Worker_1, Neighbor_2), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, AssistWithRebuilding(Rescue_Worker_1, Neighbor_3), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, Speak(Start, RW1Intro, Introduction, Neutral), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "SELF"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, Speak(RW1Intro, RW1Concern, Neutral, Neutral), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, Speak(RW1Action, RW1Neighbor, Initiative, Helpful), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, Speak(RW1Neighbor, RW1Safety, Neutral, Neutral), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_1, Speak(RW1Safety, End, Neutral, Neutral), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Move(Rescue_Worker_2, Neighbor_3, Location-Type), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Assess_Damage(Rescue_Worker_2, Neighbor_3), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Clear_Rubble(Rescue_Worker_2, Neighbor_3), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Provide_Food(Rescue_Worker_2, Neighbor_3, Food-Type), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Reassure(Rescue_Worker_2, Neighbor_3, Message), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Evacuate(Rescue_Worker_2, Neighbor_3, Destination-Type), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Repair(Rescue_Worker_2, Neighbor_3, Item-Type), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Speak(RescueWorkerIntro, MorganPanic, Introduction, Neutral), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Speak(RescueWorkerPlan, NeighborConcerned, Explanation, Calm), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Speak(NeighborConcerned, RescueWorkerAssist, Assistance, Friendly), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Rescue_Worker_2, Speak(RescueWorkerAssist, End, Assistance, Helpful), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Evacuate(Neighbor_1, Safe_Location), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Check_On(Neighbor_1, Neighbor_2), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Check_On(Neighbor_1, Neighbor_3), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": []
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Help_Out(Neighbor_1, Clear_Debri, time_2_hours), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Request_Assistance(Neighbor_1, Rescue_Worker_1, typeMedical, severityLow), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Collect_Food(Neighbor_1, Neighbor_2, quantity5), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Speak(Start, NeighborIntro, Introduction, Neutral), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Speak(NeighborIntro, EmilyApproach, Introduction, Friendly), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Speak(EmilyApproach, NeighborAnxious, SmallTalk, Friendly), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Speak(NeighborAnxious, EmilyReassurance, Anxiety, Emotional), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Speak(EmilyReassurance, NeighborGrateful, Advice, Encouraging), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_1, Speak(NeighborGrateful, End, Gratitude, Appreciative), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, Call(Neighbor_2, Rescue_Worker_1), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, AskForHelp(Neighbor_2, Rescue_Worker_1), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, Thank(Rescue_Worker_1, Neighbor_2), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, RepairHouse(Neighbor_2, Neighbor_1), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, OfferSupplies(Neighbor_2, Neighbor_1, Water), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, ReceiveSupplies(Neighbor_1, Neighbor_2, Food), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, GiveInstructions(Neighbor_2, Neighbor_3, EvacuationPlan), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, FollowInstructions(Neighbor_3, Neighbor_2), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, Speak(NeighborIntro, MorganPanic, Introduction, Neutral), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                },
+                {
+                  "Name": "Desirability for others",
+                  "Value": -5,
+                  "Target": "[target]"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, Speak(NeighborHelp, EmilyRescueWorker, Initiative, Grateful), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, Speak(EmilyRescueWorker, NeighborGratitude, Grateful, Appreciative), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_2, Speak(NeighborGratitude, End, Grateful, Appreciative), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_3, Evacuate(Neighbor_3, Safe_Location), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_3, Seek_Help(Neighbor_3, Rescue_Worker_1), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_3, Communicate(Neighbor_3, Other_Neighbors, Storm_Update), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_3, Check_On_Elderly_Neighbor(Neighbor_3, Elderly_Neighbor), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_3, Clear_Debris(Neighbor_3, Street), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_3, Provide_Food_And_Water(Neighbor_3, Displaced_Neighbors), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_3, Speak(Neighbor3Intro, EmilyApproach, Introduction, Neutral), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_3, Speak(EmilyApproach, Neighbor3Grateful, Initiative, Helpful), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_3, Speak(EmilyCarry, Neighbor3Safe, Initiative, Helpful), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Neighbor_3, Speak(Neighbor3Safe, End, Gratitude, Appreciative), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "EmotionalAppraisal.EmotionalAppraisalAsset, EmotionalAppraisal, Version=1.4.1.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "SocialImportanceAsset",
+  {
+    "root": {
+      "classId": 0,
+      "AttributionRules": []
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "SocialImportance.SocialImportanceAsset, SocialImportance, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "CommeillFautAsset",
+  {
+    "root": {
+      "classId": 0,
+      "SocialExchanges": []
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "CommeillFaut.CommeillFautAsset, CommeillFaut, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  }
+]

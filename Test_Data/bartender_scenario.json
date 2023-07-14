@@ -1,0 +1,755 @@
+{
+    "scenario_name": "bartender scenario",
+    "scenario_description": "social scenario with a bartender and two customers",
+    "agents": {
+        "Agent_A": {
+            "knowledge_base": [
+                "BEL(Agent_A, Bartender) = True",
+                "BEL(Agent_A, Busy) = False",
+                "BEL(Agent_A, Service) = True",
+                "BEL(Agent_A, Good_service) = False",
+                "BEL(Agent_A, Sales) = False",
+                "BEL(Agent_A, Music) = True",
+                "DES(Agent_A, Excellent_service) = True",
+                "DES(Agent_A, Increase_sales) = True",
+                "DES(Agent_A, Good_time) = True",
+                "DES(Agent_A, Controlled_environment) = True",
+                "DES(Agent_A, Customers_satisfied) = False"
+            ],
+            "initial_mood": [
+                "Mood(SELF)=7"
+            ],
+            "actions": {
+                "Believes(Agent_A, service_job)": {
+                    "conditions": [
+                        "BEL(Agent_A, Bartender) = True",
+                        "BEL(Agent_A, Service) = False",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_A, Service) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Believes(Agent_A, objective_ provide_customers_good_time)": {
+                    "conditions": [
+                        "BEL(Agent_A, Service) = True",
+                        "BEL(Agent_A, Good_time) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_A, Customers_satisfied) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Believes(Agent_A, objective_increase_sales)": {
+                    "conditions": [
+                        "BEL(Agent_A, Bartender) = True",
+                        "BEL(Agent_A, Increase_sales) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_A, Sales) = True",
+                        "BEL(Agent_A, Good_service) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ]
+                },
+                "Wants(Agent_A, objective_provide_excellent_service)": {
+                    "conditions": [
+                        "BEL(Agent_A, Service) = True",
+                        "BEL(Agent_A, Excellent_service) = False",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Agent_A, Excellent_service) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "OfferRecommendation(Agent_A, Agent_B, drink_type)": {
+                    "conditions": [
+                        "BEL(Agent_A, Bartender) = True",
+                        "BEL(Agent_B, Customer) = True",
+                        "BEL(Agent_A, Service) = True",
+                        "BEL(Agent_A, Good_service) = False",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Agent_A, Good_service) = True",
+                        "BEL(Agent_A, Sales) = True",
+                        "DES(Agent_A, Customers_satisfied) = True",
+                        "BEL(Agent_A, Busy) = True",
+                        "BEL(Agent_B, Drink_ordered) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "EngageInConversation(Agent_A, Agent_B)": {
+                    "conditions": [
+                        "BEL(Agent_A, Bartender) = True",
+                        "BEL(Agent_A, Service) = True",
+                        "BEL(Agent_A, Good_time) = True",
+                        "BEL(Agent_B, Customer) = True",
+                        "Mood(SELF) \u2265 0",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "DES(Agent_A, Customers_satisfied) = True",
+                        "BEL(Agent_A, Good_service) = True",
+                        "BEL(Agent_B, Conversing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "ListenAndSupport(Agent_A, Agent_C, sensitive_topic)": {
+                    "conditions": [
+                        "BEL(Agent_A, Service) = True",
+                        "BEL(Agent_C, AtBar) = True",
+                        "DES(Agent_C, ExpressEmotion) = True",
+                        "BEL(Agent_A, Controlled_environment) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Agent_C, Relief) = True",
+                        "BEL(Agent_C, EmotionalSupport) = True",
+                        "BEL(Agent_A, Helping_customer) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pity(Agent_A)"
+                    ]
+                },
+                "MonitorAndDiffuse(Agent_A, Agent_B, disturbance_caused_by_intoxication)": {
+                    "conditions": [
+                        "BEL(Agent_A, Controlled_environment) = True",
+                        "BEL(Agent_A, Good_service) = True",
+                        "BEL(Agent_A, Good_time) = True",
+                        "BEL(Agent_B, Intoxicated) = True",
+                        "BEL(Agent_B, Disturbance_caused) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Agent_A, Controlled_environment) = False",
+                        "BEL(Agent_A, Disturbance_present) = True",
+                        "BEL(Agent_A, Intervention_needed) = True",
+                        "BEL(Agent_B, Intervention_required) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "CallForBackup(Agent_A, security, belligerent_customer)": {
+                    "conditions": [
+                        "BEL(Agent_A, Controlled_environment) = True",
+                        "BEL(security, Available) = True",
+                        "BEL(belligerent_customer, Present) = True",
+                        "Mood(SELF) < -5"
+                    ],
+                    "effects": [
+                        "BEL(Agent_A, Controlled_environment) = False",
+                        "BEL(security, Available) = False",
+                        "BEL(belligerent_customer, Present) = False",
+                        "BEL(security, Alerted) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "AccommodateNeeds(Agent_A, Agent_B, intoxicated_customer)": {
+                    "conditions": [
+                        "BEL(Agent_A, Bartender) = True",
+                        "BEL(Agent_A, Busy) = True",
+                        "BEL(Agent_A, Service) = True",
+                        "BEL(Agent_A, Controlled_environment) = True",
+                        "BEL(Agent_B, Wants_service) = True",
+                        "BEL(intoxicated_customer, Ability_to_pay) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_A, Good_service) = True",
+                        "BEL(Agent_A, Sales) = True",
+                        "DES(Agent_A, Customers_satisfied) = True",
+                        "DES(Agent_B, Satisfied) = True",
+                        "BEL(intoxicated_customer, Needs_accommodated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction(Agent_A)"
+                    ]
+                },
+                "EnforceBarRules(Agent_A, Agent_B)": {
+                    "conditions": [
+                        "BEL(Agent_A, Bartender) = True",
+                        "BEL(Agent_B, Customer) = True",
+                        "BEL(Agent_B, Intoxicated) = True",
+                        "BEL(Agent_B, Causing_disturbance) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Agent_A, Controlled_environment) = True",
+                        "BEL(Agent_B, Kicked_out) = True",
+                        "BEL(Agent_B, Satisfied_with_service) = False"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ]
+                },
+                "RemoveFromPremises(Agent_A, Agent_C, belligerent_customer)": {
+                    "conditions": [
+                        "BEL(Agent_A, Controlled_environment) = True",
+                        "BEL(Agent_A, Good_service) = True",
+                        "BEL(Agent_C, belligerent_customer) = True",
+                        "Mood(SELF) > 5"
+                    ],
+                    "effects": [
+                        "BEL(Agent_A, Controlled_environment) = True",
+                        "DES(Agent_A, Customers_satisfied) = True",
+                        "BEL(Agent_C, belligerent_customer) = False",
+                        "DES(Agent_C, Removed_from_bar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief(Agent_A)"
+                    ]
+                },
+                "FeelRelieved(Agent_A)": {
+                    "conditions": [
+                        "BEL(Agent_A, Customers_satisfied) = True",
+                        "BEL(Agent_A, Controlled_environment) = True",
+                        "BEL(Agent_A, Increase_sales) = False",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_A, Customers_satisfied) = False",
+                        "BEL(Agent_A, Good_service) = True",
+                        "BEL(Agent_A, Increase_sales) = True",
+                        "DES(Agent_A, Good_time) = True",
+                        "DES(Agent_A, Controlled_environment) = True",
+                        "DES(Agent_A, Excellent_service) = True",
+                        "DES(Agent_A, Sales_boost) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "FeelHappy(Agent_A)": {
+                    "conditions": [
+                        "BEL(Agent_A, Good_service) = True",
+                        "BEL(Agent_A, Service) = True",
+                        "DES(Agent_A, Excellent_service) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Agent_A, Customers_satisfied) = True",
+                        "DES(Agent_A, Increase_sales) = True",
+                        "BEL(Agent_A, Sales) = True",
+                        "BEL(Agent_A, Good_service) = True",
+                        "BEL(Agent_A, Service) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "FeelAccomplished(Agent_A)": {
+                    "conditions": [
+                        "BEL(Agent_A, Good_service) = True",
+                        "BEL(Agent_A, Service) = True",
+                        "DES(Agent_A, Excellent_service) = True",
+                        "Mood(SELF) >= 1"
+                    ],
+                    "effects": [
+                        "DES(Agent_A, Customers_satisfied) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ]
+                },
+                "FeelGrateful(Agent_A)": {
+                    "conditions": [
+                        "BEL(Agent_A, Good_service) = True",
+                        "DES(Agent_A, Excellent_service) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Agent_A, Customers_satisfied) = True",
+                        "BEL(Agent_A, Increase_sales) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                }
+            },
+            "speak_actions": {}
+        },
+        "Agent_B": {
+            "knowledge_base": [
+                "BEL(Agent_B, at_bar) = True",
+                "BEL(Agent_B, with_friends) = True",
+                "BEL(Agent_B, wants_to_socialize) = True",
+                "BEL(Agent_B, likes_drinks) = True",
+                "BEL(Agent_B, knows_drinks) = True",
+                "DES(Agent_B, have_a_good_time) = True",
+                "DES(Agent_B, try_new_drinks) = True",
+                "DES(Agent_B, be_entertained) = True",
+                "DES(Agent_B, avoid_conflict) = True"
+            ],
+            "initial_mood": [
+                "Mood(SELF)=0"
+            ],
+            "actions": {
+                "AskForDrinkRecommendation(Agent_B, Agent_A)": {
+                    "conditions": [
+                        "BEL(Agent_B, at_bar) = True",
+                        "BEL(Agent_A, bartender) = True",
+                        "BEL(Agent_A, knows_drinks) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_B, received_recommendation) = True",
+                        "BEL(Agent_A, made_recommendation) = True",
+                        "DES(Agent_B, satisfied_with_drink) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "ExpressGratitude(Agent_B, Agent_A)": {
+                    "conditions": [
+                        "BEL(Agent_B, served_by_Agent_A) = True",
+                        "BEL(Agent_A, provided_good_service) = True",
+                        "DES(Agent_A, be appreciated) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_B, expresses_gratitude_to_Agent_A) = True",
+                        "BEL(Agent_A, received_gratitude_from_Agent_B) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "OrderAnotherDrink(Agent_B, Agent_A)": {
+                    "conditions": [
+                        "BEL(Agent_B, at_bar) = True",
+                        "BEL(Agent_A, is_bartender) = True",
+                        "BEL(Agent_A, can_serve_another_drink) = True",
+                        "Mood(SELF) > 2"
+                    ],
+                    "effects": [
+                        "DES(Agent_B, try_new_drinks) = True",
+                        "BEL(Agent_B, likes_drinks) = True",
+                        "BEL(Agent_B, knows_drinks) = True",
+                        "BEL(Agent_A, served_drink_to_Agent_B) = True",
+                        "BEL(Agent_A, checked_Agent_B_ID) = True",
+                        "BEL(Agent_A, increased_sales) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "DanceWithFriends(Agent_B)": {
+                    "conditions": [
+                        "BEL(Agent_B, at_bar) = True",
+                        "BEL(Agent_B, with_friends) = True",
+                        "BEL(Agent_B, wants_to_socialize) = True",
+                        "BEL(Agent_B, avoid_conflict) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Agent_B, have_a_good_time) = True",
+                        "DES(Agent_B, be_entertained) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "LaughAndMakeJokes(Agent_B)": {
+                    "conditions": [
+                        "BEL(Agent_B, at_bar) = True",
+                        "BEL(Agent_B, with_friends) = True",
+                        "BEL(Agent_B, wants_to_socialize) = True",
+                        "DES(Agent_B, be_entertained) = True",
+                        "DES(Agent_B, avoid_conflict) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_B, amused) = True",
+                        "BEL(Agent_B, laughing) = True",
+                        "DES(Agent_B, have_a_better_time) = True",
+                        "DES(Agent_B, improve_friendly_bonding) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "PayTheBill(Agent_B, Agent_A)": {
+                    "conditions": [
+                        "BEL(Agent_B, at_bar) = True",
+                        "BEL(Agent_B, with_friends) = True",
+                        "BEL(Agent_A, accepts_payment) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Agent_B, fulfilled_socializing_desire) = True",
+                        "DES(Agent_B, fulfilled_trying_new_drinks_desire) = True",
+                        "BEL(Agent_B, satisfied_with_service) = True",
+                        "BEL(Agent_B, paid_for_consumption) = True",
+                        "BEL(Agent_A, received_payment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "ApologizeForAccidentallySpillingDrink(Agent_B, Agent_A)": {
+                    "conditions": [
+                        "BEL(Agent_B, at_bar) = True",
+                        "BEL(Agent_B, knows_Agent_A) = True",
+                        "BEL(Agent_B, accidentally_spilled_drink) = False",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_B, accidentally_spilled_drink) = True",
+                        "BEL(Agent_A, received_apology) = True",
+                        "DES(Agent_B, avoid_conflict) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ]
+                }
+            },
+            "speak_actions": {}
+        },
+        "Agent_C": {
+            "knowledge_base": [
+                "BEL(Agent_C, is_at_bar) = True",
+                "BEL(Agent_C, emotional_state) = sad",
+                "BEL(Agent_C, reason_for_drinking) = breakup",
+                "BEL(Agent_C, prefers_solitude) = True",
+                "DES(Agent_C, forget_breakup) = True",
+                "DES(Agent_C, avoid_interactions) = True",
+                "DES(Agent_C, numb_the_pain) = True",
+                "DES(Agent_C, anonymity) = True"
+            ],
+            "initial_mood": [
+                "Mood(SELF)=-7"
+            ],
+            "actions": {
+                "OrderDrink(Agent_C, Agent_A, \"Whiskey_Soda\")": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, prefers_solitude) = True",
+                        "BEL(Agent_A, can_serve_drink) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, is_drinking) = True",
+                        "BEL(Agent_C, emotional_state) = numb",
+                        "BEL(Agent_A, made_sale) = True",
+                        "DES(Agent_C, forget_breakup) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "ActivatePhone(Agent_C)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, prefers_solitude) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, phone_active) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "LookAround(Agent_C, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "DES(Agent_C, avoid_interactions) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, familiar_with_bar) = True",
+                        "BEL(Agent_C, noticed_atmosphere) = True",
+                        "BEL(Agent_C, identified_bartender) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ]
+                },
+                "Sigh(Agent_C, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, emotional_state) = sadder",
+                        "DES(Agent_C, avoid_interactions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ]
+                },
+                "PayBill(Agent_C, Agent_A, Amount)": {
+                    "conditions": [
+                        "BEL(Agent_C, has_enough_money) = True",
+                        "BEL(Agent_A, is_ready_to_receive_payment) = True",
+                        "BEL(Agent_A, has_provided_service) = True",
+                        "BEL(Agent_A, service_cost) = Amount",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, has_enough_money) = False",
+                        "BEL(Agent_A, is_ready_to_receive_payment) = False",
+                        "BEL(Agent_A, has_received_payment_from_Agent_C) = True",
+                        "BEL(Agent_C, satisfied_with_service) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief",
+                        "Disappointment"
+                    ]
+                },
+                "LeaveBar(Agent_C, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, prefers_solitude) = True",
+                        "Mood(SELF) < -5",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, is_at_bar) = False",
+                        "DES(Agent_C, avoid_interactions) = False",
+                        "DES(Agent_C, numb_the_pain) = False",
+                        "DES(Agent_C, anonymity) = False",
+                        "BEL(Agent_C, emotional_state) = neutral"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Start, Greeting2, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, prefers_solitude) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "BEL(Agent_C, reason_for_drinking) = breakup",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, avoid_interactions) = True",
+                        "BEL(Agent_C, anonymity) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "Speak(Greeting2, DrinkOrder, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, prefers_solitude) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Speak(DrinkOrder, Sad, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "DES(Agent_C, avoid_interactions) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, is_ordering_drink) = True",
+                        "DES(Agent_C, numb_the_pain) = True",
+                        "DES(Agent_C, anonymity) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ]
+                },
+                "Speak(Sad, Concerned, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "BEL(Agent_C, reason_for_drinking) = breakup",
+                        "DES(Agent_C, avoid_interactions) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, emotional_state) = concerned",
+                        "DES(Agent_C, avoid_interactions) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ]
+                },
+                "Speak(Concerned, Empathetic, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "DES(Agent_C, avoid_interactions) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, emotional_state) = comforted",
+                        "DES(Agent_C, avoid_interactions) = False"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ]
+                },
+                "Speak(Empathetic, Goodbye2, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, emotional_state) = comforted",
+                        "BEL(Agent_A, emotional_state) = empathic"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Speak(DrinkOrder, Intoxicated, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "BEL(Agent_C, prefers_solitude) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, reason_for_drinking) = breakup",
+                        "DES(Agent_C, numb_the_pain) = True",
+                        "DES(Agent_C, avoid_interactions) = True",
+                        "DES(Agent_C, forget_breakup) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ]
+                },
+                "Speak(Intoxicated, Concerned2, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "DES(Agent_C, avoid_interactions) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = concerned",
+                        "BEL(Agent_C, reason_for_drinking) = breakup",
+                        "BEL(Agent_C, prefers_solitude) = True",
+                        "DES(Agent_C, forget_breakup) = True",
+                        "DES(Agent_C, avoid_interactions) = True",
+                        "DES(Agent_C, numb_the_pain) = True",
+                        "DES(Agent_C, anonymity) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Concerned2, Observant, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Concerned2, is_empathetic) = True",
+                        "BEL(Concerned2, is_observant) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ]
+                },
+                "Speak(Observant, Angry, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, prefers_solitude) = True",
+                        "Mood(SELF) < -6"
+                    ],
+                    "effects": [
+                        "BEL(Observant, is_angry_with_Agent_C) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "Speak(Angry, Calming, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "BEL(Agent_C, prefers_solitude) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, emotional_state) = angry"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ]
+                },
+                "Speak(Calming, Goodbye3, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "BEL(Agent_C, prefers_solitude) = True",
+                        "Mood(SELF) > -2"
+                    ],
+                    "effects": [
+                        "DES(Agent_C, forget_breakup) = True",
+                        "DES(Agent_C, avoid_interactions) = True",
+                        "BEL(Agent_C, emotional_state) = calm"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ]
+                },
+                "Speak(Observant, Goodbye, None, None)": {
+                    "conditions": [
+                        "BEL(Agent_C, is_at_bar) = True",
+                        "BEL(Agent_C, emotional_state) = sad",
+                        "BEL(Agent_C, reason_for_drinking) = breakup",
+                        "DES(Agent_C, avoid_interactions) = True",
+                        "DES(Agent_C, anonymity) = True",
+                        "Mood(SELF) = -10"
+                    ],
+                    "effects": [
+                        "BEL(Agent_C, is_at_bar) = False",
+                        "DES(Agent_C, forget_breakup) = True",
+                        "BEL(Observant, is_said_goodbye) = True"
+                    ],
+                    "occ_emotion": []
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, Greeting, None, None, \"Hi, can I get a drink please?\">",
+        "<Greeting, DrinkOrder, None, None, \"Sure! What would you like to order?\">",
+        "<DrinkOrder, Recommendation, None, None, \"What do you recommend?\">",
+        "<Recommendation, DrinkOrder, None, None, \"I recommend trying our signature cocktail, it's our bestseller! What do you think?\">",
+        "<DrinkOrder, Happy, None, None, \"That sounds great! I'll try that.\">",
+        "<Happy, Goodbye, None, None, \"Thanks a lot, I had a great time. See you next time!\">",
+        "<Start, Greeting2, None, None, \"Excuse me, can I have a drink please?\">",
+        "<Greeting2, DrinkOrder2, None, None, \"Of course, what would you like to order?\">",
+        "<DrinkOrder2, Sad, None, None, \"Just a whiskey neat.\">",
+        "<Sad, Concerned, None, None, \"Is everything okay? You seem a bit down.\">",
+        "<Concerned, Empathetic, None, None, \"It's just been a tough week, I needed something to take the edge off.\">",
+        "<Empathetic, Goodbye2, None, None, \"I completely understand, sometimes it can be hard. I hope you feel better soon.\">",
+        "<DrinkOrder, Intoxicated, None, None, \"Hey man, what's your problem? You're trying to kick me out?\">",
+        "<Intoxicated, Firm, None, None, \"I'm sorry but I have to ask you to leave. You've had too much to drink and you're starting to cause a disturbance.\">",
+        "<Firm, Angry, None, None, \"This is ridiculous, I'm not even that drunk! You're just trying to pick on me.\">",
+        "<Angry, Calming, None, None, \"I'm not trying to pick on you, I'm just doing my job. If you don't leave, I'll have to call security.\">",
+        "<Calming, Goodbye3, None, None, \"Okay, fine! I'll leave! But I'm never coming back here again!\">"
+    ]
+}

@@ -1,0 +1,814 @@
+{
+  "root": {
+    "classId": 0,
+    "ScenarioName": "Tina",
+    "Description": "Tina made spaghetti for her boyfriend. It took a lot of work, but she was very proud. Her boyfriend ate the whole plate and said it was good. Tina tried it herself, and realized it was disgusting. She was touched that he pretended it was good to spare her feelings.",
+    "Characters": [
+      {
+        "KnowledgeBase": {
+          "Perspective": "Tina",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Tina, Cooked_Spaghetti)": "True, 1",
+              "BEL(Tina, Spaghetti_Was_Disgusting)": "True, 1",
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti)": "True, 1",
+              "DES(Tina, Cook_Delicious_Spaghetti)": "True, 1",
+              "DES(Tina, Boyfriend_Honesty)": "False, 1",
+              "T": "False, 1",
+              "F": "False, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Tina's_boyfriend",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Tinas_boyfriend, likes_spaghetti)": "True, 1",
+              "BEL(Tinas_boyfriend, wants_to_please_Tina)": "True, 1",
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort)": "True, 1",
+              "DES(Tinas_boyfriend, spare_Tinas_feelings)": "True, 1",
+              "DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference)": "True, 1",
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti)": "True, 1",
+              "T": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      }
+    ],
+    "WorldModel": {
+      "Effects": {
+        "dictionary": [
+          {
+            "key": "Event(Action-End, Tina, Talk(Tina, Tinas_boyfriend, subject_Spaghetti), *)",
+            "value": []
+          },
+          {
+            "key": "Event(Action-End, Tina, Ask(Tina, Tinas_boyfriend, question_Did_you_really_like_the_spaghetti), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tina, Boyfriend_Honesty)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, Listen(Tinas_boyfriend, Tina), *)",
+            "value": []
+          },
+          {
+            "key": "Event(Action-End, Tina, Explain(Tinas_boyfriend, Tina, explanation_I_wanted_to_spare_your_feelings), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tina, Boyfriend_Honesty)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, Thank(Tina, Tinas_boyfriend), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tina, Boyfriend_Honesty)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, Apologize(Tinas_boyfriend, Tina, reason_I_should_have_been_honest), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, Tina_Apologized)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Boyfriend_Honesty)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, Discuss(Tina, Tinas_boyfriend, subject_Cooking, solution_Cook_together_in_the_future), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tina, Cook_With_Boyfriend)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, GetIngredients(Tina, Pantry), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tina, Found_Ingredients_in_Pantry)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, BoilWater(Tina, Stove), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tina, Boiling_Water)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, CookSpaghetti(Tina, Pot), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tina, Cooked_Spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Pot)",
+                "NewValue": "Unavailable",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, PrepareSauce(Tina, Saucepan, Ingredients), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tina, Sauce_Is_Prepared)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Ingredients_Are_Used)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Spaghetti_Was_Improved)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "DES(Tina, Cook_Delicious_Spaghetti)",
+                "NewValue": "False",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, HeatSauce(Tina, Saucepan), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tina, Sauce_Is_Cooked)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Sauce_Is_Raw)",
+                "NewValue": "False",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, DrainSpaghetti(Tina, Strainer), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tina, Cooked_Spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Spaghetti_Was_Disgusting)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Boyfriend_Enjoyed_Spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "DES(Tina, Cook_Delicious_Spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Spaghetti_Is_Drained)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, CombineSpaghettiAndSauce(Tina, Plate), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tina, Plate)",
+                "NewValue": "Full",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Spaghetti_With_Sauce)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "DES(Tina, Cook_Delicious_Spaghetti)",
+                "NewValue": "False",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "DES(Tina, Boyfriend_Honesty)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, ServeSpaghetti(Tina, Table), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tina, Served_Spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "DES(Tina, Boyfriend_Honesty)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "DES(Tina, Boyfriend_Approval)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Boyfriend_Knows_Spaghetti_Was_Disgusting)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Boyfriend_Tried_To_Spare_Feelings)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              },
+              {
+                "PropertyName": "BEL(Tina, Boyfriend_Appreciates_Efforts)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, Speak(Start, A, Greeting, Friendly), *)",
+            "value": []
+          },
+          {
+            "key": "Event(Action-End, Tina, Speak(B, C, Disclosure, Guilty), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tina, Boyfriend_Honesty)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina, Speak(D, End, Gratefulness, Touching), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tina, Boyfriend_Honesty)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Pretend_to_enjoy_spaghetti(Tinas_boyfriend, Tina, ), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "BEL(Tina, believes_Tinas_boyfriend_enjoys_spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "DES(Tinas_boyfriend, spare_Tinas_feelings)",
+                "NewValue": "Satisfied",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Thank_Tina_for_the_meal(Tinas_boyfriend, Tina, ), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tinas_boyfriend, show_gratitude_for_Tinas_effort)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, knows_Tina_feels_appreciated)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Offer_to_make_tomorrows_dinner(Tinas_boyfriend, Tina, ), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tinas_boyfriend, show_Tina_he_cares_about_her_happiness)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, willing_to_spend_time_cooking)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Approach(Tinas_boyfriend, Plate_of_Spaghetti), *)",
+            "value": []
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Taste(Tinas_boyfriend, Plate_of_Spaghetti), *)",
+            "value": []
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Realize(Tinas_boyfriend, Dislikes_Spaghetti), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, likes_spaghetti)",
+                "NewValue": "False",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, DES(Tinas_boyfriend, spare_Tinas_feelings), False), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tinas_boyfriend, spare_Tinas_feelings)",
+                "NewValue": "False",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference), True), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(Tinas_boyfriend, Tina, This_is_delicious_You_did_a_great_job), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "DES(Tinas_boyfriend, spare_Tinas_feelings)",
+                "NewValue": "False",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, likes_spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, wants_to_please_Tina)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "BEL(Tina, feels_happy)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti), True), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort), True), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Pretend_Like_The_Spaghetti_Is_Good(Tinas_boyfriend, Tina), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tinas_boyfriend, spare_Tinas_feelings)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Compliment_Tinas_Spaghetti(Tinas_boyfriend, Tina), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tinas_boyfriend, spare_Tinas_feelings)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "BEL(Tina, feels_happy_about_her_cooking)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Offer_To_Help_Cook_Next_Time(Tinas_boyfriend, Tina), *)",
+            "value": [
+              {
+                "PropertyName": "DES(Tinas_boyfriend, offers_to_help_cook_next_time)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, wants_to_improve_cooking_skills)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(Start, A, PositiveFeedback, Grateful), *)",
+            "value": [
+              {
+                "PropertyName": "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "INTENT(Tinas_boyfriend, prioritize_Tinas_feelings_over_his_own_preferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "INTENT(Tinas_boyfriend, make_Tina_happy)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(A, B, Concern, Caring), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "INTENT(Tinas_boyfriend, prioritize_Tinas_feelings_over_his_own_preferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "INTENT(Tinas_boyfriend, make_Tina_happy)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(B, C, Validation, Understanding), *)",
+            "value": []
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(C, D, Encouragement, Supportive), *)",
+            "value": [
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, has_spoken_about_Tinas_spaghetti)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "BEL(Tinas_boyfriend, said_spaghetti_was_good)",
+                "NewValue": "True",
+                "ObserverAgent": "Tina's_boyfriend"
+              },
+              {
+                "PropertyName": "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good)",
+                "NewValue": "False",
+                "ObserverAgent": "Tina's_boyfriend"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(D, E, Suggestion, Helpful), *)",
+            "value": []
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(E, End, Offer, Considerate), *)",
+            "value": []
+          }
+        ]
+      },
+      "Priorities": {
+        "dictionary": [
+          {
+            "key": "Event(Action-End, Tina, Talk(Tina, Tinas_boyfriend, subject_Spaghetti), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, Ask(Tina, Tinas_boyfriend, question_Did_you_really_like_the_spaghetti), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, Listen(Tinas_boyfriend, Tina), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, Explain(Tinas_boyfriend, Tina, explanation_I_wanted_to_spare_your_feelings), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, Thank(Tina, Tinas_boyfriend), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, Apologize(Tinas_boyfriend, Tina, reason_I_should_have_been_honest), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, Discuss(Tina, Tinas_boyfriend, subject_Cooking, solution_Cook_together_in_the_future), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, GetIngredients(Tina, Pantry), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, BoilWater(Tina, Stove), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, CookSpaghetti(Tina, Pot), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, PrepareSauce(Tina, Saucepan, Ingredients), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, HeatSauce(Tina, Saucepan), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, DrainSpaghetti(Tina, Strainer), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, CombineSpaghettiAndSauce(Tina, Plate), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, ServeSpaghetti(Tina, Table), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, Speak(Start, A, Greeting, Friendly), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, Speak(B, C, Disclosure, Guilty), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina, Speak(D, End, Gratefulness, Touching), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Pretend_to_enjoy_spaghetti(Tinas_boyfriend, Tina, ), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Thank_Tina_for_the_meal(Tinas_boyfriend, Tina, ), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Offer_to_make_tomorrows_dinner(Tinas_boyfriend, Tina, ), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Approach(Tinas_boyfriend, Plate_of_Spaghetti), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Taste(Tinas_boyfriend, Plate_of_Spaghetti), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Realize(Tinas_boyfriend, Dislikes_Spaghetti), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, DES(Tinas_boyfriend, spare_Tinas_feelings), False), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference), True), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(Tinas_boyfriend, Tina, This_is_delicious_You_did_a_great_job), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti), True), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort), True), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Pretend_Like_The_Spaghetti_Is_Good(Tinas_boyfriend, Tina), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Compliment_Tinas_Spaghetti(Tinas_boyfriend, Tina), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Offer_To_Help_Cook_Next_Time(Tinas_boyfriend, Tina), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(Start, A, PositiveFeedback, Grateful), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(A, B, Concern, Caring), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(B, C, Validation, Understanding), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(C, D, Encouragement, Supportive), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(D, E, Suggestion, Helpful), *)",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Tina's_boyfriend, Speak(E, End, Offer, Considerate), *)",
+            "value": 1
+          }
+        ]
+      }
+    },
+    "Dialogues": [
+      {
+        "CurrentState": "Start",
+        "NextState": " A",
+        "Meaning": " Greeting",
+        "Style": " Friendly",
+        "Utterance": " \"Hey",
+        "UtteranceId": "TTS-0CCMA2GMKWSEYP6FNHBQ3I67DH9M12SY"
+      },
+      {
+        "CurrentState": "A",
+        "NextState": " B",
+        "Meaning": " PositiveFeedback",
+        "Style": " Kind",
+        "Utterance": " \"It was good",
+        "UtteranceId": "TTS-0CCYF8KGGPEEYUBMNVO27UIRI9MDI6KH"
+      },
+      {
+        "CurrentState": "B",
+        "NextState": " C",
+        "Meaning": " Disclosure",
+        "Style": " Guilty",
+        "Utterance": " \"Really? I didn't like it when I tasted it.\"",
+        "UtteranceId": "TTS-0CC7UNY3RME9WMR75C5VPXBRY6NLPYEI"
+      },
+      {
+        "CurrentState": "C",
+        "NextState": " D",
+        "Meaning": " Compliment",
+        "Style": " Understanding",
+        "Utterance": " \"Oh",
+        "UtteranceId": "TTS-0CC03G6LGMEH2I89BUC2R3BGZ37JO556"
+      },
+      {
+        "CurrentState": "D",
+        "NextState": " End",
+        "Meaning": " Gratefulness",
+        "Style": " Touching",
+        "Utterance": " \"Thank you",
+        "UtteranceId": "TTS-0CCZ0Z5VZ113JIEE0LYC6LALW7I52E54"
+      }
+    ]
+  },
+  "types": [
+    {
+      "TypeId": 0,
+      "ClassName": "IntegratedAuthoringTool.IntegratedAuthoringToolAsset, IntegratedAuthoringTool, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null"
+    }
+  ]
+}

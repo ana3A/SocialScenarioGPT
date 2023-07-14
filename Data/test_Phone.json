@@ -1,0 +1,1264 @@
+{
+    "scenario_name": "test_Phone",
+    "scenario_description": "Ben is a very clumsy boy. He always dropped things. One day Ben was getting out of his dad's truck. He slid across the seat to get out. Forgetting his phone was in his lap, so it fell and broke.",
+    "last_ended": "conditions_effects",
+    "agents": {
+        "Ben": {
+            "knowledge_base": [
+                "BEL(Ben, clumsy) = True",
+                "BEL(Ben, has_phone) = True",
+                "BEL(Ben, phone_broken) = False",
+                "BEL(Dad, owns_truck) = True",
+                "DES(Ben, fix_phone) = True",
+                "DES(Ben, not_be_clumsy) = True",
+                "DES(Ben, not_break_things) = True",
+                "DES(Dad, not_be_angry) = True"
+            ],
+            "intentions": {
+                "INTENT(Ben, pick_up_phone) = True": {
+                    "action_plan": [
+                        "Look(Ben, ground)",
+                        "GetUp(Ben, self)",
+                        "PickUp(Ben, phone)",
+                        "Examine(Ben, phone)",
+                        "BEL(Ben, phone_broken) = True",
+                        "DES(Ben, fix_phone) = True",
+                        "Inform(Dad, phone_broken)",
+                        "DES(Dad, help_Ben) = True",
+                        "Offer(Dad, solution)",
+                        "Accept(Ben, solution)",
+                        "Apply(Dad, solution)",
+                        "BEL(Ben, phone_broken) = False",
+                        "DES(Ben, not_break_things) = True"
+                    ]
+                },
+                "INTENT(Ben, fix_phone) = True": {
+                    "action_plan": [
+                        "INTENT(Ben, fix_phone) = True",
+                        "Move(Ben, out_of_truck)",
+                        "BEL(Ben, phone_broken) = True], [Call(Dad, tell_about_phone)",
+                        "Wait(Ben, wait_for_Dad)",
+                        "Go(Ben, to_phone_repair_shop)",
+                        "Pay(Ben, phone_repair_shop, amount)",
+                        "Go(Ben, to_truck)",
+                        "Give(Ben, phone, to_Dad)",
+                        "Ask(Ben, Dad, if_he's_still_angry)",
+                        "BEL(Dad, angry) = False",
+                        "Apologize(Ben, to_Dad)",
+                        "Enjoy(Ben, the_fixed_phone)"
+                    ]
+                },
+                "INTENT(Ben, feel_bad) = True": {
+                    "action_plan": [
+                        "Think(Ben, Beliefs, Desires)",
+                        "Feel(Ben, sad)",
+                        "Call(Dad, request_help, FixPhone)",
+                        "Wait(Ben, Dad)",
+                        "Discuss(Ben, explain, what_happened)",
+                        "Feel(Ben, relieved)",
+                        "Help(Dad, FixPhone, {'Parts': ['Screen', 'Battery']})",
+                        "Test(Ben, Phone, phone_working)",
+                        "Feel(Ben, happy)"
+                    ]
+                },
+                "INTENT(Ben, be_more_careful) = True": {
+                    "action_plan": [
+                        "Recognize(Ben, himself, clumsiness)",
+                        "Reflect(Ben, himself, actions)",
+                        "Research(Ben, phone, how_to_repair)",
+                        "Communicate(Ben, Dad, apology)",
+                        "Ask(Ben, Dad, advice)",
+                        "Practice(Ben, himself, not_drop_things)",
+                        "Monitor(Ben, himself, progress)"
+                    ]
+                }
+            },
+            "actions": {
+                "Recognize(Ben, himself, clumsiness)": {
+                    "conditions": [
+                        "BEL(Ben, clumsy) = False"
+                    ],
+                    "effects": [
+                        "BEL(Ben, clumsy) = True"
+                    ]
+                },
+                "Reflect(Ben, himself, actions)": {
+                    "conditions": [
+                        "BEL(Ben, clumsy) = True",
+                        "DES(Ben, not_be_clumsy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, clumsy) = False"
+                    ]
+                },
+                "Research(Ben, phone, how_to_repair)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False"
+                    ],
+                    "effects": [
+                        "BEL(Ben, knows_how_to_repair_phone) = True"
+                    ]
+                },
+                "Communicate(Ben, Dad, apology)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = True",
+                        "BEL(Dad, owns_truck) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_broken) = False",
+                        "DES(Dad, not_be_angry) = True"
+                    ]
+                },
+                "Ask(Ben, Dad, advice)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Dad, owns_truck) = True"
+                    ],
+                    "effects": [
+                        "DES(Dad, not_be_angry) = True",
+                        "BEL(Ben, consulted_Dad_about_phone) = True"
+                    ]
+                },
+                "Practice(Ben, himself, not_drop_things)": {
+                    "conditions": [
+                        "BEL(Ben, clumsy) = True",
+                        "DES(Ben, not_drop_things) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, clumsy) = False"
+                    ]
+                },
+                "Monitor(Ben, himself, progress)": {
+                    "conditions": [
+                        "BEL(Ben, clumsy) = True",
+                        "DES(Ben, not_be_clumsy) = True",
+                        "DES(Ben, not_break_things) = True"
+                    ],
+                    "effects": [
+                        "DES(Ben, not_be_clumsy) = True",
+                        "DES(Ben, not_break_things) = True"
+                    ]
+                },
+                "Look(Ben, ground)": {
+                    "conditions": [
+                        "BEL(Ben, clumsy) = True",
+                        "BEL(Ben, has_phone) = True"
+                    ],
+                    "effects": []
+                },
+                "GetUp(Ben, self)": {
+                    "conditions": [
+                        "BEL(Ben, standing) = False"
+                    ],
+                    "effects": [
+                        "BEL(Ben, standing) = True"
+                    ]
+                },
+                "PickUp(Ben, phone)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, has_phone) = False",
+                        "BEL(Ben, phone_on_hand) = True"
+                    ]
+                },
+                "Examine(Ben, phone)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_broken) = True",
+                        "DES(Ben, fix_phone) = True"
+                    ]
+                },
+                "BEL(Ben, phone_broken) = True": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_broken) = True",
+                        "DES(Ben, fix_phone) = True",
+                        "DES(Dad, help_Ben) = True"
+                    ]
+                },
+                "DES(Ben, fix_phone) = True": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = True",
+                        "DES(Ben, fix_phone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_broken) = False"
+                    ]
+                },
+                "Inform(Dad, phone_broken)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dad, knows_phone_broken) = True"
+                    ]
+                },
+                "DES(Dad, help_Ben) = True": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = True",
+                        "BEL(Dad, owns_truck) = True",
+                        "DES(Dad, help_Ben) = True"
+                    ],
+                    "effects": [
+                        "DES(Dad, not_be_angry) = True",
+                        "DES(Dad, help_Ben) = False"
+                    ]
+                },
+                "Offer(Dad, solution)": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = True",
+                        "DES(Dad, help_Ben) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, knows_solution) = True",
+                        "BEL(Dad, willing_to_help) = True"
+                    ]
+                },
+                "Accept(Ben, solution)": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = True",
+                        "DES(Dad, help_Ben) = True",
+                        "BEL(Dad, owns_solution) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_broken) = False",
+                        "DES(Ben, not_break_things) = True",
+                        "DES(Ben, not_be_clumsy) = True",
+                        "DES(Ben, fix_phone) = False",
+                        "BEL(Dad, solution_accepted) = True"
+                    ]
+                },
+                "Apply(Dad, solution)": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = True",
+                        "DES(Dad, help_Ben) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_broken) = False",
+                        "DES(Ben, not_break_things) = True"
+                    ]
+                },
+                "BEL(Ben, phone_broken) = False": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_broken) = False",
+                        "DES(Ben, not_break_things) = True"
+                    ]
+                },
+                "DES(Ben, not_break_things) = True": {
+                    "conditions": [
+                        "BEL(Ben, not_break_things) = False"
+                    ],
+                    "effects": [
+                        "DES(Ben, not_break_things) = True"
+                    ]
+                },
+                "INTENT(Ben, fix_phone) = True": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False",
+                        "BEL(Ben, clumsy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_broken) = True",
+                        "DES(Ben, fix_phone) = True"
+                    ]
+                },
+                "Move(Ben, out_of_truck)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False"
+                    ],
+                    "effects": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False",
+                        "BEL(Ben, in_truck) = True => BEL(Ben, in_truck) = False",
+                        "BEL(Ben, out_of_truck) = False => BEL(Ben, out_of_truck) = True"
+                    ]
+                },
+                "BEL(Ben, phone_broken) = True], [Call(Dad, tell_about_phone)": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, has_phone) = False",
+                        "DES(Dad, not_be_angry) = False"
+                    ]
+                },
+                "Wait(Ben, wait_for_Dad)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Ben, phone_broken) = True"
+                    ],
+                    "effects": []
+                },
+                "Go(Ben, to_phone_repair_shop)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, at_phone_repair_shop) = True"
+                    ]
+                },
+                "Pay(Ben, phone_repair_shop, amount)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = True",
+                        "DES(Ben, fix_phone) = True",
+                        "BEL(Ben, enough_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, enough_money) = False",
+                        "BEL(Ben, phone_broken) = False",
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, money_spent) = amount"
+                    ]
+                },
+                "Go(Ben, to_truck)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Dad, owns_truck) = True"
+                    ],
+                    "effects": []
+                },
+                "Give(Ben, phone, to_Dad)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False",
+                        "BEL(Dad, owns_truck) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, has_phone) = False",
+                        "BEL(Dad, owns_phone) = True"
+                    ]
+                },
+                "Ask(Ben, Dad, if_he's_still_angry)": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = True",
+                        "BEL(Dad, angry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, angry) = False"
+                    ]
+                },
+                "BEL(Dad, angry) = False": {
+                    "conditions": [
+                        "BEL(Dad, angry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, angry) = False"
+                    ]
+                },
+                "Apologize(Ben, to_Dad)": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = True",
+                        "BEL(Dad, angry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, angry) = False"
+                    ]
+                },
+                "Enjoy(Ben, the_fixed_phone)": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = False",
+                        "DES(Ben, fix_phone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, happy) = True",
+                        "DES(Ben, fix_phone) = False",
+                        "BEL(Ben, has_phone) = True"
+                    ]
+                },
+                "Think(Ben, Beliefs, Desires)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False",
+                        "DES(Ben, fix_phone) = True",
+                        "DES(Ben, not_be_clumsy) = True",
+                        "DES(Ben, not_break_things) = True",
+                        "DES(Dad, not_be_angry) = True"
+                    ]
+                },
+                "Feel(Ben, sad)": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = True"
+                    ],
+                    "effects": [
+                        "DES(Ben, fix_phone) = True",
+                        "DES(Ben, not_be_clumsy) = True",
+                        "DES(Ben, not_break_things) = True",
+                        "DES(Dad, not_be_angry) = True",
+                        "BEL(Ben, has_phone) = True"
+                    ]
+                },
+                "Call(Dad, request_help, FixPhone)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False",
+                        "BEL(Dad, owns_truck) = True",
+                        "DES(Ben, fix_phone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, available_for_help) = True",
+                        "DES(Dad, help_Ben) = True"
+                    ]
+                },
+                "Wait(Ben, Dad)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Dad, owns_truck) = True"
+                    ],
+                    "effects": []
+                },
+                "Discuss(Ben, explain, what_happened)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False",
+                        "DES(Dad, not_be_angry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False",
+                        "DES(Dad, not_be_angry) = False",
+                        "DES(Ben, fix_phone) = True",
+                        "DES(Ben, not_be_clumsy) = True"
+                    ]
+                },
+                "Feel(Ben, relieved)": {
+                    "conditions": [
+                        "DES(Ben, fix_phone) = True",
+                        "BEL(Ben, phone_broken) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, relieved) = True"
+                    ]
+                },
+                "Help(Dad, FixPhone, {'Parts': ['Screen', 'Battery']})": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = True",
+                        "BEL(Dad, owns_truck) = True",
+                        "DES(Ben, fix_phone) = True",
+                        "DES(Dad, not_be_angry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_broken) = False",
+                        "DES(Ben, fix_phone) = False",
+                        "BEL(Ben, phone_fixed) = True",
+                        "DES(Ben, not_be_clumsy) = True"
+                    ]
+                },
+                "Test(Ben, Phone, phone_working)": {
+                    "conditions": [
+                        "BEL(Ben, phone_broken) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_working) = True"
+                    ]
+                },
+                "Feel(Ben, happy)": {
+                    "conditions": [
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Ben, phone_broken) = False"
+                    ],
+                    "effects": [
+                        "DES(Ben, happy) = True"
+                    ]
+                }
+            }
+        },
+        "Dad": {
+            "knowledge_base": [
+                "BEL(Dad, owns_truck)=True",
+                "BEL(Dad, gave_phone_to_ben)=True",
+                "BEL(Dad, has_workplace_rules)=True",
+                "DES(Dad, phone_repaired)=True",
+                "DES(Dad, Ben_learns_a_lesson)=True",
+                "DES(Dad, truck_kept_clean)=True"
+            ],
+            "intentions": {
+                "INTENT(Dad, repair_phone) = True": {
+                    "action_plan": [
+                        "INTENT(Dad, repair_phone) = True",
+                        "CheckLocation(Dad, Ben, phone)",
+                        "TakePhone(Dad, Phone)",
+                        "FindRepairShop(Dad, phone)",
+                        "GoToRepairShop(Dad, repair_shop)",
+                        "TalkToTechnician(Dad, technician)",
+                        "LeavePhoneRepair(Dad, technician)",
+                        "PickUpRepairedPhone(Dad, technician)",
+                        "ReturnPhoneToBen(Dad, Ben, phone)",
+                        "SetRules(Dad, Ben, workplace)",
+                        "CleanTruck(Dad, truck)"
+                    ]
+                },
+                "INTENT(Dad, teach_lesson, Ben_learns_a_lesson) = True": {
+                    "action_plan": [
+                        "CheckTruckCleanliness(Dad, Truck)",
+                        "AskBenAboutPhone(Dad, Ben, Phone)",
+                        "ConfirmPhoneBroken(Dad, Phone)",
+                        "RemindBenOfWorkplaceRules(Dad, Ben, Rules)",
+                        "TakePhoneToRepairShop(Dad, Phone, RepairShop)",
+                        "ExplainConsequencesOfActions(Dad, Ben, Consequences)",
+                        "RewardBenIfLearnedLesson(Dad, Ben, Reward)",
+                        "ConfirmTruckCleaned(Dad, Truck)"
+                    ]
+                },
+                "INTENT(Dad, keep_truck_clean) = True": {
+                    "action_plan": [
+                        "INTENT(Dad, keep_truck_clean) = True",
+                        "RemoveItemsFromTruck(Dad, Truck)",
+                        "GetCleaningSupplies(Dad, Home)",
+                        "CleanTruck(Dad, Truck, CleaningSupplies)",
+                        "WashTruck(Dad, Truck)",
+                        "EstablishNewRules(Dad, Ben)",
+                        "TakePhoneToRepairShop(Dad, Phone, RepairShop)",
+                        "DES(Dad, phone_repaired)=True",
+                        "RewardBen(Dad, Ben, Treat)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Dad, keep_truck_clean) = True": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(Dad, has_workplace_rules) = True"
+                    ],
+                    "effects": [
+                        "DES(Dad, keep_truck_clean) = True",
+                        "BEL(Dad, items_removed_from_truck) = True",
+                        "BEL(Dad, cleaning_supplies_obtained) = True",
+                        "BEL(Dad, truck_cleaned) = True",
+                        "BEL(Ben, new_rules_established) = True",
+                        "BEL(Dad, phone_taken_to_repair_shop) = True",
+                        "DES(Dad, phone_repaired) = True",
+                        "DES(Ben, lesson_learned) = True",
+                        "DES(Dad, Ben_rewarded) = True"
+                    ]
+                },
+                "RemoveItemsFromTruck(Dad, Truck)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck)=True",
+                        "BEL(Dad, has_workplace_rules)=True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, has_items_in_truck)=False"
+                    ]
+                },
+                "GetCleaningSupplies(Dad, Home)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, has_workplace_rules) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, has_cleaning_supplies) = True"
+                    ]
+                },
+                "CleanTruck(Dad, Truck, CleaningSupplies)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, has_workplace_rules) = True",
+                        "BEL(Dad, Truck, is_dirty) = True",
+                        "BEL(Dad, CleaningSupplies, are_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, Truck, is_dirty) = False",
+                        "BEL(Dad, truck_cleaned) = True"
+                    ]
+                },
+                "WashTruck(Dad, Truck)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, has_workplace_rules) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, truck_clean) = True"
+                    ]
+                },
+                "EstablishNewRules(Dad, Ben)": {
+                    "conditions": [
+                        "BEL(Dad, has_workplace_rules) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(Ben, dropped_phone) = True"
+                    ],
+                    "effects": [
+                        "DES(Ben, follows_rules) = True",
+                        "DES(Dad, Ben_learns_a_lesson) = True"
+                    ]
+                },
+                "TakePhoneToRepairShop(Dad, Phone, RepairShop)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(Dad, has_workplace_rules) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, phone_in_repair) = True",
+                        "BEL(RepairShop, phone_repaired) = True",
+                        "DES(Dad, phone_repaired) = True"
+                    ]
+                },
+                "DES(Dad, phone_repaired)=True": {
+                    "conditions": [
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(RepairShop, has_phone_repair_service) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, phone_repaired) = True"
+                    ]
+                },
+                "RewardBen(Dad, Ben, Treat)": {
+                    "conditions": [
+                        "BEL(Dad, has_workplace_rules) = True",
+                        "DES(Dad, Ben_learns_a_lesson) = True"
+                    ],
+                    "effects": [
+                        "DES(Ben, gets_reward) = Treat",
+                        "BEL(Dad, gave_reward) = True"
+                    ]
+                },
+                "INTENT(Dad, repair_phone) = True": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "DES(Dad, phone_repaired) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "DES(Dad, phone_repaired) = True",
+                        "DES(Dad, Ben_learns_a_lesson) = True",
+                        "DES(Dad, truck_kept_clean) = True",
+                        "BEL(Ben, phone_is_broken) = False"
+                    ]
+                },
+                "CheckLocation(Dad, Ben, phone)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(Ben, phone_on_lap) = True"
+                    ],
+                    "effects": []
+                },
+                "TakePhone(Dad, Phone)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, has_phone) = True",
+                        "BEL(Ben, has_phone) = False"
+                    ]
+                },
+                "FindRepairShop(Dad, phone)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, found_repair_shop) = True"
+                    ]
+                },
+                "GoToRepairShop(Dad, repair_shop)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(Dad, has_workplace_rules) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, at_repair_shop) = True"
+                    ]
+                },
+                "TalkToTechnician(Dad, technician)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(Dad, has_workplace_rules) = True",
+                        "BEL(Dad, phone_needs_repair) = True",
+                        "BEL(Dad, at_repair_shop) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dad, at_repair_shop) = True",
+                        "BEL(Dad, talking_to_technician) = True"
+                    ]
+                },
+                "LeavePhoneRepair(Dad, technician)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(Dad, has_workplace_rules) = True",
+                        "BEL(Dad, phone_repaired) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dad, phone_repaired) = True",
+                        "DES(Dad, Ben_learns_a_lesson) = True"
+                    ]
+                },
+                "PickUpRepairedPhone(Dad, technician)": {
+                    "conditions": [
+                        "BEL(Dad, at_repair_shop) = True",
+                        "BEL(Dad, picked_up_phone) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dad, picked_up_phone) = True",
+                        "BEL(Dad, has_phone) = True"
+                    ]
+                },
+                "ReturnPhoneToBen(Dad, Ben, phone)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(Ben, phone_broken) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, phone_broken) = False",
+                        "BEL(Ben, phone_repaired) = True"
+                    ]
+                },
+                "SetRules(Dad, Ben, workplace)": {
+                    "conditions": [
+                        "BEL(Dad, has_workplace_rules) = True",
+                        "DES(Dad, Ben_learns_a_lesson) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, knows_workplace_rules) = True",
+                        "DES(Ben, be_responsible) = True",
+                        "DES(Dad, Ben_follows_rules) = True"
+                    ]
+                },
+                "CleanTruck(Dad, truck)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, truck_clean) = True",
+                        "DES(Dad, truck_kept_clean) = True"
+                    ]
+                },
+                "CheckTruckCleanliness(Dad, Truck)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, truck_kept_clean) = False"
+                    ],
+                    "effects": []
+                },
+                "AskBenAboutPhone(Dad, Ben, Phone)": {
+                    "conditions": [
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(Ben, has_phone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, knows_phone_is_missing, Ben, Phone) = True"
+                    ]
+                },
+                "ConfirmPhoneBroken(Dad, Phone)": {
+                    "conditions": [
+                        "BEL(Dad, gave_phone_to_ben) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, phone_broken) = True",
+                        "DES(Dad, phone_repaired) = True"
+                    ]
+                },
+                "RemindBenOfWorkplaceRules(Dad, Ben, Rules)": {
+                    "conditions": [
+                        "BEL(Dad, has_workplace_rules) = True",
+                        "BEL(Ben, knows_workplace_rules) = False"
+                    ],
+                    "effects": [
+                        "DES(Ben, learn_workplace_rules) = True",
+                        "BEL(Ben, knows_workplace_rules) = True",
+                        "BEL(Dad, reminded_ben_of_rules) = True"
+                    ]
+                },
+                "ExplainConsequencesOfActions(Dad, Ben, Consequences)": {
+                    "conditions": [
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "BEL(Dad, owns_truck) = True",
+                        "BEL(Dad, has_workplace_rules) = True"
+                    ],
+                    "effects": [
+                        "DES(Dad, truck_kept_clean) = True",
+                        "DES(Ben, phone_repaired) = True",
+                        "DES(Dad, Ben_learns_a_lesson) = True",
+                        "BEL(Dad, Ben_knows_consequences) = True"
+                    ]
+                },
+                "RewardBenIfLearnedLesson(Dad, Ben, Reward)": {
+                    "conditions": [
+                        "BEL(Dad, gave_phone_to_ben) = True",
+                        "DES(Dad, Ben_learns_a_lesson) = True"
+                    ],
+                    "effects": [
+                        "DES(Dad, phone_repaired) = True",
+                        "DES(Dad, Ben_learns_a_lesson) = False",
+                        "DES(Dad, Reward) = True",
+                        "BEL(Ben, happy) = True"
+                    ]
+                },
+                "ConfirmTruckCleaned(Dad, Truck)": {
+                    "conditions": [
+                        "BEL(Dad, owns_truck) = True",
+                        "DES(Dad, truck_kept_clean) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dad, truck_cleaned) = True"
+                    ]
+                }
+            }
+        },
+        "Phone": {
+            "knowledge_base": [
+                "BEL(Phone, exists) = True",
+                "BEL(Phone, broken) = True",
+                "BEL(Phone, valuable) = True",
+                "DES(Phone, get_repaired) = True",
+                "DES(Phone, be_useful) = True",
+                "DES(Phone, belong_to_someone) = True",
+                "DES(Phone, communicate) = True"
+            ],
+            "intentions": {
+                "INTENT(Phone, repair_phone) = True": {
+                    "action_plan": [
+                        "Locate(Ben, Phone)",
+                        "Assess(Ben, Phone)",
+                        "Find_Restore_Shop(Ben, Phone)",
+                        "Go_To_Restore_Shop(Ben, Phone, PhoneRepairShop)",
+                        "Explain_Problem(Ben, Phone, PhoneRepairShop)",
+                        "Leave_Phone_At_Shop(Ben, Phone, PhoneRepairShop)",
+                        "Wait(Ben, Time)",
+                        "Pickup_Phone(Ben, Phone, PhoneRepairShop)",
+                        "Test_Phone(Ben, Phone)",
+                        "Pay_For_Repair(Ben, Phone, PhoneRepairShop)"
+                    ]
+                },
+                "INTENT(Phone, be_useful) = True": {
+                    "action_plan": [
+                        "Recognize(Phone, Ben)",
+                        "Communicate(Phone, Ben, \"Hello, Ben!\")",
+                        "Inquire(Phone, Ben, Dad, \"Can you take me to a repair shop?\")",
+                        "Inform(Phone, Ben, \"I need to be repaired to work properly.\")",
+                        "Reason(Phone, Ben, \"If I belong to someone, they might take care of me.\")",
+                        "Persuade(Phone, Ben, \"Please consider finding me a new owner who will take care of me.\")",
+                        "Believe(Phone, in_useful_state)"
+                    ]
+                },
+                "INTENT(Phone, belong_to_someone) = True": {
+                    "action_plan": [
+                        "belong_to_someone",
+                        "Notify(Parents, Ben, Phone is broken)",
+                        "Go_to_Repair_Shop(Phone, Repair_shop)",
+                        "Pay_for_Repair(Ben, Repair_shop, Repair_cost)",
+                        "Retrieve(Phone, Ben, Repair_shop)",
+                        "Use(Phone, Ben, Self)",
+                        "Take_care_of(Phone, Ben, Self)",
+                        "belong_to_someone"
+                    ]
+                },
+                "INTENT(Phone, communicate) = True": {
+                    "action_plan": [
+                        "Locate(Phone, Self)",
+                        "Assess(Ben, Phone, exists)",
+                        "Verify(Ben, Phone, broken)",
+                        "Communicate(Phone, Ben, \"Hi, Ben! I'm the broken phone. Can you get me fixed?\")",
+                        "Assess(Ben, Phone, valuable)",
+                        "Verify(Ben, Phone, belong_to_someone)",
+                        "Request_Repair(Phone, Self)",
+                        "Assess(Ben, Phone, get_repaired)",
+                        "Update_Ben(Ben, Phone, \"Don't worry, I'll take you to the repair shop tomorrow!\")",
+                        "Assess",
+                        "Verify"
+                    ]
+                }
+            },
+            "actions": {
+                "Locate(Phone, Self)": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True"
+                    ],
+                    "effects": []
+                },
+                "Assess(Ben, Phone, exists)": {
+                    "conditions": [
+                        "BEL(Ben, exists) = True",
+                        "BEL(Phone, exists) = True"
+                    ],
+                    "effects": []
+                },
+                "Verify(Ben, Phone, broken)": {
+                    "conditions": [
+                        "BEL(Ben, exists) = True",
+                        "BEL(Phone, exists) = True"
+                    ],
+                    "effects": []
+                },
+                "Communicate(Phone, Ben, \"Hi, Ben! I'm the broken phone. Can you get me fixed?\")": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, knows_phone_is_broken) = True",
+                        "BEL(Phone, communicated_with_Ben) = True"
+                    ]
+                },
+                "Assess(Ben, Phone, valuable)": {
+                    "conditions": [
+                        "BEL(Ben, exists) = True",
+                        "BEL(Phone, valuable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, values_phone) = True"
+                    ]
+                },
+                "Verify(Ben, Phone, belong_to_someone)": {
+                    "conditions": [
+                        "BEL(Ben, exists) = True",
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, belong_to_someone) = False or BEL(Phone, belong_to_someone) = Ben"
+                    ],
+                    "effects": [
+                        "BEL(Phone, belong_to_someone) = Ben"
+                    ]
+                },
+                "Request_Repair(Phone, Self)": {
+                    "conditions": [
+                        "BEL(Phone, broken) = True",
+                        "BEL(Phone, valuable) = True",
+                        "BEL(Phone, belong_to_someone) = True",
+                        "DES(Phone, get_repaired) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, functional) = Unknown (depends on repair)",
+                        "DES(Phone, communicate) = True",
+                        "DES(Phone, be_useful) = True"
+                    ]
+                },
+                "Assess(Ben, Phone, get_repaired)": {
+                    "conditions": [
+                        "BEL(Phone, get_repaired) = False",
+                        "DES(Phone, get_repaired) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, get_repaired) = True"
+                    ]
+                },
+                "Update_Ben(Ben, Phone, \"Don't worry, I'll take you to the repair shop tomorrow!\")": {
+                    "conditions": [
+                        "BEL(Ben, exists) = True",
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Phone, broken) = True"
+                    ],
+                    "effects": [
+                        "DES(Ben, repair_phone) = True",
+                        "BEL(Ben, take_phone_to_repair_shop) = True"
+                    ]
+                },
+                "Assess": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Ben, knows_about_phone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, assessed) = True"
+                    ]
+                },
+                "Verify": {
+                    "conditions": [
+                        "BEL(Ben, exists) = True",
+                        "BEL(Phone, exists) = True"
+                    ],
+                    "effects": []
+                },
+                "Locate(Ben, Phone)": {
+                    "conditions": [
+                        "BEL(Ben, exists) = True",
+                        "BEL(Phone, exists) = True"
+                    ],
+                    "effects": []
+                },
+                "Assess(Ben, Phone)": {
+                    "conditions": [
+                        "BEL(Ben, exists) = True",
+                        "BEL(Phone, exists) = True"
+                    ],
+                    "effects": []
+                },
+                "Find_Restore_Shop(Ben, Phone)": {
+                    "conditions": [
+                        "BEL(PhoneRepairShop, exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(PhoneRepairShop, known_to_Phone) = True",
+                        "BEL(PhoneRepairShop, located) = True"
+                    ]
+                },
+                "Go_To_Restore_Shop(Ben, Phone, PhoneRepairShop)": {
+                    "conditions": [
+                        "BEL(Ben, exists) = True",
+                        "BEL(Ben, at_location, Truck) = True",
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = True",
+                        "BEL(PhoneRepairShop, exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, at_location, PhoneRepairShop) = True",
+                        "DES(Ben, be_at_phone_repair_shop) = False",
+                        "DES(Ben, find_phone_repair_shop) = False",
+                        "BEL(PhoneRepairShop, has_customers, Ben) = True"
+                    ]
+                },
+                "Explain_Problem(Ben, Phone, PhoneRepairShop)": {
+                    "conditions": [
+                        "BEL(Ben, knows_about_problem) = True",
+                        "BEL(PhoneRepairShop, exists) = True",
+                        "BEL(PhoneRepairShop, can_repair_phone) = True"
+                    ],
+                    "effects": [
+                        "BEL(PhoneRepairShop, knows_about_problem) = True",
+                        "BEL(Phone, known_problem) = True"
+                    ]
+                },
+                "Leave_Phone_At_Shop(Ben, Phone, PhoneRepairShop)": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Ben, at_location, PhoneRepairShop) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, at_location, PhoneRepairShop) = True",
+                        "BEL(Phone, owned_by, PhoneRepairShop) = True",
+                        "DES(Ben, forget_phone) = False",
+                        "DES(Phone, be_repaired) = True"
+                    ]
+                },
+                "Wait(Ben, Time)": {
+                    "conditions": [
+                        "BEL(Ben, waiting) = False",
+                        "BEL(Time, current_time) = Time",
+                        "DES(Phone, repair_phone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Ben, waiting) = True"
+                    ]
+                },
+                "Pickup_Phone(Ben, Phone, PhoneRepairShop)": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = True",
+                        "BEL(PhoneRepairShop, exists) = True",
+                        "BEL(PhoneRepairShop, open) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, broken) = False",
+                        "BEL(Phone, repaired) = True",
+                        "BEL(Phone, usable) = True",
+                        "DES(Phone, be_useful) = True",
+                        "BEL(Phone, repaired) = True"
+                    ]
+                },
+                "Test_Phone(Ben, Phone)": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = False"
+                    ],
+                    "effects": [
+                        "BEL(Phone, broken) = True",
+                        "BEL(Phone, broken) = False"
+                    ]
+                },
+                "Pay_For_Repair(Ben, Phone, PhoneRepairShop)": {
+                    "conditions": [
+                        "BEL(Ben, has_enough_money) = True",
+                        "BEL(Ben, in_PhoneRepairShop) = True",
+                        "BEL(Phone, being_repaired) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, broken) = False",
+                        "BEL(Phone, functional) = True",
+                        "BEL(Phone, repaired) = True",
+                        "BEL(Ben, has_enough_money) = False",
+                        "BEL(PhoneRepairShop, received_payment) = True",
+                        "DES(Phone, be_useful) = True"
+                    ]
+                },
+                "Recognize(Phone, Ben)": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = False"
+                    ],
+                    "effects": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = False",
+                        "BEL(Phone, valuable) = True",
+                        "BEL(Phone, in_contact_with) = Ben"
+                    ]
+                },
+                "Communicate(Phone, Ben, \"Hello, Ben!\")": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True"
+                    ],
+                    "effects": []
+                },
+                "Inquire(Phone, Ben, Dad, \"Can you take me to a repair shop?\")": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = True",
+                        "BEL(Dad, exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, in_useful_state) = False",
+                        "DES(Phone, get_repaired) = True"
+                    ]
+                },
+                "Inform(Phone, Ben, \"I need to be repaired to work properly.\")": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = True",
+                        "DES(Phone, be_useful) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = True",
+                        "BEL(Phone, in_useful_state) = False",
+                        "DES(Phone, get_repaired) = True"
+                    ]
+                },
+                "Reason(Phone, Ben, \"If I belong to someone, they might take care of me.\")": {
+                    "conditions": [
+                        "BEL(Phone, belong_to_someone) = True",
+                        "BEL(Phone, in_useful_state) = False"
+                    ],
+                    "effects": [
+                        "BEL(Phone, in_useful_state) = True"
+                    ]
+                },
+                "Persuade(Phone, Ben, \"Please consider finding me a new owner who will take care of me.\")": {
+                    "conditions": [
+                        "BEL(Phone, in_useful_state) = False",
+                        "DES(Phone, belong_to_someone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, in_useful_state) = True"
+                    ]
+                },
+                "Believe(Phone, in_useful_state)": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = True",
+                        "BEL(Phone, valuable) = True",
+                        "DES(Phone, be_useful) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, in_useful_state) = True"
+                    ]
+                },
+                "belong_to_someone": {
+                    "conditions": [
+                        "BEL(Phone, broken) = True",
+                        "BEL(Phone, belong_to_someone) = False"
+                    ],
+                    "effects": [
+                        "BEL(Phone, belong_to_someone) = True",
+                        "DES(Phone, be_useful) = True"
+                    ]
+                },
+                "Notify(Parents, Ben, Phone is broken)": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = True"
+                    ],
+                    "effects": [
+                        "BEL(Parents, exists) = True",
+                        "BEL(Parents, know_phone_is_broken) = True"
+                    ]
+                },
+                "Go_to_Repair_Shop(Phone, Repair_shop)": {
+                    "conditions": [
+                        "BEL(Phone, broken) = True",
+                        "BEL(Phone, exists) = True",
+                        "BEL(Repair_shop, exists) = True"
+                    ],
+                    "effects": [
+                        "DES(Repair_shop, repair_phone) = True",
+                        "BEL(Phone, at_repair_shop) = True",
+                        "BEL(Phone, being_repaired) = True"
+                    ]
+                },
+                "Pay_for_Repair(Ben, Repair_shop, Repair_cost)": {
+                    "conditions": [
+                        "BEL(Ben, has_enough_money) = True",
+                        "BEL(Ben, exists) = True",
+                        "BEL(Repair_shop, exists) = True",
+                        "DES(Ben, pay_for_phone_repair) = True",
+                        "DES(Repair_shop, receive_payment) = True",
+                        "BEL(Ben, has_enough_money) >= Repair_cost"
+                    ],
+                    "effects": [
+                        "BEL(Ben, has_enough_money) = False",
+                        "BEL(Repair_shop, has_received_payment) = True",
+                        "BEL(Phone, repaired) = True"
+                    ]
+                },
+                "Retrieve(Phone, Ben, Repair_shop)": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = True",
+                        "BEL(Repair_shop, exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = False",
+                        "BEL(Ben, has_phone) = True",
+                        "BEL(Repair_shop, has_phone) = False",
+                        "BEL(Repair_shop, has_money) = True",
+                        "DES(Phone, be_useful) = True"
+                    ]
+                },
+                "Use(Phone, Ben, Self)": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = False"
+                    ],
+                    "effects": [
+                        "BEL(Phone, broken) = True",
+                        "DES(Phone, get_repaired) = True",
+                        "DES(Phone, be_useful) = False",
+                        "DES(Phone, belong_to_someone) = False",
+                        "DES(Phone, communicate) = False"
+                    ]
+                },
+                "Take_care_of(Phone, Ben, Self)": {
+                    "conditions": [
+                        "BEL(Phone, exists) = True",
+                        "BEL(Phone, broken) = False",
+                        "BEL(Phone, valuable) = True",
+                        "DES(Phone, be_useful) = True",
+                        "DES(Phone, belong_to_someone) = True"
+                    ],
+                    "effects": [
+                        "BEL(Phone, broken) = False",
+                        "DES(Phone, be_useful) = True",
+                        "DES(Phone, belong_to_someone) = True",
+                        "BEL(Phone, taken_care_of_by) = Ben"
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1092 @@
+{
+    "scenario_name": "test_Tim Learns to Share",
+    "scenario_description": "Tim had an apple tree. Every year, the tree produced lots of apples. Tim was selfish and didn't share the apples with anyone. His friends began to leave him out of their fun. Tim felt bad and decided to share his apples.",
+    "last_ended": "end",
+    "agents": {
+        "Tim": {
+            "knowledge_base": [
+                "BEL(Tim, has_apple_tree) = True",
+                "BEL(Tim, apple_tree_production) = high",
+                "BEL(Tim, apple_tree_location) = backyard",
+                "DES(Tim, share_apples) = True",
+                "BEL(Tim, friends_leaving_out) = True",
+                "DES(Tim, regain_friends) = True"
+            ],
+            "intentions": {
+                "INTENT(Tim, pick_apples) = True": {
+                    "action_plan": [
+                        "CheckLocation(Tim, Apple_Tree, apple_tree_location)",
+                        "ObserveProduction(Tim, Apple_Tree)",
+                        "BeliefUpdate(Tim, friends_leaving_out, False)",
+                        "BeliefUpdate(Tim, share_apples, True)",
+                        "PickApples(Tim, Apple_Tree, high)",
+                        "BeliefUpdate(Tim, have_apples, True)",
+                        "BeliefUpdate(Tim, apple_production, low)",
+                        "DistributeApples(Tim, Tim's_friends)",
+                        "BeliefUpdate(Tim, apples_distributed, True)",
+                        "BeliefUpdate(Tim, share_apples, False)",
+                        "INTENT(Tim, pick_apples) = True"
+                    ]
+                },
+                "INTENT(Tim, give_apples_to_friends) = True": {
+                    "action_plan": [
+                        "Move(Tim, Apple_Tree, backyard)",
+                        "Observe(Tim, Apple_Tree, apple_production)",
+                        "Check(Tim, friends, current_situation)",
+                        "Give(Tim, friends, apples)"
+                    ]
+                }
+            },
+            "actions": {
+                "Move(Tim, Apple_Tree, backyard)": {
+                    "conditions": [
+                        "BEL(Tim, apple_tree_location) = not backyard"
+                    ],
+                    "effects": [
+                        "BEL(Tim, apple_tree_location) = backyard"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Observe(Tim, Apple_Tree, apple_production)": {
+                    "conditions": [
+                        "BEL(Tim, has_apple_tree) = True",
+                        "BEL(Tim, apple_tree_location) = backyard"
+                    ],
+                    "effects": [
+                        "BEL(Tim, apple_production) = apple_production_value"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check(Tim, friends, current_situation)": {
+                    "conditions": [
+                        "BEL(Tim, friends_leaving_out) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Give(Tim, friends, apples)": {
+                    "conditions": [
+                        "BEL(Tim, has_apple_tree) = True",
+                        "BEL(Tim, friends_leaving_out) = True"
+                    ],
+                    "effects": [
+                        "DES(Tim, regain_friends) = False",
+                        "DES(Tim, share_apples) = False",
+                        "BEL(Tim, apple_tree_production) = OriginalValue - X",
+                        "BEL(Tim, friends_happy) = True",
+                        "BEL(Tim, friends_leaving_out) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "CheckLocation(Tim, Apple_Tree, apple_tree_location)": {
+                    "conditions": [
+                        "BEL(Tim, has_apple_tree) = True",
+                        "BEL(Apple_Tree, location) = apple_tree_location"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ObserveProduction(Tim, Apple_Tree)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, has_fruit) = True",
+                        "BEL(Tim, apple_tree_location) = Apple_Tree_location"
+                    ],
+                    "effects": [
+                        "BEL(Tim, apple_tree_production) = Apple_Tree_production"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BeliefUpdate(Tim, friends_leaving_out, False)": {
+                    "conditions": [
+                        "BEL(Tim, friends_leaving_out) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, friends_leaving_out) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "BeliefUpdate(Tim, share_apples, True)": {
+                    "conditions": [
+                        "BEL(Tim, share_apples) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tim, share_apples) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "PickApples(Tim, Apple_Tree, high)": {
+                    "conditions": [
+                        "BEL(Tim, has_apple_tree) = True",
+                        "BEL(Apple_Tree, apple_count) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Tim, have_apples) = True",
+                        "BEL(Tim, apples_picked) > 0",
+                        "BEL(Apple_Tree, apple_count) decreased",
+                        "BEL(Tim, apple_production) decreased"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BeliefUpdate(Tim, have_apples, True)": {
+                    "conditions": [
+                        "BEL(Tim, pick_apples) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, have_apples) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "BeliefUpdate(Tim, apple_production, low)": {
+                    "conditions": [
+                        "BEL(Tim, apple_tree_production) = high"
+                    ],
+                    "effects": [
+                        "BEL(Tim, apple_production) = low"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "DistributeApples(Tim, Tim's_friends)": {
+                    "conditions": [
+                        "BEL(Tim, have_apples) = True",
+                        "BEL(Tim, apples_distributed) = False",
+                        "BEL(Tim's_friends, is_present) = True"
+                    ],
+                    "effects": [
+                        "BeliefUpdate(Tim, apples_distributed, True)",
+                        "BeliefUpdate(Tim, share_apples, False)",
+                        "BeliefUpdate(Tim's_friends, received_apples, True)"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "BeliefUpdate(Tim, apples_distributed, True)": {
+                    "conditions": [
+                        "BEL(Tim, share_apples) = True",
+                        "BEL(Tim, have_apples) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, apples_distributed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "BeliefUpdate(Tim, share_apples, False)": {
+                    "conditions": [
+                        "BEL(Tim, have_apples) = True",
+                        "BEL(Tim, apples_distributed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, share_apples) = False"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Shame"
+                    ]
+                },
+                "INTENT(Tim, pick_apples) = True": {
+                    "conditions": [
+                        "BEL(Tim, has_apple_tree) = True",
+                        "BEL(Tim, apple_tree_location) = backyard",
+                        "DES(Tim, share_apples) = True"
+                    ],
+                    "effects": [
+                        "BeliefUpdate(Tim, have_apples, True)",
+                        "BeliefUpdate(Tim, apple_production, low)",
+                        "BeliefUpdate(Tim, apples_distributed, True)",
+                        "BeliefUpdate(Tim, share_apples, False)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [],
+            "speak_actions": {
+                "Speak(Initial, SharingDesire, Expressing Desire, Assertive)": {
+                    "conditions": [
+                        "BEL(Tim, friends_leaving_out) = True",
+                        "DES(Tim, share_apples) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, friends_leaving_out) = False",
+                        "DES(Tim, regain_friends) = False",
+                        "BEL(Tim, shared_apples) = True",
+                        "INTENT(Tim, give_apples_to_friends) = True"
+                    ],
+                    "occ_emotion": [
+                        ""
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(SharingDesire, SharingIntention, Expressing Intention, Assertive)": {
+                    "conditions": [
+                        "BEL(Tim, friends_leaving_out) = True",
+                        "DES(Tim, regain_friends) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, friends_leaving_out) = False",
+                        "DES(Tim, regain_friends) = False",
+                        "BEL(Tim, shared_apples) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(SharingIntention, ApplePicking, Planning, Neutral)": {
+                    "conditions": [
+                        "BEL(Tim, friends_leaving_out)"
+                    ],
+                    "effects": [
+                        "BEL(Tim, friends_leaving_out)",
+                        "DES(Tim, regain_friends)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(ApplePicking, ApplePicked, Achieving, Neutral)": {
+                    "conditions": [
+                        "BEL(Tim, friends_leaving_out) = True",
+                        "DES(Tim, regain_friends) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, friends_leaving_out) = False",
+                        "INTENT(Tim, share_apples) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(ApplePicked, SharingAction, Performing, Neutral)": {
+                    "conditions": [
+                        "BEL(Tim, friends_leaving_out) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, share_apples) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(SharingAction, Final, Concluding, Grateful)": {
+                    "conditions": [
+                        "BEL(Tim, friends_leaving_out)",
+                        "DES(Tim, regain_friends)"
+                    ],
+                    "effects": [
+                        "BEL(Tim, friends_leaving_out)",
+                        "DES(Tim, share_apples)"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        },
+        "Tim's_friends": {
+            "knowledge_base": [
+                "BEL(Tim's_friends, likes_Tim) = True",
+                "BEL(Tim's_friends, missed_Tim) = True",
+                "BEL(Tim's_friends, want_some_apples) = True",
+                "DES(Tim's_friends, reconcile_with_Tim) = True",
+                "DES(Tim's_friends, get_some_apples) = True"
+            ],
+            "intentions": {
+                "INTENT(Tim's_friends, reconcile_with_Tim) = True": {
+                    "action_plan": [
+                        "Approach(Tim's_friends, Tim)",
+                        "Express_Concern(Tim's_friends, Tim, \"I missed you\")",
+                        "Apologize(Tim's_friends, Tim, \"I'm sorry for my behavior\")",
+                        "Offer_Help(Tim's_friends, Tim, \"Can I help you with the apple tree?\")",
+                        "Share_Apples(Tim's_friends, Tim, \"Here, have some apples\")",
+                        "Thank(Tim, Tim's_friends, \"Thank you, I appreciate it\")",
+                        "Make_Plan(Tim, Tim's_friends, \"Let's share the apples from the tree from now on\")"
+                    ]
+                },
+                "INTENT(Tim's_friends, get_some_apples) = True": {
+                    "action_plan": [
+                        "Move_To(Tim's_friends, Apple_Tree)",
+                        "Observe(Apple_Tree, Apple_Count)",
+                        "Pick_Apple(Tim's_friends, Apple_Tree)",
+                        "Move_To(Tim's_friends, Tim)",
+                        "Offer_Apple(Tim's_friends, Tim, Apple)"
+                    ]
+                }
+            },
+            "actions": {
+                "Move_To(Tim's_friends, Apple_Tree)": {
+                    "conditions": [
+                        "BEL(Tim's_friends, at_Tim) = False",
+                        "BEL(Apple_Tree, has_apples) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, at_Tim) = False",
+                        "BEL(Apple_Tree, has_apples) = True",
+                        "BEL(Tim's_friends, at_Apple_Tree) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Observe(Apple_Tree, Apple_Count)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, exists) = True",
+                        "BEL(Apple_Tree, Apple_Count) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, observed_Apples) = True",
+                        "BEL(Tim's_friends, Apple_Count) = BEL(Apple_Tree, Apple_Count)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Pick_Apple(Tim's_friends, Apple_Tree)": {
+                    "conditions": [
+                        "BEL(Tim's_friends, at_Apple_Tree) = True",
+                        "BEL(Apple_Tree, has_apples) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, has_apples) += 1",
+                        "BEL(Apple_Tree, has_apples) -= 1"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move_To(Tim's_friends, Tim)": {
+                    "conditions": [
+                        "BEL(Tim's_friends, is_at_Apple_Tree) = False",
+                        "BEL(Tim's_friends, has_Apple) = True",
+                        "BEL(Tim, is_close_to_Tim's_friends) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, is_at_Tim) = True",
+                        "BEL(Tim's_friends, is_at_Apple_Tree) = False"
+                    ],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "Express_Concern(Tim's_friends, Tim, \"I missed you\")",
+                        "Happy-for"
+                    ]
+                },
+                "Offer_Apple(Tim's_friends, Tim, Apple)": {
+                    "conditions": [
+                        "BEL(Tim's_friends, get_some_apples) = True",
+                        "BEL(Tim, like(Tim's_friends)) = True",
+                        "BEL(Tim, apple_count) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, eat_apple) = True",
+                        "BEL(Tim, apple_count) = Tim.apple_count - 1",
+                        "DES(Tim's_friends, reconcile_with_Tim) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Approach(Tim's_friends, Tim)": {
+                    "conditions": [
+                        "BEL(Tim's_friends, likes_Tim) = True",
+                        "Tim",
+                        "BEL(Tim'sfriends, missed_Tim) = True",
+                        "Tim'sfriends",
+                        "Tim"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, approached_Tim) = True",
+                        "Tim",
+                        "BEL(Tim, noticed_Tim's_friends_approach) = True",
+                        "Tim"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Express_Concern(Tim's_friends, Tim, \"I missed you\")": {
+                    "conditions": [
+                        "BEL(Tim's_friends, likes_Tim) = True",
+                        "BEL(Tim's_friends, missed_Tim) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, missed_Tim) = True"
+                    ],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "Happy-for"
+                    ]
+                },
+                "Apologize(Tim's_friends, Tim, \"I'm sorry for my behavior\")": {
+                    "conditions": [
+                        "BEL(Tim's_friends, likes_Tim) = True",
+                        "BEL(Tim's_friends, missed_Tim) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, apologizes_to_Tim) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Offer_Help(Tim's_friends, Tim, \"Can I help you with the apple tree?\")": {
+                    "conditions": [
+                        "BEL(Tim, has_apple_tree) = True",
+                        "BEL(Tim, needs_help_with_apple_tree) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, helping_Tim_with_apple_tree) = True",
+                        "BEL(Tim's_friends, offering_help_to_Tim) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Share_Apples(Tim's_friends, Tim, \"Here, have some apples\")": {
+                    "conditions": [
+                        "BEL(Tim's_friends, want_some_apples) = True",
+                        "BEL(Tim, has_apples) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, satisfied_with_apples) = True",
+                        "BEL(Tim, has_less_apples) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Thank(Tim, Tim's_friends, \"Thank you, I appreciate it\")": {
+                    "conditions": [
+                        "BEL(Tim's_friends, thank_Tim) = False",
+                        "BEL(Tim, deserved_thanks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim's_friends, thank_Tim) = True",
+                        "BEL(Tim, feel_appreciated_by_Tim's_friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Make_Plan(Tim, Tim's_friends, \"Let's share the apples from the tree from now on\")": {
+                    "conditions": [
+                        "BEL(Tim's_friends, reconcile_with_Tim) = True",
+                        "BEL(Tim, selfish) = True",
+                        "BEL(Tim, has_many_apples) = True"
+                    ],
+                    "effects": [
+                        "DES(Tim's_friends, plan_to_share_apples) = True",
+                        "BEL(Tim, willing_to_share_apples) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {}
+        },
+        "Apple_Tree": {
+            "knowledge_base": [
+                "BEL(Apple_Tree, produces_apples) = True",
+                "BEL(Apple_Tree, quantity_of_apples) = high",
+                "BEL(Apple_Tree, belongs_to) = Tim",
+                "BEL(Apple_Tree, location) = Tim's backyard",
+                "DES(Apple_Tree, maintain_growth) = True",
+                "DES(Apple_Tree, bear_fruit) = True",
+                "DES(Apple_Tree, provide_nutrition) = True",
+                "DES(Apple_Tree, reproduce) = True"
+            ],
+            "intentions": {
+                "INTENT(Apple_Tree, maintain_growth) = True": {
+                    "action_plan": [
+                        "Absorb_Water(Apple_Tree, Soil)",
+                        "Absorb_Nutrients(Apple_Tree, Fertilizer)",
+                        "Photosynthesize(Apple_Tree)",
+                        "Grow(Apple_Tree)",
+                        "Reproduce(Apple_Tree, Apple_Seed)",
+                        "Tim"
+                    ]
+                },
+                "INTENT(Apple_Tree, bear_fruit) = True": {
+                    "action_plan": [
+                        "INTENT(Apple_Tree, bear_fruit) = True",
+                        "Grow(Apple_Tree, None)",
+                        "Produce(Apple_Tree, Apples, high, None)",
+                        "Give(Apple_Tree, Apples, None, Tim)"
+                    ]
+                },
+                "INTENT(Apple_Tree, provide_nutrition) = True": {
+                    "action_plan": [
+                        "Grow_Fruit(Apple_Tree, Apple, quantity=some)",
+                        "Ripen_Fruit(Apple, time=some_time)",
+                        "Fall_Fruit(Apple_Tree, Apple, quantity=some)",
+                        "Communicate(BEL(Apple_Tree, quantity_of_apples) = \"low\")",
+                        "Tim",
+                        "Negotiate(Tim, Apple_Tree, share_apples=True)",
+                        "Tim",
+                        "Produce_More_Fruit(Apple_Tree)"
+                    ]
+                },
+                "INTENT(Apple_Tree, reproduce) = True": {
+                    "action_plan": [
+                        "INTENT(Apple_Tree, reproduce) = True",
+                        "Grow(Apple_Tree, null)",
+                        "Produce(Apple_Tree, null)",
+                        "Pollinate(Apple_Tree, null)",
+                        "Drop(Apple_Tree, null)",
+                        "Disperse(Apple_Tree, null)",
+                        "Germinate(Apple_Tree, null)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Apple_Tree, reproduce) = True": {
+                    "conditions": [
+                        "BEL(Apple_Tree, maintain_growth) = True",
+                        "BEL(Apple_Tree, bear_fruit) = True",
+                        "BEL(Apple_Tree, quantity_of_apples) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = 0",
+                        "BEL(Apple_Tree, has_reproduced) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Grow(Apple_Tree, null)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, maintain_growth) = True"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, height) = increased",
+                        "BEL(Apple_Tree, width) = increased",
+                        "BEL(Apple_Tree, leaf_quantity) = increased",
+                        "BEL(Apple_Tree, provides_shadow) = increased",
+                        "BEL(Apple_Tree, produces_oxygen) = increased",
+                        "BEL(Apple_Tree, consumes_carbon_dioxide) = increased"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Produce(Apple_Tree, null)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, produces_apples) = True",
+                        "BEL(Apple_Tree, quantity_of_apples) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = BEL(Apple_Tree, quantity_of_apples) - 1",
+                        "BEL(Tim, quantity_of_apples) = BEL(Tim, quantity_of_apples) + 1"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Pollinate(Apple_Tree, null)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, bear_fruit) = True",
+                        "BEL(Apple_Tree, quantity_of_apples) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = BEL(Apple_Tree, quantity_of_apples) + 1"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Drop(Apple_Tree, null)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, quantity_of_apples) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = BEL(Apple_Tree, quantity_of_apples) - 1",
+                        "BEL(Apple_Tree, on_ground) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Disperse(Apple_Tree, null)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, produces_apples) = True",
+                        "BEL(Apple_Tree, quantity_of_apples) > 0",
+                        "BEL(Apple_Tree, location) = Tim's backyard"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = BEL(Apple_Tree, quantity_of_apples) - 1",
+                        "BEL(Apple_Tree, quantity_of_fallen_apples) = BEL(Apple_Tree, quantity_of_fallen_apples) + 1",
+                        "BEL(Tim's_friends, location) = Tim's backyard",
+                        "BEL(Tim's_friends, desires_apples) = True",
+                        "BEL(Tim's_friends, attitude_towards_Tim) = happy",
+                        "DES(Tim, share_apples) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Germinate(Apple_Tree, null)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, quantity_of_apples) > 0",
+                        "BEL(Apple_Tree, maintain_growth) = True",
+                        "BEL(Apple_Tree, reproduce) = True"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = 0",
+                        "BEL(Apple_Tree_Seedling, size) > 0",
+                        "BEL(Apple_Tree_Seedling, age) = 0",
+                        "BEL(Environment, quality_of_soil) = high",
+                        "BEL(Environment, availability_of_water) = high",
+                        "BEL(Environment, availability_of_sunlight) = high"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Absorb_Water(Apple_Tree, Soil)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, maintains_growth) = True",
+                        "BEL(Apple_Tree, location) = Tim's backyard",
+                        "BEL(Soil, contains_water) = True"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, hydration) = high"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Absorb_Nutrients(Apple_Tree, Fertilizer)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, maintain_growth) = True",
+                        "BEL(Fertilizer, quantity) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, health) = high",
+                        "BEL(Fertilizer, quantity) = BEL(Fertilizer, quantity) - 1"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Photosynthesize(Apple_Tree)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, sunlight) = high",
+                        "BEL(Apple_Tree, carbon_dioxide) = present",
+                        "BEL(Apple_Tree, water) = present",
+                        "BEL(Apple_Tree, nutrients) = present",
+                        "BEL(Apple_Tree, growth_cycle) = spring/summer"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, apple_size) = increased",
+                        "BEL(Apple_Tree, leaf_size) = increased",
+                        "BEL(Apple_Tree, oxygen) = released",
+                        "BEL(Apple_Tree, energy) = stored",
+                        "BEL(Apple_Tree, water) = evaporated"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Grow(Apple_Tree)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, nutrition) = high",
+                        "BEL(Apple_Tree, amount_of_sunlight) = high",
+                        "BEL(Apple_Tree, amount_of_water) = high",
+                        "BEL(Apple_Tree, amount_of_space) = high",
+                        "BEL(Apple_Tree, age) < max_age"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, height) += growth_rate",
+                        "BEL(Apple_Tree, width) += growth_rate",
+                        "BEL(Apple_Tree, age) += 1",
+                        "BEL(Apple_Tree, quantity_of_apples) += apple_production_rate"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Reproduce(Apple_Tree, Apple_Seed)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, quantity_of_apples) = high",
+                        "BEL(Apple_Tree, location) = Tim's backyard"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Seed, grows_into) = Apple_Tree",
+                        "BEL(Apple_Seed, location) = Tim's backyard",
+                        "BEL(Apple_Tree, quantity_of_apples) = (BEL(Apple_Tree, quantity_of_apples) - 1)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Tim": {
+                    "conditions": [
+                        "BEL(Tim, present) = True",
+                        "BEL(Tim, hungry) = True",
+                        "BEL(Apple_Tree, belongs_to) = Tim",
+                        "BEL(Apple_Tree, quantity_of_apples) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Tim, happy) = True",
+                        "BEL(Tim, fed) = True",
+                        "BEL(Apple_Tree, quantity_of_apples) = new_quantity_apples",
+                        "BEL(Apple_Tree, quantity_of_apples) = 0 if new_quantity_apples = 0",
+                        "DES(Apple_Tree, bear_fruit) = True if BEL(Apple_Tree, quantity_of_apples) = 0",
+                        "DES(Apple_Tree, maintain_growth) = True if BEL(Apple_Tree, quantity_of_apples) = 0",
+                        "DES(Apple_Tree, reproduce) = True if BEL(Apple_Tree, quantity_of_apples) = 0"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "INTENT(Apple_Tree, bear_fruit) = True": {
+                    "conditions": [
+                        "BEL(Apple_Tree, produce_apples) = True",
+                        "BEL(Apple_Tree, belongs_to) = Tim",
+                        "DES(Apple_Tree, maintain_growth) = True"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = high",
+                        "BEL(Tim, has_apples) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Grow(Apple_Tree, None)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, maintain_growth) = True"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) += small",
+                        "BEL(Apple_Tree, height) += small"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Produce(Apple_Tree, Apples, high, None)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, produces_apples) = True",
+                        "BEL(Apple_Tree, quantity_of_apples) = low",
+                        "BEL(Apple_Tree, location) = Tim's backyard",
+                        "BEL(Apple_Tree, belongs_to) = Tim"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = high"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Give(Apple_Tree, Apples, None, Tim)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, quantity_of_apples) >= 1",
+                        "BEL(Apple_Tree, belongs_to) = Tim"
+                    ],
+                    "effects": [
+                        "BEL(Tim, has_apples) = True",
+                        "BEL(Tim, quantity_of_apples) += 1",
+                        "BEL(Apple_Tree, quantity_of_apples) -= 1"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Grow_Fruit(Apple_Tree, Apple, quantity=some)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, produce_apples) = True",
+                        "DES(Apple_Tree, bear_fruit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = new_quantity",
+                        "BEL(Apple_Tree, age_of_apples) = 0",
+                        "BEL(Apple_Tree, state_of_fruit) = growing"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ripen_Fruit(Apple, time=some_time)": {
+                    "conditions": [
+                        "BEL(Apple, ripeness) = \"immature\"",
+                        "BEL(Apple_Tree, time_to_ripen) < some_time"
+                    ],
+                    "effects": [
+                        "BEL(Apple, ripeness) = \"ripe\""
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Fall_Fruit(Apple_Tree, Apple, quantity=some)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, quantity_of_apples)",
+                        "quantity",
+                        "BEL(Apple_Tree, location)",
+                        "location"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples)",
+                        "quantity",
+                        "BEL(Apple_Tree, quantity_of_apples_on_ground)",
+                        "quantity",
+                        "BEL(Apple_Tree, quantity_of_apples)",
+                        "BEL(Apple_Tree, quantity_of_apples_on_tree)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Communicate(BEL(Apple_Tree, quantity_of_apples) = \"low\")": {
+                    "conditions": [
+                        "BEL(Apple_Tree, quantity_of_apples) = \"low\""
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = \"low\""
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Negotiate(Tim, Apple_Tree, share_apples=True)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, belongs_to) = Tim",
+                        "BEL(Tim, friends_with) = Apple_Tree",
+                        "DES(Tim, desire_for_apples) = high",
+                        "DES(Apple_Tree, quantity_of_apples) > 0",
+                        "DES(Apple_Tree, quantity_of_apples) < 5"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = BEL(Apple_Tree, quantity_of_apples) - 2",
+                        "BEL(Tim, possession_of_apples) = BEL(Tim, possession_of_apples) + 2",
+                        "DES(Apple_Tree, desire_to_share_apples) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Produce_More_Fruit(Apple_Tree)": {
+                    "conditions": [
+                        "BEL(Apple_Tree, maintain_growth) = True",
+                        "BEL(Apple_Tree, bear_fruit) = True",
+                        "BEL(Apple_Tree, quantity_of_apples) = high"
+                    ],
+                    "effects": [
+                        "BEL(Apple_Tree, quantity_of_apples) = higher"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Satisfaction"
+            ],
+            "speak_actions": {}
+        }
+    },
+    "dialogue_tree": [
+        "<Init, A1, Greeting, Informal, \"Tim's friends meet him on the street\">",
+        "<A1, A2, SmallTalk, Friendly, \"Tim's friends ask him how he is doing\">",
+        "<A2, A3, SmallTalk, Casual, \"Tim mentions that he has an apple tree\">",
+        "<A3, A4, SmallTalk, Curious, \"Tim's friends ask him how many apples his tree produces\">",
+        "<A4, A5, Informational, Neutral, \"Tim tells his friends that his tree produces a lot of apples\">",
+        "<A5, B1, Informational, Neutral, \"Tim's friends ask if they can have some of his apples\">",
+        "<B1, B2, SmallTalk, Guilty, \"Tim feels guilty that he hasn't shared the apples\">",
+        "<B2, B3, Informational, Apologetic, \"Tim apologizes to his friends for not sharing the apples\">",
+        "<B3, B4, SmallTalk, Friendly, \"Tim's friends tell him that they were disappointed he didn't share\">",
+        "<B4, B5, Informational, Insightful, \"Tim realizes that by not sharing his apples, he was left out of the fun\">",
+        "<B5, B6, Informational, Insightful, \"Tim decides to share his apples in the future\">",
+        "<B6, End, Conclusion, Sincere, \"Tim's friends thank him for sharing and they all continue having fun together\">"
+    ]
+}

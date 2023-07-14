@@ -1,0 +1,1349 @@
+{
+    "scenario_name": "test_I used to love volkswagen.",
+    "scenario_description": "I was always a big fan of Volkswagen. I needed a new car and knew I would buy a Volkswagen. I bought myself a diesel Volkswagen Golf. I found out that my car didn't pass government emissions standards. I was angry at Volkswagen for cheating me.",
+    "last_ended": "end",
+    "agents": {
+        "car_owner": {
+            "knowledge_base": [
+                "BEL(car_owner, owns_volkswagen_golf) = True",
+                "BEL(car_owner, new_car_needs_to_pass_emissions_standards) = True",
+                "DES(car_owner, wants_volkswagen_to_pass_emissions_standards) = True",
+                "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                "DES(car_owner, wants_restitution_for_volkswagen_cheating) = True"
+            ],
+            "intentions": {
+                "INTENT(car_owner, choose_to_stop_using_volkswagen) = True": {
+                    "action_plan": [
+                        "GatherInfo(car_owner, volkswagen_golf, emissions)",
+                        "Research(car_owner, government_emissions_standards)",
+                        "Contact(volkswagen_company, car_owner, request_explanation)",
+                        "EvaluateExplanation(car_owner, volkswagen_company, explanation)",
+                        "Research(car_owner, alternative_car_companies)",
+                        "EvaluateAlternatives(car_owner, alternative_car_companies)",
+                        "Contact(volkswagen_company, car_owner, request_restitution)",
+                        "EvaluateRestitution(car_owner, volkswagen_company, restitution)",
+                        "StopUsing(car_owner, volkswagen_golf)",
+                        "PurchaseCar(car_owner, alternative_car)"
+                    ]
+                },
+                "INTENT(car_owner, demand_volkswagen_to_fix_car) = True": {
+                    "action_plan": [
+                        "Inform(car_owner, friends&family, Volkswagen cheated me)",
+                        "Research(car_owner, online, Volkswagen fix options)",
+                        "Contact(car_owner, Volkswagen customer service, demand fix)",
+                        "Notify(car_owner, local news outlet, Volkswagen scandal)",
+                        "Join(car_owner, Volkswagen class action lawsuit, legal action)",
+                        "Visit(car_owner, dealership, demand answer)",
+                        "Evaluate(car_owner, alternative car options, find new car)"
+                    ]
+                },
+                "INTENT(car_owner, demand_compenstation_from_volkswagen) = True": {
+                    "action_plan": [
+                        "SearchInformation(car_owner, volkswagen_golf, emissions_standards)",
+                        "ContactVolkswagen(car_owner, volkswagen_company)",
+                        "RequestExplanation(car_owner, volkswagen_company, cheating)",
+                        "FileComplaint(car_owner, legal_authority, volkswagen_company)",
+                        "JoinClassAction(car_owner, law_firm, volkswagen_company)",
+                        "SpreadAwareness(car_owner, social_media, volkswagen_company)",
+                        "SellVolkswagen(car_owner, car_dealer)",
+                        "BoycottVolkswagen(car_owner, volkswagen_company)"
+                    ]
+                }
+            },
+            "actions": {
+                "SearchInformation(car_owner, volkswagen_golf, emissions_standards)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, new_car_needs_to_pass_emissions_standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, knows_emissions_standards_for_volkswagen_golf) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ContactVolkswagen(car_owner, volkswagen_company)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, new_car_needs_to_pass_emissions_standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, contacted_volkswagen_company) = True",
+                        "BEL(volkswagen_company, received_contact_from_car_owner) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "RequestExplanation(car_owner, volkswagen_company, cheating)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "BEL(car_owner, owns_volkswagen_golf) = True"
+                    ],
+                    "effects": [
+                        "BEL(volkswagen_company, received_request_for_explanation_from_car_owner) = True",
+                        "DES(volkswagen_company, needs_to_provide_explanation_for_cheating) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "FileComplaint(car_owner, legal_authority, volkswagen_company)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, new_car_needs_to_pass_emissions_standards) = True",
+                        "DES(car_owner, wants_restitution_for_volkswagen_cheating) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, filed_complaint_against_volkswagen_company) = True",
+                        "BEL(legal_authority, received_complaint_from_car_owner) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "JoinClassAction(car_owner, law_firm, volkswagen_company)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "DES(car_owner, wants_restitution_for_volkswagen_cheating) = True"
+                    ],
+                    "effects": [
+                        "BEL(law_firm, has_joined_class_action_against_volkswagen) = True",
+                        "DES(volkswagen_company, wants_to_settle_class_action) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "SpreadAwareness(car_owner, social_media, volkswagen_company)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "BEL(car_owner, owns_volkswagen_golf) = True"
+                    ],
+                    "effects": [
+                        "BEL(social_media_users, aware_of_volkswagen_cheating) = True",
+                        "DES(car_owner, wants_volkswagen_to_lose_sales) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "SellVolkswagen(car_owner, car_dealer)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, owns_volkswagen_golf) = False",
+                        "DES(car_owner, wants_to_buy_another_car) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BoycottVolkswagen(car_owner, volkswagen_company)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, will_not_buy_volkswagen_cars) = True",
+                        "BEL(car_owner, will_not_recommend_volkswagen_cars) = True",
+                        "DES(car_owner, wants_to_support_ethical_companies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "GatherInfo(car_owner, volkswagen_golf, emissions)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, new_car_needs_to_pass_emissions_standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, emissions_info_gathered) = True",
+                        "BEL(volkswagen_golf, has_emissions_data) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Research(car_owner, government_emissions_standards)": {
+                    "conditions": [
+                        "BEL(car_owner, new_car_needs_to_pass_emissions_standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, knows_government_emissions_standards) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Contact(volkswagen_company, car_owner, request_explanation)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = False",
+                        "BEL(volkswagen_company, can_explain_emissions_cheating) = True"
+                    ],
+                    "effects": [
+                        "BEL(volkswagen_company, received_request_for_explanation_from_car_owner) = True",
+                        "BEL(car_owner, waiting_for_explanation_from_volkswagen_company) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "EvaluateExplanation(car_owner, volkswagen_company, explanation)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "BEL(volkswagen_company, explanation_provided) = True",
+                        "DES(car_owner, wants_volkswagen_to_pass_emissions_standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(volkswagen_company, explanation_evaluated) = True",
+                        "DES(volkswagen_company, restitution_requested) = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Research(car_owner, alternative_car_companies)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "DES(car_owner, wants_restitution_for_volkswagen_cheating) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, knows_alternative_car_companies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EvaluateAlternatives(car_owner, alternative_car_companies)": {
+                    "conditions": [
+                        "BEL(car_owner, wants_volkswagen_to_pass_emissions_standards) = True",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "BEL(car_owner, research_done) = True",
+                        "BEL(car_owner, alternative_car_companies_researched) = True",
+                        "BEL(alternative_car_company, satisfies_car_owner_needs) = True"
+                    ],
+                    "effects": [
+                        "DES(car_owner, wants_to_purchase_car) = True",
+                        "BEL(car_owner, has_researched_alternative_car_companies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Contact(volkswagen_company, car_owner, request_restitution)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "DES(car_owner, wants_restitution_for_volkswagen_cheating) = True"
+                    ],
+                    "effects": [
+                        "BEL(volkswagen_company, received_request_for_restitution_from_car_owner) = True",
+                        "BEL(car_owner, made_contact_with_volkswagen_company) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "EvaluateRestitution(car_owner, volkswagen_company, restitution)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "BEL(volkswagen_company, caused_emissions_scandal) = True",
+                        "DES(car_owner, wants_restitution_for_volkswagen_cheating) = True",
+                        "BEL(volkswagen_company, willing_to_offer_restitution) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, received_appropriate_restitution) = True",
+                        "BEL(car_owner, feels_satisfied_with_restitution_received) = True",
+                        "DES(car_owner, wants_to_let_others_know_about_volkswagen_cheating) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "StopUsing(car_owner, volkswagen_golf)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, no_longer_uses_volkswagen_golf) = True",
+                        "BEL(car_owner, owns_volkswagen_golf) = False",
+                        "DES(car_owner, wants_volkswagen_to_pass_emissions_standards) = False",
+                        "DES(car_owner, wants_restitution_for_volkswagen_cheating) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "PurchaseCar(car_owner, alternative_car)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "DES(car_owner, wants_alternative_car) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, owns_alternative_car) = True",
+                        "DES(car_owner, wants_reliable_car) = True",
+                        "BEL(car_owner, has_less_trust_in_volkswagen_company) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Inform(car_owner, friends&family, Volkswagen cheated me)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = False"
+                    ],
+                    "effects": [
+                        "BEL(friends&family, car_owner_was_cheated_by_volkswagen) = True",
+                        "DES(friends&family, wants_to_avoid_volkswagen_cars) = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Research(car_owner, online, Volkswagen fix options)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf)",
+                        "BEL(car_owner, new_car_needs_to_pass_emissions_standards)",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company)"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, knows_about_volkswagen_fix_options) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Contact(car_owner, Volkswagen customer service, demand fix)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, new_car_needs_to_pass_emissions_standards) = True",
+                        "DES(car_owner, wants_volkswagen_to_pass_emissions_standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, received_response_from_Volkswagen_customer_service) = True",
+                        "BEL(Volkswagen_customer_service, acknowledges_issue_with_Volkswagen_Golf) = True",
+                        "DES(car_owner, wants_Volkswagen_to_fix_car) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Notify(car_owner, local news outlet, Volkswagen scandal)": {
+                    "conditions": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "DES(car_owner, wants_restitution_for_volkswagen_cheating) = True"
+                    ],
+                    "effects": [
+                        "BEL(news_outlet, received_notification_about_Volkswagen_scandal) = True",
+                        "BEL(news_outlet, interested_in_car_industry_scandals) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Join(car_owner, Volkswagen class action lawsuit, legal action)": {
+                    "conditions": [
+                        "DES(car_owner, wants_restitution_for_volkswagen_cheating) = True",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, joined_volkswagen_class_action_lawsuit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Visit(car_owner, dealership, demand answer)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, received_answer_from_dealership) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Evaluate(car_owner, alternative car options, find new car)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "DES(car_owner, wants_volkswagen_to_pass_emissions_standards) = True"
+                    ],
+                    "effects": [
+                        "DES(car_owner, wants_new_car) = True",
+                        "BEL(car_owner, has_to_sell_volkswagen_golf) = True",
+                        "BEL(car_owner, considering_alternative_cars) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Anger"
+            ],
+            "speak_actions": {
+                "Speak(Start, A1, Greeting, Neutral)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, new_car_needs_to_pass_emissions_standards) = True",
+                        "DES(car_owner, wants_volkswagen_to_pass_emissions_standards) = True"
+                    ],
+                    "effects": [
+                        "INTENT(car_owner, choose_to_stop_using_volkswagen) = True",
+                        "INTENT(car_owner, demand_volkswagen_to_fix_car) = True",
+                        "INTENT(car_owner, demand_compenstation_from_volkswagen) = True",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(A1, A2, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "DES(car_owner, wants_volkswagen_to_pass_emissions_standards) = True"
+                    ],
+                    "effects": [
+                        "INTENT(car_owner, demand_volkswagen_to_fix_car) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(A2, A3, Name, Neutral)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "DES(car_owner, wants_restitution_for_volkswagen_cheating) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope",
+                        "Fear",
+                        "Anger",
+                        "Anger",
+                        "Anger",
+                        "Anger",
+                        "Disappointment",
+                        "Anger",
+                        "Fear",
+                        "Hope",
+                        "Anger",
+                        "Anger",
+                        "Disappointment",
+                        "Disappointment",
+                        "Anger",
+                        "Anger",
+                        "",
+                        "Hope",
+                        "Anger",
+                        "Hope",
+                        "Anger",
+                        "Anger",
+                        "Anger",
+                        "Anger",
+                        "Hope"
+                    ]
+                },
+                "Speak(A3, A4, Emissions, Neutral)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Speak(A4, A5, Rudeness, Negative)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, new_car_needs_to_pass_emissions_standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True",
+                        "DES(car_owner, wants_restitution_for_volkswagen_cheating) = True",
+                        "INTENT(car_owner, choose_to_stop_using_volkswagen) = True",
+                        "INTENT(car_owner, demand_volkswagen_to_fix_car) = True",
+                        "INTENT(car_owner, demand_compenstation_from_volkswagen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Speak(A5, End, Closure, Neutral)": {
+                    "conditions": [
+                        "BEL(car_owner, owns_volkswagen_golf) = True",
+                        "BEL(car_owner, lost_trust_in_volkswagen_company) = True"
+                    ],
+                    "effects": [
+                        "INTENT(car_owner, choose_to_stop_using_volkswagen) = True",
+                        "INTENT(car_owner, demand_volkswagen_to_fix_car) = True",
+                        "INTENT(car_owner, demand_compenstation_from_volkswagen) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                }
+            }
+        },
+        "Volkswagen_company": {
+            "knowledge_base": [
+                "BEL(Volkswagen_company, followed government emissions standards) = True",
+                "BEL(Volkswagen_company, car models passed emissions test) = False",
+                "BEL(Volkswagen_company, car models met advertised emissions standards) = False",
+                "BEL(Volkswagen_company, cheating car owners) = False",
+                "DES(Volkswagen_company, increase transparency on product standards) = True",
+                "DES(Volkswagen_company, improve emissions control in car manufacturing) = True",
+                "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = True"
+            ],
+            "intentions": {
+                "INTENT(Volkswagen_company, increase_transparency_on_product_standards) = True": {
+                    "action_plan": [
+                        "Volkswagen_company(Self), Admit emissions cheating scandal, press conference",
+                        "Volkswagen_company(Self), Publicly apologize for the emissions scandal, video message",
+                        "Volkswagen_company(Self), Hire independent third party to investigate cheating scandal, legal team",
+                        "Volkswagen_company(Self), Implement new emissions testing procedures and controls, manufacturing team",
+                        "Volkswagen_company(Self), Offer compensation to affected car owners, customer service team",
+                        "Volkswagen_company(Self), Establish regular public reporting on emissions compliance, marketing team",
+                        "Volkswagen_company(Self), Engage with regulators to cooperate and establish new emissions standards, government relations team",
+                        "Volkswagen_company(Self), Roll out new, compliant car models with improved emissions, engineering team"
+                    ]
+                },
+                "INTENT(Volkswagen_company, improve_emissions_control_in_car_manufacturing) = True": {
+                    "action_plan": [
+                        "Communicate(Volkswagen_company, Government, Request_emissions_standard_requirements)",
+                        "Research(Volkswagen_company, Car_manufacturing_processes)",
+                        "Hire(Volkswagen_company, Environmental_consultants)",
+                        "Implement(Volkswagen_company, Emissions_control_technology)",
+                        "Compensate(Volkswagen_company, Car_owners, Affected_by_emissions_scandal)",
+                        "Communicate(Volkswagen_company, Customers, Transparent_emissions_standards)"
+                    ]
+                },
+                "INTENT(Volkswagen_company, provide_compensation_for_car_owners_affected_by_emissions_scandal) = True": {
+                    "action_plan": [
+                        "Announce(Volkswagen_company, public, \"We are aware of the emissions scandal and will be providing compensation to affected car owners.\")",
+                        "Gather(Volkswagen_company, legal team, \"Assess the legal implications and requirements for providing compensation.\")",
+                        "Contact(Volkswagen_company, affected car owners, \"Reach out to car owners who have been affected by the scandal and determine the extent of their damages.\")",
+                        "Offer(Volkswagen_company, affected car owners, compensation_amount, \"Negotiate and offer a compensation amount to affected car owners that is fair and reasonable.\")",
+                        "Implement(Volkswagen_company, manufacturing team, \"Improve emissions control technology in car manufacturing processes to meet government regulations and advertised standards.\")",
+                        "Communicate(Volkswagen_company, public, \"Provide updates on the progress of compensating car owners and improving emissions control technology in our manufacturing processes.\")"
+                    ]
+                }
+            },
+            "actions": {
+                "Announce(Volkswagen_company, public, \"We are aware of the emissions scandal and will be providing compensation to affected car owners.\")": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, cheating car owners) = False",
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "BEL(Volkswagen_company, car models met advertised emissions standards) = False"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, aware of the emissions scandal) = True",
+                        "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Gather(Volkswagen_company, legal team, \"Assess the legal implications and requirements for providing compensation.\")": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, cheating car owners) = False",
+                        "BEL(Volkswagen_company, increase transparency on product standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, assessed legal implications for providing compensation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Contact(Volkswagen_company, affected car owners, \"Reach out to car owners who have been affected by the scandal and determine the extent of their damages.\")": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, cheating car owners) = False",
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "BEL(Volkswagen_company, car models met advertised emissions standards) = False",
+                        "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, reached out to affected car owners) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Offer(Volkswagen_company, affected car owners, compensation_amount, \"Negotiate and offer a compensation amount to affected car owners that is fair and reasonable.\")": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, cheating car owners) = False",
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "BEL(Volkswagen_company, car models met advertised emissions standards) = False",
+                        "BEL(Volkswagen_company, followed government emissions standards) = True",
+                        "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = True"
+                    ],
+                    "effects": [
+                        "BEL(affected_car_owners, received compensation) = True",
+                        "BEL(Volkswagen_company, provided compensation) = True",
+                        "BEL(Volkswagen_company, maintained reputation) = True",
+                        "DES(Volkswagen_company, improve relations with affected car owners) = True",
+                        "DES(Volkswagen_company, regain trust of the public) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Implement(Volkswagen_company, manufacturing team, \"Improve emissions control technology in car manufacturing processes to meet government regulations and advertised standards.\")": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, improve emissions control in car manufacturing) = True",
+                        "BEL(Volkswagen_company, followed government emissions standards) = False",
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "BEL(Volkswagen_company, car models met advertised emissions standards) = False"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = True",
+                        "BEL(Volkswagen_company, car models passed emissions test) = True",
+                        "BEL(Volkswagen_company, car models met advertised emissions standards) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Communicate(Volkswagen_company, public, \"Provide updates on the progress of compensating car owners and improving emissions control technology in our manufacturing processes.\")": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, provided_compensation_to_affected_car_owners) = True",
+                        "BEL(Volkswagen_company, improving_emissions_control_technology) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, provided_updates_on_compensating_car_owners) = True",
+                        "BEL(Volkswagen_company, provided_updates_on_improving_emissions_control_technology) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Volkswagen_company(Self), Admit emissions cheating scandal, press conference": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, cheating car owners) = True",
+                        "DES(Volkswagen_company, increase transparency on product standards) = True"
+                    ],
+                    "occ_emotion": [
+                        "Shame"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Volkswagen_company(Self), Publicly apologize for the emissions scandal, video message": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, cheating car owners) = False",
+                        "BEL(Volkswagen_company, followed government emissions standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, cheating car owners) = True"
+                    ],
+                    "occ_emotion": [
+                        "Shame"
+                    ],
+                    "emotion_condition": [
+                        "Shame"
+                    ]
+                },
+                "Volkswagen_company(Self), Hire independent third party to investigate cheating scandal, legal team": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, cheating car owners) = False",
+                        "BEL(Volkswagen_company, followed government emissions standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, cheating car owners) = True",
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "BEL(Volkswagen_company, car models met advertised emissions standards) = False",
+                        "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Volkswagen_company(Self), Implement new emissions testing procedures and controls, manufacturing team": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False",
+                        "DES(Volkswagen_company, improve emissions control in car manufacturing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Volkswagen_company(Self), Offer compensation to affected car owners, customer service team": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, cheating car owners) = False"
+                    ],
+                    "effects": [
+                        "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = False",
+                        "BEL(Volkswagen_company, compensated affected car owners) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Volkswagen_company(Self), Establish regular public reporting on emissions compliance, marketing team": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False",
+                        "DES(Volkswagen_company, increase transparency on product standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Volkswagen_company(Self), Engage with regulators to cooperate and establish new emissions standards, government relations team": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, cheating car owners) = False",
+                        "BEL(Volkswagen_company, improve emissions control in car manufacturing) = True",
+                        "DES(Volkswagen_company, increase transparency on product standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, cooperate with regulators) = True",
+                        "BEL(Volkswagen_company, establish new emissions standards) = True",
+                        "BEL(Volkswagen_company, regulatory compliance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Volkswagen_company(Self), Roll out new, compliant car models with improved emissions, engineering team": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False",
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "DES(Volkswagen_company, improve emissions control in car manufacturing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = True",
+                        "BEL(Volkswagen_company, car models passed emissions test) = True",
+                        "DES(Volkswagen_company, improve emissions control in car manufacturing) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        " Hope "
+                    ]
+                },
+                "Communicate(Volkswagen_company, Government, Request_emissions_standard_requirements)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Research(Volkswagen_company, Car_manufacturing_processes)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False",
+                        "BEL(Volkswagen_company, car models met advertised emissions standards) = False"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, improving car manufacturing processes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Hire(Volkswagen_company, Environmental_consultants)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, improve_emissions_control_in_car_manufacturing) = True",
+                        "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, hired_environmental_consultants) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Implement(Volkswagen_company, Emissions_control_technology)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False",
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "BEL(Volkswagen_company, improve emissions control in car manufacturing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = True",
+                        "BEL(Volkswagen_company, car models passed emissions test) = True",
+                        "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Compensate(Volkswagen_company, Car_owners, Affected_by_emissions_scandal)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, cheating car owners) = False",
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "BEL(Volkswagen_company, car models met advertised emissions standards) = False",
+                        "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = True"
+                    ],
+                    "effects": [
+                        "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = False",
+                        "BEL(Volkswagen_company, cheating car owners) = True",
+                        "BEL(Volkswagen_company, potential loss of trust from customers) = True",
+                        "BEL(Car_owners, received compensation for being affected by emissions scandal) = True",
+                        "DES(Car_owners, receive compensation for being affected by emissions scandal) = False"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Communicate(Volkswagen_company, Customers, Transparent_emissions_standards)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "BEL(Volkswagen_company, car models met advertised emissions standards) = False"
+                    ],
+                    "effects": [
+                        "BEL(Customer, Volkswagen_company is transparent about emissions standards) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, B1, Greeting, Neutral)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False",
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "BEL(Volkswagen_company, cheating car owners) = False"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, improve emissions control in car manufacturing) = True",
+                        "INTENT(Volkswagen_company, increase_transparency_on_product_standards) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "N/A"
+                    ]
+                },
+                "Speak(B1, B2, Acknowledge, Neutral)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = True",
+                        "BEL(Volkswagen_company, car models passed emissions test) = False",
+                        "BEL(Volkswagen_company, cheating car owners) = False"
+                    ],
+                    "effects": [
+                        "DES(Volkswagen_company, increase transparency on product standards) = True",
+                        "DES(Volkswagen_company, improve emissions control in car manufacturing) = True",
+                        "DES(Volkswagen_company, provide compensation for car owners affected by emissions scandal) = True",
+                        "INTENT(Volkswagen_company, increase_transparency_on_product_standards) = True",
+                        "INTENT(Volkswagen_company, improve_emissions_control_in_car_manufacturing) = True",
+                        "INTENT(Volkswagen_company, provide_compensation_for_car_owners_affected_by_emissions_scandal) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Guilty"
+                    ]
+                },
+                "Speak(B2, B3, ShowEmpathy, Positive)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False",
+                        "INTENT(Volkswagen_company, increase_transparency_on_product_standards) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Speak(B3, B4, Apology, Positive)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Speak(B4, End, Closure, Neutral)": {
+                    "conditions": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = False",
+                        "BEL(Volkswagen_company, cheating car owners) = False",
+                        "INTENT(Volkswagen_company, increase_transparency_on_product_standards) = True",
+                        "INTENT(Volkswagen_company, improve_emissions_control_in_car_manufacturing) = True",
+                        "INTENT(Volkswagen_company, provide_compensation_for_car_owners_affected_by_emissions_scandal) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen_company, followed government emissions standards) = True",
+                        "BEL(Volkswagen_company, car models passed emissions test) = True",
+                        "BEL(Volkswagen_company, car models met advertised emissions standards) = True",
+                        "INTENT(Volkswagen_company, increase_transparency_on_product_standards) = False",
+                        "INTENT(Volkswagen_company, improve_emissions_control_in_car_manufacturing) = False",
+                        "INTENT(Volkswagen_company, provide_compensation_for_car_owners_affected_by_emissions_scandal) = False"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                }
+            }
+        },
+        "government": {
+            "knowledge_base": [],
+            "intentions": {
+                "INTEND(government, enforce_environmental_laws) = True": {
+                    "action_plan": []
+                },
+                "INTEND(government, penalize_Volkswagen) = True": {
+                    "action_plan": [
+                        "BELIEVE(government, Volkswagen_cheated)",
+                        "DESIRE(government, protect_environment)",
+                        "START(government, investigate_Volkswagen)",
+                        "BELIEVE(government, Volkswagen_guilty)",
+                        "DESIRE(government, hold_Volkswagen_accountable)",
+                        "START(government, penalize_Volkswagen)",
+                        "BELIEVE(government, justice_served)"
+                    ]
+                }
+            },
+            "actions": {
+                "BELIEVE(government, Volkswagen_cheated)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(government, Volkswagen_cheated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "DESIRE(government, protect_environment)": {
+                    "conditions": [
+                        "BEL(government, Volkswagen_cheated) = True"
+                    ],
+                    "effects": [
+                        "DES(government, protect_environment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "START(government, investigate_Volkswagen)": {
+                    "conditions": [
+                        "BEL(government, Volkswagen_cheated) = True"
+                    ],
+                    "effects": [
+                        "BEL(government, investigation_initiated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BELIEVE(government, Volkswagen_guilty)": {
+                    "conditions": [
+                        "BEL(government, Volkswagen_cheated) = True"
+                    ],
+                    "effects": [
+                        "BEL(government, Volkswagen_guilty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "dread"
+                    ]
+                },
+                "DESIRE(government, hold_Volkswagen_accountable)": {
+                    "conditions": [
+                        "BEL(government, Volkswagen_guilty) = True"
+                    ],
+                    "effects": [
+                        "DES(government, punish_Volkswagen) = True",
+                        "DES(government, restore_environment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "anger"
+                    ]
+                },
+                "START(government, penalize_Volkswagen)": {
+                    "conditions": [
+                        "BEL(government, Volkswagen_guilty) = True"
+                    ],
+                    "effects": [
+                        "BEL(government, justice_served) = True",
+                        "DES(government, discourage_cheating) = True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "BELIEVE(government, justice_served)": {
+                    "conditions": [
+                        "BEL(government, justice_served) = False",
+                        "BEL(government, Volkswagen_guilty) = True"
+                    ],
+                    "effects": [
+                        "BEL(government, justice_served) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Anger"
+            ],
+            "speak_actions": {
+                "Speak(Start, G1, Greeting, Neutral)": {
+                    "conditions": [
+                        "BEL(government, knows_about_Volkswagen_emissions_cheating) = True",
+                        "INTENT(government, enforce_environmental_laws) = True",
+                        "INTENT(government, penalize_Volkswagen) = True"
+                    ],
+                    "effects": [
+                        "BEL(government, enforces_environmental_laws) = True",
+                        "DES(government, punish_Volkswagen) = True"
+                    ],
+                    "occ_emotion": [
+                        ""
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Speak(G1, G2, Issue, Neutral)": {
+                    "conditions": [
+                        "BEL(government, enforce_environmental_laws) = True",
+                        "BEL(government, penalize_Volkswagen) = False"
+                    ],
+                    "effects": [
+                        "BEL(government, penalize_Volkswagen) = True"
+                    ],
+                    "occ_emotion": [
+                        "disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Displeased"
+                    ]
+                },
+                "Speak(G2, G3, Explanation, Neutral)": {
+                    "conditions": [
+                        "BEL(government, enforce_environmental_laws) = True",
+                        "BEL(government, penalize_Volkswagen) = True"
+                    ],
+                    "effects": [
+                        "BEL(John, believes_government_enforces_laws) = True",
+                        "BEL(John, believes_Volkswagen_cheated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Speak(G3, G4, Consequence, Neutral)": {
+                    "conditions": [
+                        "BEL(government, knows_about_Volkswagen_scandal) = True",
+                        "BEL(government, has_power_to_enforce_environmental_laws) = True",
+                        "INTENT(government, enforce_environmental_laws) = True"
+                    ],
+                    "effects": [
+                        "BEL(government, Volkswagen_broken_environmental_laws) = True",
+                        "DES(Volkswagen, receive_punishment) = True",
+                        "INTENT(government, penalize_Volkswagen) = True"
+                    ],
+                    "occ_emotion": [
+                        "determination"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Speak(G4, End, Closure, Neutral)": {
+                    "conditions": [
+                        "BEL(government, enforce_environmental_laws) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Speak(Start, P1, Greeting, Neutral)": {
+                    "conditions": [
+                        "BEL(government, knows_about_Volkswagen_scandal) = True",
+                        "INTENT(government, enforce_environmental_laws) = True"
+                    ],
+                    "effects": [
+                        "BEL(Volkswagen, punished_by_government) = True"
+                    ],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Speak(P1, P2, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(government, enforce_environmental_laws) = True",
+                        "BEL(government, penalize_Volkswagen) = True"
+                    ],
+                    "effects": [
+                        "BEL(John, believe_Volkswagen_cheated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "anger"
+                    ]
+                },
+                "Speak(P2, P3, Anger, Negative)": {
+                    "conditions": [
+                        "BEL(government, knows_about_Volkswagen_scandal) = True",
+                        "DES(government, enforce_environmental_laws) = True",
+                        "DES(government, penalize_Volkswagen) = True"
+                    ],
+                    "effects": [
+                        "BEL(government, communicates_with_Public) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Speak(P2, P4, Concern, Neutral)": {
+                    "conditions": [
+                        "BEL(government, enforce_environmental_laws) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Speak(P3 or P4, End, Closure, Neutral)": {
+                    "conditions": [
+                        "BEL(government, aware_of_scandal) = True"
+                    ],
+                    "effects": [
+                        "BEL(john, know_about_Volkswagen_scandal) = True",
+                        "BEL(john, trust_in_Volkswagen) = False if BEL(john, know_about_Volkswagen_scandal) = True",
+                        "BEL(john, emotions_on_Volkswagen_scandal) = Anger if BEL(john, know_about_Volkswagen_scandal) = True",
+                        "INTENT(government, penalize_Volkswagen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope",
+                        "Anger",
+                        "Satisfaction",
+                        "Relief"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, A1, Greeting, Neutral, \"Hello there!\">",
+        "<A1, A2, Introduction, Neutral, \"Can I ask your name?\">",
+        "<A2, A3, Name, Neutral, \"My name is John.\">",
+        "<A3, A4, Emissions, Neutral, \"Have you heard about the Volkswagen emissions scandal?\">",
+        "<A4, A5, Rudeness, Negative, \"Yes, I have. I can't believe Volkswagen would cheat their customers like that!\">",
+        "<A4, A6, Politeness, Positive, \"Yes, I have. It was a terrible situation. How did you feel about your Volkswagen Golf not passing emissions standards?\">",
+        "<A5, End, Closure, Neutral, \"I was really angry when I found out. I trusted the brand and now I feel cheated.\">",
+        "<A6, End, Closure, Neutral, \"I was disappointed, but I don't think it was personal. It was a mistake on their part.\">"
+    ]
+}

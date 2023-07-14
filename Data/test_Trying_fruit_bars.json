@@ -1,0 +1,317 @@
+{
+    "scenario_name": "test_Trying fruit bars",
+    "scenario_description": "Kelly decided she wanted to try something different. She always had the same meal for breakfast. She decided to try some fruit bars. She put some in her mouth. The taste was delicious.",
+    "last_ended": "end",
+    "agents": {
+        "Kelly": {
+            "knowledge_base": [
+                "BEL(Kelly, likes_fruit_bars) = True",
+                "DES(Kelly, try_new_breakfast) = True",
+                "BEL(Kelly, previous_breakfast) = same_meal",
+                "BEL(Kelly, taste_of_fruit_bars) = delicious"
+            ],
+            "intentions": {
+                "INTENT(Kelly, choose_fruit_bars) = True": {
+                    "action_plan": [
+                        "MOVE(Kelly, kitchen)",
+                        "LOCATE(Kelly, fruit bars)",
+                        "TRY(Kelly, fruit bars)",
+                        "DECIDE(Kelly, like_fruit_bars)",
+                        "SETBEL(Kelly, previous_breakfast, fruit_bars)",
+                        "SETDES(Kelly, try_new_breakfast, False)",
+                        "SETDES(Kelly, likes_fruit_bars, True)",
+                        "STOP(Kelly)"
+                    ]
+                },
+                "INTENT(Kelly, taste_fruit_bars) = True": {
+                    "action_plan": [
+                        "Move(Kelly, Kitchen)",
+                        "Retrieve(Kelly, Fruit Bars)",
+                        "Open(Kelly, Fruit Bars)",
+                        "Inspect(Kelly, Fruit Bars)",
+                        "Place(Kelly, Fruit Bar, Mouth)",
+                        "Evaluate(Kelly, Taste)",
+                        "Decide(Kelly, Breakfast Choice)"
+                    ]
+                }
+            },
+            "actions": {
+                "Move(Kelly, Kitchen)": {
+                    "conditions": [
+                        "BEL(Kelly, location) = not_in_kitchen"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, location) = in_kitchen"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Retrieve(Kelly, Fruit Bars)": {
+                    "conditions": [
+                        "BEL(Kelly, likes_fruit_bars) = True",
+                        "BEL(Kelly, Fruit Bars_Exist) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, has_fruit_bars) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Open(Kelly, Fruit Bars)": {
+                    "conditions": [
+                        "BEL(Kelly, has_fruit_bars) = True",
+                        "BEL(Kelly, fruit_bars_package_status) = sealed"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, fruit_bars_package_status) = open",
+                        "BEL(Kelly, fruit_bars_content_status) = fresh"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Inspect(Kelly, Fruit Bars)": {
+                    "conditions": [
+                        "BEL(Kelly, holding_fruit_bars) = True",
+                        "BEL(Kelly, inspected_fruit_bars) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, inspected_fruit_bars) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Place(Kelly, Fruit Bar, Mouth)": {
+                    "conditions": [
+                        "BEL(Kelly, holds_fruit_bar) = True",
+                        "BEL(Kelly, mouth_empty) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, holds_fruit_bar) = False",
+                        "BEL(Kelly, mouth_empty) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Evaluate(Kelly, Taste)": {
+                    "conditions": [
+                        "BEL(Kelly, taste_of_fruit_bars) = delicious"
+                    ],
+                    "effects": [
+                        "DES(Kelly, breakfast_choice_changed) = True",
+                        "BEL(Kelly, breakfast_choice) = fruit_bars",
+                        "BEL(Kelly, previous_breakfast) != fruit_bars"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Decide(Kelly, Breakfast Choice)": {
+                    "conditions": [
+                        "BEL(Kelly, taste_of_fruit_bars) = delicious"
+                    ],
+                    "effects": [
+                        "DES(Kelly, liked_fruit_bars) = True",
+                        "DES(Kelly, try_new_breakfast) = False",
+                        "BEL(Kelly, previous_breakfast) = \"same_meal, but now wants to try fruit bars\""
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MOVE(Kelly, kitchen)": {
+                    "conditions": [
+                        "BEL(Kelly, in_kitchen) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, in_kitchen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "LOCATE(Kelly, fruit bars)": {
+                    "conditions": [
+                        "BEL(Kelly, previous_breakfast) = same_meal"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, fruit_bars_location) = known"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TRY(Kelly, fruit bars)": {
+                    "conditions": [
+                        "BEL(Kelly, try_new_breakfast) = True",
+                        "BEL(Kelly, taste_of_fruit_bars) = delicious"
+                    ],
+                    "effects": [
+                        "SETBEL(Kelly, likes_fruit_bars, True)"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DECIDE(Kelly, like_fruit_bars)": {
+                    "conditions": [
+                        "BEL(Kelly, taste_of_fruit_bars) = delicious",
+                        "DES(Kelly, try_new_breakfast) = False"
+                    ],
+                    "effects": [
+                        "SETDES(Kelly, likes_fruit_bars, True)"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SETBEL(Kelly, previous_breakfast, fruit_bars)": {
+                    "conditions": [
+                        "BEL(Kelly, previous_breakfast) = same_meal"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, previous_breakfast) = fruit_bars"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "SETDES(Kelly, try_new_breakfast, False)": {
+                    "conditions": [
+                        "DES(Kelly, try_new_breakfast) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SETDES(Kelly, likes_fruit_bars, True)": {
+                    "conditions": [
+                        "BEL(Kelly, choose_fruit_bars) = True",
+                        "BEL(Kelly, taste_of_fruit_bars) = delicious"
+                    ],
+                    "effects": [
+                        "DES(Kelly, likes_fruit_bars) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "STOP(Kelly)": {
+                    "conditions": [
+                        "INTENT(Kelly, choose_fruit_bars) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Curiosity"
+            ],
+            "speak_actions": {
+                "Speak(Start, A, Greeting, Neutral)": {
+                    "conditions": [
+                        "INTENT(Kelly, choose_fruit_bars) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, likes_fruit_bars) = True",
+                        "BEL(Kelly, previous_breakfast) = same_meal",
+                        "BEL(Kelly, taste_of_fruit_bars) = delicious"
+                    ],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(B, End, Opinion, Curious)": {
+                    "conditions": [
+                        "BEL(Kelly, wants_to_speak) = True",
+                        "BEL(Kelly, knows_how_to_speak) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, has_spoken) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(End, End, End, End)": {
+                    "conditions": [
+                        "BEL(Kelly, wants_to_speak) = True",
+                        "BEL(Kelly, feels_confident) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kelly, spoke) = True",
+                        "BEL(Kelly, wants_to_speak) = False"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, A, Greeting, Neutral, \"Good morning, Kelly!\">",
+        "<A, B, Introduction, Friendly, \"Hey there! I see you're trying something new for breakfast. How do you like the fruit bars?\">",
+        "<B, End, Opinion, Curious, \"Oh, they're delicious! I never thought I'd like them but now I can't wait to try more flavors.\">",
+        "<A, End, Opinion, Polite, \"That's great to hear. Excuse me, I have to go now, but I hope you have a great day!\">"
+    ]
+}

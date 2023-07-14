@@ -1,0 +1,2961 @@
+{
+    "scenario_name": "test_Sold Out.",
+    "scenario_description": "Michael was a sneaker head. He's been trying to get a pair of Adidas 350 for almost a year. They are limited sales, and go out within minutes. Michael has registered for ten different sites to try and get a pair. He's staying up all night in hopes to be the first.",
+    "last_ended": "end",
+    "agents": {
+        "Michael": {
+            "knowledge_base": [
+                "BEL(Michael, HasAdidas350) = False",
+                "BEL(Michael, LimitedSales) = True",
+                "BEL(Michael, HighDemand) = True",
+                "BEL(Michael, RegistrationOnSites) = True",
+                "BEL(Michael, NeedToStayUpLate) = True",
+                "BEL(Michael, Frustration) = 0",
+                "DES(Michael, GetAdidas350) = True",
+                "DES(Michael, BeTheFirst) = True"
+            ],
+            "intentions": {
+                "INTENT(Michael, RegisterForMoreSites) = True": {
+                    "action_plan": [
+                        "INTENT(Michael, RegisterForMoreSites) = True",
+                        "OpenBrowser(Michael, PC)",
+                        "SearchForSneakerSites(Michael, PC)",
+                        "CreateNewAccounts(SneakerSites, Michael)",
+                        "VerifyEmails(Michael, Email)",
+                        "AddAdidas350ToLists(Michael, SneakerSites)",
+                        "SetAlarmClock(Michael, Phone)",
+                        "TakeASleepingPill(Michael, Pill)",
+                        "GoToBed(Michael, Bed)"
+                    ]
+                },
+                "INTENT(Michael, CheckForMoreInformation) = True": {
+                    "action_plan": [
+                        "SearchForAvailableAdidas350(Michael, Sneaker Sellers)",
+                        "JoinOtherSneakerHeads(Michael, Other Sneaker Heads)",
+                        "SetReminders(Michael, RegistrationOnSites)",
+                        "Sleep(Michael)",
+                        "StayUpLate(Michael)",
+                        "CheckForMoreInformation(Michael, Sneaker Sellers, RegistrationOnSites)"
+                    ]
+                },
+                "INTENT(Michael, StayUpAllNight) = True": {
+                    "action_plan": [
+                        "CheckRegistration(Michael, SneakerSellers)",
+                        "CheckCountdown(Michael, SneakerSellers)",
+                        "GetEnergyDrink(Michael, Store)",
+                        "SetAlarm(Michael, Phone)",
+                        "RefreshPage(Michael, SneakerSellers)",
+                        "PlaceOrder(Michael, SneakerSellers)",
+                        "CheckConfirmation(Michael, Email)",
+                        "GoToSleep(Michael, Bed)"
+                    ]
+                },
+                "INTENT(Michael, MonitorMultipleSites) = True": {
+                    "action_plan": [
+                        "SearchForSneakerSites(Michael, None)",
+                        "CheckEmailForUpdates(Michael, SneakerSellers)",
+                        "SetMultipleAlarms(Michael, None)",
+                        "StayUpLate(Michael, None)",
+                        "RefreshSneakerSites(Michael, SneakerSellers)",
+                        "AddAdidas350ToCart(Michael, SneakerSellers)",
+                        "CompletePurchase(Michael, SneakerSellers, PaymentInfo)",
+                        "ShareWithFriends(Michael, Friends)"
+                    ]
+                },
+                "INTENT(Michael, CollaborateWithOthers) = False": {
+                    "action_plan": [
+                        "Search(Michael, SearchEngine, \"Adidas 350\")",
+                        "Evaluate(Michael, SneakerSellers, \"Reputation\")",
+                        "Register(Michael, SneakerSites, \"Adidas 350 Release\")",
+                        "Stayup(Michael, Home, \"Late\")",
+                        "Check(Michael, SneakerSites, \"Adidas 350 Release\")",
+                        "PlaceOrder(Michael, SneakerSeller, \"Adidas 350\")",
+                        "Receive(Michael, SneakerDelivery, \"Adidas 350\")",
+                        "ShowOff(Michael, OtherSneakerHeads, \"Adidas 350\")",
+                        "Celebrate(Michael, Friends, \"New Sneakers\")"
+                    ]
+                },
+                "INTENT(Michael, CompeteWithOthers) = True": {
+                    "action_plan": [
+                        "INTENT(Michael, CompeteWithOthers) = True",
+                        "CheckSales( Michael, SneakerSeller )",
+                        "PlaceOrder( Michael, SneakerSeller, Size )",
+                        "CheckConfirmation( Michael, SneakerSeller )",
+                        "PrepareToWait( Michael )",
+                        "CommunicateWithOtherSneakerHeads( Michael, OtherSneakerHeads )",
+                        "GetAdviceFromFriends( Michael, Friends )",
+                        "ManageFrustration( Michael )"
+                    ]
+                },
+                "INTENT(Michael, ExpressFrustration) = 0": {
+                    "action_plan": [
+                        "BrowseWebsites(Michael, Sneaker Sellers)",
+                        "CheckEmail(Michael, RegistrationOnSites)",
+                        "TextFriends(Michael, Friends, \"I'm so frustrated, I can't get these sneakers!\")",
+                        "TakeABreak(Michael, None)",
+                        "VentOnline(Michael, Other Sneaker Heads, \"I can't believe I missed out on Adidas 350 again, this is so frustrating! Anyone else feel the same?\")"
+                    ]
+                }
+            },
+            "actions": {
+                "BrowseWebsites(Michael, Sneaker Sellers)": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, RegistrationOnSites) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, HasAdidas350) = True",
+                        "BEL(Michael, Frustration) = 1"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckEmail(Michael, RegistrationOnSites)": {
+                    "conditions": [
+                        "BEL(Michael, RegistrationOnSites) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, HasNewEmails) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TextFriends(Michael, Friends, \"I'm so frustrated, I can't get these sneakers!\")": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True",
+                        "DES(Michael, BeTheFirst) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Frustration) = 5",
+                        "BEL(Friends, KnowsAboutMichaelsFrustration) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "TakeABreak(Michael, None)": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, NeedToStayUpLate) = False",
+                        "BEL(Michael, Frustration) = 0.5",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "VentOnline(Michael, Other Sneaker Heads, \"I can't believe I missed out on Adidas 350 again, this is so frustrating! Anyone else feel the same?\")": {
+                    "conditions": [
+                        "BEL(Michael, Frustration) >= 3",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, SharedExperience) = True",
+                        "BEL(OtherSneakerHeads, Frustration) >= 1",
+                        "BEL(Michael, Frustration) += 1"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "INTENT(Michael, RegisterForMoreSites) = True": {
+                    "conditions": [
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, Frustration) < 5"
+                    ],
+                    "effects": [
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, Frustration) = BEL(Michael, Frustration) + 1"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "OpenBrowser(Michael, PC)": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True",
+                        "BEL(Michael, RegistrationOnSites) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, BrowserIsOpen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SearchForSneakerSites(Michael, PC)": {
+                    "conditions": [
+                        "BEL(Michael, RegistrationOnSites) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, FoundSneakerSites) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CreateNewAccounts(SneakerSites, Michael)": {
+                    "conditions": [
+                        "BEL(Michael, RegistrationOnSites) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, RegisteredOnSneakerSite_1) = True",
+                        "BEL(Michael, RegisteredOnSneakerSite_2) = True",
+                        "BEL(Michael, RegisteredOnSneakerSite_3) = True",
+                        "BEL(Michael, RegisteredOnSneakerSite_4) = True",
+                        "BEL(Michael, RegisteredOnSneakerSite_5) = True",
+                        "BEL(Michael, RegisteredOnSneakerSite_6) = True",
+                        "BEL(Michael, RegisteredOnSneakerSite_7) = True",
+                        "BEL(Michael, RegisteredOnSneakerSite_8) = True",
+                        "BEL(Michael, RegisteredOnSneakerSite_9) = True",
+                        "BEL(Michael, RegisteredOnSneakerSite_10) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "VerifyEmails(Michael, Email)": {
+                    "conditions": [
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, Frustration) < 5"
+                    ],
+                    "effects": [
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, Frustration) = BEL(Michael, Frustration) + 1"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "AddAdidas350ToLists(Michael, SneakerSites)": {
+                    "conditions": [
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, HighDemand) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, RegisteredOnSite_1) = True",
+                        "BEL(Michael, RegisteredOnSite_2) = True",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SetAlarmClock(Michael, Phone)": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True",
+                        "BEL(Michael, Frustration) < 50"
+                    ],
+                    "effects": [
+                        "BEL(Michael, AlarmClockSet) = True",
+                        "BEL(Michael, NeedToStayUpLate) = False",
+                        "BEL(Michael, Frustration) += 10"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TakeASleepingPill(Michael, Pill)": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, NeedToStayUpLate) = False",
+                        "BEL(Michael, Frustration) += 10",
+                        "BEL(Michael, IsSleeping) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "GoToBed(Michael, Bed)": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, NeedToStayUpLate) = False",
+                        "BEL(Michael, Frustration) += 1",
+                        "DES(Michael, GetAdidas350) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "SearchForAvailableAdidas350(Michael, Sneaker Sellers)": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, HighDemand) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, AvailableSneakerSellers) = Sneaker Sellers",
+                        "BEL(Michael, Frustration) = 0"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "JoinOtherSneakerHeads(Michael, Other Sneaker Heads)": {
+                    "conditions": [
+                        "BEL(Michael, HighDemand) = True",
+                        "BEL(Michael, Frustration) < 5"
+                    ],
+                    "effects": [
+                        "BEL(Other Sneaker Heads, IncludesMichael) = True",
+                        "BEL(Michael, Frustration) + 2"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SetReminders(Michael, RegistrationOnSites)": {
+                    "conditions": [
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, ReminderSet) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Sleep(Michael)": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, NeedToStayUpLate) = False",
+                        "BEL(Michael, Frustration) = 0"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "StayUpLate(Michael)": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True",
+                        "BEL(Michael, Frustration) < 5"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Frustration) += 1",
+                        "BEL(Michael, HasSlept) = False",
+                        "BEL(Michael, IsFatigued) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fatigue"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckForMoreInformation(Michael, Sneaker Sellers, RegistrationOnSites)": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, HighDemand) = True",
+                        "BEL(Michael, RegistrationOnSites) = True"
+                    ],
+                    "effects": [
+                        "DES(Michael, GetAdidas350) = True",
+                        "BEL(Michael, Frustration) = 0 OR (BEL(Michael, Frustration) + 1)",
+                        "BEL(Michael, HasAdidas350) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckRegistration(Michael, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, RegistrationOnSites) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckCountdown(Michael, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, CountdownStarted) = True",
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, HighDemand) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, CountdownStarted) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GetEnergyDrink(Michael, Store)": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, IncreasedEnergy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "SetAlarm(Michael, Phone)": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True",
+                        "BEL(Michael, Frustration) < 5"
+                    ],
+                    "effects": [
+                        "BEL(Michael, SetAlarm) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "RefreshPage(Michael, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, LimitedSales) = True",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Frustration) = 0.1",
+                        "BEL(Michael, RegisteredSuccessfully) = True",
+                        "BEL(Michael, PageRefreshed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PlaceOrder(Michael, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, HighDemand) = True",
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, HasAdidas350) = True",
+                        "DES(Michael, GetAdidas350) = False",
+                        "DIS(Michael, Frustration) = -50"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckConfirmation(Michael, Email)": {
+                    "conditions": [
+                        "BEL(Michael, OrderPlaced) = True",
+                        "BEL(Michael, ConfirmationEmailReceived) = False"
+                    ],
+                    "effects": [
+                        "BEL(Michael, ConfirmationEmailReceived) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GoToSleep(Michael, Bed)": {
+                    "conditions": [
+                        "BEL(Michael, Frustration) >= 3",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, NeedToStayUpLate) = False",
+                        "BEL(Michael, Frustration) = 0",
+                        "DES(Michael, GetAdidas350) = False",
+                        "BEL(Michael, HasAdidas350) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "SearchForSneakerSites(Michael, None)": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, RegistrationOnSites) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, FoundSneakerSites) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckEmailForUpdates(Michael, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, SendsEmailUpdates)"
+                    ],
+                    "effects": [
+                        "BEL(Michael, ReceivesEmailUpdates) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SetMultipleAlarms(Michael, None)": {
+                    "conditions": [
+                        "BEL(Michael, RegistrationOnSites) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, AlarmSet) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "StayUpLate(Michael, None)": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Frustration) += 2",
+                        "BEL(Michael, NeedToStayUpLate) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "RefreshSneakerSites(Michael, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, Frustration) < 5"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Frustration) = BEL(Michael, Frustration) + 1",
+                        "BEL(Michael, SneakerAvailable) = True",
+                        "BEL(Michael, SneakerAvailable) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AddAdidas350ToCart(Michael, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(SneakerSellers, HasAdidas350) = True",
+                        "BEL(SneakerSellers, Adidas350InStock) = True",
+                        "DES(Michael, GetAdidas350) = True",
+                        "DES(Michael, BeTheFirst) = True",
+                        "BEL(Michael, CartIsEmpty) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, CartHasAdidas350) = True",
+                        "BEL(SneakerSellers, Adidas350InStock) = False",
+                        "DES(Michael, Frustration) = 0.1"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CompletePurchase(Michael, SneakerSellers, PaymentInfo)": {
+                    "conditions": [
+                        "BEL(Michael, HasAdidas350) = False",
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, HighDemand) = True",
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, NeedToStayUpLate) = True",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, HasAdidas350) = True",
+                        "DES(Michael, GetAdidas350) = False",
+                        "DES(Michael, BeTheFirst) = False",
+                        "BEL(Michael, Frustration) = -10"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ShareWithFriends(Michael, Friends)": {
+                    "conditions": [
+                        "BEL(Michael, HasAdidas350) = True",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "DES(Friends, SeeMichaelWithAdidas350) = True",
+                        "BEL(Michael, Frustration) = 0"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Search(Michael, SearchEngine, \"Adidas 350\")": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, RegistrationOnSites) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, FoundOnSearchEngine) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Evaluate(Michael, SneakerSellers, \"Reputation\")": {
+                    "conditions": [
+                        "BEL(SneakerSellers, Reputation) = High"
+                    ],
+                    "effects": [
+                        "BEL(Michael, ChanceOfGettingAdidas350) = High"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Register(Michael, SneakerSites, \"Adidas 350 Release\")": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, HighDemand) = True",
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, RegisteredOnAdidas350Site) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Stayup(Michael, Home, \"Late\")": {
+                    "conditions": [
+                        "BEL(Michael, NeedToStayUpLate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Frustration) = +1",
+                        "BEL(Michael, NeedToStayUpLate) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check(Michael, SneakerSites, \"Adidas 350 Release\")": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, NeedToStayUpLate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Frustration) += 1",
+                        "BEL(Michael, HasAdidas350) = True",
+                        "DES(Michael, GetAdidas350) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PlaceOrder(Michael, SneakerSeller, \"Adidas 350\")": {
+                    "conditions": [
+                        "BEL(Michael, HasAdidas350) = False",
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, HighDemand) = True",
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, NeedToStayUpLate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, HasAdidas350) = True",
+                        "DES(Michael, GetAdidas350) = False",
+                        "BEL(Michael, Frustration) = 0.2",
+                        "BEL(Michael, AvailableFunds) -= SneakerPrice",
+                        "BEL(SneakerSeller, Reputation) += 0.1"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Receive(Michael, SneakerDelivery, \"Adidas 350\")": {
+                    "conditions": [
+                        "BEL(Michael, HasAdidas350) = False",
+                        "BEL(Michael, SneakerDelivery, \"Adidas 350\") = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, HasAdidas350) = True",
+                        "BEL(Michael, Frustration) := 0",
+                        "DES(Michael, GetAdidas350) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "ShowOff(Michael, OtherSneakerHeads, \"Adidas 350\")": {
+                    "conditions": [
+                        "BEL(Michael, HasAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, MichaelHasAdidas350) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Celebrate(Michael, Friends, \"New Sneakers\")": {
+                    "conditions": [
+                        "BEL(Michael, HasAdidas350) = True",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "DES(Michael, BeTheFirst) = False",
+                        "DES(Michael, GetAdidas350) = False",
+                        "BEL(Michael, Frustration) = 0.2",
+                        "BEL(Friends, ImpressedBySneakers) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "INTENT(Michael, CompeteWithOthers) = True": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, HasAdidas350) = True",
+                        "BEL(Michael, Frustration) = 0",
+                        "DES(Michael, GetAdidas350) = False",
+                        "DES(Michael, BeTheFirst) = False",
+                        "BEL(Michael, NeedToStayUpLate) = False"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Envy"
+                    ]
+                },
+                "CheckSales( Michael, SneakerSeller )": {
+                    "conditions": [
+                        "BEL(SneakerSeller, HasAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, HasAdidas350) = True",
+                        "BEL(Michael, LimitedSales) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PlaceOrder( Michael, SneakerSeller, Size )": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "BEL(Michael, HasAdidas350) = False"
+                    ],
+                    "effects": [
+                        "BEL(Michael, OrderedAdidas350) = True",
+                        "BEL(SneakerSeller, ReceivedOrderFromMichael, Size) = True",
+                        "DES(Michael, BeTheFirst) = False",
+                        "DES(Michael, GetAdidas350) = False",
+                        "BEL(Michael, Frustration) = 0.2"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckConfirmation( Michael, SneakerSeller )": {
+                    "conditions": [
+                        "BEL(SneakerSeller, ConfirmsOrder(Michael)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, HasAdidas350) = True",
+                        "DES(Michael, GetAdidas350) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PrepareToWait( Michael )": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "DES(Michael, BeTheFirst) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, PreparedToWait) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CommunicateWithOtherSneakerHeads( Michael, OtherSneakerHeads )": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, IsFriendOfMichael) = True",
+                        "BEL(OtherSneakerHeads, IsOnline) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, HasCommunicatedWithSneakerHead) = True",
+                        "BEL(Michael, Frustration) = BEL(Michael, Frustration) + 0.5",
+                        "BEL(Michael, FrustrationThresholdReached) = (BEL(Michael, Frustration) >= 5)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "GetAdviceFromFriends( Michael, Friends )": {
+                    "conditions": [
+                        "BEL(Michael, NeedAdviceFromFriends) = True",
+                        "BEL(Friends, HaveExperienceWithAdidas350) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, GotAdviceFromFriends) = True",
+                        "DES(Michael, FeelMoreConfident) = True",
+                        "BEL(Michael, LessFrustrated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ManageFrustration( Michael )": {
+                    "conditions": [
+                        "BEL(Michael, Frustration) < 100"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Frustration) += 50",
+                        "DES(Michael, GetAdidas350) = False",
+                        "INTENT(Michael, CompeteWithOthers) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Hope"
+            ],
+            "speak_actions": {
+                "Speak(Greeting, Information, None, None)": {
+                    "conditions": [
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "INTENT(Michael, MonitorMultipleSites) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Frustration) = 0",
+                        "DES(Michael, GetAdidas350) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Frustration"
+                    ]
+                },
+                "Speak(Information, Desires, None, None)": {
+                    "conditions": [
+                        "BEL(Michael, Frustration) < 5",
+                        "BEL(Michael, NeedToStayUpLate) = True",
+                        "INTENT(Michael, MonitorMultipleSites) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Frustration) = BEL(Michael, Frustration) + 1"
+                    ],
+                    "occ_emotion": [
+                        "Distress",
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Speak(Confirmation, Advice, None, None)": {
+                    "conditions": [
+                        "BEL(Michael, LimitedSales) = True",
+                        "BEL(Michael, HighDemand) = True",
+                        "DES(Michael, GetAdidas350) = True",
+                        "INTENT(Michael, CheckForMoreInformation) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, RegistrationOnSites) = True",
+                        "INTENT(Michael, RegisterForMoreSites) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            }
+        },
+        "Sneaker Sellers": {
+            "knowledge_base": [
+                "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                "BEL(SneakerSellers, LimitedEditionSneakersStock) = Numerical Value",
+                "BEL(SneakerSellers, CompetitionAmongSellers) = True/False",
+                "DES(SneakerSellers, SellLimitedEditionSneakers, Numerical Value) = True",
+                "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True",
+                "DES(SneakerSellers, Reputation, Arguments) = True"
+            ],
+            "intentions": {
+                "INTENT(SneakerSellers, SellSneakers, Numerical Value) = ?": {
+                    "action_plan": [
+                        "INTENT(SneakerSellers, SellSneakers, Numerical Value)",
+                        "Advertise(SneakerSellers, Public, LimitedEditionSneakersStock)",
+                        "SetPrice(SneakerSellers, LimitedEditionSneakers, Numerical Value)",
+                        "OfferSneakers(SneakerSellers, OtherSneakerHeads, LimitedEditionSneakersStock)",
+                        "UpdateStock(SneakerSellers, BEL(SneakerSellers, LimitedEditionSneakersStock) - Numerical Value)",
+                        "MonitorCompetition(SneakerSellers, OtherSneakerSellers)",
+                        "ImproveReputation(SneakerSellers, DES(SneakerSellers, Reputation, Arguments))"
+                    ]
+                },
+                "INTENT(SneakerSellers, IncreaseProfit, Numerical Value) = True": {
+                    "action_plan": [
+                        "CheckStock(SneakerSellers, LimitedEditionSneakers, Arguments*)",
+                        "DeterminePrice(SneakerSellers, LimitedEditionSneakers, Arguments*)",
+                        "PromoteSneakers(SneakerSellers, SocialMedia, Arguments*)",
+                        "SellSneakers(SneakerSellers, Customers, Arguments*)",
+                        "EvaluateProfit(SneakerSellers, Arguments*)"
+                    ]
+                },
+                "INTENT(SneakerSellers, Maintain or Improve Reputation, Arguments) = True": {
+                    "action_plan": [
+                        "MonitorStock(SneakerSellers, LimitedEditionSneakers)",
+                        "Advertise(LimitedEditionSneakers, PotentialBuyers)",
+                        "PricingStrategy(SneakerSellers, LimitedEditionSneakers, CompetitionAmongSellers)",
+                        "ProvideExcellentCustomerService(SneakerSellers, Buyers)",
+                        "DealWithComplaints(SneakerSellers, UnsatisfiedCustomers)",
+                        "AskForFeedback(SneakerSellers, Buyers)",
+                        "Restock(LimitedEditionSneakers, Numerical Value)"
+                    ]
+                }
+            },
+            "actions": {
+                "MonitorStock(SneakerSellers, LimitedEditionSneakers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) < ThresholdValue"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = NewStockLevel",
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Advertise(LimitedEditionSneakers, PotentialBuyers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > 0",
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = True"
+                    ],
+                    "effects": [
+                        "BEL(PotentialBuyers, AwareOfLimitedEditionSneakers) = True",
+                        "DES(PotentialBuyers, DesireLimitedEditionSneakers, Numerical Value) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "PricingStrategy(SneakerSellers, LimitedEditionSneakers, CompetitionAmongSellers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > 0",
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersPrice) = Higher/Lower/Unchanged",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = Decreased/Unchanged/Increased"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ProvideExcellentCustomerService(SneakerSellers, Buyers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(Buyers, WantsLimitedEditionSneakers) = True",
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, Numerical Value) = True"
+                    ],
+                    "effects": [
+                        "BEL(Buyers, SatisfiedCustomer) = True",
+                        "DES(SneakerSellers, Reputation, Arguments) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "DealWithComplaints(SneakerSellers, UnsatisfiedCustomers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) < 100",
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = True",
+                        "DES(SneakerSellers, Reputation, Arguments) = True",
+                        "BEL(SneakerBuyers, UnsatisfiedWithPurchase) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) += 1",
+                        "BEL(SneakerBuyers, UnsatisfiedWithPurchase) = False",
+                        "DES(SneakerSellers, Reputation, Arguments) += 1"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Anger",
+                        "Remorse"
+                    ]
+                },
+                "AskForFeedback(SneakerSellers, Buyers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "DES(SneakerSellers, Reputation, Arguments) = True",
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = True"
+                    ],
+                    "effects": [
+                        "BEL(Buyers, FeedbackGiven) = True",
+                        "BEL(SneakerSellers, PositiveFeedbackReceived) = True",
+                        "BEL(SneakerSellers, NegativeFeedbackReceived) = True",
+                        "DES(SneakerSellers, Maintain or Improve Reputation, Arguments) = True",
+                        "DES(SneakerSellers, Modify Customer Service, Arguments) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Restock(LimitedEditionSneakers, Numerical Value)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) < Numerical Value"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = Numerical Value"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "INTENT(SneakerSellers, SellSneakers, Numerical Value)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) >= Numerical Value"
+                    ],
+                    "effects": [
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, Numerical Value) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) -= Numerical Value",
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True",
+                        "DES(SneakerSellers, Reputation, Arguments) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Advertise(SneakerSellers, Public, LimitedEditionSneakersStock)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > 0"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = True",
+                        "BEL(SneakerSellers, AdvertisedToPublic) = LimitedEditionSneakersStock"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SetPrice(SneakerSellers, LimitedEditionSneakers, Numerical Value)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) >= Numerical Value",
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, Numerical Value) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersPrice) = Numerical Value"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "OfferSneakers(SneakerSellers, OtherSneakerHeads, LimitedEditionSneakersStock)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > 0",
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, Numerical Value) = True",
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, WantLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) - Numerical Value",
+                        "DES(SneakerSellers, Reputation, Arguments) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "UpdateStock(SneakerSellers, BEL(SneakerSellers, LimitedEditionSneakersStock) - Numerical Value)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) >= Numerical Value"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = BEL(SneakerSellers, LimitedEditionSneakersStock) - Numerical Value"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fears-confirmed"
+                    ]
+                },
+                "MonitorCompetition(SneakerSellers, OtherSneakerSellers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, Reputation) = Improved",
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = False"
+                    ],
+                    "occ_emotion": [
+                        "Emotions cannot be accurately determined without additional context and information about the specific beliefs, desires, and intentions of the Sneaker Sellers."
+                    ],
+                    "emotion_condition": [
+                        "Envy"
+                    ]
+                },
+                "ImproveReputation(SneakerSellers, DES(SneakerSellers, Reputation, Arguments))": {
+                    "conditions": [
+                        "BEL(SneakerSellers, ReputationStatus) = Negative",
+                        "DES(SneakerSellers, Reputation, Arguments) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, ReputationStatus) = Positive"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "CheckStock(SneakerSellers, LimitedEditionSneakers, Arguments*)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DeterminePrice(SneakerSellers, LimitedEditionSneakers, Arguments*)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > 0"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersPrice) = Arguments*",
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PromoteSneakers(SneakerSellers, SocialMedia, Arguments*)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, PromotionOnSocialMedia) = True/False",
+                        "DES(SneakerSellers, IncreaseReputation, Arguments*) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "SellSneakers(SneakerSellers, Customers, Arguments*)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > 0",
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, Arguments*) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) - Arguments*",
+                        "DES(SneakerSellers, Reputation, Arguments*) + Arguments*",
+                        "DES(SneakerSellers, IncreaseProfit, Arguments*) + Arguments*"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "EvaluateProfit(SneakerSellers, Arguments*)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > 0",
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = True"
+                    ],
+                    "effects": [
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) += Numerical Value",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) -= Numerical Value"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Gloating"
+            ],
+            "speak_actions": {
+                "Speak(Start, Greeting, None, None)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > 0",
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, Numerical Value) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = BEL(SneakerSellers, LimitedEditionSneakersStock) - 1",
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(Greeting, Information, None, None)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > Numerical Value",
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = True",
+                        "INTENT(SneakerSellers, SellSneakers, Numerical Value) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) -= Numerical Value",
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True",
+                        "BEL(SneakerSellers, Reputation, Arguments) += Numerical Value"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Information, Options, None, None)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > 0",
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, Numerical Value) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = BEL(SneakerSellers, LimitedEditionSneakersStock) - Numerical Value",
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy",
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Options, Requirements, None, None)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > Numerical Value",
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, Numerical Value) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = Updated Numerical Value",
+                        "DES(SneakerSellers, IncreaseProfit, Updated Numerical Value) = True",
+                        "INTENT(SneakerSellers, SellSneakers, Numerical Value) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Speak(Requirements, Offer, None, None)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) > 0",
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, ?Numerical Value) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = OldLimitedEditionSneakersStock - Numerical Value",
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Offer, Confirmation, None, None)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) >= Numerical Value",
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = BEL(SneakerSellers, LimitedEditionSneakersStock) - Numerical Value",
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, Numerical Value) = False",
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True",
+                        "INTENT(SneakerSellers, SellSneakers, Numerical Value) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Confirmation, Purchase, None, None)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = New Numeric Value",
+                        "BEL(SneakerSellers, CompetitionAmongSellers) = New Boolean Value",
+                        "DES(SneakerSellers, SellLimitedEditionSneakers, Numeric Value) = True",
+                        "INTENT(SneakerSellers, SellSneakers, Numeric Value) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Speak(Purchase, End, None, None)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, HasLimitedEditionSneakers) = True",
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = Numerical Value",
+                        "DES(SneakerSelllers, SellLimitedEditionSneakers, Numerical Value) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, LimitedEditionSneakersStock) = (Numerical Value - 1)",
+                        "DES(SneakerSellers, IncreaseProfit, Numerical Value) = True",
+                        "INTENT(SneakerSellers, Maintain or Improve Reputation, Arguments) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            }
+        },
+        "Other Sneaker Heads": {
+            "knowledge_base": [
+                "BEL(OtherSneakerHeads, exists) = True",
+                "BEL(OtherSneakerHeads, competitors_exist) = True",
+                "BEL(OtherSneakerHeads, price_desire) = Numerical Value",
+                "BEL(OtherSneakerHeads, availability_belief) = True",
+                "DES(OtherSneakerHeads, get_the_sneakers) = True",
+                "DES(OtherSneakerHeads, collaborate) = True",
+                "DES(OtherSneakerHeads, compete) = True"
+            ],
+            "intentions": {
+                "INTENT(OtherSneakerHeads, get_the_sneakers) = True": {
+                    "action_plan": [
+                        "SearchWebsites(OtherSneakerHeads, SneakerSellers)",
+                        "WaitForRelease(OtherSneakerHeads, SneakerSellers)",
+                        "TryToBuy(OtherSneakerHeads, SneakerSellers, PaymentInfo)",
+                        "CommunicateWithOtherSneakerHeads(OtherSneakerHeads, OtherSneakerHeads, CollaborationRequest)",
+                        "CompeteWithOtherSneakerHeads(OtherSneakerHeads, OtherSneakerHeads)",
+                        "CelebrateOrRegret(OtherSneakerHeads, Friends)"
+                    ]
+                },
+                "INTENT(OtherSneakerHeads, collaborate, Michael) = True": {
+                    "action_plan": [
+                        "CheckAvailability(OtherSneakerHeads, SneakerSellers)",
+                        "ContactMichael(OtherSneakerHeads, Michael)",
+                        "ShareInformation(OtherSneakerHeads, Michael)",
+                        "AgreeToCollaborate(OtherSneakerHeads, Michael)",
+                        "CoordinateEfforts(OtherSneakerHeads, Michael)",
+                        "ArriveEarly(OtherSneakerHeads, Michael)",
+                        "WaitInLine(OtherSneakerHeads, Michael)",
+                        "TakeTurns(OtherSneakerHeads, Michael)",
+                        "KeepEachOtherMotivated(OtherSneakerHeads, Michael)",
+                        "PurchaseSneakers(OtherSneakerHeads, Michael, SneakerSellers)",
+                        "Celebrate(OtherSneakerHeads, Michael)"
+                    ]
+                },
+                "INTENT(OtherSneakerHeads, compete) = True": {
+                    "action_plan": [
+                        "Compulsion(OtherSneakerHeads, Michael)",
+                        "Check(OtherSneakerHeads, sneaker websites)",
+                        "Check_Sneaker_Sales(OtherSneakerHeads)",
+                        "Check_Competitors(OtherSneakerHeads)",
+                        "Update_Beliefs(OtherSneakerHeads, Michael, sneaker_available = False)",
+                        "Update_Beliefs(OtherSneakerHeads, competitors, activity = True)",
+                        "Coordinate(OtherSneakerHeads, Michael)",
+                        "Decide_Compete_or_Collaborate(OtherSneakerHeads)",
+                        "Intention_Action(OtherSneakerHeads, compete, Michael)",
+                        "Check_Sneaker_Availability(OtherSneakerHeads, Michael)",
+                        "Attempt_Sneaker_Purchase(OtherSneakerHeads, Michael)",
+                        "Update_Beliefs(OtherSneakerHeads, Michael, sneaker_available = False)",
+                        "Update_Beliefs(OtherSneakerHeads, Michael, sneaker_owned = True)",
+                        "Compulsion(OtherSneakerHeads, Michael)",
+                        "Check(OtherSneakerHeads, sneaker websites)",
+                        "Check_Sneaker_Sales(OtherSneakerHeads)",
+                        "Check_Competitors(OtherSneakerHeads)",
+                        "Update_Beliefs(OtherSneakerHeads, Michael, sneaker_available = False)",
+                        "Update_Beliefs(OtherSneakerHeads, competitors, activity = True)",
+                        "Coordinate(OtherSneakerHeads, Michael)",
+                        "Decide_Compete_or_Collaborate(OtherSneakerHeads)",
+                        "Intention_Action(OtherSneakerHeads, compete, Michael)",
+                        "Check_Sneaker_Availability(OtherSneakerHeads, Michael)",
+                        "Attempt_Sneaker_Purchase(OtherSneakerHeads, Michael)",
+                        "Update_Beliefs(OtherSneakerHeads, Michael, sneaker_available = False)",
+                        "Update_Beliefs(OtherSneakerHeads, Michael, sneaker_owned = True)"
+                    ]
+                },
+                "INTENT(OtherSneakerHeads, price_desire, Numerical Value) = True": {
+                    "action_plan": [
+                        "INTENT(OtherSneakerHeads, price_desire, Numerical Value) = True",
+                        "Search(OtherSneakerHeads, Internet, \"Adidas 350 limited edition\")",
+                        "Register(OtherSneakerHeads, SellerWebsite, \"Register for early access\")",
+                        "Form(Group, OtherSneakerHeads, \"Collaboration Group\")",
+                        "Watch(OtherSneakerHeads, SneakerSeller, \"Follow activity on the seller's website\")",
+                        "Compete(OtherSneakerHeads, Michael, \"Try to purchase the limited edition sneakers\")"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(OtherSneakerHeads, price_desire, Numerical Value) = True": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True",
+                        "BEL(OtherSneakerHeads, price_desire) < Numerical Value"
+                    ],
+                    "effects": [
+                        "INTENT(OtherSneakerHeads, price_desire, Numerical Value) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Search(OtherSneakerHeads, Internet, \"Adidas 350 limited edition\")": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, found_sneakers) = True",
+                        "BEL(OtherSneakerHeads, interested_in_sneakers) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Register(OtherSneakerHeads, SellerWebsite, \"Register for early access\")": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, registered) = True",
+                        "BEL(OtherSneakerHeads, registered_with_seller, SellerWebsite) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Form(Group, OtherSneakerHeads, \"Collaboration Group\")": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True"
+                    ],
+                    "effects": [
+                        "DES(OtherSneakerHeads, collaborate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Watch(OtherSneakerHeads, SneakerSeller, \"Follow activity on the seller's website\")": {
+                    "conditions": [
+                        "BEL(SneakerSeller, exists) = True",
+                        "BEL(SneakerSeller, website_accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, information_about_sneakers) = True",
+                        "BEL(OtherSneakerHeads, desire_for_sneakers) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Compete(OtherSneakerHeads, Michael, \"Try to purchase the limited edition sneakers\")": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "BEL(Michael, exists) = True",
+                        "BEL(Michael, competitors_exist) = True",
+                        "BEL(Michael, price_desire) = Numerical Value",
+                        "BEL(Michael, availability_belief) = True",
+                        "DES(OtherSneakerHeads, compete) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = False",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = False",
+                        "DES(OtherSneakerHeads, collaborate) = False",
+                        "BEL(Michael, price_desire) = Higher Value",
+                        "BEL(Michael, competitors_exist) = False",
+                        "DES(Michael, get_the_sneakers) = True",
+                        "DES(Michael, defeat_rival) = OtherSneakerHeads",
+                        "BEL(Michael, success_probability) = Lower Probability"
+                    ],
+                    "occ_emotion": [
+                        "Competing"
+                    ],
+                    "emotion_condition": [
+                        "Competition"
+                    ]
+                },
+                "SearchWebsites(OtherSneakerHeads, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, exists) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WaitForRelease(OtherSneakerHeads, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, exists) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = False"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, availability_belief) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TryToBuy(OtherSneakerHeads, SneakerSellers, PaymentInfo)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, has_sneakers) = True",
+                        "BEL(SneakerSellers, available_sneakers) = Less",
+                        "BEL(OtherSneakerHeads, available_balance) = Less"
+                    ],
+                    "occ_emotion": [
+                        "Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CommunicateWithOtherSneakerHeads(OtherSneakerHeads, OtherSneakerHeads, CollaborationRequest)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "DES(OtherSneakerHeads, collaborate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Collaborator1, exists) = True",
+                        "BEL(Collaborator2, exists) = True",
+                        "BEL(OtherSneakerHeads, collaborated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CompeteWithOtherSneakerHeads(OtherSneakerHeads, OtherSneakerHeads)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "DES(OtherSneakerHeads, compete) = True",
+                        "INTENT(OtherSneakerHeads, get_the_sneakers) = True",
+                        "BEL(Self, availability_belief) = True",
+                        "BEL(Self, price_desire) > BEL(OtherSneakerHeads, price_desire)"
+                    ],
+                    "effects": [
+                        "BEL(Self, won_sneakers) = True",
+                        "BEL(Self, price_desire) = BEL(OtherSneakerHeads, price_desire)",
+                        "BEL(OtherSneakerHeads, lost_sneakers) = True",
+                        "DES(Self, celebrate) = True",
+                        "DES(OtherSneakerHeads, regret) = True"
+                    ],
+                    "occ_emotion": [
+                        "Compete: Fear"
+                    ],
+                    "emotion_condition": [
+                        "Competition"
+                    ]
+                },
+                "CelebrateOrRegret(OtherSneakerHeads, Friends)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, get_the_sneakers) = True",
+                        "BEL(Friends, exists) = True"
+                    ],
+                    "effects": [
+                        "DES(Friends, celebrate) = True",
+                        "DES(Friends, regret) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy",
+                        "Distress"
+                    ]
+                },
+                "CheckAvailability(OtherSneakerHeads, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(SneakerSellers, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True"
+                    ],
+                    "effects": [
+                        "BEL(SneakerSellers, availability_belief) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ContactMichael(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, competitiveness) = True",
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(Michael, exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, contacted_Michael) = True",
+                        "BEL(Michael, contacted_by) = OtherSneakerHeads"
+                    ],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "Envy"
+                    ]
+                },
+                "ShareInformation(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "DES(OtherSneakerHeads, collaborate) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, have_information_about_Michael) = True",
+                        "BEL(OtherSneakerHeads, have_shared_information_with_Michael) = True"
+                    ],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AgreeToCollaborate(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True",
+                        "BEL(Michael, exists) = True"
+                    ],
+                    "effects": [
+                        "DES(OtherSneakerHeads, collaborate_with_Michael) = True",
+                        "BEL(OtherSneakerHeads, agree_to_collaborate_with_Michael) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CoordinateEfforts(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "DES(OtherSneakerHeads, collaborate) = True",
+                        "BEL(Michael, competitors_exist) = True",
+                        "DES(Michael, collaborate) = True"
+                    ],
+                    "effects": [
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True",
+                        "DES(Michael, get_the_sneakers) = True",
+                        "BEL(OtherSneakerHeads, SneakerSellers_location) = Same as Michael",
+                        "BEL(Michael, SneakerSellers_location) = Same as Other Sneaker Heads",
+                        "BEL(OtherSneakerHeads, waiting_in_line) = True",
+                        "BEL(Michael, waiting_in_line) = True",
+                        "DES(OtherSneakerHeads, motivation) = High",
+                        "DES(Michael, motivation) = High"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": []
+                },
+                "ArriveEarly(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "BEL(Michael, exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, arrive_early) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WaitInLine(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, in_line)",
+                        "BEL(Michael, in_line)"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TakeTurns(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "DES(OtherSneakerHeads, collaborate) = True",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True",
+                        "DES(OtherSneakerHeads, compete) = False"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, take_turns) = True",
+                        "BEL(OtherSneakerHeads, waiting_time) = Numerical Value",
+                        "BEL(OtherSneakerHeads, current_turn) = Numerical Value",
+                        "DES(OtherSneakerHeads, motivate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "KeepEachOtherMotivated(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(Michael, exists) = True",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True",
+                        "INTENT(OtherSneakerHeads, collaborate, Michael) = True",
+                        "BEL(OtherSneakerHeads, keep_each_other_motivated) = False"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, keep_each_other_motivated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PurchaseSneakers(OtherSneakerHeads, Michael, SneakerSellers)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "INTENT(OtherSneakerHeads, collaborate, Michael) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, get_the_sneakers) = True",
+                        "BEL(OtherSneakerHeads, price_desire) = Decreased Numerical Value",
+                        "BEL(Michael, get_the_sneakers) = True",
+                        "BEL(Michael, price_desire) = Decreased Numerical Value",
+                        "DES(OtherSneakerHeads, collaborate) = False",
+                        "DES(OtherSneakerHeads, compete) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Celebrate(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, get_the_sneakers) = True",
+                        "BEL(OtherSneakerHeads, collaborate) = True",
+                        "BEL(Michael, celebrate_desire) = True"
+                    ],
+                    "effects": [
+                        "DES(OtherSneakerHeads, satisfaction) = Numerical Value +1",
+                        "DES(Michael, satisfaction) = Numerical Value +1"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Compulsion(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(Michael, sneaker_owned) = False",
+                        "BEL(Michael, sneaker_available) = True"
+                    ],
+                    "effects": [
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Check(OtherSneakerHeads, sneaker websites)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, visited_sneaker_websites) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check_Sneaker_Sales(OtherSneakerHeads)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, availability_belief) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check_Competitors(OtherSneakerHeads)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, competitors, activity) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Update_Beliefs(OtherSneakerHeads, Michael, sneaker_available = False)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "BEL(Michael, exists) = True",
+                        "BEL(Michael, desired_sneaker) = True",
+                        "BEL(Michael, sneaker_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, Michael, sneaker_available) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Update_Beliefs(OtherSneakerHeads, competitors, activity = True)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = False"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, competitors_activity) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Envy"
+                    ]
+                },
+                "Coordinate(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "DES(OtherSneakerHeads, collaborate) = True",
+                        "BEL(Michael, exists) = True",
+                        "BEL(Michael, desire_sneakers) = True",
+                        "BEL(Michael, sneaker_available) = False"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, collaborative_activity) = True",
+                        "BEL(Michael, collaborative_activity) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Decide_Compete_or_Collaborate(OtherSneakerHeads)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True"
+                    ],
+                    "effects": [
+                        "DES(OtherSneakerHeads, compete) = True",
+                        "DES(OtherSneakerHeads, collaborate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Intention_Action(OtherSneakerHeads, compete, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, get_the_sneakers) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "BEL(OtherSneakerHeads, price_desire) != None",
+                        "BEL(Michael, exists) = True",
+                        "BEL(Michael, has_registered) = True",
+                        "BEL(Michael, staying_up_all_night) = True",
+                        "BEL(Michael, desires_adidas_350) = True",
+                        "BEL(Michael, searched_sneaker_websites) = True",
+                        "BEL(Michael, sneakers_not_available) = True"
+                    ],
+                    "effects": [
+                        "DES(OtherSneakerHeads, cooperate) = False",
+                        "DES(OtherSneakerHeads, compete) = False",
+                        "BEL(OtherSneakerHeads, competitors_activity) = True",
+                        "BEL(OtherSneakerHeads, informed_competitor) = True",
+                        "BEL(OtherSneakerHeads, increased_price) = Numerical Value or None",
+                        "BEL(OtherSneakerHeads, decreased_price) = Numerical Value or None",
+                        "BEL(Michael, competition_encountered) = True",
+                        "BEL(Michael, on_my_own) = False",
+                        "BEL(Michael, cooperation_encountered) = False",
+                        "BEL(Michael, increased_price) = Numerical Value or None",
+                        "BEL(Michael, decreased_price) = Numerical Value or None"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check_Sneaker_Availability(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, sneaker_available) = False",
+                        "BEL(Michael, exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, sneaker_available) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Attempt_Sneaker_Purchase(OtherSneakerHeads, Michael)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, get_the_sneakers) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "BEL(Michael, sneaker_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, sneaker_available) = False",
+                        "BEL(Michael, sneaker_owned) = True",
+                        "DES(OtherSneakerHeads, price_desire) = NewNumericalValue"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Update_Beliefs(OtherSneakerHeads, Michael, sneaker_owned = True)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, sneaker_available) = False",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, price_desire) = Numerical Value",
+                        "BEL(OtherSneakerHeads, sneaker_owned) = False",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, sneaker_owned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Hope"
+            ],
+            "speak_actions": {
+                "Speak(Start, Greeting, None, None)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True"
+                    ],
+                    "effects": [
+                        "INTENT(OtherSneakerHeads, collaborate, [Michael]) = True",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Greeting, Information, None, None)": {
+                    "conditions": [
+                        "INTENT(OtherSneakerHeads, get_the_sneakers) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True"
+                    ],
+                    "effects": [
+                        "DES(OtherSneakerHeads, collaborate, Michael) = True",
+                        "BEL(OtherSneakerHeads, price_desire, [Numerical Value]) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Information, Empathy, None, None)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "INTENT(OtherSneakerHeads, collaborate, Michael) = True"
+                    ],
+                    "effects": [
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True"
+                    ],
+                    "occ_emotion": [
+                        "Empathy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Empathy, Advisory, None, None)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "BEL(OtherSneakerHeads, availability_belief) = True",
+                        "BEL(OtherSneakerHeads, collaborate, Michael) = True",
+                        "INTENT(OtherSneakerHeads, collaborate, Michael) = True"
+                    ],
+                    "occ_emotion": [
+                        "competitiveness",
+                        "frustration",
+                        "happiness",
+                        "disappointment",
+                        "joy",
+                        "happy-for",
+                        "gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Sympathy"
+                    ]
+                },
+                "Speak(Advisory, Parting, None, None)": {
+                    "conditions": [
+                        "BEL(OtherSneakerHeads, exists) = True",
+                        "BEL(OtherSneakerHeads, competitors_exist) = True",
+                        "DES(OtherSneakerHeads, collaborate) = True OR DES(OtherSneakerHeads, compete) = True"
+                    ],
+                    "effects": [
+                        "BEL(OtherSneakerHeads, availability_belief) = False",
+                        "BEL(OtherSneakerHeads, price_desire, Numerical Value) = Numerical Value + 50",
+                        "DES(OtherSneakerHeads, get_the_sneakers) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope",
+                        "Hope"
+                    ]
+                }
+            }
+        },
+        "Friends": {
+            "knowledge_base": [
+                "BEL(Friends, can_support_Michael) = True",
+                "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                "DES(Friends, help_Michael_get_sneakers) = True",
+                "DES(Friends, not_jeopardize_Michael's_well-being) = True"
+            ],
+            "intentions": {
+                "INTENT(Friends, provide_encouragement_to_Michael) = True": {
+                    "action_plan": [
+                        "INTENT(Friends, provide_encouragement_to_Michael) = True",
+                        "ReachOut(Friends, Michael)",
+                        "Acknowledge(Michael, Sneaker Quest)",
+                        "Empathize(Friends, Michael)",
+                        "Suggest_New_Strategy(Friends, Michael, Brainstorm)",
+                        "Stay_In_Touch(Friends, Michael)"
+                    ]
+                },
+                "INTENT(Friends, offer_advice_on_sneaker_sales_strategies) = True": {
+                    "action_plan": [
+                        "Greet(Friends, Michael)",
+                        "Ask(BEL(Michael, registration_for_sites), Friends)",
+                        "Inform(BEL(Friends, knowledge_about_sneaker_culture), Friends, Michael)",
+                        "Offer_Advice(DES(Friends, help_Michael_get_sneakers), Friends, Michael, Arguments(strongest_strategy))",
+                        "Check_In(BEL(Michael, emotional_state), Friends)",
+                        "Support(BEL(Friends, can_support_Michael), Friends, Michael, Arguments(emotional_support))"
+                    ]
+                },
+                "INTENT(Friends, share_knowledge_on_sneaker_culture_with_Michael) = True": {
+                    "action_plan": [
+                        "INTENT(Friends, share_knowledge_on_sneaker_culture_with_Michael) = True",
+                        "Check_Information(Friends, sneaker_culture_websites, None)",
+                        "Plan_Conversation(Friends, Michael, None)",
+                        "Meet_Michael(Friends, Michael, None)",
+                        "Share_Knowledge(Friends, Michael, updated_sneaker_culture_information)",
+                        "Provide_Emotional_Support(Friends, Michael, None)"
+                    ]
+                },
+                "INTENT(Friends, suggest_alternative_sneaker_options) = True": {
+                    "action_plan": [
+                        "INTENT(Friends, suggest_alternative_sneaker_options)",
+                        "LOOKUP(Friends, sneaker retailers)",
+                        "SELECT(Friends, alternative_sneaker_options)",
+                        "ANALYZE(Friends, alternative_sneaker_options)",
+                        "PRESENT(Friends, alternative_sneaker_options, Michael)",
+                        "LISTEN(Friends, Michael)",
+                        "PURCHASE(Friends, alternative_sneaker_options)",
+                        "REINFORCE(Friends, Michael)"
+                    ]
+                },
+                "INTENT(Friends, dissuade_Michael_from_unhealthy_behaviors) = True": {
+                    "action_plan": [
+                        "INTENT(Friends, dissuade_Michael_from_unhealthy_behaviors) = True",
+                        "Greet(Friends, Michael)",
+                        "Listen(Friends, Michael)",
+                        "Ask(Friends, Michael, \"Have you slept enough?\")",
+                        "Suggest(Friends, Michael, \"Why don't you let us help you?\")",
+                        "Explain(Friends, Michael, \"We could take turns staying up and refreshing the websites. That way, you can rest and we can all have a better chance of getting them.\")",
+                        "Reassure(Friends, Michael, \"We understand how important these sneakers are to you, but your health matters more.\")",
+                        "Thank(Friends, Michael, \"Thank you for considering our offer. We are here for you.\")"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Friends, dissuade_Michael_from_unhealthy_behaviors) = True": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True"
+                    ],
+                    "effects": [
+                        "DES(Friends, not_jeopardize_Michael's_well-being) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Greet(Friends, Michael)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Love"
+                    ]
+                },
+                "Listen(Friends, Michael)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Empathy"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "Ask(Friends, Michael, \"Have you slept enough?\")": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Suggest(Friends, Michael, \"Why don't you let us help you?\")": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True",
+                        "DES(Friends, not_jeopardize_Michael's_well-being) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, suggest_helping_Michael) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Explain(Friends, Michael, \"We could take turns staying up and refreshing the websites. That way, you can rest and we can all have a better chance of getting them.\")": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True",
+                        "BEL(Michael, awake) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friends, able_to_help_Michael) = True",
+                        "BEL(Michael, awake) = True",
+                        "DES(Friends, more_likely_to_get_sneakers) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Reassure(Friends, Michael, \"We understand how important these sneakers are to you, but your health matters more.\")": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, not_jeopardize_Michael's_well-being) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, reassured_Michael) = True",
+                        "DES(Friends, support_Michael_with_sneaker_goal) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "Thank(Friends, Michael, \"Thank you for considering our offer. We are here for you.\")": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "INTENT(Friends, provide_encouragement_to_Michael) = True": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True",
+                        "DES(Friends, not_jeopardize_Michael's_well-being) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, provided_encouragement_to_Michael) = True",
+                        "BEL(Michael, encouraged_by_Friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ReachOut(Friends, Michael)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, contacted_Michael) = True",
+                        "BEL(Michael, contacted_by_Friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Acknowledge(Michael, Sneaker Quest)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, Friends_acknowledged_sneaker_quest) = True"
+                    ],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "Empathize(Friends, Michael)": {
+                    "conditions": [
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Michael, Sneaker_Quest) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, empathize_with_Michael) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "Suggest_New_Strategy(Friends, Michael, Brainstorm)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True",
+                        "BEL(Michael, failed_sneaker_hunt) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, provided_new_strategy) = True",
+                        "DES(Friends, maintain_Michael's_motivation) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True",
+                        "BEL(Michael, new_strategy_suggested) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Stay_In_Touch(Friends, Michael)": {
+                    "conditions": [
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "BEL(Friends, can_support_Michael) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True"
+                    ],
+                    "effects": [
+                        "DES(Friends, stay_in_touch_with_Michael) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Ask(BEL(Michael, registration_for_sites), Friends)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Michael, registration_for_sites) = undefined"
+                    ],
+                    "effects": [
+                        "BEL(Michael, registration_for_sites) = value_returned_by_Michael"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Inform(BEL(Friends, knowledge_about_sneaker_culture), Friends, Michael)": {
+                    "conditions": [
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, informed_about_sneaker_culture) = True",
+                        "BEL(Michael, knowledgeable_friend) = Friends"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Offer_Advice(DES(Friends, help_Michael_get_sneakers), Friends, Michael, Arguments(strongest_strategy))": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True",
+                        "BEL(Michael, registration_for_sites)"
+                    ],
+                    "effects": [
+                        "BEL(Michael, knowledge_about_sneaker_sales_strategies) = strongest_strategy"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check_In(BEL(Michael, emotional_state), Friends)": {
+                    "conditions": [
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "BEL(Michael, emotional_state) = uncertain"
+                    ],
+                    "effects": [
+                        "BEL(Friends, knowledge_about_Michael's_emotional_state) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concerned"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Support(BEL(Friends, can_support_Michael), Friends, Michael, Arguments(emotional_support))": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, emotional_support_provided) = True",
+                        "BEL(Michael, emotional_state) = Positive"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Compassion"
+                    ]
+                },
+                "INTENT(Friends, share_knowledge_on_sneaker_culture_with_Michael) = True": {
+                    "conditions": [
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True"
+                    ],
+                    "effects": [
+                        "DES(Friends, help_Michael_get_sneakers) = True",
+                        "BEL(Michael, updated_sneaker_culture_information) = True",
+                        "BEL(Friends, shared_knowledge_with_Michael) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Happy-for"
+                    ]
+                },
+                "Check_Information(Friends, sneaker_culture_websites, None)": {
+                    "conditions": [
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "BEL(sneaker_culture_websites, accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, up_to_date_on_sneaker_culture) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Plan_Conversation(Friends, Michael, None)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, talking_to_Michael_about_sneaker_culture) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "Meet_Michael(Friends, Michael, None)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, not_jeopardize_Michael's_well-being) = True",
+                        "BEL(Michael, acquaintance_of_Friends) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, present_with_Michael) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Share_Knowledge(Friends, Michael, updated_sneaker_culture_information)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True",
+                        "DES(Friends, not_jeopardize_Michael's_well-being) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, updated_sneaker_culture_information) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Provide_Emotional_Support(Friends, Michael, None)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "DES(Friends, not_jeopardize_Michael's_well-being) = True",
+                        "BEL(Michael, in_need_of_emotional_support) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, provided_emotional_support_to_Michael) = True",
+                        "DES(Friends, reduce_Michael's_stress_level) = True",
+                        "DES(Friends, enhance_relationship_with_Michael) = True",
+                        "DES(Friends, maintain_positive_connectedness_with_Michael) = True",
+                        "BEL(Michael, received_emotional_support_from_Friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "INTENT(Friends, suggest_alternative_sneaker_options)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True",
+                        "DES(Friends, not_jeopardize_Michael's_well-being) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Friends, suggest_alternative_sneaker_options) = True",
+                        "BEL(Friends, alternative_sneaker_options) = True",
+                        "BEL(Friends, sneaker_retailers) = True",
+                        "BEL(Friends, knowledge_about_alternative_sneaker_options) = True",
+                        "DES(Friends, fulfill_Michael's_sneaker_needs) = True",
+                        "DES(Friends, maintain_good_relationship_with_Michael) = True",
+                        "DES(Friends, minimize_risk_for_Michael) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "LOOKUP(Friends, sneaker retailers)": {
+                    "conditions": [
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SELECT(Friends, alternative_sneaker_options)": {
+                    "conditions": [
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "BEL(Friends, can_support_Michael) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, selected_sneaker_options) = alternative_sneaker_options",
+                        "BEL(Friends, alternative_sneaker_options) = alternative_sneaker_options"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ANALYZE(Friends, alternative_sneaker_options)": {
+                    "conditions": [
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "BEL(Friends, can_support_Michael) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, analyzed_alternative_sneaker_options) = True",
+                        "BEL(Friends, alternative_sneaker_options_exist) = True/False",
+                        "BEL(Friends, preferred_alternative_sneaker_option) = [arguments*",
+                        "DES(Friends, suggest_alternative_sneaker_options) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PRESENT(Friends, alternative_sneaker_options, Michael)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, not_jeopardize_Michael's_well-being) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, presented_with_alternative_options) = True",
+                        "BEL(Friends, presented_alternative_options_to_Michael) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "LISTEN(Friends, Michael)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friends, listening_to_Michael) = True",
+                        "DES(Friends, understand_Michael's_frustration) = True"
+                    ],
+                    "occ_emotion": [
+                        "Empathy"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "PURCHASE(Friends, alternative_sneaker_options)": {
+                    "conditions": [
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "DES(Friends, help_Michael_get_sneakers) = True",
+                        "BEL(Michael, has_not_purchased_alternative_sneaker_option) = True"
+                    ],
+                    "effects": [
+                        "BEL(Michael, has_not_purchased_alternative_sneaker_option) = False",
+                        "BEL(Michael, has_purchased_alternative_sneaker_option) = True",
+                        "DES(Friends, reinforce_Michael_to_feel_good_about_purchase) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "REINFORCE(Friends, Michael)": {
+                    "conditions": [
+                        "BEL(Friends, can_support_Michael) = True",
+                        "BEL(Friends, knowledge_about_sneaker_culture) = True",
+                        "BEL(Michael, received_alternative_sneaker_options) = True"
+                    ],
+                    "effects": [
+                        "DES(Friends, reinforce_Michael) = True",
+                        "DES(Friends, not_jeopardize_Michael's_well-being) = True",
+                        "BEL(Michael, increased_self-worth) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Hope"
+            ],
+            "speak_actions": {}
+        }
+    },
+    "dialogue_tree": [
+        "<Start, Greeting, None, None, \"Hey Michael, how are you doing today?\">",
+        "<Greeting, Information, None, None, \"What have you been up to lately?\">",
+        "<Information, Desires, None, None, \"Oh, I've been trying to get a pair of Adidas 350 for almost a year now.\">",
+        "<Desires, Confirmation, None, None, \"Have you ever gotten lucky and gotten a pair?\">",
+        "<Confirmation, Advice, None, None, \"No, unfortunately not. Do you have any advice on how to get them?\">",
+        "<Advice, Thankyou, None, None, \"Thank you so much, I'll give those a try.\">",
+        "<Thankyou, End, None, None, \"Have a great day!\">"
+    ]
+}

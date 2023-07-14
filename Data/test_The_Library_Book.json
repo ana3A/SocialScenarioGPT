@@ -1,0 +1,1008 @@
+{
+    "scenario_name": "test_The Library Book",
+    "scenario_description": "Thomas always returned his library books on time. One day, he was going to a doctor's appointment. Thomas decided to bring a book to pass time. Thomas put the book on the roof of his car, and accidently drove away. Thomas had to pay a library fine.",
+    "last_ended": "end",
+    "agents": {
+        "Thomas": {
+            "knowledge_base": [],
+            "intentions": {
+                "GoToAppointment(Thomas) = True": {
+                    "action_plan": [
+                        "Drive(Thomas, Doctor's office)",
+                        "Realize(Thomas, BookOnRoof)",
+                        "Search(Thomas, Book)",
+                        "Decide(Thomas, PayFine)",
+                        "AttendAppointment(Thomas)"
+                    ]
+                },
+                "BringBook(Thomas, 'on roof of car') = True": {
+                    "action_plan": [
+                        "Check(Pockets, Phone)",
+                        "Realize(MissedBook)",
+                        "Recall(ReturnDate)",
+                        "Assess(FineAmount)",
+                        "Pay(FineAmount)",
+                        "Return(LibraryBook)"
+                    ]
+                },
+                "ReturnBookOnTime(Thomas) = True": {
+                    "action_plan": [
+                        "ReturnBookOnTime(Thomas) = True",
+                        "GetInCar(Thomas)",
+                        "PutBookOnRoof(Thomas)",
+                        "DriveAway(Thomas)",
+                        "RealizeBookOnRoof(Thomas)",
+                        "StopTheCar(Thomas)",
+                        "RetrieveBookFromRoof(Thomas)",
+                        "ReturnBookToLibrary(Thomas, Librarian)"
+                    ]
+                },
+                "PayLibraryFine(Thomas) = False": {
+                    "action_plan": [
+                        "Believes(Thomas, own_library_book)",
+                        "Believes(Thomas, library_fine_to_pay)",
+                        "Desires(Thomas, return_library_book)",
+                        "Plans(Thomas, ActionsToPayLibraryFine)",
+                        "CheckCarForLostBook(Thomas)",
+                        "RealizeBookLost(Thomas)",
+                        "VisitLibrary(Thomas, Librarian)",
+                        "ExplainSituation(Thomas, Librarian)",
+                        "AgreeToRepayFines(Thomas, Librarian, Amount)",
+                        "RequestReplacementBook(Thomas, Librarian)",
+                        "ReturnLibraryBook(Thomas, Librarian)"
+                    ]
+                }
+            },
+            "actions": {
+                "Believes(Thomas, own_library_book)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Thomas, own_library_book) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Believes(Thomas, library_fine_to_pay)": {
+                    "conditions": [
+                        "BEL(Thomas, own_library_book) = False"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, library_fine_to_pay) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Desires(Thomas, return_library_book)": {
+                    "conditions": [
+                        "BEL(Thomas, own_library_book) = True"
+                    ],
+                    "effects": [
+                        "DES(Thomas, return_library_book) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Plans(Thomas, ActionsToPayLibraryFine)": {
+                    "conditions": [
+                        "BEL(Thomas, own_library_book) = True"
+                    ],
+                    "effects": [
+                        "DES(Thomas, return_library_book) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "CheckCarForLostBook(Thomas)": {
+                    "conditions": [
+                        "BEL(Thomas, own_library_book) = True"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, found_lost_book) = True",
+                        "BEL(Thomas, found_lost_book) = False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "RealizeBookLost(Thomas)": {
+                    "conditions": [
+                        "BEL(Thomas, own_library_book) = True"
+                    ],
+                    "effects": [
+                        "Beliefs(Thomas, lost_library_book) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "VisitLibrary(Thomas, Librarian)": {
+                    "conditions": [
+                        "BEL(Thomas, own_library_book) = False",
+                        "BEL(Thomas, library_fine_to_pay) = True"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, at_library) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ExplainSituation(Thomas, Librarian)": {
+                    "conditions": [
+                        "BEL(Thomas, library_fine_to_pay) = True",
+                        "BEL(Librarian, aware_of_lost_book) = False"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, explained_situation_to_librarian) = True",
+                        "BEL(Librarian, aware_of_lost_book) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "AgreeToRepayFines(Thomas, Librarian, Amount)": {
+                    "conditions": [
+                        "BEL(Librarian, willing_to_negotiate) = True",
+                        "BEL(Librarian, amount_of_fine) > 0",
+                        "DES(Thomas, repay_fines) = True"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, willing_to_negotiate) = False",
+                        "BEL(Librarian, amount_of_fine) = amount",
+                        "BEL(Thomas, has_paid_fines) = False",
+                        "BEL(Thomas, amount_of_fines) = amount"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "RequestReplacementBook(Thomas, Librarian)": {
+                    "conditions": [
+                        "BEL(Librarian, has_available_books) = True",
+                        "DES(Thomas, request_replacement_book) = True"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, has_replacement_book) = True",
+                        "BEL(Librarian, has_available_books) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": []
+                },
+                "ReturnLibraryBook(Thomas, Librarian)": {
+                    "conditions": [
+                        "BEL(Thomas, possess_library_book) = True",
+                        "BEL(Thomas, book_lost) = False",
+                        "BEL(Librarian, library_open) = True",
+                        "BEL(Librarian, book_not_returned) = True"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, possess_library_book) = False",
+                        "BEL(Librarian, book_not_returned) = False",
+                        "BEL(Librarian, book_returned) = True",
+                        "DES(Thomas, PayLibraryFine) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": []
+                },
+                "Drive(Thomas, Doctor's office)": {
+                    "conditions": [
+                        "BEL(Thomas, HasCar) = True",
+                        "BEL(Thomas, KnowsLocation) = True",
+                        "BEL(Thomas, HasAppointment) = True",
+                        "DES(Thomas, ArriveOnTime) = True"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, IsAtAppointment) = True",
+                        "BEL(Thomas, HasBook) = False",
+                        "DES(Thomas, ArriveOnTime) = False",
+                        "BEL(Thomas, HasCar)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Realize(Thomas, BookOnRoof)": {
+                    "conditions": [
+                        "BEL(BookOnRoof) = True"
+                    ],
+                    "effects": [
+                        "BEL(Realized, BookOnRoof) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Search(Thomas, Book)": {
+                    "conditions": [
+                        "BEL(Thomas, BookOnRoof) = True"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, FoundBook) = True",
+                        "BEL(Thomas, BookOnRoof) = False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Decide(Thomas, PayFine)": {
+                    "conditions": [
+                        "BEL(Thomas, BookOnRoof) = True"
+                    ],
+                    "effects": [
+                        "DES(Thomas, PayFine) = True",
+                        "BEL(Thomas, Money) -= 10"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "AttendAppointment(Thomas)": {
+                    "conditions": [
+                        "DES(GoToAppointment(Thomas)) = True",
+                        "BEL(HasAppointment(Thomas)) = True"
+                    ],
+                    "effects": [
+                        "BEL(AttendedAppointment(Thomas)) = True",
+                        "BEL(IsAvailable(Thomas)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Check(Pockets, Phone)": {
+                    "conditions": [
+                        "BEL(Thomas, 'has_pockets') = True",
+                        "BEL(Thomas, 'has_phone') = True"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, 'book_not_found') = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Realize(MissedBook)": {
+                    "conditions": [
+                        "BEL(Thomas, BookOnCarRoof) = True",
+                        "BEL(Thomas, BookReturnedOnTime) = False"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, MissedBook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Recall(ReturnDate)": {
+                    "conditions": [
+                        "BEL(Thomas, BookOnRoofOfCar) = True",
+                        "BEL(Thomas, MissedDoctorAppointment) = False",
+                        "BEL(Thomas, BookReturnedLate) = False"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, BookOnRoofOfCar) = False",
+                        "BEL(Thomas, MissedBook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Assess(FineAmount)": {
+                    "conditions": [
+                        "BEL(Librarian, HasBook(Thomas)) = True",
+                        "BEL(Thomas, MissedAppointment) = False"
+                    ],
+                    "effects": [
+                        "DES(Thomas, PayLessFine) = True if BEL(Thomas, HasCash) = True and BEL(Thomas, HasCreditCard) = True else False",
+                        "BEL(Thomas, TotalFineAmount) = BEL(Librarian, BookFineAmount)",
+                        "BEL(Thomas, HasCash) = False if DES(Thomas, PayLessFine) = True else True",
+                        "BEL(Thomas, HasCreditCard) = False if DES(Thomas, PayLessFine) = True else True",
+                        "BEL(Thomas, HasBook(Thomas)) = False",
+                        "DES(Thomas, ReturnBook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Pay(FineAmount)": {
+                    "conditions": [
+                        "BEL(Thomas, HasEnoughMoney) = True",
+                        "DES(Thomas, AvoidLateFee) = True",
+                        "BEL(Librarian, FinePaid) = False"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, HasEnoughMoney) = False",
+                        "BEL(Librarian, FinePaid) = True",
+                        "DES(Thomas, AvoidLateFee) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Return(LibraryBook)": {
+                    "conditions": [
+                        "BEL(Thomas, HasBook) = True",
+                        "BEL(Thomas, Car) = Parked",
+                        "BEL(Thomas, CarRoof) = Empty"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, HasBook) = False",
+                        "BEL(Librarian, BookReturned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "ReturnBookOnTime(Thomas) = True": {
+                    "conditions": [
+                        "BEL(Thomas, HasBookOnRoof) = True",
+                        "BEL(Thomas, IsLateToAppointment) = False"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, HasBookOnRoof) = False",
+                        "BEL(Thomas, LibraryFine) = False",
+                        "BEL(Thomas, ReturnedBookOnTime) = True",
+                        "DES(Thomas, ImpressLibrarian) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "GetInCar(Thomas)": {
+                    "conditions": [
+                        "AtLocation(Thomas, Home) = True"
+                    ],
+                    "effects": [
+                        "InCar(Thomas) = True",
+                        "AtLocation(Thomas, Home) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PutBookOnRoof(Thomas)": {
+                    "conditions": [
+                        "BEL(Thomas, hasCar) = True",
+                        "BEL(Thomas, hasBook) = True",
+                        "DES(ReturnBookOnTime(Thomas)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, bookOnRoof) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DriveAway(Thomas)": {
+                    "conditions": [
+                        "BEL(Thomas, HasKey) = True",
+                        "BEL(Thomas, CarIsNearby) = True",
+                        "BEL(Thomas, BookIsOnRoof) = True",
+                        "DES(ReturnBookOnTime(Thomas)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, CarIsMoving) = True",
+                        "BEL(Thomas, BookIsOnRoof) = False",
+                        "BEL(Thomas, BookLost) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "RealizeBookOnRoof(Thomas)": {
+                    "conditions": [
+                        "BEL(BookOnRoof) = True",
+                        "BEL(RememberingBookOnRoof) = False"
+                    ],
+                    "effects": [
+                        "BEL(RememberingBookOnRoof) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Surprise"
+                    ]
+                },
+                "StopTheCar(Thomas)": {
+                    "conditions": [
+                        "DriveAway(Thomas) = True",
+                        "RealizeBookOnRoof(Thomas) = True"
+                    ],
+                    "effects": [
+                        "StopTheCar(Thomas) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "RetrieveBookFromRoof(Thomas)": {
+                    "conditions": [
+                        "BEL(RealizeBookOnRoof(Thomas)) = True"
+                    ],
+                    "effects": [
+                        "BEL(BookInHand(Thomas)) = True",
+                        "BEL(ReturnBookOnTime(Thomas)) = False",
+                        "DES(PayLibraryFine(Thomas)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "ReturnBookToLibrary(Thomas, Librarian)": {
+                    "conditions": [
+                        "BEL(ReturnBookOnTime(Thomas)) = True",
+                        "BEL(RealizeBookOnRoof(Thomas)) = True",
+                        "BEL(StopTheCar(Thomas)) = True"
+                    ],
+                    "effects": [
+                        "BEL(ReturnBookOnTime(Thomas)) = False",
+                        "BEL(ReturnBookToLibrary(Thomas, Librarian)) = True",
+                        "DES(PayLibraryFine(Thomas)) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": []
+                }
+            },
+            "initial_occ_emotion": [
+                "Hope"
+            ],
+            "speak_actions": {
+                "Speak(Initial, A, Introduction, Formal)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Thomas, GoToAppointment()) = True",
+                        "BEL(Thomas, BringBook(Thomas, 'on roof of car')) = True",
+                        "BEL(Thomas, ReturnBookOnTime(Thomas)) = True",
+                        "BEL(Thomas, PayLibraryFine(Thomas)) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Speak(Initial, A, Introduction, Formal)], [Believes(Thomas, own_library_book), Hope"
+                    ]
+                }
+            }
+        },
+        "Librarian": {
+            "knowledge_base": [
+                "BEL(Librarian, BookReturnedOnTime) = True",
+                "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                "DES(Librarian, ReceiveLateFee, \"Book_Title\") = True",
+                "DES(Librarian, KeepTrackOfReturnedBooks) = True"
+            ],
+            "intentions": {
+                "INTENT(Librarian, CollectLateFee, \"Book_Title\") = True": {
+                    "action_plan": [
+                        "CheckReturnedBooks(Librarian)",
+                        "CheckLateFee(Librarian, \"Book_Title\")",
+                        "NotifyPatronOfLateBook(Librarian, \"Book_Title\")",
+                        "ReceiveLateFee(Librarian, \"Book_Title\")",
+                        "UpdateReturnedBooksList(Librarian, \"Book_Title\")",
+                        "CheckReturnedBooks(Librarian)",
+                        "CheckLateFee(Librarian, \"Book_Title\")",
+                        "NotifyPatronOfLateBook(Librarian, \"Book_Title\")",
+                        "ReceiveLateFee(Librarian, \"Book_Title\")",
+                        "UpdateReturnedBooksList(Librarian, \"Book_Title\")"
+                    ]
+                },
+                "INTENT(Librarian, UpdateBookStatus, \"Book_Title\") = True": {
+                    "action_plan": [
+                        "CheckLibraryRecord(Librarian, Thomas)",
+                        "NotifyThomasOfLateBook(Librarian, Thomas, \"Book_Title\")",
+                        "MarkBookAsLate(Librarian, \"Book_Title\")",
+                        "AddLateFeeToThomasAccount(Librarian, Thomas, LateFee)",
+                        "UpdateBookStatus(Librarian, \"Book_Title\")"
+                    ]
+                },
+                "INTENT(Librarian, AddLateFeeToAccount) = True": {
+                    "action_plan": [
+                        "INTENT(Librarian, AddLateFeeToAccount) = True",
+                        "CheckDueDate(Librarian, \"Book_Title\")",
+                        "CheckReturnedBooks(Librarian)",
+                        "IfReturnedOnTime(Librarian, \"Book_Title\")",
+                        "IfLate(ReturnLateFee, Librarian, \"Book_Title\")",
+                        "SendNotification(Librarian, Thomas, LateBookNotification)",
+                        "UpdateAccount(Librarian, Thomas, LateFeeCharge)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Librarian, AddLateFeeToAccount) = True": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime) = True"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, LateBookReturned, \"Book_Title\") = True",
+                        "DES(Librarian, ReceiveLateFee, \"Book_Title\") = True",
+                        "BEL(Librarian, LateFeeCharged, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Fears-confirmed"
+                    ]
+                },
+                "CheckDueDate(Librarian, \"Book_Title\")": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, BookDueDateKnown, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckReturnedBooks(Librarian)": {
+                    "conditions": [
+                        "BEL(Librarian, KeepTrackOfReturnedBooks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, BookReturnedOnTime, \"Book_Title\") = True/False",
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "IfReturnedOnTime(Librarian, \"Book_Title\")": {
+                    "conditions": [
+                        "BEL(Librarian, BookReturnedOnTime) = True",
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True"
+                    ],
+                    "effects": [
+                        "DES(Librarian, ReceiveLateFee, \"Book_Title\") = False",
+                        "DES(Librarian, KeepTrackOfReturnedBooks) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "IfLate(ReturnLateFee, Librarian, \"Book_Title\")": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime, \"Book_Title\") = False"
+                    ],
+                    "effects": [
+                        "DES(Librarian, ReceiveLateFee, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedLate, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "SendNotification(Librarian, Thomas, LateBookNotification)": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime) = False",
+                        "BEL(Thomas, LateBookNotificationReceived, \"Book_Title\") = False"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, LateBookNotificationReceived, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "UpdateAccount(Librarian, Thomas, LateFeeCharge)": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Thomas, ReturnedBooksOnTime) = False"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, AccountUpdated, Thomas) = True",
+                        "BEL(Librarian, ReceivedLateFee, Thomas) = True",
+                        "DES(Librarian, UpdateAccount, Thomas) = False",
+                        "BEL(Thomas, HasLibraryFine) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "CheckLateFee(Librarian, \"Book_Title\")": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime, \"Book_Title\") = False"
+                    ],
+                    "effects": [
+                        "DES(Librarian, ReceiveLateFee, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Displeasure"
+                    ]
+                },
+                "NotifyPatronOfLateBook(Librarian, \"Book_Title\")": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime) = False",
+                        "BEL(Librarian, LateFeePaid, \"Book_Title\") = False",
+                        "BEL(Librarian, PatronNotified, \"Book_Title\") = False"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, PatronNotified, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "ReceiveLateFee(Librarian, \"Book_Title\")": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime, \"Book_Title\") = False"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, BookReturnedOnTime, \"Book_Title\") = False",
+                        "BEL(Librarian, LateFeePaid, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "UpdateReturnedBooksList(Librarian, \"Book_Title\")": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, BookReturnedOnTime) = False",
+                        "BEL(Librarian, BookReturnedLate, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "CheckLibraryRecord(Librarian, Thomas)": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Thomas, CheckedOutBooks) = AtLeastOneCheckedOut",
+                        "BEL(Librarian, BookReturnedOnTime) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "NotifyThomasOfLateBook(Librarian, Thomas, \"Book_Title\")": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime) = False",
+                        "BEL(Thomas, NotifyLateReturn, \"Book_Title\") = False"
+                    ],
+                    "effects": [
+                        "BEL(Thomas, NotifyLateReturn, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "MarkBookAsLate(Librarian, \"Book_Title\")": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime, \"Book_Title\") = False",
+                        "BEL(Librarian, BookIsLate, \"Book_Title\") = False"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, BookIsLate, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "AddLateFeeToThomasAccount(Librarian, Thomas, LateFee)": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime) = False",
+                        "BEL(Thomas, AccountBalance, Balance)"
+                    ],
+                    "effects": [
+                        "DES(Librarian, ReceiveLateFee, \"Book_Title\") = False",
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = False",
+                        "BEL(Thomas, AccountBalance, Balance + LateFee) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Fears-confirmed"
+                    ]
+                },
+                "UpdateBookStatus(Librarian, \"Book_Title\")": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime) = False"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = False",
+                        "BEL(Librarian, BookReturnedOnTime) = False",
+                        "BEL(Librarian, BookReturnedLate, \"Book_Title\") = True",
+                        "DES(Librarian, ReceiveLateFee, \"Book_Title\") = False",
+                        "DES(Librarian, KeepTrackOfReturnedBooks) = True",
+                        "BEL(Librarian, LateFeeReceived, Thomas, LateFee) = True",
+                        "BEL(Thomas, LateFeePaid, LateFee) = True",
+                        "DES(Librarian, FindReplacementCopy, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Fear"
+            ],
+            "speak_actions": {
+                "Speak(A, B, Acknowledgment, Polite)": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, Book_Title) = True",
+                        "DES(Librarian, KeepTrackOfReturnedBooks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Librarian, ReceiveLateFee, Book_Title) = True",
+                        "INTENT(Librarian, CollectLateFee, Book_Title) = True",
+                        "INTENT(Librarian, UpdateBookStatus, Book_Title) = True",
+                        "INTENT(Librarian, AddLateFeeToAccount) = True"
+                    ],
+                    "occ_emotion": [
+                        "CheckLateFee(Librarian, \"Book_Title\") --> ReceiveLateFee(Librarian, \"Book_Title\"), Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "CheckDueDate, Fear",
+                        "CheckReturnedBooks, Hope",
+                        "IfReturnedOnTime, Gratification",
+                        "IfLate, Anger",
+                        "SendNotification, Fear",
+                        "UpdateAccount, Gratification",
+                        "NotifyPatronOfLateBook, Disappointment",
+                        "ReceiveLateFee, Gratification",
+                        "UpdateReturnedBooksList, Satisfaction",
+                        "CheckLibraryRecord, Hope",
+                        "NotifyThomasOfLateBook, Disappointment",
+                        "MarkBookAsLate, Fear",
+                        "AddLateFeeToThomasAccount, Gratification",
+                        "UpdateBookStatus, Satisfaction"
+                    ]
+                },
+                "Speak(C, D, Confirmation, Reassuring)": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime) = False",
+                        "DES(Librarian, ReceiveLateFee, \"Book_Title\") = True"
+                    ],
+                    "effects": [
+                        "INTENT(Librarian, CollectLateFee, \"Book_Title\") = True",
+                        "INTENT(Librarian, UpdateBookStatus, \"Book_Title\") = True",
+                        "INTENT(Librarian, AddLateFeeToAccount) = True"
+                    ],
+                    "occ_emotion": [
+                        "CheckDueDate(Librarian, \"Book_Title\"), IfLate(ReturnLateFee, Librarian, \"Book_Title\"), Distress"
+                    ],
+                    "emotion_condition": [
+                        "CheckDueDate(Librarian, \"Book_Title\"), Fear",
+                        "CheckReturnedBooks(Librarian), Relief",
+                        "IfReturnedOnTime(Librarian, \"Book_Title\"), Satisfaction",
+                        "IfLate(ReturnLateFee, Librarian, \"Book_Title\"), Anger",
+                        "SendNotification(Librarian, Thomas, LateBookNotification), Fear",
+                        "UpdateAccount(Librarian, Thomas, LateFeeCharge), Gratification",
+                        "CheckLateFee(Librarian, \"Book_Title\"), Fear",
+                        "NotifyPatronOfLateBook(Librarian, \"Book_Title\"), Remorse",
+                        "ReceiveLateFee(Librarian, \"Book_Title\"), Gratification",
+                        "UpdateReturnedBooksList(Librarian, \"Book_Title\"), Relief",
+                        "CheckLibraryRecord(Librarian, Thomas), Fear",
+                        "NotifyThomasOfLateBook(Librarian, Thomas, \"Book_Title\"), Pity",
+                        "MarkBookAsLate(Librarian, \"Book_Title\"), Fear",
+                        "AddLateFeeToThomasAccount(Librarian, Thomas, LateFee), Gratification",
+                        "UpdateBookStatus(Librarian, \"Book_Title\"), Satisfaction"
+                    ]
+                },
+                "Speak(D, E, Explanation, Firm)": {
+                    "conditions": [],
+                    "effects": [
+                        "SPEAK ACTION",
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "BEL(Librarian, BookReturnedOnTime) = False",
+                        "DES(Librarian, ReceiveLateFee, \"Book_Title\") = True",
+                        "DES(Librarian, KeepTrackOfReturnedBooks) = True",
+                        "INTENT(Librarian, CollectLateFee, \"Book_Title\") = True",
+                        "INTENT(Librarian, UpdateBookStatus, \"Book_Title\") = True",
+                        "INTENT(Librarian, AddLateFeeToAccount) = True"
+                    ],
+                    "occ_emotion": [
+                        "UpdateAccount, LateFeeCharge, Disappointment, Displeased about the disconfirmation of a desirable event and the confirmation of an undesirable event"
+                    ],
+                    "emotion_condition": [
+                        "Fear",
+                        "Joy",
+                        "Distress",
+                        "Hope",
+                        "Distress",
+                        "Relief",
+                        "Pity",
+                        "Satisfaction",
+                        "Joy",
+                        "Joy",
+                        "Fear",
+                        "Anger",
+                        "Distress",
+                        "Joy"
+                    ]
+                },
+                "Speak(F, G, Assistance, Accommodating)": {
+                    "conditions": [
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True",
+                        "INTENT(Librarian, CollectLateFee, \"Book_Title\") = True"
+                    ],
+                    "effects": [
+                        "DES(Librarian, KeepTrackOfReturnedBooks) = True",
+                        "BEL(Librarian, BookReturnedOnTime) = False",
+                        "DES(Librarian, ReceiveLateFee, \"Book_Title\") = False",
+                        "INTENT(Librarian, UpdateBookStatus, \"Book_Title\") = True",
+                        "INTENT(Librarian, AddLateFeeToAccount) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(H, End, Gratitude, Polite)": {
+                    "conditions": [
+                        "BEL(Librarian, BookReturnedOnTime) = True",
+                        "BEL(Librarian, BookCheckedOut, \"Book_Title\") = True"
+                    ],
+                    "effects": [
+                        "INTENT(Librarian, CollectLateFee, \"Book_Title\") = True",
+                        "INTENT(Librarian, UpdateBookStatus, \"Book_Title\") = True"
+                    ],
+                    "occ_emotion": [
+                        "UpdateAccount(Librarian, Thomas, LateFeeCharge), NotifyThomasOfLateBook(Librarian, Thomas, \"Book_Title\"), Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "ReceiveLateFee(Librarian, \"Book_Title\"), Speak(H, End, Gratitude, Polite), Gratitude"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Initial, A, Introduction, Formal, \"Hello, my name is Thomas. How may I help you?\">",
+        "<A, B, Apology, Regretful, \"I am sorry for troubling you, but I accidentally lost a book I borrowed from here.\">",
+        "<B, C, Clarification, Confused, \"Could you please clarify what happened, so I understand better?\">",
+        "<C, D, Understanding, Helpful, \"Ah, I see. So you put the book on your car roof to take it with you but forgot about it and drove away.\">",
+        "<D, E, Frustration, Annoyed, \"As a result, the book is lost, and I have to pay a library fine, which is frustrating.\">",
+        "<E, F, Sympathy, Supportive, \"That sounds frustrating indeed. I completely understand your situation, and I am happy to help.\">",
+        "<F, G, Solution, Helpful, \"We can wave the library fine since this is your first time losing the book. However, the book still needs to be replaced, and you will have to pay for it.\">",
+        "<G, H, Agreement, Determined, \"Absolutely. This is fair, and I will gladly pay for the replacement.\">",
+        "<H, End, Gratitude, Thankful, \"Thank you so much for helping me with this. I appreciate it.\">"
+    ]
+}

@@ -1,0 +1,2475 @@
+{
+    "scenario_name": "test_Bead Art",
+    "scenario_description": "I'm a big fan of pixel art. I express my fandom by making bead art of sprites. I melt the beads together so they fuse forever. It is a time-consuming but fun process. Now my walls are covered in bead-based pixel art.",
+    "last_ended": "end",
+    "agents": {
+        "player": {
+            "knowledge_base": [
+                "BEL(player, loves_pixel_art) = True",
+                "BEL(player, enjoys_making_bead_art) = True",
+                "BEL(player, bead_art_is_time_consuming) = True",
+                "BEL(player, has_covered_walls_with_bead_art) = True",
+                "DES(player, wants_to_create_new_designs) = True",
+                "DES(player, hopes_to_show_bead_art_to_others) = True",
+                "DES(player, wants_to_improve_bead_art_technique) = True",
+                "DES(player, aims_to_be_recognized_as_pixel_art_creator) = True"
+            ],
+            "intentions": {
+                "INTENT(player, create_new_bead_art_designs) = True": {
+                    "action_plan": [
+                        "GatherMaterials(player, \\)]",
+                        "CreateDesign(player, , template, beads)",
+                        "MeltBeads(player, , pegboard)",
+                        "DisplayDesign(player, roommate\\)]",
+                        "SolicitFeedback(player, roommate\\)]",
+                        "ResearchTechniques(player, \\)]"
+                    ]
+                },
+                "INTENT(player, show_bead_art_to_others) = True": {
+                    "action_plan": [
+                        "Explore(player, online_pixel_art_communities)",
+                        "Create(player, new_bead_art_designs)",
+                        "Share(player, bead_art_on_social_media)",
+                        "Join(player, local_art_events)",
+                        "Collaborate(player, with_other_artists)",
+                        "Optimize(player, time_management_skills)",
+                        "Document(player, bead_art_process)",
+                        "Establish(player, personal_branding_and_marketing_strategy)",
+                        "Seek(player, expert_opinions_on_bead_art)",
+                        "Exhibit(player, the_bead_art_to_wider_audience)"
+                    ]
+                },
+                "INTENT(player, improve_bead_art_technique) = True": {
+                    "action_plan": [
+                        "AGENT(player)",
+                        "INTENT(player, improve_bead_art_technique) = True",
+                        "PracticeBeadArt(player, None)",
+                        "ResearchPixelArt(player, Internet)",
+                        "FindBeadArtClasses(player, LocalArtSchool)",
+                        "ShowBeadArtToOthers(player, FriendsAndFamily)",
+                        "ParticipateInArtCompetitions(player, LocalArtCompetitions)"
+                    ]
+                },
+                "INTENT(player, be_recognized_as_pixel_art_creator) = True": {
+                    "action_plan": [
+                        "BrainstormNewDesigns(player, None)",
+                        "ResearchPixelArtTrends(player, None)",
+                        "PracticeBeadArtTechnique(player, None)",
+                        "ShowBeadArtToRoommate(player, roommate)",
+                        "CreateNewBeadArt(player, None)",
+                        "ShareBeadArtOnSocialMedia(player, None)",
+                        "CollaborateWithOtherPixelArtists(player, artist)",
+                        "EnterPixelArtCompetitions(player, None)",
+                        "AttendPixelArtEvents(player, None)",
+                        "SellBeadArt(player, None)"
+                    ]
+                }
+            },
+            "actions": {
+                "BrainstormNewDesigns(player, None)": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "DES(player, wants_to_create_new_designs) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ResearchPixelArtTrends(player, None)": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, aims_to_be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, knows_latest_pixel_art_trends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "PracticeBeadArtTechnique(player, None)": {
+                    "conditions": [
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "DES(player, wants_to_improve_bead_art_technique) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, has_improved_bead_art_technique) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ShowBeadArtToRoommate(player, roommate)": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True"
+                    ],
+                    "effects": [
+                        "DES(roommate, impressed_with_bead_art) = True",
+                        "BEL(roommate, has_seen_bead_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "CreateNewBeadArt(player, None)": {
+                    "conditions": [
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, has_created_new_bead_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ShareBeadArtOnSocialMedia(player, None)": {
+                    "conditions": [
+                        "BEL(player, aims_to_be_recognized_as_pixel_art_creator) = True",
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "BEL(player, wants_to_create_new_designs) = True",
+                        "BEL(player, hopes_to_show_bead_art_to_others) = True",
+                        "BEL(player, enjoys_making_bead_art) = True"
+                    ],
+                    "effects": [
+                        "DES(player, gains_social_media_followers) = True",
+                        "DES(player, receives_feedback_on_bead_art) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "CollaborateWithOtherPixelArtists(player, artist)": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "DES(player, aims_to_be_recognized_as_pixel_art_creator) = True",
+                        "BEL(artist, is_pixel_art_creator) = True",
+                        "DES(artist, is_willing_to_collaborate) = True"
+                    ],
+                    "effects": [
+                        "DES(player, has_collaborated_with_other_pixel_artists) = True",
+                        "BEL(artist, has_collaborated_with_player) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "EnterPixelArtCompetitions(player, None)": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "BEL(player, aims_to_be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, received_positive_feedback) = True",
+                        "DES(player, hopes_to_win_competition) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AttendPixelArtEvents(player, None)": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "BEL(player, aims_to_be_recognized_as_pixel_art_creator) = True",
+                        "DES(player, wants_to_improve_bead_art_technique) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, attends_pixel_art_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SellBeadArt(player, None)": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, has_covered_walls_with_bead_art) = False",
+                        "DES(player, aims_to_be_recognized_as_pixel_art_creator) = True",
+                        "BEL(player, has_money) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GatherMaterials(player, \\)]": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, has_bead_art_materials) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CreateDesign(player, , template, beads)": {
+                    "conditions": [
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "DES(player, wants_to_create_new_designs) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, has_template) = template",
+                        "BEL(player, has_beads) = beads",
+                        "BEL(player, knows_how_to_create_design) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MeltBeads(player, , pegboard)": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, has_melted_beads_together) = True",
+                        "BEL(player, has_experienced_a_sense_of_accomplishment) = True",
+                        "DES(player, hopes_to_show_bead_art_to_others) += 1",
+                        "DES(player, wants_to_improve_bead_art_technique) += 1"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DisplayDesign(player, roommate\\)]": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "DES(player, hopes_to_show_bead_art_to_others) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, has_seen_bead_art_created_by_player) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": []
+                },
+                "SolicitFeedback(player, roommate\\)]": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "DES(player, hopes_to_show_bead_art_to_others) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, received_feedback_on_bead_art) = True",
+                        "DES(player, gains_inspiration_for_new_designs) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ResearchTechniques(player, \\)]": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "DES(player, wants_to_improve_bead_art_technique) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, discovered_new_bead_art_techniques) = True",
+                        "DES(player, wants_to_experiment_with_new_techniques) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Explore(player, online_pixel_art_communities)": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, has_covered_walls_with_bead_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, discovers_new_bead_art_techniques) = True",
+                        "BEL(player, gains_knowledge_about_pixel_art_history) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": []
+                },
+                "Create(player, new_bead_art_designs)": {
+                    "conditions": [
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, has_created_new_bead_art_design) = True",
+                        "DES(player, wants_to_create_new_designs) = False",
+                        "BEL(player, has_improved_bead_art_technique) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Share(player, bead_art_on_social_media)": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "BEL(player, hopes_to_show_bead_art_to_others) = True",
+                        "BEL(player, aims_to_be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, bead_art_has_been_shared_on_social_media) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Join(player, local_art_events)": {
+                    "conditions": [
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "BEL(player, hopes_to_show_bead_art_to_others) = True",
+                        "BEL(player, wants_to_improve_bead_art_technique) = True",
+                        "BEL(player, aims_to_be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "effects": [
+                        "DES(player, gains_exposure_for_bead_art) = True",
+                        "DES(player, meets_other_local_artists) = True",
+                        "BEL(player, has_joined_local_art_scene) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Collaborate(player, with_other_artists)": {
+                    "conditions": [
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(other_artist, enjoys_making_bead_art) = True"
+                    ],
+                    "effects": [
+                        "DES(player, hopes_to_collaborate_with_other_artists) = True",
+                        "DES(other_artist, hopes_to_collaborate_with_other_artists) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Optimize(player, time_management_skills)": {
+                    "conditions": [
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "DES(player, wants_to_improve_bead_art_technique) = True"
+                    ],
+                    "effects": [
+                        "DES(player, wants_to_improve_bead_art_technique) = False",
+                        "BEL(player, efficient_time_management_is_important) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Document(player, bead_art_process)": {
+                    "conditions": [
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True"
+                    ],
+                    "effects": [
+                        "DES(player, has_documented_bead_art_process) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Establish(player, personal_branding_and_marketing_strategy)": {
+                    "conditions": [
+                        "BEL(player, aims_to_be_recognized_as_pixel_art_creator) = True",
+                        "BEL(player, wants_to_showcase_bead_art_to_wider_audience) = True"
+                    ],
+                    "effects": [
+                        "DES(player, wants_to_improve_personal_branding_strategy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Seek(player, expert_opinions_on_bead_art)": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "DES(player, hopes_to_show_bead_art_to_others) = True",
+                        "DES(player, aims_to_be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, gains_expert_input_on_bead_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Exhibit(player, the_bead_art_to_wider_audience)": {
+                    "conditions": [
+                        "BEL(player, show_bead_art_to_others) = True",
+                        "BEL(player, has_covered_walls_with_bead_art) = True"
+                    ],
+                    "effects": [
+                        "DES(player, gains_wider_audience) = True",
+                        "BEL(player, have_exhibited_bead_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AGENT(player)": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy",
+                        "Curiosity",
+                        "Pride",
+                        "Hope",
+                        "Satisfaction",
+                        "Excitement",
+                        "Anticipation",
+                        "Admiration",
+                        "Satisfaction",
+                        "Satisfaction",
+                        "Pride",
+                        "Curiosity",
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope",
+                        "Curiosity",
+                        "Determination",
+                        "Pride",
+                        "Joy",
+                        "Gratification",
+                        "Admiration",
+                        "Hope",
+                        "Excitement",
+                        "Gratification",
+                        "Frustration",
+                        "Hope",
+                        "Satisfaction",
+                        "Pride",
+                        "Hope",
+                        "Curiosity",
+                        "Curiosity",
+                        "Joy",
+                        "Gratification",
+                        "Excitement",
+                        "Admiration",
+                        "Determination",
+                        "Pride",
+                        "Hope",
+                        "Curiosity",
+                        "Hope"
+                    ]
+                },
+                "INTENT(player, improve_bead_art_technique) = True": {
+                    "conditions": [
+                        "BEL(player, bead_art_is_time_consuming) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PracticeBeadArt(player, None)": {
+                    "conditions": [
+                        "BEL(player, enjoys_making_bead_art) = True"
+                    ],
+                    "effects": [
+                        "None -> BEL(player, has_practiced_bead_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ResearchPixelArt(player, Internet)": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, gains_knowledge_on_pixel_art) = True",
+                        "BEL(player, finds_new_artistic_inspiration) = True",
+                        "DES(player, hopes_to_show_bead_art_to_others) = True",
+                        "DES(player, wants_to_improve_bead_art_skill) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "FindBeadArtClasses(player, LocalArtSchool)": {
+                    "conditions": [
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "DES(player, wants_to_improve_bead_art_technique) = True",
+                        "BEL(player, knows_about_local_art_school) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, enrolls_in_bead_art_classes) = True",
+                        "BEL(player, spends_time_learning_bead_art) = True",
+                        "DES(player, improves_bead_art_technique) += 1"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ShowBeadArtToOthers(player, FriendsAndFamily)": {
+                    "conditions": [
+                        "BEL(player, has_covered_walls_with_bead_art) = True",
+                        "DES(player, hopes_to_show_bead_art_to_others) = True"
+                    ],
+                    "effects": [
+                        "DES(player, receives_feedback_from_others) = True",
+                        "BEL(player, gets_recognized_as_a_pixel_artist) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "ParticipateInArtCompetitions(player, LocalArtCompetitions)": {
+                    "conditions": [
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, aims_to_be_recognized_as_pixel_art_creator) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "BEL(player, hopes_to_show_bead_art_to_others) = True",
+                        "DES(player, wants_to_improve_bead_art_technique) = True",
+                        "BEL(LocalArtCompetitions, requires_art_submissions) = True"
+                    ],
+                    "effects": [
+                        "DES(player, receives_feedback_from_art_competitions) = True",
+                        "BEL(player, gains_experience_from_art_competitions) = True",
+                        "BEL(player, gains_recognition_from_art_competitions) = True",
+                        "BEL(player, participates_in_art_competitions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, Initiated, Introducing Topic, Neutral)": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True"
+                    ],
+                    "effects": [
+                        "INTENT(player, create_new_bead_art_designs) = True",
+                        "INTENT(player, show_bead_art_to_others) = True",
+                        "INTENT(player, improve_bead_art_technique) = True",
+                        "INTENT(player, be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "occ_emotion": [
+                        "Initiated, None, Hope, Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Distress(Start, Initiated, Introducing Topic, Neutral)"
+                    ]
+                },
+                "Speak(Initiated, UnderstandingProcess, Seeking Information, Neutral)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "INTENT(player, create_new_bead_art_designs) = True",
+                        "INTENT(player, show_bead_art_to_others) = True",
+                        "INTENT(player, improve_bead_art_technique)= True",
+                        "INTENT(player, be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Initiated, UnderstandingProcess, Seeking Information, Neutral), None, None, None, Fear"
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(Initiated, SharingInterest, Showing Interest, Neutral)": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "BEL(player, has_covered_walls_with_bead_art) = True"
+                    ],
+                    "effects": [
+                        "INTENT(player, create_new_bead_art_designs) = True",
+                        "INTENT(player, show_bead_art_to_others) = True",
+                        "INTENT(player, improve_bead_art_technique) = True",
+                        "INTENT(player, be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "PracticeBeadArt(player, None), None, Satisfaction, Positive, None",
+                        "ResearchPixelArt(player, Internet), None, Curiosity, Positive, None",
+                        "FindBeadArtClasses(player, LocalArtSchool), None, Hope, Positive, None",
+                        "ShowBeadArtToOthers(player, FriendsAndFamily), None, Pride, Positive, None",
+                        "ParticipateInArtCompetitions(player, LocalArtCompetitions), None, Excitement, Positive, None"
+                    ]
+                },
+                "Speak(SharingInterest, HesitantResponse, Hesitant Response, Neutral)": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "DES(player, wants_to_create_new_designs) = True",
+                        "DES(player, hopes_to_show_bead_art_to_others) = True",
+                        "DES(player, wants_to_improve_bead_art_technique) = True",
+                        "INTENT(player, create_new_bead_art_designs) = True",
+                        "INTENT(player, show_bead_art_to_others) = True",
+                        "INTENT(player, improve_bead_art_technique) = True",
+                        "INTENT(player, be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "AGENT(player), None, Hope, Neutral, Fear: False"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(SharingInterest, Appreciation, Compliment, Neutral)": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "DES(player, wants_to_create_new_designs) = True",
+                        "DES(player, hopes_to_show_bead_art_to_others) = True",
+                        "DES(player, wants_to_improve_bead_art_technique) = True",
+                        "INTENT(player, create_new_bead_art_designs) = True",
+                        "INTENT(player, show_bead_art_to_others) = True",
+                        "INTENT(player, improve_bead_art_technique) = True",
+                        "INTENT(player, be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "PracticeBeadArt(player, None), None, Hope, Neutral",
+                        "ResearchPixelArt(player, Internet), None, Interest, Neutral",
+                        "FindBeadArtClasses(player, LocalArtSchool), None, Hope, Neutral",
+                        "ShowBeadArtToOthers(player, FriendsAndFamily), None, Happy-for, Neutral",
+                        "ParticipateInArtCompetitions(player, LocalArtCompetitions), None, Hope, Neutral",
+                        "ShareBeadArtOnSocialMedia(player, None), None, Gratification, Neutral",
+                        "Join(player, local_art_events), None, Joy, Neutral",
+                        "Collaborate(player, with_other_artists), None, Admiration, Neutral",
+                        "Establish(player, personal_branding_and_marketing_strategy), None, Satisfaction, Neutral",
+                        "Seek(player, expert_opinions_on_bead_art), None, Hope, Neutral",
+                        "Exhibit(player, the_bead_art_to_wider_audience), None, Joy, Neutral",
+                        "Speak(SharingInterest, Appreciation, Compliment, Neutral), None, Love, Neutral"
+                    ]
+                },
+                "Speak(HesitantResponse, Agreement, Positive Response, Neutral)": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "INTENT(player, show_bead_art_to_others) = True"
+                    ],
+                    "effects": [
+                        "DES(player, wants_to_create_new_designs) = True",
+                        "DES(player, hopes_to_show_bead_art_to_others) = True",
+                        "DES(player, wants_to_improve_bead_art_technique) = True",
+                        "INTENT(player, be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "occ_emotion": [
+                        "HesitantResponse, Agreement, Positive Response, Neutral",
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Speak(HesitantResponse, Agreement, Hope, Neutral)"
+                    ]
+                },
+                "Speak(SharingInterest, Decline, Negative Response, Neutral)": {
+                    "conditions": [
+                        "BEL(player, loves_pixel_art) = True",
+                        "BEL(player, enjoys_making_bead_art) = True",
+                        "BEL(player, bead_art_is_time_consuming) = True",
+                        "DES(player, wants_to_create_new_designs) = True",
+                        "DES(player, hopes_to_show_bead_art_to_others) = True",
+                        "DES(player, wants_to_improve_bead_art_technique) = True",
+                        "INTENT(player, create_new_bead_art_designs) = True",
+                        "INTENT(player, show_bead_art_to_others) = True",
+                        "INTENT(player, improve_bead_art_technique) = True",
+                        "INTENT(player, be_recognized_as_pixel_art_creator) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "ParticipateInArtCompetitions, Speak(SharingInterest, Decline, Negative Response, Neutral), Disappointment, Neutral"
+                    ]
+                }
+            }
+        },
+        "artist": {
+            "knowledge_base": [
+                "BEL(artist, proficient_in_bead_art) = True",
+                "BEL(artist, enjoys_creating_pixel_art) = True",
+                "DES(artist, create_new_pixel_art) = True",
+                "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                "BEL(artist, the_bead_art_is_popular) = False",
+                "DES(artist, become_popular_through_bead_art) = True"
+            ],
+            "intentions": {
+                "INTENT(artist, find inspiration for new pixel art) = True": {
+                    "action_plan": [
+                        "SearchInspiration(Artist, OnlineResources, Query=\"pixel art inspiration\")",
+                        "BrowseInspiration(Artist, OnlineResources)",
+                        "ChooseInspiration(Artist, InspirationPiece)",
+                        "SketchArt(Artist, Pencil, Paper, InspirationPiece)",
+                        "GatherBeads(Artist, Beads, Equipment)",
+                        "ArrangeBeads(Artist, Beads, Pegboard)",
+                        "MeltBeads(Artist, Beads)",
+                        "InspectArt(Artist, FinishedPixelArt)",
+                        "ShareArt(Artist, Roommate)"
+                    ]
+                },
+                "INTENT(artist, gather beads and equipment) = True": {
+                    "action_plan": [
+                        "CheckBeadSupply(artist, None)",
+                        "GoShopping(artist, store, [\"beads\", \"iron\", \"pegboards\"])",
+                        "Shop(artist, store)",
+                        "Purchase(artist, store, [\"beads\", \"iron\", \"pegboards\"])",
+                        "ReturnHome(artist, None)",
+                        "OrganizeEquipment(artist, None)",
+                        "CreatePixelArt(artist, None)",
+                        "FindFeedback(artist, None)",
+                        "ModifyArtwork(artist, None)",
+                        "ShowcaseArtwork(artist, None)"
+                    ]
+                },
+                "INTENT(artist, start creating new pixel art) = True": {
+                    "action_plan": [
+                        "GATHER_BEADS(artist, None)",
+                        "CHOOSE_DESIRED_PIXEL_ART(artist, None)",
+                        "CREATE_PIXEL_ART(artist, None)",
+                        "SHARE_PIXEL_ART_ON_SOCIAL_MEDIA(artist, None)",
+                        "MONITOR_POPULARITY_LEVEL(artist, None)",
+                        "CREATE_NEW_PIXEL_ART_OR_IMPROVE_EXISTING_ONES(artist, None)"
+                    ]
+                },
+                "INTENT(artist, finish creating new pixel art) = False": {
+                    "action_plan": [
+                        "GATHER_MATERIALS(artist, bead art supplies)",
+                        "SELECT_PIXEL_ART_TEMPLATE(artist, sprite)",
+                        "CREATE_BEAD_ART(artist, sprite)",
+                        "IRON_BEAD_ART(artist, sprite)",
+                        "DISPLAY_BEAD_ART(artist, new_display_area)",
+                        "UPDATE_POPULARITY(artist, bead_art_popularity)",
+                        "INTEND(artist, finish creating new pixel art)"
+                    ]
+                },
+                "INTENT(artist, display new pixel art on social media) = False": {
+                    "action_plan": [
+                        "VerifyBeadSupplies(artist)",
+                        "DecideArtSubject(artist)",
+                        "CreatePixelArt(artist, subject)",
+                        "EvaluateArtQuality(artist)",
+                        "DecideArtPublicationMethod(artist)",
+                        "DisplayArtworkOnSocialMedia(artist)",
+                        "MonitorSocialMediaFeedback(artist)",
+                        "PlanNextArtPiece(artist)"
+                    ]
+                },
+                "INTENT(artist, promote bead art on local craft markets) = False": {
+                    "action_plan": [
+                        "GatherBeads(artist)",
+                        "CreatePixelArt(artist, new_pixel_art)",
+                        "EvaluateMarketDemandLevel(artist, total_pixel_art_inventory)",
+                        "AdjustBeadArtDesign(artist, existing_pixel_art)",
+                        "PromoteBeadArt(artist)",
+                        "EvaluateSuccessLevel(artist, bead_art_sales)",
+                        "RevisePromotionalStrategy(artist)",
+                        "INTENT(artist, promote bead art on local craft markets) = True"
+                    ]
+                },
+                "INTENT(artist, gain recognition for bead art) = False": {
+                    "action_plan": [
+                        "PURCHASE_MATERIALS(artist, bead_store, bead_art_kit)",
+                        "DECIDE_PIXEL_ART_DESIGN(artist, design_book)",
+                        "CREATE_PIXEL_ART(artist, bead_art, chosen_design)",
+                        "DISPLAY_PIXEL_ART(artist, living_room)",
+                        "ASK_ROOMMATE_OPINION(artist, roommate)",
+                        "POST_PIXEL_ART_ON_SOCIAL_MEDIA(artist, internet)",
+                        "CONTINUE_CREATING_PIXEL_ART(artist)"
+                    ]
+                }
+            },
+            "actions": {
+                "PURCHASE_MATERIALS(artist, bead_store, bead_art_kit)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "DECIDE_PIXEL_ART_DESIGN(artist, design_book)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, create_new_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CREATE_PIXEL_ART(artist, bead_art, chosen_design)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True",
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "DES(artist, create_new_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False",
+                        "BEL(artist, the_pixel_art_is_created) = True",
+                        "BEL(artist, has_art_to_display) = True",
+                        "DES(artist, create_new_pixel_art) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "DISPLAY_PIXEL_ART(artist, living_room)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, new_pixel_art_displayed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "ASK_ROOMMATE_OPINION(artist, roommate)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(roommate, present_in_living_room) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, receive_feedback_from_roommate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "POST_PIXEL_ART_ON_SOCIAL_MEDIA(artist, internet)": {
+                    "conditions": [
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = True",
+                        "DES(artist, gain_recognition_for_bead_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "CONTINUE_CREATING_PIXEL_ART(artist)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, create_new_pixel_art) = True",
+                        "DES(artist, become_popular_through_bead_art) = True",
+                        "BEL(artist, the_bead_art_is_popular) += x",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "SearchInspiration(Artist, OnlineResources, Query=\"pixel art inspiration\")": {
+                    "conditions": [
+                        "BEL(Artist, proficient_in_bead_art) = True",
+                        "BEL(Artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BrowseInspiration(Artist, OnlineResources)": {
+                    "conditions": [
+                        "BEL(Artist, enjoys_creating_pixel_art) = True",
+                        "BEL(Artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(Artist, the_bead_art_is_popular) = False"
+                    ],
+                    "effects": [
+                        "BEL(Artist, found_inspiration) = True",
+                        "DES(Artist, create_new_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ChooseInspiration(Artist, InspirationPiece)": {
+                    "conditions": [
+                        "BEL(Artist, proficient_in_bead_art) = True",
+                        "BEL(Artist, have_sufficient_beads_and_equipment) = True",
+                        "DES(Artist, create_new_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(Artist, found_pixel_art_inspiration) = True",
+                        "BEL(Artist, chosen_pixel_art_inspiration) = InspirationPiece"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SketchArt(Artist, Pencil, Paper, InspirationPiece)": {
+                    "conditions": [
+                        "BEL(Artist, proficient_in_bead_art) = True",
+                        "BEL(Artist, enjoys_creating_pixel_art) = True",
+                        "BEL(Artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Artist, plans_exist_for_new_pixel_art) = True",
+                        "BEL(Artist, has_sketch_of_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Inspiration"
+                    ]
+                },
+                "GatherBeads(Artist, Beads, Equipment)": {
+                    "conditions": [
+                        "BEL(Artist, have_sufficient_beads_and_equipment) = False"
+                    ],
+                    "effects": [
+                        "BEL(Artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(Artist, Beads) += Beads",
+                        "BEL(Artist, Equipment) += Equipment"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ArrangeBeads(Artist, Beads, Pegboard)": {
+                    "conditions": [
+                        "BEL(Artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(Artist, enjoys_creating_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(Artist, beads_arranged_on_pegboard) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "MeltBeads(Artist, Beads)": {
+                    "conditions": [
+                        "BEL(Artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Artist, have_sufficient_beads_and_equipment) = False",
+                        "BEL(Artist, the_bead_art_is_popular) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "InspectArt(Artist, FinishedPixelArt)": {
+                    "conditions": [
+                        "BEL(Artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(Artist, enjoys_creating_pixel_art) = True",
+                        "BEL(Artist, proficient_in_bead_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(Artist, satisfied_with_finished_art) = True/False",
+                        "DES(Artist, share_finished_pixel_art) = True if BEL(Artist, satisfied_with_finished_art) = True",
+                        "DES(Artist, create_new_pixel_art) = True if BEL(Artist, satisfied_with_finished_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "ShareArt(Artist, Roommate)": {
+                    "conditions": [
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "BEL(Roommate, interested_in_art) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, receive_feedback_on_art) = True",
+                        "BEL(Roommate, impressed_by_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Approval"
+                    ]
+                },
+                "CheckBeadSupply(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "GoShopping(artist, store, [\"beads\", \"iron\", \"pegboards\"])": {
+                    "conditions": [
+                        "BEL(store, has_items([beads, iron, pegboards]))) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Shop(artist, store)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False",
+                        "BEL(shopkeeper, sells_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, acquire_beads_and_equipment) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Purchase(artist, store, [\"beads\", \"iron\", \"pegboards\"])": {
+                    "conditions": [
+                        "BEL(store, has_items_in_stock, [\"beads\", \"iron\", \"pegboards\"]) = True",
+                        "BEL(artist, have_sufficient_funds, None) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, have_sufficient_funds, None) = False",
+                        "BEL(store, has_items_in_stock, [\"beads\", \"iron\", \"pegboards\"]) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ReturnHome(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "OrganizeEquipment(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, equipment_organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "CreatePixelArt(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, create_new_pixel_art) = False",
+                        "BEL(artist, the_bead_art_is_popular) = ?",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = ?"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "FindFeedback(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, the_bead_art_is_popular) = False"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = True",
+                        "DES(artist, create_new_pixel_art) = True",
+                        "DES(artist, become_popular_through_bead_art) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ModifyArtwork(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, become_popular_through_bead_art) = True",
+                        "DES(artist, become_popular_through_bead_art) = False"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "ShowcaseArtwork(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, the_bead_art_is_popular) = False"
+                    ],
+                    "effects": [
+                        "DES(artist, become_popular_through_bead_art) = True",
+                        "BEL(artist, the_bead_art_is_popular) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "GATHER_BEADS(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CHOOSE_DESIRED_PIXEL_ART(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, create_new_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CREATE_PIXEL_ART(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "DES(artist, create_new_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_created_new_pixel_art) = True",
+                        "BEL(artist, have_used_up_some_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "SHARE_PIXEL_ART_ON_SOCIAL_MEDIA(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "DES(artist, become_popular_through_bead_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "MONITOR_POPULARITY_LEVEL(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, the_bead_art_is_popular) = False"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = popularity_level",
+                        "DES(artist, become_popular_through_bead_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CREATE_NEW_PIXEL_ART_OR_IMPROVE_EXISTING_ONES(artist, None)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "DES(artist, create_new_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, become_popular_through_bead_art) = True",
+                        "BEL(artist, the_bead_art_is_popular) = True",
+                        "DES(artist, improve_existing_pixel_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False",
+                        "BEL(artist, enjoys_creating_pixel_art) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GATHER_MATERIALS(artist, bead art supplies)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SELECT_PIXEL_ART_TEMPLATE(artist, sprite)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, selected_pixel_art_template) = sprite",
+                        "BEL(artist, has_started_creating_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": []
+                },
+                "CREATE_BEAD_ART(artist, sprite)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, last_created_pixel_art) = sprite",
+                        "BEL(artist, bead_art_inventory) -= used_beads",
+                        "DES(artist, improve_bead_art_skill) += experience",
+                        "DES(artist, create_new_pixel_art) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "IRON_BEAD_ART(artist, sprite)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True",
+                        "BEL(artist, the_bead_art_is_popular) = False"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True",
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "DES(artist, create_new_pixel_art) = True",
+                        "DES(artist, become_popular_through_bead_art) = True",
+                        "BEL(artist, the_bead_art_is_popular) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "DISPLAY_BEAD_ART(artist, new_display_area)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "INTENT(artist, finish creating new pixel art) = False",
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "BEL(artist, displayed_pixel_art) = new_display_area"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "UPDATE_POPULARITY(artist, bead_art_popularity)": {
+                    "conditions": [
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "DES(artist, become_popular_through_bead_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "INTEND(artist, finish creating new pixel art)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "DES(artist, create_new_pixel_art) = True",
+                        "INTENT(artist, finish creating new pixel art) = False"
+                    ],
+                    "effects": [
+                        "DES(artist, create_new_pixel_art) = False",
+                        "INTENT(artist, finish creating new pixel art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "VerifyBeadSupplies(artist)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DecideArtSubject(artist)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, has_chosen_art_subject) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CreatePixelArt(artist, subject)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "DES(artist, create_new_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_created_new_pixel_art) = True",
+                        "BEL(artist, have_used_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "EvaluateArtQuality(artist)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, bead_art_is_high_quality) = True",
+                        "DES(artist, desire_to_sell_bead_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "DecideArtPublicationMethod(artist)": {
+                    "conditions": [
+                        "BEL(artist, have_new_pixel_art_to_display) = True",
+                        "BEL(artist, have_decided_on_art_publication_method) = False"
+                    ],
+                    "effects": [
+                        "DES(artist, successfully_publish_art_on_social_media) = True",
+                        "BEL(artist, received_at_least_10_positive_feedbacks) = True",
+                        "BEL(artist, received_less_than_10_positive_feedbacks) = True",
+                        "BEL(artist, the_bead_art_is_popular) = True",
+                        "BEL(artist, the_bead_art_is_popular) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DisplayArtworkOnSocialMedia(artist)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "INTENT(artist, display new pixel art on social media) = True",
+                        "DES(artist, become_popular_through_bead_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "MonitorSocialMediaFeedback(artist)": {
+                    "conditions": [
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "INTENT(artist, display new pixel art on social media) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = True/False",
+                        "DES(artist, create_new_pixel_art) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "PlanNextArtPiece(artist)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, the_bead_art_is_popular) = False"
+                    ],
+                    "effects": [
+                        "DES(artist, create_new_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GatherBeads(artist)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False"
+                    ],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CreatePixelArt(artist, new_pixel_art)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, has_created_new_pixel_art)",
+                        "BEL(artist, knowledge_of_new_pixel_art)"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EvaluateMarketDemandLevel(artist, total_pixel_art_inventory)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, the_bead_art_is_popular) = False"
+                    ],
+                    "effects": [
+                        "DES(artist, become_popular_through_bead_art) = True",
+                        "BEL(artist, the_bead_art_is_popular) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AdjustBeadArtDesign(artist, existing_pixel_art)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "DES(artist, create_new_pixel_art) = True",
+                        "DES(artist, become_popular_through_bead_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = True",
+                        "DES(artist, create_new_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "PromoteBeadArt(artist)": {
+                    "conditions": [
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "INTENT(artist, promote bead art on local craft markets) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = True",
+                        "DES(artist, increase bead art production) = True",
+                        "DES(artist, attend local craft markets) = True",
+                        "DES(artist, improve public speaking skills) = True",
+                        "DES(artist, collaborate with other bead artists) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "hope"
+                    ]
+                },
+                "EvaluateSuccessLevel(artist, bead_art_sales)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "DES(artist, become_popular_through_bead_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "RevisePromotionalStrategy(artist)": {
+                    "conditions": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "INTENT(artist, promote bead art on local craft markets) = True",
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "DES(artist, become_popular_through_bead_art) = True"
+                    ],
+                    "effects": [
+                        "DES(artist, become_popular_through_bead_art) = False",
+                        "BEL(artist, the_bead_art_is_popular) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "INTENT(artist, promote bead art on local craft markets) = True": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "DES(artist, create_new_pixel_art) = True",
+                        "DES(artist, become_popular_through_bead_art) = True",
+                        "INTENT(artist, promote_bead_art_on_local_craft_markets) = False"
+                    ],
+                    "effects": [
+                        "INTENT(artist, promote_bead_art_on_local_craft_markets) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, Initiated, Introducing Topic, Neutral)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = True",
+                        "INTENT(artist, finish_creating_new_pixel_art) = True",
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "DES(artist, become_popular_through_bead_art) = True",
+                        "INTENT(artist, gather_beads_and_equipment) = False"
+                    ],
+                    "occ_emotion": [
+                        "Start, Initiated, Introducing Topic, Neutral, \"Hey there! I see you checking out my walls, what do you think of my pixel art?\"",
+                        "Initiated,_,_,Joy, _"
+                    ],
+                    "emotion_condition": [
+                        "Initiated, , , Hope, Joy"
+                    ]
+                },
+                "Speak(Initiated, ExplainingProcess, Sharing Information, Neutral)": {
+                    "conditions": [
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "INTENT(artist, create_new_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "INTENT(artist, find_inspiration_for_new_pixel_art) = True",
+                        "INTENT(artist, gather_beads_and_equipment) = True",
+                        "INTENT(artist, start_creating_new_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(ExplainingProcess, None, Satisfaction, Neutral, \"I'm pleased with having shared my knowledge about bead-based pixel art.\")"
+                    ],
+                    "emotion_condition": [
+                        "Initiated, ExplainingProcess, Sharing Information, Neutral",
+                        "Joy"
+                    ]
+                },
+                "Speak(ExplainingProcess, CasuallyMentioning, Information Sharing, Neutral)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(artist, the_bead_art_is_popular) = False",
+                        "BEL(artist, proficient_in_bead_art) = True",
+                        "BEL(artist, enjoys_creating_pixel_art) = True",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "DES(artist, create_new_pixel_art) = True",
+                        "DES(artist, become_popular_through_bead_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Speak(ExplainingProcess, CasuallyMentioning, Information Sharing, Neutral, Joy)",
+                        "Speak(ExplainingProcess, CasuallyMentioning, Information Sharing, Neutral, Gratification)"
+                    ]
+                },
+                "Speak(CasuallyMentioning, ShowingOff, Boasting, Confident)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(artist, have_sufficient_beads_and_equipment) = True",
+                        "INTENT(artist, gather_beads_and_equipment)",
+                        "BEL(artist, have_sufficient_beads_and_equipment) = False",
+                        "INTENT(artist, start_creating_new_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "ContinueCreatingPixelArt(None, None, None)",
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Gratification",
+                        "Hope",
+                        "Joy"
+                    ]
+                },
+                "Speak(ShowingOff, End, Expressing Passion, Enthusiastic)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "None, DecideArtSubject, Hope, Neutral"
+                    ]
+                }
+            }
+        },
+        "roommate": {
+            "knowledge_base": [
+                "BEL(roommate, likes_pixel_art)",
+                "BEL(roommate, finds_bead_art_tacky)",
+                "BEL(roommate, doesn't_have_time_for_crafts)",
+                "DES(roommate, have_nice_decor)",
+                "DES(roommate, avoid_confrontation)",
+                "DES(roommate, save_money)"
+            ],
+            "intentions": {
+                "INTENT(roommate, improve_home_decor) = True, DES(roommate, have_nice_decor)": {
+                    "action_plan": [
+                        "TalkTo(player, roommate)",
+                        "Research(online, home decoration ideas)",
+                        "DiscussOptions(roommate, artist)",
+                        "OfferAssistance(roommate, player)",
+                        "Compromise(roommate, player)"
+                    ]
+                },
+                "INTENT(roommate, avoid_confrontation) = True, DES(roommate, avoid_confrontation)": {
+                    "action_plan": [
+                        "CheckSchedule(roommate, None)",
+                        "CheckSavings(roommate, None)",
+                        "LookForDesignIdeas(roommate, internet)",
+                        "SuggestDecorChange(roommate, player, design_ideas)",
+                        "ListenToPlayerResponse(roommate, player)",
+                        "CompromiseDesigns(roommate, player)",
+                        "AgreeOnDecorationChanges(roommate, player)",
+                        "ContributeToDecorationChange(roommate, player, agreed_responsibilities)",
+                        "EnjoyNewDecor(roommate, player)"
+                    ]
+                },
+                "INTENT(roommate, save_money) = True, DES(roommate, save_money)": {
+                    "action_plan": [
+                        "Complain(roommate, player, BEL(player, makes_bead_art))",
+                        "Buy_decor(roommate, self, DES(roommate, have_nice_decor))",
+                        "Hide_bead_art(roommate, self, BEL(player, stores_bead_art_in_shelves))",
+                        "Offer_alternate_art(roommate, player, DES(roommate, have_nice_decor), BEL(roommate, likes_pixel_art))",
+                        "Set_up_purchase_criteria(roommate, self, DES(roommate, save_money))"
+                    ]
+                }
+            },
+            "actions": {
+                "Complain(roommate, player, BEL(player, makes_bead_art))": {
+                    "conditions": [
+                        "BEL(roommate, finds_bead_art_tacky) = True",
+                        "DES(roommate, have_nice_decor) = True",
+                        "DES(roommate, avoid_confrontation) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, makes_bead_art) = True",
+                        "DES(roommate, save_money) = False",
+                        "DES(roommate, have_nice_decor) = False",
+                        "DES(roommate, avoid_confrontation) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disapproval"
+                    ],
+                    "emotion_condition": [
+                        "Dislike",
+                        "Distress"
+                    ]
+                },
+                "Buy_decor(roommate, self, DES(roommate, have_nice_decor))": {
+                    "conditions": [
+                        "DES(roommate, have_nice_decor) = True",
+                        "BEL(roommate, likes_pixel_art) = False"
+                    ],
+                    "effects": [
+                        "DES(roommate, save_money) = DES(roommate, save_money) + 1",
+                        "BEL(roommate, finds_bead_art_tacky) = BEL(roommate, finds_bead_art_tacky) + 1",
+                        "BEL(roommate, likes_pixel_art) = BEL(roommate, likes_pixel_art) -1",
+                        "DES(roommate, have_nice_decor) = DES(roommate, have_nice_decor) + 1"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Desire"
+                    ]
+                },
+                "Hide_bead_art(roommate, self, BEL(player, stores_bead_art_in_shelves))": {
+                    "conditions": [
+                        "BEL(player, stores_bead_art_in_shelves) = True"
+                    ],
+                    "effects": [
+                        "BEL(player, stores_bead_art_in_shelves) = False",
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "DES(roommate, have_nice_decor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Offer_alternate_art(roommate, player, DES(roommate, have_nice_decor), BEL(roommate, likes_pixel_art))": {
+                    "conditions": [
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "BEL(player, makes_bead_art) = True",
+                        "DES(roommate, have_nice_decor) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, finds_bead_art_tacky) = False",
+                        "BEL(roommate, likes_pixel_art_alternative) = True"
+                    ],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "Happy-for"
+                    ]
+                },
+                "Set_up_purchase_criteria(roommate, self, DES(roommate, save_money))": {
+                    "conditions": [
+                        "DES(roommate, save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, needs_new_furniture) = True",
+                        "BEL(roommate, maximum_budget) = 200",
+                        "BEL(roommate, minimum_size) = \"30x30\"",
+                        "BEL(roommate, preferred_colors) = [\"Neutral\", \"Earth tones\"",
+                        "BEL(roommate, needs_delivery) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TalkTo(player, roommate)": {
+                    "conditions": [
+                        "BEL(roommate, likes_pixel_art) = False",
+                        "BEL(roommate, finds_bead_art_tacky) = False",
+                        "BEL(roommate, doesn't_have_time_for_crafts) = False"
+                    ],
+                    "effects": [
+                        "BEL(roommate, likes_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction",
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Research(online, home decoration ideas)": {
+                    "conditions": [
+                        "BEL(roommate, doesn't_have_time_for_crafts) = True",
+                        "DES(roommate, have_nice_decor) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, has_ideas_for_home_decor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "DiscussOptions(roommate, artist)": {
+                    "conditions": [
+                        "BEL(roommate, likes_pixel_art) = False",
+                        "BEL(roommate, finds_bead_art_tacky) = False"
+                    ],
+                    "effects": [
+                        "DES(roommate, have_nice_decor) = True",
+                        "BEL(roommate, interested_in_pixel_art) = True",
+                        "BEL(roommate, knows_artists) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "OfferAssistance(roommate, player)": {
+                    "conditions": [
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "BEL(roommate, doesn't_have_time_for_crafts) = False",
+                        "DES(roommate, have_nice_decor) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, offered_assistance) = True",
+                        "DES(roommate, save_money) = True",
+                        "DES(roommate, avoid_confrontation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Compromise(roommate, player)": {
+                    "conditions": [
+                        "BEL(roommate, finds_bead_art_tacky) = True",
+                        "BEL(roommate, likes_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "DES(roommate, have_nice_decor) = True"
+                    ],
+                    "occ_emotion": [
+                        "relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckSchedule(roommate, None)": {
+                    "conditions": [
+                        "BEL(roommate, doesn't_have_time_for_crafts) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckSavings(roommate, None)": {
+                    "conditions": [
+                        "BEL(roommate, doesn't_have_time_for_crafts) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "LookForDesignIdeas(roommate, internet)": {
+                    "conditions": [
+                        "BEL(roommate, have_nice_decor) = False",
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "BEL(roommate, finds_bead_art_tacky) = True",
+                        "BEL(roommate, doesn't_have_time_for_crafts) = False"
+                    ],
+                    "effects": [
+                        "BEL(roommate, have_nice_decor) = True",
+                        "BEL(roommate, likes_design_ideas) = True",
+                        "DES(roommate, save_money) = -10"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SuggestDecorChange(roommate, player, design_ideas)": {
+                    "conditions": [
+                        "BEL(roommate, find_bead_art_tacky) = True",
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "DES(roommate, have_nice_decor) = True",
+                        "DES(roommate, avoid_confrontation) = True",
+                        "DES(roommate, save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, suggested_decor) = design_ideas",
+                        "BEL(player, received_decor_suggestion_from) = roommate"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ListenToPlayerResponse(roommate, player)": {
+                    "conditions": [
+                        "BEL(roommate, avoid_confrontation) = True",
+                        "BEL(player, expressed_opinion) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, compromise_possible) = True",
+                        "DES(roommate, compromise_player_opinion) = True",
+                        "DES(roommate, compromise_orig_design) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "CompromiseDesigns(roommate, player)": {
+                    "conditions": [
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "BEL(roommate, finds_bead_art_tacky) = False",
+                        "DES(roommate, avoid_confrontation) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "BEL(roommate, finds_bead_art_tacky) = True",
+                        "DES(roommate, have_nice_decor) = True",
+                        "DES(roommate, save_money) = True"
+                    ],
+                    "occ_emotion": [
+                        "satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Compromise"
+                    ]
+                },
+                "AgreeOnDecorationChanges(roommate, player)": {
+                    "conditions": [
+                        "BEL(roommate, finds_bead_art_tacky) = True",
+                        "DES(roommate, have_nice_decor) = True",
+                        "BEL(player, likes_pixel_art) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, finds_bead_art_tacky) = False",
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "BEL(player, agrees_with_decoration_changes) = True",
+                        "DES(roommate, save_money) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "ContributeToDecorationChange(roommate, player, agreed_responsibilities)": {
+                    "conditions": [
+                        "BEL(roommate, have_nice_decor) = True",
+                        "BEL(player, has_bead_art) = True",
+                        "BEL(player, willing_to_change_decor) = True",
+                        "DES(roommate, avoid_confrontation) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, have_nice_decor) = True",
+                        "BEL(player, satisfied_with_decor) = True",
+                        "DES(roommate, save_money) = True",
+                        "DES(roommate, contribute_to_decor_change) = True",
+                        "DES(player, happy_with_new_decor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "EnjoyNewDecor(roommate, player)": {
+                    "conditions": [
+                        "BEL(roommate, have_nice_decor) = False",
+                        "BEL(player, enjoys_pixel_art) = True",
+                        "BEL(roommate, finds_bead_art_tacky) = False",
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "DES(roommate, avoid_confrontation) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, have_nice_decor) = True",
+                        "DES(roommate, avoid_confrontation) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, Initiated, Asking about Pixel Art, Neutral)": {
+                    "conditions": [
+                        "BEL(roommate, likes_pixel_art) = False",
+                        "BEL(roommate, finds_bead_art_tacky) = False",
+                        "BEL(roommate, doesn't_have_time_for_crafts) = False",
+                        "DES(roommate, have_nice_decor) = True",
+                        "DES(roommate, avoid_confrontation) = True",
+                        "DES(roommate, save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "DES(roommate, have_nice_decor) = False",
+                        "DES(roommate, save_money) = False",
+                        "BEL(roommate, finds_bead_art_tacky) = True",
+                        "BEL(roommate, doesn't_have_time_for_crafts) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Initiated, End, Sharing Interests, Neutral)",
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(Initiated, ExplainingProcess, Sharing Information, Neutral)": {
+                    "conditions": [
+                        "BEL(roommate, likes_pixel_art) = False",
+                        "BEL(roommate, finds_bead_art_tacky) = True",
+                        "BEL(roommate, doesn't_have_time_for_crafts) = False",
+                        "DES(roommate, have_nice_decor) = True",
+                        "DES(roommate, avoid_confrontation) = True",
+                        "DES(roommate, save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, likes_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Speak(ExplainingProcess, None, Satisfaction, Neutral)"
+                    ]
+                },
+                "Speak(ExplainingProcess, B_impressed, Impressed Response, Neutral)": {
+                    "conditions": [
+                        "BEL(roommate, likes_pixel_art) = False",
+                        "BEL(roommate, finds_bead_art_tacky) = True",
+                        "BEL(roommate, doesn't_have_time_for_crafts) = False",
+                        "DES(roommate, have_nice_decor) = True",
+                        "INTENT(roommate, avoid_confrontation) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "BEL(roommate, finds_bead_art_tacky) = False",
+                        "INTENT(roommate, improve_home_decor) = True"
+                    ],
+                    "occ_emotion": [
+                        "B_impressed, None, Joy, Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(B_impressed, B_curious, Curious Inquiry, Neutral)": {
+                    "conditions": [
+                        "BEL(roommate, likes_pixel_art) = False",
+                        "DES(roommate, have_nice_decor) = True",
+                        "DES(roommate, save_money) = True",
+                        "INTENT(roommate, avoid_confrontation) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, finds_bead_art_tacky) = True"
+                    ],
+                    "occ_emotion": [
+                        "B_curious, None, Curious Inquiry, Neutral, Fear"
+                    ],
+                    "emotion_condition": [
+                        "None, None, None, None"
+                    ]
+                },
+                "Speak(B_curious, A_excited, Excitement Response, Neutral)": {
+                    "conditions": [
+                        "BEL(roommate, finds_bead_art_tacky) = True",
+                        "DES(roommate, avoid_confrontation) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "B_excited, None, Joy, Neutral"
+                    ],
+                    "emotion_condition": [
+                        "LookForDesignIdeas(None, None, JOY, None)",
+                        "Complain(roommate, player, DISTRESS(player, makes_bead_art), None, \"I don't like that you plastered the walls with pixel art. It doesn't suit my taste.\")",
+                        "OfferAssistance(roommate, player, HAPPY_FOR(player, makes_bead_art), None, \"Wow, these bead art pieces are great! You're really talented at this.\")",
+                        "Buy_decor(roommate, self, PITY(player, lacks_decor), None, \"I feel sorry that you haven't decorated your place much. Let me buy some things to help you out.\")",
+                        "SuggestDecorChange(roommate, player, DESIGN_IDEAS, GLOATING(player, lacks_decor), \"You clearly need my help in decorating. Luckily, I have excellent taste and can offer some ideas.\")",
+                        "Hide_bead_art(roommate, self, RESENTMENT(player, makes_bead_art), None, \"I'm putting your bead art in a cupboard. I don't want it on display anymore.\")",
+                        "DiscussOptions(roommate, artist, HOPE, None, \"I think we have some great design options here. Let's discuss them fully and make a plan.\")",
+                        "Set_up_purchase_criteria(roommate, self, FEAR(None, None), None, \"I need to figure out a way to save money for our redecorating plans. I have some criteria in mind that I need to follow.\")",
+                        "AgreeOnDecorationChanges(roommate, player, SATISFACTION(None, None), None, \"I'm satisfied with our plans for the redecoration. I can't wait to see how it turns out!\")",
+                        "CheckSavings(roommate, None, FEARS_CONFIRMED(None, None), None, \"My savings aren't looking as good as I hoped. This isn't good news for the redecoration plans.\")",
+                        "Compromise(roommate, player, RELIEF(None, None), None, \"I'm relieved we can come to a compromise about the design options. It will save money and look great.\")",
+                        "DiscussOptions(roommate, artist, DISAPPOINTMENT(None, None), None, \"I'm really disappointed that the design options we wanted ended up not working out. Let's try to come up with something new.\")",
+                        "ContributeToDecorationChange(roommate, player, PRIDE(None, None), None, \"I'm really proud of the contribution I made towards the redecoration. It looks great.\")",
+                        "CheckSchedule(roommate, None, SHAME(None, None), None, \"I'm ashamed that I forgot about our redecoration plans due to my busy schedule. I need to prioritize better.\")",
+                        "ListenToPlayerResponse(roommate, player, ADMIRATION(None, None), None, \"I admire your creativity in making these unique bead art pieces. They're amazing!\")",
+                        "Offer_alternate_art(roommate, player, DES(roommate, have_nice_decor), REPROACH(player, makes_bead_art), \"Instead of the pixel art, why don't we put up some nice framed prints or landscapes? They're more universal and more conducive to good decor.\")",
+                        "CompromiseDesigns(roommate, player, GRATIFICATION(None, None), None, \"I'm really gratified we were able to come up with a new design that both looks great and saves money.\")",
+                        "Offer_alternate_art(roommate, player, DES(roommate, have_nice_decor), REMORSE(None, None), \"I'm really regretful about not being able to appreciate your pixel art. I'll try to be more open-minded in the future.\")",
+                        "EnjoyNewDecor(roommate, player, GRATITUDE(None, None), None, \"I'm really grateful to you for suggesting these changes to the decor. It looks amazing!\")",
+                        "Buy_decor(roommate, self, ANGER(player, makes_bead_art), None, \"I'm fed up with this pixel art. I'm buying new decor right away to replace it.\")",
+                        "CheckSchedule(roommate, None, LOVE(None, None), None, \"I love this picture on the wall. It's really appealing to me.\")",
+                        "CheckSchedule(roommate, None, HATE(None, None), None, \"I hate this old lamp. It's really unappealing and outdated.\")"
+                    ]
+                },
+                "Speak(A_excited, B_skeptical, Skeptical Response, Neutral)": {
+                    "conditions": [
+                        "BEL(roommate, finds_bead_art_tacky) = False",
+                        "DES(roommate, have_nice_decor) = True",
+                        "DES(roommate, avoid_confrontation) = True",
+                        "INTENT(roommate, save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, likes_pixel_art) = True"
+                    ],
+                    "occ_emotion": [
+                        "B_skeptical, None, Disappointment, Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Complain(roommate, player, BEL(player, makes_bead_art)), None, None, None, None",
+                        "Joy], [Distress], [Resentment], [Anger], [Pity], [Disappointment], [Fear-confirmed], [Relief], [Hope], [Satisfaction], [Gratification], [Fears-confirmed], [Shame], [Pride], [Reproach], [Admiration], [Gratitude], [Love], [Hate",
+                        "Buy_decor(roommate, self, DES(roommate, have_nice_decor)), None, None, None, None",
+                        "Joy], [Hope",
+                        "Hide_bead_art(roommate, self, BEL(player, stores_bead_art_in_shelves)), None, None, None, None",
+                        "Fear], [Relief], [Joy",
+                        "Offer_alternate_art(roommate, player, DES(roommate, have_nice_decor), BEL(roommate, likes_pixel_art)), None, None, None, None",
+                        "Joy], [Hope], [Happy-for], [Admiration], [Love",
+                        "Set_up_purchase_criteria(roommate, self, DES(roommate, save_money)), None, None, None, None",
+                        "Hope], [Fear], [Joy], [Distress",
+                        "TalkTo(player, roommate), None, None, None, None",
+                        "Joy], [Happy-for], [Admiration], [Love",
+                        "Research(online, home decoration ideas), None, None, None, None",
+                        "Joy], [Happy-for], [Admiration], [Love], [Hope",
+                        "DiscussOptions(roommate, artist), None, None, None, None",
+                        "Joy], [Happy-for], [Admiration], [Love",
+                        "OfferAssistance(roommate, player), None, None, None, None",
+                        "Joy], [Happy-for], [Admiration], [Love",
+                        "Compromise(roommate, player), None, None, None, None",
+                        "Joy], [Admiration], [Satisfaction",
+                        "CheckSchedule(roommate, None), None, None, None, None",
+                        "Hope], [Fear], [Joy], [Distress",
+                        "CheckSavings(roommate, None), None, None, None, None",
+                        "Hope], [Fear], [Joy], [Distress",
+                        "LookForDesignIdeas(roommate, internet), None, None, None, None",
+                        "Joy], [Happy-for], [Admiration], [Love], [Hope",
+                        "SuggestDecorChange(roommate, player, design_ideas), None, None, None, None",
+                        "Joy], [Happy-for], [Admiration], [Love",
+                        "ListenToPlayerResponse(roommate, player), None, None, None, None",
+                        "Joy], [Happy-for], [Admiration], [Love], [Pride",
+                        "CompromiseDesigns(roommate, player), None, None, None, None",
+                        "Joy], [Admiration], [Satisfaction",
+                        "AgreeOnDecorationChanges(roommate, player), None, None, None, None",
+                        "Joy], [Admiration], [Love], [Satisfaction",
+                        "ContributeToDecorationChange(roommate, player, agreed_responsibilities), None, None, None, None",
+                        "Joy], [Admiration], [Love], [Satisfaction",
+                        "EnjoyNewDecor(roommate, player), None, None, None, None",
+                        "Joy], [Happy-for], [Admiration], [Love], [Gratification"
+                    ]
+                },
+                "Speak(B_skeptical, End, Reassuring Response, Neutral)": {
+                    "conditions": [
+                        "BEL(roommate, likes_pixel_art) = False",
+                        "BEL(roommate, finds_bead_art_tacky) = False",
+                        "BEL(roommate, doesn't_have_time_for_crafts) = False",
+                        "DES(roommate, have_nice_decor) = True",
+                        "INTENT(roommate, avoid_confrontation) = True",
+                        "INTENT(roommate, save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(roommate, likes_pixel_art) = True",
+                        "BEL(roommate, finds_bead_art_tacky) = False",
+                        "BEL(roommate, doesn't_have_time_for_crafts) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "CheckSchedule(None), None, None, Neutral, None",
+                        "CheckSavings(None), None, None, Neutral, None",
+                        "Complain(roommate, player, BEL(player, makes_bead_art)), None, Displeased about, Neutral, None",
+                        "Buy_decor(roommate, self, DES(roommate, have_nice_decor)), None, Pleased about, Neutral, None",
+                        "Hide_bead_art(roommate, self, BEL(player, stores_bead_art_in_shelves)), None, Displeased about, Neutral, None",
+                        "Offer_alternate_art(roommate, player, DES(roommate, have_nice_decor), BEL(roommate, likes_pixel_art)), None, Pleased about, Neutral, None",
+                        "Set_up_purchase_criteria(roommate, self, DES(roommate, save_money)), None, Pleased about, Neutral, None",
+                        "TalkTo(player, roommate), None, Neutral, Neutral, None",
+                        "Research(online, home decoration ideas), None, Pleased about, Neutral, None",
+                        "DiscussOptions(roommate, artist), None, Pleased about, Neutral, None",
+                        "OfferAssistance(roommate, player), None, Pleased about, Neutral, None",
+                        "Compromise(roommate, player), None, Neutral, Neutral, None",
+                        "LookForDesignIdeas(roommate, internet), None, Pleased about, Neutral, None",
+                        "SuggestDecorChange(roommate, player, design_ideas), None, Pleased about, Neutral, None",
+                        "ListenToPlayerResponse(roommate, player), None, Neutral, Neutral, None",
+                        "CompromiseDesigns(roommate, player), None, Neutral, Neutral, None",
+                        "AgreeOnDecorationChanges(roommate, player), None, Pleased about, Neutral, None",
+                        "ContributeToDecorationChange(roommate, player, agreed_responsibilities), None, Pleased about, Neutral, None",
+                        "EnjoyNewDecor(roommate, player), None, Pleased about, Neutral, None"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, Initiated, Introducing Topic, Neutral, \"Hey there! I see you checking out my walls, what do you think of my pixel art?\">",
+        "<Initiated, ExplainingProcess, Sharing Information, Neutral, \"Its actually not that difficult to make pixel art like this. I use beads and melt them together with an iron. It's a bit time-consuming but it's worth it.\">",
+        "<ExplainingProcess, B_shareExp, Sharing Experience, Neutral, \"Oh, I've done something similar before! But instead of beads, I used clay to create tiny sculptures!\">",
+        "<B_shareExp, A_invite, Sharing Experience, Neutral, \"I think you'd enjoy making some pixel art with beads. Want to try it out sometime?\">",
+        "<A_invite, B_Respond, Hesitant Response, Neutral, \"That sounds like it could be fun, but I'm not sure if I'd be good at it. I'll think about it.\">",
+        "<B_Respond, A_Encourage, Encouraging Response, Neutral, \"Don't worry about being good at it, it's about having fun! Plus, I'd love to teach you how to do it. Whenever you're ready, just let me know.\">",
+        "<A_Encourage, End, Agreement, Neutral, \"Alright, that sounds great. I'll think about it some more and set aside some time to try it out with you.\">"
+    ]
+}

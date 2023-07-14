@@ -1,0 +1,1910 @@
+{
+    "scenario_name": "test_Mike",
+    "scenario_description": "Mike is always taking care of everyone. He carries a first aid kit in his bag and always has snacks. Once, I cut my finger when I was climbing a tree. Mike just pulled out peroxide and a bandage! It's good to have Mike around.",
+    "last_ended": "conditions_effects",
+    "agents": {
+        "Mike": {
+            "knowledge_base": [],
+            "intentions": {
+                "Provide_Aid(Mike, Injured_Character, First_aid_kit)": {
+                    "action_plan": [
+                        "Provide_Aid(Mike, Injured_Character, First_aid_kit)",
+                        "Check_Situation(Mike, Injured_Character)",
+                        "Retrieve_First_Aid_Kit(Mike, First_aid_kit)",
+                        "Administer_First_Aid(Mike, Injured_Character, First_aid_kit)",
+                        "Offer_Snacks(Mike, Injured_Character, Snacks)"
+                    ]
+                },
+                "Offer_Food(Mike, Hungry_Character, Snacks)": {
+                    "action_plan": [
+                        "Check_Bag(Mike, First_aid_kit)",
+                        "Check_Bag(Mike, Snacks)",
+                        "Move(Mike, Player)",
+                        "Offer_Food(Mike, Player, Snacks)",
+                        "Check_Bag(Mike, First_aid_kit)",
+                        "Check_Wound(Player, Cut_Finger)",
+                        "Clean_Wound(Mike, Player, Peroxide)",
+                        "Apply_Bandaid(Mike, Player, Bandage)"
+                    ]
+                },
+                "Carry_First_Aid_Kit(Mike)": {
+                    "action_plan": [
+                        "Retrieve_First_Aid_Kit(Mike, null)",
+                        "Check_Snacks(Mike, null)",
+                        "Go_To_Player(Mike, Player)",
+                        "Examine_Injury(Mike, Player)",
+                        "Disinfect_Wound(Mike, Player, Peroxide)",
+                        "Apply_Bandage(Mike, Player, Bandage)",
+                        "Offer_Snacks(Mike, Player)",
+                        "Stay_With_Player(Mike, Player)",
+                        "Check_Player_Status(Mike, Player)",
+                        "Go_Back_To_Starting_Location(Mike, null)"
+                    ]
+                },
+                "Carry_Snacks(Mike)": {
+                    "action_plan": [
+                        "Check_Inventory(Mike, Snacks)",
+                        "Go_To(Mike, Supermarket)",
+                        "Buy_Items(Mike, Supermarket, Snacks, {Type: 'Healthy', Quantity: 5})",
+                        "Check_Inventory(Mike, First_aid_kit)",
+                        "Go_To(Mike, Pharmacy)",
+                        "Buy_Items(Mike, Pharmacy, First_aid_kit, {Type: 'Bandages', Quantity: 10, Type: 'Peroxide', Quantity: 2, Type: 'Alcohol_swabs', Quantity: 5})",
+                        "Pack_Items(Mike, Bag, Snacks, First_aid_kit)",
+                        "Leave(Mike)"
+                    ]
+                }
+            },
+            "actions": {
+                "Check_Inventory(Mike, Snacks)": {
+                    "conditions": [
+                        "BEL(Mike, has_bag) = True",
+                        "BEL(Mike, bag_contains_snacks) = False"
+                    ],
+                    "effects": [
+                        "BEL(Mike, bag_contains_snacks) = True"
+                    ]
+                },
+                "Go_To(Mike, Supermarket)": {
+                    "conditions": [
+                        "BEL(Mike, At_Home) = True",
+                        "BEL(Mike, Enough_Money) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, At_Home) = False",
+                        "BEL(Mike, At_Supermarket) = True"
+                    ]
+                },
+                "Buy_Items(Mike, Supermarket, Snacks, {Type: 'Healthy', Quantity: 5})": {
+                    "conditions": [
+                        "BEL(Mike, Location) = Supermarket",
+                        "BEL(Supermarket, Inventory[Snacks][Type]) = Healthy",
+                        "BEL(Supermarket, Inventory[Snacks][Quantity]) >= 5"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Inventory[Snacks][Type]) = Healthy",
+                        "BEL(Mike, Inventory[Snacks][Quantity]) = BEL(Mike, Inventory[Snacks][Quantity]) + 5",
+                        "BEL(Supermarket, Inventory[Snacks][Quantity]) = BEL(Supermarket, Inventory[Snacks][Quantity]) - 5"
+                    ]
+                },
+                "Check_Inventory(Mike, First_aid_kit)": {
+                    "conditions": [
+                        "BEL(Mike, Inventory) = True",
+                        "BEL(Mike, First_aid_kit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Mike, First_aid_kit) = True"
+                    ]
+                },
+                "Go_To(Mike, Pharmacy)": {
+                    "conditions": [
+                        "BEL(Mike, At_Home) = False",
+                        "BEL(Mike, At_Pharmacy) = False"
+                    ],
+                    "effects": [
+                        "BEL(Mike, At_Pharmacy) = True"
+                    ]
+                },
+                "Buy_Items(Mike, Pharmacy, First_aid_kit, {Type: 'Bandages', Quantity: 10, Type: 'Peroxide', Quantity: 2, Type: 'Alcohol_swabs', Quantity: 5})": {
+                    "conditions": [
+                        "BEL(Mike, At_Pharmacy) = True",
+                        "BEL(Mike, Enough_Money) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Have_Bandages) = True",
+                        "BEL(Mike, Have_Peroxide) = True",
+                        "BEL(Mike, Have_Alcohol_Swabs) = True",
+                        "BEL(Mike, Have_First_Aid_Kit_Item) = True",
+                        "DES(Mike, Carry_First_Aid_Kit) = True"
+                    ]
+                },
+                "Pack_Items(Mike, Bag, Snacks, First_aid_kit)": {
+                    "conditions": [
+                        "BEL(Mike, Inventory_snacks) = True",
+                        "BEL(Mike, Inventory_first_aid_kit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Bag_contents) = [Snacks, First_aid_kit"
+                    ]
+                },
+                "Leave(Mike)": {
+                    "conditions": [
+                        "BEL(Mike, At_Location, Home) = False",
+                        "BEL(Mike, At_Location, Supermarket) = False",
+                        "BEL(Mike, At_Location, Pharmacy) = False"
+                    ],
+                    "effects": [
+                        "BEL(Mike, At_Location, Home) = True",
+                        "BEL(Mike, Has_Snacks) = False",
+                        "BEL(Mike, Has_First_aid_kit) = False"
+                    ]
+                },
+                "Provide_Aid(Mike, Injured_Character, First_aid_kit)": {
+                    "conditions": [
+                        "BEL(Injured_Character, is_injured) = True",
+                        "BEL(Mike, has_first_aid_kit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Injured_Character, is_injured) = False",
+                        "BEL(Mike, has_first_aid_kit) = False",
+                        "BEL(Mike, helped_someone) = True",
+                        "DES(Mike, be_prepared) = True"
+                    ]
+                },
+                "Check_Situation(Mike, Injured_Character)": {
+                    "conditions": [
+                        "BEL(Injured_Character, Bleeding) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Knows_Situation) = True"
+                    ]
+                },
+                "Retrieve_First_Aid_Kit(Mike, First_aid_kit)": {
+                    "conditions": [
+                        "BEL(Mike, Has_First_Aid_Kit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Has_First_Aid_Kit) = False",
+                        "BEL(Mike, Has_Retrieved_First_Aid) = True",
+                        "BEL(First_aid_kit, Is_Available) = False"
+                    ]
+                },
+                "Administer_First_Aid(Mike, Injured_Character, First_aid_kit)": {
+                    "conditions": [
+                        "BEL(Mike, First_aid_kit) = True",
+                        "BEL(Injured_Character, Bleeding) = True"
+                    ],
+                    "effects": [
+                        "BEL(Injured_Character, Bleeding) = False",
+                        "BEL(Injured_Character, Wound_Healing) = True",
+                        "DES(Mike, Help_someone) = True"
+                    ]
+                },
+                "Offer_Snacks(Mike, Injured_Character, Snacks)": {
+                    "conditions": [
+                        "BEL(Mike, First_aid_kit) = True",
+                        "BEL(Injured_Character, Hungry) = True",
+                        "BEL(Injured_Character, Trusts_Mike) = True",
+                        "DES(Mike, Offer_Snacks) = True"
+                    ],
+                    "effects": [
+                        "DES(Mike, Offered_Snacks) = True",
+                        "BEL(Injured_Character, Full) = True",
+                        "BEL(Injured_Character, Hungry) = False"
+                    ]
+                },
+                "Check_Bag(Mike, First_aid_kit)": {
+                    "conditions": [
+                        "BEL(Mike, Has_First_aid_kit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Checked_First_aid_kit) = True"
+                    ]
+                },
+                "Check_Bag(Mike, Snacks)": {
+                    "conditions": [
+                        "BEL(Mike, Bag_contains_snacks) = True"
+                    ],
+                    "effects": []
+                },
+                "Move(Mike, Player)": {
+                    "conditions": [
+                        "BEL(Mike, has_met_Player) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, at_Player) = True",
+                        "BEL(Mike, has_met_Player) = False"
+                    ]
+                },
+                "Offer_Food(Mike, Player, Snacks)": {
+                    "conditions": [
+                        "BEL(Mike, Carries_Snacks) = True",
+                        "DES(Player, Hungry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Carries_Snacks) = False",
+                        "BEL(Player, Ate_Snacks) = True",
+                        "DES(Player, Not_Hungry) = True"
+                    ]
+                },
+                "Check_Wound(Player, Cut_Finger)": {
+                    "conditions": [
+                        "BEL(Player, Has_Cut_Finger) = True"
+                    ],
+                    "effects": []
+                },
+                "Clean_Wound(Mike, Player, Peroxide)": {
+                    "conditions": [
+                        "BEL(Mike, Has_Peroxide) = True",
+                        "BEL(Player, Has_Cut_Finger) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Has_Peroxide) = False",
+                        "BEL(Player, Clean_Wound) = True",
+                        "DES(Mike, Helped_Player) = True"
+                    ]
+                },
+                "Apply_Bandaid(Mike, Player, Bandage)": {
+                    "conditions": [
+                        "BEL(Player, Cut_Finger) = True",
+                        "BEL(Mike, Bandage) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, Cut_Finger) = False",
+                        "BEL(Player, Healed_Wound) = True",
+                        "DES(Mike, Good_Deeds) = +1"
+                    ]
+                },
+                "Retrieve_First_Aid_Kit(Mike, null)": {
+                    "conditions": [
+                        "BEL(Mike, Has_First_Aid_Kit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Has_First_Aid_Kit) = True"
+                    ]
+                },
+                "Check_Snacks(Mike, null)": {
+                    "conditions": [
+                        "BEL(Mike, Carries_First_Aid_Kit) = True",
+                        "BEL(Mike, Has_Snacks) = False"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Has_Snacks) = True",
+                        "BEL(Mike, Checked_Snacks) = True"
+                    ]
+                },
+                "Go_To_Player(Mike, Player)": {
+                    "conditions": [
+                        "BEL(Mike, Has_Been_Injured(Player)) = False",
+                        "BEL(Mike, Location) = Starting_Location",
+                        "BEL(Player, Is_Injured) = True",
+                        "BEL(Player, Location) != Starting_Location"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Location) = Player_Location",
+                        "BEL(Player, Is_Helped_By) = Mike"
+                    ]
+                },
+                "Examine_Injury(Mike, Player)": {
+                    "conditions": [
+                        "BEL(Player, Injury) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, InjuryDetected) = True",
+                        "BEL(Mike, InjuryLocation) = [Player, Injury"
+                    ]
+                },
+                "Disinfect_Wound(Mike, Player, Peroxide)": {
+                    "conditions": [
+                        "BEL(Mike, Has_Peroxide) = True",
+                        "BEL(Player, Has_Wound) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, Wound_Clean) = True",
+                        "BEL(Mike, Has_Peroxide) = False",
+                        "DES(Mike, Comfort_Player) = True"
+                    ]
+                },
+                "Apply_Bandage(Mike, Player, Bandage)": {
+                    "conditions": [
+                        "BEL(Mike, Carry_First_Aid_Kit) = True",
+                        "BEL(Player, Injured) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, Injured) = False",
+                        "BEL(Bandage, Applied) = True",
+                        "DES(Mike, Help_Player) = True"
+                    ]
+                },
+                "Offer_Snacks(Mike, Player)": {
+                    "conditions": [
+                        "BEL(Player, hasSnacks) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, hasSnacks) = True",
+                        "DES(Mike, showCare) = True"
+                    ]
+                },
+                "Stay_With_Player(Mike, Player)": {
+                    "conditions": [
+                        "BEL(Mike, is_with_player) = False",
+                        "BEL(Player, injured) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, is_with_player) = True",
+                        "DES(Mike, comfort_player) = True"
+                    ]
+                },
+                "Check_Player_Status(Mike, Player)": {
+                    "conditions": [
+                        "BEL(Player, Bleeding) = False",
+                        "BEL(Player, Pain) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, Health) = 100",
+                        "DES(Mike, Help_Player) = False"
+                    ]
+                },
+                "Go_Back_To_Starting_Location(Mike, null)": {
+                    "conditions": [
+                        "BEL(Mike, Has_Started_Moving) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, Has_Started_Moving) = False",
+                        "BEL(Mike, Is_At_Starting_Location) = True"
+                    ]
+                }
+            }
+        },
+        "Player": {
+            "knowledge_base": [
+                "BEL(Player, carries_first_aid_kit) = False",
+                "BEL(Player, enjoys_climbing_trees) = True",
+                "BEL(Player, believes_Mike_is_trustworthy) = True",
+                "DES(Player, getting_help_from_Mike_in_emergencies) = True",
+                "DES(Player, improving_first_aid_skills) = True"
+            ],
+            "intentions": {
+                "INTENT(Player, carry_first_aid_kit) = True": {
+                    "action_plan": [
+                        "GO(Player, home)",
+                        "SEARCH(Player, first_aid_kit)",
+                        "TAKE(Player, first_aid_kit)",
+                        "CHECK(Player, contents_of_first_aid_kit)",
+                        "RESTOCK(Player, missing_items)",
+                        "PUT(Player, first_aid_kit, backpack)",
+                        "GO(Player, outside)"
+                    ]
+                },
+                "INTENT(Player, improve_first_aid_skills) = True": {
+                    "action_plan": [
+                        "Go(Player, to_store, buy_first_aid_kit)",
+                        "Practice(Player, first_aid_techniques, using_first_aid_kit)",
+                        "Research(Player, online, first_aid_knowledge)",
+                        "Attend(Player, first_aid_class, local_community_center)",
+                        "Ask(Player, Mike, for_feedback)",
+                        "Repeat(Player, practice_sessions)"
+                    ]
+                },
+                "INTENT(Player, climb_tree_again) = True": {
+                    "action_plan": [
+                        "INTENT(Player, climb_tree_again) = True",
+                        "Go(Player, Home)",
+                        "Take(Player, First_aid_kit, None)",
+                        "Take(Player, Snacks, None)",
+                        "Go(Player, Tree)",
+                        "Climb(Player, Tree, None)",
+                        "Get_Injured(Player, Tree, None)",
+                        "Use(Player, First_aid_kit, Self)",
+                        "Continue_Climbing(Player, Tree, None)",
+                        "Reach_Top(Player, Tree, None)",
+                        "Climb_Down(Player, Tree, None)",
+                        "Return(Player, First_aid_kit, Home)",
+                        "BEL(Player, forgot_snacks) = True",
+                        "Mike"
+                    ]
+                },
+                "INTENT(Player, seek_help_from_Mike) = True": {
+                    "action_plan": [
+                        "Move(Player, Tree, location)",
+                        "Notice(Player, First_aid_kit, availability)",
+                        "Think(Player, Mike, trustworthiness)",
+                        "Call(Player, Mike, mobile)",
+                        "Wait(Player, Mike, arrival)",
+                        "Explain(Player, accident, Mike)",
+                        "Receive(Player, First_aid_kit, Mike)",
+                        "Apply(Player, Peroxide, wound)",
+                        "Apply(Player, Bandage, wound)",
+                        "Express_gratitude(Player, Mike)"
+                    ]
+                },
+                "INTENT(Player, trust_Mike_in_emergencies) = True": {
+                    "action_plan": [
+                        "Move(Player, Tree)",
+                        "Climb(Player, Tree)",
+                        "Cut(Player, finger)",
+                        "CallOut(Player, Mike)",
+                        "Assess(Mike, Player, injury)",
+                        "Retrieve(Mike, First_aid_kit)",
+                        "Clean(Mike, Player, wound)",
+                        "Bandage(Mike, Player, wound)",
+                        "Offer(Mike, Snacks, Player)",
+                        "Thank(Player, Mike)",
+                        "Watch(Player, Mike)",
+                        "Learn(Player, First_aid)",
+                        "BEL(Player, trust_Mike_in_emergencies) = True"
+                    ]
+                }
+            },
+            "actions": {
+                "Move(Player, Tree)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, at_tree) = True"
+                    ]
+                },
+                "Climb(Player, Tree)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "BEL(Tree, is_within_reach(Player)) = True",
+                        "BEL(Tree, is_stable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, is_on_tree) = True"
+                    ]
+                },
+                "Cut(Player, finger)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, injured_finger) = True",
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = True"
+                    ]
+                },
+                "CallOut(Player, Mike)": {
+                    "conditions": [
+                        "BEL(Player, trusts_Mike) = False",
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, called_out_for_Mike) = True"
+                    ]
+                },
+                "Assess(Mike, Player, injury)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "BEL(Mike, carries_first_aid_kit) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, improving_first_aid_skills) = True",
+                        "BEL(Player, injured) = True",
+                        "BEL(Mike, aware_of_injury) = True"
+                    ]
+                },
+                "Retrieve(Mike, First_aid_kit)": {
+                    "conditions": [
+                        "BEL(Mike, carries_first_aid_kit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "BEL(Mike, carries_first_aid_kit) = False"
+                    ]
+                },
+                "Clean(Mike, Player, wound)": {
+                    "conditions": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "BEL(Mike, carries_first_aid_kit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, wound_clean) = True",
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = False"
+                    ]
+                },
+                "Bandage(Mike, Player, wound)": {
+                    "conditions": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "BEL(Mike, carries_first_aid_kit) = True",
+                        "BEL(Player, injured) = True",
+                        "BEL(Mike, available) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = False",
+                        "BEL(Player, bandaged) = True",
+                        "DES(Player, improving_first_aid_skills) = True",
+                        "BEL(Mike, friendly) = True",
+                        "BEL(Mike, grateful) = True",
+                        "BEL(Player, trusts_Mike_in_emergencies) = True"
+                    ]
+                },
+                "Offer(Mike, Snacks, Player)": {
+                    "conditions": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "DES(Mike, offer_snacks_to_player) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, has_snacks) = True"
+                    ]
+                },
+                "Thank(Player, Mike)": {
+                    "conditions": [
+                        "BEL(Player, trust_Mike_in_emergencies) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, expressing_gratitude_to_Mike) = True"
+                    ]
+                },
+                "Watch(Player, Mike)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "BEL(Player, trust_Mike_in_emergencies) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, improving_first_aid_skills) = True"
+                    ]
+                },
+                "Learn(Player, First_aid)": {
+                    "conditions": [
+                        "BEL(Player, knows_what_first_aid_kit_is) = True",
+                        "BEL(Player, has_access_to_first_aid_kit) = True",
+                        "DES(Player, improving_first_aid_skills) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, knows_first_aid) = True"
+                    ]
+                },
+                "BEL(Player, trust_Mike_in_emergencies) = True": {
+                    "conditions": [
+                        "BEL(Player, enjoying_climbing_trees) = True",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "BEL(Player, carries_first_aid_kit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, trust_Mike_in_emergencies) = True"
+                    ]
+                },
+                "GO(Player, home)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True"
+                    ],
+                    "effects": []
+                },
+                "SEARCH(Player, first_aid_kit)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, has_found_first_aid_kit) = True"
+                    ]
+                },
+                "TAKE(Player, first_aid_kit)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "DES(Player, improving_first_aid_skills) = True"
+                    ]
+                },
+                "CHECK(Player, contents_of_first_aid_kit)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, knows_contents_of_first_aid_kit) = True",
+                        "DES(Player, restocking_missing_items) = True"
+                    ]
+                },
+                "RESTOCK(Player, missing_items)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "BEL(Player, has_missing_items_in_first_aid_kit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, has_missing_items_in_first_aid_kit) = False",
+                        "BEL(Player, carries_first_aid_kit) = True"
+                    ]
+                },
+                "PUT(Player, first_aid_kit, backpack)": {
+                    "conditions": [
+                        "BEL(Player, in_room)",
+                        "BEL(Player, carrying_first_aid_kit) = False",
+                        "BEL(Player, backpack_is_open) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, carrying_first_aid_kit) = True",
+                        "BEL(Player, backpack_is_open) = False"
+                    ]
+                },
+                "GO(Player, outside)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True"
+                    ],
+                    "effects": []
+                },
+                "Go(Player, to_store, buy_first_aid_kit)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True"
+                    ]
+                },
+                "Practice(Player, first_aid_techniques, using_first_aid_kit)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "BEL(Player, improves_first_aid_skills) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "BEL(Player, improves_first_aid_skills) = True"
+                    ]
+                },
+                "Research(Player, online, first_aid_knowledge)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "DES(Player, improving_first_aid_skills) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, has_knowledge_about_first_aid) = True",
+                        "DES(Player, learning_more_about_first_aid) = False"
+                    ]
+                },
+                "Attend(Player, first_aid_class, local_community_center)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "DES(Player, improving_first_aid_skills) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "DES(Player, improving_first_aid_skills) = False"
+                    ]
+                },
+                "Ask(Player, Mike, for_feedback)": {
+                    "conditions": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "DES(Player, improving_first_aid_skills) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, getting_feedback_from_Mike) = True"
+                    ]
+                },
+                "Repeat(Player, practice_sessions)": {
+                    "conditions": [
+                        "BEL(Player, carrying_first_aid_kit) = True",
+                        "DES(Player, improving_first_aid_skills) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, improving_first_aid_skills) = True",
+                        "BEL(Player, carrying_first_aid_kit) = True",
+                        "BEL(Player, carrying_first_aid_kit) = False"
+                    ]
+                },
+                "INTENT(Player, climb_tree_again) = True": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, carrying_first_aid_kit) = True",
+                        "DES(Player, improving_first_aid_skills) = True",
+                        "BEL(Player, forgot_snacks) = True"
+                    ]
+                },
+                "Go(Player, Home)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True"
+                    ]
+                },
+                "Take(Player, First_aid_kit, None)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True"
+                    ]
+                },
+                "Take(Player, Snacks, None)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "BEL(Player, carries_first_aid_kit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, forgot_snacks) = False",
+                        "BEL(Player, carries_snacks) = True"
+                    ]
+                },
+                "Go(Player, Tree)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "BEL(Player, enjoys_climbing_trees) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, at_tree) = True"
+                    ]
+                },
+                "Climb(Player, Tree, None)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, climbed_tree) = True",
+                        "BEL(Player, injured_self) = True"
+                    ]
+                },
+                "Get_Injured(Player, Tree, None)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = True",
+                        "DES(Player, improving_first_aid_skills) = True",
+                        "BEL(Player, injured) = True"
+                    ]
+                },
+                "Use(Player, First_aid_kit, Self)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "BEL(Player, get_injured) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, get_injured) = False",
+                        "DES(Player, improving_first_aid_skills) = True"
+                    ]
+                },
+                "Continue_Climbing(Player, Tree, None)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "BEL(Player, is_injured) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, is_tired) = True",
+                        "BEL(Player, climbed_higher) = True"
+                    ]
+                },
+                "Reach_Top(Player, Tree, None)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "DES(Player, improving_first_aid_skills) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = True",
+                        "BEL(Player, forgot_snacks) = True"
+                    ]
+                },
+                "Climb_Down(Player, Tree, None)": {
+                    "conditions": [
+                        "BEL(Player, reached_top_of_tree) = True",
+                        "BEL(Player, injured_in_tree) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, reached_ground_safely) = True",
+                        "BEL(Player, climbed_tree) = False",
+                        "BEL(Player, climbed_down_tree) = True"
+                    ]
+                },
+                "Return(Player, First_aid_kit, Home)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "BEL(Player, forgot_snacks) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "BEL(Player, forgot_snacks) = True"
+                    ]
+                },
+                "BEL(Player, forgot_snacks) = True": {
+                    "conditions": [
+                        "INTENT(Player, climb_tree_again) = True",
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "BEL(Player, forgot_snacks) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, forgot_snacks) = True"
+                    ]
+                },
+                "Mike": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "DES(Player, improving_first_aid_skills) = True",
+                        "BEL(Player, forgot_snacks) = True"
+                    ]
+                },
+                "Move(Player, Tree, location)": {
+                    "conditions": [
+                        "BEL(Player, enjoys_climbing_trees) = True",
+                        "BEL(Tree, location) = Current_Location(Player)"
+                    ],
+                    "effects": [
+                        "BEL(Player, location) = Tree",
+                        "BEL(Player, Previous_location) = Current_Location(Player)"
+                    ]
+                },
+                "Notice(Player, First_aid_kit, availability)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True"
+                    ]
+                },
+                "Think(Player, Mike, trustworthiness)": {
+                    "conditions": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = False"
+                    ],
+                    "effects": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = True"
+                    ]
+                },
+                "Call(Player, Mike, mobile)": {
+                    "conditions": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = True"
+                    ]
+                },
+                "Wait(Player, Mike, arrival)": {
+                    "conditions": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = True",
+                        "INTENT(Player, seek_help_from_Mike) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, believes_Mike_is_here) = True"
+                    ]
+                },
+                "Explain(Player, accident, Mike)": {
+                    "conditions": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, knows_about_Player_accident) = True",
+                        "BEL(Player, explained_accident_to_Mike) = True"
+                    ]
+                },
+                "Receive(Player, First_aid_kit, Mike)": {
+                    "conditions": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = False"
+                    ]
+                },
+                "Apply(Player, Peroxide, wound)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "DES(Player, improving_first_aid_skills) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "DES(Player, improving_first_aid_skills) = False",
+                        "BEL(wound, disinfected) = True",
+                        "BEL(wound, bleeding_stopped) = True"
+                    ]
+                },
+                "Apply(Player, Bandage, wound)": {
+                    "conditions": [
+                        "BEL(Player, carries_first_aid_kit) = True",
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "BEL(Player, enjoying_climbing_trees) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, improving_first_aid_skills) = True",
+                        "BEL(Player, carries_bandages) = False",
+                        "BEL(Player, wound_treated) = True"
+                    ]
+                },
+                "Express_gratitude(Player, Mike)": {
+                    "conditions": [
+                        "BEL(Player, believes_Mike_is_trustworthy) = True",
+                        "INTENT(Player, seek_help_from_Mike) = True"
+                    ],
+                    "effects": [
+                        "DES(Player, getting_help_from_Mike_in_emergencies) = False",
+                        "DES(Player, improving_first_aid_skills) = True",
+                        "DES(Player, expressing_gratitude_towards_Mike) = True"
+                    ]
+                }
+            }
+        },
+        "Tree": {
+            "knowledge_base": [
+                "BEL(Tree, is_standing) = True",
+                "BEL(Tree, is_tall) = True",
+                "BEL(Tree, is_a_tree) = True",
+                "BEL(Tree, has_branches) = True",
+                "BEL(Tree, has_leaves) = True",
+                "DES(Tree, to_use_sunlight_for_photosynthesis) = True",
+                "DES(Tree, to_keep_growing) = True",
+                "DES(Tree, to_provide_shade) = True"
+            ],
+            "intentions": {}
+        },
+        "First_aid_kit": {
+            "knowledge_base": [
+                "BEL(First_aid_kit, contains_peroxide) = True",
+                "BEL(First_aid_kit, contains_bandages) = True",
+                "BEL(First_aid_kit, is_portable) = True",
+                "BEL(First_aid_kit, is_accessible) = True",
+                "BEL(First_aid_kit, has_expiration_date) = True",
+                "BEL(First_aid_kit, expiration_date) = \"2023-01-01\"",
+                "DES(First_aid_kit, be_carried_around) = True",
+                "DES(First_aid_kit, be_replenished_when_empty) = True",
+                "DES(First_aid_kit, be_used_for_medical_purposes) = True"
+            ],
+            "intentions": {
+                "INTENT(First_aid_kit, carry_around) = True": {
+                    "action_plan": [
+                        "pick_up(First_aid_kit, None, None)",
+                        "check_contents(First_aid_kit, None, None)",
+                        "place_in_backpack(First_aid_kit, Mike, None)",
+                        "check_backpack_contents(Mike, None, None)",
+                        "replenish(First_aid_kit, None, None)",
+                        "use(First_aid_kit, Player, injured_body_part)",
+                        "put_away(First_aid_kit, Mike, location_at_home)"
+                    ]
+                },
+                "INTENT(First_aid_kit, replenish_when_empty) = True": {
+                    "action_plan": [
+                        "INTENT(First_aid_kit, replenish_when_empty) = True",
+                        "CheckExpirationDate(First_aid_kit, None)",
+                        "GoToStore(First_aid_kit, Store)",
+                        "SelectItems(First_aid_kit, Store, peroxide, bandages)",
+                        "PayForItems(First_aid_kit, Store, peroxide, bandages)",
+                        "ReturnToStorage(First_aid_kit, None)",
+                        "StoreItems(First_aid_kit, storage_location, peroxide, bandages)"
+                    ]
+                },
+                "INTENT(First_aid_kit, be_used_for_medical_purposes) = True": {
+                    "action_plan": [
+                        "INTENT(First_aid_kit, be_used_for_medical_purposes) = True",
+                        "CheckExpirationDate(First_aid_kit, None)",
+                        "PickUp(First_aid_kit, None)",
+                        "Carry(First_aid_kit, Player)",
+                        "Find(First_aid_kit, Tree)",
+                        "Open(First_aid_kit, None)",
+                        "TakeOut(First_aid_kit, peroxide)",
+                        "Apply(First_aid_kit, peroxide, Player)",
+                        "TakeOut(First_aid_kit, bandage)",
+                        "Apply(First_aid_kit, bandage, Player)",
+                        "Close(First_aid_kit, None)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(First_aid_kit, be_used_for_medical_purposes) = True": {
+                    "conditions": [
+                        "BEL(First_aid_kit, contains_peroxide) = True",
+                        "BEL(First_aid_kit, contains_bandages) = True",
+                        "BEL(First_aid_kit, is_portable) = True",
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, has_expiration_date) = True",
+                        "BEL(First_aid_kit, expiration_date) = \"2023-01-01\""
+                    ],
+                    "effects": [
+                        "DES(First_aid_kit, be_carried_around) = False",
+                        "BEL(First_aid_kit, is_accessible) = False",
+                        "BEL(First_aid_kit, contains_peroxide) = False",
+                        "DES(First_aid_kit, be_replenished_when_empty) = True",
+                        "BEL(Player, has_clean_cut) = True",
+                        "BEL(Player, has_bandage) = True"
+                    ]
+                },
+                "CheckExpirationDate(First_aid_kit, None)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, has_expiration_date) = True",
+                        "BEL(First_aid_kit, expiration_date) = CurrentDate or CurrentDate < BEL(First_aid_kit, expiration_date)"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, is_accessible) = True"
+                    ]
+                },
+                "PickUp(First_aid_kit, None)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, is_being_carried_by) = None",
+                        "BEL(First_aid_kit, is_accessible) = False"
+                    ]
+                },
+                "Carry(First_aid_kit, Player)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, is_portable) = True",
+                        "BEL(Player, is_physical) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, has(First_aid_kit)) = True",
+                        "BEL(First_aid_kit, is_carried_by_player) = True"
+                    ]
+                },
+                "Find(First_aid_kit, Tree)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = False",
+                        "BEL(CharacterWithGoal, has_vision) = True",
+                        "BEL(CharacterWithGoal, knows_how_to_look_for_objects) = True",
+                        "BEL(CharacterWithGoal, has_time_to_search) = True",
+                        "BEL(CharacterWithGoal, is_nearby(Tree)) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, is_accessible) = True"
+                    ]
+                },
+                "Open(First_aid_kit, None)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, is_open) = False"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, is_open) = True",
+                        "DES(First_aid_kit, be_inspected) = True"
+                    ]
+                },
+                "TakeOut(First_aid_kit, peroxide)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, contains_peroxide) = True",
+                        "BEL(First_aid_kit, is_open) = False"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, contains_peroxide) = True",
+                        "BEL(First_aid_kit, is_open) = False",
+                        "BEL(First_aid_kit, contains_peroxide) = False",
+                        "BEL(First_aid_kit, held_by_agent) = First_aid_kit"
+                    ]
+                },
+                "Apply(First_aid_kit, peroxide, Player)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, contains_peroxide) = True",
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(Player, has_cut) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, cut_disinfected) = True",
+                        "BEL(First_aid_kit, contains_peroxide) = False"
+                    ]
+                },
+                "TakeOut(First_aid_kit, bandage)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, contains_bandages) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, contains_bandages) = False",
+                        "DES(First_aid_kit, be_replenished_when_empty) = True"
+                    ]
+                },
+                "Apply(First_aid_kit, bandage, Player)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, contains_bandages) = True",
+                        "BEL(Player, has_cut) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, has_bandage_on_cut) = True",
+                        "DES(First_aid_kit, be_replenished_when_empty) = True",
+                        "BEL(First_aid_kit, contains_bandages) = False"
+                    ]
+                },
+                "Close(First_aid_kit, None)": {
+                    "conditions": [
+                        "DES(First_aid_kit, be_used_for_medical_purposes) = True",
+                        "BEL(First_aid_kit, is_open) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, is_open) = False"
+                    ]
+                },
+                "pick_up(First_aid_kit, None, None)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, is_portable) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, is_held_by) = First_aid_kit",
+                        "BEL(First_aid_kit, is_accessible) = False"
+                    ]
+                },
+                "check_contents(First_aid_kit, None, None)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, has_expiration_date) = True",
+                        "BEL(First_aid_kit, expiration_date) > CurrentDate"
+                    ],
+                    "effects": [
+                        "DES(First_aid_kit, be_inspected) = True",
+                        "BEL(First_aid_kit, contains_peroxide) = True/False",
+                        "BEL(First_aid_kit, contains_bandages) = True/False"
+                    ]
+                },
+                "place_in_backpack(First_aid_kit, Mike, None)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_portable) = True",
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "DES(First_aid_kit, be_carried_around) = True"
+                    ],
+                    "effects": [
+                        "BEL(Mike, has_item(First_aid_kit)) = True",
+                        "BEL(Mike, carrying_capacity) = Mike.carrying_capacity - First_aid_kit.weight",
+                        "DES(First_aid_kit, is_carried_around) = True",
+                        "DES(Mike, have_items_on_person) = True"
+                    ]
+                },
+                "check_backpack_contents(Mike, None, None)": {
+                    "conditions": [
+                        "BEL(Mike, has_backpack) = True",
+                        "BEL(Mike, backpack_contents) = None"
+                    ],
+                    "effects": [
+                        "BEL(Mike, backpack_contents) = [First_aid_kit"
+                    ]
+                },
+                "replenish(First_aid_kit, None, None)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, has_expiration_date)",
+                        "BEL(First_aid_kit, expiration_date) = Current_or_Past_Date",
+                        "BEL(First_aid_kit, is_accessible)",
+                        "BEL(First_aid_kit, is_portable)",
+                        "DES(First_aid_kit, be_replenished_when_empty)"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, contains_peroxide) = True",
+                        "BEL(First_aid_kit, contains_bandages) = True",
+                        "DES(First_aid_kit, be_replenished_when_empty) = False"
+                    ]
+                },
+                "use(First_aid_kit, Player, injured_body_part)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, contains_peroxide) = True",
+                        "BEL(First_aid_kit, contains_bandages) = True",
+                        "BEL(Player, is_injured) = True",
+                        "DES(First_aid_kit, be_used_for_medical_purposes) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, contains_peroxide) = False",
+                        "BEL(First_aid_kit, contains_bandages) = False",
+                        "BEL(Player, is_injured) = False"
+                    ]
+                },
+                "put_away(First_aid_kit, Mike, location_at_home)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_portable) = True",
+                        "BEL(First_aid_kit, has_expiration_date) = True",
+                        "BEL(Mike, is_at_home) = True",
+                        "DES(Mike, keep_home_organized) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, is_accessible) = False",
+                        "BEL(First_aid_kit, is_at_home) = True",
+                        "BEL(First_aid_kit, location) = location_at_home",
+                        "DES(First_aid_kit, be_replenished_when_empty) = True"
+                    ]
+                },
+                "INTENT(First_aid_kit, replenish_when_empty) = True": {
+                    "conditions": [
+                        "BEL(First_aid_kit, contains_peroxide) = True",
+                        "BEL(First_aid_kit, contains_bandages) = True",
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, has_expiration_date) = True",
+                        "BEL(First_aid_kit, expiration_date) < date.today()",
+                        "DES(First_aid_kit, be_replenished_when_empty) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, contains_peroxide) = True",
+                        "BEL(First_aid_kit, contains_bandages) = True",
+                        "BEL(First_aid_kit, has_expiration_date) = True",
+                        "BEL(First_aid_kit, expiration_date) = \"2023-01-01\"",
+                        "DES(First_aid_kit, be_replenished_when_empty) = True",
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, is_portable) = True",
+                        "BEL(First_aid_kit, location) = storage_location",
+                        "BEL(First_aid_kit, status) = restocked"
+                    ]
+                },
+                "GoToStore(First_aid_kit, Store)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(Store, is_accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, is_accessible) = False",
+                        "BEL(Store, visited_by_agent) = First_aid_kit"
+                    ]
+                },
+                "SelectItems(First_aid_kit, Store, peroxide, bandages)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(Store, has_peroxide) = True",
+                        "BEL(Store, has_bandages) = True",
+                        "DES(First_aid_kit, be_used_for_medical_purposes) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, contains_peroxide) = True",
+                        "BEL(First_aid_kit, contains_bandages) = True"
+                    ]
+                },
+                "PayForItems(First_aid_kit, Store, peroxide, bandages)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, has_expiration_date) = True",
+                        "BEL(Store, has_peroxide) = True",
+                        "BEL(Store, has_bandages) = True",
+                        "BEL(Store, has_cashier) = True",
+                        "BEL(Store, accepts_cash) = True",
+                        "BEL(First_aid_kit, contains_peroxide) = False",
+                        "BEL(First_aid_kit, contains_bandages) = False",
+                        "DES(First_aid_kit, be_replenished_when_empty) = True"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, contains_peroxide) = True",
+                        "BEL(Store, has_cash, -price(bandages))",
+                        "BEL(First_aid_kit, contains_bandages) = True"
+                    ]
+                },
+                "ReturnToStorage(First_aid_kit, None)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible) = True",
+                        "BEL(First_aid_kit, has_not_been_returned) = True",
+                        "DES(First_aid_kit, be_carried_around) = False"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, has_not_been_returned) = False",
+                        "BEL(First_aid_kit, is_accessible) = False",
+                        "BEL(First_aid_kit, is_stored) = True"
+                    ]
+                },
+                "StoreItems(First_aid_kit, storage_location, peroxide, bandages)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, is_accessible)",
+                        "BEL(First_aid_kit, has_expiration_date)",
+                        "BEL(First_aid_kit, expiration_date) != Today()"
+                    ],
+                    "effects": [
+                        "BEL(First_aid_kit, contains_peroxide) = False",
+                        "BEL(First_aid_kit, contains_bandages) = False",
+                        "BEL(First_aid_kit, stored_at_location, storage_location) = True",
+                        "DES(First_aid_kit, be_replenished_when_empty) = False"
+                    ]
+                }
+            }
+        },
+        "Snacks": {
+            "knowledge_base": [
+                "BEL(Snacks, in_bag) = True",
+                "DES(Snacks, provide_nutrition) = True",
+                "DES(Snacks, satisfy_hunger) = True",
+                "DES(Snacks, promote_social_bonding) = True",
+                "BEL(Snacks, quantity_in_bag) = Numerical Value",
+                "BEL(Snacks, expire_date) = True/False",
+                "BEL(Snacks, favorite_snack_type) = True/False"
+            ],
+            "intentions": {
+                "INTENT(Snacks, provide_nutrition) = True": {
+                    "action_plan": [
+                        "CheckExpirationDate(Snacks, None)",
+                        "CheckSnackAvailability(Snacks, Player)",
+                        "OfferSnacks(Snacks, Player)",
+                        "SitWithPlayer(Snacks, Player)"
+                    ]
+                },
+                "INTENT(Snacks, satisfy_hunger) = True": {
+                    "action_plan": [
+                        "INTENT(Snacks, satisfy_hunger) = True",
+                        "CheckExpirationDate(Snacks, self)",
+                        "RetrieveSnacks(Snacks, self, First_aid_kit)",
+                        "OfferSnacks(Snacks, Player, None)",
+                        "UpdateQuantityInBag(Snacks, self, -1)",
+                        "PromoteSocialBonding(Snacks, self, Player)"
+                    ]
+                },
+                "INTENT(Snacks, promote_social_bonding) = True": {
+                    "action_plan": [
+                        "CheckBag(Snacks, Agent)",
+                        "If(BEL(Snacks, quantity_in_bag) < 1), GoToStore(Snacks, Store)",
+                        "If(BEL(Snacks, expire_date) = True), DiscardExpiredSnacks(Snacks)",
+                        "If(BEL(Player, friend) = True), OfferSnacks(Snacks, Player)",
+                        "Player",
+                        "If(BEL(Player, hungry) = True), OfferSnacks(Snacks, Player)",
+                        "Player",
+                        "If(BEL(Snacks, favorite_snack_type) = True), OfferFavoriteSnacks(Snacks, Player)",
+                        "Player"
+                    ]
+                },
+                "INTENT(Snacks, check_quantity) = True": {
+                    "action_plan": [
+                        "INITIATE(Agent, Snacks, check_quantity)",
+                        "BEL_ADOPTION(Agent, BEL(Snacks, quantity_in_bag) = 10)",
+                        "INTENT(Snacks, check_quantity) = True",
+                        "AgentOfAction",
+                        "BEL_ADOPTION(Agent, BEL(Snacks, quantity_in_bag) = 10)",
+                        "BEL(Snacks, quantity_in_bag)",
+                        "AgentOfAction",
+                        "INTENT(Agent, Snacks, buy_snacks)",
+                        "BEL(Snacks, expire_date)",
+                        "AgentOfAction",
+                        "INTENT(Agent, Snacks, throw_away_expired_snacks)",
+                        "BEL(Snacks, favorite_snack_type)",
+                        "AgentOfAction",
+                        "INTENT(Agent, Snacks, add_favorite_snack_to_bag)",
+                        "AgentOfAction",
+                        "INTENT(Agent, Snacks, continue_with_previous_actions)"
+                    ]
+                },
+                "INTENT(Snacks, check_expiration_date) = True": {
+                    "action_plan": [
+                        "MoveTo(Snacks, First_aid_kit)",
+                        "Inspect( Snacks, First_aid_kit)",
+                        "BEL(Snacks, expire_date) = True",
+                        "BEL(Snacks, expire_date) = False",
+                        "MoveTo(Snacks, Snacks_Storage)",
+                        "Count( Snacks, quantity_in_bag)",
+                        "BEL(Snacks, favorite_snack_type) = True",
+                        "INTENTION(Snacks, restock_snacks) = True",
+                        "ACT(Snacks, restock_snacks)",
+                        "BEL(Snacks, quantity_in_bag) = UpdatedQuantity",
+                        "BEL(Snacks, favorite_snack_type) = True",
+                        "BEL(Snacks, favorite_snack_type) = False"
+                    ]
+                },
+                "INTENT(Snacks, check_favorite_snacks) = True": {
+                    "action_plan": [
+                        "INTENT(Snacks, check_favorite_snacks) = True",
+                        "ACTION(Snacks, MoveTo, Kitchen)",
+                        "ACTION(Snacks, OpenFridge, Kitchen)",
+                        "ACTION(Snacks, CheckInventory, Fridge, favorite_snack_type)",
+                        "ACTION(Snacks, MoveTo, Pantry)",
+                        "ACTION(Snacks, CheckInventory, Pantry, favorite_snack_type)",
+                        "ACTION(Snacks, MoveTo, Player)",
+                        "ACTION(Snacks, Purchase, Grocery_Store, favorite_snack_type)",
+                        "ACTION(Snacks, MoveTo, Player)",
+                        "ACTION(Snacks, Give, Player, favorite_snack_type)",
+                        "MoveTo(Snacks, Location)",
+                        "OpenFridge(Snacks, Kitchen)",
+                        "CheckInventory(Snacks, Location, snack_type)",
+                        "Purchase(Snacks, Grocery_Store, snack_type)",
+                        "Give(Snacks, Player, snack_type)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Snacks, check_favorite_snacks) = True": {
+                    "conditions": [
+                        "BEL(Snacks, favorite_snack_type) = True"
+                    ],
+                    "effects": []
+                },
+                "ACTION(Snacks, MoveTo, Kitchen)": {
+                    "conditions": [
+                        "BEL(Snacks, at_location_Kitchen) = False"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, at_location_Kitchen) = True"
+                    ]
+                },
+                "ACTION(Snacks, OpenFridge, Kitchen)": {
+                    "conditions": [
+                        "BEL(Snacks, in_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, near_fridge) = True"
+                    ]
+                },
+                "ACTION(Snacks, CheckInventory, Fridge, favorite_snack_type)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, favorite_snack_type) = favorite_snack_type",
+                        "BEL(Fridge, is_open) = True",
+                        "BEL(Fridge, contains_favorite_snack) = True"
+                    ],
+                    "effects": []
+                },
+                "ACTION(Snacks, MoveTo, Pantry)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Player, location) = Pantry"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, location) = Pantry",
+                        "DES(Snacks, locate_snacks) = False"
+                    ]
+                },
+                "ACTION(Snacks, CheckInventory, Pantry, favorite_snack_type)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, favorite_snack_type) = True",
+                        "BEL(Pantry, favorite_snack_type) = True"
+                    ],
+                    "effects": []
+                },
+                "ACTION(Snacks, MoveTo, Player)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, current_location) = Player"
+                    ]
+                },
+                "ACTION(Snacks, Purchase, Grocery_Store, favorite_snack_type)": {
+                    "conditions": [
+                        "BEL(Snacks, in_store) = True",
+                        "BEL(Store, has_snack_type, favorite_snack_type) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) = current_quantity + 1",
+                        "BEL(Store, inventory_of_snack_type, favorite_snack_type) = current_quantity - 1"
+                    ]
+                },
+                "ACTION(Snacks, Give, Player, favorite_snack_type)": {
+                    "conditions": [
+                        "BEL(Snacks, quantity_in_bag) > 0",
+                        "DES(Snacks, satisfy_hunger) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = BEL(Snacks, quantity_in_bag) - 1",
+                        "DES(Snacks, satisfy_hunger) = False",
+                        "DES(Snacks, promote_social_bonding) = True"
+                    ]
+                },
+                "MoveTo(Snacks, Location)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) > 0",
+                        "BEL(Snacks, expire_date) = False",
+                        "BEL(Snacks, current_location) != Location"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, current_location) = Location"
+                    ]
+                },
+                "OpenFridge(Snacks, Kitchen)": {
+                    "conditions": [
+                        "BEL(Snacks, in_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, near_fridge) = True"
+                    ]
+                },
+                "CheckInventory(Snacks, Location, snack_type)": {
+                    "conditions": [
+                        "BEL(Location, snack_type) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) = Numerical Value",
+                        "BEL(Snacks, favorite_snack_type) = True/False"
+                    ]
+                },
+                "Purchase(Snacks, Grocery_Store, snack_type)": {
+                    "conditions": [
+                        "BEL(Snacks, in_grocery_store) = True",
+                        "DES(Snacks, satisfy_hunger) = True",
+                        "DES(Snacks, provide_nutrition) = True",
+                        "BEL(Snacks, quantity_in_bag) < 10"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, in_grocery_store) = False",
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) += 1"
+                    ]
+                },
+                "Give(Snacks, Player, snack_type)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) > 0",
+                        "BEL(Player, hungry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = BEL(Snacks, quantity_in_bag) - 1",
+                        "DES(Snacks, satisfy_hunger) = False",
+                        "BEL(Player, hungry) = False"
+                    ]
+                },
+                "CheckExpirationDate(Snacks, None)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, expire_date) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, expire_date) = False",
+                        "BEL(Snacks, quantity_in_bag) = 0"
+                    ]
+                },
+                "CheckSnackAvailability(Snacks, Player)": {
+                    "conditions": [
+                        "BEL(Player, has_hunger) = True",
+                        "BEL(Snacks, in_bag) = True"
+                    ],
+                    "effects": [
+                        "BEL(Player, satisfied_hunger) = True",
+                        "BEL(Snacks, quantity_in_bag) = quantity_in_bag - 1"
+                    ]
+                },
+                "OfferSnacks(Snacks, Player)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) > 0",
+                        "BEL(Player, hungry) = True"
+                    ],
+                    "effects": [
+                        "DES(Snacks, satisfy_hunger) = False",
+                        "BEL(Player, has_snack) = True",
+                        "BEL(Player, hungry) = False",
+                        "BEL(Snacks, quantity_in_bag) = BEL(Snacks, quantity_in_bag) - 1"
+                    ]
+                },
+                "SitWithPlayer(Snacks, Player)": {
+                    "conditions": [
+                        "BEL(Player, in_room) = True",
+                        "BEL(Snacks, in_room) = True",
+                        "BEL(Snacks, quantity_in_bag) > 0",
+                        "BEL(Snacks, favorite_snack_type) = Player.preferred_snack"
+                    ],
+                    "effects": [
+                        "BEL(Player, sitting) = True",
+                        "BEL(Snacks, sitting) = True"
+                    ]
+                },
+                "INTENT(Snacks, satisfy_hunger) = True": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) > 0",
+                        "BEL(Snacks, expire_date) = False"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = BEL(Snacks, quantity_in_bag) -1",
+                        "DES(Snacks, satisfy_hunger) = False",
+                        "BEL(Player, satisfied_hunger) = True",
+                        "DES(Snacks, promote_social_bonding) = True"
+                    ]
+                },
+                "CheckExpirationDate(Snacks, self)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, expire_date) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, expire_date) = True"
+                    ]
+                },
+                "RetrieveSnacks(Snacks, self, First_aid_kit)": {
+                    "conditions": [
+                        "BEL(First_aid_kit, in_bag) = True",
+                        "BEL(Snacks, in_bag) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = Quantity_in_Bag - 1",
+                        "BEL(First_aid_kit, in_bag) = True"
+                    ]
+                },
+                "OfferSnacks(Snacks, Player, None)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) > 0",
+                        "BEL(Player, hungry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) -= 1",
+                        "DES(Snacks, promote_social_bonding) = True",
+                        "BEL(Player, hunger) = False",
+                        "DES(Player, satisfy_hunger) = True"
+                    ]
+                },
+                "UpdateQuantityInBag(Snacks, self, -1)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = BEL(Snacks, quantity_in_bag) - 1"
+                    ]
+                },
+                "PromoteSocialBonding(Snacks, self, Player)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Player, hungry) = True"
+                    ],
+                    "effects": [
+                        "DES(Snacks, promote_social_bonding) = False",
+                        "DES(Player, satisfied_hunger) = True",
+                        "DES(self, satisfied_hunger) = True",
+                        "DES(Player, promoted_social_bonding) = True",
+                        "DES(self, promoted_social_bonding) = True",
+                        "BEL(Snacks, quantity_in_bag) = PreviousValue - 1"
+                    ]
+                },
+                "CheckBag(Snacks, Agent)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) > 0"
+                    ],
+                    "effects": []
+                },
+                "If(BEL(Snacks, quantity_in_bag) < 1), GoToStore(Snacks, Store)": {
+                    "conditions": [
+                        "BEL(Snacks, quantity_in_bag) < 1"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = NewQuantitityInBag",
+                        "BEL(Store, visited_by_Snacks) = True"
+                    ]
+                },
+                "If(BEL(Snacks, expire_date) = True), DiscardExpiredSnacks(Snacks)": {
+                    "conditions": [
+                        "BEL(Snacks, expire_date) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = BEL(Snacks, quantity_in_bag) - 1",
+                        "BEL(Snacks, expire_date) = False"
+                    ]
+                },
+                "If(BEL(Player, friend) = True), OfferSnacks(Snacks, Player)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Player, friend) = True"
+                    ],
+                    "effects": [
+                        "DES(Snacks, promote_social_bonding) = False",
+                        "BEL(Player, full) = True",
+                        "BEL(Snacks, quantity_in_bag) = BEL(Snacks, quantity_in_bag) - 1"
+                    ]
+                },
+                "Player": {
+                    "conditions": [
+                        "BEL(Player, friend) = True",
+                        "BEL(Player, hungry) = True",
+                        "BEL(Snacks, favorite_snack_type) = True"
+                    ],
+                    "effects": [
+                        "DES(Snacks, promote_social_bonding) = False",
+                        "BEL(Player, satisfied_hunger) = True",
+                        "BEL(Snacks, quantity_in_bag) = OldValue - 1"
+                    ]
+                },
+                "If(BEL(Player, hungry) = True), OfferSnacks(Snacks, Player)": {
+                    "conditions": [
+                        "BEL(Player, hungry) = True"
+                    ],
+                    "effects": [
+                        "DES(Snacks, satisfy_hunger) = True",
+                        "BEL(Player, had_snacks) = True"
+                    ]
+                },
+                "If(BEL(Snacks, favorite_snack_type) = True), OfferFavoriteSnacks(Snacks, Player)": {
+                    "conditions": [
+                        "BEL(Snacks, favorite_snack_type) = True",
+                        "BEL(Player, friend) = True",
+                        "BEL(Player, hunger) = True"
+                    ],
+                    "effects": [
+                        "DES(Snacks, promote_social_bonding) = True",
+                        "DES(Player, satisfaction_of_hunger) = True",
+                        "DES(Player, enjoyment_of_favorite_snack) = True",
+                        "BEL(Snacks, quantity_in_bag) = BEL(Snacks, quantity_in_bag) - 1",
+                        "BEL(Snacks, favorite_snack_type) = False"
+                    ]
+                },
+                "INITIATE(Agent, Snacks, check_quantity)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True"
+                    ],
+                    "effects": []
+                },
+                "BEL_ADOPTION(Agent, BEL(Snacks, quantity_in_bag) = 10)": {
+                    "conditions": [
+                        "BEL(Agent, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) != 10"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = 10"
+                    ]
+                },
+                "INTENT(Snacks, check_quantity) = True": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL_ADOPTION(Agent, BEL(Snacks, quantity_in_bag) = Numerical Value)"
+                    ],
+                    "effects": [
+                        "INTENT(Snacks, check_quantity) = True"
+                    ]
+                },
+                "AgentOfAction": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = BEL(Snacks, quantity_in_bag) - 1"
+                    ]
+                },
+                "BEL(Snacks, quantity_in_bag)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = Numerical Value"
+                    ]
+                },
+                "INTENT(Agent, Snacks, buy_snacks)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) < 5"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) += 10"
+                    ]
+                },
+                "BEL(Snacks, expire_date)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, expire_date) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = decrease by 1",
+                        "BEL(Snacks, expire_date) = False"
+                    ]
+                },
+                "INTENT(Agent, Snacks, throw_away_expired_snacks)": {
+                    "conditions": [
+                        "BEL(Snacks, expire_date) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) =  Numerical Value (Decreases by the amount of expired snacks thrown away)",
+                        "BEL(Snacks, expire_date) = False (For expired snacks thrown away)"
+                    ]
+                },
+                "BEL(Snacks, favorite_snack_type)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "DES(Snacks, add_favorite_snack_to_bag) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, favorite_snack_type) = True"
+                    ]
+                },
+                "INTENT(Agent, Snacks, add_favorite_snack_to_bag)": {
+                    "conditions": [
+                        "BEL(Agent, in_store) = True",
+                        "BEL(Snacks, favorite_snack_type) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = BEL(Snacks, quantity_in_bag) + 1",
+                        "BEL(Agent, money) = BEL(Agent, money) - price"
+                    ]
+                },
+                "INTENT(Agent, Snacks, continue_with_previous_actions)": {
+                    "conditions": [
+                        "INTENT(Snacks, check_quantity) = True"
+                    ],
+                    "effects": []
+                },
+                "MoveTo(Snacks, First_aid_kit)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(First_aid_kit, location) = Current_Location(Snacks)"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, current_location) = First_aid_kit"
+                    ]
+                },
+                "Inspect( Snacks, First_aid_kit)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, expire_date) = False"
+                    ],
+                    "effects": []
+                },
+                "BEL(Snacks, expire_date) = True": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, expire_date) = False"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, expire_date) = True"
+                    ]
+                },
+                "BEL(Snacks, expire_date) = False": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, expire_date) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, expire_date) = False"
+                    ]
+                },
+                "MoveTo(Snacks, Snacks_Storage)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, in_bag) = False], [BEL(Snacks, location) = Snacks_Storage"
+                    ]
+                },
+                "Count( Snacks, quantity_in_bag)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = Numerical Value"
+                    ]
+                },
+                "BEL(Snacks, favorite_snack_type) = True": {
+                    "conditions": [
+                        "BEL(Snacks, quantity_in_bag) = Numerical Value",
+                        "BEL(Snacks, favorite_snack_type) = False"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, favorite_snack_type) = True"
+                    ]
+                },
+                "INTENTION(Snacks, restock_snacks) = True": {
+                    "conditions": [
+                        "BEL(Snacks, favorite_snack_type) = True",
+                        "BEL(Snacks, quantity_in_bag) < 5"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = 10",
+                        "BEL(Snacks, favorite_snack_type) = False"
+                    ]
+                },
+                "ACT(Snacks, restock_snacks)": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, favorite_snack_type) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = UpdatedQuantity",
+                        "BEL(Snacks, favorite_snack_type) = False"
+                    ]
+                },
+                "BEL(Snacks, quantity_in_bag) = UpdatedQuantity": {
+                    "conditions": [
+                        "BEL(Snacks, in_bag) = True",
+                        "BEL(Snacks, quantity_in_bag) = Quantity"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, quantity_in_bag) = UpdatedQuantity"
+                    ]
+                },
+                "BEL(Snacks, favorite_snack_type) = False": {
+                    "conditions": [
+                        "BEL(Snacks, favorite_snack_type) = True"
+                    ],
+                    "effects": [
+                        "BEL(Snacks, favorite_snack_type) = False"
+                    ]
+                }
+            }
+        }
+    }
+}

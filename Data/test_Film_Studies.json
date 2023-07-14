@@ -1,0 +1,2367 @@
+{
+    "scenario_name": "test_Film Studies",
+    "scenario_description": "Luke was in his third year of college. He was ecstatic and curious when he heard about a film studies course. He thought it had to be too good to be true. He was aw realizing all they did was sit around studying movies. He got an A in the course and changed his major to film studies.",
+    "last_ended": "end",
+    "agents": {
+        "Luke": {
+            "knowledge_base": [
+                "BEL(Luke, Enrolled_in_college) = True",
+                "BEL(Luke, Year_of_college) = 3",
+                "BEL(Luke, Interested_in_film_studies) = True",
+                "BEL(Luke, Heard_about_film_studies_course) = True",
+                "BEL(Luke, Thought_course_was_good) = True",
+                "BEL(Luke, Received_A_grade_in_film_studies_course) = True",
+                "BEL(Luke, Changed_major_to_film_studies) = True",
+                "DES(Luke, Curiosity_about_film_studies_course) = True",
+                "DES(Luke, Achieve_A_grade_in_film_studies_course) = True",
+                "DES(Luke, Change_major_to_film_studies) = True"
+            ],
+            "intentions": {
+                "INTENT(Luke, Enroll_in_film_studies_course) = True": {
+                    "action_plan": [
+                        "Enroll(Luke, Professor_Smith, Film_studies_course)",
+                        "Attend(Luke, Film_studies_course, Schedule)",
+                        "Study(Luke, Film_studies_course, Movies)",
+                        "Take_exam(Luke, Film_studies_course, Exam)",
+                        "Receive_grade(Luke, Film_studies_course, A_grade)",
+                        "Request_to_change_major(Luke, Administration, Major_change_form)",
+                        "Submit_major_change_form(Luke, Administration, Major_change_form)",
+                        "Receive_approval(Luke, Administration, Major_change_request)",
+                        "Change_major(Luke, Administration, Major_change_paperwork)"
+                    ]
+                },
+                "INTENT(Luke, Achieve_an_A_grade_in_film_studies_course) = True": {
+                    "action_plan": [
+                        "Attend_class(Luke, Professor_Smith)",
+                        "Study_movie_theory(Luke, Student_Library)",
+                        "Watch_movies_in_class(Luke, Professor_Smith)",
+                        "Participate_in_class_discussion(Luke, Fellow_Students)",
+                        "Submit_movie_analysis_paper(Luke, Professor_Smith)",
+                        "Prepare_for_movie_exam(Luke, Student_Library)",
+                        "Take_the_exam(Luke, Professor_Smith)",
+                        "Receive_grade(Luke, Professor_Smith)"
+                    ]
+                },
+                "INTENT(Luke, Change_major_to_film_studies) = True": {
+                    "action_plan": [
+                        "Enroll(Luke, Film_studies_course)",
+                        "Attend(Luke, Film_studies_lectures)",
+                        "Study(Luke, Film_materials)",
+                        "Engage(Luke, Professor_Smith)",
+                        "Submit(Luke, Outstanding_work)",
+                        "Express(Luke, Interest_in_film_studies)",
+                        "Research(Luke, Film_industry)",
+                        "Speak_to(Luke, Advisor)",
+                        "Apply_for(Luke, Change_of_major)"
+                    ]
+                }
+            },
+            "actions": {
+                "Enroll(Luke, Film_studies_course)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) >= 1",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "~BEL(Luke, Enrolled_in_film_studies_course)"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Enrolled_in_film_studies_course) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Attend(Luke, Film_studies_lectures)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) >= 3",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Attended_film_studies_lectures) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Study(Luke, Film_materials)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "BEL(Luke, Thought_course_was_good) = True"
+                    ],
+                    "effects": [
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True",
+                        "BEL(Luke, Familiar_with_film_studies_materials) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Engage(Luke, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Professor_Smith, Teaching_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Engaged_with_Professor_Smith) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Submit(Luke, Outstanding_work)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = False",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True",
+                        "BEL(Professor_Smith, Impressed_by_Luke's_work) = False"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = False",
+                        "BEL(Professor_Smith, Impressed_by_Luke's_work) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Express(Luke, Interest_in_film_studies)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) > 0",
+                        "BEL(Luke, Interested_in_film_studies) = True"
+                    ],
+                    "effects": [
+                        "DES(Luke, Curiosity_about_film_studies_course) = False",
+                        "BEL(Luke, Thought_course_was_good) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Research(Luke, Film_industry)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Interested_in_film_studies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Knowledge_about_film_industry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Speak_to(Luke, Advisor)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) > 2",
+                        "DES(Luke, Change_major_to_film_studies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Spoke_to_advisor) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Apply_for(Luke, Change_of_major)": {
+                    "conditions": [
+                        "BEL(Luke, Changed_major_to_film_studies) = False",
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Changed_major_to_film_studies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Enroll(Luke, Professor_Smith, Film_studies_course)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) = 3",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Enrolled_in_Film_studies_course, Professor_Smith) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Attend(Luke, Film_studies_course, Schedule)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "BEL(Luke, Thought_course_was_good) = True",
+                        "BEL(Luke, Changed_major_to_film_studies) = False",
+                        "BEL(Luke, Attended_fewer_than_required_classes) = True",
+                        "DES(Luke, Curiosity_about_film_studies_course) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = False",
+                        "DES(Luke, Change_major_to_film_studies) = False"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Enrolled_in_Film_studies_course) = True",
+                        "BEL(Luke, Attended_enough_classes) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Study(Luke, Film_studies_course, Movies)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = False",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Studied_movies_for_film_studies_course) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Take_exam(Luke, Film_studies_course, Exam)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) = 3",
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = False",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "BEL(Film_studies_course, Exam_scheduled) = True",
+                        "BEL(Luke, Completed_studying_Film_studies_course) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Receive_grade(Luke, Film_studies_course, A_grade)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = False",
+                        "BEL(Professor_Smith, Completed_Grading) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Request_to_change_major(Luke, Administration, Major_change_form)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Changed_major_to_film_studies) = False",
+                        "BEL(Luke, Year_of_college) > 1"
+                    ],
+                    "effects": [
+                        "DES(Luke, Change_major_to_film_studies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Submit_major_change_form(Luke, Administration, Major_change_form)": {
+                    "conditions": [
+                        "BEL(Luke, Received_approval_to_change_major) = False",
+                        "BEL(Administration, Received_major_change_form) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Submitted_major_change_form) = True",
+                        "BEL(Administration, Reviewed_major_change_form) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Receive_approval(Luke, Administration, Major_change_request)": {
+                    "conditions": [
+                        "BEL(Luke, Received_approval_for_major_change) = False",
+                        "DES(Luke, Change_major_to_film_studies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Received_approval_for_major_change) = True",
+                        "DES(Luke, Change_major_to_film_studies) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Change_major(Luke, Administration, Major_change_paperwork)": {
+                    "conditions": [
+                        "BEL(Luke, Received_approval_for_major_change) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Changed_major_to_film_studies) = True",
+                        "BEL(Luke, Received_approval_for_major_change) = False",
+                        "DES(Luke, Change_major_to_film_studies) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Attend_class(Luke, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "BEL(Luke, Thought_course_was_good) = True",
+                        "BEL(Luke, Changed_major_to_film_studies) = False"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Attended_class_with_Professor_Smith) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Study_movie_theory(Luke, Student_Library)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) >= 3",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Student_Library, Library_open) = True",
+                        "BEL(Student_Library, Has_movie_theory_books) = True"
+                    ],
+                    "effects": [
+                        "DES(Luke, Understand_movie_theory) = True",
+                        "BEL(Luke, Knowledge_of_movie_theory) = Increased",
+                        "BEL(Student_Library, Luke_currently_at_library) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Watch_movies_in_class(Luke, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Has_a_list_of_movies_to_show_in_class) = True",
+                        "BEL(Professor_Smith, Will_show_movies_in_class_today) = True",
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) >= 3",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Watched_movies_in_class_today) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Participate_in_class_discussion(Luke, Fellow_Students)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) > 2",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Fellow_Students, Participating_in_class_discussion) = True"
+                    ],
+                    "effects": [
+                        "DES(Luke, Participating_in_class_discussion) = True",
+                        "BEL(Luke, Confidence_in_participation) = Increased",
+                        "BEL(Luke, Knowledge_of_subject_matter) = Increased",
+                        "BEL(Luke, Perception_of_classmates) = Changed",
+                        "BEL(Fellow_Students, Perception_of_Luke's_engagement) = Changed"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Submit_movie_analysis_paper(Luke, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = False",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = False",
+                        "DES(Luke, Change_major_to_film_studies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Prepare_for_movie_exam(Luke, Student_Library)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) = 3",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Changed_major_to_film_studies) = False",
+                        "BEL(Student_Library, Available) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True",
+                        "DES(Luke, Prepare_for_movie_exam) = False"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Prepared_for_movie_exam) = True",
+                        "DES(Luke, Confidence_for_movie_exam) = Increased"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Take_the_exam(Luke, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) = 3",
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "BEL(Luke, Changed_major_to_film_studies) = False",
+                        "BEL(Professor_Smith, Course_has_exam) = True",
+                        "BEL(Professor_Smith, Luke_registered_to_take_exam) = True"
+                    ],
+                    "effects": [
+                        "DES(Luke, Achieve_an_A_grade_in_film_studies_course) = False",
+                        "DES(Luke, Change_major_to_film_studies) = True",
+                        "BEL(Luke, Received_exam_grade) = True",
+                        "BEL(Luke, Exam_grade) = Numeric_Value",
+                        "BEL(Luke, Passed_exam) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Receive_grade(Luke, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Completed_Grading_for_exam) = True",
+                        "BEL(Luke, Took_the_exam) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Grade_for_exam) = Grade_received",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = False",
+                        "BEL(Luke, Passed_exam_with_A_grade) = True",
+                        "DES(Luke, Change_major_to_film_studies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "curiosity"
+            ],
+            "speak_actions": {
+                "Speak(Start, A1, Greeting, Neutral)": {
+                    "conditions": [
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Thought_course_was_good) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True",
+                        "DES(Luke, Change_major_to_film_studies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(A2, A3, Confirmation, Hopeful)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "DES(Luke, Curiosity_about_film_studies_course) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True",
+                        "DES(Luke, Change_major_to_film_studies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Thought_course_was_good) = True",
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = True",
+                        "BEL(Luke, Changed_major_to_film_studies) = True",
+                        "INTENT(Luke, Enroll_in_film_studies_course) = True",
+                        "INTENT(Luke, Achieve_an_A_grade_in_film_studies_course) = True",
+                        "INTENT(Luke, Change_major_to_film_studies) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "hope",
+                        "anxiety",
+                        "uncertainty",
+                        "apprehension",
+                        "hopeful"
+                    ]
+                },
+                "Speak(A3, A4, Question, Inquisitive)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "DES(Luke, Curiosity_about_film_studies_course) = True",
+                        "DES(Luke, Interested_in_film_studies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Thought_course_was_good) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True",
+                        "INTENT(Luke, Enroll_in_film_studies_course) = True"
+                    ],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(A4, A5, Information, Neutral)": {
+                    "conditions": [
+                        "BEL(Luke, Enrolled_in_college) = True",
+                        "BEL(Luke, Year_of_college) = 3",
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "DES(Luke, Curiosity_about_film_studies_course) = True",
+                        "DES(Luke, Achieve_A_grade_in_film_studies_course) = True",
+                        "DES(Luke, Change_major_to_film_studies) = True",
+                        "INTENT(Luke, Enroll_in_film_studies_course) = True",
+                        "INTENT(Luke, Achieve_an_A_grade_in_film_studies_course) = True",
+                        "INTENT(Luke, Change_major_to_film_studies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "BEL(Luke, Thought_course_was_good) = True",
+                        "BEL(Luke, Received_A_grade_in_film_studies_course) = True",
+                        "BEL(Luke, Changed_major_to_film_studies) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": []
+                },
+                "Speak(A6, A7, Question, Curious)": {
+                    "conditions": [
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "BEL(Luke, Interested_in_film_studies) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(A7, End, Farewell, Neutral)": {
+                    "conditions": [
+                        "BEL(Luke, Heard_about_film_studies_course) = True",
+                        "BEL(Luke, Interested_in_film_studies) = True",
+                        "DES(Luke, Curiosity_about_film_studies_course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Thought_course_was_good) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": []
+                }
+            }
+        },
+        "Professor_Smith": {
+            "knowledge_base": [
+                "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                "BEL(Professor_Smith, Luke_is_a_Student_in_Film_Studies_Course) = True",
+                "BEL(Professor_Smith, Film_Studies_is_a_Great_Field_to_Study) = True",
+                "BEL(Professor_Smith, Teaching_Methods_are_Effective) = True",
+                "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True",
+                "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                "DES(Professor_Smith, Stimulate_Students_Interest) = True",
+                "DES(Professor_Smith, Promote_Discussion) = True",
+                "DES(Professor_Smith, Help_Students_Develop_Analytical_Skills) = True",
+                "DES(Professor_Smith, Encourage_Critical_Thinking) = True"
+            ],
+            "intentions": {
+                "INTENT(Professor_Smith, Teach_Film_Studies) = True": {
+                    "action_plan": [
+                        "Explain(Professor_Smith, Fellow_Students, \"the importance of film studies as a field of study\")",
+                        "Ask(Question(Professor_Smith, \"What movie did you watch last weekend?\"), Fellow_Students)",
+                        "Assign(Professor_Smith, Fellow_Students, \"analyzing a specific movie scene in pairs and present their analysis to the class\")",
+                        "Provide(Professor_Smith, Fellow_Students, \"feedback on their movie scene analysis\")",
+                        "Organize(Professor_Smith, Fellow_Students, \"a debate about the meaning of a particular movie scene\")",
+                        "Encourage(Professor_Smith, Luke, \"to continue studying film studies\")"
+                    ]
+                },
+                "INTENT(Professor_Smith, Stimulate_Students_Interest) = True": {
+                    "action_plan": [
+                        "Initiate_Class(Professor_Smith, Film_Studies_Course)",
+                        "Greet_Students(Professor_Smith, Fellow_Students)",
+                        "Start_Lecture(Professor_Smith)",
+                        "Present_Course_Outline(Professor_Smith)",
+                        "Engage_Students_in_Interactive_Discussion(Professor_Smith, Fellow_Students)",
+                        "Show_Interesting_Clips_from_Films(Professor_Smith)",
+                        "Give_Examples_of_Analytical_Methods(Professor_Smith)",
+                        "Assign_Homework_and_Discussion_Topics(Professor_Smith, Fellow_Students)",
+                        "Encourage_Students_to_Participate(Professor_Smith)",
+                        "Answer_Questions_and_Provide_Feedback(Professor_Smith, Fellow_Students)"
+                    ]
+                },
+                "INTENT(Professor_Smith, Promote_Discussion) = True": {
+                    "action_plan": [
+                        "Prepare_Topic(Professor_Smith, None, Film_Studies)",
+                        "Present_Topic(Professor_Smith, Fellow_Students, Film_Studies)",
+                        "Encourage_Fellow_Students(Professor_Smith, Fellow_Students, None)",
+                        "Pose_Questions(Professor_Smith, Fellow_Students, Discussion_Questions)",
+                        "Listen_Actively(Professor_Smith, Fellow_Students, None)",
+                        "Acknowledge_Fellow_Students(Professor_Smith, Fellow_Students, Positive_Feedback)",
+                        "Redirect_Off-Topic_Conversation(Professor_Smith, Fellow_Students, Off-Topic_Comments)"
+                    ]
+                },
+                "INTENT(Professor_Smith, Help_Students_Develop_Analytical_Skills) = True": {
+                    "action_plan": [
+                        "Identify_Film_Studies_Skills(Professor_Smith, None)",
+                        "Plan_Class_Presentation(Professor_Smith, None, Prompt= \"What makes a movie great?\")",
+                        "Facilitate_Development_of_Film_Analysis(Professor_Smith, None, Feedback=True, Criteria=[\"Plot\", \"Characterization\", \"Themes\"])",
+                        "Provide_Feedback_on_Student_Research(Professor_Smith, Luke, Feedback_Text=\"Great analysis on that last paper, Luke. The way you examined the symbolism was impressive!\")",
+                        "Encourage_Student_Discussion(Professor_Smith, Fellow_Students, Topic=\"The Use of Flashbacks in Cinematography\")",
+                        "Assign_Group_Film_Project(Professor_Smith, None, Group_Size=4, Random_Assignment=True)",
+                        "Provide_Individual_Feedback_to_Groups(Professor_Smith, None, Feedback_Text=\"You guys did a great job working together and your analysis was on-point!\")",
+                        "Assign_Reflective_Writing_Assignment(Professor_Smith, None, Prompt=\"Reflect on what you learned this semester and how it will influence your perspective on film going forward\")"
+                    ]
+                },
+                "INTENT(Professor_Smith, Encourage_Critical_Thinking) = True": {
+                    "action_plan": [
+                        "Initiate_Lecture(Professor_Smith)",
+                        "Present_Pertinent_Material(Professor_Smith, Course_Textbook)",
+                        "Explain_Concepts(Professor_Smith, Students)",
+                        "Ask_Questions_to_Elicit_Critical_Thinking(Professor_Smith, Students)",
+                        "Encourage_Discussions_and_Debates(Professor_Smith, Students)",
+                        "Provide_Feedback(Professor_Smith, Students, Comments)",
+                        "Assign_Thoughtful_Assignments(Professor_Smith, Students, Critical_Analysis_Description, Due_Date)"
+                    ]
+                }
+            },
+            "actions": {
+                "Initiate_Lecture(Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Teaching_Methods_are_Effective) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Lecture_Initiated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Present_Pertinent_Material(Professor_Smith, Course_Textbook)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Methods_are_Effective) = True",
+                        "BEL(Professor_Smith, Luke_is_a_Student_in_Film_Studies_Course) = True",
+                        "BEL(Professor_Smith, Film_Studies_is_a_Great_Field_to_Study) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Understands_Course_Textbook_Content) = True",
+                        "DES(Professor_Smith, Promote_Discussion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Explain_Concepts(Professor_Smith, Students)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True",
+                        "BEL(Student, Understands_Concepts) = False"
+                    ],
+                    "effects": [
+                        "BEL(Student, Understands_Concepts) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "admiration"
+                    ]
+                },
+                "Ask_Questions_to_Elicit_Critical_Thinking(Professor_Smith, Students)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Student, Attending_Lecture) = True",
+                        "BEL(Student, Understanding_Lecture) = True",
+                        "BEL(Student, Motivated_to_Participate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Student, Able_to_Analyze_Movies) = True",
+                        "BEL(Student, Improved_Critical_Thinking) = True",
+                        "BEL(Professor_Smith, Students_Are_Engaged) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Encourage_Discussions_and_Debates(Professor_Smith, Students)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "DES(Professor_Smith, Encourage_Discussion) = True",
+                        "BEL(Student, Enjoys_Discussions_and_Debates) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Students_Have_More_Critical_Thinking_Skills) = True",
+                        "BEL(Student, Participated_in_Class_Discussion) = True",
+                        "DES(Student, Develop_Critical_Thinking_Skills) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Provide_Feedback(Professor_Smith, Students, Comments)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True",
+                        "BEL(Student, Submitted_Assignment) = True"
+                    ],
+                    "effects": [
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True",
+                        "BEL(Student, Received_Feedback) = True",
+                        "BEL(Student, Feedback_Improves_Performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Assign_Thoughtful_Assignments(Professor_Smith, Students, Critical_Analysis_Description, Due_Date)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Student, Enrolled_in_Film_Studies_Course) = True",
+                        "BEL(Student, Interested_in_Developing_Analytical_Skills) = True"
+                    ],
+                    "effects": [
+                        "DES(Student, Motivated_to_Devote_Time_to_Assignment) = True",
+                        "BEL(Student, Understands_Assignment_Requirements) = True",
+                        "BEL(Student, Recognizes_Importance_of_Critical_Analysis) = True",
+                        "BEL(Student, Familiar_with_Examples_of_Critical_Analysis) = True",
+                        "BEL(Student, Confident_in_Critical_Analysis_Abilities) = True",
+                        "DES(Student, Completed_Assignment_on_Time) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Explain(Professor_Smith, Fellow_Students, \"the importance of film studies as a field of study\")": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True"
+                    ],
+                    "effects": [
+                        "None"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Ask(Question(Professor_Smith, \"What movie did you watch last weekend?\"), Fellow_Students)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Film_Studies_is_a_Great_Field_to_Study) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "Fellow_Students",
+                        "Fellow_Students"
+                    ],
+                    "effects": [
+                        "DES(Professor_Smith, Stimulate_Students_Interest) = True",
+                        "DES(Professor_Smith, Promote_Discussion) = True",
+                        "DES(Professor_Smith, Help_Students_Develop_Analytical_Skills) = True",
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True",
+                        "BEL(Professor_Smith, Fellow_Students_Shared_What_Movie_They_Watched_Last_Weekend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Happy-for"
+                    ]
+                },
+                "Assign(Professor_Smith, Fellow_Students, \"analyzing a specific movie scene in pairs and present their analysis to the class\")": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "DES(Professor_Smith, Help_Students_Develop_Analytical_Skills) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Analyzing_Specific_Movie_Scene) = True",
+                        "BEL(Fellow_Students, Presenting_Movie_Analysis_to_Class) = True",
+                        "DES(Professor_Smith, Promote_Discussion) = True",
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Provide(Professor_Smith, Fellow_Students, \"feedback on their movie scene analysis\")": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "BEL(Fellow_Students, Completed_Movie_Scene_Analysis) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Received_Feedback_on_Movie_Scene_Analysis) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Organize(Professor_Smith, Fellow_Students, \"a debate about the meaning of a particular movie scene\")": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "DES(Professor_Smith, Promote_Discussion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Fellow_Students_Do_Not_Agree_on_Meaning_of_the_Movie_Scene) = True",
+                        "BEL(Fellow_Students_in_Debate, Opportunity_to_Practice_Communication_Skills) = True",
+                        "BEL(Fellow_Students_in_Debate, Opportunity_to_Develop_Movie_Analysis_Skills) = True",
+                        "BEL(Fellow_Students_in_Debate, Feeling_Empowered_to_Speak_and_Participate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Encourage(Professor_Smith, Luke, \"to continue studying film studies\")": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Luke_is_a_Student_in_Film_Studies_Course) = True",
+                        "DES(Professor_Smith, Stimulate_Students_Interest) = True",
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True"
+                    ],
+                    "effects": [
+                        "DES(Luke, Continue_Studying_Film_Studies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Initiate_Class(Professor_Smith, Film_Studies_Course)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "~BEL(Professor_Smith, Film_Studies_Course_Has_Already_Been_Initiated)"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Film_Studies_Course_Has_Already_Been_Initiated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Greet_Students(Professor_Smith, Fellow_Students)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Professor_Smith_Is_Friendly) = True",
+                        "BEL(Fellow_Students, Professor_Smith_Is_Approachable) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Start_Lecture(Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Teaching_Methods_are_Effective) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Giving_Lecture) = True",
+                        "DES(Professor_Smith, Stimulate_Students_Interest) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Present_Course_Outline(Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Luke_is_a_Student_in_Film_Studies_Course) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Course_Outline_Presented) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Engage_Students_in_Interactive_Discussion(Professor_Smith, Fellow_Students)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "DES(Professor_Smith, Promote_Discussion) = True",
+                        "BEL(Fellow_Students, Interested_In_Discussion_Topic) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Students_Actively_Participated_In_Class_Discussion) = True",
+                        "BEL(Fellow_Students, Learned_New_Ideas_From_Class_Discussion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Show_Interesting_Clips_from_Films(Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "DES(Professor_Smith, Stimulate_Students_Interest) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Student_Interest_is_Stimulated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Give_Examples_of_Analytical_Methods(Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Students_Understand_Analytical_Methods) = True",
+                        "DES(Professor_Smith, Help_Students_Develop_Analytical_Skills) = False",
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Assign_Homework_and_Discussion_Topics(Professor_Smith, Fellow_Students)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Fellow_Students, Has_Completed_Reading_As_Signed) = True"
+                    ],
+                    "effects": [
+                        "DES(Fellow_Students, Assigned_Homework_and_Discussion_Topics) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Encourage_Students_to_Participate(Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "BEL(Professor_Smith, Teaching_Methods_are_Effective) = True",
+                        "DES(Professor_Smith, Stimulate_Students_Interest) = True"
+                    ],
+                    "effects": [
+                        "DES(Professor_Smith, Promote_Discussion) = True",
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True",
+                        "BEL(Student, Encouraged_to_Participate_in_Film_Studies_Class) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Answer_Questions_and_Provide_Feedback(Professor_Smith, Fellow_Students)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "BEL(Fellow_Students, Have_Questions) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Successfully_Answered_Questions) = True",
+                        "DES(Professor_Smith, Help_Students_Understand_Material) = True",
+                        "DES(Fellow_Students, Feel_Confident_in_Understanding_Material) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Prepare_Topic(Professor_Smith, None, Film_Studies)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Film_Studies_is_a_Great_Field_to_Study) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Preparing_Topic_in_Film_Studies_Class) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Present_Topic(Professor_Smith, Fellow_Students, Film_Studies)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Film_Studies_is_a_Great_Field_to_Study) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "BEL(Fellow_Students, None) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Topic_of_Film_Studies) = True",
+                        "BEL(Professor_Smith, Active_Participation_of_Students) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Excitement"
+                    ]
+                },
+                "Encourage_Fellow_Students(Professor_Smith, Fellow_Students, None)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Film_Studies_is_a_Great_Field_to_Study) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Fellow_Student, Interested_in_Discussion) = True"
+                    ],
+                    "effects": [
+                        "DES(Professor_Smith, Promote_Discussion) = True",
+                        "BEL(Fellow_Student, Encouraged_by_Professor_Smith) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Pose_Questions(Professor_Smith, Fellow_Students, Discussion_Questions)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Fellow_Students, Interested_in_Film_Studies) = True",
+                        "DES(Professor_Smith, Promote_Discussion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Able_to_Answer_Discussion_Questions) = True",
+                        "BEL(Fellow_Students, Discussing_Film_Studies) = True",
+                        "DES(Fellow_Students, Engage_in_Class_Discussions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Listen_Actively(Professor_Smith, Fellow_Students, None)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True",
+                        "DES(Professor_Smith, Promote_Discussion) = True",
+                        "BEL(Fellow_Students, _)"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Understand_Fellow_Students'_Perspectives) = True",
+                        "BEL(Professor_Smith, Engage_with_Fellow_Students) = True",
+                        "BEL(Fellow_Students, Feel_Heard) = True",
+                        "DES(Professor_Smith, Promote_Discussion) = False",
+                        "DES(Professor_Smith, Encourage_Fellow_Students_to_Participate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Acknowledge_Fellow_Students(Professor_Smith, Fellow_Students, Positive_Feedback)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "DES(Professor_Smith, Promote_Discussion) = True",
+                        "BEL(Fellow_Students, Have_Participated_in_Discussion) = True"
+                    ],
+                    "effects": [
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True",
+                        "DES(Fellow_Students, Feel_Positive_About_Class) = True",
+                        "BEL(Fellow_Students, Contributed_to_Class_Discussion) = True",
+                        "BEL(Professor_Smith, Recognizes_Fellow_Students_Contributions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Redirect_Off-Topic_Conversation(Professor_Smith, Fellow_Students, Off-Topic_Comments)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Fellow_Students, Off-Topic_Comments_Are_Being_Made) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Redirecting_Off-Topic_Conversation) = True",
+                        "DES(Fellow_Students, Staying_On_Topic) = True",
+                        "BEL(Fellow_Students, Professor_Smith_Can_Manage_The_Class) = True",
+                        "BEL(Fellow_Students, Professor_Smith_Cares_About_Class_Discussion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Identify_Film_Studies_Skills(Professor_Smith, None)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Film_Studies_Skills_Identified) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Plan_Class_Presentation(Professor_Smith, None, Prompt= \"What makes a movie great?\")": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Teaching_Methods_are_Effective) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Class_Presentation_Planned) = True",
+                        "BEL(Professor_Smith, Presentation_Prompt) = \"What makes a movie great?\""
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Facilitate_Development_of_Film_Analysis(Professor_Smith, None, Feedback=True, Criteria=[\"Plot\", \"Characterization\", \"Themes\"])": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Be_Actively_Involved_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "DES(Professor_Smith, Help_Students_Develop_Analytical_Skills) = True",
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True",
+                        "DES(Professor_Smith, Promote_Discussion) = True",
+                        "BEL(None, Film_Analysis_Criteria) = [\"Plot\", \"Characterization\", \"Themes\""
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Students_Understand_Criteria_for_Film_Analysis) = True",
+                        "BEL(Professor_Smith, Students_Understand_Importance_of_Film_Analysis) = True",
+                        "BEL(Professor_Smith, Students_Are_Able_to_Analyze_Movies) = True",
+                        "DES(Professor_Smith, Encourage_Further_Film_Analysis) = True",
+                        "DES(Professor_Smith, Provide_More_Detailed_Feedback_on_Film_Analysis) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Provide_Feedback_on_Student_Research(Professor_Smith, Luke, Feedback_Text=\"Great analysis on that last paper, Luke. The way you examined the symbolism was impressive!\")": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Luke_is_a_Student_in_Film_Studies_Course) = True",
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True"
+                    ],
+                    "effects": [
+                        "BEL(Luke, Feedback_on_Analysis) = \"Great analysis on that last paper, Luke. The way you examined the symbolism was impressive!\"",
+                        "DES(Professor_Smith, Help_Students_Develop_Analytical_Skills) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Encourage_Student_Discussion(Professor_Smith, Fellow_Students, Topic=\"The Use of Flashbacks in Cinematography\")": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Fellow_Students, Understanding_of_Flashbacks_in_Film) = False"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Understanding_of_Flashbacks_in_Film) = True",
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Assign_Group_Film_Project(Professor_Smith, None, Group_Size=4, Random_Assignment=True)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True",
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Assigned_Group_Film_Project) = True",
+                        "BEL(Professor_Smith, Group_Size) = 4",
+                        "BEL(Professor_Smith, Group_Assignment_Random) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Provide_Individual_Feedback_to_Groups(Professor_Smith, None, Feedback_Text=\"You guys did a great job working together and your analysis was on-point!\")": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Should_Collaborate_and_Debate_in_Class) = True",
+                        "BEL(Professor_Smith, Film_Studies_is_a_Great_Field_to_Study) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True"
+                    ],
+                    "effects": [
+                        "DES(Professor_Smith, Help_Students_Develop_Analytical_Skills) = True",
+                        "BEL(Professor_Smith, Students_Have_Developed_Analytical_Skills) = True",
+                        "BEL(Professor_Smith, Students_Have_Great_Study_Habits) = True",
+                        "BEL(Professor_Smith, Students_Should_Have_Feedback_on_Group_Projects) = True",
+                        "BEL(Professor_Smith, Students_Should_Work_Collaboratively) = True",
+                        "BEL(Professor_Smith, Students_Should_Apply_Film_Analysis_Techniques) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Assign_Reflective_Writing_Assignment(Professor_Smith, None, Prompt=\"Reflect on what you learned this semester and how it will influence your perspective on film going forward\")": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Teaching_Film_Studies) = True",
+                        "BEL(Professor_Smith, Students_Have_Different_Learning_Methods) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Reflective_Writing_Assignment_Assigned) = True",
+                        "DES(Professor_Smith, Encourage_Critical_Thinking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [],
+            "speak_actions": {}
+        },
+        "Fellow_Students": {
+            "knowledge_base": [
+                "BEL(Fellow_Students, Enjoys_Movies) = True",
+                "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False",
+                "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True",
+                "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True",
+                "DES(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True",
+                "DES(Fellow_Students, Participate_In_Class_Discussions) = True",
+                "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True"
+            ],
+            "intentions": {
+                "INTENT(Fellow_Students, Attend_Film_Studies_Class) = True": {
+                    "action_plan": [
+                        "Go_To_Class(Fellow_Students, Film_Studies_Course)",
+                        "Greet_Luke(Fellow_Students, Luke)",
+                        "Listen_To_Class_Lecture(Fellow_Students, Professor_Smith)",
+                        "Participate_In_Class_Discussion(Fellow_Students, Professor_Smith, Topic_Of_Discussion)",
+                        "Socialize_With_Luke_And_Other_Film_Enthusiasts(Fellow_Students, Luke, Other_Film_Enthusiasts)",
+                        "Exchange_Contact_Information(Fellow_Students, Luke, Other_Film_Enthusiasts)",
+                        "Study_For_Exams(Fellow_Students, Film_Studies_Course, Professor_Smith)",
+                        "Write_An_Essay(Fellow_Students, Film_Critique_Assignment, Professor_Smith)",
+                        "Attend_Film_Screening_And_Discussion_Event(Fellow_Students, Film_Screening_Event, Hosted_By_Professor_Smith)",
+                        "Graduate_With_A_Degree_In_Film_Studies(Fellow_Students)"
+                    ]
+                },
+                "INTENT(Fellow_Students, Participate_In_Class_Discussions) = True": {
+                    "action_plan": [
+                        "Participate_In_Class_Discussions",
+                        "Go_To_Classroom(Fellow_Students, Professor_Smith)",
+                        "Greet_Luke(Fellow_Students, Luke)",
+                        "Sit_Next_To_Luke(Fellow_Students, Luke)",
+                        "Listen_To_Professor(Fellow_Students, Professor_Smith)",
+                        "Ask_Question(Discussion_Participant, Professor_Smith, \"May I Ask A Question?\")",
+                        "Start_Conversation(Discussion_Participant, Luke, \"What Did You Think About The Lecture?\")",
+                        "Listen_To_Luke(Discussion_Participant, Luke)",
+                        "Connect_With_Luke(Discussion_Participant, Luke, \"We Should Talk More About This Later!\")",
+                        "Summarize_Discussion(Discussion_Participant, Class)"
+                    ]
+                },
+                "INTENT(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True": {
+                    "action_plan": [
+                        "Attend_Class(Fellow_Students, Professor_Smith)",
+                        "Participate_In_Class_Discussion(Fellow_Students, Professor_Smith)",
+                        "Take_Notes_On_Lecture(Fellow_Students, Professor_Smith)",
+                        "Study_For_Exams(Fellow_Students, Textbook)",
+                        "Review_Movie_Films(Fellow_Students, Online_Resources)",
+                        "Meet_With_Professor_Smith_For_Advice(Fellow_Students, Professor_Smith)",
+                        "Collaborate_With_Classmate_On_Project(Fellow_Students, Classmate)"
+                    ]
+                },
+                "INTENT(Fellow_Students, Meet_Other_Film_Enthusiasts) = True": {
+                    "action_plan": [
+                        "Attend(Fellow_Students, Film_Study_Course, None)",
+                        "Participate(Fellow_Students, Class_Discussions, None)",
+                        "Join(Fellow_Students, Film_Club, None)",
+                        "Organize(Fellow_Students, Film_Screening_Event, Other_Film_Enthusiasts)",
+                        "Invite(Fellow_Students, Other_Film_Enthusiasts, To_Film_Screening_Event)"
+                    ]
+                },
+                "INTENT(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True": {
+                    "action_plan": [
+                        "Luke",
+                        "Attend_Class(Fellow_Students, Professor_Smith)",
+                        "Participate_In_Class_Discussions(Fellow_Students, None)",
+                        "Approach_Luke(Fellow_Students, Luke)",
+                        "Compliment_Luke_On_His_Knowledge_Of_Films(Fellow_Students, Luke)",
+                        "Ask_Luke_For_Movie_Recommendations(Fellow_Students, Luke)",
+                        "Arrange_To_Watch_A_Film_Together(Fellow_Students, Luke)",
+                        "Discuss_The_Film_And_Have_Friendly_Conversation(Fellow_Students, Luke)",
+                        "Express_Interest_In_Potential_Future_Movie_Nights(Fellow_Students, Luke)"
+                    ]
+                }
+            },
+            "actions": {
+                "Luke": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False",
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True",
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True"
+                    ],
+                    "effects": [
+                        "DES(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True",
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True",
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True",
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy",
+                        "Admiration",
+                        "Hope",
+                        "Joy",
+                        "Joy",
+                        "Happy-for",
+                        "Joy",
+                        "Interest",
+                        "Happy-for",
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Admiration",
+                        "Hope",
+                        "Hope",
+                        "Joy",
+                        "Hope",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Hope",
+                        "Pride",
+                        "Joy",
+                        "Pride",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Hope",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Hope",
+                        "Joy",
+                        "Hope",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Joy",
+                        "Joy"
+                    ]
+                },
+                "Attend_Class(Fellow_Students, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True"
+                    ],
+                    "effects": [
+                        "BEL(Professor_Smith, Has_Friendly_Relationship_With_Fellow_Students) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Participate_In_Class_Discussions(Fellow_Students, None)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True",
+                        "BEL(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Enjoys_Movies) = True"
+                    ],
+                    "effects": [
+                        "DES(Fellow_Students, Learn_From_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Has_Increased_Understanding_Of_Movies) = True",
+                        "BEL(Fellow_Students, Feels_Positive_Toward_Professor_Smith) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Approach_Luke(Fellow_Students, Luke)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "BEL(Luke, None)"
+                    ],
+                    "effects": [
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Happy-for"
+                    ]
+                },
+                "Compliment_Luke_On_His_Knowledge_Of_Films(Fellow_Students, Luke)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "BEL(Luke, Knowledge_Of_Films) > 0"
+                    ],
+                    "effects": [
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True",
+                        "BEL(Fellow_Students, Feels_Positive_Towards_Luke) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Ask_Luke_For_Movie_Recommendations(Fellow_Students, Luke)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "BEL(Luke, Knowledge_Of_Films) >= Fellow_Students_Movie_Knowledge",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True"
+                    ],
+                    "effects": [
+                        "DES(Fellow_Students, Obtain_Movie_Recommendations_From_Luke) = True",
+                        "BEL(Fellow_Students, Has_Gained_Knowledge_From_Luke) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Arrange_To_Watch_A_Film_Together(Fellow_Students, Luke)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False",
+                        "BEL(Luke, Enjoys_Movies) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Has_Future_Plans_With_Luke) = True",
+                        "BEL(Fellow_Students, Feels_Content) = True",
+                        "BEL(Luke, Has_Future_Plans_With_Fellow_Students) = True",
+                        "BEL(Luke, Feels_Content) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Discuss_The_Film_And_Have_Friendly_Conversation(Fellow_Students, Luke)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True",
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "BEL(Luke, Enjoys_Movies) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True",
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "[BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False",
+                        "DES(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Luke) = True",
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = False",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = False",
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = False",
+                        "BEL(Luke, Has_Friendly_Relationship_With_Fellow_Students) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Express_Interest_In_Potential_Future_Movie_Nights(Fellow_Students, Luke)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Luke) = True",
+                        "BEL(Luke, Is_Interested_In_Film_Events) = False"
+                    ],
+                    "effects": [
+                        "DES(Luke, Attend_Future_Movie_Night_Events) = True",
+                        "BEL(Luke, Is_Interested_In_Film_Events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Go_To_Class(Fellow_Students, Film_Studies_Course)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Attend_Film_Studies_Class) = False",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Attend_Film_Studies_Class) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Greet_Luke(Fellow_Students, Luke)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Luke) = False",
+                        "BEL(Luke, Is_In_Proximity_To_Fellow_Students) = False"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Luke) = True",
+                        "BEL(Luke, Is_In_Proximity_To_Fellow_Students) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Listen_To_Class_Lecture(Fellow_Students, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Attend_Film_Studies_Class) = True",
+                        "BEL(Professor_Smith, Is_Currently_Lecturing) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Learned_New_Information) = True",
+                        "BEL(Fellow_Students, Is_Paying_Attention_In_Class) = True",
+                        "BEL(Professor_Smith, Is_Being_Listened_To) = True",
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Participate_In_Class_Discussion(Fellow_Students, Professor_Smith, Topic_Of_Discussion)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Ready_To_Start_Discussion) = True",
+                        "BEL(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Listens_To_Class_Lectures) = True",
+                        "DES(Professor_Smith, Conduct_Class_Discussion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Understands_Topic_Of_Discussion) = True",
+                        "BEL(Fellow_Students, Has_Shared_Opinion_With_Professor) = True",
+                        "DES(Fellow_Students, Gain_Knowledge_From_Class_Discussion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Socialize_With_Luke_And_Other_Film_Enthusiasts(Fellow_Students, Luke, Other_Film_Enthusiasts)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Luke) = True",
+                        "BEL(Luke, Enjoys_Socializing_With_Fellow_Students) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Has_Met_Other_Film_Enthusiasts) = True",
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Exchange_Contact_Information(Fellow_Students, Luke, Other_Film_Enthusiasts)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Meet_Other_Film_Enthusiasts) = True",
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "BEL(Luke, Enjoys_Movies) = True",
+                        "BEL(Other_Film_Enthusiasts, Enjoys_Movies) = True"
+                    ],
+                    "effects": [
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True",
+                        "DES(Other_Film_Enthusiasts, Maintain_Friendly_Relationship_With_Fellow_Students) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Study_For_Exams(Fellow_Students, Film_Studies_Course, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Attend_Film_Studies_Class) = True",
+                        "BEL(Professor_Smith, Teaches_Film_Studies_Course) = True",
+                        "DES(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Prepared_For_Exam_In_Film_Studies_Course) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Write_An_Essay(Fellow_Students, Film_Critique_Assignment, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True",
+                        "BEL(Professor_Smith, Gave_Film_Critique_Assignment) = True",
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Completed_Film_Critique_Assignment) = True",
+                        "BEL(Fellow_Students, Understands_The_Importance_Of_Film_Critiques) = True",
+                        "BEL(Fellow_Students, Improved_Film_Analysis_Skills) = True",
+                        "DES(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) -= 1",
+                        "DES(Fellow_Students, Impress_Professor_Smith) += 1"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Attend_Film_Screening_And_Discussion_Event(Fellow_Students, Film_Screening_Event, Hosted_By_Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Attended_Film_Studies_Class_Professor_Smith) = True",
+                        "BEL(Professor_Smith, Hosted_Film_Screening_Event) = True",
+                        "BEL(Professor_Smith, Expert_In_Film_Studies) = True",
+                        "DES(Fellow_Students, Participate_In_Film_Screening_And_Discussion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Attended_Film_Screening_Event) = True",
+                        "BEL(Fellow_Students, Learned_New_Things_About_Filmmaking) = True",
+                        "BEL(Fellow_Students, Interacted_With_Other_Fellow_Students_And_Professor_Smith) = True",
+                        "DES(Fellow_Students, Write_A_Film_Critique_For_Extra_Credit) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Graduate_With_A_Degree_In_Film_Studies(Fellow_Students)": {
+                    "conditions": [
+                        "DES(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True",
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Graduate_With_A_Degree_In_Film_Studies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Participate_In_Class_Discussions": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True",
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False"
+                    ],
+                    "effects": [
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = False",
+                        "BEL(Discussion_Participant, Listened_To_Professor) = True",
+                        "BEL(Discussion_Participant, Asked_Question) = True",
+                        "BEL(Discussion_Participant, Listened_To_Luke) = True",
+                        "BEL(Discussion_Participant, Connected_With_Luke) = True",
+                        "BEL(Discussion_Participant, Summarized_Discussion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Go_To_Classroom(Fellow_Students, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Is_In_Professor_Smith_s_Class) = True",
+                        "BEL(Fellow_Students, Is_In_Professor_Smith_s_Office_Hours) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Sit_Next_To_Luke(Fellow_Students, Luke)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "BEL(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True",
+                        "BEL(Luke, Attends_Film_Studies_Class) = True",
+                        "BEL(Fellow_Students, Attends_Film_Studies_Class) = True",
+                        "BEL(Fellow_Students, Sits_Next_To_Luke) = False"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Sits_Next_To_Luke) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Love"
+                    ]
+                },
+                "Listen_To_Professor(Fellow_Students, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Learned_New_Information_From_Professor) = True",
+                        "DES(Fellow_Students, Gain_Knowledge_About_Class_Subject) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Attention"
+                    ]
+                },
+                "Ask_Question(Discussion_Participant, Professor_Smith, \"May I Ask A Question?\")": {
+                    "conditions": [
+                        "BEL(Discussion_Participant, Knows_The_Answer_To_Own_Question) = False",
+                        "BEL(Discussion_Participant, Trusts_Professor_Smith) = True"
+                    ],
+                    "effects": [
+                        "BEL(Discussion_Participant, Knows_The_Answer_To_Own_Question) = True",
+                        "BEL(Professor_Smith, Recognizes_Discussion_Participant) = True",
+                        "DES(Professor_Smith, Answer_Discussion_Participant_Question) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Start_Conversation(Discussion_Participant, Luke, \"What Did You Think About The Lecture?\")": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "BEL(Discussion_Participant, Sitting_Next_To_Luke) = True"
+                    ],
+                    "effects": [
+                        "BEL(Discussion_Participant, Participated_In_Discussion) = True",
+                        "BEL(Luke, Enjoyed_Discussion) = True",
+                        "DES(Discussion_Participant, Connect_With_Luke) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Listen_To_Luke(Discussion_Participant, Luke)": {
+                    "conditions": [
+                        "BEL(Discussion_Participant, Knows_Luke) = True",
+                        "BEL(Discussion_Participant, Sees_Luke_As_A_Film_Enthusiast) = True",
+                        "BEL(Luke, Is_Actively_Participating_In_Discussion) = True"
+                    ],
+                    "effects": [
+                        "DES(Discussion_Participant, Feels_More_Connected_To_Luke) = True",
+                        "BEL(Discussion_Participant, Bond_With_Luke) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Connect_With_Luke(Discussion_Participant, Luke, \"We Should Talk More About This Later!\")": {
+                    "conditions": [
+                        "BEL(Discussion_Participant, Has_Friendly_Relationship_With_Luke) = True"
+                    ],
+                    "effects": [
+                        "DES(Discussion_Participant, Connect_With_Luke) = True",
+                        "BEL(Discussion_Participant, Has_Friendly_Relationship_With_Luke) = True",
+                        "BEL(Luke, Is_Interested_In_Further_Discussion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Summarize_Discussion(Discussion_Participant, Class)": {
+                    "conditions": [
+                        "BEL(Discussion_Participant, Knows_Main_Points_Of_Discussion_) = True",
+                        "BEL(Discussion_Participant, Has_Listened_Carefully_To_Other_Participants) = True",
+                        "DES(Discussion_Participant, Wants_To_Contribute_To_Discussion) = True"
+                    ],
+                    "effects": [
+                        "DES(Discussion_Participant, Feels_Happy_About_Contributing_To_Discussion) = True",
+                        "DES(Discussion_Participant, Feels_Proud_Of_Adding_New_Insights_To_Discussion) = True",
+                        "BEL(Class, Has_Been_Productive) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Participate_In_Class_Discussion(Fellow_Students, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Professor_Smith, Is_Conducting_Class) = True",
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True",
+                        "BEL(Fellow_Students, Enjoys_Movies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Has_Participated_In_Class_Discussions) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True",
+                        "BEL(Fellow_Students, Feels_More_Confident_In_Class) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Interest",
+                        "Curiosity"
+                    ]
+                },
+                "Take_Notes_On_Lecture(Fellow_Students, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True",
+                        "BEL(Professor_Smith, Is_Giving_A_Lecture_Today) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Learned_About_Movie_Making_Techniques) = True",
+                        "DES(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Study_For_Exams(Fellow_Students, Textbook)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True",
+                        "BEL(Textbook, Contains_Relevant_Information) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Feels_More_Confident_About_Exam) = True",
+                        "DES(Fellow_Students, Score_High_On_Exam) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": []
+                },
+                "Review_Movie_Films(Fellow_Students, Online_Resources)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False",
+                        "BEL(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Improves_Movie_Knowledge) = True",
+                        "BEL(Fellow_Students, Has_Better_Understanding_Of_Films) = True",
+                        "DES(Fellow_Students, Use_New_Knowledge_In_Class_Discussions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Meet_With_Professor_Smith_For_Advice(Fellow_Students, Professor_Smith)": {
+                    "conditions": [
+                        "BEL(Professor_Smith, Available_For_Meeting) = True",
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Got_Advice_From_Professor_Smith) = True",
+                        "DES(Fellow_Students, Improve_Understanding_Of_Course_Material) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Collaborate_With_Classmate_On_Project(Fellow_Students, Classmate)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True",
+                        "DES(Classmate, Participate_In_Class_Discussion) = True",
+                        "DES(Classmate, Get_A_Good_Grade_In_The_Film_Studies_Course) = True"
+                    ],
+                    "effects": [
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True",
+                        "BEL(Fellow_Students, Has_Met_Classmate) = True",
+                        "BEL(Fellow_Students, Believes_Classmate_Is_Friendly_And_Helpful) = True",
+                        "DES(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True",
+                        "DES(Classmate, Get_A_Good_Grade_In_The_Film_Studies_Course) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Desire"
+                    ]
+                },
+                "Attend(Fellow_Students, Film_Study_Course, None)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False",
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Attending_Film_Study_Course) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Participate(Fellow_Students, Class_Discussions, None)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False"
+                    ],
+                    "effects": [
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True",
+                        "BEL(Fellow_Students, Has_Participated_In_Class_Discussions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Join(Fellow_Students, Film_Club, None)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Member_Of_Film_Club) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Organize(Fellow_Students, Film_Screening_Event, Other_Film_Enthusiasts)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Has_Friendly_Relationship_With_Professor_Smith) = True",
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True",
+                        "BEL(Other_Film_Enthusiasts, Enjoys_Movies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Fellow_Students, Has_Organized_Film_Screening_Event) = True",
+                        "BEL(Other_Film_Enthusiasts, Has_Been_Invited_To_Film_Screening_Event) = True",
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Excitement"
+                    ]
+                },
+                "Invite(Fellow_Students, Other_Film_Enthusiasts, To_Film_Screening_Event)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Meet_Other_Film_Enthusiasts) = True",
+                        "BEL(Other_Film_Enthusiasts, Knows_About_Film_Screening_Event[Fellow_Students]) = False"
+                    ],
+                    "effects": [
+                        "DES(Other_Film_Enthusiasts, Attend_Film_Screening_Event[Fellow_Students]) = True",
+                        "BEL(Fellow_Students, Invited_Other_Film_Enthusiasts[To_Film_Screening_Event]) = True",
+                        "BEL(Other_Film_Enthusiasts, Knows_About_Film_Screening_Event[Fellow_Students]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "hope"
+            ],
+            "speak_actions": {
+                "Speak(Start, A1, Greeting, Neutral)": {
+                    "conditions": [
+                        "INTENT(Fellow_Students, Attend_Film_Studies_Class) = True",
+                        "INTENT(Fellow_Students, Participate_In_Class_Discussions) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(A1, A2, Question, Curious)": {
+                    "conditions": [
+                        "INTENT(Fellow_Students, Attend_Film_Studies_Class) = True",
+                        "INTENT(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Enjoys_Movies) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(A2, A3, Information, Neutral)": {
+                    "conditions": [
+                        "INTENT(Fellow_Students, Attend_Film_Studies_Class) = True",
+                        "BEL(Fellow_Students, Thinks_Luke_is_Great) = True",
+                        "DES(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True",
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "BEL(Fellow_Students, Enjoys_Movies) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        ""
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Speak(A3, A4, Confirmation, Neutral)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False",
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "INTENT(Fellow_Students, Attend_Film_Studies_Class) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Speak(A4, A5, Advice, Supportive)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False",
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "INTENT(Fellow_Students, Attend_Film_Studies_Class) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(A5, A6, Question, Curious)": {
+                    "conditions": [
+                        "INTENT(Fellow_Students, Attend_Film_Studies_Class) = True",
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "INTENT(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True",
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Curious"
+                    ]
+                },
+                "Speak(A6, A7, Information, Enthusiastic)": {
+                    "conditions": [
+                        "BEL(Fellow_Students, Enjoys_Movies) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False",
+                        "DES(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "INTENT(Fellow_Students, Attend_Film_Studies_Class) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(A7, End, Farewell, Friendly)": {
+                    "conditions": [
+                        "INTENT(Fellow_Students, Attend_Film_Studies_Class) = True",
+                        "BEL(Fellow_Students, Finds_Film_Studies_Course_Boring) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Fellow_Students, Participate_In_Class_Discussions) = True",
+                        "INTENT(Fellow_Students, Get_A_Good_Grade_In_The_Film_Studies_Course) = True",
+                        "DES(Fellow_Students, Meet_Other_Film_Enthusiasts) = True",
+                        "DES(Fellow_Students, Maintain_Friendly_Relationship_With_Luke) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, A1, Greeting, Neutral, \"Hello! How are you doing today?\">",
+        "<A1, A2, Question, Curious, \"Have you heard about the new film studies course this semester?\">",
+        "<A2, A3, Information, Enthusiastic, \"I'm thinking of taking it, studying movies all semester sounds like a dream come true!\">",
+        "<A3, A4, Confirmation, Hopeful, \"Do you think it's worth taking? Will it be easy, or hard?\">",
+        "<A4, A5, Confirmation, Encouraging, \"You should definitely take it! It can be challenging, but it will be so rewarding. Plus, you have a natural interest in movies, which will help.\">",
+        "<A5, A6, Question, Inquisitive, \"What did you think of the course? About the workload and the requirements?\">",
+        "<A6, A7, Information, Excited, \"I loved it! The course is stimulating, and the workload is manageable. You get to watch a lot of movies, and you will learn a lot about the art of filmmaking.\">",
+        "<A7, End, Farewell, Neutral, \"You should definitely take the course! Good luck!\">"
+    ]
+}

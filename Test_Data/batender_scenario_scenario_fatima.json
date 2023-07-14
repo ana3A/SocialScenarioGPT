@@ -1,0 +1,2308 @@
+{
+  "root": {
+    "classId": 0,
+    "ScenarioName": "batender scenario",
+    "Description": "social scenario with a bartender and two customers",
+    "Characters": [
+      {
+        "KnowledgeBase": {
+          "Perspective": "Mark",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Mark,FriendlyBar)": "True, 1",
+              "BEL(Mark,GoodConversations)": "True, 1",
+              "BEL(Mark,InterestedInSarah)": "False, 1",
+              "DES(Mark,HaveGoodTime)": "True, 1",
+              "DES(Mark,MakeNewFriends)": "True, 1",
+              "DES(Mark,OrderBeer)": "True, 1",
+              "DES(Mark,OrderWhiskey)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Sarah",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Sarah,likes_white_wine)": "True, 1",
+              "BEL(Sarah,the_bar_has_a_relaxing_environment)": "True, 1",
+              "BEL(Sarah,enjoys_conversations_with_friends)": "True, 1",
+              "DES(Sarah,wants_to_relax)": "True, 1",
+              "DES(Sarah,wants_to_enjoy_her_wine)": "True, 1",
+              "DES(Sarah,does_not_want_to_be_disturbed)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      },
+      {
+        "KnowledgeBase": {
+          "Perspective": "Bartender",
+          "Knowledge": {
+            "SELF": {
+              "BEL(Bartender,BarIsAProfessionalEnvironment)": "True, 1",
+              "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)": "True, 1",
+              "BEL(Bartender,ItIsImportantToMaintainACleanBar)": "True, 1",
+              "BEL(Bartender,SocializingWithCustomersIsImportant)": "True, 1",
+              "DES(Bartender,ServeDrinksAccordingly)": "True, 1",
+              "DES(Bartender,KeepCustomersHappy)": "True, 1",
+              "DES(Bartender,MaintainACleanBar)": "True, 1",
+              "DES(Bartender,CreateAThrivingSocialEnvironment)": "True, 1"
+            }
+          }
+        },
+        "BodyName": null,
+        "VoiceName": null,
+        "EmotionalState": {
+          "Mood": 0,
+          "initialTick": 0,
+          "EmotionalPool": [],
+          "AppraisalConfiguration": {
+            "HalfLifeDecayConstant": 0.5,
+            "EmotionInfluenceOnMoodFactor": 0.3,
+            "MoodInfluenceOnEmotionFactor": 0.3,
+            "MinimumMoodValueForInfluencingEmotions": 0.5,
+            "EmotionalHalfLifeDecayTime": 15,
+            "MoodHalfLifeDecayTime": 60
+          }
+        },
+        "AutobiographicMemory": {
+          "Tick": 0,
+          "records": []
+        },
+        "OtherAgents": {
+          "dictionary": []
+        },
+        "Goals": []
+      }
+    ],
+    "WorldModel": {
+      "Effects": {
+        "dictionary": [
+          {
+            "key": "Event(Action-End, Mark, StartConversation(Mark,Sarah), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "False",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Sarah,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Sarah,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, OrderDrink(Mark,Beer), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "DES(Mark,OrderBeer)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, OrderDrink(Mark,Whiskey), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,OrderWhiskey)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, OfferDrink(Mark,Sarah,Wine), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Sarah,Customer)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Sarah,PreferWhiteWine)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "False",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "DES(Mark,HaveGoodTime)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "DES(Mark,MakeNewFriends)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "DES(Mark,OrderBeer)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "DES(Mark,OrderWhiskey)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Compliment(Sarah,Dress), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Sarah,Upset)",
+                "NewValue": "False",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Sarah,DressedNice)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, PayBill(Mark,Bartender), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,HaveGoodTime)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, WaveGoodbye(Mark,Sarah), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Sarah,WantToContinueConversation)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Drinking,Flirt1,Flirting,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "False",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "DES(Mark,HaveGoodTime)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "2",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Flirt1,Flirt2,Flirting,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "False",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "4",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Flirt2,Drinking,Flirting,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "DES(Mark,HaveGoodTime)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "DES(Mark,MakeNewFriends)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Drinking,Job1,Personal,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Drinking,OngoingConversation)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Job1,Drinking,Personal,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Drinking,RudeCustomer1,Anger,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Drinking,RudeCustomer1Present)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "False",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-3",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(RudeCustomer1,RudeCustomer2,Anger,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(RudeCustomer1,Annoying)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(RudeCustomer2,Aggressive)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(RudeCustomer2,Drinking,Anger,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Drinking,Hobby1,Personal,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Hobby1,Drinking,Personal,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-4",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Drinking,Birthday1,Planning,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Drinking,CelebratingBirthday)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "DES(Mark,HaveGoodTime)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Birthday1,Birthday2,Planning,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Birthday2,Drinking,Planning,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Mark,FriendlyBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversations)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "BEL(Mark,InterestedInSarah)",
+                "NewValue": "True",
+                "ObserverAgent": "Mark"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Mark"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, OrderDrink(Sarah,Bartender,white_wine), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,does_not_have_a_drink)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Bartender,has_white_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Sit(Sarah,Chair1), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_free_chair)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,the_chair_is_suitable_for_sitting)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Relax(Sarah,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_enjoy_her_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Pay(Bartender,Sarah,10), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,is_holding_enough_money)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Chat(Sarah,Mark), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_enjoy_her_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,knows_Mark)",
+                "NewValue": "False",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, RefuseDrinkOffer(Sarah,Mark), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, ExpressAnger(Sarah,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Leave(Sarah,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,TalktoBartender1,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,likes_white_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_enjoy_her_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(TalktoBartender1,TalktoBartender2,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,wants_to_enjoy_her_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(TalktoBartender2,Drinking,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,likes_white_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,Job1,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_enjoy_her_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Job1,Job2,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_enjoy_her_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Job2,Drinking,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,Story1,Humor,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Story1,Story2,Humor,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Story2,Drinking,Humor,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,likes_white_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_enjoy_her_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "2",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,Music1,Passion,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_enjoy_her_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Music1,Music2,Passion,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Music2,Drinking,Passion,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,Hike1,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,likes_hiking)",
+                "NewValue": "False",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Hike1,Hike2,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Hike2,Drinking,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_enjoy_her_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,CurrentEvent1,Opinion,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_relax)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,wants_to_enjoy_her_wine)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "DES(Sarah,does_not_want_to_be_disturbed)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(CurrentEvent1,CurrentEvent2,Opinion,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Sarah,the_bar_has_a_relaxing_environment)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(Sarah,enjoys_conversations_with_friends)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(CurrentEvent2,Drinking,Opinion,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(CurrentEvent2,is_about_a_non-controversial_topic)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "BEL(CurrentEvent2,speaker_will_not_bring_up_a_topic_that_makes_Sarah_uncomfortable)",
+                "NewValue": "True",
+                "ObserverAgent": "Sarah"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Sarah"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, ServeDrink(Bartender,Mark,Beer), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, ServeDrink(Bartender,Sarah,WhiteWine), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,ItIsImportantToMaintainACleanBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, RememberDrinkPreference(Bartender,Mark,Beer,Whiskey), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Mark,IsARelgularCustomer)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, RememberDrinkPreference(Bartender,Sarah,WhiteWine), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, OfferToClean(Bartender,Sarah,Dress), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,ItIsImportantToMaintainACleanBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Sarah,DressIsDirty)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, OfferAnotherDrink(Bartender,Sarah), [t])",
+            "value": [
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, FacilitateConversation(Bartender,Mark,Sarah), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,SocializingWithCustomersIsImportant)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Mark,GoodConversationsAreImportant)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Sarah,RelaxingIsImportant)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, PlayMusic(Bartender,Jazz), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "5",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, ServeSnacks(Bartender,Mark,Peanuts), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, ServeSnacks(Bartender,Sarah,CheesePlatter), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,SocializingWithCustomersIsImportant)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Start,Greeting,Introduction,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Drinking,Order,Request,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Start,Recommend1,None,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Recommend1,Recommend2,None,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Start,SmallTalk1,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,SocializingWithCustomersIsImportant)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(SmallTalk1,SmallTalk2,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,SocializingWithCustomersIsImportant)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(SmallTalk2,Drinking,Interest,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,SocializingWithCustomersIsImportant)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Drinking,Incident1,Incident,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Incident1,Incident2,Incident,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Incident2,Drinking,Incident,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Drinking,Snack,Offer,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,ItIsImportantToMaintainACleanBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,SocializingWithCustomersIsImportant)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "DES(Bartender,ServeDrinksAccordingly)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "DES(Bartender,KeepCustomersHappy)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "DES(Bartender,MaintainACleanBar)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "DES(Bartender,CreateAThrivingSocialEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "0",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Snack,Drinking,Offer,None), [t])",
+            "value": [
+              {
+                "PropertyName": "BEL(Bartender,BarIsAProfessionalEnvironment)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,CustomersHaveSpecificDrinkPreferences)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "BEL(Bartender,SocializingWithCustomersIsImportant)",
+                "NewValue": "True",
+                "ObserverAgent": "Bartender"
+              },
+              {
+                "PropertyName": "Mood(SELF)",
+                "NewValue": "-5",
+                "ObserverAgent": "Bartender"
+              }
+            ]
+          }
+        ]
+      },
+      "Priorities": {
+        "dictionary": [
+          {
+            "key": "Event(Action-End, Mark, StartConversation(Mark,Sarah), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, OrderDrink(Mark,Beer), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, OrderDrink(Mark,Whiskey), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, OfferDrink(Mark,Sarah,Wine), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Compliment(Sarah,Dress), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, PayBill(Mark,Bartender), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, WaveGoodbye(Mark,Sarah), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Drinking,Flirt1,Flirting,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Flirt1,Flirt2,Flirting,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Flirt2,Drinking,Flirting,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Drinking,Job1,Personal,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Job1,Drinking,Personal,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Drinking,RudeCustomer1,Anger,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(RudeCustomer1,RudeCustomer2,Anger,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(RudeCustomer2,Drinking,Anger,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Drinking,Hobby1,Personal,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Hobby1,Drinking,Personal,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Drinking,Birthday1,Planning,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Birthday1,Birthday2,Planning,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Mark, Speak(Birthday2,Drinking,Planning,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, OrderDrink(Sarah,Bartender,white_wine), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Sit(Sarah,Chair1), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Relax(Sarah,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Pay(Bartender,Sarah,10), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Chat(Sarah,Mark), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, RefuseDrinkOffer(Sarah,Mark), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, ExpressAnger(Sarah,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Leave(Sarah,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,TalktoBartender1,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(TalktoBartender1,TalktoBartender2,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(TalktoBartender2,Drinking,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,Job1,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Job1,Job2,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Job2,Drinking,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,Story1,Humor,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Story1,Story2,Humor,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Story2,Drinking,Humor,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,Music1,Passion,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Music1,Music2,Passion,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Music2,Drinking,Passion,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,Hike1,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Hike1,Hike2,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Hike2,Drinking,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(Drinking,CurrentEvent1,Opinion,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(CurrentEvent1,CurrentEvent2,Opinion,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Sarah, Speak(CurrentEvent2,Drinking,Opinion,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, ServeDrink(Bartender,Mark,Beer), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, ServeDrink(Bartender,Sarah,WhiteWine), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, RememberDrinkPreference(Bartender,Mark,Beer,Whiskey), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, RememberDrinkPreference(Bartender,Sarah,WhiteWine), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, OfferToClean(Bartender,Sarah,Dress), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, OfferAnotherDrink(Bartender,Sarah), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, FacilitateConversation(Bartender,Mark,Sarah), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, PlayMusic(Bartender,Jazz), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, ServeSnacks(Bartender,Mark,Peanuts), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, ServeSnacks(Bartender,Sarah,CheesePlatter), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Start,Greeting,Introduction,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Drinking,Order,Request,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Start,Recommend1,None,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Recommend1,Recommend2,None,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Start,SmallTalk1,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(SmallTalk1,SmallTalk2,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(SmallTalk2,Drinking,Interest,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Drinking,Incident1,Incident,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Incident1,Incident2,Incident,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Incident2,Drinking,Incident,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Drinking,Snack,Offer,None), [t])",
+            "value": 1
+          },
+          {
+            "key": "Event(Action-End, Bartender, Speak(Snack,Drinking,Offer,None), [t])",
+            "value": 1
+          }
+        ]
+      }
+    },
+    "Dialogues": [
+      {
+        "CurrentState": "Start",
+        "NextState": "Greeting",
+        "Meaning": "Introduction",
+        "Style": "None",
+        "Utterance": " \"Mark and Sarah enter the bar and take a seat.\"",
+        "UtteranceId": "TTS-0CCLGVVN1P3CPZTPYB5R6QN7F23LBAH2"
+      },
+      {
+        "CurrentState": "Greeting",
+        "NextState": "Ordering",
+        "Meaning": "Introduction",
+        "Style": "None",
+        "Utterance": " \"Mark greets Sarah and asks her what she would like to drink.\"",
+        "UtteranceId": "TTS-0CCUH5DUM3W190FTQG8TS9H55N60P81M"
+      },
+      {
+        "CurrentState": "Ordering",
+        "NextState": "Drinking",
+        "Meaning": "Purchase",
+        "Style": "None",
+        "Utterance": " \"Sarah thanks Mark and begins sipping her wine.\"",
+        "UtteranceId": "TTS-0CC3X69R6C5IXYFEFFF2DLU0W1LUQCWY"
+      },
+      {
+        "CurrentState": "Ordering",
+        "NextState": "Drinking",
+        "Meaning": "Purchase",
+        "Style": "None",
+        "Utterance": " \"Mark begins drinking his beer.\"",
+        "UtteranceId": "TTS-0CCZF2IAOOCWHTOWW7L3V4623MSI6S6E"
+      },
+      {
+        "CurrentState": "Drinking",
+        "NextState": "TVShow1",
+        "Meaning": "Interest",
+        "Style": "None",
+        "Utterance": " \"Mark asks Sarah if she has seen any good TV shows lately.\"",
+        "UtteranceId": "TTS-0CCAS3IKZDEMRPXSYNAQ9RT5QXA3JDY8"
+      },
+      {
+        "CurrentState": "TVShow1",
+        "NextState": "TVShow2",
+        "Meaning": "Interest",
+        "Style": "None",
+        "Utterance": " \"Sarah mentions that she has been binge-watching a show on streaming service.\"",
+        "UtteranceId": "TTS-0CCK5FMWRB6TW5Y6SJWZK8YQ7FV5S92L"
+      },
+      {
+        "CurrentState": "TVShow2",
+        "NextState": "Drinking",
+        "Meaning": "Interest",
+        "Style": "None",
+        "Utterance": " \"Mark says he has heard of that show and the two agree to continue the conversation later.\"",
+        "UtteranceId": "TTS-0CCBXCVNO09WAQRZX5WF24ZWQORR9M69"
+      },
+      {
+        "CurrentState": "Drinking",
+        "NextState": "Politics1",
+        "Meaning": "Controversy",
+        "Style": "None",
+        "Utterance": " \"Sarah brings up a political issue and asks Mark his thoughts.\"",
+        "UtteranceId": "TTS-0CCWSLA33VU343E1GT7AQ1FTEY2WZ9H5"
+      },
+      {
+        "CurrentState": "Politics1",
+        "NextState": "Politics2",
+        "Meaning": "Controversy",
+        "Style": "None",
+        "Utterance": " \"Mark disagrees with Sarah's perspective and they begin to debate the issue.\"",
+        "UtteranceId": "TTS-0CCGROE4DQMHXCVDUSY11TJV0XJPQ4GS"
+      },
+      {
+        "CurrentState": "Politics2",
+        "NextState": "Drinking",
+        "Meaning": "Controversy",
+        "Style": "None",
+        "Utterance": " \"Sarah and Mark both calm down and agree to disagree after a while.\"",
+        "UtteranceId": "TTS-0CCACWAF64NO0HMIXUWFVAKGTD6VC19W"
+      },
+      {
+        "CurrentState": "Drinking",
+        "NextState": "Accident1",
+        "Meaning": "Incident",
+        "Style": "None",
+        "Utterance": " \"Sarah spills wine on her dress and becomes upset.\"",
+        "UtteranceId": "TTS-0CC6KCYX9LGJPXKCXKBT43K3WOY7HATC"
+      },
+      {
+        "CurrentState": "Accident1",
+        "NextState": "Accident2",
+        "Meaning": "Incident",
+        "Style": "None",
+        "Utterance": " \"Mark notices and offers to help Sarah clean the stain.\"",
+        "UtteranceId": "TTS-0CCK3GSWFINVFM0EWV6JOPQF71TE1M4B"
+      },
+      {
+        "CurrentState": "Accident2",
+        "NextState": "Drinking",
+        "Meaning": "Incident",
+        "Style": "None",
+        "Utterance": " \"Sarah accepts Mark's offer and the two continue to drink.\"",
+        "UtteranceId": "TTS-0CC4EZBHRIL756006DIP4PQHE5L8FS04"
+      },
+      {
+        "CurrentState": "Start",
+        "NextState": "Recommend1",
+        "Meaning": "None",
+        "Style": "None",
+        "Utterance": " \"The bartender approaches Mark and Sarah and asks if they want to try a new drink.\"",
+        "UtteranceId": "TTS-0CC14AUHRF8RHMSD7ODHYAHKPJV9JF8A"
+      },
+      {
+        "CurrentState": "Recommend1",
+        "NextState": "Recommend2",
+        "Meaning": "None",
+        "Style": "None",
+        "Utterance": " \"The bartender describes the drink and the ingredients.\"",
+        "UtteranceId": "TTS-0CC5R4RW2OTISXYAGHVW5WHOPTCUPIWS"
+      },
+      {
+        "CurrentState": "Recommend2",
+        "NextState": "Drinking",
+        "Meaning": "Purchase",
+        "Style": "None",
+        "Utterance": " \"Mark and Sarah both decide to try the drink.\"",
+        "UtteranceId": "TTS-0CC7K4ABCJ01YNRSASQ94S0CNN0POBM5"
+      },
+      {
+        "CurrentState": "Drinking",
+        "NextState": "Travel1",
+        "Meaning": "Interest",
+        "Style": "None",
+        "Utterance": " \"Sarah asks Mark where he would like to travel.\"",
+        "UtteranceId": "TTS-0CC80R95ANVDTT8P0LF2DV6Q3GQHI1Z0"
+      },
+      {
+        "CurrentState": "Travel1",
+        "NextState": "Travel2",
+        "Meaning": "Interest",
+        "Style": "None",
+        "Utterance": " \"Mark mentions his dream destination and asks Sarah the same question.\"",
+        "UtteranceId": "TTS-0CC204EGXB1EJ8JG0IITJMKQ785GWOJE"
+      },
+      {
+        "CurrentState": "Travel2",
+        "NextState": "Drinking",
+        "Meaning": "Interest",
+        "Style": "None",
+        "Utterance": " \"Sarah tells Mark about her favorite trip and the discussion continues.\"",
+        "UtteranceId": "TTS-0CCRKNIC09FVIGAN3H8SW93E80ZJ479T"
+      }
+    ]
+  },
+  "types": [
+    {
+      "TypeId": 0,
+      "ClassName": "IntegratedAuthoringTool.IntegratedAuthoringToolAsset, IntegratedAuthoringTool, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null"
+    }
+  ]
+}

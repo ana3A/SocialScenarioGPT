@@ -1,0 +1,2569 @@
+{
+    "scenario_name": "test_Olympics",
+    "scenario_description": "I look forward to watching the Olympics every four years. I plan my day around my favorite events. I try not to miss any action. Watching the countries compete is exciting. I've been watching the games all week.",
+    "last_ended": "end",
+    "agents": {
+        "Viewer": {
+            "knowledge_base": [
+                "BEL(Viewer, favorite_events_exist) = True",
+                "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                "BEL(Viewer, watching_Olympics_exciting) = True",
+                "BEL(Viewer, watching_Olympics_entertaining) = True",
+                "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True",
+                "DES(Viewer, plan_day_around_favorite_events) = True",
+                "DES(Viewer, try_not_miss_any_action) = True",
+                "DES(Viewer, watch_all_Olympic_events) = True",
+                "DES(Viewer, enjoy_watching_countries_compete) = True",
+                "DES(Viewer, watch_Olympics_all_week) = True"
+            ],
+            "intentions": {
+                "INTENT(Viewer, plan_day_around_favorite_events) = True": {
+                    "action_plan": [
+                        "INTENT(Viewer, plan_day_around_favorite_events) = True",
+                        "Check_Schedule(Viewer, Olympics_Schedule)",
+                        "Create_Watching_Schedule(Viewer, Watches_Schedule)",
+                        "Prepare_Food(Viewer, Snacks)",
+                        "Set_Reminders(Viewer, Phone_Alarm)",
+                        "Watch_Events(Viewer, Olympic_Events)",
+                        "Take_Notes(Viewer, Personal_Notes)",
+                        "Share_Notes(Viewer, Social_Media)"
+                    ]
+                },
+                "INTENT(Viewer, try_not_miss_any_action) = True": {
+                    "action_plan": [
+                        "Notify(Viewer, Coach, \"Please remind me of the schedule for the Olympic events.\")",
+                        "Receive(Coach, Viewer, schedule_Olympic_events)",
+                        "Plan(Viewer, schedule_Olympic_events)",
+                        "Notify(Viewer, Athlete, \"I am a huge fan. Would you be willing to sign my merchandise?\")",
+                        "Receive(Athlete, Viewer, response_affirmative)",
+                        "Perform(Athlete, Viewer, sign_merchandise)",
+                        "Notify(Viewer, Commentator, \"I love your commentary. Could you give me some insight on which games to watch?\")",
+                        "Receive(Commentator, Viewer, commentary_insight)",
+                        "Plan(Viewer, commentary_insight, watch_selected_events)"
+                    ]
+                },
+                "INTENT(Viewer, watch_all_Olympic_events) = True": {
+                    "action_plan": [
+                        "PlanDayAroundFavoriteEvents(Viewer, None)",
+                        "WatchOlympics(Viewer, None)",
+                        "CheckTVSchedule(Viewer, None)",
+                        "FindPreferredChannel(Viewer, None)",
+                        "SitOnCouch(Viewer, None)",
+                        "GrabSnacks(Viewer, None)",
+                        "SettleIntoWatching(Viewer, None)",
+                        "PayAttentionToAthletes(Viewer, Athlete)",
+                        "ListenToCommentators(Viewer, Commentator)",
+                        "CelebrateWinners(Viewer, None)"
+                    ]
+                },
+                "INTENT(Viewer, enjoy_watching_countries_compete) = True": {
+                    "action_plan": [
+                        "PlanDay(Viewer, own_schedule)",
+                        "SearchSchedule(Viewer, Olympics_website, favorite_events)",
+                        "SetReminder(Viewer, phone_calendar, favorite_events)",
+                        "PrepareSnacks(Viewer, kitchen)",
+                        "TurnOnTV(Viewer, living_room_TV)",
+                        "TuneIntoBroadcast(Viewer, TV_channel)",
+                        "WatchEvents(Viewer, TV, favorite_events, snacks)",
+                        "ResearchCountries(Viewer, phone_browser, competing_countries)",
+                        "DiscussEvents(Viewer, social_media, friends)"
+                    ]
+                },
+                "INTENT(Viewer, watch_Olympics_all_week) = True": {
+                    "action_plan": [
+                        "PlanDay(Viewer, None)",
+                        "CheckSchedule(Viewer, None)",
+                        "WatchEvent(Viewer, Countries)",
+                        "IncreaseKnowledge(Viewer, Soccer)",
+                        "WatchAllEvents(Viewer, None)"
+                    ]
+                }
+            },
+            "actions": {
+                "PlanDay(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "DES(Viewer, plan_day_around_favorite_events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, scheduled_day) = True",
+                        "BEL(Viewer, missed_events_exist) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckSchedule(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, knows_schedule) = True",
+                        "BEL(Viewer, favorite_events_exist) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WatchEvent(Viewer, Countries)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True"
+                    ],
+                    "effects": [
+                        "DES(Viewer, watch_more_events) = True",
+                        "BEL(Viewer, watched_countries_event) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "IncreaseKnowledge(Viewer, Soccer)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, increased_knowledge_soccer) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WatchAllEvents(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, watch_all_Olympic_events) = True",
+                        "BEL(Viewer, watching_Olympics_all_week) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, watched_all_Olympic_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "INTENT(Viewer, plan_day_around_favorite_events) = True": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                        "DES(Viewer, plan_day_around_favorite_events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True",
+                        "DES(Viewer, try_not_miss_any_action) = True",
+                        "DES(Viewer, watch_all_Olympic_events) = True",
+                        "DES(Viewer, enjoy_watching_countries_compete) = True",
+                        "DES(Viewer, watch_Olympics_all_week) = True",
+                        "BEL(Viewer, Olympics_Schedule) = Arguments*",
+                        "BEL(Viewer, Watches_Schedule) = Arguments*",
+                        "BEL(Viewer, Snacks) = Arguments*",
+                        "BEL(Viewer, Phone_Alarm) = Arguments*"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check_Schedule(Viewer, Olympics_Schedule)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, Olympics_Schedule_exists) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Create_Watching_Schedule(Viewer, Watches_Schedule)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "DES(Viewer, plan_day_around_favorite_events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, Watches_Schedule) = Watching_Schedule",
+                        "DES(Viewer, try_not_miss_any_action) = True",
+                        "DES(Viewer, watch_all_Olympic_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Prepare_Food(Viewer, Snacks)": {
+                    "conditions": [
+                        "BEL(Viewer, watch_Olympics_all_week) = True",
+                        "BEL(Viewer, prepare_snacks) = False"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, prepare_snacks) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Set_Reminders(Viewer, Phone_Alarm)": {
+                    "conditions": [
+                        "BEL(Viewer, plan_day_around_favorite_events) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                        "DES(Viewer, try_not_miss_any_action) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, alarm_set) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Watch_Events(Viewer, Olympic_Events)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "DES(Viewer, try_not_miss_any_action) = True"
+                    ],
+                    "effects": [
+                        "DES(Viewer, watch_all_Olympic_events) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Take_Notes(Viewer, Personal_Notes)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True",
+                        "DES(Viewer, take_personal_notes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, notes_taken) = True",
+                        "BEL(Viewer, gained_knowledge) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Share_Notes(Viewer, Social_Media)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_all_week) = True",
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "DES(Viewer, take_notes_about_Olympics) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, shared_notes_on_Social_Media) = True",
+                        "DES(Viewer, receive_feedback_about_Olympics_notes_from_friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Notify(Viewer, Coach, \"Please remind me of the schedule for the Olympic events.\")": {
+                    "conditions": [
+                        "BEL(Coach, has_schedule_to_Olympic_events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, reminded_of_schedule_to_Olympic_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Receive(Coach, Viewer, schedule_Olympic_events)": {
+                    "conditions": [
+                        "BEL(Coach, has_schedule_of_Olympic_events)"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, has_schedule_of_Olympic_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Plan(Viewer, schedule_Olympic_events)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, schedule_Olympic_events_exist) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Notify(Viewer, Athlete, \"I am a huge fan. Would you be willing to sign my merchandise?\")": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_all_week) = True",
+                        "BEL(Athlete, fan_of_viewers_country) = True"
+                    ],
+                    "effects": [
+                        "DES(Viewer, get_merchandise_signed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Receive(Athlete, Viewer, response_affirmative)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "DES(Viewer, try_not_miss_any_action) = True",
+                        "BEL(Athlete, willingness_to_sign_merchandise) = True"
+                    ],
+                    "effects": [
+                        "BEL(Athlete, merchandise_signed_by_viewer) = True",
+                        "BEL(Viewer, Athlete_signed_merchandise_received) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Perform(Athlete, Viewer, sign_merchandise)": {
+                    "conditions": [
+                        "BEL(Athlete, merchandise_signing_possible) = True",
+                        "BEL(Viewer, merchandise_to_sign_exists) = True",
+                        "DES(Viewer, obtain_athlete_signature) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, merchandise_signed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Notify(Viewer, Commentator, \"I love your commentary. Could you give me some insight on which games to watch?\")": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "DES(Viewer, watch_all_Olympic_events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, commentary_insight_exists) = True",
+                        "DES(Viewer, watch_selected_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Receive(Commentator, Viewer, commentary_insight)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True",
+                        "DES(Viewer, watch_all_Olympic_events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, enjoys_Commentator_insight) = True",
+                        "DES(Viewer, watch_selected_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Plan(Viewer, commentary_insight, watch_selected_events)": {
+                    "conditions": [
+                        "BEL(Viewer, commentary_insight) = True",
+                        "DES(Viewer, watch_selected_events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, increased_knowledge_selected_events) = True",
+                        "DES(Viewer, enjoy_watching_selected_events) = True",
+                        "BEL(Viewer, watched_selected_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "excitement"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PlanDayAroundFavoriteEvents(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "DES(Viewer, plan_day_around_favorite_events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, day_planned_around_favorite_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WatchOlympics(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "CheckTVSchedule(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, TV_schedule_checked) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "FindPreferredChannel(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, found_preferred_channel) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SitOnCouch(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, comfortable_couch_exist) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, sitting_on_couch) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "GrabSnacks(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True",
+                        "DES(Viewer, grab_snacks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, satisfied_appetite) = True",
+                        "DES(Viewer, grab_snacks) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "SettleIntoWatching(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, trying_not_miss_any_action) = True",
+                        "DES(Viewer, watch_all_Olympic_events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, personally_enjoying_Olympics) = True",
+                        "BEL(Viewer, feeling_relaxed) = True",
+                        "DES(Viewer, share_Olympic_highlights_with_friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "PayAttentionToAthletes(Viewer, Athlete)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Athlete, being_watched_by_Viewer) = True",
+                        "DES(Viewer, becoming_knowledgeable_about_Athlete) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "ListenToCommentators(Viewer, Commentator)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, listening_to_commentators_increases_knowledge) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, gaining_knowledge_about_sport) = True",
+                        "BEL(Viewer, becoming_informed_about_athletes) = True",
+                        "DES(Viewer, plan_day_around_commentator_schedule) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "CelebrateWinners(Viewer, None)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True"
+                    ],
+                    "effects": [
+                        "DES(Viewer, feel_happy_about_winners) = True",
+                        "BEL(Viewer, feels_empathetic_towards_winners) = True",
+                        "BEL(Viewer, feels_connected_to_winners) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "PlanDay(Viewer, own_schedule)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, plan_day_around_favorite_events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, schedule_prepared) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "SearchSchedule(Viewer, Olympics_website, favorite_events)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, favorite_events_exist_on_Olympics_website) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SetReminder(Viewer, phone_calendar, favorite_events)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, reminder_set_for_favorite_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PrepareSnacks(Viewer, kitchen)": {
+                    "conditions": [
+                        "BEL(Viewer, have_snacks_in_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, feel_prepared_to_watch_events) = True",
+                        "DES(Viewer, enjoy_watching_events_with_snacks) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "TurnOnTV(Viewer, living_room_TV)": {
+                    "conditions": [
+                        "BEL(Viewer, TV_is_off) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, TV_is_on) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "TuneIntoBroadcast(Viewer, TV_channel)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(TV_channel, Olympics_broadcast_exist) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, watching_Olympics_on_TV) = True",
+                        "DES(Viewer, enjoy_watching_countries_compete) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "WatchEvents(Viewer, TV, favorite_events, snacks)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True",
+                        "BEL(Viewer, watch_all_Olympic_events) = True",
+                        "BEL(Viewer, own_schedule) = True",
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                        "DES(Viewer, enjoy_watching_countries_compete) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, learning_about_competing_countries) = True",
+                        "BEL(Viewer, entertainment_value_of_watching_Olympics_increased) = True",
+                        "DES(Viewer, satisfy_snack_cravings) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "ResearchCountries(Viewer, phone_browser, competing_countries)": {
+                    "conditions": [
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Viewer, researched_countries) = True",
+                        "BEL(Viewer, competing_countries_exist) = True",
+                        "DES(Viewer, discuss_competing_countries) = True",
+                        "DES(Viewer, learn_about_different_soccer_cultures) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "DiscussEvents(Viewer, social_media, friends)": {
+                    "conditions": [
+                        "BEL(Viewer, watching_Olympics_all_week) = True",
+                        "DES(Viewer, enjoy_watching_countries_compete) = True"
+                    ],
+                    "effects": [
+                        "BEL(friends, interested_in_Olympics) = True",
+                        "BEL(friends, aware_of_favorites_events) = True",
+                        "DES(Viewer, discuss_Olympic_events_with_friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, ASK_FOR_FAVORITE_SPORT, None, None)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True",
+                        "DES(Viewer, plan_day_around_favorite_events) = True",
+                        "DES(Viewer, try_not_miss_any_action) = True",
+                        "DES(Viewer, watch_all_Olympic_events) = True",
+                        "DES(Viewer, enjoy_watching_countries_compete) = True",
+                        "DES(Viewer, watch_Olympics_all_week) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "[Start, ASK_FOR_FAVORITE_SPORT, None, None, \"Hey, have you been watching the Olympics? What's your favorite sport?\""
+                    ],
+                    "emotion_condition": [
+                        "[Neutral], [Speak(Start, ASK_FOR_FAVORITE_SPORT, None, None)], None, None"
+                    ]
+                },
+                "Speak(SHARE_FAVORITE_SPORT, ASK_ABOUT_EXCITING_EVENTS, None, None)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True",
+                        "DES(Viewer, plan_day_around_favorite_events) = True",
+                        "DES(Viewer, try_not_miss_any_action) = True",
+                        "DES(Viewer, watch_all_Olympic_events) = True",
+                        "DES(Viewer, enjoy_watching_countries_compete) = True",
+                        "DES(Viewer, watch_Olympics_all_week) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Speak(SHARE_FAVORITE_SPORT, ASK_ABOUT_EXCITING_EVENTS, Joy, None)"
+                    ]
+                },
+                "Speak(SHARE_EXCITING_EVENTS, ASK_ABOUT_MEDAL_COUNT, None, None)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True",
+                        "DES(Viewer, plan_day_around_favorite_events) = True",
+                        "DES(Viewer, try_not_miss_any_action) = True",
+                        "DES(Viewer, watch_all_Olympic_events) = True",
+                        "DES(Viewer, enjoy_watching_countries_compete) = True",
+                        "DES(Viewer, watch_Olympics_all_week) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Speak(SHARE_EXCITING_EVENTS, ASK_ABOUT_MEDAL_COUNT, None, None)],Joy"
+                    ],
+                    "emotion_condition": [
+                        "Speak(SHARE_EXCITING_EVENTS, ASK_ABOUT_MEDAL_COUNT, Hope, None)"
+                    ]
+                },
+                "Speak(SHARE_MEDAL_COUNT, END, None, None)": {
+                    "conditions": [
+                        "BEL(Viewer, favorite_events_exist) = True",
+                        "BEL(Viewer, Olympics_is_held_every_4_years) = True",
+                        "BEL(Viewer, watching_Olympics_exciting) = True",
+                        "BEL(Viewer, watching_Olympics_entertaining) = True",
+                        "BEL(Viewer, watching_Olympics_increases_knowledge_soccer) = True",
+                        "DES(Viewer, plan_day_around_favorite_events) = True",
+                        "DES(Viewer, try_not_miss_any_action) = True",
+                        "DES(Viewer, watch_all_Olympic_events) = True",
+                        "DES(Viewer, enjoy_watching_countries_compete) = True",
+                        "DES(Viewer, watch_Olympics_all_week) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Speak(SHARE_MEDAL_COUNT, END, relief, None)"
+                    ]
+                }
+            }
+        },
+        "Athlete": {
+            "knowledge_base": [
+                "BEL(Athlete, hasCompeted) = True",
+                "BEL(Athlete, isInjured) = False",
+                "BEL(Athlete, hasWonMedals, Gold, Silver, Bronze) = Gold: 2, Silver: 1, Bronze: 0",
+                "BEL(Athlete, hasGoodRelationshipWithCoach) = True",
+                "DES(Athlete, WinNextEvent) = True",
+                "DES(Athlete, BeatPersonalBest) = True",
+                "DES(Athlete, StayFocused) = True",
+                "DES(Athlete, MakeCountryProud) = True"
+            ],
+            "intentions": {
+                "INTENT(Athlete": {
+                    "action_plan": [
+                        "Practice(Athlete, Gym, Time=2 hours)",
+                        "ConsultWithCoach(Athlete, Coach, Objective=WinningStrategy)",
+                        "VisualizeSuccess(Athlete, EventLocation)",
+                        "StayFocused(Athlete)",
+                        "EatHealthy(Athlete, NourishingDiet)",
+                        "RestAndRecover(Athlete, Bed, Time=8 hours)",
+                        "WarmUp(Athlete, EventLocation)",
+                        "Compete(Athlete, EventLocation)"
+                    ]
+                }
+            },
+            "actions": {
+                "Practice(Athlete, Gym, Time=2 hours)": {
+                    "conditions": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, isInjured) = False"
+                    ],
+                    "effects": [
+                        "BEL(Athlete, hasPracticed) = True",
+                        "BEL(Athlete, isTired) = True",
+                        "DES(Athlete, BeatPersonalBest) = True",
+                        "DES(Athlete, StayFocused) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ConsultWithCoach(Athlete, Coach, Objective=WinningStrategy)": {
+                    "conditions": [
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True",
+                        "DES(Athlete, WinNextEvent) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, hasSharedWinningStrategyWithAthlete) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "VisualizeSuccess(Athlete, EventLocation)": {
+                    "conditions": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, isInjured) = False",
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True",
+                        "DES(Athlete, WinNextEvent) = True"
+                    ],
+                    "effects": [
+                        "DES(Athlete, PerformVisualisation) = True",
+                        "BEL(Athlete, VisualisedSuccessAt, EventLocation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "StayFocused(Athlete)": {
+                    "conditions": [
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True",
+                        "DES(Athlete, StayFocused) = True"
+                    ],
+                    "effects": [
+                        "BEL(Athlete, StayedFocused) = True",
+                        "BEL(Athlete, willPerformWell) = True",
+                        "DES(Athlete, WinNextEvent) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Focus"
+                    ]
+                },
+                "EatHealthy(Athlete, NourishingDiet)": {
+                    "conditions": [
+                        "BEL(Athlete, isInjured) = False"
+                    ],
+                    "effects": [
+                        "DES(Athlete, StayHealthy) = True",
+                        "BEL(Athlete, hasCravings) = False",
+                        "BEL(Athlete, isFull) = True",
+                        "BEL(Athlete, hasEnergy) += 1",
+                        "BEL(Athlete, hasGoodMood) += 1",
+                        "BEL(Athlete, hasNourishingDiet) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "RestAndRecover(Athlete, Bed, Time=8 hours)": {
+                    "conditions": [
+                        "BEL(Athlete, isInjured) = False",
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True"
+                    ],
+                    "effects": [
+                        "BEL(Athlete, hasCompeted) = False",
+                        "BEL(Athlete, isInjured) = False",
+                        "BEL(Athlete, hasWonMedals, Gold, Silver, Bronze) = Gold: 2, Silver: 1, Bronze: 0",
+                        "DES(Athlete, WinNextEvent) = True",
+                        "DES(Athlete, BeatPersonalBest) = True",
+                        "DES(Athlete, StayFocused) = True",
+                        "DES(Athlete, MakeCountryProud) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "WarmUp(Athlete, EventLocation)": {
+                    "conditions": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, isInjured) = False",
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True"
+                    ],
+                    "effects": [
+                        "DES(Athlete, PerformBetterInEvent) = True",
+                        "BEL(Athlete, isWarmedUp, EventLocation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Compete(Athlete, EventLocation)": {
+                    "conditions": [
+                        "BEL(Athlete, hasCompeted) = False",
+                        "BEL(Athlete, isInjured) = False"
+                    ],
+                    "effects": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, hasWonMedals, Gold, Silver, Bronze) = Gold: +1 (if the athlete won a gold medal), Silver: +1 (if the athlete won a silver medal), Bronze: +1 (if the athlete won a bronze medal)",
+                        "DES(Athlete, WinNextEvent) = False",
+                        "DES(Athlete, BeatPersonalBest) = True/False",
+                        "DES(Athlete, MakeCountryProud) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, INTRODUCE, None, None)": {
+                    "conditions": [
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True",
+                        "DES(Athlete, StayFocused) = True",
+                        "INTENT(Athlete, WinNextEvent) = True"
+                    ],
+                    "effects": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, hasWonMedals, Gold, Silver, Bronze) = Gold: 2, Silver: 1, Bronze: 0",
+                        "DES(Athlete, WinNextEvent) = False",
+                        "DES(Athlete, BeatPersonalBest) = True",
+                        "DES(Athlete, StayFocused) = False",
+                        "DES(Athlete, MakeCountryProud) = True",
+                        "INTENT(Athlete, WinNextEvent) = False"
+                    ],
+                    "occ_emotion": [
+                        "Start, INTRODUCE, None, None, \"I am an athlete competing in the upcoming Olympic games.\"",
+                        "INTRODUCE, None, None, None, None"
+                    ],
+                    "emotion_condition": [
+                        "Speak(Start, INTRODUCE, Hope, None)"
+                    ]
+                },
+                "Speak(INTRODUCE, ASK_ABOUT_FAVORITE_SPORT, None, None)": {
+                    "conditions": [
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True",
+                        "INTENT(Athlete, WinNextEvent) = True",
+                        "INTENT(Athlete, StayFocused) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(ASK_ABOUT_FAVORITE_SPORT, SHARE_FAVORITE_SPORT, None, None)": {
+                    "conditions": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, isInjured) = False",
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True",
+                        "INTENT(Athlete, Speak) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(SHARE_FAVORITE_SPORT, ASK_ABOUT_EXPERIENCE, None, None)": {
+                    "conditions": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, isInjured) = False",
+                        "DES(Athlete, WinNextEvent) = True",
+                        "DES(Athlete, StayFocused) = True",
+                        "INTENT(Athlete, None) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Speak(SHARE_FAVORITE_SPORT, ASK_ABOUT_EXPERIENCE, None, None)], [Belief(BeliefType='EventLocation', Value=None), Desire(DesireType='Winning'), Intention(IntentionType='WarmUp')]Joy"
+                    ],
+                    "emotion_condition": [
+                        "Decide(Gratification), Speak(SHARE_FAVORITE_SPORT, ASK_ABOUT_EXPERIENCE, None, None)"
+                    ]
+                },
+                "Speak(ASK_ABOUT_EXPERIENCE, SHARE_EXPERIENCE, None, None)": {
+                    "conditions": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, isInjured) = False",
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True",
+                        "INTENT(Athlete, None)"
+                    ],
+                    "effects": [
+                        "DES(Athlete, WinNextEvent) = False",
+                        "DES(Athlete, BeatPersonalBest) = False",
+                        "DES(Athlete, StayFocused) = False",
+                        "INTENT(Athlete, Speak) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(SHARE_EXPERIENCE, ASK_ABOUT_MEDAL_ASPIRATION, None, None)": {
+                    "conditions": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, isInjured) = False",
+                        "DES(Athlete, StayFocused) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(ASK_ABOUT_MEDAL_ASPIRATION, SHARE_MEDAL_ASPIRATION, None, None)": {
+                    "conditions": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, isInjured) = False",
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True",
+                        "INTENT(Athlete, WinNextEvent) = True"
+                    ],
+                    "effects": [
+                        "None"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(SHARE_MEDAL_ASPIRATION, END, None, None)": {
+                    "conditions": [
+                        "BEL(Athlete, hasCompeted) = True",
+                        "BEL(Athlete, isInjured) = False",
+                        "BEL(Athlete, hasGoodRelationshipWithCoach) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            }
+        },
+        "Coach": {
+            "knowledge_base": [
+                "BEL(Coach, Athlete_is_in_good_condition) = True",
+                "BEL(Coach, Athlete_has_a_strong_will) = True",
+                "BEL(Coach, Opposing_team_is_strong) = False",
+                "BEL(Coach, Athlete_has_practiced_enough) = True",
+                "DES(Coach, Win_the_competition)",
+                "DES(Coach, Optimize_the_team's_performance)",
+                "DES(Coach, Formulate_a_successful_strategy)"
+            ],
+            "intentions": {
+                "INTENT(Coach, Plan_the_training_schedule_for_Athlete) = True": {
+                    "action_plan": [
+                        "Athlete",
+                        "Inquire_About_Athlete's_Current_Condition(Coach, Athlete)",
+                        "Athlete",
+                        "Evaluate_Athlete's_Strengths_and_Weaknesses(Coach, Athlete)",
+                        "Athlete",
+                        "Discuss_Training_Goals(Coach, Athlete)",
+                        "Athlete",
+                        "Develop_Training_Plan(Coach, Athlete)",
+                        "Athlete",
+                        "Specify_Training_Resources(Coach, Athlete)",
+                        "Monitor_Training_Progress(Coach, Athlete)",
+                        "Athlete",
+                        "Provide_Motivational_Support(Coach, Athlete)",
+                        "Athlete"
+                    ]
+                },
+                "INTENT(Coach, Analyze_and_Assess_the_Opposition) = True": {
+                    "action_plan": [
+                        "Evaluate_Condition(Coach, Athlete)",
+                        "Analyze_Performance(Coach, Athlete)",
+                        "Review_Practice_Routines(Coach, Athlete)",
+                        "Formulate_Strategy(Coach, Team)",
+                        "Provide_Motivation_and_Feedback(Coach, Athlete)"
+                    ]
+                },
+                "INTENT(Coach, Develop_the_Team's_game_plan) = True": {
+                    "action_plan": [
+                        "Analyze(Agent=Coach, Target=Athlete)",
+                        "Set_Objectives(Agent=Coach, Target=Athlete)",
+                        "Develop_Strategy(Agent=Coach, Target=Athlete)",
+                        "Execute_Practice(Agent=Coach, Target=Athlete)",
+                        "Monitor_Performance(Agent=Coach, Target=Athlete)",
+                        "Motivate(Agent=Coach, Target=Athlete)",
+                        "Evaluate_Performance(Agent=Coach, Target=Athlete)"
+                    ]
+                },
+                "INTENT(Coach, Encourage_Athlete) = True": {
+                    "action_plan": [
+                        "Evaluate_Performance(Coach, Athlete)",
+                        "Motivate_Athlete(Coach, Athlete)",
+                        "Discuss_Strategies(Coach, Athlete)",
+                        "Provide_Feedback(Coach, Athlete)",
+                        "Evaluate_Opponent(Coach, Athlete, Opponent)",
+                        "Encourage_Athlete(Coach, Athlete)"
+                    ]
+                },
+                "INTENT(Coach, Provide_Tactical_Advice_to_Athlete) = True": {
+                    "action_plan": [
+                        "Analyze_Performance(Coach, Athlete)",
+                        "Identify_Opponent_Strengths(Coach, None)",
+                        "Formulate_Strategy(Coach, Athlete, Opposing_team)",
+                        "Present_Tactical_Advice(Coach, Athlete, Strategy)"
+                    ]
+                }
+            },
+            "actions": {
+                "Analyze_Performance(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Identify_Opponent_Strengths(Coach, None)": {
+                    "conditions": [
+                        "BEL(Coach, Opposing_team_is_strong) = False"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Opposing_team_is_weak) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Formulate_Strategy(Coach, Athlete, Opposing_team)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "BEL(Coach, Opposing_team_is_strong) = False"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_has_a_strategy) = True",
+                        "BEL(Coach, Athlete_understands_strategy) = True",
+                        "DES(Coach, Optimize_the_team's_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Analyze",
+                        "Hope",
+                        "Resentment",
+                        "Admiration"
+                    ]
+                },
+                "Present_Tactical_Advice(Coach, Athlete, Strategy)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "BEL(Coach, Opposing_team_is_strong) = False",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "DES(Coach, Win_the_competition) = True",
+                        "DES(Coach, Optimize_the_team's_performance) = True",
+                        "DES(Coach, Formulate_a_successful_strategy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_has_been_given_tactical_advice) = True",
+                        "DES(Coach, Athlete_to_implement_tactical_advice) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Athlete": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_has_improved_condition) = True",
+                        "BEL(Coach, Athlete_is_motivated) = True",
+                        "DES(Coach, Maximize_Athlete's_Performance) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Inquire_About_Athlete's_Current_Condition(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Evaluate_Athlete's_Strengths_and_Weaknesses(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "BEL(Coach, Athlete_is_in_good_condition) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_has_weaknesses) = True/False",
+                        "BEL(Coach, Athlete_has_strengths) = True/False",
+                        "DES(Coach, Adjust_Training_Plan) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Discuss_Training_Goals(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Formulate_a_successful_strategy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Develop_Training_Plan(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "BEL(Coach, Athlete_is_in_good_condition) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_is_prepared_to_perform_well) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Specify_Training_Resources(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "BEL(Coach, Athlete_is_in_good_condition) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Necessary_training_resources_are_identified_for_Athlete) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Monitor_Training_Progress(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "BEL(Athlete, Athlete_is_training_regularly) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_is_taking_training_seriously) = True",
+                        "DES(Coach, Optimize_the_team's_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Provide_Motivational_Support(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Boost_Athlete's_Motivation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Evaluate_Condition(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_has_practiced_enough) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Review_Practice_Routines(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "DES(Coach, Optimize_the_team's_performance) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_is_in_regular_condition) = True",
+                        "BEL(Coach, Athlete_has_new_tech_knowledge) = True",
+                        "DES(Coach, Improve_the_team's_weak_points) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Formulate_Strategy(Coach, Team)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "BEL(Coach, Opposing_team_is_strong) = False",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "DES(Coach, Formulate_a_successful_strategy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_is_not_confused_by_strategy) = True",
+                        "BEL(Coach, Team_members_know_their_roles_in_strategy) = True",
+                        "DES(Coach, Win_the_competition) = True",
+                        "DES(Coach, Optimize_the_team's_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Provide_Motivation_and_Feedback(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "DES(Coach, Optimize_the_team's_performance) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Win_the_competition) = True",
+                        "DES(Coach, Formulate_a_successful_strategy) = True",
+                        "BEL(Coach, Athlete_is_motivated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Analyze(Agent=Coach, Target=Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "BEL(Coach, Opposing_team_is_strong) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Set_Objectives(Agent=Coach, Target=Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Formulate_a_successful_strategy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Develop_Strategy(Agent=Coach, Target=Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "BEL(Coach, Opposing_team_is_strong) = False",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "DES(Coach, Formulate_a_successful_strategy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Strategy_is_developed_for_competition) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Execute_Practice(Agent=Coach, Target=Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True"
+                    ],
+                    "effects": [
+                        "BEL(Athlete, Athlete_is_practicing) = True",
+                        "BEL(Coach, Athlete_is_making_progress) = True",
+                        "DES(Coach, Optimize_the_team's_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Monitor_Performance(Agent=Coach, Target=Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "BEL(Coach, Athlete_is_in_good_condition) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_performance_is_monitored) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Motivate(Agent=Coach, Target=Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "DES(Coach, Optimize_the_team's_performance)",
+                        "DES(Coach, Formulate_a_successful_strategy)"
+                    ],
+                    "effects": [
+                        "DES(Coach, Motivate_the_Athlete)",
+                        "BEL(Athlete, Athlete_is_motivated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Evaluate_Performance(Agent=Coach, Target=Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_has_practiced_enough) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_performance_evaluation) = Good"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Anxiety",
+                        "Hope"
+                    ]
+                },
+                "Evaluate_Performance(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Motivate_Athlete(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Athlete_is_motivated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Motivation"
+                    ]
+                },
+                "Discuss_Strategies(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "DES(Coach, Formulate_a_successful_strategy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_is_confident_in_strategy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Provide_Feedback(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Optimize_the_team's_performance) = True",
+                        "BEL(Coach, Athlete_is_performing_well) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Criticism"
+                    ]
+                },
+                "Evaluate_Opponent(Coach, Athlete, Opponent)": {
+                    "conditions": [
+                        "BEL(Coach, Opposing_team_is_strong) = False"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Opponent_Is_Weak) = True",
+                        "BEL(Coach, Opponent_Is_Moderate) = False",
+                        "BEL(Coach, Opponent_Is_Strong) = False"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Encourage_Athlete(Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Win_the_competition) = +1",
+                        "DES(Coach, Optimize_the_team's_performance) = +1",
+                        "BEL(Coach, Athlete_is_encouraged) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Encouragement"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, ASK_ABOUT_FAVORITE_EVENT, None, None)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "BEL(Coach, Opposing_team_is_strong) = False",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(ASK_ABOUT_FAVORITE_EVENT, SHARE_FAVORITE_EVENT, None, None)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "BEL(Coach, Opposing_team_is_strong) = False",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "INTENT(Coach, Encourage_Athlete) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Athlete_is_motivated) = True",
+                        "INTENT(Coach, Provide_Tactical_Advice_to_Athlete) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(SHARE_FAVORITE_EVENT, SHARE_ENCOURAGEMENT, None, None)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "BEL(Coach, Opposing_team_is_strong) = False",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True",
+                        "INTENT(Coach, Encourage_Athlete) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Gloating, Speak(SHARE_FAVORITE_EVENT, SHARE_ENCOURAGEMENT, None, None), None, None"
+                    ]
+                },
+                "Speak(SHARE_ENCOURAGEMENT, END, None, None)": {
+                    "conditions": [
+                        "BEL(Coach, Athlete_is_in_good_condition) = True",
+                        "BEL(Coach, Athlete_has_a_strong_will) = True",
+                        "BEL(Coach, Opposing_team_is_strong) = False",
+                        "BEL(Coach, Athlete_has_practiced_enough) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Anger, Speak(SHARE_ENCOURAGEMENT, END, None, None), None, None"
+                    ]
+                }
+            }
+        },
+        "Commentator": {
+            "knowledge_base": [
+                "BEL(Commentator, Interested_in_Olympics) = True",
+                "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                "BEL(Commentator, Familiar_with_Athletes) = True",
+                "BEL(Commentator, Aware_of_Current_Events) = True",
+                "DES(Commentator, Provide_Insightful_Commentary) = True",
+                "DES(Commentator, Share_Background_Information) = True",
+                "DES(Commentator, Keep_Audience_Entertained) = True",
+                "DES(Commentator, Accurately_Predict_Outcomes) = True"
+            ],
+            "intentions": {
+                "INTENT(Commentator, Provide_Insightful_Commentary) = True": {
+                    "action_plan": [
+                        "Research(Commentator, Olympics, Athletes)",
+                        "Prepare(Commentator, Notes)",
+                        "Engage(Commentator, Audience)",
+                        "Watch(Commentator, Olympics)",
+                        "Analyze(Commentator, Performance)",
+                        "Collaborate(Commentator, Coach, Athlete)",
+                        "Report(Commentator, Current_Trends)",
+                        "Summarize(Commentator, Highlights)"
+                    ]
+                },
+                "INTENT(Commentator, Share_Background_Information) = True": {
+                    "action_plan": [
+                        "INTENT(Commentator, Share_Background_Information) = True",
+                        "Research_Olympic_Athletes(Commentator, Athlete)",
+                        "Prepare_Notes(Commentator, None)",
+                        "Join_Broadcast_Team(Commentator, None)",
+                        "Share_Background_Info(Commentator, Viewer, Athlete)",
+                        "Engage_With_Other_Commentator(Commentator, None)",
+                        "Encourage_International_Understanding(Commentator, Viewer)",
+                        "Accurately_Predict_Outcomes(Commentator, Viewer, Athlete)"
+                    ]
+                },
+                "INTENT(Commentator, Keep_Audience_Entertained) = True": {
+                    "action_plan": [
+                        "Greet_Audience(Commentator)",
+                        "Share_Interesting_Facts(Commentator, Athlete)",
+                        "Provide_Insightful_Commentary(Commentator, Athlete)",
+                        "Engage_with_Co-Commentator(Commentator, Co-Commentator)",
+                        "Ask_Questions_to_the_Expert(Group_of_Audience, Coach)",
+                        "Make_Humorous_Jokes(Commentator)",
+                        "Give_Accurate_Predictions(Commentator, Athlete)",
+                        "Thank_Audience_for_Watching(Commentator)"
+                    ]
+                },
+                "INTENT(Commentator, Accurately_Predict_Outcomes) = True": {
+                    "action_plan": [
+                        "Research_Athlete(Commentator, Athlete)",
+                        "Analyse_Opponent_Performance(Commentator, Athletes_Opponent)",
+                        "Evaluate_Weather_Conditions(Commentator, Venue)",
+                        "Consider_Coach_Insight(Commentator, Coach, Athlete)",
+                        "Check_Current_Game_Trends(Commentator, Other_Athletes)",
+                        "Analyse_Possible_Outcomes(Commentator, Athlete, Opponent)",
+                        "Formulate_Prediction(Commentator, Athlete, Opponent)"
+                    ]
+                }
+            },
+            "actions": {
+                "Research_Athlete(Commentator, Athlete)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Knowledge_about_Athlete_[Athlete]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Analyse_Opponent_Performance(Commentator, Athletes_Opponent)": {
+                    "conditions": [
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "BEL(Athletes_Opponent, Has_Competed_In_Olympics) = True",
+                        "BEL(Athletes_Opponent, World_Ranking) = Ranking"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "BEL(Commentator, Understood_Performance_Of_Opponent) = True",
+                        "BEL(Commentator, Opponent_Weaknesses_Identified) = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Evaluate_Weather_Conditions(Commentator, Venue)": {
+                    "conditions": [
+                        "BEL(Commentator, Aware_of_Current_Events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Weather_Conditions_Are_Good) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Consider_Coach_Insight(Commentator, Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Coach, Available) = True",
+                        "BEL(Coach, Knowledgeable_about_Athlete) = True",
+                        "DES(Commentator, Provide_Insightful_Commentary) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Has_New_Information) = True",
+                        "BEL(Commentator, Considered_Coach_Insight) = True",
+                        "BEL(Commentator, Familiar_with_Athlete_Coach) = True",
+                        "DES(Commentator, Enhance_Commentary) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Check_Current_Game_Trends(Commentator, Other_Athletes)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Aware_of_Game_Trends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Analyse_Possible_Outcomes(Commentator, Athlete, Opponent)": {
+                    "conditions": [
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Athlete, Performance_history_available) = True",
+                        "BEL(Opponent, Performance_history_available) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "DES(Commentator, Accurately_Predict_Outcomes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Formulate_Prediction(Commentator, Athlete, Opponent)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "DES(Commentator, Accurately_Predict_Outcomes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Anticipating_a_Result) = True",
+                        "BEL(Commentator, Predicted_Outcome) = Athlete_Win/Opponent_Win"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Research(Commentator, Olympics, Athletes)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = False"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Prepare(Commentator, Notes)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Prepared_Notes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Engage(Commentator, Audience)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "DES(Commentator, Keep_Audience_Entertained) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "BEL(Commentator, Engaged_Audience) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Watch(Commentator, Olympics)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Enjoys_Watching_Olympics) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Analyze(Commentator, Performance)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "DES(Commentator, Accurately_Predict_Outcomes) = True",
+                        "BEL(Commentator, Informed_about_Performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Collaborate(Commentator, Coach, Athlete)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Coach, Willing_to_Collaborate_with_Commentator) = True",
+                        "BEL(Athlete, Willing_to_Collaborate_with_Commentator) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Learned_about_Athlete_Performance)",
+                        "BEL(Commentator, Built_Relationship_with_Coach_and_Athlete)",
+                        "DES(Commentator, Increase_Interview_Access_with_Athlete) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Report(Commentator, Current_Trends)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "DES(Commentator, Share_Background_Information) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Summarize(Commentator, Highlights)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "INTENT(Commentator, Provide_Insightful_Commentary) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Keep_Audience_Entertained) = True",
+                        "DES(Commentator, Accurately_Predict_Outcomes) = True",
+                        "BEL(Commentator, Informed_about_Recent_Events) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "INTENT(Commentator, Share_Background_Information) = True": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Shared_Background_Info) = True",
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "DES(Commentator, Keep_Audience_Entertained) = True",
+                        "DES(Commentator, Accurately_Predict_Outcomes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Research_Olympic_Athletes(Commentator, Athlete)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = False",
+                        "BEL(Athlete, Participating_in_Olympics) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Familiar_with_Athletes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Prepare_Notes(Commentator, None)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Prepared_Notes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Join_Broadcast_Team(Commentator, None)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "DES(Commentator, Share_Background_Information) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Part_of_Broadcast_Team) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Share_Background_Info(Commentator, Viewer, Athlete)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Viewer, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Share_Background_Information) = False",
+                        "BEL(Athlete, Familiar_to_Commentator) = True",
+                        "BEL(Viewer, Informed_About_Athlete) = True",
+                        "BEL(Viewer, Connected_with_Commentator) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Engage_With_Other_Commentator(Commentator, None)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator2, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator2, Familiar_with_Athletes) = True",
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "DES(Commentator2, Provide_Insightful_Commentary) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Engaged_with_Commentator) = Commentator2",
+                        "BEL(Commentator2, Engaged_with_Commentator) = Commentator"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Encourage_International_Understanding(Commentator, Viewer)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Viewer, Interested_in_Olympics) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Encourage_International_Understanding) = True",
+                        "DES(Viewer, Feel_More_Connected_to_Other_Countries) = True"
+                    ],
+                    "occ_emotion": [
+                        "Love"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Accurately_Predict_Outcomes(Commentator, Viewer, Athlete)": {
+                    "conditions": [
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Viewer, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Athlete, Participating_in_Olympics) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Accurately_Predict_Outcomes) = True",
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "BEL(Athlete, Expectations_of_Winning) = True",
+                        "BEL(Athlete, Expectations_of_Winning) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Greet_Audience(Commentator)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Noticed_Audience) = True",
+                        "DES(Commentator, Keep_Audience_Entertained) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Share_Interesting_Facts(Commentator, Athlete)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Athlete, Known_for_Highlights) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Share_Background_Information) = True",
+                        "BEL(Commentator, Informed_About_Athlete) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Provide_Insightful_Commentary(Commentator, Athlete)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "BEL(Athlete, Impressed_by_Commentator) = False"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Provide_Insightful_Commentary) = False",
+                        "BEL(Athlete, Impressed_by_Commentator) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Engage_with_Co-Commentator(Commentator, Co-Commentator)": {
+                    "conditions": [
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Co-Commentator, Aware_of_Current_Events) = True",
+                        "BEL(Co-Commentator, Knowledgeable_about_Olympics) = True",
+                        "DES(Commentator, Keep_Audience_Entertained) = True",
+                        "DES(Co-Commentator, Keep_Audience_Entertained) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Engaging_with_Co-Commentator) = Co-Commentator",
+                        "BEL(Co-Commentator, Engaging_with_Commentator) = Commentator"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Ask_Questions_to_the_Expert(Group_of_Audience, Coach)": {
+                    "conditions": [
+                        "BEL(Commentator, Interest_in_Olympics) = True",
+                        "DES(Commentator, Keep_Audience_Entertained) = True",
+                        "BEL(Group_of_Audience, Interest_in_Coach_Expertise) = True",
+                        "BEL(Coach, Information_Available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Familiar_with_Coach) = True",
+                        "BEL(Commentator, Informed_about_Team) = True",
+                        "DES(Commentator, Provide_Insightful_Commentary) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Make_Humorous_Jokes(Commentator)": {
+                    "conditions": [
+                        "BEL(Commentator, Keep_Audience_Entertained) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Provide_Entertainment) = True",
+                        "BEL(Commentator, Amusing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Give_Accurate_Predictions(Commentator, Athlete)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "DES(Commentator, Accurately_Predict_Outcomes) = True",
+                        "BEL(Athlete, Experienced_in_Competition) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Increase_Credibility) = True",
+                        "BEL(Commentator, Saw_Athlete_Perform_Well) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Thank_Audience_for_Watching(Commentator)": {
+                    "conditions": [
+                        "BEL(Commentator, Keep_Audience_Entertained) = True"
+                    ],
+                    "effects": [
+                        "DES(Commentator, Provide_Insightful_Commentary) = False",
+                        "DES(Commentator, Share_Background_Information) = False",
+                        "DES(Commentator, Keep_Audience_Entertained) = False",
+                        "DES(Commentator, Accurately_Predict_Outcomes) = False",
+                        "BEL(Commentator, Thanked_Audience) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, ASK_ABOUT_FAVORITE_SPORT, Commentator, Polite)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "DES(Commentator, Share_Background_Information) = True",
+                        "DES(Commentator, Keep_Audience_Entertained) = True",
+                        "DES(Commentator, Accurately_Predict_Outcomes) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Speak(Start, ASK_ABOUT_FAVORITE_SPORT, Commentator, Polite)], [ASK_ABOUT_FAVORITE_SPORT, None, Gratification, None, \"It's great to be here discussing the Olympics with all of you!\"",
+                        "Speak(Start, ASK_ABOUT_FAVORITE_SPORT, Commentator, Polite)], [ASK_ABOUT_FAVORITE_SPORT, None, Gratification, None, \"It's great to be here discussing the Olympics with all of you!\""
+                    ],
+                    "emotion_condition": [
+                        "Fear(Commentator), Speak(Start, ASK_ABOUT_FAVORITE_SPORT, Commentator, Polite)"
+                    ]
+                },
+                "Speak(ASK_ABOUT_FAVORITE_SPORT, SHARE_FAVORITE_SPORT, Commentator, Friendly)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "DES(Commentator, Share_Background_Information) = True",
+                        "DES(Commentator, Keep_Audience_Entertained) = True",
+                        "DES(Commentator, Accurately_Predict_Outcomes) = True",
+                        "INTENT(Commentator, Provide_Insightful_Commentary) = True",
+                        "INTENT(Commentator, Share_Background_Information) = True",
+                        "INTENT(Commentator, Keep_Audience_Entertained) = True",
+                        "INTENT(Commentator, Accurately_Predict_Outcomes) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "ASK_ABOUT_FAVORITE_SPORT, SHARE_FAVORITE_SPORT, None, None, \"Hey, what's your favorite sport?\"",
+                        "SHARE_FAVORITE_SPORT, ASK_ABOUT_EXCITING_EVENTS, None, None, \"That's great, my favorite is gymnastics. What about you?\"",
+                        "ASK_ABOUT_EXCITING_EVENTS, SHARE_EXCITING_EVENTS, Joy, Chirpy, \"Oh, I agree the 100m sprint final was so exciting! My favorite was when Simone Biles returned in the balance beam final. What about you?\""
+                    ],
+                    "emotion_condition": [
+                        "Fear, Speak(ASK_ABOUT_FAVORITE_SPORT, SHARE_FAVORITE_SPORT, Commentator, Friendly)], \"I hope the viewer is interested in talking about their favorite sport.\", None, None, None"
+                    ]
+                },
+                "Speak(SHARE_FAVORITE_SPORT, ASK_ABOUT_EXCITING_EVENTS, Commentator, Energetic)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "INTENT(Commentator, Provide_Insightful_Commentary) = True",
+                        "INTENT(Commentator, Share_Background_Information) = True",
+                        "INTENT(Commentator, Keep_Audience_Entertained) = True",
+                        "INTENT(Commentator, Accurately_Predict_Outcomes) = True"
+                    ],
+                    "effects": [
+                        "None"
+                    ],
+                    "occ_emotion": [
+                        "Speak(SHARE_FAVORITE_SPORT, ASK_ABOUT_EXCITING_EVENTS, Commentator, Energetic)], [None, None, Joy, None, None"
+                    ],
+                    "emotion_condition": [
+                        "Speak(SHARE_FAVORITE_SPORT, ASK_ABOUT_EXCITING_EVENTS, Commentator, Energetic), Speak(ASK_ABOUT_EXCITING_EVENTS, SHARE_EXCITING_EVENTS, Commentator, Joy)"
+                    ]
+                },
+                "Speak(ASK_ABOUT_EXCITING_EVENTS, SHARE_EXCITING_EVENTS, Commentator, Inquisitive)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "DES(Commentator, Provide_Insightful_Commentary) = True",
+                        "DES(Commentator, Share_Background_Information) = True",
+                        "DES(Commentator, Keep_Audience_Entertained) = True",
+                        "DES(Commentator, Accurately_Predict_Outcomes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Gave_Insightful_Commentary) = True/False",
+                        "BEL(Commentator, Shared_Background_Information) = True/False",
+                        "BEL(Commentator, Kept_Audience_Entertained) = True/False",
+                        "BEL(Commentator, Predicted_Outcome_Accurately) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "[Start, None, None, None, None",
+                        "[Start, Watch, None, None, None",
+                        "[Watch, Analyze, None, None, None",
+                        "[Analyze, Research_Olympic_Athletes, None, None, Fear",
+                        "[Analyze, Prepare_Notes, None, None, Hope",
+                        "[Analyze, Collaborate, None, None, None",
+                        "[Analyze, Join_Broadcast_Team, None, None, Joy",
+                        "[Join_Broadcast_Team, Greet_Audience, None, None, Joy",
+                        "[Join_Broadcast_Team, Share_Background_Info, Happy-for, None, Gratification",
+                        "[Join_Broadcast_Team, Engage_with_Co-Commentator, None, None, None",
+                        "[Analyze, Engage_With_Other_Commentator, None, None, None",
+                        "[Join_Broadcast_Team, Encourage_International_Understanding, None, None, None",
+                        "[Analyze, Share_Interesting_Facts, None, None, Joy",
+                        "[Analyze, Provide_Insightful_Commentary, None, None, Admiration",
+                        "[Analyze, Ask_Questions_to_the_Expert, None, None, None",
+                        "[Analyze, Make_Humorous_Jokes, None, None, Joy",
+                        "[Analyze, Give_Accurate_Predictions, None, None, Satisfaction",
+                        "[Join_Broadcast_Team, Thank_Audience_for_Watching, None, None, None"
+                    ]
+                },
+                "Speak(SHARE_EXCITING_EVENTS, ASK_ABOUT_MEDAL_COUNT, Commentator, Confident)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "INTENT(Commentator, Provide_Insightful_Commentary) = True",
+                        "INTENT(Commentator, Share_Background_Information) = True",
+                        "INTENT(Commentator, Keep_Audience_Entertained) = True",
+                        "INTENT(Commentator, Accurately_Predict_Outcomes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Provided_Insightful_Commentary) = True",
+                        "BEL(Commentator, Shared_Background_Information) = True",
+                        "BEL(Commentator, Kept_Audience_Entertained) = True",
+                        "BEL(Commentator, Accurately_Predicted_Outcomes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(SHARE_EXCITING_EVENTS, ASK_ABOUT_MEDAL_COUNT, Commentator, Confident), None, Joy, None, None"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(ASK_ABOUT_MEDAL_COUNT, SHARE_MEDAL_COUNT, Commentator, Excited)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "INTENT(Commentator, Provide_Insightful_Commentary) = True",
+                        "INTENT(Commentator, Share_Background_Information) = True",
+                        "INTENT(Commentator, Keep_Audience_Entertained) = True",
+                        "INTENT(Commentator, Accurately_Predict_Outcomes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Commentator, Provided_Insightful_Commentary) = True/False",
+                        "BEL(Commentator, Shared_Background_Information) = True/False",
+                        "BEL(Commentator, Kept_Audience_Entertained) = True/False",
+                        "BEL(Commentator, Accurately_Predicted_Outcomes) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Speak(ASK_ABOUT_MEDAL_COUNT, SHARE_MEDAL_COUNT, Commentator, Excited) -> Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Decide, Speak(ASK_ABOUT_MEDAL_COUNT, SHARE_MEDAL_COUNT, Commentator, Excited), Joy, None, None"
+                    ]
+                },
+                "Speak(SHARE_MEDAL_COUNT, END, Commentator, Friendly)": {
+                    "conditions": [
+                        "BEL(Commentator, Interested_in_Olympics) = True",
+                        "BEL(Commentator, Knowledgeable_about_Olympics) = True",
+                        "BEL(Commentator, Familiar_with_Athletes) = True",
+                        "BEL(Commentator, Aware_of_Current_Events) = True",
+                        "INTENT(Commentator, Provide_Insightful_Commentary) = True",
+                        "INTENT(Commentator, Share_Background_Information) = True",
+                        "INTENT(Commentator, Keep_Audience_Entertained) = True",
+                        "INTENT(Commentator, Accurately_Predict_Outcomes) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Speak(SHARE_MEDAL_COUNT, END, Commentator, Friendly) , END, Joy, None"
+                    ],
+                    "emotion_condition": [
+                        "Pride, Speak(SHARE_MEDAL_COUNT, END, Commentator, Friendly), None, None, \"Let me tell you the latest medal count. It makes me so proud to see my country on the top of the list.\""
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, ASK_FOR_FAVORITE_SPORT, None, None, \"Hey, have you been watching the Olympics? What's your favorite sport?\">",
+        "<ASK_FOR_FAVORITE_SPORT, SHARE_FAVORITE_SPORT, None, None, \"My favorite sport is gymnastics, what's yours?\">",
+        "<SHARE_FAVORITE_SPORT, ASK_ABOUT_EXCITING_EVENTS, None, None, \"I really enjoyed watching the Japanese team win the gold medal in the men's gymnastics team final. What about you?\">",
+        "<ASK_ABOUT_EXCITING_EVENTS, SHARE_EXCITING_EVENTS, None, None, \"The most exciting event for me was the 100m sprint final, it was really close! What about you?\">",
+        "<SHARE_EXCITING_EVENTS, ASK_ABOUT_MEDAL_COUNT, None, None, \"Yeah, I was on the edge of my seat during that race! So have you been keeping track of the medal count?\">",
+        "<ASK_ABOUT_MEDAL_COUNT, SHARE_MEDAL_COUNT, None, None, \"Yes, I have. I think the United States is leading the medal count. How about you?\">",
+        "<SHARE_MEDAL_COUNT, END, None, None, \"Oh, I hadn't checked in a while. I hope my country is doing well. It was great talking to you about the Olympics!\">"
+    ]
+}

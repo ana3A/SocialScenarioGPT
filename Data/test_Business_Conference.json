@@ -1,0 +1,1642 @@
+{
+    "scenario_name": "test_Business Conference",
+    "scenario_description": "Jonathan dressed up in a formal attire before leaving the house. When he came into the building, the leader showed him where to go. He came into the conference room. The organization was discussing new ideas for an upcoming project. The conference became successful when we developed an agenda.",
+    "last_ended": "end",
+    "agents": {
+        "Jonathan": {
+            "knowledge_base": [
+                "BEL(Jonathan, dressed_up) = True",
+                "BEL(Jonathan, formal_attire) = True",
+                "BEL(Jonathan, at_conference_room) = False",
+                "DES(Jonathan, attend_conference) = True",
+                "DES(Jonathan, participate_in_discussions) = True",
+                "DES(Jonathan, contribute_to_agenda) = True"
+            ],
+            "intentions": {
+                "INTENT(Jonathan, get_to_conference_room) = True": {
+                    "action_plan": [
+                        "CheckAttire(Jonathan, self)",
+                        "GoToBuilding(Jonathan, Building)",
+                        "MeetLeader(Jonathan, Leader)",
+                        "GoToConferenceRoom(Jonathan, ConferenceRoom)",
+                        "JoinDiscussion(Jonathan, Organization)",
+                        "ContributeToAgenda(Jonathan, Organization)"
+                    ]
+                },
+                "INTENT(Jonathan, listen_to_ideas) = True": {
+                    "action_plan": [
+                        "GetDressed(Jonathan, FormalAttire, None)",
+                        "GoToBuilding(Jonathan, ConferenceBuilding, None)",
+                        "MeetLeader(Jonathan, Leader, None)",
+                        "GoToConferenceRoom(Jonathan, ConferenceRoom, None)",
+                        "ListenToIdeas(Jonathan, Organization, None)",
+                        "ParticipateInDiscussions(Jonathan, Organization, None)",
+                        "ContributeToAgenda(Jonathan, Organization, None)"
+                    ]
+                },
+                "INTENT(Jonathan, contribute_to_agenda) = True": {
+                    "action_plan": [
+                        "Move(Jonathan, ConferenceBuilding, ConferenceRoom)",
+                        "Greet(Jonathan, Leader)",
+                        "Listen(Jonathan, Organization)",
+                        "Propose_ideas(Jonathan, Organization)",
+                        "Collaborate(Jonathan, Organization)"
+                    ]
+                }
+            },
+            "actions": {
+                "Move(Jonathan, ConferenceBuilding, ConferenceRoom)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_building) = True",
+                        "BEL(Jonathan, in_transit) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, at_conference_building) = True",
+                        "BEL(Jonathan, in_transit) = True",
+                        "BEL(Jonathan, at_conference_room) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Greet(Jonathan, Leader)": {
+                    "conditions": [
+                        "BEL(Jonathan, dressed_up) = True",
+                        "BEL(Jonathan, at_conference_room) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, greeted_leader) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Listen(Jonathan, Organization)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = True",
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Propose_ideas(Jonathan, Organization)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = True",
+                        "BEL(Jonathan, familiar_with_project_details) = True"
+                    ],
+                    "effects": [
+                        "DES(Jonathan, contribute_to_agenda) = False",
+                        "BEL(Jonathan, proposed_ideas) = True",
+                        "BEL(Jonathan, participated_in_discussions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Collaborate(Jonathan, Organization)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = True",
+                        "DES(Organization, develop_agenda) = True"
+                    ],
+                    "effects": [
+                        "DES(Jonathan, achieve_conference_goal) = True",
+                        "BEL(Jonathan, satisfied_attendee) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckAttire(Jonathan, self)": {
+                    "conditions": [
+                        "BEL(Jonathan, dressed_up) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, dressed_up) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GoToBuilding(Jonathan, Building)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_building) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, at_building) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MeetLeader(Jonathan, Leader)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_building) = True",
+                        "BEL(Jonathan, knows_where_to_go) = True",
+                        "BEL(Leader, location) = ConferenceRoom"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, met_leader) = True",
+                        "BEL(Jonathan, knows_where_to_go) = False",
+                        "BEL(Leader, met_Jonathan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GoToConferenceRoom(Jonathan, ConferenceRoom)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, at_conference_room) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "JoinDiscussion(Jonathan, Organization)": {
+                    "conditions": [
+                        "BEL(Organization, meeting_in_progress) = True",
+                        "BEL(Jonathan, at_conference_room) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, participating_in_discussions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ContributeToAgenda(Jonathan, Organization)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True",
+                        "BEL(Organization, agenda_not_finalized) = True",
+                        "DES(Jonathan, participate_in_discussions) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, contributed_to_agenda) = True",
+                        "BEL(Organization, agenda_finalized) = True",
+                        "DES(Jonathan, gain_recognition) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "GetDressed(Jonathan, FormalAttire, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, FormalAttire) = False",
+                        "BEL(Jonathan, at_home) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, FormalAttire) = True",
+                        "BEL(Jonathan, at_home) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GoToBuilding(Jonathan, ConferenceBuilding, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_building) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, at_conference_building) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MeetLeader(Jonathan, Leader, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_building) = True",
+                        "BEL(Jonathan, met_leader) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, met_leader) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GoToConferenceRoom(Jonathan, ConferenceRoom, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = False",
+                        "BEL(Jonathan, ConferenceRoom) = ConferenceRoom",
+                        "BEL(Leader, ConferenceRoom) = ConferenceRoom"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, at_conference_room) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ListenToIdeas(Jonathan, Organization, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = False",
+                        "BEL(Jonathan, participate_in_discussions) = True",
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, at_conference_room) = True",
+                        "DES(Organization, increase_participation) += 1"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "ParticipateInDiscussions(Jonathan, Organization, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = True",
+                        "DES(Jonathan, participate_in_discussions) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, have_spoken_in_discussions) = True",
+                        "DES(Jonathan, contribute_to_agenda) = True",
+                        "BEL(Organization, successful_conference) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "ContributeToAgenda(Jonathan, Organization, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = True",
+                        "DES(Organization, develop_agenda) = True"
+                    ],
+                    "effects": [
+                        "DES(Jonathan, achieve_contribution) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Hope"
+            ],
+            "speak_actions": {
+                "Speak(Introduction, Interest, None, None)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "None, CheckAttire, None, None",
+                        "GetDressed, GoToBuilding, Fear, None",
+                        "MeetLeader, GoToConferenceRoom, Admiration, None",
+                        "ListenToIdeas, ParticipateInDiscussions, Happy-for, None",
+                        "ContributeToAgenda, GoToBuilding, Pride, None",
+                        "End, None, Satisfaction, None"
+                    ]
+                },
+                "Speak(Interest, Interest2, None, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = False",
+                        "INTENT(Jonathan, get_to_conference_room) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, at_conference_room) = True",
+                        "BEL(Jonathan, met_Alex) = True",
+                        "INTENT(Jonathan, listen_to_ideas) = True",
+                        "INTENT(Jonathan, contribute_to_agenda) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest, Interest2, None, None",
+                        "Interest2, Interest2_complete, Joy, Networking, Jonathan feels pleased or joyful after networking with Alex about potential collaborations for future projects."
+                    ],
+                    "emotion_condition": [
+                        "Neutral, Neutral, None, None, \"Jonathan is not feeling any specific emotion before speaking about his project.\""
+                    ]
+                },
+                "Speak(Interest2, Networking, None, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, dressed_up) = True",
+                        "BEL(Jonathan, formal_attire) = True",
+                        "BEL(Jonathan, at_conference_room) = False",
+                        "INTENT(Jonathan, get_to_conference_room) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, at_conference_room) = True",
+                        "DES(Jonathan, attend_conference) = True",
+                        "INTENT(Jonathan, listen_to_ideas) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Listen(Jonathan, Organization), Listen, None, None, \"Jonathan listens to the organization.\"",
+                        "Propose_ideas(Jonathan, Organization), Hope, None, None, \"Jonathan proposes his ideas.\"",
+                        "ContributeToAgenda(Jonathan, Organization), Pride, None, None, \"Jonathan feels proud about contributing to the agenda.\"",
+                        "Collaborate(Jonathan, Organization), Happy-for, None, None, \"Jonathan is happy for the potential collaboration.\"",
+                        "Speak(Interest2, Networking, Relief, None), Relief, None, None, \"Jonathan feels relieved about discussing potential collaborations with Alex.\""
+                    ]
+                },
+                "Speak(Networking, ConnectionMade, None, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = False",
+                        "INTENT(Jonathan, get_to_conference_room) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, at_conference_room) = True"
+                    ],
+                    "occ_emotion": [
+                        "Action, Action, Joy, None, \"Jonathan feels joy as he successfully made a new connection and discussed potential collaborations with Alex.\""
+                    ],
+                    "emotion_condition": [
+                        "ContributeToAgenda(Organization, Jonathan, None, Joy)"
+                    ]
+                },
+                "Speak(ConnectionMade, End, None, None)": {
+                    "conditions": [
+                        "BEL(Jonathan, at_conference_room) = False",
+                        "INTENT(Jonathan, get_to_conference_room) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, at_conference_room) = True",
+                        "INTENT(Jonathan, get_to_conference_room) = False",
+                        "BEL(Jonathan, participate_in_discussions) = True",
+                        "BEL(Jonathan, contribute_to_agenda) = True",
+                        "INTENT(Jonathan, listen_to_ideas) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(ConnectionMade, End, None, None), None, None, Joy, None"
+                    ],
+                    "emotion_condition": [
+                        "Collaborate(ConnectionMade, End, Joy, None, \"Jonathan is pleased to have found a potential collaboration partner.\")"
+                    ]
+                }
+            }
+        },
+        "Leader": {
+            "knowledge_base": [
+                "BEL(Leader, knowledgeable_about_new_project) = True",
+                "BEL(Leader, experienced_in_running_meetings) = True",
+                "BEL(Leader, responsible_for_overseeing_project) = True",
+                "DES(Leader, establish_successful_agenda) = True",
+                "DES(Leader, ensure_everyone_contributes) = True",
+                "DES(Leader, make_use_of_knowledge_and_experience) = True"
+            ],
+            "intentions": {
+                "INTENT(Leader, establish_agenda) = True": {
+                    "action_plan": [
+                        "Notify(Leader, Jonathan, \"Welcome him and show him to the conference room\")",
+                        "Inform(Leader, Organization, \"We will start the meeting now\")",
+                        "Facilitate(Leader, Organization, \"Brainstorm ideas for the project\")",
+                        "Synthesize(Leader, Organization, \"Develop an agenda for the upcoming project\")",
+                        "Conclude(Leader, Organization, \"Thank everyone for their contributions and adjourn the meeting\")"
+                    ]
+                },
+                "INTENT(Leader, ensure_contributions, Participants) = True": {
+                    "action_plan": [
+                        "INTENT(Leader, ensure_contributions, Participants) = True",
+                        "SendInvitations(Leader, Participants)",
+                        "PrepareAgenda(Leader, Organization)",
+                        "StartMeeting(Leader, Participants)",
+                        "EncourageParticipation(Leader, Participants)",
+                        "ManageTime(Leader, Meeting)",
+                        "SummarizeResults(Leader, Organization)"
+                    ]
+                },
+                "INTENT(Leader, utilize_knowledge_and_experience) = True": {
+                    "action_plan": [
+                        "ScheduleMeeting(Leader, Organization, Time)",
+                        "PrepareAgenda(Leader, Organization, Topics)",
+                        "IntroduceTopics(Leader, Organization, Topics)",
+                        "FacilitateDiscussion(Leader, Organization, Topics)",
+                        "SummarizeOutcomes(Leader, Organization, Outcomes)",
+                        "AssignTasks(Leader, Organization, Tasks)"
+                    ]
+                },
+                "Participants": {
+                    "action_plan": [
+                        "Guide(Leader, Jonathan, location)",
+                        "EnterRoom(Jonathan, conference_room)",
+                        "InitiateDiscussion(Leader, Organization, new_project_ideas)",
+                        "Listen(Jonathan, Organization, new_project_ideas)",
+                        "ShareInput(Jonathan, Organization, new_project_ideas)",
+                        "FacilitateDiscussion(Leader, Organization, successful_agenda)",
+                        "ConcludeMeeting(Leader, Organization)"
+                    ]
+                }
+            },
+            "actions": {
+                "Guide(Leader, Jonathan, location)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EnterRoom(Jonathan, conference_room)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, present_in_conference_room) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "InitiateDiscussion(Leader, Organization, new_project_ideas)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Organization, discussing_new_project_ideas) = False"
+                    ],
+                    "effects": [
+                        "BEL(Organization, discussing_new_project_ideas) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Listen(Jonathan, Organization, new_project_ideas)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_project_ideas) = True"
+                    ],
+                    "effects": [
+                        "Jonathan",
+                        "BEL(Jonathan, aware_of_new_project_ideas) = True",
+                        "Jonathan",
+                        "DES(Jonathan, contribute_to_new_project) = 5",
+                        "Jonathan",
+                        "BEL(Leader, Jonathan_is_listening) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "ShareInput(Jonathan, Organization, new_project_ideas)": {
+                    "conditions": [
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Jonathan, present_in_conference_room) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, contributed_to_new_project_ideas) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "FacilitateDiscussion(Leader, Organization, successful_agenda)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "DES(Leader, make_use_of_knowledge_and_experience) = True",
+                        "DES(Leader, establish_successful_agenda) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, successful_agenda) = True",
+                        "BEL(Organization, discussed_new_project_ideas) = True",
+                        "BEL(Leader, satisfied_with_discussion_outcome) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ConcludeMeeting(Leader, Organization)": {
+                    "conditions": [
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Organization, new_project_ideas_successfully_developed) = True"
+                    ],
+                    "effects": [
+                        "DES(Leader, successful_conclusion_of_meeting) = True",
+                        "BEL(Organization, project_ideas_agreed_upon) = True",
+                        "BEL(Organization, project_agenda_created) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Notify(Leader, Jonathan, \"Welcome him and show him to the conference room\")": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True"
+                    ],
+                    "effects": [
+                        "BEL(Leader, notified_Jonathan) = True",
+                        "BEL(Leader, showed_Jonathan_to_conference_room) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Inform(Leader, Organization, \"We will start the meeting now\")": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "DES(Leader, ensure_everyone_contributes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, meeting_in_progress) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Facilitate(Leader, Organization, \"Brainstorm ideas for the project\")": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "DES(Leader, ensure_everyone_contributes) = True"
+                    ],
+                    "effects": [
+                        "DES(Leader, gather_all_ideas) = True",
+                        "BEL(Leader, ideas_collected) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Synthesize(Leader, Organization, \"Develop an agenda for the upcoming project\")": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "DES(Leader, establish_successful_agenda) = True",
+                        "BEL(Organization, knowledge_about_upcoming_project) = True",
+                        "DES(Organization, desire_to_develop_agenda_for_project) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, agenda_for_upcoming_project_developed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Conclude(Leader, Organization, \"Thank everyone for their contributions and adjourn the meeting\")": {
+                    "conditions": [
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Organization, meeting_started) = True",
+                        "BEL(Organization, agenda_developed) = True",
+                        "BEL(Leader, ensure_everyone_contributed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, meeting_ended) = True",
+                        "DES(Leader, establish_successful_agenda) = False",
+                        "DES(Leader, ensure_everyone_contributes) = False",
+                        "BEL(Organization, everyone_thanked) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "INTENT(Leader, ensure_contributions, Participants) = True": {
+                    "conditions": [
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Organization, discussing_new_project_ideas) = True"
+                    ],
+                    "effects": [
+                        "BEL(Leader, contributions_received_from_Participants) = True",
+                        "BEL(Leader, successful_meeting_established) = True",
+                        "BEL(Participants, encouraged_to_contribute) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SendInvitations(Leader, Participants)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Participants, interested_in_attending) = True"
+                    ],
+                    "effects": [
+                        "BEL(Leader, successfully_sent_invitations_to_Participants) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PrepareAgenda(Leader, Organization)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, agenda_prepared_by_Leader) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "StartMeeting(Leader, Participants)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "INTENT(Leader, establish_successful_agenda) = True",
+                        "INTENT(Leader, ensure_contributions, Participants) = True",
+                        "BEL(Participants, arrived_to_meeting) = True"
+                    ],
+                    "effects": [
+                        "BEL(Leader, meeting_started) = True",
+                        "BEL(Leader, time_management_in_progress) = True",
+                        "BEL(Leader, summarizing_results_in_progress) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EncourageParticipation(Leader, Participants)": {
+                    "conditions": [
+                        "BEL(Leader, experienced_in_encouraging_participation) = True",
+                        "BEL(Participants, willing_to_participate) = True"
+                    ],
+                    "effects": [
+                        "DES(Leader, successful_meeting) = True",
+                        "BEL(Participants, satisfied_with_meeting_outcome) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "ManageTime(Leader, Meeting)": {
+                    "conditions": [
+                        "BEL(Leader, in_meeting) = True",
+                        "BEL(Meeting, time_left) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Meeting, time_left) = BEL(Meeting, time_left) - 1"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Anxiety"
+                    ]
+                },
+                "SummarizeResults(Leader, Organization)": {
+                    "conditions": [
+                        "BEL(Leader, establish_successful_agenda) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Organization, project_ideas_generated) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, project_ideas_discussed) = True",
+                        "BEL(Organization, agenda_prepared) = True",
+                        "BEL(Organization, project_ideas_summarized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "ScheduleMeeting(Leader, Organization, Time)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, meeting_scheduled) = True",
+                        "BEL(Organization, meeting_time) = Time"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PrepareAgenda(Leader, Organization, Topics)": {
+                    "conditions": [
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Organization, has_upcoming_project) = True",
+                        "BEL(Organization, knowledgeable_about_upcoming_project) = True",
+                        "DES(Leader, establish_successful_agenda) = True"
+                    ],
+                    "effects": [
+                        "BEL(Leader, knowledgeable_about_agenda_topics) = True",
+                        "BEL(Organization, has_agenda_prepared) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "IntroduceTopics(Leader, Organization, Topics)": {
+                    "conditions": [
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Organization, discussing_new_ideas) = True",
+                        "BEL(Organization, knowledgeable) = True",
+                        "DES(Leader, make_use_of_knowledge_and_experience) = True",
+                        "DES(Leader, ensure_everyone_contributes) = True"
+                    ],
+                    "effects": [
+                        "BEL(Leader, introduced_topics) = Topics",
+                        "BEL(Organization, aware_of_topics) = Topics"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "FacilitateDiscussion(Leader, Organization, Topics)": {
+                    "conditions": [
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Organization, discussing_new_ideas) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "DES(Leader, establish_successful_agenda) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, discussion_successfully_held) = True",
+                        "BEL(Leader, gained_facilitation_skills) = True",
+                        "BEL(Leader, avoided_allow_political_disputes) = True",
+                        "DES(Leader, summarize_outcomes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SummarizeOutcomes(Leader, Organization, Outcomes)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Organization, successful_conference) = False"
+                    ],
+                    "effects": [
+                        "BEL(Organization, successful_conference) = True",
+                        "DES(Leader, establish_successful_agenda) = False",
+                        "DES(Leader, ensure_everyone_contributes) = False",
+                        "DES(Leader, make_use_of_knowledge_and_experience) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "AssignTasks(Leader, Organization, Tasks)": {
+                    "conditions": [
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "BEL(Organization, discussed_topics) = True",
+                        "BEL(Organization, outcomes_summarized) = True"
+                    ],
+                    "effects": [
+                        "DES(Leader, assign_tasks) = True",
+                        "BEL(Organization, tasks_assigned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Contentment"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "hope"
+            ],
+            "speak_actions": {
+                "Speak(Start, Greeting, None, None)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "INTENT(Leader, establish_agenda) = True",
+                        "INTENT(Leader, ensure_contributions, Participants) = True",
+                        "INTENT(Leader, utilize_knowledge_and_experience) = True"
+                    ],
+                    "effects": [
+                        "BEL(Participants, received_clear_directions) = True",
+                        "BEL(Participants, contributed_to_agenda) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Start, Greeting, None, None)], [Emotion, None, Joy, None, \"Leader feels pleased about welcoming Jonathan to the conference.\""
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Greeting, Guidance, None, None)": {
+                    "conditions": [
+                        "BEL(Leader,knowledgeable_about_new_project) = True",
+                        "BEL(Leader,experienced_in_running_meetings) = True",
+                        "BEL(Leader,responsible_for_overseeing_project) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Leader,establish_agenda) = True",
+                        "INTENT(Leader,ensure_contributions, Participants) = True",
+                        "INTENT(Leader,utilize_knowledge_and_experience) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Greeting, Guidance, None, None), Guidance, Joy, None"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Guidance, ConferenceStart, None, None)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Leader, establish_agenda) = True",
+                        "INTENT(Leader, ensure_contributions, Participants) = True",
+                        "INTENT(Leader, utilize_knowledge_and_experience) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "None, ConferenceStart, None, None, \"Leader welcomes everyone to the conference.\"",
+                        "Joy, ConferenceStart, None, None"
+                    ]
+                },
+                "Speak(ConferenceStart, Discussion, None, None)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "INTENT(Leader, establish_agenda) = True",
+                        "INTENT(Leader, ensure_contributions, Participants) = True",
+                        "INTENT(Leader, utilize_knowledge_and_experience) = True"
+                    ],
+                    "effects": [
+                        "BEL(Leader, successful_conference) = True",
+                        "BEL(Participants, motivated_to_contribute) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(ConferenceStart, Discussion, None, None), None, Joy, None, None"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Discussion, Agenda, None, None)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "INTENT(Leader, establish_agenda) = True",
+                        "INTENT(Leader, ensure_contributions, Participants)",
+                        "INTENT(Leader, utilize_knowledge_and_experience) = True"
+                    ],
+                    "effects": [
+                        "DES(Leader, establish_successful_agenda) = True",
+                        "DES(Leader, ensure_everyone_contributes) = True",
+                        "DES(Leader, make_use_of_knowledge_and_experience) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Agenda, ConferenceEnd, None, None)": {
+                    "conditions": [
+                        "BEL(Leader, knowledgeable_about_new_project) = True",
+                        "BEL(Leader, experienced_in_running_meetings) = True",
+                        "BEL(Leader, responsible_for_overseeing_project) = True",
+                        "INTENT(Leader, establish_agenda) = True",
+                        "INTENT(Leader, ensure_contributions, Participants) = True",
+                        "INTENT(Leader, utilize_knowledge_and_experience) = True"
+                    ],
+                    "effects": [
+                        "BEL(Leader, successful_conference) = True",
+                        "DES(Leader, establish_successful_agenda) = False",
+                        "DES(Leader, ensure_everyone_contributes) = False",
+                        "DES(Leader, make_use_of_knowledge_and_experience) = False",
+                        "INTENT(Leader, establish_agenda) = False",
+                        "INTENT(Leader, ensure_contributions, Participants) = False",
+                        "INTENT(Leader, utilize_knowledge_and_experience) = False"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Agenda, ConferenceEnd, None, None), ConferenceEnded, Satisfaction, None"
+                    ],
+                    "emotion_condition": [
+                        "DecideTopic, Speak, Hope, None",
+                        "Speak, Conclude, Satisfaction, None"
+                    ]
+                }
+            }
+        },
+        "Organization": {
+            "knowledge_base": [
+                "BEL(Organization, has_formal_attire) = True",
+                "BEL(Organization, agenda_needed) = False",
+                "BEL(Organization, discussing_new_ideas) = True",
+                "DES(Organization, successful_conference) = True"
+            ],
+            "intentions": {
+                "INTENT(Organization, create_agenda) = True": {
+                    "action_plan": [
+                        "CheckBelief(Organization, has_formal_attire)",
+                        "VerifyLocation(Organization, Leader)",
+                        "MeetJonathan(Organization, Jonathan)",
+                        "VerifyBelief(Organization, discussing_new_ideas)",
+                        "EvaluateBelief(Organization, discussing_new_ideas)",
+                        "DetermineDesire(Organization, agenda_needed)",
+                        "CreateAgenda(Organization, None)",
+                        "VerifyDesire(Organization, successful_conference)",
+                        "AssessOutcome(Organization, successful_conference)",
+                        "AdjournMeeting(Organization, None)"
+                    ]
+                },
+                "INTENT(Organization, evaluate_new_ideas) = True": {
+                    "action_plan": [
+                        "GoToLocation(Organization, Entrance)",
+                        "GreetPerson(Organization, Jonathan)",
+                        "ShowToLocation(Organization, Jonathan, ConferenceRoom)",
+                        "CheckBelief(Organization, Jonathan, has_formal_attire)",
+                        "DiscussIdeas(Organization, ConferenceRoom)",
+                        "SetBelief(Organization, agenda_needed, True)",
+                        "DevelopAgenda(Organization, ConferenceRoom)",
+                        "SetBelief(Organization, agenda_needed, False)",
+                        "SetDesire(Organization, successful_conference, True)",
+                        "EvaluateIdeas(Organization, ConferenceRoom)",
+                        "SetIntention(Organization, Null)"
+                    ]
+                },
+                "INTENT(Organization, achieve_success) = True": {
+                    "action_plan": [
+                        "CheckFormalAttire(Organization, Jonathan)",
+                        "GuideToConferenceRoom(Organization, Leader, Jonathan)",
+                        "StartConference(Organization)",
+                        "BrainstormIdeas(Organization)",
+                        "EvaluateIdeas(Organization)",
+                        "CreateAgenda(Organization)",
+                        "FollowAgenda(Organization)",
+                        "SummarizeNextSteps(Organization)",
+                        "EndConference(Organization)"
+                    ]
+                }
+            },
+            "actions": {
+                "CheckFormalAttire(Organization, Jonathan)": {
+                    "conditions": [
+                        "BEL(Organization, has_formal_attire) = True",
+                        "BEL(Jonathan, dressed_up) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GuideToConferenceRoom(Organization, Leader, Jonathan)": {
+                    "conditions": [
+                        "BEL(Leader, located_conference_room) = True",
+                        "BEL(Organization, has_formal_attire) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jonathan, in_conference_room) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "StartConference(Organization)": {
+                    "conditions": [
+                        "BEL(Organization, has_formal_attire) = True",
+                        "BEL(Organization, agenda_needed) = False",
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, conference_started) = True",
+                        "BEL(Organization, discussion_in_progress) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BrainstormIdeas(Organization)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, generated_ideas) = True",
+                        "BEL(Organization, participated_in_brainstorming) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EvaluateIdeas(Organization)": {
+                    "conditions": [
+                        "BEL(Organization, agenda_needed) = False",
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, some_ideas_approved) = True",
+                        "DES(Organization, continue_discussion) += 1"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CreateAgenda(Organization)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, agenda_needed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "FollowAgenda(Organization)": {
+                    "conditions": [
+                        "BEL(Organization, agenda_created) = True",
+                        "BEL(Organization, following_agenda) = False"
+                    ],
+                    "effects": [
+                        "BEL(Organization, following_agenda) = True",
+                        "BEL(Organization, successful_conference) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "SummarizeNextSteps(Organization)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True",
+                        "BEL(Organization, agenda_needed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Organization, agenda_needed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "EndConference(Organization)": {
+                    "conditions": [
+                        "BEL(Organization, agenda_completed) = True",
+                        "DES(Organization, successful_conference) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, discussing_new_ideas) = False",
+                        "DES(Organization, successful_conference) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "CheckBelief(Organization, has_formal_attire)": {
+                    "conditions": [
+                        "BEL(Organization, has_formal_attire) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "VerifyLocation(Organization, Leader)": {
+                    "conditions": [
+                        "BEL(Organization, has_formal_attire) = True",
+                        "BEL(Leader, location_known) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MeetJonathan(Organization, Jonathan)": {
+                    "conditions": [
+                        "BEL(Organization, has_formal_attire) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "VerifyBelief(Organization, discussing_new_ideas)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = False"
+                    ],
+                    "effects": [
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EvaluateBelief(Organization, discussing_new_ideas)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DetermineDesire(Organization, agenda_needed)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "DES(Organization, agenda_needed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "hope"
+                    ]
+                },
+                "CreateAgenda(Organization, None)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True",
+                        "BEL(Organization, agenda_needed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Organization, agenda_needed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "hope"
+                    ]
+                },
+                "VerifyDesire(Organization, successful_conference)": {
+                    "conditions": [
+                        "BEL(Organization, successful_conference) = False"
+                    ],
+                    "effects": [
+                        "DES(Organization, successful_conference) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AssessOutcome(Organization, successful_conference)": {
+                    "conditions": [
+                        "BEL(Organization, successful_conference) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, successful_conference) = True",
+                        "BEL(Organization, discussing_new_ideas) = True",
+                        "BEL(Organization, has_formal_attire) = True",
+                        "DES(Organization, successful_conference) = True",
+                        "DES(Organization, agenda_needed) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "AdjournMeeting(Organization, None)": {
+                    "conditions": [
+                        "BEL(Organization, successful_conference) = True",
+                        "BEL(Organization, agenda_needed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Organization, successful_conference) = False",
+                        "BEL(Organization, agenda_needed) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "GoToLocation(Organization, Entrance)": {
+                    "conditions": [
+                        "BEL(Organization, has_formal_attire) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "GreetPerson(Organization, Jonathan)": {
+                    "conditions": [
+                        "BEL(Jonathan, present_in_building) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Love"
+                    ]
+                },
+                "ShowToLocation(Organization, Jonathan, ConferenceRoom)": {
+                    "conditions": [
+                        "BEL(Organization, has_formal_attire) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "CheckBelief(Organization, Jonathan, has_formal_attire)": {
+                    "conditions": [
+                        "BEL(Jonathan, has_formal_attire) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DiscussIdeas(Organization, ConferenceRoom)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True",
+                        "BEL(Organization, agenda_needed) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SetBelief(Organization, agenda_needed, True)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, agenda_needed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DevelopAgenda(Organization, ConferenceRoom)": {
+                    "conditions": [
+                        "BEL(Organization, agenda_needed) = True"
+                    ],
+                    "effects": [
+                        "SetBelief(Organization, discussing_new_ideas, False)",
+                        "SetBelief(Organization, agenda_needed, False)"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SetBelief(Organization, agenda_needed, False)": {
+                    "conditions": [
+                        "BEL(Organization, agenda_needed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, agenda_needed) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "SetDesire(Organization, successful_conference, True)": {
+                    "conditions": [
+                        "BEL(Organization, agenda_needed) = False"
+                    ],
+                    "effects": [
+                        "DES(Organization, successful_conference) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EvaluateIdeas(Organization, ConferenceRoom)": {
+                    "conditions": [
+                        "BEL(Organization, agenda_needed) = False",
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "SetDesire(Organization, successful_conference, True)"
+                    ],
+                    "occ_emotion": [
+                        "satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "SetIntention(Organization, Null)": {
+                    "conditions": [
+                        "INTENT(Organization, evaluate_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Organization, Null)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [],
+            "speak_actions": {
+                "Speak(Start, Greeted, None, None)": {
+                    "conditions": [
+                        "BEL(Organization, has_formal_attire) = True",
+                        "BEL(Organization, agenda_needed) = False",
+                        "BEL(Organization, discussing_new_ideas) = True",
+                        "INTENT(Organization, create_agenda) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, agenda_needed) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Speak(Start, Greeted, None, None)]Hope"
+                    ]
+                },
+                "Speak(Greeted, Introduction, None, None)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Organization, evaluate_new_ideas) = True",
+                        "BEL(Organization, agenda_needed) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Neutral, Greeted, None, None"
+                    ]
+                },
+                "Speak(Introduction, IdeaSharing, None, None)": {
+                    "conditions": [
+                        "BEL(Organization, discussing_new_ideas) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, agenda_needed) = True",
+                        "INTENT(Organization, create_agenda) = True"
+                    ],
+                    "occ_emotion": [
+                        "Start, CheckBelief1, None, None",
+                        "CheckBelief1, MeetJonathan, has_formal_attire, None",
+                        "MeetJonathan, GreetPerson, None, None",
+                        "GreetPerson, VerifyBelief1, None, None",
+                        "VerifyBelief1, GuideToConferenceRoom, discussing_new_ideas, None",
+                        "GuideToConferenceRoom, DiscussIdeas, None, None",
+                        "DiscussIdeas, EvaluateIdeas1, None, None",
+                        "EvaluateIdeas1, CreateAgenda, None, None",
+                        "CreateAgenda, FollowAgenda1, None, None",
+                        "FollowAgenda1, SummarizeNextSteps, None, None",
+                        "SummarizeNextSteps, EvaluateDesire, successful_conference, None",
+                        "EvaluateDesire, AssessOutcome, successful_conference, None",
+                        "AssessOutcome, Gratitude, None, None",
+                        "Gratitude"
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(IdeaSharing, Agenda, None, None)": {
+                    "conditions": [
+                        "SPEAK ACTION",
+                        "BEL(Organization, has_formal_attire) = True",
+                        "BEL(Organization, discussing_new_ideas) = True",
+                        "INTENT(Organization, create_agenda) = True"
+                    ],
+                    "effects": [
+                        "BEL(Organization, agenda_needed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak, IdeaSharing, None, None, \"Organization shares their idea for the upcoming project.\"",
+                        "IdeaSharing, EvaluateIdeas, None, None, \"Attendees discuss the feasibility of the idea.\"",
+                        "EvaluateIdeas, Gratification, None, None, \"Organization is pleased with the positive feedback and confirmation of their idea.\"",
+                        "EvaluateIdeas, Disappointment, None, None, \"Organization is disappointed with the negative feedback and disconfirmation of their idea.\"",
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "null, CheckFormalAttire, None, None",
+                        "CheckFormalAttire, VerifyLocation, None, None",
+                        "VerifyLocation, MeetJonathan, None, None",
+                        "MeetJonathan, VerifyBelief, None, None",
+                        "VerifyBelief, EvaluateBelief, None, None",
+                        "EvaluateBelief, DiscussIdeas, None, None",
+                        "DiscussIdeas, DetermineDesire, None, None",
+                        "DetermineDesire, CreateAgenda, Hope, None",
+                        "CreateAgenda, FollowAgenda, Joy, None",
+                        "FollowAgenda, EvaluateIdeas, None, None",
+                        "EvaluateIdeas, DevelopAgenda, None, None",
+                        "DevelopAgenda, SetBelief, Gratification, None",
+                        "SetBelief, DiscussIdeas, None, None",
+                        "DiscussIdeas, EvaluateIdeas, None, None",
+                        "EvaluateIdeas, SummarizeNextSteps, None, None",
+                        "SummarizeNextSteps, AssessOutcome, None, None",
+                        "AssessOutcome, AdjournMeeting, Satisfied, None",
+                        "AdjournMeeting, GoToLocation, None, None"
+                    ]
+                },
+                "Speak(Agenda, End, None, None)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Organization, discussing_new_ideas) = True",
+                        "BEL(Organization, has_formal_attire) = True",
+                        "BEL(Organization, agenda_needed) = False",
+                        "BEL(Organization, successful_conference) = True",
+                        "INTENT(Organization, create_agenda) = True",
+                        "INTENT(Organization, evaluate_new_ideas) = True",
+                        "INTENT(Organization, achieve_success) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Agenda, End, None, None), EndConference(Organization), Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Fear, Speak(Agenda, End, None, None), None, None"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, Greeted, None, None, \"Alex enters the conference room.\">",
+        "<Greeted, Introduction, None, None, \"Alex greets Jonathan.\">",
+        "<Introduction, Interest, None, None, \"Alex asks Jonathan about his work.\">",
+        "<Interest, Interest2, None, None, \"Jonathan explains his project.\">",
+        "<Interest2, Networking, None, None, \"Alex introduces himself and explains his project.\">",
+        "<Networking, ConnectionMade, None, None, \"Alex and Jonathan discuss potential collaborations.\">",
+        "<ConnectionMade, End, None, None, \"Alex thanks Jonathan and moves on to meet other attendees.\">"
+    ]
+}

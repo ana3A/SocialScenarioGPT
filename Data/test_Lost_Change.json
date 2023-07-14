@@ -1,0 +1,708 @@
+{
+    "scenario_name": "test_Lost Change",
+    "scenario_description": "Tim was doing laundry. He accidentally dropped his quarters. Too many went down a drain. Tim had to get more quarters. He wound up having to go to the store to get change.",
+    "last_ended": "conditions_effects",
+    "agents": {
+        "Tim": {
+            "knowledge_base": [],
+            "intentions": {
+                "FindQuarters(Tim)": {
+                    "action_plan": [
+                        "CheckPockets(Tim, None)",
+                        "GoToMachine(Tim, Machine)",
+                        "GoToStore(Tim, Store)",
+                        "GetChange(Tim, Store, Amount)",
+                        "GoBackToMachine(Tim, Machine)",
+                        "InsertQuarters(Tim, Machine, Amount)",
+                        "CheckPockets(Tim, None)",
+                        "GoToMachine(Tim, Machine)",
+                        "GoToStore(Tim, Store)",
+                        "GetChange(Tim, Store, Amount)",
+                        "GoBackToMachine(Tim, Machine)",
+                        "InsertQuarters(Tim, Machine, Amount)"
+                    ]
+                },
+                "GoToStore(Tim, Store)": {
+                    "action_plan": [
+                        "GoToStore(Tim, Store)",
+                        "CheckPockets(Tim, None)",
+                        "CheckCouch(Tim, None)",
+                        "CheckCar(Tim, None)",
+                        "CheckJar(Tim, None)",
+                        "GoToStore(Tim, Store)",
+                        "RetrieveWallet(Tim, None)",
+                        "WalkToStore(Tim, Store)",
+                        "EnterStore(Tim, Store)",
+                        "TakeMoneyOut(Tim, None)",
+                        "AskForQuarters(Tim, Store, None)",
+                        "PayMoney(Tim, Store, None)",
+                        "ObtainQuarters(Tim, None)",
+                        "LeaveStore(Tim, Store)",
+                        "ArriveHome(Tim, None)"
+                    ]
+                }
+            },
+            "actions": {
+                "GoToStore(Tim, Store)": {
+                    "conditions": [
+                        "BEL(Tim, at_home) = True",
+                        "BEL(Store, open) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, at_home) = False",
+                        "BEL(Tim, at_store) = True"
+                    ]
+                },
+                "CheckPockets(Tim, None)": {
+                    "conditions": [
+                        "BEL(Tim, HasQuarters) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tim, HasQuarters) = True",
+                        "BEL(Tim, HasQuarters) = False"
+                    ]
+                },
+                "CheckCouch(Tim, None)": {
+                    "conditions": [
+                        "BEL(Tim, hasKeys) = True",
+                        "BEL(Tim, hasQuarters) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tim, hasQuarters) = True",
+                        "BEL(Tim, foundQuarters) = True",
+                        "BEL(Tim, foundQuarters) = True",
+                        "BEL(Tim, couch) = Quarters"
+                    ]
+                },
+                "CheckCar(Tim, None)": {
+                    "conditions": [
+                        "BEL(Tim, HasCar) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, FoundQuarters) = None",
+                        "BEL(Tim, FoundWallet) = None",
+                        "BEL(Tim, HasQuarters) = False"
+                    ]
+                },
+                "CheckJar(Tim, None)": {
+                    "conditions": [
+                        "BEL(Tim, hasJar) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, foundQuarters) = True"
+                    ]
+                },
+                "RetrieveWallet(Tim, None)": {
+                    "conditions": [
+                        "BEL(Tim, has_wallet) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, holding_wallet) = True",
+                        "BEL(Tim, has_wallet) = False"
+                    ]
+                },
+                "WalkToStore(Tim, Store)": {
+                    "conditions": [
+                        "BEL(Tim, atHome) = True",
+                        "BEL(Tim, hasQuarters) = False",
+                        "BEL(Store, exists) = True",
+                        "BEL(Tim, canWalkToStore) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, atHome) = False",
+                        "BEL(Tim, atStore) = True",
+                        "DES(Tim, buyQuarters) = True"
+                    ]
+                },
+                "EnterStore(Tim, Store)": {
+                    "conditions": [
+                        "BEL(Tim, hasWallet) = True",
+                        "BEL(Tim, atHome) = False",
+                        "BEL(Store, isOpen) = True",
+                        "BEL(Tim, hasEnteredStore) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tim, inStore) = True",
+                        "BEL(Store, hasCustomer) = True",
+                        "BEL(Tim, hasEnteredStore) = True"
+                    ]
+                },
+                "TakeMoneyOut(Tim, None)": {
+                    "conditions": [
+                        "BEL(Tim, has_wallet) = True",
+                        "BEL(Tim, has_money) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tim, has_money) = True"
+                    ]
+                },
+                "AskForQuarters(Tim, Store, None)": {
+                    "conditions": [
+                        "BEL(Tim, InStore(Store)) = False",
+                        "BEL(Store, HasQuarters) = True",
+                        "DES(Tim, GetQuarters) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, InStore(Store)) = True",
+                        "BEL(Tim, TalkingTo(Store)) = True",
+                        "BEL(Store, HasQuarters) = False",
+                        "DES(Tim, GetQuarters) = False",
+                        "BEL(Tim, HasQuarters) = True"
+                    ]
+                },
+                "PayMoney(Tim, Store, None)": {
+                    "conditions": [
+                        "BEL(Tim, HasCash) = True",
+                        "BEL(Store, AcceptsCash) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, HasQuarters) = True",
+                        "BEL(Tim, HasCash) = Reduced/0"
+                    ]
+                },
+                "ObtainQuarters(Tim, None)": {
+                    "conditions": [
+                        "BEL(Tim, inStore) = True",
+                        "BEL(Store, hasQuarters) = True"
+                    ],
+                    "effects": [
+                        "DES(Tim, hasQuarters) = True"
+                    ]
+                },
+                "LeaveStore(Tim, Store)": {
+                    "conditions": [
+                        "BEL(Tim, HasQuarters) = True",
+                        "BEL(Tim, AtStore) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, HasQuarters) = False",
+                        "BEL(Tim, AtStore) = False",
+                        "BEL(Tim, AtHome) = True"
+                    ]
+                },
+                "ArriveHome(Tim, None)": {
+                    "conditions": [
+                        "BEL(Tim, inCar) = True",
+                        "BEL(Tim, atStore) = False",
+                        "BEL(Tim, hasQuarters) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, inCar) = False",
+                        "BEL(Tim, atHome) = True"
+                    ]
+                },
+                "GoToMachine(Tim, Machine)": {
+                    "conditions": [
+                        "BEL(Tim, AtHome) = False",
+                        "BEL(Tim, AtLaundry) = True",
+                        "BEL(Tim, AtMachine) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tim, AtHome) = False",
+                        "BEL(Tim, AtLaundry) = True",
+                        "BEL(Tim, AtMachine) = True"
+                    ]
+                },
+                "GetChange(Tim, Store, Amount)": {
+                    "conditions": [
+                        "BEL(Tim, isAt(Store)) = True",
+                        "BEL(Store, hasChange(Amount)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, hasChange(Amount)) = True",
+                        "BEL(Store, hasChange(Amount)) = False"
+                    ]
+                },
+                "GoBackToMachine(Tim, Machine)": {
+                    "conditions": [
+                        "BEL(Tim, AtMachine) = False",
+                        "BEL(Tim, AtStore) = True",
+                        "BEL(Tim, HasChange) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, AtMachine) = True",
+                        "BEL(Tim, AtStore) = False"
+                    ]
+                },
+                "InsertQuarters(Tim, Machine, Amount)": {
+                    "conditions": [
+                        "BEL(Tim, HasChange) = False",
+                        "BEL(Machine, HasQuarters) = True",
+                        "BEL(Machine, AmountQuarters) >= Amount",
+                        "DES(Tim, FindQuarters) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tim, HasChange) = True",
+                        "BEL(Machine, AmountQuarters) = Machine.AmountQuarters - Amount",
+                        "BEL(Machine, HasQuarters) = Machine.AmountQuarters > 0",
+                        "DES(Tim, FindQuarters) = False"
+                    ]
+                }
+            }
+        },
+        "Store": {
+            "knowledge_base": [
+                "BEL(Store, has_quarters) = True",
+                "BEL(Store, is_open) = True",
+                "BEL(Store, has_change_for_dollar) = True",
+                "BEL(Store, location) = \"15th Street\"",
+                "DES(Store, sell_quarters) = True",
+                "DES(Store, make_profit) = True",
+                "DES(Store, attract_customers) = True",
+                "DES(Store, provide_good_customer_service) = True"
+            ],
+            "intentions": {
+                "INTENT(Store, sell_quarters) = True": {
+                    "action_plan": [
+                        "INTENT(Store, sell_quarters) = True",
+                        "Move(Store, location, \"15th Street\")",
+                        "Check(Store, has_quarters)",
+                        "Check(Store, is_open)",
+                        "Check(Store, has_change_for_dollar)",
+                        "Provide(Store, good_customer_service)",
+                        "Sell(Store, quarters, Exchange(1, dollar, quarters))",
+                        "Receive(Store, payment, 1$)",
+                        "Increase(Store, revenue)",
+                        "Attract(Store, customers)"
+                    ]
+                },
+                "INTENT(Store, make_profit) = True": {
+                    "action_plan": [
+                        "Advertise(Store, customers, location=\"15th Street\")",
+                        "Welcome(CustomerServiceAgent, customers)",
+                        "Sell(Store, customers, quarters, number_of_quarters=4)",
+                        "Offer(Store, customers, change_for_dollar)",
+                        "Monitor(Store, sales)",
+                        "Restock(Store, quarters)",
+                        "Thank(CustomerServiceAgent, customers)"
+                    ]
+                },
+                "INTENT(Store, attract_customers) = True": {
+                    "action_plan": [
+                        "Advertise(Store, Radio, AdMessage)",
+                        "Offer_discounts(Store, Customers, DiscountPercentage)",
+                        "Give_good_customer_service(Store, Customers)",
+                        "Arrange_special_events(Store, Customers, EventName)"
+                    ]
+                },
+                "INTENT(Store, provide_good_customer_service) = True": {
+                    "action_plan": [
+                        "Greet(Store, Customer)",
+                        "Ask(Customer, how_can_I_help_you)",
+                        "Sell(Store, Customer, Quarters)",
+                        "Provide(Store, Customer, ChangeForDollar)",
+                        "Thank(Customer)"
+                    ]
+                }
+            },
+            "actions": {
+                "Greet(Store, Customer)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True"
+                    ],
+                    "effects": [
+                        "DES(Store, provide_good_customer_service) = True",
+                        "BEL(Store, has_quarters) = True",
+                        "BEL(Store, has_change_for_dollar) = True",
+                        "BEL(Customer, is_greeted_by_Store) = True"
+                    ]
+                },
+                "Ask(Customer, how_can_I_help_you)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "BEL(Store, has_quarters) = True"
+                    ],
+                    "effects": []
+                },
+                "Sell(Store, Customer, Quarters)": {
+                    "conditions": [
+                        "BEL(Store, has_quarters) = True",
+                        "BEL(Store, is_open) = True",
+                        "DES(Store, sell_quarters) = True"
+                    ],
+                    "effects": [
+                        "BEL(Store, has_quarters) = False",
+                        "BEL(Customer, has_quarters) = True"
+                    ]
+                },
+                "Provide(Store, Customer, ChangeForDollar)": {
+                    "conditions": [
+                        "BEL(Store, has_change_for_dollar) = True",
+                        "BEL(Store, is_open) = True",
+                        "BEL(Customer, has_dollar) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, has_dollar) = False",
+                        "BEL(Customer, has_quarters) = True",
+                        "BEL(Store, has_change_for_dollar) = False",
+                        "DES(Store, make_profit) = True"
+                    ]
+                },
+                "Thank(Customer)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "BEL(Customer, purchased_quarters) = True",
+                        "BEL(Customer, paid_with_dollar) = True"
+                    ],
+                    "effects": [
+                        "DES(Store, provide_good_customer_service) = True",
+                        "DES(Store, attract_customers) = True",
+                        "BEL(Customer, satisfied_with_service) = True",
+                        "BEL(Store, has_quarters) = False",
+                        "BEL(Store, has_change_for_dollar) = True",
+                        "BEL(Store, profits_increase) += 0.25"
+                    ]
+                },
+                "INTENT(Store, sell_quarters) = True": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "BEL(Store, has_quarters) = True",
+                        "BEL(Store, has_change_for_dollar) = True"
+                    ],
+                    "effects": [
+                        "BEL(Store, has_quarters) = False",
+                        "BEL(Store, revenue) = revenue + 1",
+                        "DES(Store, make_profit) = True",
+                        "DES(Store, attract_customers) = True",
+                        "DES(Store, sell_quarters) = False"
+                    ]
+                },
+                "Move(Store, location, \"15th Street\")": {
+                    "conditions": [
+                        "BEL(Store, location) = Location"
+                    ],
+                    "effects": [
+                        "BEL(Store, location) = \"15th Street\""
+                    ]
+                },
+                "Check(Store, has_quarters)": {
+                    "conditions": [
+                        "BEL(Store, has_quarters) = True"
+                    ],
+                    "effects": []
+                },
+                "Check(Store, is_open)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True"
+                    ],
+                    "effects": []
+                },
+                "Check(Store, has_change_for_dollar)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "BEL(Store, has_change_for_dollar) = True"
+                    ],
+                    "effects": []
+                },
+                "Provide(Store, good_customer_service)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True"
+                    ],
+                    "effects": [
+                        "DES(Store, provide_good_customer_service) = True"
+                    ]
+                },
+                "Sell(Store, quarters, Exchange(1, dollar, quarters))": {
+                    "conditions": [
+                        "BEL(Store, has_quarters) = True",
+                        "BEL(Store, is_open) = True",
+                        "BEL(Store, has_change_for_dollar) = True"
+                    ],
+                    "effects": [
+                        "BEL(Store, has_quarters) = False",
+                        "BEL(Customer, has_quarters) = True",
+                        "BEL(Store, has_change_for_dollar) = True",
+                        "BEL(Store, revenue) += 0.25"
+                    ]
+                },
+                "Receive(Store, payment, 1$)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "ARG(payment, 1$) = True"
+                    ],
+                    "effects": [
+                        "BEL(Store, revenue) = 1$",
+                        "BEL(Store, has_change_for_dollar) = False",
+                        "ARG(payment, 1$) = False"
+                    ]
+                },
+                "Increase(Store, revenue)": {
+                    "conditions": [
+                        "BEL(Store, make_profit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Store, revenue) = X+1"
+                    ]
+                },
+                "Attract(Store, customers)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "DES(Store, attract_customers) = True"
+                    ],
+                    "effects": [
+                        "BEL(Store, more_customers) = True"
+                    ]
+                },
+                "Advertise(Store, customers, location=\"15th Street\")": {
+                    "conditions": [
+                        "BEL(Store, is_open)=True",
+                        "BEL(Store, location)=\"15th_Street\""
+                    ],
+                    "effects": [
+                        "DES(Store, attract_customers)=True"
+                    ]
+                },
+                "Welcome(CustomerServiceAgent, customers)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "DES(Store, provide_good_customer_service) = True",
+                        "BEL(CustomerServiceAgent, is_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Store, has_customer_service) = True",
+                        "BEL(CustomerServiceAgent, is_busy) = True"
+                    ]
+                },
+                "Sell(Store, customers, quarters, number_of_quarters=4)": {
+                    "conditions": [
+                        "BEL(Store, has_quarters) = True",
+                        "BEL(Store, is_open) = True",
+                        "BEL(Store, attract_customers) = True",
+                        "BEL(Customer, is_interested) = True",
+                        "DES(Store, sell_quarters) = True",
+                        "[ARG(number_of_quarters)] = 4"
+                    ],
+                    "effects": [
+                        "BEL(Store, has_quarters) = False",
+                        "BEL(Store, make_profit) = True",
+                        "DES(Store, provide_good_customer_service) = True",
+                        "BEL(Customer, has_quarters) = True",
+                        "[BEL(Customer, quarters)"
+                    ]
+                },
+                "Offer(Store, customers, change_for_dollar)": {
+                    "conditions": [
+                        "BEL(Store, has_change_for_dollar) = True",
+                        "BEL(Store, is_open) = True",
+                        "BEL(Store, location) = \"15th_Street\"",
+                        "BEL(customers, wants_change_for_dollar) = True"
+                    ],
+                    "effects": [
+                        "DES(Store, make_profit) = True",
+                        "BEL(Store, has_change_for_dollar) = False",
+                        "BEL(customers, has_change_for_dollar) = True"
+                    ]
+                },
+                "Monitor(Store, sales)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "BEL(Store, sell_quarters) = True"
+                    ],
+                    "effects": [
+                        "BEL(Store, total_sales) += 1"
+                    ]
+                },
+                "Restock(Store, quarters)": {
+                    "conditions": [
+                        "BEL(Store, has_quarters) = False"
+                    ],
+                    "effects": [
+                        "BEL(Store, has_quarters) = True"
+                    ]
+                },
+                "Thank(CustomerServiceAgent, customers)": {
+                    "conditions": [
+                        "BEL(CustomerServiceAgent, greeted_customers) = True",
+                        "BEL(Store, attract_customers) = True"
+                    ],
+                    "effects": [
+                        "BEL(Store, provided_good_customer_service) = True",
+                        "DES(CustomerServiceAgent, feel_appreciated) = True"
+                    ]
+                },
+                "Advertise(Store, Radio, AdMessage)": {
+                    "conditions": [
+                        "BEL(Radio, is_on_air) = True",
+                        "DES(Store, make_profit) = True",
+                        "DES(Store, attract_customers) = True"
+                    ],
+                    "effects": [
+                        "BEL(Radio, is_advertising) = AdMessage",
+                        "BEL(Store, is_generating_revenue) = True",
+                        "DES(Store, make_profit) = IncreasedProfit",
+                        "DES(Store, attract_customers) = IncreasedCustomers"
+                    ]
+                },
+                "Offer_discounts(Store, Customers, DiscountPercentage)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "DES(Store, provide_good_customer_service) = True"
+                    ],
+                    "effects": [
+                        "BEL(Store, has_change_for_dollar) = True",
+                        "New BEL(Customer, made_purchase_from_Store) = True",
+                        "DES(Store, make_profit) = True",
+                        "DES(Store, provide_good_customer_service) = True",
+                        "New BEL(Customer, satisfied_with_discount_purchased_from_Store) = True"
+                    ]
+                },
+                "Give_good_customer_service(Store, Customers)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "BEL(Customers, is_present_at_Store) = True"
+                    ],
+                    "effects": [
+                        "DES(Store, provide_good_customer_service) = True",
+                        "BEL(Store, has_positive_review_from_Customers) = True"
+                    ]
+                },
+                "Arrange_special_events(Store, Customers, EventName)": {
+                    "conditions": [
+                        "BEL(Store, is_open) = True",
+                        "DES(Store, attract_customers) = True",
+                        "DES(Store, provide_good_customer_service) = True",
+                        "BEL(Customers, interested_in_special_events) = True",
+                        "BEL(Customers, has_time_available) = True"
+                    ],
+                    "effects": [
+                        "DES(Store, make_profit) = True",
+                        "BEL(Store, has_customers_attended_eventName) = True"
+                    ]
+                }
+            }
+        },
+        "Machine": {
+            "knowledge_base": [
+                "BEL(Machine, hasQuarters) = True",
+                "BEL(Machine, location, x, y) = (2, 5)",
+                "BEL(Machine, isWorking) = True",
+                "BEL(Machine, pricePerLoad) = 1.5",
+                "DES(Machine, provideQuarters) = True",
+                "DES(Machine, receivePayment, payment) = True"
+            ],
+            "intentions": {
+                "INTENT(Machine, provideQuarters) = True": {
+                    "action_plan": [
+                        "INTENT(Machine, provideQuarters) = True",
+                        "CalculateChange(Machine, Store, amountToChange)",
+                        "BEL(Machine, hasQuarters) = BEL(Machine, hasQuarters) - amountToChange",
+                        "ProvideQuarters(Machine, Tim, amountOfQuarters)",
+                        "Store"
+                    ]
+                },
+                "INTENT(Machine, receivePayment, payment) = True": {
+                    "action_plan": [
+                        "CheckWorkingStatus(Machine, _, _)",
+                        "CheckQuartersAmount(Machine, _, _)",
+                        "ProvideQuarters(Machine, Tim, 2)",
+                        "ReceivePayment(Machine, _, 1.5)"
+                    ]
+                }
+            },
+            "actions": {
+                "CheckWorkingStatus(Machine, _, _)": {
+                    "conditions": [
+                        "BEL(Machine, isWorking) = True"
+                    ],
+                    "effects": []
+                },
+                "CheckQuartersAmount(Machine, _, _)": {
+                    "conditions": [
+                        "BEL(Machine, hasQuarters) = True"
+                    ],
+                    "effects": [
+                        "BEL(Machine, hasQuarters) = True",
+                        "BEL(Machine, hasQuarters) = False"
+                    ]
+                },
+                "ProvideQuarters(Machine, Tim, 2)": {
+                    "conditions": [
+                        "BEL(Machine, hasQuarters) = True",
+                        "BEL(Machine, location, x, y) = (2, 5)",
+                        "BEL(Tim, isPresent) = True"
+                    ],
+                    "effects": [
+                        "BEL(Machine, hasQuarters) = (True - 2)",
+                        "BEL(Tim, hasQuarters) = 2",
+                        "BEL(Machine, location, x, y) = (2, 5)",
+                        "DES(Tim, doLaundry, _*) = True",
+                        "DES(Machine, receivePayment, payment) = True"
+                    ]
+                },
+                "ReceivePayment(Machine, _, 1.5)": {
+                    "conditions": [
+                        "BEL(Machine, hasQuarters) = True",
+                        "BEL(Machine, isWorking) = True"
+                    ],
+                    "effects": [
+                        "BEL(Machine, hasQuarters) = False",
+                        "BEL(Machine, totalEarnings) = 1.5"
+                    ]
+                },
+                "INTENT(Machine, provideQuarters) = True": {
+                    "conditions": [
+                        "BEL(Machine, hasQuarters) = True",
+                        "BEL(Machine, isWorking) = True",
+                        "DES(Machine, provideQuarters) = True"
+                    ],
+                    "effects": [
+                        "BEL(Machine, hasQuarters) = BEL(Machine, hasQuarters) - amountToChange",
+                        "DES(Machine, receivePayment, payment) = True",
+                        "BEL(Tim, hasQuarters) = BEL(Tim, hasQuarters) + amountOfQuarters",
+                        "BEL(Store, amountOfChange) = BEL(Store, amountOfChange) + amountToChange",
+                        "BEL(Machine, location, x, y) = (2,5)"
+                    ]
+                },
+                "CalculateChange(Machine, Store, amountToChange)": {
+                    "conditions": [
+                        "BEL(Machine, isWorking) = True",
+                        "BEL(Machine, location, x, y) = (2, 5)",
+                        "BEL(Machine, pricePerLoad) = price",
+                        "DES(Machine, receivePayment, payment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Machine, hasQuarters) = BEL(Machine, hasQuarters) + amountToChange",
+                        "BEL(Store, hasChange) = BEL(Store, hasChange) - amountToChange*price"
+                    ]
+                },
+                "BEL(Machine, hasQuarters) = BEL(Machine, hasQuarters) - amountToChange": {
+                    "conditions": [
+                        "BEL(Machine, hasQuarters) = True",
+                        "BEL(Machine, hasQuarters) is Numerical Value",
+                        "amountToChange is Numerical Value"
+                    ],
+                    "effects": [
+                        "BEL(Machine, hasQuarters) = BEL(Machine, hasQuarters) - amountToChange"
+                    ]
+                },
+                "ProvideQuarters(Machine, Tim, amountOfQuarters)": {
+                    "conditions": [
+                        "BEL(Machine, hasQuarters) >= amountOfQuarters",
+                        "BEL(Machine, isWorking) = True",
+                        "BEL(Tim, location, x, y) = BEL(Machine, location, x, y)"
+                    ],
+                    "effects": [
+                        "BEL(Machine, hasQuarters) = BEL(Machine, hasQuarters) - amountOfQuarters",
+                        "BEL(Tim, hasQuarters) = BEL(Tim, hasQuarters) + amountOfQuarters",
+                        "DES(Tim, finishLaundry) = True"
+                    ]
+                },
+                "Store": {
+                    "conditions": [
+                        "BEL(Machine, location, x, y) = (2, 5)",
+                        "BEL(Machine, isWorking) = True",
+                        "BEL(Tim, location, x, y) = (1, 3)",
+                        "DES(Tim, doLaundry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Machine, hasQuarters) = BEL(Machine, hasQuarters) + payment",
+                        "BEL(Machine, location, x, y) = (2, 5)",
+                        "DES(Machine, receivePayment, payment) = False",
+                        "DES(Tim, doLaundry) = False",
+                        "DES(Machine, provideQuarters) = False"
+                    ]
+                }
+            }
+        }
+    }
+}

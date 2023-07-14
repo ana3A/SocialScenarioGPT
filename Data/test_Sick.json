@@ -1,0 +1,2590 @@
+{
+    "scenario_name": "test_Sick",
+    "scenario_description": "Sandy felt weak after working out. She told her coach she was dizzy. As she was walking off the court, she fainted. Sandy was rushed to the ER. Sandy had an aneurysm.",
+    "last_ended": "speak_actions",
+    "agents": {
+        "Sandy": {
+            "knowledge_base": [
+                "BEL(Sandy, dizzy)=True",
+                "BEL(Sandy, weak)=True",
+                "BEL(Sandy, worked_out)=True",
+                "BEL(Sandy, aneurysm)=False",
+                "DES(Sandy, get_medical_attention)=True",
+                "DES(Sandy, feel_better)=True",
+                "DES(Sandy, live)=True"
+            ],
+            "intentions": {
+                "INTENT(Sandy, seek_medical_attention) = True": {
+                    "action_plan": [
+                        "Call(Coach, Sandy)",
+                        "Guide(Coach, Sandy, Exit)",
+                        "Call(911, Sandy)",
+                        "Wait(Coach, Sandy, Ambulance)",
+                        "Transport(Ambulance, Sandy, Hospital)",
+                        "Examine(ER_Nurse, Sandy)",
+                        "Notify(Doctor, Sandy, ER_Nurse)",
+                        "Diagnose(Doctor, Sandy, Aneurysm)",
+                        "Treat(Doctor, Sandy, Aneurysm)"
+                    ]
+                },
+                "INTENT(Sandy, recover) = True": {
+                    "action_plan": [
+                        "CallEmergency(Sandy, Coach)",
+                        "LieDown(Sandy, Ground)",
+                        "CallEmergency(Sandy, ER_Nurse)",
+                        "Wait(Sandy, None, 5 minutes)",
+                        "CallEmergency(Sandy, Doctor)",
+                        "GetTransported(Sandy, Ambulance)",
+                        "ReceiveTreatment(Sandy, Doctor)",
+                        "Recover(Sandy, None)"
+                    ]
+                },
+                "INTENT(Sandy, survive) = True": {
+                    "action_plan": [
+                        "CallDoctor(Sandy, Doctor)",
+                        "LieDown(Sandy, Floor)",
+                        "CoachCheck(Sandy, Coach)",
+                        "CallAmbulance(Coach, ER_Nurse)",
+                        "AccompanySandy(Coach, ER_Nurse)",
+                        "ERCheck(ER_Nurse, Sandy)",
+                        "DoctorAssess(Doctor, Sandy)",
+                        "MonitorHealth(Doctor, Sandy)"
+                    ]
+                }
+            },
+            "actions": {
+                "CallDoctor(Sandy, Doctor)": {
+                    "conditions": [
+                        "BEL(Sandy, dizzy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, contacted_doctor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "LieDown(Sandy, Floor)": {
+                    "conditions": [
+                        "BEL(Sandy, conscious) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, conscious) = False], [BEL(Sandy, lying_down) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "CoachCheck(Sandy, Coach)": {
+                    "conditions": [
+                        "BEL(Sandy, dizzy) = True",
+                        "BEL(Sandy, weak) = True",
+                        "BEL(Sandy, worked_out) = True",
+                        "DES(Sandy, get_medical_attention) = True",
+                        "DES(Sandy, feel_better) = True",
+                        "DES(Sandy, live) = True",
+                        "BEL(Coach, has_first_aid_kit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, checked_by_coach) = True",
+                        "DES(Sandy, get_medical_attention) = False",
+                        "DES(Coach, assist_sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "CallAmbulance(Coach, ER_Nurse)": {
+                    "conditions": [
+                        "BEL(Coach, knows_how_to_call_ambulance) = True",
+                        "BEL(Sandy, conscious) = False",
+                        "DES(Coach, get_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, called_ambulance) = True",
+                        "BEL(ER_Nurse, ambulance_called) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "AccompanySandy(Coach, ER_Nurse)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, at_hospital)=True",
+                        "BEL(Coach, with_Sandy)=True",
+                        "BEL(Coach, can_accompany)=True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, at_hospital)=True",
+                        "BEL(Coach, with_Sandy)=False",
+                        "BEL(ER_Nurse, with_Sandy)=True",
+                        "DES(Coach, help_Sandy)=False",
+                        "DES(ER_Nurse, help_Sandy)=True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "ERCheck(ER_Nurse, Sandy)": {
+                    "conditions": [
+                        "BEL(Sandy, ER_opens)=True",
+                        "BEL(ER_Nurse, available)=True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, admitted_to_hospital)=True",
+                        "DES(Sandy, receive_medical_treatment)=True",
+                        "DES(Sandy, recover_health)=True",
+                        "BEL(ER_Nurse, busy)=True",
+                        "BEL(Sandy, aneurysm)=True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DoctorAssess(Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, available) = True",
+                        "BEL(Sandy, in_hospital) = False",
+                        "BEL(Sandy, conscious) = True",
+                        "BEL(Sandy, assessed_by_doctor) = False"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, available) = False",
+                        "BEL(Sandy, in_hospital) = True",
+                        "BEL(Sandy, conscious) = True",
+                        "BEL(Sandy, assessed_by_doctor) = True",
+                        "DES(Sandy, get_treatment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "MonitorHealth(Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, on_duty) = True",
+                        "BEL(Sandy, conscious) = True",
+                        "BEL(Doctor, monitoring) = False",
+                        "BEL(Doctor, good_health) = True",
+                        "BEL(Sandy, aneurysm) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, monitoring) = True",
+                        "DES(Doctor, save_Sandy) = True",
+                        "DES(Sandy, recover) = True",
+                        "DES(Sandy, get_treatment) = True",
+                        "BEL(Sandy, hospital) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Call(Coach, Sandy)": {
+                    "conditions": [
+                        "BEL(Sandy, dizzy) = True",
+                        "BEL(Sandy, weak) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Guide(Coach, Sandy, Exit)": {
+                    "conditions": [
+                        "BEL(Coach, knows_exit) = True",
+                        "BEL(Coach, with(Sandy)) = True",
+                        "BEL(Sandy, dizzy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, exited_building) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "@Fear"
+                    ]
+                },
+                "Call(911, Sandy)": {
+                    "conditions": [
+                        "BEL(Sandy, dizzy) = True",
+                        "BEL(Sandy, weak) = True",
+                        "DES(Sandy, get_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, medical_emergency) = True",
+                        "BEL(Sandy, ambulance_called) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Wait(Coach, Sandy, Ambulance)": {
+                    "conditions": [
+                        "BEL(Coach, knows_Sandy_dizzy) = True",
+                        "BEL(Coach, near_Sandy) = True",
+                        "DES(Coach, seek_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, received_medical_attention) = False",
+                        "BEL(Sandy, transported_by_ambulance) = False",
+                        "BEL(Ambulance, on_the_way) = False",
+                        "BEL(Ambulance, arrived) = False",
+                        "DES(Sandy, get_medical_attention) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Transport(Ambulance, Sandy, Hospital)": {
+                    "conditions": [
+                        "BEL(Ambulance, is_available) = True",
+                        "BEL(Sandy, needs_medical_attention) = True",
+                        "BEL(Hospital, is_accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, receiving_medical_attention) = True",
+                        "BEL(Ambulance, is_available) = False",
+                        "BEL(Sandy, needs_medical_attention) = False",
+                        "DES(Sandy, feel_better) = True",
+                        "DES(Sandy, live) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Examine(ER_Nurse, Sandy)": {
+                    "conditions": [
+                        "BEL(Sandy, unconscious) = True",
+                        "BEL(ER_Nurse, available) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, examining) = True",
+                        "BEL(Sandy, diagnosed) = False"
+                    ],
+                    "occ_emotion": [
+                        "fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Notify(Doctor, Sandy, ER_Nurse)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Diagnosed_Sandy_Aneurysm) = True",
+                        "DES(Doctor, Treat_Aneurysm) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Knows_About_Sandy_Aneurysm) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Diagnose(Doctor, Sandy, Aneurysm)": {
+                    "conditions": [
+                        "BEL(Doctor, ER_certified) = True",
+                        "BEL(Hospital, equipped_for_neurosurgery) = True",
+                        "BEL(Sandy, aneurysm) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, aneurysm) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Treat(Doctor, Sandy, Aneurysm)": {
+                    "conditions": [
+                        "BEL(Sandy, aneurysm) = True"
+                    ],
+                    "effects": [
+                        "DES(Sandy, live) = True",
+                        "DES(Sandy, feel_better) = True",
+                        "BEL(Sandy, aneurysm) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "CallEmergency(Sandy, Coach)": {
+                    "conditions": [
+                        "BEL(Sandy, dizzy) = True",
+                        "BEL(Sandy, weak) = True",
+                        "BEL(Sandy, worked_out) = True",
+                        "DES(Sandy, get_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, emergency_called_coach) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "LieDown(Sandy, Ground)": {
+                    "conditions": [
+                        "BEL(Sandy, dizzy) = True"
+                    ],
+                    "effects": [
+                        "DES(Sandy, feel_better) = True",
+                        "BEL(Sandy, dizzy) = False",
+                        "BEL(Sandy, weak) = True",
+                        "BEL(Sandy, worked_out) = True",
+                        "BEL(Sandy, aneurysm) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "CallEmergency(Sandy, ER_Nurse)": {
+                    "conditions": [
+                        "BEL(Sandy, aneurysm) = False",
+                        "BEL(Sandy, dizzy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, aneurysm) = True",
+                        "DES(Sandy, get_medical_attention) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Wait(Sandy, None, 5 minutes)": {
+                    "conditions": [
+                        "BEL(Sandy, aneurysm) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CallEmergency(Sandy, Doctor)": {
+                    "conditions": [
+                        "BEL(Sandy, dizzy) = True",
+                        "BEL(Sandy, weak) = True",
+                        "BEL(Sandy, worked_out) = True",
+                        "BEL(Sandy, aneurysm) = False"
+                    ],
+                    "effects": [
+                        "DES(Sandy, get_medical_attention) = True",
+                        "BEL(Sandy, medical_help_received) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "GetTransported(Sandy, Ambulance)": {
+                    "conditions": [
+                        "BEL(Sandy, dizzy) = True",
+                        "BEL(Sandy, weak) = True",
+                        "BEL(Sandy, worked_out) = True",
+                        "BEL(Sandy, aneurysm) = False",
+                        "DES(Sandy, get_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, in_ambulance) = True",
+                        "BEL(Sandy, at_hospital) = False",
+                        "DES(Sandy, get_medical_attention) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ReceiveTreatment(Sandy, Doctor)": {
+                    "conditions": [
+                        "BEL(Sandy, transported_by_ambulance) = True",
+                        "BEL(Sandy, doctor_available) = True",
+                        "DES(Sandy, get_treatment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, aneurysm_treated) = True",
+                        "BEL(Sandy, discharged) = True",
+                        "DES(Sandy, feel_better) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Recover(Sandy, None)": {
+                    "conditions": [
+                        "BEL(Sandy, aneurysm)"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, live)",
+                        "DES(Sandy, recover)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [],
+            "speak_actions": {
+                "Speak(start, A, intro, neutral)": {},
+                "Speak(A, B, inquiry, concerned)": {},
+                "Speak(B, C, educate, informative)": {},
+                "Speak(C, D, concern, empathetic)": {},
+                "Speak(D, E, educate, informative)": {},
+                "Speak(E, F, concern, empathetic)": {},
+                "Speak(F, end, conclusion, neutral)": {}
+            }
+        },
+        "Coach": {
+            "knowledge_base": [
+                "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                "DES(Coach, Wants_Sandy_to_Recover) = True",
+                "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True"
+            ],
+            "intentions": {
+                "INTENT(Coach, Assess_Sandy's_Condition) = True": {
+                    "action_plan": [
+                        "Call(Coach, Emergency_services, \"911\")",
+                        "Approach(Coach, Sandy, None)",
+                        "Check(Coach, Sandy, Symptoms)",
+                        "Help(Coach, Sandy, Sit_Down)",
+                        "Ask(Coach, Sandy, Explanation)",
+                        "Inform(Coach, Emergency_services, Sandy's_Condition)",
+                        "Escort(Coach, Sandy, ER_Area)",
+                        "Collaborate(Coach, ER_Nurse, Share_Information)",
+                        "Answer(Coach, Doctor, Questions)",
+                        "Evaluate(Coach, Sandy, Workout_Routines)",
+                        "Arrange(Coach, Medical_Checkup, Sandy)",
+                        "Provide(Coach, Sandy, Safety_Tips)"
+                    ]
+                },
+                "INTENT(Coach, Call_for_an_Ambulance) = True": {
+                    "action_plan": [
+                        "INTENT(Coach, Call_for_an_Ambulance) = True",
+                        "Assess_Sandy's_Condition(Coach, Sandy)",
+                        "Call_Emergency_Services(Coach, None)",
+                        "Explain_Sandy's_Condition_to_the_Operator(Coach, Emergency_Services, Sandy's_condition)",
+                        "Stay_with_Sandy(Coach, Sandy)"
+                    ]
+                },
+                "INTENT(Coach, Notify_Sandy's_Family) = False": {
+                    "action_plan": [
+                        "INTENT(Coach, Notify_Sandy's_Family) = False",
+                        "Call(Coach, 911)",
+                        "Accompany(Coach, Sandy)",
+                        "Talk(Coach, ER_Nurse)",
+                        "Talk(Coach, Doctor)",
+                        "Ask(Coach, Doctor, Recommended_Steps_to_Prev_Potential_Incidences)",
+                        "Debrief(Coach, Sandy)",
+                        "Inform(Coach, Sandy's_Family)",
+                        "Follow-Up(Coach)"
+                    ]
+                },
+                "INTENT(Coach, Research_Symptoms_of_Aneurysm) = True": {
+                    "action_plan": [
+                        "Search_Symptoms(Coach, \"\", \"\")",
+                        "Talk_To_Sandy(Coach, Sandy, \"What_Happened\")",
+                        "Gather_Information(Coach, ER_Nurse, \"Ask_About_Sandy's_Condition\")",
+                        "Consult_Doctor(Coach, Doctor, \"Sandy's_Condition\")",
+                        "Take_Action(Coach, Sandy, \"Suggests_a_Visit_to_the_Doctor\")",
+                        "Follow_Up(Coach, Sandy, \"Asks_Sandy_How_She_Feels_and_if_She_Saw_the_Doctor\")"
+                    ]
+                },
+                "INTENT(Coach, Follow_Up_with_Medical_Team) = True": {
+                    "action_plan": [
+                        "Coach(Coach, Sandy, Check_Sandy's_Vital_Signs)",
+                        "ER_Nurse(ER_Nurse, Coach, Take_Sandy_to_the_Triage_Area)",
+                        "ER_Nurse(ER_Nurse, Sandy, Check_Blood_Pressure)",
+                        "ER_Nurse(ER_Nurse, Sandy, Check_Heart_Rate)",
+                        "ER_Nurse(ER_Nurse, Sandy, Check_Temperature)",
+                        "Doctor(Doctor, Sandy, Conduct_CT_Scan)",
+                        "Doctor(Doctor, Sandy, Assess_Aneurysm)",
+                        "Coach(Coach, Doctor, Gather_Information_on_Sandy's_Condition)",
+                        "Coach(Coach, Sandy, Provide_Support_and_Care)",
+                        "Coach(Coach, Sandy, Follow_Up_with_Medical_Team)"
+                    ]
+                },
+                "INTENT(Coach, Modify_Sandy's_Workout_Routine) = True": {
+                    "action_plan": [
+                        "Coach(Modify_Sandy's_Workout_Routine)",
+                        "Coach(Check_Sandy's_Medical_History, Sandy)",
+                        "Coach(Research_Dizziness_Symptoms, None)",
+                        "Coach(Consult_With_Medical_Professional, ER_Nurse)",
+                        "Coach(Create_New_Workout_Plan, Sandy)",
+                        "Coach(Discuss_New_Workout_Plan_With_Sandy, Sandy)",
+                        "Coach(Monitor_Sandy's_Progress, Sandy)"
+                    ]
+                }
+            },
+            "actions": {
+                "Coach(Modify_Sandy's_Workout_Routine)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True",
+                        "BEL(Coach, Knows_Sandy's_New_Workout_Routine) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Coach(Check_Sandy's_Medical_History, Sandy)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "BEL(Coach, Has_Not_Checked_Sandy's_Medical_History) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Has_Checked_Sandy's_Medical_History) = True",
+                        "BEL(Coach, Knows_Sandy's_Medical_History) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": []
+                },
+                "Coach(Research_Dizziness_Symptoms, None)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_More_About_Dizziness_Symptoms) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Coach(Consult_With_Medical_Professional, ER_Nurse)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True",
+                        "DES(Coach, Consult_With_Medical_Professional) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy_Medical_History) = True",
+                        "BEL(ER_Nurse, Has_Knowledge_About_Sandy's_Condition) = True",
+                        "BEL(Coach, Received_Medical_Advice) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Coach(Create_New_Workout_Plan, Sandy)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine)",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion)",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future)"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy's_New_Workout_Routine, [Routine])",
+                        "DES(Coach, Wants_Sandy_to_Follow_New_Workout_Routine)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": []
+                },
+                "Coach(Discuss_New_Workout_Plan_With_Sandy, Sandy)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "BEL(Sandy, Has_Consented_to_New_Workout_Plan) = False"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "BEL(Sandy, Has_Consented_to_New_Workout_Plan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Coach(Monitor_Sandy's_Progress, Sandy)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Has_Monitoring_Plan) = True",
+                        "BEL(Coach, Monitoring_Start_Date) = Today",
+                        "DES(Coach, Wants_to_Check_Sandy's_Progress) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Call(Coach, Emergency_services, \"911\")": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Called_Emergency_Services) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Approach(Coach, Sandy, None)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Check(Coach, Sandy, Symptoms)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Sandy_Is_Confirmed_to_Have_Fainted) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = False",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Help(Coach, Sandy, Sit_Down)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, Sits_Down) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Ask(Coach, Sandy, Explanation)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy's_Explanation) = True",
+                        "BEL(Coach, Sandy's_Explanation) = Explanation",
+                        "DES(Coach, Wants_to_Help_Sandy_if_Necessary) = True"
+                    ],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Inform(Coach, Emergency_services, Sandy's_Condition)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Assess_Sandy's_Condition) = True",
+                        "BEL(Coach, Emergency_services_Are_Available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy_Is_In_Immediate_Danger) = True",
+                        "BEL(Coach, Emergency_services_Have_Been_Informed) = True",
+                        "DES(Coach, Wants_Sandy_to_Get_Immediate_Medical_Attention) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "fear"
+                    ]
+                },
+                "Escort(Coach, Sandy, ER_Area)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "INTENT(Coach, Assess_Sandy's_Condition) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Accompanied_Sandy_to_ER) = True",
+                        "BEL(Coach, Informed_ER_Staff_of_Sandy's_Arrival) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Collaborate(Coach, ER_Nurse, Share_Information)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "BEL(Coach, Assess_Sandy's_Condition) = True",
+                        "BEL(ER_Nurse, Knows_Sandy's_Condition) = False"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Knows_Sandy's_Condition) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = False",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Answer(Coach, Doctor, Questions)": {
+                    "conditions": [
+                        "BEL(Coach, Assess_Sandy's_Condition) = True",
+                        "BEL(Doctor, Needs_Information_about_Sandy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Believes_Sandy's_Condition_Was_Properly_Diagnosed_and_Treated) = True",
+                        "DES(Coach, Wants_to_Monitor_Sandy's_Recovery) = True",
+                        "BEL(Doctor, Has_Information_About_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Evaluate(Coach, Sandy, Workout_Routines)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True",
+                        "BEL(Coach, Knows_Sandy_Has_a_Workout_Routine) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy's_Workout_Routine_is_Appropriate) = True",
+                        "BEL(Coach, Knows_Sandy's_Workout_Routine_is_Inadequate) = True",
+                        "BEL(Coach, Knows_Sandy's_Workout_Routine) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Arrange(Coach, Medical_Checkup, Sandy)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "INTENT(Coach, Assess_Sandy's_Condition) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy's_Medical_Condition) = True",
+                        "DES(Coach, Wants_Sandy_to_Receive_Appropriate_Medical_Care) = True",
+                        "BEL(Sandy, Is_Scheduled_for_a_Medical_Checkup) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Provide(Coach, Sandy, Safety_Tips)": {
+                    "conditions": [
+                        "BEL(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, Knows_Safety_Tips) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hoping"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "INTENT(Coach, Call_for_an_Ambulance) = True": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "INTENT(Coach, Call_for_an_Ambulance) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Coach, Call_for_an_Ambulance) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Assess_Sandy's_Condition(Coach, Sandy)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "INTENT(Coach, Call_for_an_Ambulance) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy's_Condition) = True",
+                        "BEL(Coach, Believes_Sandy_Fainted_Due_to_Medical_Emergency) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Call_Emergency_Services(Coach, None)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True",
+                        "BEL(Coach, Called_for_Emergency_Services) = True",
+                        "BEL(Coach, Help_Is_On_the_Way) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": []
+                },
+                "Explain_Sandy's_Condition_to_the_Operator(Coach, Emergency_Services, Sandy's_condition)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                        "BEL(Emergency_Services, Knows_Sandy's_Condition) = False"
+                    ],
+                    "effects": [
+                        "BEL(Emergency_Services, Knows_Sandy's_Condition) = True",
+                        "BEL(Emergency_Services, Knows_Sandy's_Condition_Details) = True",
+                        "BEL(Emergency_Services, Is_Informed_About_Sandy's_Health_Issue) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Stay_with_Sandy(Coach, Sandy)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "INTENT(Coach, Call_for_an_Ambulance) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True",
+                        "BEL(Coach, Knows_Sandy_is_Being_Taken_Care_Of) = True",
+                        "BEL(Coach, Knows_Sandy_is_Not_Alone) = True",
+                        "BEL(Coach, Believes_Sandy_is_in_Good_Hands) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "INTENT(Coach, Notify_Sandy's_Family) = False": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "INTENT(Coach, Notify_Sandy's_Family) = False"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "INTENT(Coach, Notify_Sandy's_Family) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "Call(Coach, 911)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Has_Called_911) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Accompany(Coach, Sandy)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Accompanying_Sandy) = True",
+                        "BEL(Coach, Knows_Sandy's_Current_State) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Talk(Coach, ER_Nurse)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy's_Current_Medical_State) = True",
+                        "BEL(Coach, Informs_ER_Nurse_About_Sandy's_Symptoms) = True",
+                        "DES(Coach, Wants_Doctor_to_Assess_Sandy) = True",
+                        "BEL(ER_Nurse, Receives_Information_About_Sandy's_Condition) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Talk(Coach, Doctor)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy_Has_Been_Admitted_to_the_ER) = True",
+                        "BEL(Coach, Believes_Sandy_Needs_Medical_Attention) = True",
+                        "DES(Coach, Wants_to_Get_Medical_Answers) = True",
+                        "DES(Coach, Wants_Sandy_to_Be_Treated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Ask(Coach, Doctor, Recommended_Steps_to_Prev_Potential_Incidences)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Steps_to_Prev_Potential_Incidences) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Debrief(Coach, Sandy)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Learned_Sandy's_Concerns_and_Feelings) = True",
+                        "BEL(Coach, Knows_Sandy's_Medical_History) = True",
+                        "BEL(Coach, Knows_Sandy's_Current_Medications) = True",
+                        "DES(Coach, Wants_to_Support_Sandy) = True",
+                        "DES(Coach, Wants_to_Adjust_Sandy's_Workout_Routine) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Inform(Coach, Sandy's_Family)": {
+                    "conditions": [
+                        "BEL(Coach, Notify_Sandy's_Family) = True",
+                        "BEL(Coach, Knows_Sandy's_Family_Info) = True",
+                        "BEL(Coach, Sandy's_Family_Contact_Info) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Sandy's_Family_Notified) = True",
+                        "DES(Coach, Wants_to_Update_Sandy's_Family_on_Her_Condition) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "Follow-Up(Coach)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True",
+                        "INTENT(Coach, Notify_Sandy's_Family) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Wants_to_Follow_Up_with_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Search_Symptoms(Coach, \"\", \"\")": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Symptoms_of_Aneurysm) = False"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Symptoms_of_Aneurysm) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Talk_To_Sandy(Coach, Sandy, \"What_Happened\")": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_What_Happened_to_Sandy) = True",
+                        "BEL(Sandy, Is_Safe) = True",
+                        "DES(Coach, Wants_to_Help_Sandy_Recover) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Gather_Information(Coach, ER_Nurse, \"Ask_About_Sandy's_Condition\")": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Knows_Sandy's_Condition) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy's_Condition) = True",
+                        "BEL(Coach, Believes_Sandy_Has_an_Aneurysm) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        " Fear "
+                    ]
+                },
+                "Consult_Doctor(Coach, Doctor, \"Sandy's_Condition\")": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "BEL(Coach, Research_Symptoms_of_Aneurysm) = True",
+                        "BEL(Coach, Sandy_Has_Been_Rushed_to_ER) = True",
+                        "BEL(Doctor, Knowledge_of_Aneurysm_Symptoms) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = False",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True",
+                        "BEL(Coach, Knows_Sandy_Has_Been_Diagnosed_with_Aneurysm) = True",
+                        "BEL(Coach, Knows_What_to_Do_in_Case_of_Aneurysm) = True",
+                        "BEL(Coach, Suggested_Visit_to_Doctor_for_Sandy) = True",
+                        "DES(Doctor, Treats_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Take_Action(Coach, Sandy, \"Suggests_a_Visit_to_the_Doctor\")": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Suggests_a_Visit_to_the_Doctor) = True",
+                        "BEL(Coach, Advised_Sandy_to_See_Doctor) = True",
+                        "BEL(Sandy, Advised_to_See_Doctor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Follow_Up(Coach, Sandy, \"Asks_Sandy_How_She_Feels_and_if_She_Saw_the_Doctor\")": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "BEL(Coach, Sandy_Has_Seen_a_Doctor) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "INTENT(Coach, Research_Symptoms_of_Aneurysm) = True"
+                    ],
+                    "effects": [
+                        "Bel(Coach, Sandy_Feels_Better) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Coach(Coach, Sandy, Check_Sandy's_Vital_Signs)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Has_Checked_Sandy_Vital_Signs) = True",
+                        "BEL(Coach, Knows_Sandy's_Current_Condition) = True",
+                        "BEL(Coach, Believes_Sandy_Is_in_a_Critical_Condition) = True/False",
+                        "DES(Coach, Wants_to_Provide_Proper_Support) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ER_Nurse(ER_Nurse, Coach, Take_Sandy_to_the_Triage_Area)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "BEL(ER_Nurse, Is_Available) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Is_Available) = False",
+                        "BEL(ER_Nurse, Is_Busy) = True",
+                        "BEL(ER_Nurse, Believes_Sandy_Requires_Medical_Attention) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ER_Nurse(ER_Nurse, Sandy, Check_Blood_Pressure)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                        "DES(Coach, Wants_to_Prevent_Similar_Incident_from_Occurring_in_Future) = True",
+                        "BEL(ER_Nurse, Can_Check_Blood_Pressure) = True",
+                        "BEL(ER_Nurse, Has_Access_to_Blood_Pressure_Monitoring_Devices) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Knows_Sandy's_Blood_Pressure) = True",
+                        "BEL(Sandy, Has_Her_Blood_Pressure_Checked) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": []
+                },
+                "ER_Nurse(ER_Nurse, Sandy, Check_Heart_Rate)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Knows_Sandy_Has_Fainted) = True",
+                        "BEL(ER_Nurse, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Sandy, Is_Conscious) = False"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Knows_Sandy's_Heart_Rate) = True",
+                        "DES(Coach, Wants_to_Find_Out_Heart_Rate) = True",
+                        "DES(ER_Nurse, Wants_to_Monitor_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ER_Nurse(ER_Nurse, Sandy, Check_Temperature)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Knows_How_to_Check_Temperature) = True",
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Check_Temperature_Successful) = True",
+                        "BEL(Sandy, Has_Temperature_Checked) = True",
+                        "DES(Coach, Wants_Medical_Professionals_to_Help_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": []
+                },
+                "Doctor(Doctor, Sandy, Conduct_CT_Scan)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Knows_Symptoms_of_Dizziness) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "BEL(Doctor, Has_Access_to_CT_Scan_Machine) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Conducted_CT_Scan_on_Sandy) = True",
+                        "BEL(Coach, Has_Information_on_Sandy's_Condition) = True",
+                        "BEL(Coach, Knows_Sandy's_Aneurysm_Status) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Doctor(Doctor, Sandy, Assess_Aneurysm)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "BEL(Doctor, Has_Capability_to_Assess_Aneurysm) = True",
+                        "BEL(Doctor, Knows_Information_on_Aneurysms) = True",
+                        "BEL(Doctor, Has_Access_to_CT_Scan) = True",
+                        "BEL(Sandy, Present_in_Hospital) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Has_Knowledge_of_Sandy's_Aneurysm) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = False",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "BEL(Sandy, Unwell) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Coach(Coach, Doctor, Gather_Information_on_Sandy's_Condition)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "INTENT(Coach, Follow_Up_with_Medical_Team) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy_s_CT_Scan_Results) = True",
+                        "BEL(Coach, Knows_Sandy_s_Aneurysm_Diagnosis) = True",
+                        "DES(Coach, Wants_to_Know_Sandy_s_Medical_History) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Coach(Coach, Sandy, Provide_Support_and_Care)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "DES(Coach, Wants_Sandy_to_Recover) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True"
+                    ],
+                    "effects": [
+                        "DES(Coach, Has_Provided_Support_and_Care_to_Sandy) = True",
+                        "BEL(Sandy, Feels_Supported_and_Cared_For) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Compassion"
+                    ]
+                },
+                "Coach(Coach, Sandy, Follow_Up_with_Medical_Team)": {
+                    "conditions": [
+                        "BEL(Coach, Knows_Sandy_Workout_Routine) = True",
+                        "BEL(Coach, Believes_Sandy_May_Have_Fainted_Due_to_Exhaustion) = True",
+                        "DES(Coach, Wants_to_Find_Out_Why_Sandy_Fainted) = True",
+                        "INTENT(Coach, Follow_Up_with_Medical_Team) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Knows_Sandy's_Medical_Condition) = True",
+                        "DES(Coach, Wants_to_Ensure_Sandy_Receives_Appropriate_Care) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Concern"
+            ],
+            "speak_actions": {
+                "Speak(start, A, intro, neutral)": {},
+                "Speak(A, B, inquiry, concerned)": {},
+                "Speak(B, C, educate, informative)": {},
+                "Speak(C, D, concern, empathetic)": {},
+                "Speak(D, end, conclusion, neutral)": {}
+            }
+        },
+        "ER_Nurse": {
+            "knowledge_base": [
+                "BEL(ER_Nurse, is_available) = True",
+                "BEL(ER_Nurse, is_qualified) = True",
+                "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                "BEL(ER_Nurse, Sandy_is_stable) = False",
+                "DES(ER_Nurse, stabilize_Sandy) = True",
+                "DES(ER_Nurse, communicate_with_Doctor) = True",
+                "DES(ER_Nurse, monitor_Sandy) = True",
+                "DES(ER_Nurse, provide_emotional_support) = True"
+            ],
+            "intentions": {
+                "INTENT(ER_Nurse, stabilize_Sandy) = True": {
+                    "action_plan": [
+                        "Move(ER_Nurse, Sandy, [])",
+                        "Check_Vitals(ER_Nurse, Sandy, [])",
+                        "Administer_Oxygen(ER_Nurse, Sandy, [])",
+                        "Start_IV(ER_Nurse, Sandy, [])",
+                        "Call_Doctor(ER_Nurse, Doctor, [Sandy])",
+                        "Connect_Monitor(ER_Nurse, Sandy, [])",
+                        "Reassure(Sandy, ER_Nurse, [])",
+                        "Update_Coach(ER_Nurse, Coach, [Sandy])"
+                    ]
+                },
+                "INTENT(ER_Nurse, communicate_with_Doctor) = True": {
+                    "action_plan": [
+                        "Move(ER_Nurse, Sandy, location=ER_room)",
+                        "Check(ER_Nurse, Sandy, vitals)",
+                        "Use(ER_Nurse, monitor, Sandy)",
+                        "Update(ER_Nurse, Doctor, new_information=\"Sandy's condition and vitals\")",
+                        "Wait(ER_Nurse, Doctor, duration=10)",
+                        "Provide(ER_Nurse, emotional_support, Sandy)",
+                        "Update(ER_Nurse, Coach, new_information=\"Sandy's condition and prognosis\")"
+                    ]
+                },
+                "INTENT(ER_Nurse, monitor_Sandy) = True": {
+                    "action_plan": [
+                        "Check_Vital_Signs(ER_Nurse, Sandy)",
+                        "Administer_Medications(ER_Nurse, Sandy, Anti-hypotensive)",
+                        "Communicate_with_Doctor(ER_Nurse, Doctor, Sandy's_condition)",
+                        "Monitor_Vital_Signs(ER_Nurse, Sandy)",
+                        "Provide_Emotional_Support(ER_Nurse, Sandy)"
+                    ]
+                },
+                "INTENT(ER_Nurse, provide_emotional_support) = True": {
+                    "action_plan": [
+                        "MoveTo(ER_Nurse, Sandy, Location=ER_Room)",
+                        "SpeakTo(ER_Nurse, Sandy, Message=\"Hi Sandy, my name is Mary and I will be taking care of you today. You are in good hands.\"",
+                        "HoldHand(ER_Nurse, Sandy)",
+                        "ListenTo(ER_Nurse, Sandy, Duration=10 minutes)",
+                        "Encourage(ER_Nurse, Sandy, Message=\"It's okay, Sandy. You're in the right place and we will take good care of you.\")"
+                    ]
+                }
+            },
+            "actions": {
+                "MoveTo(ER_Nurse, Sandy, Location=ER_Room)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, is_available) = True",
+                        "BEL(Sandy, in_need_of_medical_attention) = True",
+                        "BEL(ER_Room, is_accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, is_available) = False",
+                        "BEL(ER_Nurse, is_busy) = True",
+                        "BEL(ER_Nurse, current_location) = ER_Room",
+                        "BEL(Sandy, is_being_attended) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "SpeakTo(ER_Nurse, Sandy, Message=\"Hi Sandy, my name is Mary and I will be taking care of you today. You are in good hands.\"": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Sandy_has_been_introduced) = True",
+                        "BEL(ER_Nurse, Sandy_is_feeling_welcomed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "HoldHand(ER_Nurse, Sandy)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "BEL(ER_Nurse, Sandy_needs_emotional_support) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, touching_Sandy_hand) = True",
+                        "DES(ER_Nurse, provide_emotional_support) = False",
+                        "DES(ER_Nurse, comfort_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Compassion"
+                    ],
+                    "emotion_condition": [
+                        "Compassion"
+                    ]
+                },
+                "ListenTo(ER_Nurse, Sandy, Duration=10 minutes)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, is_available) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, is_talking_to_Sandy) = True",
+                        "BEL(ER_Nurse, listening_to_Sandy) = True",
+                        "BEL(ER_Nurse, remaining_duration_listening) = 10 minutes"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Encourage(ER_Nurse, Sandy, Message=\"It's okay, Sandy. You're in the right place and we will take good care of you.\")": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "DES(ER_Nurse, provide_emotional_support) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = True",
+                        "DES(ER_Nurse, provide_emotional_support) = False",
+                        "BEL(Sandy, feels_emotionally_supported) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(ER_Nurse, Sandy, [])": {
+                    "conditions": [
+                        "BEL(ER_Nurse, is_available) = True",
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, ER_Nurse_assisting) = True",
+                        "BEL(ER_Nurse, is_available) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Check_Vitals(ER_Nurse, Sandy, [])": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "BEL(ER_Nurse, Sandy_responds_to_stimuli) = True/False/Numerical Value",
+                        "DES(ER_Nurse, communicate_with_Doctor) = True",
+                        "DES(ER_Nurse, communicate_with_Doctor) = False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Administer_Oxygen(ER_Nurse, Sandy, [])": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "BEL(Sandy, requires_oxygen) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, has_administered_oxygen) = True",
+                        "BEL(Sandy, requires_oxygen) = False",
+                        "BEL(Sandy, oxygen_level) = Increased"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Start_IV(ER_Nurse, Sandy, [])": {
+                    "conditions": [
+                        "BEL(ER_Nurse, is_available) = True",
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(Sandy, IV_access) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, IV_access) = True",
+                        "BEL(Sandy, IV_fluid_administered) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Call_Doctor(ER_Nurse, Doctor, [Sandy])": {
+                    "conditions": [
+                        "BEL(ER_Nurse, is_available) = True",
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(Doctor, is_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, is_notified) = True",
+                        "DES(Doctor, examine_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Connect_Monitor(ER_Nurse, Sandy, [])": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, is_monitored_by) = ER_Nurse",
+                        "BEL(ER_Nurse, is_monitoring) = Sandy"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Reassure(Sandy, ER_Nurse, [])": {
+                    "conditions": [
+                        "BEL(Sandy, is_anxious) = True",
+                        "DES(ER_Nurse, provide_emotional_support) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, is_anxious) = False",
+                        "BEL(ER_Nurse, emotional_support_provided) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Encouragement"
+                    ]
+                },
+                "Update_Coach(ER_Nurse, Coach, [Sandy])": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = True",
+                        "DES(ER_Nurse, communicate_with_Doctor) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Sandys_condition) = Stable",
+                        "BEL(Coach, Sandys_location) = Hospital",
+                        "DES(Coach, visit_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Move(ER_Nurse, Sandy, location=ER_room)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, is_available) = True",
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, is_available) = False",
+                        "BEL(Sandy, current_location) = ER_room"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Check(ER_Nurse, Sandy, vitals)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = False"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Use(ER_Nurse, monitor, Sandy)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, has_monitored_Sandy) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = True or False depending on Sandy's vitals"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Update(ER_Nurse, Doctor, new_information=\"Sandy's condition and vitals\")": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, has_new_information) = True",
+                        "BEL(Doctor, new_information) = \"Sandy's condition and vitals\""
+                    ],
+                    "occ_emotion": [
+                        "fear"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Wait(ER_Nurse, Doctor, duration=10)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, is_available) = True",
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "BEL(Doctor, is_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = True",
+                        "DES(ER_Nurse, provide_emotional_support) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Provide(ER_Nurse, emotional_support, Sandy)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "DES(ER_Nurse, provide_emotional_support) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Sandy_is_stable) = True",
+                        "DES(ER_Nurse, provide_emotional_support) = False",
+                        "BEL(Sandy, comforted_by_ER_Nurse) = True"
+                    ],
+                    "occ_emotion": [
+                        "Compassion"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "Update(ER_Nurse, Coach, new_information=\"Sandy's condition and prognosis\")": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "BEL(ER_Nurse, is_available) = True",
+                        "BEL(ER_Nurse, is_qualified) = True",
+                        "BEL(Coach, Sandy_needs_medical_attention) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Sandy's condition and prognosis) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Check_Vital_Signs(ER_Nurse, Sandy)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, is_available) = True",
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, has_checked_vital_signs) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = True/False",
+                        "DES(ER_Nurse, administer_treatment) = True/False (depending on the results of the vital signs check)",
+                        "DES(ER_Nurse, call_for_doctor) = True/False (depending on the results of the vital signs check)"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Administer_Medications(ER_Nurse, Sandy, Anti-hypotensive)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False",
+                        "BEL(ER_Nurse, is_qualified) = True",
+                        "BEL(ER_Nurse, is_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, has_received_medication) = True",
+                        "DES(ER_Nurse, monitor_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Communicate_with_Doctor(ER_Nurse, Doctor, Sandy's_condition)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, is_qualified) = True",
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "DES(ER_Nurse, communicate_with_Doctor) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, is_informed_about_Sandy) = True",
+                        "BEL(Doctor, Sandy's_condition) = Sandy's_condition",
+                        "BEL(ER_Nurse, Sandy_is_stable) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Monitor_Vital_Signs(ER_Nurse, Sandy)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Sandy_Vital_Signs_monitored) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Provide_Emotional_Support(ER_Nurse, Sandy)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_needs_medical_attention) = True",
+                        "BEL(ER_Nurse, Sandy_is_stable) = False"
+                    ],
+                    "effects": [
+                        "DES(ER_Nurse, provide_emotional_support) = False",
+                        "BEL(ER_Nurse, Sandy_is_comforted) = True"
+                    ],
+                    "occ_emotion": [
+                        "Compassion"
+                    ],
+                    "emotion_condition": [
+                        "Compassion"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Fear"
+            ],
+            "speak_actions": {
+                "Speak(start, A, intro, neutral)": {},
+                "Speak(A, B, inquiry, concerned)": {},
+                "Speak(B, C, educate, informative)": {},
+                "Speak(C, D, concern, empathetic)": {},
+                "Speak(D, E, educate, informative)": {},
+                "Speak(E, F, educate, informative)": {},
+                "Speak(F, G, concern, empathetic)": {},
+                "Speak(G, end, conclusion, neutral)": {}
+            }
+        },
+        "Doctor": {
+            "knowledge_base": [
+                "BEL(Doctor, isQualifiedInEmergency) = True",
+                "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                "BEL(Doctor, Sandy_Current_Condition) = critical",
+                "BEL(Doctor, Sandy_Initial_Treatment) = given",
+                "DES(Doctor, Save_Sandy) = True",
+                "DES(Doctor, Diagnose_Aneurysm) = True",
+                "DES(Doctor, Communicate_with_ER_Nurse) = True",
+                "DES(Doctor, Update_Coach_and_Relatives) = True"
+            ],
+            "intentions": {
+                "INTENT(Doctor, Treat_Patient, Sandy) = True": {
+                    "action_plan": [
+                        "Move(Doctor, Sandy)",
+                        "Examine(Doctor, Sandy)",
+                        "Order(Doctor, BrainScan, Sandy)",
+                        "Analyze(Doctor, BrainScan, Sandy)",
+                        "Diagnose(Doctor, Aneurysm, Sandy)",
+                        "Communicate(Doctor, ER_Nurse, Sandy_Current_Condition)",
+                        "Order(Doctor, Surgery, Sandy)",
+                        "Perform(Doctor, Surgery, Sandy)",
+                        "Stabilize(Doctor, Sandy)",
+                        "Update(Doctor, Coach_and_Relatives, Sandy_Current_Condition)"
+                    ]
+                },
+                "INTENT(Doctor, Diagnose_Aneurysm, Sandy) = True": {
+                    "action_plan": [
+                        "Examine(Doctor, Sandy, None)",
+                        "Order(Doctor, CT_Scan, Sandy)",
+                        "Wait(Doctor, CT_Scan, None)",
+                        "Read(Doctor, CT_Scan_Results, Sandy)",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "Administer(Doctor, Additional_Medication, Sandy)",
+                        "Communicate(Doctor, ER_Nurse, Sandy_Current_Condition, Sandy)",
+                        "Update(Doctor, Coach_and_Relatives, Sandy_Current_Condition)"
+                    ]
+                },
+                "INTENT(Doctor, Communicate_with_ER_Nurse, Sandy) = True": {
+                    "action_plan": [
+                        "Retrieve(Patient_Chart, Doctor, Sandy)",
+                        "Examine(Patient, Doctor, Sandy)",
+                        "Diagnose(Aneurysm, Doctor, Sandy)",
+                        "Notify(Coach_and_Relatives, Doctor, Sandy)",
+                        "Update(ER_Nurse, Doctor, Sandy)"
+                    ]
+                },
+                "INTENT(Doctor, Update_Coach_and_Relatives, Sandy) = True": {
+                    "action_plan": [
+                        "CheckPatient(Doctor, Sandy)",
+                        "DiagnoseAneurysm(Doctor, Sandy)",
+                        "AdministerTreatment(Doctor, Sandy)",
+                        "CommunicateWithER(Doctor, ER_Nurse)",
+                        "UpdateCoach(Doctor, Coach, Sandy_Current_Condition)",
+                        "UpdateRelatives(Doctor, Sandy, Relatives)",
+                        "PerformSurgery(Doctor, Sandy)"
+                    ]
+                }
+            },
+            "actions": {
+                "CheckPatient(Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Current_Condition) = stabilized",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DiagnoseAneurysm(Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given, Sandy"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Diagnosis) = aneurysm, Sandy",
+                        "DES(Doctor, Administer_Treatment) = True, Sandy"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "AdministerTreatment(Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Current_Condition) = stable",
+                        "DES(Doctor, Update_Coach_and_Relatives) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CommunicateWithER(Doctor, ER_Nurse)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical"
+                    ],
+                    "effects": [
+                        "DES(Doctor, Communicate_with_ER_Nurse) = False",
+                        "BEL(ER_Nurse, hasReceivedMessage) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "UpdateCoach(Doctor, Coach, Sandy_Current_Condition)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "DES(Doctor, Update_Coach_and_Relatives) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach, Sandy_Current_Condition) = critical",
+                        "DES(Coach, BeInformedAboutSandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "UpdateRelatives(Doctor, Sandy, Relatives)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "DES(Doctor, Update_Coach_and_Relatives) = True",
+                        "BEL(Sandy, Coach) = Coach",
+                        "BEL(Sandy, Relatives) = Relatives"
+                    ],
+                    "effects": [
+                        "BEL(Sandy, Relatives) = Updated_Relatives",
+                        "BEL(Coach, Sandy_Current_Condition) = Updated_Condition"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "PerformSurgery(Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "DES(Doctor, Save_Sandy) = True",
+                        "DES(Doctor, Perform_Surgery) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Current_Condition) = stable",
+                        "DES(Doctor, Save_Sandy) = False",
+                        "DES(Doctor, Perform_Surgery) = False",
+                        "BEL(Doctor, performedSuccessfulSurgery) = True",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given and Sandy_Initial_Treatment updated"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Move(Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, Sandy_Current_Location) != Location(Doctor)"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Current_Location) = Location(Doctor)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Examine(Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy) = Sandy",
+                        "BEL(Doctor, Sandy) = examined"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Order(Doctor, BrainScan, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_BrainScan_Ordered) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Analyze(Doctor, BrainScan, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Aneurysm_Diagnosed) = True",
+                        "BEL(Doctor, Sandy_Aneurysm_Location) = Arguments",
+                        "BEL(Doctor, Sandy_Treatment_Plan) = Arguments",
+                        "BEL(Doctor, Sandy_BrainScan_Done) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Diagnose(Doctor, Aneurysm, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Knows_Diagnosis) = True",
+                        "BEL(Doctor, Diagnosis) = Aneurysm",
+                        "DES(Doctor, Save_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Communicate(Doctor, ER_Nurse, Sandy_Current_Condition)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Doctor_Communication) = True",
+                        "BEL(Doctor, ER_Nurse_Communication) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Order(Doctor, Surgery, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "DES(Doctor, Save_Sandy) = True",
+                        "DES(Doctor, Diagnose_Aneurysm) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, hasOrderedSurgery, Sandy) = True",
+                        "BEL(Doctor, Knows_Preferred_Surgical_Procedure) = True",
+                        "DES(Doctor, Perform_Surgery, Sandy) = True",
+                        "DES(Doctor, Stabilize_Patient_After_Surgery, Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Perform(Doctor, Surgery, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "DES(Doctor, Save_Sandy) = True",
+                        "DES(Doctor, Diagnose_Aneurysm) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Current_Condition) = stable",
+                        "DES(Doctor, Save_Sandy) = False",
+                        "DES(Doctor, Diagnose_Aneurysm) = False",
+                        "DES(Doctor, Communicate_with_ER_Nurse) = True",
+                        "DES(Doctor, Update_Coach_and_Relatives) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Stabilize(Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "INTENT(Doctor, Treat_Patient, Sandy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Current_Condition) = stable"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Update(Doctor, Coach_and_Relatives, Sandy_Current_Condition)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical_updated",
+                        "DES(Doctor, Update_Coach_and_Relatives) = False",
+                        "DES(Doctor, Save_Sandy) = True",
+                        "BEL(Coach_and_Relatives, Sandy_Current_Condition) = critical_updated"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Examine(Doctor, Sandy, None)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Being_Examined) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Order(Doctor, CT_Scan, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Got_CT_Scan_Order) = True",
+                        "DES(Doctor, Wait_For_CT_Scan_Results, None) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Wait(Doctor, CT_Scan, None)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, CT_Scan_Results) = None"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, CT_Scan_Results) = available",
+                        "DES(Doctor, Diagnose_Aneurysm) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Read(Doctor, CT_Scan_Results, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given",
+                        "BEL(Doctor, Sandy) = examined"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Aneurysm_Found) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, Sandy_CT_Results_Received) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BEL(Doctor, Sandy_Initial_Treatment) = given": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) != stable"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "BEL(Doctor, Sandy_Current_Condition) = critical": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = not critical",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Administer(Doctor, Additional_Medication, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, Sandy_Initial_Treatment) = given"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Current_Condition) = stable",
+                        "BEL(Doctor, Sandy_Current_Treatment) = administered_additional_medication"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Communicate(Doctor, ER_Nurse, Sandy_Current_Condition, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Doctor, Sandy_Current_Condition) != stable",
+                        "DES(Doctor, Diagnose_Aneurysm) = True",
+                        "DES(Doctor, Communicate_with_ER_Nurse) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Sandy_Current_Condition) = critical",
+                        "BEL(ER_Nurse, Sandy_Current_Condition_Details) = Sandy_Current_Condition",
+                        "BEL(Doctor, Sandy_Current_Condition_Details_Communicated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Retrieve(Patient_Chart, Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Patient_Chart, exists) = True",
+                        "BEL(Patient_Chart, has_information_about) = Sandy",
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, has_access_to_patient_chart) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Examine(Patient, Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "BEL(Patient_Chart, Sandy) = exists"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Symptoms) = List of symptoms present in Sandy after examination",
+                        "BEL(Doctor, Sandy_Diagnosis) = Possible diagnosis for Sandy's symptoms",
+                        "BEL(Patient_Chart, Sandy, Doctor) = Exam and diagnosis notes added",
+                        "DES(Doctor, Notify_Others) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Diagnose(Aneurysm, Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, isQualifiedInEmergency) = True",
+                        "BEL(Doctor, hasExperienceInTreatingAneurysms) = True",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, Sandy_Aneurysm_Diagnosed) = True",
+                        "DES(Doctor, Save_Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Notify(Coach_and_Relatives, Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "DES(Doctor, Save_Sandy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Coach_and_Relatives, Sandy_Update_Received) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Update(ER_Nurse, Doctor, Sandy)": {
+                    "conditions": [
+                        "BEL(ER_Nurse, Sandy_Current_Condition) = not_critical",
+                        "BEL(Doctor, Sandy_Current_Condition) = critical",
+                        "INTENT(Doctor, Diagnose_Aneurysm, Sandy) = True",
+                        "INTENT(Doctor, Notify_Coach_and_Relatives, Sandy) = True"
+                    ],
+                    "effects": [
+                        "BEL(ER_Nurse, Sandy_Current_Condition) = critical",
+                        "DES(ER_Nurse, Take_Immediate_Action, Sandy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Surprise"
+            ],
+            "speak_actions": {
+                "Speak(start, A, intro, neutral)": {},
+                "Speak(A, B, inquiry, concerned)": {},
+                "Speak(B, C, educate, informative)": {},
+                "Speak(C, D, concern, empathetic)": {},
+                "Speak(D, E, educate, informative)": {},
+                "Speak(E, F, educate, informative)": {},
+                "Speak(F, end, conclusion, neutral)": {}
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<start, A, intro, neutral, \"Hello Sandy, how are you feeling today?\">",
+        "<A, B, inquiry, concerned, \"I heard you told coach you were feeling dizzy. How are you feeling now?\">",
+        "<B, C, educate, informative, \"It's important to take care of yourself after working out. Have you been feeling dizzy often?\">",
+        "<C, D, concern, empathetic, \"I'm sorry to hear that you fainted. How are you feeling now?\">",
+        "<D, E, educate, informative, \"We ran some tests and found an aneurysm. Do you know what that is?\">",
+        "<E, F, educate, informative, \"It's a bulge in a blood vessel that can burst and cause serious problems. We are going to need to monitor your condition closely.\">",
+        "<F, end, conclusion, neutral, \"Do you have any questions for me, Sandy?\">"
+    ]
+}

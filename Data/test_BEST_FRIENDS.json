@@ -1,0 +1,295 @@
+{
+    "scenario_name": "test_BEST FRIENDS",
+    "scenario_description": "Me and Shelby have been best friends since the 1st grade. We attended elementary, middle school and high school together. I was so mad when we were accepted to different colleges. I thought that would break up our friendship, but it didn't. We kept in touch daily and after graduate we became roommates.",
+    "last_ended": "conditions_effects",
+    "agents": {
+        "Me": {
+            "knowledge_base": [
+                "BEL(Me, Friends with Shelby) = True",
+                "BEL(Me, Shelby is also going to college) = True",
+                "BEL(Me, Shelby and I kept in touch daily) = True",
+                "BEL(Me, We became roommates after graduate) = True",
+                "DES(Me, Keep the friendship with Shelby) = True",
+                "DES(Me, Do well in college) = True",
+                "DES(Me, Find a good job after graduate) = True"
+            ],
+            "intentions": {}
+        },
+        "Shelby": {
+            "knowledge_base": [
+                "BEL(Shelby, friends_with_me) = True",
+                "BEL(Shelby, attended_same_school) = True",
+                "BEL(Shelby, graduated_college) = True",
+                "BEL(Shelby, keeps_in_touch_daily) = True",
+                "BEL(Shelby, best_friends) = True",
+                "DES(Shelby, maintain_relationship) = True",
+                "DES(Shelby, support_me) = True",
+                "DES(Shelby, live_with_me) = True"
+            ],
+            "intentions": {
+                "INTENT(Shelby, maintain_relationship) = True": {
+                    "action_plan": [
+                        "INTENT(Shelby, maintain_relationship) = True",
+                        "SendMessage(Shelby, Me, \"Good morning! How did you sleep?\")",
+                        "Me",
+                        "PlanOutgoingCall(Shelby, Me)",
+                        "MakeCall(Shelby, Me, [plan_discussion])",
+                        "Me",
+                        "OrganizeSurpriseParty(Shelby, Me, friends)",
+                        "Me",
+                        "Me",
+                        "AskMeToLiveTogether(Shelby, Me)",
+                        "Me"
+                    ]
+                },
+                "INTENT(Shelby, support_me) = True": {
+                    "action_plan": [
+                        "INTENT(Shelby, support_me) = True",
+                        "Message(Shelby, Me, \"Hey, how are you doing?\")",
+                        "Invite(Shelby, Me, \"Would you like to visit me this weekend? We can catch up and hang out together.\")",
+                        "Buy_Groceries(Shelby, -, \"Buy ingredients to cook dinner for Me\")",
+                        "Listen(Shelby, Me, \"Listen to Me's stories about their college experiences and show interest.\")",
+                        "Offer(Sheby, Me, \"If you need any help, please let me know.\")"
+                    ]
+                },
+                "INTENT(Shelby, live_with_me) = True": {
+                    "action_plan": [
+                        "INTENT(Shelby, live_with_me) = True",
+                        "Message(Shelby, Me, \"Hey, we've been talking about living together for a while now. Do you want to start looking for a place to rent?\")",
+                        "Consult(Shelby, online_rental_listings, \"Search for apartments in our budget range and in a convenient location\")",
+                        "PresentOptions(Shelby, Me, shortlisted_apartments)",
+                        "Discuss(Shelby, Me, apartment_features, \"We should talk about which of the shortlisted apartments have the features we want, such as the number of rooms, location, amenities, and other important details that may be different from our expectations.\")",
+                        "Assess(Shelby, selected_apartment, condition, \"We should check if the apartment is ready and livable before signing the lease. We also need to check for any potential issues or damages.\")",
+                        "Agree(Shelby, Me, terms_and_conditions, \"We should agree on the terms and conditions of the lease, such as the duration and type of lease, rent amount, security deposit, and other important details we need to know.\")"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Shelby, live_with_me) = True": {
+                    "conditions": [
+                        "BEL(Shelby, keeps_in_touch_daily) = True",
+                        "BEL(Shelby, graduated_college) = True",
+                        "DES(Shelby, live_with_me) = True"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, lives_with_Me) = True",
+                        "BEL(Shelby, keeps_in_touch_daily) = True",
+                        "BEL(Shelby, graduated_college) = True",
+                        "BEL(Shelby, best_friends) = True",
+                        "BEL(Shelby, friends_with_me) = True",
+                        "DES(Shelby, maintain_relationship) = True",
+                        "DES(Shelby, support_me) = True"
+                    ]
+                },
+                "Message(Shelby, Me, \"Hey, we've been talking about living together for a while now. Do you want to start looking for a place to rent?\")": {
+                    "conditions": [
+                        "BEL(Shelby, maintains_relationship) = True",
+                        "BEL(Me, maintains_relationship) = True"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, communicates_with_Me) = True"
+                    ]
+                },
+                "Consult(Shelby, online_rental_listings, \"Search for apartments in our budget range and in a convenient location\")": {
+                    "conditions": [
+                        "BEL(Shelby, maintain_relationship) = True",
+                        "BEL(Shelby, live_with_me) = True"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, search_rental_listings) = True"
+                    ]
+                },
+                "PresentOptions(Shelby, Me, shortlisted_apartments)": {
+                    "conditions": [
+                        "BEL(Shelby, maintains_relationship) = True",
+                        "BEL(Me, maintains_relationship) = True",
+                        "BEL(Shelby, live_with_me) = True",
+                        "BEL(Me, live_with_me) = True",
+                        "BEL(Shelby, shortlisted_apartments) = ListOfApartments",
+                        "BEL(Me, shortlisted_apartments) = ListOfApartments"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, presents_shortlisted_apartments) = True",
+                        "BEL(Me, receives_shortlisted_apartments) = True"
+                    ]
+                },
+                "Discuss(Shelby, Me, apartment_features, \"We should talk about which of the shortlisted apartments have the features we want, such as the number of rooms, location, amenities, and other important details that may be different from our expectations.\")": {
+                    "conditions": [
+                        "BEL(Shelby, best_friends) = True",
+                        "BEL(Me, best_friends) = True",
+                        "BEL(Shelby, maintains_relationship) = True",
+                        "BEL(Me, maintains_relationship) = True"
+                    ],
+                    "effects": []
+                },
+                "Assess(Shelby, selected_apartment, condition, \"We should check if the apartment is ready and livable before signing the lease. We also need to check for any potential issues or damages.\")": {
+                    "conditions": [
+                        "BEL(Shelby, selected_apartment) = True",
+                        "BEL(Shelby, live_with_me) = True"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, apartment_is_livable) = True or False",
+                        "BEL(Shelby, potential_issues) = True or False",
+                        "BEL(Shelby, lease_signed) = True or False"
+                    ]
+                },
+                "Agree(Shelby, Me, terms_and_conditions, \"We should agree on the terms and conditions of the lease, such as the duration and type of lease, rent amount, security deposit, and other important details we need to know.\")": {
+                    "conditions": [
+                        "INTENT(Shelby, live_with_me) = True",
+                        "BEL(Me, interested_in_living_with_Shelby) = True",
+                        "BEL(Shelby, shortlisted_apartments) = True",
+                        "BEL(Me, agreed_on_terms_and_conditions) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, agreed_on_terms_and_conditions) = True"
+                    ]
+                },
+                "INTENT(Shelby, maintain_relationship) = True": {
+                    "conditions": [
+                        "BEL(Shelby, maintains_good_communication) = True",
+                        "BEL(Shelby, willing_to_talk) = True",
+                        "BEL(Me, maintains_good_communication) = True",
+                        "DES(Shelby, maintain_relationship) = True"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, had_conversation_with_me) = True",
+                        "BEL(Me, had_conversation_with_Shelby) = True",
+                        "BEL(Shelby, is_closer_to_goals) = True",
+                        "DES(Shelby, maintain_relationship) = False",
+                        "DES(Shelby, surprise_me) = True",
+                        "BEL(Shelby, asked_to_live_with_Me) = True"
+                    ]
+                },
+                "SendMessage(Shelby, Me, \"Good morning! How did you sleep?\")": {
+                    "conditions": [
+                        "BEL(Shelby, keeps_in_touch_daily) = True"
+                    ],
+                    "effects": []
+                },
+                "Me": {
+                    "conditions": [
+                        "BEL(Me, friends_with_Shelby) = True",
+                        "BEL(Me, keeps_in_touch_daily) = True",
+                        "BEL(Shelby, maintain_relationship) = True",
+                        "BEL(Shelby, support_me) = True"
+                    ],
+                    "effects": []
+                },
+                "PlanOutgoingCall(Shelby, Me)": {
+                    "conditions": [
+                        "BEL(Shelby, keeps_in_touch_daily) = True",
+                        "BEL(Me, has_phone)",
+                        "BEL(Shelby, has_phone)"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, plans_outgoing_call) = True",
+                        "BEL(Shelby, is_busy) = True"
+                    ]
+                },
+                "MakeCall(Shelby, Me, [plan_discussion])": {
+                    "conditions": [
+                        "BEL(Shelby, keeps_in_touch_daily) = True",
+                        "BEL(Me, available_for_call) = True"
+                    ],
+                    "effects": [
+                        "DES(Shelby, feel_closer_to_me) = True",
+                        "BEL(Shelby, discussed_recent_events) = True"
+                    ]
+                },
+                "OrganizeSurpriseParty(Shelby, Me, friends)": {
+                    "conditions": [
+                        "BEL(Shelby, best_friends) = True",
+                        "BEL(Me, knows_nobody_at_party) = True",
+                        "BEL(friends, willing_to_attend_party) = True"
+                    ],
+                    "effects": [
+                        "DES(Me, gratitude_for_party) = True",
+                        "BEL(Me, enjoys_surprise_party) = True",
+                        "BEL(friends, attended_party) = True"
+                    ]
+                },
+                "AskMeToLiveTogether(Shelby, Me)": {
+                    "conditions": [
+                        "BEL(Shelby, best_friends) = True",
+                        "BEL(Me, looking_for_place) = False",
+                        "DES(Shelby, live_with_me) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, living_with_Shelby) = True",
+                        "BEL(Me, looking_for_place) = False",
+                        "DES(Me, save_money) = True",
+                        "DES(Shelby, sharing_expenses) = True"
+                    ]
+                },
+                "INTENT(Shelby, support_me) = True": {
+                    "conditions": [
+                        "BEL(Shelby, keeps_in_touch_daily) = True",
+                        "BEL(Shelby, graduated_college) = True"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, maintain_relationship) = True",
+                        "DES(Shelby, live_with_me) = True",
+                        "BEL(Shelby, best_friends) = True",
+                        "BEL(Shelby, attended_same_school) = True",
+                        "Message(Shelby, Me, \"Hey, how are you doing?\")",
+                        "Invite(Shelby, Me, \"Would you like to visit me this weekend? We can catch up and hang out together.\")",
+                        "Buy_Groceries(Shelby, -, \"Buy ingredients to cook dinner for Me\")",
+                        "Listen(Shelby, Me, \"Listen to Me's stories about their college experiences and show interest.\")",
+                        "Offer(Shelby, Me, \"If you need any help, please let me know.\")"
+                    ]
+                },
+                "Message(Shelby, Me, \"Hey, how are you doing?\")": {
+                    "conditions": [
+                        "BEL(Shelby, keeps_in_touch_daily) = True"
+                    ],
+                    "effects": []
+                },
+                "Invite(Shelby, Me, \"Would you like to visit me this weekend? We can catch up and hang out together.\")": {
+                    "conditions": [
+                        "BEL(Shelby, keeps_in_touch_daily) = True",
+                        "BEL(Shelby, maintain_relationship) = True",
+                        "BEL(Me, graduated_college) = True"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, Me_visits_this_weekend) = True"
+                    ]
+                },
+                "Buy_Groceries(Shelby, -, \"Buy ingredients to cook dinner for Me\")": {
+                    "conditions": [
+                        "BEL(Shelby, lives_with_me) = True",
+                        "BEL(Shelby, has_money) = True",
+                        "BEL(Shelby, knows_what_I_like) = True",
+                        "BEL(Shelby, has_time_for_shopping) = True"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, has_bought_groceries) = True",
+                        "DES(Shelby, cook_dinner_for_me) = True",
+                        "BEL(Shelby, has_money) = Shelby.has_money - cost_of_groceries",
+                        "BEL(Shelby, has_time_for_shopping) = Shelby.has_time_for_shopping - time_spent_shopping"
+                    ]
+                },
+                "Listen(Shelby, Me, \"Listen to Me's stories about their college experiences and show interest.\")": {
+                    "conditions": [
+                        "BEL(Shelby, keeps_in_touch_daily) = True",
+                        "DES(Shelby, maintain_relationship) = True",
+                        "BEL(Me, has_college_experiences) = True"
+                    ],
+                    "effects": [
+                        "BEL(Shelby, listened_to_Me_stories) = True",
+                        "DES(Shelby, deepen_relationship) = True"
+                    ]
+                },
+                "Offer(Sheby, Me, \"If you need any help, please let me know.\")": {
+                    "conditions": [
+                        "BEL(Shelby, best_friends) = True",
+                        "DES(Shelby, support_me) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, offered_help_by_Shelby) = True",
+                        "DES(Me, receive_help_from_Shelby) = True"
+                    ]
+                }
+            }
+        }
+    }
+}

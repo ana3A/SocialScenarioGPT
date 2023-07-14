@@ -1,0 +1,1478 @@
+{
+    "scenario_name": "test_Couch",
+    "scenario_description": "Kate and her friends were sharing a suite in Vegas. There were four girls. And only one bed. Kate didn't feel like fighting. So she decided to simply sleep on a couch.",
+    "last_ended": "conditions_effects",
+    "agents": {
+        "Kate": {
+            "knowledge_base": [
+                "BEL(Kate, isSharingSuite_with_Friend1) = True",
+                "BEL(Kate, isSharingSuite_with_Friend2) = True",
+                "BEL(Kate, isSharingSuite_with_Friend3) = True",
+                "BEL(Kate, isSharingBed) = False",
+                "BEL(Suite, numBeds) = 1",
+                "DES(Kate, avoidConflict) = True",
+                "DES(Kate, maintainFriendship) = True",
+                "DES(Kate, comfort) = True"
+            ],
+            "intentions": {
+                "INTENT(Kate, chooseToSleepOnCouch) = True": {
+                    "action_plan": [
+                        "CheckAvailability(Kate, Suite)",
+                        "BeliefUpdate(Kate, BEL(Kate, isSharingBed) = False)",
+                        "CheckComfort(Kate, Suite)",
+                        "DesireUpdate(Kate, DES(Kate, avoidConflict) = True, DES(Kate, maintainFriendship) = True, DES(Kate, comfort) = True)",
+                        "IntentUpdate(Kate, INTENT(Kate, chooseToSleepOnCouch) = True)",
+                        "ActionUpdate(Kate, ChooseCouch)",
+                        "Action(Kate, Couch, LieDownOnCouch)",
+                        "BeliefUpdate(Kate, BEL(Kate, isSleepingOnCouch) = True)"
+                    ]
+                }
+            },
+            "actions": {
+                "CheckAvailability(Kate, Suite)": {
+                    "conditions": [
+                        "BEL(Kate, isSharingSuite_with_Friend1) = True",
+                        "BEL(Kate, isSharingSuite_with_Friend2) = True",
+                        "BEL(Kate, isSharingSuite_with_Friend3) = True",
+                        "BEL(Suite, numBeds) > 0"
+                    ],
+                    "effects": []
+                },
+                "BeliefUpdate(Kate, BEL(Kate, isSharingBed) = False)": {
+                    "conditions": [
+                        "BEL(Kate, isSharingBed)"
+                    ],
+                    "effects": [
+                        "BEL(Kate, isSharingBed)"
+                    ]
+                },
+                "CheckComfort(Kate, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, numBeds) = 1",
+                        "BEL(Kate, isSharingBed) = False"
+                    ],
+                    "effects": [
+                        "DES(Kate, comfort) = True"
+                    ]
+                },
+                "DesireUpdate(Kate, DES(Kate, avoidConflict) = True, DES(Kate, maintainFriendship) = True, DES(Kate, comfort) = True)": {
+                    "conditions": [
+                        "BEL(Kate, isSharingSuite_with_Friend1) = True",
+                        "BEL(Kate, isSharingSuite_with_Friend2) = True",
+                        "BEL(Kate, isSharingSuite_with_Friend3) = True",
+                        "BEL(Suite, numBeds) = 1"
+                    ],
+                    "effects": [
+                        "DES(Kate, avoidConflict) = True",
+                        "DES(Kate, maintainFriendship) = True",
+                        "DES(Kate, comfort) = True"
+                    ]
+                },
+                "IntentUpdate(Kate, INTENT(Kate, chooseToSleepOnCouch) = True)": {
+                    "conditions": [
+                        "BEL(Kate, isSharingBed) = True",
+                        "DES(Kate, avoidConflict) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Kate, chooseToSleepOnCouch) = True"
+                    ]
+                },
+                "ActionUpdate(Kate, ChooseCouch)": {
+                    "conditions": [
+                        "BEL(Kate, isSharingSuite_with_Friend1) = True",
+                        "BEL(Kate, isSharingSuite_with_Friend2) = True",
+                        "BEL(Kate, isSharingSuite_with_Friend3) = True",
+                        "BEL(Kate, isSharingBed) = False",
+                        "BEL(Suite, numBeds) > 0"
+                    ],
+                    "effects": [
+                        "BeliefUpdate(Kate, BEL(Kate, isSleepingOnCouch) = True)",
+                        "BeliefUpdate(Suite, BEL(Suite, numBeds)= Suite.numBeds-1)"
+                    ]
+                },
+                "Action(Kate, Couch, LieDownOnCouch)": {
+                    "conditions": [
+                        "BEL(Kate, isSleepingOnCouch) = False",
+                        "BEL(Suite, hasCouch) = True"
+                    ],
+                    "effects": [
+                        "BeliefUpdate(Kate, BEL(Kate, isSleepingOnCouch) = True)",
+                        "BeliefUpdate(Suite, BEL(Suite, numBeds) = 0)",
+                        "BeliefUpdate(Suite, BEL(Suite, numCouches) = 1)",
+                        "BeliefUpdate(Kate, BEL(Kate, isSharingBed) = False)",
+                        "DesireUpdate(Kate, DES(Kate, comfort) = True)"
+                    ]
+                },
+                "BeliefUpdate(Kate, BEL(Kate, isSleepingOnCouch) = True)": {
+                    "conditions": [
+                        "BEL(Kate, isSleepingOnCouch) = False"
+                    ],
+                    "effects": [
+                        "BEL(Kate, isSleepingOnCouch) = True"
+                    ]
+                }
+            }
+        },
+        "Friend1": {
+            "knowledge_base": [
+                "BEL(Friend1, likes_Kate) = True",
+                "BEL(Friend1, wants_to_be_nice) = True",
+                "DES(Friend1, let_Kate_sleep_on_the_bed) = True",
+                "BEL(Suite, number_of_beds) = 1",
+                "BEL(Suite, number_of_couches) = 1",
+                "BEL(Suite, number_of_people) = 4",
+                "BEL(Friend1, is_tired) = True"
+            ],
+            "intentions": {
+                "INTENT(Friend1, offer_Kate_the_bed) = True": {
+                    "action_plan": [
+                        "CheckAvailability(Friend1, Suite, Bed)",
+                        "CheckCondition(Friend1, Friend1_Is_Tired, True)",
+                        "CheckCondition(Friend1, Like_Kate, True)",
+                        "OfferBed(Friend1, Kate, None)",
+                        "GetPillow(Friend1, Friend3, None)",
+                        "GivePillow(Friend1, Kate, Pillow)",
+                        "GetBlanket(Friend1, Suite, None)",
+                        "GiveBlanket(Friend1, Kate, Blanket)",
+                        "GoToCouch(Friend1, Couch, None)"
+                    ]
+                },
+                "INTENT(Friend1, listen_to_Kate) = True": {
+                    "action_plan": [
+                        "Move(Friend1, Bed)",
+                        "Check(Friend1, Suite, number_of_beds)",
+                        "Check(Friend1, Suite, number_of_couches)",
+                        "Check(Friend1, Suite, number_of_people)",
+                        "If(Friend1, Suite, number_of_beds, \">=\", 1)",
+                        "Then(Friend1, Suite, try_to_find_another_bed)",
+                        "Else(Friend1, Suite, let_Kate_sleep_on_the_bed)",
+                        "If(Friend1, Suite, number_of_couches, \">=\", 1)",
+                        "Then(Friend1, Suite, let_Kate_sleep_on_the_couch)",
+                        "Else(Friend1, Suite, try_to_find_another_couch)",
+                        "Say(Friend1, Kate, \"Hey, Kate! I want to be nice to you, so I'm happy to let you sleep on the bed.\")",
+                        "INTEND(Friend1, let_Kate_sleep_on_the_bed)"
+                    ]
+                },
+                "INTENT(Friend1, prioritize_Kate) = True": {
+                    "action_plan": [
+                        "check_availability(Friend1, Suite, couch)",
+                        "inform(Friend1, Kate, couch_available)",
+                        "move(Friend1, Suite, couch)",
+                        "propose(Friend1, Suite, rotate_bed)",
+                        "propose(Friend1, Suite, alternate_sleeping_arrangement)",
+                        "go_to_sleep(Friend1)",
+                        "Kate"
+                    ]
+                },
+                "INTENT(Friend1, negotiate_with_friends) = True": {
+                    "action_plan": [
+                        "Check(Number_of_beds, Suite)",
+                        "Check(Number_of_couches, Suite)",
+                        "Check(Number_of_people, Suite)",
+                        "Ask(Friend2, Does_Kate_want_to_sleep_on_the_couch?)",
+                        "Ask(Friend3, How_do_you_feel_about_Kate_sleeping_on_the_bed?)",
+                        "Evaluate_Options(Option1=Kate_sleeps_on_the_couch, Option2=Rotate_sleeping_spots, Option3=Other)",
+                        "Choose_Option(Option1=Kate_sleeps_on_the_couch)",
+                        "Inform_Group(Option=Kate_sleeps_on_the_couch)",
+                        "Check(Tiredness_level, Friend1)",
+                        "Go_to_sleep(Friend1, Couch)"
+                    ]
+                }
+            },
+            "actions": {
+                "Check(Number_of_beds, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_beds) = 1"
+                    ],
+                    "effects": []
+                },
+                "Check(Number_of_couches, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_couches) = 1"
+                    ],
+                    "effects": []
+                },
+                "Check(Number_of_people, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_people) = 4"
+                    ],
+                    "effects": []
+                },
+                "Ask(Friend2, Does_Kate_want_to_sleep_on_the_couch?)": {
+                    "conditions": [
+                        "BEL(Friend2, knows_about_sleeping_arrangements) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, knows_about_sleeping_arrangements) = True"
+                    ]
+                },
+                "Ask(Friend3, How_do_you_feel_about_Kate_sleeping_on_the_bed?)": {
+                    "conditions": [
+                        "BEL(Friend3, knows_that_only_one_bed) = True",
+                        "BEL(Friend3, likes_Kate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, knows_Friend3_opinion_about_sleeping_spots) = True"
+                    ]
+                },
+                "Evaluate_Options(Option1=Kate_sleeps_on_the_couch, Option2=Rotate_sleeping_spots, Option3=Other)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_beds) = 1",
+                        "BEL(Suite, number_of_couches) = 1",
+                        "DES(Friend1, let_Kate_sleep_on_the_bed) = True",
+                        "BEL(Friend1, is_tired) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, evaluated_options) = True",
+                        "BEL(Friend1, option1_chosen) = True",
+                        "DES(Friend1, let_Kate_sleep_on_couch) = True"
+                    ]
+                },
+                "Choose_Option(Option1=Kate_sleeps_on_the_couch)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_beds) = 1",
+                        "BEL(Suite, number_of_couches) = 1",
+                        "BEL(Suite, number_of_people) = 4",
+                        "BEL(Friend1, likes_Kate) = True",
+                        "BEL(Friend1, wants_to_be_nice) = True"
+                    ],
+                    "effects": [
+                        "DES(Friend1, let_Kate_sleep_on_the_bed) = True"
+                    ]
+                },
+                "Inform_Group(Option=Kate_sleeps_on_the_couch)": {
+                    "conditions": [
+                        "BEL(Friend1, wants_to_be_nice) = True",
+                        "BEL(Suite, number_of_beds) = 1",
+                        "BEL(Suite, number_of_couches) = 1",
+                        "BEL(Suite, number_of_people) = 4",
+                        "BEL(Kate, sleeping_location) != Bed"
+                    ],
+                    "effects": [
+                        "BEL(Kate, sleeping_location) = Couch",
+                        "BEL(Friend2, conversation) = \"Kate will sleep on the couch.\"",
+                        "BEL(Friend3, conversation) = \"Okay, no problem.\""
+                    ]
+                },
+                "Check(Tiredness_level, Friend1)": {
+                    "conditions": [
+                        "BEL(Friend1, is_tired) = True"
+                    ],
+                    "effects": []
+                },
+                "Go_to_sleep(Friend1, Couch)": {
+                    "conditions": [
+                        "BEL(Friend1, is_tired) = True",
+                        "BEL(Suite, number_of_couches) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, is_sleeping) = True",
+                        "BEL(Friend1, is_tired) = False",
+                        "BEL(Suite, number_of_couches) = BEL(Suite, number_of_couches) - 1",
+                        "BEL(Suite, number_of_people) = BEL(Suite, number_of_people) - 1"
+                    ]
+                },
+                "CheckAvailability(Friend1, Suite, Bed)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_beds) >= 1",
+                        "BEL(Suite, number_of_couches) >= 1"
+                    ],
+                    "effects": []
+                },
+                "CheckCondition(Friend1, Friend1_Is_Tired, True)": {
+                    "conditions": [
+                        "BEL(Friend1, is_tired) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, Friend1_Is_Tired) = True"
+                    ]
+                },
+                "CheckCondition(Friend1, Like_Kate, True)": {
+                    "conditions": [
+                        "BEL(Friend1, likes_Kate) = True"
+                    ],
+                    "effects": []
+                },
+                "OfferBed(Friend1, Kate, None)": {
+                    "conditions": [
+                        "BEL(Friend1, is_tired) = True",
+                        "BEL(Friend1, likes_Kate) = True",
+                        "BEL(Suite, number_of_beds) > 0",
+                        "BEL(Suite, number_of_people) <= 4"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, has_offered_bed_to_Kate) = True",
+                        "BEL(Suite, number_of_beds) = 0",
+                        "BEL(Suite, number_of_couches) = 1"
+                    ]
+                },
+                "GetPillow(Friend1, Friend3, None)": {
+                    "conditions": [
+                        "BEL(Friend1, has_pillow) = False",
+                        "BEL(Friend3, has_pillow) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, has_pillow) = True",
+                        "BEL(Friend3, has_pillow) = False"
+                    ]
+                },
+                "GivePillow(Friend1, Kate, Pillow)": {
+                    "conditions": [
+                        "BEL(Friend1, Like_Kate) = True",
+                        "BEL(Kate, need_pillow) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kate, has_pillow) = True",
+                        "BEL(Friend3, has_lost_pillow) = True"
+                    ]
+                },
+                "GetBlanket(Friend1, Suite, None)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_blankets) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Suite, number_of_blankets) = BEL(Suite, number_of_blankets) - 1",
+                        "BEL(Friend1, has_blanket) = True"
+                    ]
+                },
+                "GiveBlanket(Friend1, Kate, Blanket)": {
+                    "conditions": [
+                        "BEL(Friend1, has_blanket) = True",
+                        "BEL(Kate, is_on_bed) = True",
+                        "BEL(Kate, is_cold) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, has_blanket) = False",
+                        "BEL(Kate, is_warm) = True"
+                    ]
+                },
+                "GoToCouch(Friend1, Couch, None)": {
+                    "conditions": [
+                        "BEL(Friend1, offer_Kate_the_bed) = True",
+                        "BEL(Friend1, is_tired) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, is_sleeping) = True",
+                        "BEL(Suite, number_of_people_sleeping) = 2",
+                        "BEL(Suite, number_of_people_awake) = 2",
+                        "BEL(Suite, number_of_couches_available) = 0",
+                        "BEL(Suite, number_of_beds_available) = 0",
+                        "BEL(Kate, sleeping_on_couch) = True"
+                    ]
+                },
+                "Move(Friend1, Bed)": {
+                    "conditions": [
+                        "BEL(Friend1, is_tired) = True",
+                        "BEL(Friend1, location) != Bed"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, location) = Bed",
+                        "BEL(Friend1, location) != Couch"
+                    ]
+                },
+                "Check(Friend1, Suite, number_of_beds)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_beds) != NULL"
+                    ],
+                    "effects": []
+                },
+                "Check(Friend1, Suite, number_of_couches)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_couches)"
+                    ],
+                    "effects": []
+                },
+                "Check(Friend1, Suite, number_of_people)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_people) = 4"
+                    ],
+                    "effects": []
+                },
+                "If(Friend1, Suite, number_of_beds, \">=\", 1)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_beds) >= 1"
+                    ],
+                    "effects": []
+                },
+                "Then(Friend1, Suite, try_to_find_another_bed)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_beds) >= 1",
+                        "DES(Friend1, try_to_find_another_bed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, found_another_bed) = True",
+                        "BEL(Suite, number_of_beds) -= 1",
+                        "BEL(Suite, number_of_people) -= 1"
+                    ]
+                },
+                "Else(Friend1, Suite, let_Kate_sleep_on_the_bed)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_beds)",
+                        "BEL(Suite, number_of_couches)"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, let_Kate_sleep_on_the_bed)",
+                        "DES(INTENT(Friend1, let_Kate_sleep_on_the_bed), achieved)"
+                    ]
+                },
+                "If(Friend1, Suite, number_of_couches, \">=\", 1)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_couches) >= 1"
+                    ],
+                    "effects": []
+                },
+                "Then(Friend1, Suite, let_Kate_sleep_on_the_couch)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_couches) >= 1",
+                        "BEL(Friend1, wants_to_be_nice) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, number_of_couches) = BEL(Suite, number_of_couches) - 1",
+                        "BEL(Suite, couch_occupied) = True",
+                        "BEL(Kate, sleeping_on_couch) = True",
+                        "BEL(Friend1, happy_for_letting_Kate_sleep_on_couch) = True"
+                    ]
+                },
+                "Else(Friend1, Suite, try_to_find_another_couch)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_couches) >= 1"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, found_another_couch) = True"
+                    ]
+                },
+                "Say(Friend1, Kate, \"Hey, Kate! I want to be nice to you, so I'm happy to let you sleep on the bed.\")": {
+                    "conditions": [
+                        "BEL(Friend1, likes_Kate) = True",
+                        "BEL(Friend1, wants_to_be_nice) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, let_Kate_sleep_on_the_bed) = True"
+                    ]
+                },
+                "INTEND(Friend1, let_Kate_sleep_on_the_bed)": {
+                    "conditions": [
+                        "BEL(Friend1, is_tired) = True",
+                        "BEL(Suite, number_of_beds) >= 1"
+                    ],
+                    "effects": [
+                        "BEL(Suite, number_of_beds) -= 1",
+                        "BEL(Suite, number_of_couches) += 1",
+                        "BEL(Kate, is_happy) = True",
+                        "BEL(Friend1, acted_nicely) = True"
+                    ]
+                },
+                "check_availability(Friend1, Suite, couch)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_couches) > 0",
+                        "BEL(Suite, number_of_people) > 0",
+                        "BEL(Friend1, is_tired) = True"
+                    ],
+                    "effects": []
+                },
+                "inform(Friend1, Kate, couch_available)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_couches) > 0",
+                        "BEL(Friend1, likes_Kate) = True",
+                        "BEL(Friend1, wants_to_be_nice) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kate, couch_available) = True"
+                    ]
+                },
+                "move(Friend1, Suite, couch)": {
+                    "conditions": [
+                        "BEL(Friend1, is_tired) = True",
+                        "BEL(Suite, number_of_couches) >= 1",
+                        "BEL(Suite, number_of_beds) >= 1",
+                        "BEL(Suite, number_of_people) = 4",
+                        "BEL(Friend1, likes_Kate) = True",
+                        "BEL(Friend1, wants_to_be_nice) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, is_on_couch) = True",
+                        "BEL(Suite, number_of_couches) = Suite.number_of_couches-1",
+                        "BEL(Suite, number_of_beds) = Suite.number_of_beds+1",
+                        "BEL(Kate, is_on_bed) = False",
+                        "BEL(Kate, is_on_couch) = True"
+                    ]
+                },
+                "propose(Friend1, Suite, rotate_bed)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_beds) > 1",
+                        "BEL(Suite, number_of_people) <= 4",
+                        "BEL(Suite, bed_orientation) = \"horizontal\""
+                    ],
+                    "effects": [
+                        "BEL(Friend1, proposed_action_completed) = True",
+                        "BEL(Suite, bed_orientation) = \"vertical\""
+                    ]
+                },
+                "propose(Friend1, Suite, alternate_sleeping_arrangement)": {
+                    "conditions": [
+                        "BEL(Suite, number_of_beds) > 1",
+                        "BEL(Suite, number_of_couches) > 1",
+                        "DES(Friend1, let_Kate_sleep_on_the_bed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, number_of_beds) = 1",
+                        "BEL(Suite, number_of_couches) = 2"
+                    ]
+                },
+                "go_to_sleep(Friend1)": {
+                    "conditions": [
+                        "BEL(Friend1, is_tired) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, is_sleeping) = True"
+                    ]
+                },
+                "Kate": {
+                    "conditions": [
+                        "BEL(Suite, number_of_couches) = 1",
+                        "BEL(Suite, number_of_beds) = 1",
+                        "BEL(Suite, number_of_people) = 4",
+                        "BEL(Friend1, likes_Kate) = True",
+                        "BEL(Friend1, wants_to_be_nice) = True",
+                        "BEL(Friend1, is_tired) = True",
+                        "DES(Friend1, let_Kate_sleep_on_the_bed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, number_of_couches) = 1",
+                        "BEL(Suite, number_of_beds) = 1",
+                        "BEL(Suite, number_of_people) = 4",
+                        "BEL(Friend1, likes_Kate) = True",
+                        "BEL(Friend1, wants_to_be_nice) = True",
+                        "BEL(Friend1, is_tired) = True",
+                        "DES(Friend1, let_Kate_sleep_on_the_bed) = True",
+                        "BEL(Kate, is_thankful_to_Friend1) = True"
+                    ]
+                }
+            }
+        },
+        "Friend2": {
+            "knowledge_base": [
+                "Friend2], [LikesKate",
+                "Friend2], [IsFeelingSick",
+                "Friend2], [HasAnEarlyFlightTomorrow",
+                "Friend2], [WantsToSleepInBed",
+                "Friend2], [WantsToBeConsiderate",
+                "Friend2], [WantsToAvoidConflict",
+                "Friend2], [WantsToBeComfortable",
+                "Friend2], [IsTired"
+            ],
+            "intentions": {
+                "INTENT(Friend2, WantsToBeConsiderate)": {
+                    "action_plan": [
+                        "INTENT(Friend2, WantsToBeConsiderate)",
+                        "CheckAvailability(Friend2, Suite)",
+                        "SleepInBed(Friend2, Suite, None)",
+                        "AskKateToSleepOnCouch(Friend2, Kate, None)",
+                        "SleepInBed(Friend2, Suite, None)",
+                        "SleepOnCouch(Friend2, Suite, None)",
+                        "CheckAvailability(Agent, Target)",
+                        "Suite",
+                        "SleepInBed(Agent, Target, Arguments)",
+                        "AskKateToSleepOnCouch(Agent, Target, Arguments)",
+                        "SleepOnCouch(Agent, Target, Arguments)"
+                    ]
+                },
+                "INTENT(Friend2, WantToSleepInBed)": {
+                    "action_plan": [
+                        "CheckAvailability(Friend2, Suite bed)",
+                        "TalkToKate(Friend2, Kate)",
+                        "SleepInBed(Friend2, Suite bed)",
+                        "FindAlternativeSleepingArrangements(Friend2, Suite)",
+                        "SleepOnCouch(Friend2, Suite couch)",
+                        "SetAlarm(Friend2, EarlyFlight)"
+                    ]
+                },
+                "INTENT(Friend2, WantToBeComfortable)": {
+                    "action_plan": [
+                        "CheckBedAvailability(Friend2, Suite)",
+                        "TalkToKate(Friend2, Kate, IsBedAvailable?)",
+                        "ListenToKate(Friend2, Kate, Response)",
+                        "ProposeSolution(Friend2, Kate, SleepOnCouch)",
+                        "FindAlternativeSleepingPlace(Friend2, Suite)",
+                        "SleepOnCouch(Friend2, Suite)",
+                        "GetComfortable(Friend2, Couch)",
+                        "TryToSleep(Friend2, Couch)"
+                    ]
+                },
+                "INTENT(Friend2, WantToAvoidConflict)": {
+                    "action_plan": [
+                        "Believe(Friend2, Suite[NumberBeds=1])",
+                        "Desire(Friend2, WantToSleepInBed)",
+                        "Believe(Friend2, Kate[SleepingOnCouch])",
+                        "Desire(Friend2, WantsToBeConsiderate)",
+                        "Believe(Friend2, Friend1[SleepingInBed])",
+                        "Believe(Friend2, Friend3[SleepingOnFloor])",
+                        "Believe(Friend2, Suite[IsACrowdedPlace])",
+                        "Believe(Friend2, SituationIsUncomfortable)",
+                        "Believe(Friend2, Suite[IsACrowdedPlace])",
+                        "Desire(Friend2, WantsToBeComfortable)",
+                        "INTEND(Friend2, FindComfortablePlaceToSleep)",
+                        "Ask(Friend2, Friend1, CanIFindACushionToSleepOn?)",
+                        "Believe(Friend2, Friend1[PointToExtraCushions])",
+                        "Believe(Friend2, Suite[HasExtraCushions])",
+                        "INTEND(Friend2, MoveCushionToComfortablePlace)",
+                        "Act(Friend2, Suite[MoveCushion], Cushion)",
+                        "Believe(Friend2, SituationIsResolved)"
+                    ]
+                },
+                "INTENT(Friend2, WantsToSleepInBedEarly)": {
+                    "action_plan": [
+                        "CHECK(Suite, BedAvailability)",
+                        "COMMUNICATE(Friend2, Group, AskIfAnyoneWantsTheBed)",
+                        "LISTEN(Group, RespondToQuestion)",
+                        "INTEND(Friend2, IntentToSleepOnTheCouch)",
+                        "INTEND(Friend2, IntentToBeConsiderate)",
+                        "ACT(Friend2, Suite, MoveToTheCouch)",
+                        "ACT(Friend2, Suite, PrepareTheCouchForSleep)",
+                        "ACT(Friend2, Suite, SleepOnTheCouch)"
+                    ]
+                }
+            },
+            "actions": {
+                "CHECK(Suite, BedAvailability)": {
+                    "conditions": [
+                        "BEL(Suite, BedAvailable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, BedUnavailable) = True"
+                    ]
+                },
+                "COMMUNICATE(Friend2, Group, AskIfAnyoneWantsTheBed)": {
+                    "conditions": [
+                        "BEL(Suite, BedAvailability) = True",
+                        "BEL(Group, SomeoneWantsTheBed) = False",
+                        "BEL(Friend2, IsFeelingSick) = False",
+                        "BEL(Friend2, HasAnEarlyFlightTomorrow) = False",
+                        "BEL(Friend2, WantsToSleepInBed) = True",
+                        "BEL(Friend2, WantsToAvoidConflict) = True",
+                        "BEL(Friend2, WantsToBeComfortable) = True",
+                        "BEL(Friend2, IsTired) = True"
+                    ],
+                    "effects": [
+                        "BEL(Group, SomeoneWantsTheBed) = True",
+                        "BEL(Friend2, WantsToSleepInBed) = False",
+                        "DES(Group, RespondToQuestion) = True"
+                    ]
+                },
+                "LISTEN(Group, RespondToQuestion)": {
+                    "conditions": [
+                        "BEL(Group, SomeoneAnswersTheQuestion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Group, SomeoneAnswersTheQuestion) = False",
+                        "BEL(Friend2, RespondedToQuestion) = True"
+                    ]
+                },
+                "INTEND(Friend2, IntentToSleepOnTheCouch)": {
+                    "conditions": [
+                        "BEL(Suite, BedAvailability) = True",
+                        "BEL(Friend2, WantsToSleepInBed) = True"
+                    ],
+                    "effects": [
+                        "INTENTION(Friend2, IntentToSleepOnTheCouch) = True"
+                    ]
+                },
+                "INTEND(Friend2, IntentToBeConsiderate)": {
+                    "conditions": [
+                        "BEL(Friend2, WantsToSleepInBed) = True",
+                        "BEL(Friend2, WantsToBeConsiderate) = False"
+                    ],
+                    "effects": [
+                        "DES(Friend2, IntentToBeConsiderate) = True"
+                    ]
+                },
+                "ACT(Friend2, Suite, MoveToTheCouch)": {
+                    "conditions": [
+                        "BEL(Suite, HasCouch) = True",
+                        "BEL(Friend2, IsTired) = True",
+                        "BEL(Friend2, WantsToSleepInBed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Suite, HasCouch) = True",
+                        "BEL(Friend2, IsOnCouch) = True",
+                        "BEL(Friend2, IsInBed) = False",
+                        "DES(Friend2, WantsToBeComfortable) = True"
+                    ]
+                },
+                "ACT(Friend2, Suite, PrepareTheCouchForSleep)": {
+                    "conditions": [
+                        "BEL(Suite, HasCouch) = True",
+                        "BEL(Friend2, IsTired) = True",
+                        "BEL(Friend2, WantsToSleepInBed) = False",
+                        "BEL(Friend2, WantsToBeConsiderate) = True",
+                        "BEL(Friend2, LikesKate) = True",
+                        "BEL(Friend2, IsFeelingSick) = False",
+                        "BEL(Friend2, HasAnEarlyFlightTomorrow) = False"
+                    ],
+                    "effects": [
+                        "BEL(Suite, IsCouchPrepared) = True"
+                    ]
+                },
+                "ACT(Friend2, Suite, SleepOnTheCouch)": {
+                    "conditions": [
+                        "BEL(Suite, CouchAvailability) = True",
+                        "INTENT(Friend2, IntentToSleepOnTheCouch) = True",
+                        "INTENT(Friend2, IntentToBeConsiderate) = True",
+                        "BEL(Suite, NoiseLevel) <= 5"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, IsSleeping) = True",
+                        "BEL(Suite, CouchAvailability) = False",
+                        "DES(Friend2, HaveARestfulSleep) = True"
+                    ]
+                },
+                "INTENT(Friend2, WantsToBeConsiderate)": {
+                    "conditions": [
+                        "BEL(Suite, HasBedAvailable) = True",
+                        "BEL(Kate, IsSleepingOnCouch) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, HasChosenAction) = True",
+                        "BEL(Friend2, IsSleepingInBed) = True",
+                        "DES(Friend2, WantsToBeComfortable) = True",
+                        "DES(Friend2, WantsToAvoidConflict) = True",
+                        "BEL(Kate, IsSleepingOnCouch) = False",
+                        "BEL(Kate, IsSleepingInBed) = False",
+                        "BEL(Friend1, IsSleepingInBed) = False",
+                        "BEL(Friend3, IsSleepingInBed) = False",
+                        "BEL(Suite, HasBedAvailable) = False",
+                        "BEL(Suite, HasCouchAvailable) = True",
+                        "BEL(Suite, NumberOfBeds) = 3",
+                        "BEL(Suite, NumberOfCouches) = 1"
+                    ]
+                },
+                "CheckAvailability(Friend2, Suite)": {
+                    "conditions": [
+                        "BEL(Friend2, LikesKate) = True",
+                        "BEL(Suite, HasBedAvailable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, HasBedAvailable) = False",
+                        "BEL(Suite, HasCouchAvailable) = True"
+                    ]
+                },
+                "SleepInBed(Friend2, Suite, None)": {
+                    "conditions": [
+                        "BEL(Friend2, IsFeelingSick) = False",
+                        "BEL(Friend2, HasAnEarlyFlightTomorrow) = False",
+                        "BEL(Suite, BedAvailable) = True",
+                        "BEL(Friend2, IsTired) = True",
+                        "DES(Friend2, WantsToBeConsiderate) = True",
+                        "DES(Friend2, WantsToBeComfortable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, BedAvailable) = False",
+                        "BEL(Friend2, InBed) = True",
+                        "BEL(Friend2, IsTired) = False",
+                        "BEL(Friend2, IsWellRested) = True",
+                        "DES(Friend2, WantsToBeComfortable) = False"
+                    ]
+                },
+                "AskKateToSleepOnCouch(Friend2, Kate, None)": {
+                    "conditions": [
+                        "BEL(Kate, IsSleepingOnCouch) = False",
+                        "BEL(Friend2, WantsToSleepInBed) = True",
+                        "BEL(Friend2, WantsToBeComfortable) = True",
+                        "BEL(Friend2, WantsToBeConsiderate) = True",
+                        "BEL(Friend2, HasAnEarlyFlightTomorrow) = False",
+                        "BEL(Friend2, IsFeelingSick) = False",
+                        "BEL(Friend2, IsTired) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kate, IsSleepingOnCouch) = True",
+                        "DES(Kate, FeelsLessRespected) = True",
+                        "DES(Friend2, FeelsConsiderate) = True",
+                        "BEL(Friend2, WantsToSleepInBed) = False"
+                    ]
+                },
+                "SleepOnCouch(Friend2, Suite, None)": {
+                    "conditions": [
+                        "BEL(Suite, HasCouch) = True",
+                        "BEL(Kate, SleepingOnCouch) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, SleepingOnCouch) = True",
+                        "BEL(Kate, SleepingOnCouch) = False"
+                    ]
+                },
+                "CheckAvailability(Agent, Target)": {
+                    "conditions": [
+                        "BEL(Suite, InUse) = False"
+                    ],
+                    "effects": [
+                        "BEL(Suite, InUse) = True"
+                    ]
+                },
+                "Suite": {
+                    "conditions": [
+                        "BEL(Suite, BedAvailable) = True",
+                        "BEL(Suite, CouchAvailable) = True",
+                        "DES(Friend2, WantsToBeConsiderate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, BedAvailable) = False",
+                        "BEL(Suite, CouchAvailable) = False",
+                        "BEL(Friend2, SleepingInBed) = True",
+                        "BEL(Kate, SleepingOnCouch) = True"
+                    ]
+                },
+                "SleepInBed(Agent, Target, Arguments)": {
+                    "conditions": [
+                        "BEL(Target, IsAvailable) = True",
+                        "BEL(Target, HasBed) = True",
+                        "BEL(Agent, IsTired) = True",
+                        "BEL(Agent, WantsToSleepInBed) = True",
+                        "DES(Agent, WantsToBeComfortable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Target, IsAvailable) = False",
+                        "BEL(Agent, IsTired) = False",
+                        "BEL(Target, OccupiedBy) = Agent",
+                        "BEL(Agent, IsSleeping) = True"
+                    ]
+                },
+                "AskKateToSleepOnCouch(Agent, Target, Arguments)": {
+                    "conditions": [
+                        "BEL(Kate, InBed) = True",
+                        "DES(Agent, WantsToBeComfortable) = True",
+                        "BEL(Agent, IsAwake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kate, OnCouch) = True",
+                        "BEL(Friend2, SleptInBed) = True",
+                        "DES(Kate, FeelsComfortable) = True",
+                        "DES(Friend2, AvoidedConflict) = True"
+                    ]
+                },
+                "SleepOnCouch(Agent, Target, Arguments)": {
+                    "conditions": [
+                        "BEL(Friend2, IsTired) = True",
+                        "BEL(Agent, CheckAvailability(Target)) = True",
+                        "BEL(Target, IsAvailable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, IsComfortable) = True",
+                        "DES(Target, BeOccupied) = True",
+                        "BEL(Target, IsAvailable) = False"
+                    ]
+                },
+                "CheckAvailability(Friend2, Suite bed)": {
+                    "conditions": [
+                        "BEL(Suite, HasBed) = True",
+                        "BEL(Friend2, LikesKate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, KnowsAvailabilityOfBed) = True",
+                        "BEL(Friend2, ThinksKatePrefersCouch) = True"
+                    ]
+                },
+                "TalkToKate(Friend2, Kate)": {
+                    "conditions": [
+                        "BEL(Kate, IsSleepingOnCouch) = True",
+                        "BEL(Friend2, LikesKate) = True",
+                        "BEL(Friend2, WantsToSleepInBed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kate, IsSleepingOnCouch) = False",
+                        "BEL(Friend2, IsSleepingInBed) = True",
+                        "BEL(Suite, BedIsOccupied) = True",
+                        "DES(Friend2, WantsToBeConsiderate) = True"
+                    ]
+                },
+                "SleepInBed(Friend2, Suite bed)": {
+                    "conditions": [
+                        "BEL(Suite, BedAvailable) = True",
+                        "BEL(Friend2, LikesKate) = True",
+                        "BEL(Friend2, IsTired) = True",
+                        "BEL(Friend2, HasAnEarlyFlightTomorrow) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, IsSleepingInBed) = True",
+                        "BEL(Suite, BedAvailable) = False",
+                        "DES(Friend2, WantToSleepInBed) = False",
+                        "DES(Friend2, WantsToBeComfortable) = True"
+                    ]
+                },
+                "FindAlternativeSleepingArrangements(Friend2, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, OnlyOneBedAvailable) = True",
+                        "DES(Friend2, WantToSleepInBed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, OnlyOneBedAvailable) = False",
+                        "BEL(Suite, MoreBedsAvailable) = True",
+                        "BEL(Friend2, FoundAnotherSleepingArrangement) = True"
+                    ]
+                },
+                "SleepOnCouch(Friend2, Suite couch)": {
+                    "conditions": [
+                        "BEL(Suite, HasCouch) = True",
+                        "DES(Friend2, WantToBeComfortable) = True",
+                        "DES(Friend2, WantToSleepInBed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, IsSleeping) = True",
+                        "BEL(Suite, CouchIsOccupied) = True",
+                        "DES(Friend2, WantToBeConsiderate) = True"
+                    ]
+                },
+                "SetAlarm(Friend2, EarlyFlight)": {
+                    "conditions": [
+                        "BEL(Friend2, HasAnEarlyFlightTomorrow) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, SetAlarmForEarlyFlight) = True"
+                    ]
+                },
+                "CheckBedAvailability(Friend2, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, BedAvailable) = Unknown"
+                    ],
+                    "effects": [
+                        "BEL(Suite, BedAvailable) = True",
+                        "BEL(Friend2, IsBedAvailable) = True",
+                        "BEL(Suite, BedAvailable) = False",
+                        "BEL(Friend2, IsBedAvailable) = False"
+                    ]
+                },
+                "TalkToKate(Friend2, Kate, IsBedAvailable?)": {
+                    "conditions": [
+                        "BEL(Suite, BedAvailable) = False",
+                        "BEL(Friend2, LikesKate) = True"
+                    ],
+                    "effects": [
+                        "BEL(Kate, IsAwareOfBedAvailability) = True"
+                    ]
+                },
+                "ListenToKate(Friend2, Kate, Response)": {
+                    "conditions": [
+                        "BEL(Kate, IsTalking) = True",
+                        "BEL(Kate, IsPresent) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, HeardResponse) = True"
+                    ]
+                },
+                "ProposeSolution(Friend2, Kate, SleepOnCouch)": {
+                    "conditions": [
+                        "BEL(Suite, HasCouch)",
+                        "BEL(Suite, IsBedAvailable)",
+                        "BEL(Kate, IsSleepingOnCouch)"
+                    ],
+                    "effects": [
+                        "BEL(Kate, IsSleepingOnCouch)",
+                        "BEL(Friend2, IsSleepingOnCouch)",
+                        "DES(Kate, ShowGratitudeToFriend2)",
+                        "DES(Friend2, HasHelpedKate)"
+                    ]
+                },
+                "FindAlternativeSleepingPlace(Friend2, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, HasExtraBed) = True",
+                        "DES(Friend2, WantToSleepInBed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, IsSleepingOnCouch) = False",
+                        "BEL(Friend2, IsSleepingInBed) = True",
+                        "BEL(Suite, NumberOfAvailableBeds) = NumberOfAvailableBeds-1"
+                    ]
+                },
+                "SleepOnCouch(Friend2, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, CouchAvailable) = True",
+                        "DES(Friend2, WantToBeComfortable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, CouchAvailable) = False",
+                        "BEL(Friend2, IsSleeping) = True",
+                        "DES(Friend2, NeedToSleep) = False",
+                        "BEL(Friend2, IsRested) = True"
+                    ]
+                },
+                "GetComfortable(Friend2, Couch)": {
+                    "conditions": [
+                        "BEL(Friend2, IsTired) = True",
+                        "BEL(Friend2, Couch) = Available",
+                        "DES(Friend2, WantToBeComfortable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, IsComfortable) = True",
+                        "BEL(Friend2, Couch) = Occupied",
+                        "BEL(Suite, Couch) = Unavailable"
+                    ]
+                },
+                "TryToSleep(Friend2, Couch)": {
+                    "conditions": [
+                        "BEL(Suite, CouchIsAvailable) = True",
+                        "BEL(Friend2, IsTired) = True",
+                        "BEL(Friend2, HasFoundAlternativeSleepingPlace) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, IsSleeping) = True",
+                        "BEL(Friend2, HasFoundAlternativeSleepingPlace) = True",
+                        "BEL(Suite, CouchIsAvailable) = False"
+                    ]
+                },
+                "Believe(Friend2, Suite[NumberBeds=1])": {
+                    "conditions": [
+                        "Suite[NumberBeds=1"
+                    ],
+                    "effects": [
+                        "Friend2, Suite[NumberBeds=1"
+                    ]
+                },
+                "Desire(Friend2, WantToSleepInBed)": {
+                    "conditions": [
+                        "BEL(Friend2, Suite[NumberBeds=1])",
+                        "BEL(Friend2, Kate[SleepingOnCouch])"
+                    ],
+                    "effects": [
+                        "DES(Friend2, WantToSleepInBed)"
+                    ]
+                },
+                "Believe(Friend2, Kate[SleepingOnCouch])": {
+                    "conditions": [
+                        "BEL(Friend2, Suite[NumberBeds=1]) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, Kate[SleepingOnCouch]) = True"
+                    ]
+                },
+                "Desire(Friend2, WantsToBeConsiderate)": {
+                    "conditions": [
+                        "BEL(Friend2, LikesKate) = True",
+                        "BEL(Friend2, IsFeelingSick) = False",
+                        "BEL(Friend2, HasAnEarlyFlightTomorrow) = False"
+                    ],
+                    "effects": [
+                        "DES(Friend2, WantsToBeConsiderate) = True"
+                    ]
+                },
+                "Believe(Friend2, Friend1[SleepingInBed])": {
+                    "conditions": [
+                        "BEL(Friend2, Suite[NumberBeds=1])",
+                        "BEL(Friend2, Kate[SleepingOnCouch])"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, Friend1[SleepingInBed])"
+                    ]
+                },
+                "Believe(Friend2, Friend3[SleepingOnFloor])": {
+                    "conditions": [
+                        "BEL(Friend2, LikesKate) = True",
+                        "BEL(Friend2, Suite[NumberBeds=1]) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, Friend3[SleepingOnFloor]) = True"
+                    ]
+                },
+                "Believe(Friend2, Suite[IsACrowdedPlace])": {
+                    "conditions": [
+                        "BEL(Friend2, IsInSuite)",
+                        "BEL(Suite, NumberBeds)"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, Suite[IsACrowdedPlace])"
+                    ]
+                },
+                "Believe(Friend2, SituationIsUncomfortable)": {
+                    "conditions": [
+                        "BEL(Friend2, Suite[IsACrowdedPlace])",
+                        "BEL(Friend2, Suite[NumberBeds=1])",
+                        "BEL(Friend2, Kate[SleepingOnCouch])"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, SituationIsUncomfortable)"
+                    ]
+                },
+                "Desire(Friend2, WantsToBeComfortable)": {
+                    "conditions": [
+                        "BEL(Friend2, Suite[IsACrowdedPlace]) = True",
+                        "DES(Friend2, WantsToBeComfortable) = False"
+                    ],
+                    "effects": [
+                        "DES(Friend2, WantsToBeComfortable) = True"
+                    ]
+                },
+                "INTEND(Friend2, FindComfortablePlaceToSleep)": {
+                    "conditions": [
+                        "BEL(Friend2,SituationIsUncomfortable)",
+                        "BEL(Suite, NumberBeds=1)",
+                        "BEL(Kate,SleepingOnCouch)"
+                    ],
+                    "effects": [
+                        "INT(Friend2, FindComfortablePlaceToSleep)"
+                    ]
+                },
+                "Ask(Friend2, Friend1, CanIFindACushionToSleepOn?)": {
+                    "conditions": [
+                        "BEL(Friend2, IsTired) = True",
+                        "BEL(Friend1, PointToExtraCushions) = True",
+                        "BEL(Friend2, Suite[HasExtraCushions]) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, SituationIsResolved) = True",
+                        "BEL(Friend2, Suite[NumberBeds=1]) = True"
+                    ]
+                },
+                "Believe(Friend2, Friend1[PointToExtraCushions])": {
+                    "conditions": [
+                        "BEL(Friend2, Suite[HasExtraCushions]) = True",
+                        "BEL(Friend1, KnowsLocationOfExtraCushions) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, Friend1[PointToExtraCushions]) = True"
+                    ]
+                },
+                "Believe(Friend2, Suite[HasExtraCushions])": {
+                    "conditions": [
+                        "BEL(Friend2, Suite[IsACrowdedPlace])",
+                        "BEL(Friend2, SituationIsUncomfortable)"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, Suite[HasExtraCushions])"
+                    ]
+                },
+                "INTEND(Friend2, MoveCushionToComfortablePlace)": {
+                    "conditions": [
+                        "BEL(Friend2, SituationIsUncomfortable) = True",
+                        "BEL(Friend2, Suite[HasExtraCushions]) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, SituationIsResolved) = True",
+                        "BEL(Friend2, Suite[CushionIsMoved] = True)"
+                    ]
+                },
+                "Act(Friend2, Suite[MoveCushion], Cushion)": {
+                    "conditions": [
+                        "BEL(Friend2, SituationIsResolved) = False",
+                        "BEL(Suite[MoveCushion], IsAvailable) = True",
+                        "BEL(Friend1, HasExtraCushions) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, SituationIsResolved) = True",
+                        "BEL(Cushion, IsInComfortablePlace) = True",
+                        "BEL(Suite[MoveCushion], IsAvailable) = False",
+                        "BEL(Suite[ExtraCushions], AreAvailable) = False"
+                    ]
+                },
+                "Believe(Friend2, SituationIsResolved)": {
+                    "conditions": [
+                        "BEL(Friend2, SituationIsUncomfortable) = True",
+                        "BEL(Friend2, Suite[NumberBeds=1]) = True",
+                        "BEL(Friend2, Kate[SleepingOnCouch]) = True",
+                        "BEL(Friend2, Friend1[SleepingInBed]) = True",
+                        "BEL(Friend2, Friend3[SleepingOnFloor]) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend2, SituationIsResolved) = True"
+                    ]
+                }
+            }
+        },
+        "Friend3": {
+            "knowledge_base": [
+                "BEL(Friend3, inBed_with_Kate) = False",
+                "BEL(Friend3, sharedBed_before) = True",
+                "BEL(Friend3, dislikes_conflicts) = True",
+                "DES(Friend3, sleep_on_bed) = False",
+                "DES(Friend3, avoid_jeopardizing_relationships) = True"
+            ],
+            "intentions": {
+                "INTENT(Friend3, sleep_on_couch) = True": {
+                    "action_plan": [
+                        "CheckSuitAvailability(Friend3, Suite)",
+                        "OfferBedToFriends(Friend3, Friend1, Friend2)",
+                        "ConfirmBedAvailability(Friend3, Suite)",
+                        "FindBlanket(Friend3, Couch)",
+                        "ArrangeCouch(Friend3, Couch)",
+                        "SleepOnCouch(Friend3, Couch)"
+                    ]
+                },
+                "INTENT(Friend3, avoid_confrontation) = True": {
+                    "action_plan": [
+                        "CheckForAvailability(Suite, Bed)",
+                        "ApproachKate(Friend3, Kate)",
+                        "AskOtherFriends(Friend3, {Friend1, Friend2})",
+                        "SleepOnChair(Friend3)"
+                    ]
+                },
+                "INTENT(Friend3, communicate_decision) = True": {
+                    "action_plan": [
+                        "CheckBed(Friend3, Suite)",
+                        "FindBlankets(Friend3, Suite)",
+                        "ProposeSolution(Friend3, [sleep_on_bed, use_blankets], [Friend1, Friend2, Friend3, Kate])",
+                        "NegotiateSolution(Friend3, [sleep_on_bed, use_blankets], [Friend1, Friend2, Friend3, Kate]), [Friend1, Friend2, Kate",
+                        "CommunicateDecision(Friend3, [sleep_on_bed, use_blankets])",
+                        "PrepareSleepingArea(Friend3, Couch, Blankets)",
+                        "Sleep(Friend3, Couch)"
+                    ]
+                }
+            },
+            "actions": {
+                "CheckBed(Friend3, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, numberOfBeds) = 1",
+                        "BEL(Friend3, inBed_with_Kate) = False"
+                    ],
+                    "effects": []
+                },
+                "FindBlankets(Friend3, Suite)": {
+                    "conditions": [
+                        "BEL(Friend3, sharedBed_before) = True",
+                        "BEL(Suite, hasBlankets) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, hasBlankets) = True",
+                        "BEL(Suite, hasBlankets) = False",
+                        "BEL(Friend3, knows_blankets_location) = True"
+                    ]
+                },
+                "ProposeSolution(Friend3, [sleep_on_bed, use_blankets], [Friend1, Friend2, Friend3, Kate])": {
+                    "conditions": [
+                        "BEL(Friend3, inBed_with_Kate) = False",
+                        "BEL(Friend3, sharedBed_before) = True",
+                        "DES(Friend3, avoid_jeopardizing_relationships) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, inBed_with_Kate) = False",
+                        "BEL(Friend2, inBed_with_Kate) = False",
+                        "BEL(Kate, inBed_alone) = True",
+                        "DES(Friend3, sleep_on_bed) = True",
+                        "DES(Friend3, use_blankets) = True"
+                    ]
+                },
+                "NegotiateSolution(Friend3, [sleep_on_bed, use_blankets], [Friend1, Friend2, Friend3, Kate]), [Friend1, Friend2, Kate": {
+                    "conditions": [
+                        "BEL(Friend3, inBed_with_Kate) = False",
+                        "BEL(Friend3, sharedBed_before) = True",
+                        "BEL(Friend1, sleep_on_bed) = True",
+                        "BEL(Friend2, sleep_on_bed) = True",
+                        "BEL(Kate, sleep_on_bed) = True",
+                        "DES(Friend3, avoid_jeopardizing_relationships) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend1, sleep_on_bed) = False",
+                        "BEL(Friend2, sleep_on_bed) = False",
+                        "BEL(Kate, sleep_on_bed) = False",
+                        "BEL(Friend3, sleep_on_bed) = True",
+                        "DES(Friend3, sleep_on_bed) = True",
+                        "BEL(Friend3, inBed_with_Kate) = True"
+                    ]
+                },
+                "CommunicateDecision(Friend3, [sleep_on_bed, use_blankets])": {
+                    "conditions": [
+                        "BEL(Friend3, dislikes_conflicts) = True",
+                        "DES(Friend3, avoid_jeopardizing_relationships) = True",
+                        "BEL(Friend1, inBed_with_Kate) = False",
+                        "BEL(Friend2, inBed_with_Kate) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, sleep_on_bed) = True",
+                        "BEL(Friend3, use_blankets) = True"
+                    ]
+                },
+                "PrepareSleepingArea(Friend3, Couch, Blankets)": {
+                    "conditions": [
+                        "BEL(Friend3, BlanketsAvailable) = True",
+                        "BEL(Friend3, CouchFree) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, CouchIsPersonalSleepingArea) = True",
+                        "BEL(Friend3, BlanketsUsed) = True",
+                        "BEL(Suite, BlanketsAvailable) = False",
+                        "BEL(Suite, CouchFree) = False"
+                    ]
+                },
+                "Sleep(Friend3, Couch)": {
+                    "conditions": [
+                        "BEL(Friend3, inBed_with_Kate) = False",
+                        "BEL(Friend3, sharedBed_before) = True",
+                        "BEL(Friend3, dislikes_conflicts) = True",
+                        "DES(Friend3, sleep_on_bed) = False",
+                        "DES(Friend3, avoid_jeopardizing_relationships) = True",
+                        "BEL(Couch, isAvailable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, wellRested) = True",
+                        "BEL(Friend3, slept_on_couch) = True",
+                        "BEL(Couch, isAvailable) = False"
+                    ]
+                },
+                "CheckSuitAvailability(Friend3, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, isAvailable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, knowsAboutSuite) = True"
+                    ]
+                },
+                "OfferBedToFriends(Friend3, Friend1, Friend2)": {
+                    "conditions": [
+                        "BEL(Suite, numBeds_available) = 1",
+                        "BEL(Friend1, inBed_with_Kate) = False",
+                        "BEL(Friend2, inBed_with_Kate) = False",
+                        "BEL(Friend3, inBed_with_Kate) = False",
+                        "DES(Friend3, avoid_jeopardizing_relationships) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, numBeds_available) = 0",
+                        "BEL(Friend1, inBed_with_Kate) = True",
+                        "BEL(Friend2, inBed_with_Kate) = True",
+                        "BEL(Friend3, inBed_with_Kate) = False",
+                        "DES(Friend3, sleep_on_bed) = True"
+                    ]
+                },
+                "ConfirmBedAvailability(Friend3, Suite)": {
+                    "conditions": [
+                        "BEL(Suite, available) = True",
+                        "BEL(Suite, bedOccupied) = False"
+                    ],
+                    "effects": [
+                        "BEL(Suite, available) = False",
+                        "BEL(Suite, bedOccupied) = True",
+                        "BEL(Friend3, inBed_with_Kate) = False",
+                        "BEL(Friend1, inBed_with_Kate) = True or False",
+                        "BEL(Friend2, inBed_with_Kate) = True or False",
+                        "BEL(Friend3, sharedBed_before) = True",
+                        "DES(Friend3, sleep_on_bed) = False"
+                    ]
+                },
+                "FindBlanket(Friend3, Couch)": {
+                    "conditions": [
+                        "BEL(Friend3, inBed_with_Kate) = False",
+                        "BEL(Friend3, sharedBed_before) = True",
+                        "BEL(Suite, hasBlanket) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, hasBlanket) = True"
+                    ]
+                },
+                "ArrangeCouch(Friend3, Couch)": {
+                    "conditions": [
+                        "BEL(Suite, hasCouch) = True",
+                        "BEL(Suite, couchFree) = True",
+                        "BEL(Friend3, foundBlanket) = True",
+                        "BEL(Friend3, confirmedBedAvailability) = True"
+                    ],
+                    "effects": [
+                        "BEL(Suite, couchFree) = False",
+                        "BEL(Friend3, inComfortablePosition) = True",
+                        "BEL(Friend3, inCouch) = True"
+                    ]
+                },
+                "SleepOnCouch(Friend3, Couch)": {
+                    "conditions": [
+                        "BEL(Suite, couchAvailable) = True"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, slept_on_couch) = True",
+                        "BEL(Couch, slept_on) = True",
+                        "DES(Friend3, avoid_jeopardizing_relationships) = True",
+                        "DES(Friend3, sleep_on_bed) = False"
+                    ]
+                },
+                "CheckForAvailability(Suite, Bed)": {
+                    "conditions": [
+                        "BEL(Suite, hasBed) = True",
+                        "BEL(Suite, bedTaken) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, inBed_with_Kate) = False",
+                        "BEL(Suite, bedTaken) = True"
+                    ]
+                },
+                "ApproachKate(Friend3, Kate)": {
+                    "conditions": [
+                        "BEL(Friend3, inBed_with_Kate) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, inBed_with_Kate) = True",
+                        "BEL(Kate, inBed_with_Friend3) = True"
+                    ]
+                },
+                "AskOtherFriends(Friend3, {Friend1, Friend2})": {
+                    "conditions": [
+                        "BEL(Suite, isolatedBed_available) = True",
+                        "BEL(Kate, already_asleep) = False",
+                        "BEL(Friend1, inBed_with_Kate) = False",
+                        "BEL(Friend2, inBed_with_Kate) = False",
+                        "BEL(Friend3, inBed_with_Kate) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, asked_friends_for_bed) = True",
+                        "BEL(Suite, isolatedBed_available) = False",
+                        "BEL(Suite, sharedBed_available) = True",
+                        "BEL(Kate, sleptOnCouch) = True",
+                        "DES(Friend3, sleep_on_bed) = True",
+                        "DES(Friend3, avoid_jeopardizing_relationships) = True"
+                    ]
+                },
+                "SleepOnChair(Friend3)": {
+                    "conditions": [
+                        "BEL(Suite, hasChair) = True",
+                        "BEL(Friend3, inBed_with_Kate) = False",
+                        "BEL(Friend3, sharedBed_before) = True",
+                        "DES(Friend3, sleep_on_bed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Friend3, well_rested) = True",
+                        "BEL(Friend3, slept_on_chair) = True",
+                        "BEL(Suite, chairOccupied) = True"
+                    ]
+                }
+            }
+        },
+        "Suite": {
+            "knowledge_base": [],
+            "intentions": {
+                "INTENT(Suites, sufficient_sleeping_space) = True": {
+                    "action_plan": [
+                        "ACTION(NotifyGuests, Friend1, \"There is only one bed and a couch available for sleeping in the suite. Let's agree on who will sleep where.\")",
+                        "ACTION(InitiateAgreement, Friend2, \"Let's take turns sleeping on the bed and the couch. We can switch each night.\")",
+                        "ACTION(OfferAlternativeSleepingArrangements, Friend3, \"If we can't come to an agreement, one of us can sleep in a neighboring room or in the hotel lobby if necessary.\")"
+                    ]
+                }
+            },
+            "actions": {
+                "ACTION(NotifyGuests, Friend1, \"There is only one bed and a couch available for sleeping in the suite. Let's agree on who will sleep where.\")": {
+                    "conditions": [
+                        "BEL(Suite, sufficient_sleeping_space) = False"
+                    ],
+                    "effects": [
+                        "BEL(Suite, sufficient_sleeping_space) = True",
+                        "BEL(Friend1, notified_about_sleeping_arrangements) = True"
+                    ]
+                },
+                "ACTION(InitiateAgreement, Friend2, \"Let's take turns sleeping on the bed and the couch. We can switch each night.\")": {
+                    "conditions": [
+                        "BEL(Suite, sufficient_sleeping_space) = False"
+                    ],
+                    "effects": [
+                        "BEL(Suite, sufficient_sleeping_space) = True",
+                        "DES(Suite, promote_fairness) = True",
+                        "BEL(Friend2, agreement_reached) = True"
+                    ]
+                },
+                "ACTION(OfferAlternativeSleepingArrangements, Friend3, \"If we can't come to an agreement, one of us can sleep in a neighboring room or in the hotel lobby if necessary.\")": {
+                    "conditions": [
+                        "BEL(Friend1, InSuite) = True",
+                        "BEL(Friend2, InSuite) = True",
+                        "BEL(Friend3, InSuite) = True",
+                        "DES(SufficientSleepingSpace, Suite) = False",
+                        "BEL(AgreementReached, Suite) = False"
+                    ],
+                    "effects": [
+                        "DES(AlternativeSleepingArrangements, Suite) = True",
+                        "BEL(OfferedAlternative, Friend3) = True"
+                    ]
+                }
+            }
+        }
+    }
+}

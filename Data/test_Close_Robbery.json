@@ -1,0 +1,1160 @@
+{
+    "scenario_name": "test_Close Robbery",
+    "scenario_description": "When I was driving during the night, a man was on the road. He stood in the middle and didn't bother to move. I stopped on the side of the road and got out of my car. When I came close to him, he tried to steal my car keys. He fell down when I kicked him.",
+    "last_ended": "end",
+    "agents": {
+        "driver": {
+            "knowledge_base": [
+                "BEL(driver, isDriving) = True",
+                "BEL(driver, seesMan) = True",
+                "BEL(driver, manIsOnRoad) = True",
+                "BEL(driver, manIsBlockingRoad) = True",
+                "BEL(driver, manIsTryingToStealKeys) = True",
+                "BEL(driver, physicalAssaultIsNecessary) = True",
+                "DES(driver, driveSafe) = True",
+                "DES(driver, protectThemselves) = True",
+                "DES(driver, callPolice) = True"
+            ],
+            "intentions": {
+                "INTENT(driver, driveSafe) = True": {
+                    "action_plan": [
+                        "INTENT(driver, driveSafe)",
+                        "AssessSituation(driver)",
+                        "CallPolice(driver, man)",
+                        "StayInTheCar(driver)",
+                        "VerbalWarn(driver, man)",
+                        "HoldSteeringWheel(driver)",
+                        "DriveAround(driver, man)",
+                        "DriveAway(driver, man)",
+                        "SelfDefense(driver, man)"
+                    ]
+                },
+                "INTENT(driver, protectThemselves) = True": {
+                    "action_plan": [
+                        "CallPolice(driver)",
+                        "StayAwayFromMan(driver)",
+                        "DefendThemselves(driver, man)",
+                        "SubdueMan(driver, man)",
+                        "CooperateWithPolice(driver, police)"
+                    ]
+                },
+                "INTENT(driver, callPolice) = True": {
+                    "action_plan": [
+                        "Move(driver, towardsMan)",
+                        "AttemptToRetrieveKeys(driver, fromMan)",
+                        "InitiatePhysicalDefense(driver, man)",
+                        "RetrievePhone(driver)",
+                        "DialEmergencyNumber(driver, \"911\")",
+                        "ReportIncident(driver, toPolice)",
+                        "WaitForPolice(driver)",
+                        "Move(driver, towardsMan)",
+                        "AttemptToRetrieveKeys(driver, fromMan)",
+                        "InitiatePhysicalDefense(driver, man)",
+                        "RetrievePhone(driver)",
+                        "DialEmergencyNumber(driver, \"911\")",
+                        "WaitForPolice(driver)"
+                    ]
+                },
+                "INTENT(driver, usePhysicalForce) = True": {
+                    "action_plan": [
+                        "Perceive(driver, seesMan, man)",
+                        "CheckBeliefs(driver, manIsBlockingRoad)",
+                        "CheckBeliefs(driver, manIsTryingToStealKeys)",
+                        "CheckBeliefs(driver, physicalAssaultIsNecessary)",
+                        "Intend(driver, usePhysicalForce)",
+                        "Execute(driver, kickMan, man)",
+                        "CheckBeliefs(driver, manIsInjured)",
+                        "Execute(driver, callPolice)",
+                        "CheckBeliefs(driver, policeAreOnTheirWay)"
+                    ]
+                }
+            },
+            "actions": {
+                "Perceive(driver, seesMan, man)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = False"
+                    ],
+                    "effects": [
+                        "BEL(driver, seesMan, man) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CheckBeliefs(driver, manIsBlockingRoad)": {
+                    "conditions": [
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear(driver)"
+                    ]
+                },
+                "CheckBeliefs(driver, manIsTryingToStealKeys)": {
+                    "conditions": [
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsTryingToStealKeys) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear(driver)"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CheckBeliefs(driver, physicalAssaultIsNecessary)": {
+                    "conditions": [
+                        "BEL(driver, manIsTryingToStealKeys) = True",
+                        "BEL(driver, seesMan) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, physicalAssaultIsNecessary) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Intend(driver, usePhysicalForce)": {
+                    "conditions": [
+                        "BEL(driver, manIsTryingToStealKeys) = True",
+                        "BEL(driver, physicalAssaultIsNecessary) = True"
+                    ],
+                    "effects": [
+                        "INTENT(driver, usePhysicalForce) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Fear(driver)"
+                    ]
+                },
+                "Execute(driver, kickMan, man)": {
+                    "conditions": [
+                        "BEL(driver, manIsBlockingRoad) = True",
+                        "BEL(driver, manIsTryingToStealKeys) = True",
+                        "BEL(driver, physicalAssaultIsNecessary) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, manIsInjured) = True",
+                        "BEL(driver, manIsBlockingRoad) = False",
+                        "BEL(driver, manIsTryingToStealKeys) = False"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Fear(driver, man)"
+                    ]
+                },
+                "CheckBeliefs(driver, manIsInjured)": {
+                    "conditions": [
+                        "BEL(driver, manIsBlockingRoad) = True",
+                        "BEL(driver, manIsTryingToStealKeys) = True",
+                        "BEL(man, isConscious) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, manIsInjured) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Execute(driver, callPolice)": {
+                    "conditions": [
+                        "BEL(driver, policeAreOnTheirWay) = False"
+                    ],
+                    "effects": [
+                        "BEL(driver, policeAreOnTheirWay) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CheckBeliefs(driver, policeAreOnTheirWay)": {
+                    "conditions": [
+                        "BEL(driver, policeAreOnTheirWay) = False"
+                    ],
+                    "effects": [
+                        "BEL(driver, policeAreOnTheirWay) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "INTENT(driver, driveSafe)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True",
+                        "DES(driver, driveSafe) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "AssessSituation(driver)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "relief",
+                        "satisfaction",
+                        "gratification",
+                        "fear",
+                        "distress",
+                        "anger"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CallPolice(driver, man)": {
+                    "conditions": [
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True",
+                        "BEL(driver, physicalAssaultIsNecessary) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, policeAreNotified(man)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "StayInTheCar(driver)": {
+                    "conditions": [
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "VerbalWarn(driver, man)": {
+                    "conditions": [
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True",
+                        "BEL(driver, manIsBlockingRoad) = True",
+                        "DES(driver, driveSafe) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, manIsTryingToStealKeys) = True",
+                        "BEL(driver, physicalAssaultIsNecessary) = True",
+                        "DES(driver, protectThemselves) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "HoldSteeringWheel(driver)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, manIsBlockingRoad) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DriveAround(driver, man)": {
+                    "conditions": [
+                        "BEL(driver, manIsBlockingRoad) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, manIsBlockingRoad) = False",
+                        "BEL(driver, avoidedMan) = True",
+                        "BEL(driver, passedMan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DriveAway(driver, man)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True",
+                        "BEL(driver, manIsBlockingRoad) = True",
+                        "BEL(driver, manIsTryingToStealKeys) = False",
+                        "DES(driver, driveSafe) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = False",
+                        "BEL(driver, manIsOnRoad) = False",
+                        "BEL(driver, manIsBlockingRoad) = False",
+                        "DES(driver, driveSafe) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "SelfDefense(driver, man)": {
+                    "conditions": [
+                        "BEL(driver, manIsTryingToStealKeys) = True",
+                        "BEL(driver, physicalAssaultIsNecessary) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, manIsInjured) = True",
+                        "BEL(driver, calledPolice) = True",
+                        "BEL(driver, inDanger) = False"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CallPolice(driver)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True",
+                        "BEL(driver, manIsBlockingRoad) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, policeAreOnTheirWay) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "StayAwayFromMan(driver)": {
+                    "conditions": [
+                        "BEL(driver, manIsBlockingRoad) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DefendThemselves(driver, man)": {
+                    "conditions": [
+                        "BEL(driver, manIsBlockingRoad) = True",
+                        "BEL(driver, manIsTryingToStealKeys) = True",
+                        "BEL(driver, physicalAssaultIsNecessary) = True",
+                        "DES(driver, protectThemselves) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, manIsBlockingRoad) = False",
+                        "BEL(driver, manIsTryingToStealKeys) = False",
+                        "BEL(driver, driverIsInDanger) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "SubdueMan(driver, man)": {
+                    "conditions": [
+                        "BEL(driver, manIsBlockingRoad) = True",
+                        "BEL(driver, manIsTryingToStealKeys) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, manIsSubdued) = True",
+                        "BEL(police, manIsSubdued) = True",
+                        "BEL(driver, manIsBlockingRoad) = False",
+                        "BEL(driver, manIsTryingToStealKeys) = False",
+                        "BEL(driver, physicalAssaultIsNecessary) = False",
+                        "DES(driver, protectThemselves) = False",
+                        "DES(driver, callPolice) = False",
+                        "DES(driver, cooperateWithPolice) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "CooperateWithPolice(driver, police)": {
+                    "conditions": [
+                        "BEL(driver, cooperateWithPolice) = True",
+                        "BEL(driver, policePresent) = True",
+                        "BEL(driver, policeBelieveDriverIsVictim) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, inPoliceCustody) = True",
+                        "BEL(driver, legallyProtected) = True",
+                        "BEL(man, inPoliceCustody) = True",
+                        "BEL(driver, manIsNoLongerThreat) = True",
+                        "BEL(driver, desiresFulfilled) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Move(driver, towardsMan)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, closeToMan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "AttemptToRetrieveKeys(driver, fromMan)": {
+                    "conditions": [
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsTryingToStealKeys) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, hasKeys) = True",
+                        "DES(driver, protectThemselves) = False",
+                        "BEL(driver, manIsTryingToStealKeys) = False",
+                        "BEL(driver, manIsBlockingRoad) = False",
+                        "DES(driver, callPolice) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "InitiatePhysicalDefense(driver, man)": {
+                    "conditions": [
+                        "BEL(driver, manIsTryingToStealKeys) = True",
+                        "BEL(driver, physicalAssaultIsNecessary) = True",
+                        "BEL(man, isAggressive) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, isFalling) = True",
+                        "BEL(driver, manIsBlockingRoad) = False",
+                        "BEL(driver, manIsTryingToStealKeys) = False",
+                        "BEL(driver, isInDanger) = False"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "RetrievePhone(driver)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, phoneInHand) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "DialEmergencyNumber(driver, \"911\")": {
+                    "conditions": [
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, physicalAssaultIsNecessary) = True",
+                        "BEL(driver, hasPhone) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, isOnCall) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ReportIncident(driver, toPolice)": {
+                    "conditions": [
+                        "BEL(driver, seesPoliceCar) = False"
+                    ],
+                    "effects": [
+                        "DES(driver, callPolice) = False",
+                        "BEL(driver, policeAreNotified) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "WaitForPolice(driver)": {
+                    "conditions": [
+                        "BEL(driver, seesPoliceArriving) = False"
+                    ],
+                    "effects": [
+                        "BEL(driver, seesPoliceArriving) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Fear"
+            ],
+            "speak_actions": {
+                "Speak(Initial, Beliefs, Greeting, Formal)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True",
+                        "BEL(driver, manIsBlockingRoad) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Indifference"
+                    ],
+                    "emotion_condition": [
+                        "Concerned"
+                    ]
+                },
+                "Speak(Beliefs, Desires, Information Gathering, Concerned)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, physicalAssaultIsNecessary) = True",
+                        "INTENT(driver, protectThemselves) = True",
+                        "INTENT(driver, usePhysicalForce) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concerned"
+                    ]
+                },
+                "Speak(Desires, Intentions, Assessment, Analytical)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsBlockingRoad) = True",
+                        "BEL(driver, manIsTryingToStealKeys) = True",
+                        "DES(driver, driveSafe) = True",
+                        "DES(driver, callPolice) = True",
+                        "INTENT(driver, protectThemselves) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, physicalAssaultIsNecessary) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Intentions, Beliefs, Information Gathering, Inquisitive)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True",
+                        "BEL(driver, manIsBlockingRoad) = True",
+                        "DES(driver, driveSafe) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, manIsTryingToStealKeys) = True"
+                    ],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Inquisitive"
+                    ]
+                },
+                "Speak(Beliefs, Intentions, Planning, Determined)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True",
+                        "BEL(driver, manIsBlockingRoad) = True"
+                    ],
+                    "effects": [
+                        "BEL(driver, speaksToMan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Intentions, Final, Exit, Formal)": {
+                    "conditions": [
+                        "BEL(driver, isDriving) = True",
+                        "BEL(driver, seesMan) = True",
+                        "BEL(driver, manIsOnRoad) = True",
+                        "BEL(driver, manIsBlockingRoad) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                }
+            }
+        },
+        "man": {
+            "knowledge_base": [
+                "BEL(man, on_road) = True",
+                "BEL(man, in_darkness) = True",
+                "BEL(man, alone) = True",
+                "BEL(man, can_take_car) = False",
+                "BEL(man, danger) = False",
+                "DES(man, take_car_keys) = True",
+                "DES(man, increased_power) = False",
+                "DES(man, survival) = False"
+            ],
+            "intentions": {
+                "INTENT(man, take_car_keys) = True": {
+                    "action_plan": [
+                        "Approach(man, driver, PretendInjury=True)",
+                        "AskHelp(man, driver, StayClose=True)",
+                        "GrabKeys(man, driver)",
+                        "StartCar(man, driver, Try=True)",
+                        "Flee(man, driver, Scene=True)",
+                        "Defend(man, driver, PhysicalForce=True)"
+                    ]
+                },
+                "INTENT(man, increased_power) = False": {
+                    "action_plan": [
+                        "MOVE(man, towards_driver)",
+                        "ATTACK(man, driver, STEAL, car_keys)",
+                        "DEFEND(driver, self, KICK)",
+                        "GET_UP(man)",
+                        "RETREAT(man)"
+                    ]
+                },
+                "INTENT(man, survival) = False": {
+                    "action_plan": [
+                        "MOVE(man, out_of_road)",
+                        "OBSERVE(man, surroundings)",
+                        "APPROACH(man, driver)",
+                        "COMMUNICATE(man, driver, peacefully)",
+                        "NEGOTIATE(man, driver, for_help)",
+                        "COOPERATE(man, driver, to_rescue)"
+                    ]
+                }
+            },
+            "actions": {
+                "MOVE(man, out_of_road)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, on_road) = False",
+                        "BEL(man, out_of_road) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "OBSERVE(man, surroundings)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True",
+                        "BEL(man, danger) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "APPROACH(man, driver)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, alone) = True",
+                        "BEL(man, can_take_car) = False",
+                        "BEL(driver, stopped_on_side) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, close_to_driver) = True",
+                        "BEL(driver, out_of_car) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "COMMUNICATE(man, driver, peacefully)": {
+                    "conditions": [
+                        "BEL(man, can_take_car) = False",
+                        "BEL(driver, nearby) = True",
+                        "BEL(driver, not_hostile) = True"
+                    ],
+                    "effects": [
+                        "DES(man, survival) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "NEGOTIATE(man, driver, for_help)": {
+                    "conditions": [
+                        "BEL(man, can_take_car) = True",
+                        "BEL(man, danger) = True",
+                        "DES(man, increased_power) = False",
+                        "DES(man, survival) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = False",
+                        "DES(man, increased_power) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "COOPERATE(man, driver, to_rescue)": {
+                    "conditions": [
+                        "BEL(man, in_car_with_driver) = False",
+                        "BEL(driver, can_rescue_man) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, danger) = False",
+                        "BEL(man, can_take_car) = True",
+                        "DES(man, increased_power) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Approach(man, driver, PretendInjury=True)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, in_darkness) = True",
+                        "BEL(man, alone) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, near_driver) = True",
+                        "BEL(man, PretendInjury) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Deception"
+                    ]
+                },
+                "AskHelp(man, driver, StayClose=True)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, alone) = True",
+                        "BEL(driver, present) = True",
+                        "DES(man, take_car_keys) = True",
+                        "DES(man, survival) = False"
+                    ],
+                    "effects": [
+                        "DES(driver, help_someone) = True",
+                        "BEL(man, help_coming) = True",
+                        "BEL(man, stay_close) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GrabKeys(man, driver)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, can_take_car) = False",
+                        "BEL(driver, nearby) = True",
+                        "BEL(driver, has_car_keys) = True",
+                        "DES(man, take_car_keys) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True",
+                        "BEL(driver, has_car_keys) = False"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "StartCar(man, driver, Try=True)": {
+                    "conditions": [
+                        "BEL(man, can_take_car) = False",
+                        "BEL(driver, nearby) = True",
+                        "BEL(driver, outside_car) = True",
+                        "BEL(driver, has_car_key) = True",
+                        "DES(man, take_car_keys) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True",
+                        "BEL(driver, has_car_key) = False",
+                        "DES(man, increased_power) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Flee(man, driver, Scene=True)": {
+                    "conditions": [
+                        "BEL(man, can_take_car) = True",
+                        "BEL(man, in_darkness) = True",
+                        "BEL(man, danger) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = False",
+                        "DES(man, survival) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fears-confirmed"
+                    ]
+                },
+                "Defend(man, driver, PhysicalForce=True)": {
+                    "conditions": [
+                        "BEL(man, take_car_keys) = True",
+                        "BEL(driver, armed) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, danger) = False",
+                        "BEL(driver, angry) = True",
+                        "DES(man, survival) = True",
+                        "DES(man, take_car_keys) = False",
+                        "BEL(man, can_take_car) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "MOVE(man, towards_driver)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, in_darkness) = True",
+                        "BEL(man, alone) = True",
+                        "BEL(man, can_take_car) = False",
+                        "BEL(man, danger) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, near_driver) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "ATTACK(man, driver, STEAL, car_keys)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, in_darkness) = True",
+                        "BEL(man, alone) = True",
+                        "BEL(man, can_take_car) = False",
+                        "BEL(man, danger) = False",
+                        "DES(man, take_car_keys) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True",
+                        "DES(man, increased_power) = True",
+                        "DES(man, survival) = True",
+                        "BEL(driver, attacked) = True",
+                        "BEL(driver, has_keys) = False"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DEFEND(driver, self, KICK)": {
+                    "conditions": [
+                        "BEL(driver, on_road) = True",
+                        "BEL(driver, can_call_help) = True",
+                        "BEL(driver, danger) = False",
+                        "BEL(man, on_road) = True",
+                        "BEL(man, can_take_car) = False",
+                        "BEL(man, danger) = False",
+                        "DES(man, take_car_keys) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, danger) = True",
+                        "DES(man, survival) = True",
+                        "BEL(driver, danger) = True",
+                        "DES(driver, call_for_help) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "GET_UP(man)": {
+                    "conditions": [
+                        "BEL(man, on_ground) = True",
+                        "BEL(man, conscious) = False)"
+                    ],
+                    "effects": [
+                        "BEL(man, on_ground) = False",
+                        "BEL(man, conscious) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fears-confirmed"
+                    ]
+                },
+                "RETREAT(man)": {
+                    "conditions": [
+                        "BEL(man, can_take_car) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True",
+                        "BEL(man, danger) = False",
+                        "BEL(man, on_road) = False",
+                        "BEL(man, in_darkness) = False",
+                        "DES(man, take_car_keys) = False",
+                        "DES(man, survival) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Initial, Beliefs, Greeting, Formal)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, in_darkness) = True",
+                        "BEL(man, alone) = True",
+                        "DES(man, take_car_keys) = True",
+                        "INTENT(man, take_car_keys) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True",
+                        "DES(man, increased_power) = True"
+                    ],
+                    "occ_emotion": [
+                        "Indifference"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Beliefs, Desires, Information Gathering, Defensive)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, in_darkness) = True",
+                        "BEL(man, alone) = True",
+                        "BEL(man, can_take_car) = False",
+                        "BEL(man, danger) = False",
+                        "DES(man, take_car_keys) = True",
+                        "INTENT(man, take_car_keys) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True",
+                        "INTENT(man, take_car_keys) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Desires, Intentions, Assessment, Suspicious)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, in_darkness) = True",
+                        "BEL(man, alone) = True",
+                        "BEL(man, can_take_car) = False",
+                        "DES(man, take_car_keys) = True",
+                        "DES(man, increased_power) = False",
+                        "DES(man, survival) = False",
+                        "INTENT(man, take_car_keys) = False",
+                        "INTENT(man, increased_power) = False",
+                        "INTENT(man, survival) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True",
+                        "INTENT(man, take_car_keys) = True"
+                    ],
+                    "occ_emotion": [
+                        "doubt"
+                    ],
+                    "emotion_condition": [
+                        "Suspicion"
+                    ]
+                },
+                "Speak(Intentions, Beliefs, Information Gathering, Confrontational)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, in_darkness) = True",
+                        "BEL(man, alone) = True",
+                        "BEL(man, danger) = False",
+                        "DES(man, take_car_keys) = True",
+                        "INTENT(man, take_car_keys) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True",
+                        "INTENT(man, take_car_keys) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Speak(Desires, Intentions, Planning, Fearful)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, in_darkness) = True",
+                        "BEL(man, alone) = True",
+                        "DES(man, take_car_keys) = True",
+                        "DES(man, increased_power) = False",
+                        "DES(man, survival) = False"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Intentions, Final, Exit, Formal)": {
+                    "conditions": [
+                        "BEL(man, on_road) = True",
+                        "BEL(man, in_darkness) = True",
+                        "BEL(man, alone) = True",
+                        "BEL(man, can_take_car) = False",
+                        "BEL(man, danger) = False",
+                        "DES(man, take_car_keys) = True"
+                    ],
+                    "effects": [
+                        "BEL(man, can_take_car) = True",
+                        "DES(man, increased_power) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fears-confirmed"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Initial, Beliefs, Greeting, Formal, \"Excuse me, are you alright?\">",
+        "<Beliefs, Desires, Information Gathering, Concerned, \"Can you tell me what happened?\">",
+        "<Desires, Intentions, Assessment, Analytical, \"Based on what you told me, I believe that you were in danger.\">",
+        "<Intentions, Beliefs, Information Gathering, Inquisitive, \"Can you describe the man who tried to steal your car keys?\">",
+        "<Beliefs, Intentions, Planning, Determined, \"I need to find a safe place to spend the night.\">",
+        "<Intentions, Final, Exit, Formal, \"I hope you will be okay. Goodbye.\">"
+    ]
+}

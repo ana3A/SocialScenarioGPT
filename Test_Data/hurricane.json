@@ -1,0 +1,1943 @@
+{
+    "scenario_name": "hurricane",
+    "scenario_description": " \tMorgan and her family lived in Florida. They heard a hurricane was coming. They decided to evacuate to a relative's house. They arrived and learned from the news that it was a terrible storm. They felt lucky they had evacuated when they did.",
+    "agents": {
+        "Emily": {
+            "knowledge_base": [
+                "BEL(Emily, Evacuation_Needed) = True",
+                "BEL(Emily, Hurricane_Approaching) = True",
+                "BEL(Emily, Family_Members_Require_Assistance) = False",
+                "BEL(Emily, Need_to_Check_on_Neighbors) = False",
+                "BEL(Emily, Property_Damage_Likely) = True",
+                "DES(Emily, Ensure_Family_Safety) = True",
+                "DES(Emily, Assist_in_Neighbor_Evacuation) = False",
+                "DES(Emily, Check_Neighbor's_Property) = False",
+                "DES(Emily, Secure_Home_Before_Evacuating) = True",
+                "DES(Emily, Help_Rebuild_Neighbor's_Property) = False"
+            ],
+            "initial_mood": [
+                "Mood(SELF)=x"
+            ],
+            "actions": {
+                "Convince(Morgan, Emily, SafeLocation)": {
+                    "conditions": [
+                        "BEL(Morgan, In_Panic) = True",
+                        "BEL(Emily, Evacuation_Needed) = True",
+                        "BEL(Emily, Hurricane_Approaching) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, In_Panic) = False",
+                        "BEL(Morgan, Evacuate_to_SafeLocation) = True",
+                        "DES(Emily, Ensure_Family_Safety) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Reassure(Grace, Emily)": {
+                    "conditions": [
+                        "BEL(Emily, Hurricane_Approaching) = True",
+                        "BEL(Emily, Family_Members_Require_Assistance) = False",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Grace, Reassured_by_Emily) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Prepare(Self, House)": {
+                    "conditions": [
+                        "BEL(Emily, Evacuation_Needed) = True",
+                        "BEL(Emily, Hurricane_Approaching) = True",
+                        "BEL(Emily, Property_Damage_Likely) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Emily, House_Prepared_for_Hurricane) = True",
+                        "DES(Emily, Secure_Home_Before_Evacuating) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Evacuate(Self, Neighbor_1)": {
+                    "conditions": [
+                        "BEL(Emily, Evacuation_Needed) = True",
+                        "BEL(Emily, Hurricane_Approaching) = True",
+                        "BEL(Emily, Family_Members_Require_Assistance) = False",
+                        "BEL(Emily, Need_to_Check_on_Neighbors) = False",
+                        "BEL(Emily, Property_Damage_Likely) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Emily, Evacuation_Needed) = False",
+                        "DES(Emily, Ensure_Family_Safety) = True",
+                        "BEL(Neighbor_1, At_Home) = False",
+                        "BEL(Neighbor_1, Safe_from_Hurricane) = True",
+                        "BEL(Neighbor_1, Evacuated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Care(Self, InjuredNeighbor_2)": {
+                    "conditions": [
+                        "BEL(Emily, Hurricane_Approaching) = True",
+                        "BEL(Emily, Family_Members_Require_Assistance) = True",
+                        "BEL(InjuredNeighbor_2, Injury) = True",
+                        "BEL(Emily, Property_Damage_Likely) = True",
+                        "BEL(Emily, Evacuation_Needed) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Emily, Ensure_Family_Safety) = True",
+                        "DES(Emily, Help_InjuredNeighbor_2) = True",
+                        "BEL(Emily, Family_Members_Require_Assistance) = False",
+                        "BEL(InjuredNeighbor_2, Injury) = False"
+                    ],
+                    "occ_emotion": [
+                        "Compassion"
+                    ]
+                },
+                "Rebuild(Self, House)": {
+                    "conditions": [
+                        "BEL(Emily, Help_Rebuild_Neighbor's_Property) = True",
+                        "BEL(Emily, Property_Damage_Likely) = True",
+                        "BEL(Neighbor_1, House_Damaged) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, House_Damaged) = False",
+                        "BEL(Emily, Help_Rebuild_Neighbor's_Property) = False",
+                        "BEL(Emily, Property_Damage_Likely) = False",
+                        "DES(Emily, Help_Rebuild_Neighbor's_Property) = False",
+                        "DES(Emily, Check_Neighbor's_Property) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Help(Self, Rescue_Worker_1, CleanUp)": {
+                    "conditions": [
+                        "BEL(Emily, Hurricane_Approaching) = True",
+                        "BEL(Emily, Evacuation_Needed) = True",
+                        "BEL(Emily, Family_Members_Require_Assistance) = False",
+                        "BEL(Rescue_Worker_1, Available_for_Help) = True",
+                        "BEL(Rescue_Worker_1, Has_Requested_Help) = False",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_1, Has_Requested_Help) = True",
+                        "BEL(Emily, Family_Members_Require_Assistance) = True",
+                        "DES(Emily, Assist_in_Neighbor_Evacuation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Report(Self, FallenTree)": {
+                    "conditions": [
+                        "BEL(Emily, Evacuation_Needed) = True",
+                        "BEL(Emily, Hurricane_Approaching) = True",
+                        "BEL(Emily, Family_Members_Require_Assistance) = False",
+                        "BEL(Emily, Property_Damage_Likely) = True",
+                        "BEL(Emily, FallenTree_Reported) = False",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Emily, FallenTree_Reported) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Search(Self, MissingPet)": {
+                    "conditions": [
+                        "BEL(Emily, Evacuation_Needed) = False",
+                        "BEL(Emily, Hurricane_Approaching) = True",
+                        "BEL(Emily, Property_Damage_Likely) = True",
+                        "BEL(Emily, Family_Members_Require_Assistance) = False",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Emily, MissingPet_Found) = True",
+                        "BEL(Neighbor_1, MissingPet_Found) = True",
+                        "BEL(Neighbor_2, MissingPet_Found) = True",
+                        "BEL(Neighbor_3, MissingPet_Found) = True",
+                        "BEL(Emily, DES(Search_MissingPet) = False)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Donate(Self, FoodSupplies)": {
+                    "conditions": [
+                        "BEL(Emily, Evacuation_Needed) = False",
+                        "BEL(Emily, Property_Damage_Likely) = False",
+                        "DES(Emily, Assist_in_Neighbor_Evacuation) = False",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Emily, FoodSupplies_Donated) = True",
+                        "BEL(Emily, Supplies_Donated_to_Neighbors) = True",
+                        "DES(Emily, Help_Neighbors_with_Supplies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(EmilyIntro, MorganPanic, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Emily, Evacuation_Needed) = True",
+                        "EmilyIntro, MorganPanic, Introduction, Neutral, \"Why are we packing all our stuff?\"",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                }
+            }
+        },
+        "Morgan": {
+            "knowledge_base": [
+                "BEL(Morgan, believes_hurricane_approaching) = True",
+                "BEL(Morgan, believes_home_is_not_safe) = True",
+                "BEL(Morgan, believes_evacuation_is_necessary) = True",
+                "BEL(Morgan, believes_need_to_protect_family) = True",
+                "BEL(Morgan, believes_power_outage_is_likely) = True",
+                "DES(Morgan, desires_to_evacuate) = True",
+                "DES(Morgan, desires_family_safety) = True",
+                "DES(Morgan, desires_information_about_storm) = True",
+                "DES(Morgan, desires_adequate_shelter) = True",
+                "DES(Morgan, desires_to_stay_in_contact_with_extended_family) = True"
+            ],
+            "initial_mood": [
+                "Mood(SELF)= -8"
+            ],
+            "actions": {
+                "Panic(Morgan)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "BEL(Morgan, believes_evacuation_is_necessary) = True",
+                        "DES(Morgan, desires_to_evacuate) = True",
+                        "DES(Morgan, desires_information_about_storm) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ]
+                },
+                "CheckWeather(Morgan)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_information_about_storm) = False",
+                        "Mood(SELF) < -5"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, believes_information_about_storm) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ]
+                },
+                "PackBags(Morgan, null)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "BEL(Morgan, desires_to_evacuate) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, has_packed_bags) = True",
+                        "BEL(Morgan, desires_to_evacuate) = False",
+                        "BEL(Morgan, desires_adequate_shelter) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "CallFamily(Morgan, null, \"Grace, Emily\")": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_need_to_protect_family) = True",
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "DES(Morgan, desires_to_stay_in_contact_with_extended_family) = True",
+                        "Mood(SELF) > 1"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, believes_contacted_family) = True",
+                        "BEL(Morgan, believes_information_shared_with_family) = True",
+                        "DES(Morgan, desires_to_stay_in_contact_with_extended_family) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "SearchForImportantDocuments(Morgan)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, desires_information_about_storm) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, possesses_important_documents) = True",
+                        "BEL(Morgan, desires_to_find_missing_documents) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "AskNeighborsForHelp(Morgan, Neighbor_1, \"Can you help me carry these bags to the car?\")": {
+                    "conditions": [
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "BEL(Neighbor_1, believes_in_helping_others) = True",
+                        "Mood(SELF) >= -3"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, believes_neighborhood_is_willing_to_help) = True",
+                        "DES(Morgan, desires_help_with_evacuation) = True",
+                        "DES(Morgan, desires_to_show_gratitude) = True",
+                        "DES(Neighbor_1, desires_to_help_Morgan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "GetInCar(Morgan, null)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "BEL(Morgan, desires_adequate_shelter) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, believes_had_to_evacuate) = True",
+                        "BEL(Morgan, desires_adequate_shelter) = False",
+                        "BEL(Morgan, desires_family_safety) = True",
+                        "BEL(Morgan, desires_to_stay_in_contact_with_extended_family) = True",
+                        "BEL(Morgan, believes_in_car_to_evacuation_location) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "FollowEvacuationRoute(Morgan, null)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "DES(Morgan, desires_to_evacuate) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "BEL(Morgan, believes_adequate_shelter_is_possible) = True",
+                        "BEL(Morgan, believes_following_evacuation_route_will_lead_to_safety) = True",
+                        "DES(Morgan, desires_family_safety) = True",
+                        "DES(Morgan, desires_to_arrive_safely_at_evacuation_destination) = True",
+                        "DES(Morgan, desires_to_stay_in_contact_with_extended_family) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "ExpressGratitude(Morgan, Rescue_Worker_1, null)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_need_to_protect_family) = True",
+                        "BEL(Morgan, believes_evacuation_is_necessary) = True",
+                        "BEL(Rescue_Worker_1, desires_to_help_people) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, desires_to_express_gratitude) = True",
+                        "BEL(Morgan, desires_to_help_rescue_workers) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "StayCalm(Morgan)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "BEL(Morgan, believes_evacuation_is_necessary) = True",
+                        "BEL(Morgan, believes_family_is_accounted_for) = True",
+                        "Mood(SELF) > 5"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, believes_safe_location_found) = True",
+                        "DES(Morgan, desires_to_stay_calm) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Start, MorganIntro, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(MorganIntro, EmilyExplanation, Confusion, Urgent)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "BEL(Morgan, believes_evacuation_is_necessary) = True",
+                        "BEL(Morgan, believes_need_to_protect_family) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ]
+                },
+                "Speak(EmilyExplanation, MorganPanic, Confusion, Urgent)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_home_is_not_safe) = False",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, believes_evacuation_is_necessary) = True",
+                        "DES(Morgan, desires_to_evacuate) = True",
+                        "DES(Morgan, desires_family_safety) = True",
+                        "DES(Morgan, desires_information_about_storm) = True",
+                        "DES(Morgan, desires_adequate_shelter) = True",
+                        "DES(Morgan, desires_to_stay_in_contact_with_extended_family) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ]
+                },
+                "Speak(MorganPanic, EmilyHelp, Panic, Emotional)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "BEL(Morgan, believes_evacuation_is_necessary) = True",
+                        "BEL(Morgan, desires_to_evacuate) = True",
+                        "BEL(Morgan, desires_family_safety) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(MorganPanic, has_spoken_to_Emily) = True",
+                        "BEL(Morgan, desires_family_safety) = False",
+                        "BEL(Morgan, desires_information_about_storm) = True",
+                        "BEL(Morgan, desires_adequate_shelter) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ]
+                },
+                "Speak(EmilyHelp, MorganReassurance, Support, Comforting)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "DES(Morgan, desires_family_safety) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_home_is_not_safe) = True",
+                        "BEL(Morgan, believes_evacuation_is_necessary) = True",
+                        "DES(Morgan, desires_family_safety) = True",
+                        "DES(Morgan, desires_information_about_storm) = True",
+                        "DES(Morgan, desires_adequate_shelter) = True",
+                        "DES(Morgan, desires_to_stay_in_contact_with_extended_family) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief",
+                        "Emily"
+                    ]
+                },
+                "Speak(MorganReassurance, End, Gratitude, Appreciative)": {
+                    "conditions": [
+                        "BEL(Morgan, believes_hurricane_approaching) = True",
+                        "BEL(Morgan, believes_evacuation_is_necessary) = True",
+                        "BEL(Morgan, believes_need_to_protect_family) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, desires_family_safety) = True",
+                        "BEL(Morgan, desires_adequate_shelter) = True",
+                        "DES(Morgan, desires_information_about_storm) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        },
+        "Grace": {
+            "knowledge_base": [],
+            "initial_mood": [
+                "Mood(SELF)=-8"
+            ],
+            "actions": {
+                "Talk(Grace, Emily, Reassurance)": {
+                    "conditions": [
+                        "BEL(Grace, Scared) = True",
+                        "BEL(Emily, Safe) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Grace, Reassured) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Hide(Grace, Under_The_Table)": {
+                    "conditions": [
+                        "BEL(Grace, Panic) = True",
+                        "BEL(Emily, Comforting) = True",
+                        "Mood(SELF) < -8"
+                    ],
+                    "effects": [
+                        "BEL(Grace, Calm) = True",
+                        "BEL(Grace, Under_Table) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ]
+                },
+                "Cry(Grace, Null)": {
+                    "conditions": [
+                        "BEL(Grace, scared) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Grace, cried) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ]
+                },
+                "Hug(Grace, Emily)": {
+                    "conditions": [
+                        "BEL(Grace, IsFeelingScared) = True",
+                        "BEL(Emily, IsCloseToGrace) = True",
+                        "Emily",
+                        "Mood(SELF) >= 5"
+                    ],
+                    "effects": [
+                        "BEL(Grace, IsFeelingScared) = False",
+                        "DES(Emily, FeelCloseToGrace) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Listen(Grace, Neighbor_1, Worries)": {
+                    "conditions": [
+                        "BEL(Grace, Is_Listening) = False",
+                        "BEL(Neighbor_1, Has_Worries) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Grace, Is_Listening) = True",
+                        "DES(Grace, Comfort_Neighbor_1) = True",
+                        "DES(Neighbor_1, Feels_Comforted) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ]
+                },
+                "Watch_TV(Grace, Null)": {
+                    "conditions": [
+                        "BEL(Grace, Watched_TV) = False",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "BEL(Grace, Watched_TV) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief",
+                        "Satisfaction",
+                        "Relief",
+                        "Satisfaction"
+                    ]
+                },
+                "Play_Board_Game(Grace, Emily)": {
+                    "conditions": [
+                        "BEL(Grace, knows_how_to_play_board_game) = True",
+                        "BEL(Emily, likes_board_games) = True",
+                        "BEL(Grace, wants_to_bond_with_Emily) = True",
+                        "Emily",
+                        "Mood(SELF) > 2"
+                    ],
+                    "effects": [
+                        "DES(Grace, feels_satisfied) = True",
+                        "DES(Emily, feels_closer_to_Grace) = True",
+                        "BEL(Grace, wants_to_play_again) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Sleep(Grace, Null)": {
+                    "conditions": [
+                        "BEL(Grace, Awake) = True",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [
+                        "BEL(Grace, Asleep) = True",
+                        "DES(Grace, Rested) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Start, GraceIntro, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Emily, inHome) = True",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [],
+                    "occ_emotion": []
+                },
+                "Speak(GraceIntro, EmilyTask, SmallTalk, Casual)": {
+                    "conditions": [
+                        "BEL(Grace, knowsEmily) = True",
+                        "Mood(SELF) >= -5"
+                    ],
+                    "effects": [
+                        "DES(Grace, wantsToDoSomethingWithEmily) = True",
+                        "BEL(Grace, talkedWithEmilyBefore) = True"
+                    ],
+                    "occ_emotion": [
+                        "Talk(GraceIntro, EmilyTask, SmallTalk)",
+                        "Neutral"
+                    ]
+                },
+                "Speak(EmilyTask, GraceTask, SmallTalk, Casual)": {
+                    "conditions": [
+                        "DES(GraceTask) = \"None\"",
+                        "BEL(Weather, HurricaneApproaching) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(EmilyTask) = SmallTalk",
+                        "DES(GraceTask) = \"Completed\"",
+                        "--(Grace, Greeting)"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Speak(GraceTask, EmilyFear, Concern, Worried)": {
+                    "conditions": [
+                        "BEL(EmilyEvacuated) = False",
+                        "DES(GraceTask) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(EmilyFear) = True",
+                        "BEL(EmilyConcern) = True",
+                        "BEL(GraceSpokeWithEmily) = True",
+                        "BEL(EmilyAcknowledgeGrace) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ]
+                },
+                "Speak(EmilyFear, GraceComfort, Support, Comforting)": {
+                    "conditions": [
+                        "BEL(EmilyFear) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(GraceComfort) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Speak(GraceComfort, End, Gratitude, Appreciative)": {
+                    "conditions": [
+                        "BEL(GraceFear) = False",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(GraceComfort) = True",
+                        "BEL(GraceThankful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        },
+        "Rescue_Worker_1": {
+            "knowledge_base": [
+                "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+                "BEL(Rescue_Worker_1, trained_for_rescue_operations) = True",
+                "BEL(Rescue_Worker_1, familiar_with_the_area) = True",
+                "BEL(Rescue_Worker_1, has_access_to_medical_supplies) = True",
+                "BEL(Rescue_Worker_1, has_radio_communication) = True",
+                "DES(Rescue_Worker_1, rescue_people_in_need) = True",
+                "DES(Rescue_Worker_1, provide_medical_assistance) = True",
+                "DES(Rescue_Worker_1, coordinate_with_other_rescue_workers) = True",
+                "DES(Rescue_Worker_1, maintain_safe_distance_from_dangerous_areas) = True"
+            ],
+            "initial_mood": [],
+            "actions": {
+                "MoveTo(Rescue_Worker_1, Location_Shelter)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+                        "BEL(Rescue_Worker_1, familiar_with_the_area) = True",
+                        "BEL(Rescue_Worker_1, has_radio_communication) = True",
+                        "BEL(Rescue_Worker_1, maintain_safe_distance_from_dangerous_areas) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_1, is_at_shelter) = True",
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Evacuate(Neighbor_1)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+                        "BEL(Rescue_Worker_1, has_access_to_medical_supplies) = True",
+                        "BEL(Neighbor_1, is_in_need_of_rescue) = True",
+                        "BEL(Neighbor_1, is_in_safe_distance) = False",
+                        "Mood(SELF) > 5"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, has_been_rescued) = True",
+                        "BEL(Rescue_Worker_1, is_busy_rescuing) = True",
+                        "DES(Rescue_Worker_1, rescue_people_in_need) = False",
+                        "DES(Rescue_Worker_1, provide_medical_assistance) = True",
+                        "DES(Rescue_Worker_1, coordinate_with_other_rescue_workers) = True",
+                        "DES(Rescue_Worker_1, maintain_safe_distance_from_dangerous_areas) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Evacuate(Neighbor_2)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+                        "BEL(Rescue_Worker_1, has_radio_communication) = True",
+                        "BEL(Neighbor_2, in_need_of_rescue) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_1, successfully_evacuated_neighbor_2) = True",
+                        "BEL(Neighbor_2, evacuated_by_Rescue_Worker_1) = True",
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = False",
+                        "DES(Rescue_Worker_1, rescue_people_in_need) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Evacuate(Neighbor_3)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+                        "BEL(Neighbor_3, stranded_in_dangerous_area) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_1, coordinates_with_other_rescue_workers) = True",
+                        "BEL(Neighbor_3, evacuated_to_safe_location) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "ClearDebris(Rescue_Worker_1, Road)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+                        "BEL(Rescue_Worker_1, familiar_with_the_area) = True",
+                        "BEL(Rescue_Worker_1, has_radio_communication) = True",
+                        "BEL(Road, blocked_with_debris) = True",
+                        "Mood(SELF) > 0",
+                        "Mood(SELF) > 5"
+                    ],
+                    "effects": [
+                        "BEL(Road, blocked_with_debris) = False",
+                        "BEL(Rescue_Worker_1, physically_exhausted) = True",
+                        "DES(Rescue_Worker_1, provide_assistance_to_those_trapped) = True",
+                        "DES(Rescue_Worker_1, report_progress_to_supervisor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "HelpInjured(Rescue_Worker_1, Injured_Neighbor_1, FirstAid_Kit)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, has_access_to_medical_supplies) = True",
+                        "BEL(Rescue_Worker_1, familiar_with_the_area) = True",
+                        "BEL(Injured_Neighbor_1, requires_medical_assistance) = True",
+                        "Mood(SELF) > 5"
+                    ],
+                    "effects": [
+                        "BEL(Injured_Neighbor_1, received_medical_assistance) = True",
+                        "BEL(Rescue_Worker_1, has_used_first_aid_kit) = True",
+                        "DES(Rescue_Worker_1, provide_medical_assistance) = False",
+                        "BEL(Rescue_Worker_1, has_access_to_medical_supplies) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "HelpInjured(Rescue_Worker_1, Injured_Neighbor_2, FirstAid_Kit)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, has_access_to_medical_supplies) = True",
+                        "BEL(Injured_Neighbor_2, requires_first_aid) = True",
+                        "BEL(Rescue_Worker_1, maintain_safe_distance_from_dangerous_areas) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_1, has_used_first_aid_kit) = True",
+                        "DES(Rescue_Worker_1, provide_medical_assistance) = False",
+                        "BEL(Injured_Neighbor_2, has_received_medical_assistance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "AssistWithRebuilding(Rescue_Worker_1, Neighbor_1)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = False",
+                        "BEL(Rescue_Worker_1, trained_for_rescue_operations) = True",
+                        "BEL(Rescue_Worker_1, has_access_to_medical_supplies) = True",
+                        "BEL(Neighbor_1, needs_help_with_rebuilding) = True",
+                        "BEL(Neighbor_1, has_tools_and_materials_for_rebuilding) = True",
+                        "BEL(Neighbor_1, familiar_with_rebuilding_procedures) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, needs_help_with_rebuilding) = False",
+                        "BEL(Neighbor_1, has_rebuilt_home) = True",
+                        "BEL(Rescue_Worker_1, exhausted) = True",
+                        "DES(Rescue_Worker_1, provide_medical_assistance) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "AssistWithRebuilding(Rescue_Worker_1, Neighbor_2)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, able_to_help_others) = True",
+                        "BEL(Neighbor_2, in_need_of_assistance) = True",
+                        "BEL(Rescue_Worker_1, has_tools_and_supplies) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_1, has_helped_Neighbor_2) = True",
+                        "BEL(Neighbor_2, received_help_from_Rescue_Worker_1) = True",
+                        "BEL(Rescue_Worker_1, reduced_damage_to_Neighbor_2's_property) = True",
+                        "DES(Rescue_Worker_1, feels_satisfed_with_help_provided) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "AssistWithRebuilding(Rescue_Worker_1, Neighbor_3)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = False",
+                        "BEL(Neighbor_3, injured) = False",
+                        "BEL(Neighbor_3, in_need_of_help) = True",
+                        "BEL(Rescue_Worker_1, has_access_to_tools) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3, in_need_of_help) = False",
+                        "BEL(Neighbor_3, grateful) = True",
+                        "BEL(Rescue_Worker_1, exhausted) = True",
+                        "BEL(Rescue_Worker_1, has_access_to_tools) = False",
+                        "DES(Rescue_Worker_1, assist_with_rebuilding) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Start, RW1Intro, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, has_radio_communication) = True",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pride"
+                    ]
+                },
+                "Speak(RW1Intro, RW1Concern, Neutral, Neutral)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+                        "BEL(Rescue_Worker_1, trained_for_rescue_operations) = True",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_1, well_prepared_for_rescue_operations) = True",
+                        "DES(Rescue_Worker_1, show_concern_for_people_in_need) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Speak(RW1Concern, RW1Action, Concern, Sympathetic)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+                        "BEL(Rescue_Worker_1, trained_for_rescue_operations) = True",
+                        "BEL(Rescue_Worker_1, has_radio_communication) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Rescue_Worker_1, provide_medical_assistance) = False",
+                        "DES(Rescue_Worker_1, coordinate_with_other_rescue_workers) = True",
+                        "BEL(RW1Concern, resolved) = True"
+                    ],
+                    "occ_emotion": [
+                        "Compassion",
+                        "Joy(Compassion)"
+                    ]
+                },
+                "Speak(RW1Action, RW1Neighbor, Initiative, Helpful)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+                        "BEL(Rescue_Worker_1, has_radio_communication) = True",
+                        "BEL(RW1Neighbor, need_of_help) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Rescue_Worker_1, coordinate_with_other_rescue_workers) = True",
+                        "BEL(RW1Neighbor, receiving_help_from_RW1) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(RW1Neighbor, RW1Safety, Neutral, Neutral)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, has_radio_communication) = True",
+                        "BEL(RW1Neighbor, is_in_danger) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(RW1Safety, is_safe) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(RW1Safety, End, Neutral, Neutral)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_1, in_urgent_situation) = True",
+                        "BEL(Rescue_Worker_1, has_radio_communication) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_1, maintain_safe_distance_from_dangerous_areas) = True",
+                        "BEL(Rescue_Worker_1, provide_safety_instructions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                }
+            }
+        },
+        "Rescue_Worker_2": {
+            "knowledge_base": [
+                "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+                "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters) = True",
+                "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+                "DES(Rescue_Worker_2, assist_in_rescuing_people) = True",
+                "DES(Rescue_Worker_2, ensure_safety_of_individuals) = True",
+                "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                "DES(Rescue_Worker_2, coordinate_efficiently_with_other_rescue_workers) = True",
+                "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+                "DES(Rescue_Worker_2, help_evacuate_people_safely) = True",
+                "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+                "DES(Rescue_Worker_2, maintain_calm_and_composure_during_rescue_efforts) = True"
+            ],
+            "initial_mood": [],
+            "actions": {
+                "Move(Rescue_Worker_2, Neighbor_3, Location-Type)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+                        "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters) = True",
+                        "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+                        "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+                        "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+                        "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "Mood(SELF) > 0",
+                        "Mood(SELF) = 0",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_2, at_location(Neighbor_3)) = True",
+                        "BEL(Neighbor_3, rescued_by(Rescue_Worker_2)) = True",
+                        "DES(Rescue_Worker_2, assist_in_rescuing_people) = False",
+                        "DES(Rescue_Worker_2, ensure_safety_of_individuals) = False",
+                        "DES(Rescue_Worker_2, help_evacuate_people_safely) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Assess_Damage(Rescue_Worker_2, Neighbor_3)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+                        "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+                        "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+                        "BEL(Neighbor_3, is_in_need_of_rescue) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3, is_safe) = True",
+                        "BEL(Neighbor_3, requires_medical_attention) = False",
+                        "DES(Rescue_Worker_2, assist_in_rescuing_people) = False",
+                        "DES(Rescue_Worker_2, help_evacuate_people_safely) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ]
+                },
+                "Clear_Rubble(Rescue_Worker_2, Neighbor_3)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+                        "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                        "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+                        "BEL(Neighbor_3, trapped_under_rubble) = True",
+                        "Mood(SELF) >= 2"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3, trapped_under_rubble) = False",
+                        "BEL(Neighbor_3, injured) = True",
+                        "DES(Rescue_Worker_2, provide_first_aid_to_Neighbor_3) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Provide_Food(Rescue_Worker_2, Neighbor_3, Food-Type)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                        "BEL(Neighbor_3, in_need_of_food) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_2, used_emergency_supplies) = True",
+                        "BEL(Neighbor_3, received_food) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Reassure(Rescue_Worker_2, Neighbor_3, Message)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "BEL(Neighbor_3, scared) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_2, reassure_neighbor_3) = True",
+                        "BEL(Neighbor_3, reassured) = True",
+                        "BEL(Neighbor_3, scared) = False",
+                        "BEL(Neighbor_3, message_received) = Message"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Evacuate(Rescue_Worker_2, Neighbor_3, Destination-Type)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+                        "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+                        "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+                        "BEL(Neighbor_3, in_need_of_evacuation) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3, in_a_safe_location) = True",
+                        "DES(Rescue_Worker_2, ensure_safety_of_individuals) = False",
+                        "DES(Rescue_Worker_2, help_evacuate_people_safely) = False",
+                        "DES(Rescue_Worker_2, coordinate_efficiently_with_other_rescue_workers) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Repair(Rescue_Worker_2, Neighbor_3, Item-Type)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+                        "DES(Rescue_Worker_2, assist_in_rescuing_people) = True",
+                        "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+                        "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "BEL(Neighbor_3, requires_item_repair) = True",
+                        "BEL(Rescue_Worker_2, familiar_with_type_of_item_to_be_repaired) = True",
+                        "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_2, level_of_confidence) = \"Increased\"",
+                        "BEL(Rescue_Worker_2, level_of_satisfaction) = \"Increased\"",
+                        "BEL(Neighbor_3, requires_item_repair) = False",
+                        "BEL(Neighbor_3, item_repaired) = Item-Type"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Start, RescueWorkerIntro, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "BEL(Rescue_Worker_2, introduced_to_Emily) = True"
+                    ],
+                    "occ_emotion": [
+                        "Approval"
+                    ]
+                },
+                "Speak(RescueWorkerIntro, MorganPanic, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Morgan, aware_of_Rescue_Worker_2_presence) = True",
+                        "BEL(Rescue_Worker_2, introduced_to_Morgan) = True",
+                        "BEL(Rescue_Worker_2, introduced_to_family) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Speak(MorganPanic, RescueWorkerPlan, Confusion, Authoritative)": {
+                    "conditions": [
+                        "BEL(MorganPanic, is_safe) = False",
+                        "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+                        "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+                        "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters) = True",
+                        "Bel(MorganPanic, available_for_rescue) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Rescue_Worker_2, assist_in_rescuing_people) = False",
+                        "DES(Rescue_Worker_2, ensure_safety_of_individuals) = False",
+                        "DES(Rescue_Worker_2, coordinate_efficiently_with_other_rescue_workers) = True",
+                        "DES(Rescue_Worker_2, help_evacuate_people_safely) = True",
+                        "BEL(Rescue_Worker_2, aware_of_hurricane) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "Speak(RescueWorkerPlan, NeighborConcerned, Explanation, Calm)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+                        "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+                        "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+                        "BEL(NeighborConcerned, aware_of_hurricane) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(RescueWorkerPlan, explained_evac_process) = True",
+                        "BEL(NeighborConcerned, aware_of_evac_process) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Speak(NeighborConcerned, RescueWorkerAssist, Assistance, Friendly)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+                        "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+                        "BEL(NeighborConcerned, in_need_of_assistance) = True",
+                        "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(NeighborConcerned, receiving_assistance) = True",
+                        "DES(Rescue_Worker_2, assist_in_rescuing_people) = False",
+                        "BEL(Rescue_Worker_2, helped_neighbor) = True",
+                        "DES(Rescue_Worker_2, ensure_safety_of_individuals) = True",
+                        "DES(Rescue_Worker_2, coordinate_efficiently_with_other_rescue_workers) = True",
+                        "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+                        "DES(Rescue_Worker_2, help_evacuate_people_safely) = True",
+                        "BEL(NeighborConcerned, in_need_of_assistance) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(RescueWorkerAssist, End, Assistance, Helpful)": {
+                    "conditions": [
+                        "BEL(Rescue_Worker_2, aware_of_hurricane) = True",
+                        "BEL(Rescue_Worker_2, trained_to_handle_nat_disasters) = True",
+                        "BEL(Rescue_Worker_2, equipped_with_rescue_gear) = True",
+                        "BEL(Rescue_Worker_2, access_to_emergency_supplies) = True",
+                        "BEL(Rescue_Worker_2, communication_systems_working) = True",
+                        "BEL(Rescue_Worker_2, familiar_with_the_evacuation_route) = True",
+                        "BEL(Rescue_Worker_2, physically_and_mentally_prepared) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Rescue_Worker_2, assist_in_rescuing_people) = False",
+                        "DES(Rescue_Worker_2, ensure_safety_of_individuals) = False",
+                        "DES(Rescue_Worker_2, help_evacuate_people_safely) = True",
+                        "RescueWorkerAssist"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        },
+        "Neighbor_1": {
+            "knowledge_base": [
+                "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                "BEL(Neighbor_1, HouseIsNotSafe) = True",
+                "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+                "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+                "DES(Neighbor_1, WantsToEvacuate) = True",
+                "DES(Neighbor_1, WantsAssistance) = True",
+                "DES(Neighbor_1, WantsToFeelSafe) = True",
+                "DES(Neighbor_1, WantsToReuniteWithFamily) = True"
+            ],
+            "initial_mood": [],
+            "actions": {
+                "Evacuate(Neighbor_1, Safe_Location)": {
+                    "conditions": [
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "BEL(Neighbor_1, HouseIsNotSafe) = True",
+                        "DES(Neighbor_1, WantsToEvacuate) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "BEL(Neighbor_1, HouseIsNotSafe) = False",
+                        "DES(Neighbor_1, WantsToEvacuate) = False",
+                        "BEL(Neighbor_1, ArrivedToSafeLocation) = True",
+                        "DES(Neighbor_1, WantsAssistance) = False",
+                        "DES(Neighbor_1, WantsToFeelSafe) = True",
+                        "DES(Neighbor_1, WantsToReuniteWithFamily) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Check_On(Neighbor_1, Neighbor_2)": {
+                    "conditions": [
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+                        "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+                        "BEL(Neighbor_2, IsCloseBy) = True",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, HasCheckedOnNeighbor2) = True",
+                        "DES(Neighbor_1, WantsToCheckOnOtherNeighbors) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ]
+                },
+                "Check_On(Neighbor_1, Neighbor_3)": {
+                    "conditions": [
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+                        "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+                        "BEL(Neighbor_3, IsInHouse) = True",
+                        "Mood(SELF) = 0",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, KnowsAboutNeighbor_3Status) = True",
+                        "BEL(Neighbor_3, IsSafe) = True",
+                        "DES(Neighbor_1, WantsAssistance) = False",
+                        "DES(Neighbor_3, WantsAssistance) = False"
+                    ],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ]
+                },
+                "Help_Out(Neighbor_1, Clear_Debri, {time: 2 hours})": {
+                    "conditions": [
+                        "BEL(Neighbor_1, HouseIsNotSafe) = True",
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "DES(Neighbor_1, WantsAssistance) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, HouseIsNotSafe) = False",
+                        "BEL(Neighbor_1, IsSafe) = True",
+                        "BEL(Neighbor_1, KnowsAboutEmergencyShelters) = True",
+                        "DES(Neighbor_1, WantsAssistance) = False",
+                        "DES(Neighbor_1, WantsToReuniteWithFamily) = True",
+                        "DES(Neighbor_1, WantsToFeelSafe) = False",
+                        "BEL(Neighbor_1, TimeToClearDebri) = 2 hours"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Request_Assistance(Neighbor_1, Rescue_Worker_1, {type:Medical, severity:Low})": {
+                    "conditions": [
+                        "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+                        "BEL(Rescue_Worker_1, KnowsAboutMedicalAssistance) = True",
+                        "BEL(Rescue_Worker_1, IsAvailableForAssistance) = True",
+                        "Mood(SELF) <= -5"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, DesiresMedicalAssistance) = True",
+                        "BEL(Neighbor_1, TrustsRescueWorker_1) = True",
+                        "BEL(Rescue_Worker_1, IsAssignedToAssistNeighbor_1) = True",
+                        "BEL(Rescue_Worker_1, IsBusyAssistingNeighbor) = True",
+                        "BEL(Rescue_Worker_1, BelievesNeighbor_1NeedsMedicalAssistance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Collect_Food(Neighbor_1, Neighbor_2, {quantity:5})": {
+                    "conditions": [
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "BEL(Neighbor_2, KnowsAboutHurricane) = True",
+                        "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+                        "DES(Neighbor_1, WantsAssistance) = True",
+                        "BEL(Neighbor_2, HasFood) = True",
+                        "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Neighbor_2, WantsToHelpOthers) = True",
+                        "DES(Neighbor_1, WantsToRepayDebt) = True",
+                        "BEL(Neighbor_1, CollectedFood) = True",
+                        "BEL(Neighbor_2, HasFood) = {quantity: 0}",
+                        "BEL(Neighbor_2, IsHelping) = {action: Collect_Food, receiver: Neighbor_1}",
+                        "BEL(Neighbor_1, HasFood) = {quantity: 5}"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Start, NeighborIntro, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "BEL(Neighbor_1, HouseIsNotSafe) = True",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Speak(NeighborIntro, EmilyApproach, Introduction, Friendly)": {
+                    "conditions": [
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Admiration"
+                    ]
+                },
+                "Speak(EmilyApproach, NeighborAnxious, SmallTalk, Friendly)": {
+                    "conditions": [
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "BEL(Neighbor_1, HouseIsNotSafe) = True",
+                        "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+                        "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+                        "Mood(SELF) = 1"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, FeelsLessAnxious) = True",
+                        "BEL(Neighbor_1, IsEagerToTalk) = True",
+                        "DES(Neighbor_1, WantsToAskAboutEmily) = True",
+                        "BEL(Neighbor_1, TrustsEmilyMore) = True",
+                        "DES(Neighbor_1, WantsToStayWithEmily) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(NeighborAnxious, EmilyReassurance, Anxiety, Emotional)": {
+                    "conditions": [
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "BEL(Neighbor_1, HouseIsNotSafe) = True",
+                        "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+                        "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "DES(Neighbor_1, WantsToFeelSafe) = False",
+                        "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+                        "BEL(Neighbor_1, KnowsAboutHurricane) = True",
+                        "DES(Neighbor_1, WantsAssistance) = False",
+                        "BEL(Neighbor_1, HouseIsNotSafe) = True",
+                        "DES(Neighbor_1, WantsToEvacuate) = True",
+                        "INT(Neighbor_1, Speak) = EmilyReassurance",
+                        "BEL(Neighbor_1, TrustsEmily) = True",
+                        "BEL(Neighbor_1, HasSpokenToEmily) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Speak(EmilyReassurance, NeighborGrateful, Advice, Encouraging)": {
+                    "conditions": [
+                        "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+                        "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+                        "Mood(SELF) < 5"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, WantsToReuniteWithFamily) = True",
+                        "BEL(Neighbor_1, NeedsHelpEvacuating) = False",
+                        "BEL(Neighbor_1, KnowsHowToEvacuate) = True",
+                        "DES(Neighbor_1, WantsAssistance) = False",
+                        "DES(Neighbor_1, WantsToFeelSafe) = True",
+                        "DES(Neighbor_1, WantsToEvacuate) = False",
+                        "BEL(Neighbor_1, TrustsEmilyAdvice) = True",
+                        "BEL(Neighbor_1, FeelsGrateful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(NeighborGrateful, End, Gratitude, Appreciative)": {
+                    "conditions": [
+                        "BEL(Neighbor_1, NeedsHelpEvacuating) = True",
+                        "BEL(Neighbor_1, BelievesEmilyIsTrustworthy) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_1, WantsToThankEmily) = True",
+                        "DES(Neighbor_1, WantsToReturnTheFavor) = True",
+                        "BEL(Neighbor_1, IsGratefulToEmily) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        },
+        "Neighbor_2": {
+            "knowledge_base": [
+                "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                "BEL(Neighbor_2, believes_his_house_is_not_strong_enough) = True",
+                "BEL(Neighbor_2, believes_he_is_not_prepared) = True",
+                "BEL(Neighbor_2, believes_he_needs_help) = False",
+                "DES(Neighbor_2, desires_to_evacuate_safely) = True",
+                "DES(Neighbor_2, desires_to_reinforce_his_house) = True",
+                "DES(Neighbor_2, desires_to_prepare_survival_kit) = True"
+            ],
+            "initial_mood": [
+                "Mood(SELF)=-7"
+            ],
+            "actions": {
+                "Call(Neighbor_2, Rescue_Worker_1)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "BEL(Neighbor_2, believes_he_needs_help) = True",
+                        "DES(Neighbor_2, desires_to_evacuate_safely) = True",
+                        "DES(Neighbor_2, desires_to_prepare_survival_kit) = False",
+                        "DES(Neighbor_2, desires_to_reinforce_his_house) = False",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, believes_rescue_worker_1_can_help) = True",
+                        "BEL(Neighbor_2, believes_rescue_worker_1_will_arrive_soon) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "AskForHelp(Neighbor_2, Rescue_Worker_1)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_he_needs_help) = True",
+                        "BEL(Rescue_Worker_1, believes_he_can_provide_help) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, believes_he_needs_help) = False",
+                        "DES(Rescue_Worker_1, desires_to_assist_Neighbor_2) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Thank(Rescue_Worker_1, Neighbor_2)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_he_needs_help) = False",
+                        "BEL(Rescue_Worker_1, is_present_at_Neighbor_2_house) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, believes_he_needs_help) = True",
+                        "BEL(Rescue_Worker_1, has_helped_Neighbor_2) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "RepairHouse(Neighbor_2, Neighbor_1)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_his_house_is_not_strong_enough) = True",
+                        "BEL(Neighbor_2, believes_he_needs_help) = False",
+                        "BEL(Neighbor_1, believes_she_can_help_neighbor_2) = True",
+                        "DES(Neighbor_2, desires_to_reinforce_his_house) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, believes_his_house_is_strong_now) = True",
+                        "DES(Neighbor_2, desires_to_reinforce_his_house) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "OfferSupplies(Neighbor_2, Neighbor_1, Water)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, desires_to_prepare_survival_kit) = True",
+                        "BEL(Neighbor_2, believes_he_needs_help) = False",
+                        "BEL(Neighbor_2, believes_his_house_is_not_strong_enough) = False",
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "BEL(Neighbor_1, desires_to_evacuate_safely) = True",
+                        "BEL(Neighbor_1, has_need_for_water) = True",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, desires_to_prepare_survival_kit) = False",
+                        "BEL(Neighbor_2, believes_he_needs_help) = True",
+                        "BEL(Neighbor_2, believes_his_house_is_not_strong_enough) = True",
+                        "BEL(Neighbor_1, has_need_for_water) = False",
+                        "BEL(Neighbor_1, has_water) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "ReceiveSupplies(Neighbor_1, Neighbor_2, Food)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_he_needs_help) = False",
+                        "BEL(Neighbor_1, has_supplies) = True",
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "Mood(SELF) > -3",
+                        "Neighbor_1"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, believes_he_needs_help) = True",
+                        "DES(Neighbor_2, desires_to_receive_supplies) = True",
+                        "BEL(Neighbor_1, has_supplies) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "GiveInstructions(Neighbor_2, Neighbor_3, EvacuationPlan)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, desires_to_evacuate_safely) = True",
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "BEL(Neighbor_3, is_willing_to_evacuate) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, desires_to_evacuate_safely) = False",
+                        "BEL(Neighbor_2, desires_to_prepare_survival_kit) = False",
+                        "DES(Neighbor_2, successfully_gave_instructions) = True",
+                        "BEL(Neighbor_3, received_instructions) = True",
+                        "BEL(Neighbor_3, knows_how_to_evacuate_safely) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "FollowInstructions(Neighbor_3, Neighbor_2)": {
+                    "conditions": [
+                        "BEL(Neighbor_3, is_present_in_the_area) = True",
+                        "BEL(Neighbor_2, desires_to_evacuate_safely) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, has_received_evacuation_instructions) = True",
+                        "DES(Neighbor_2, desires_to_evacuate_safely) = False",
+                        "DES(Neighbor_2, desires_to_follow_instructions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Start, NeighborIntro, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(NeighborIntro, MorganPanic, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "BEL(Neighbor_2, believes_he_is_not_prepared) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "BEL(Neighbor_2, believes_he_is_not_prepared) = True",
+                        "BEL(Neighbor_2, believes_he_needs_help) = True",
+                        "DES(Neighbor_2, desires_to_evacuate_safely) = True",
+                        "DES(Neighbor_2, desires_to_reinforce_his_house) = True",
+                        "DES(Neighbor_2, desires_to_prepare_survival_kit) = True",
+                        "SAYS(Neighbor_2, Someone, Something)"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ]
+                },
+                "Speak(MorganPanic, NeighborHelp, Explanation, Concerned)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "BEL(Neighbor_2, believes_he_is_not_prepared) = True",
+                        "BEL(Neighbor_2, believes_he_needs_help) = False",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, believes_he_needs_help) = True"
+                    ],
+                    "occ_emotion": [
+                        "Rescue_Worker_1",
+                        "Relief"
+                    ]
+                },
+                "Speak(NeighborHelp, EmilyRescueWorker, Initiative, Grateful)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "BEL(Neighbor_2, believes_he_needs_help) = False",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, believes_he_needs_help) = True",
+                        "DES(Neighbor_2, desires_to_evacuate_safely) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(EmilyRescueWorker, NeighborGratitude, Grateful, Appreciative)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_he_needs_help) = False",
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, believes_he_needs_help) = True",
+                        "DES(Neighbor_2, desires_to_evacuate_safely) = True",
+                        "DES(Neighbor_2, desires_to_prepare_survival_kit) = True",
+                        "SPEAK(Neighbor_2, NeighborGratitude, Grateful, Appreciative)"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(NeighborGratitude, End, Grateful, Appreciative)": {
+                    "conditions": [
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "BEL(Neighbor_2, believes_his_house_is_not_strong_enough) = True",
+                        "BEL(Neighbor_2, believes_he_is_not_prepared) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_2, believes_in_approaching_hurricane) = True",
+                        "BEL(Neighbor_2, believes_his_house_is_not_strong_enough) = True",
+                        "BEL(Neighbor_2, believes_he_is_not_prepared) = True",
+                        "DES(Neighbor_2, desires_to_evacuate_safely) = True",
+                        "DES(Neighbor_2, desires_to_reinforce_his_house) = True",
+                        "DES(Neighbor_2, desires_to_prepare_survival_kit) = True",
+                        "BEL(Neighbor_2, believes_in_grateful_actions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        },
+        "Neighbor_3": {
+            "knowledge_base": [
+                "BEL(Neighbor_3,knows_about_hurricane) = True",
+                "BEL(Neighbor_3,house_is_not_safe) = True",
+                "BEL(Neighbor_3,wants_to_evacuate) = True",
+                "BEL(Neighbor_3,limited_financial_resources) = True",
+                "DES(Neighbor_3,find_a_way_to_afford_evacuation) = True",
+                "DES(Neighbor_3,get_help_from_neighbors) = True",
+                "DES(Neighbor_3,reach_out_to_rescue_workers) = True",
+                "DES(Neighbor_3,secure_their_property) = True"
+            ],
+            "initial_mood": [],
+            "actions": {
+                "Evacuate(Neighbor_3, Safe_Location)": {
+                    "conditions": [
+                        "BEL(Neighbor_3, house_is_not_safe) = True",
+                        "BEL(Neighbor_3, wants_to_evacuate) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3, house_is_not_safe) = False",
+                        "BEL(Neighbor_3, wants_to_evacuate) = False",
+                        "BEL(Neighbor_3, evacuated_to) = Safe_Location",
+                        "DES(Neighbor_3, secure_their_property) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Seek_Help(Neighbor_3, Rescue_Worker_1)": {
+                    "conditions": [
+                        "BEL(Neighbor_3,knows_about_hurricane) = True",
+                        "BEL(Neighbor_3,wants_to_evacuate) = True",
+                        "BEL(Neighbor_3,limited_financial_resources) = True",
+                        "BEL(Rescue_Worker_1,available) = True",
+                        "Mood(SELF) < -5"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3,received_help_from_Rescue_Worker_1) = True",
+                        "BEL(Neighbor_3,has_more_financial_resources) = True",
+                        "DES(Neighbor_3,find_a_way_to_afford_evacuation) = False",
+                        "DES(Neighbor_3,get_help_from_neighbors) = False",
+                        "DES(Neighbor_3,reach_out_to_rescue_workers) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Communicate(Neighbor_3, Other_Neighbors, Storm_Update)": {
+                    "conditions": [
+                        "BEL(Neighbor_3, knows_about_hurricane) = True",
+                        "BEL(Neighbor_3, house_is_not_safe) = True",
+                        "BEL(Neighbor_3, limited_financial_resources) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Other_Neighbors, receive_Storm_Update) = True",
+                        "BEL(Neighbor_3, communicated_with_Other_Neighbors) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Check_On_Elderly_Neighbor(Neighbor_3, Elderly_Neighbor)": {
+                    "conditions": [
+                        "BEL(Neighbor_3,knows_about_hurricane) = True",
+                        "BEL(Neighbor_3,limited_financial_resources) = True",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [
+                        "BEL(Elderly_Neighbor,checked_on_by_Neighbor_3) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Clear_Debris(Neighbor_3, Street)": {
+                    "conditions": [
+                        "BEL(Neighbor_3, house_is_not_safe) = True",
+                        "BEL(Neighbor_3, limited_financial_resources) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3, able_to_evacuate) = True",
+                        "BEL(Neighbor_3, Street_is_safe) = True",
+                        "DES(Neighbor_3, secure_their_property) = False",
+                        "DES(Neighbor_3, find_a_way_to_afford_evacuation) = False",
+                        "DES(Neighbor_3, reach_out_to_rescue_workers) = False",
+                        "DES(Neighbor_3, evacuate_to_a_safe_location) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Provide_Food_And_Water(Neighbor_3, Displaced_Neighbors)": {
+                    "conditions": [
+                        "BEL(Neighbor_3,limited_financial_resources) = True",
+                        "BEL(Neighbor_3,knows_about_Displaced_Neighbors) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3,has_provided_food_and_water) = True",
+                        "BEL(Displaced_Neighbors,has_received_food_and_water) = True",
+                        "DES(Neighbor_3,satisfy_desire_to_help) = True",
+                        "BEL(Neighbor_3,limited_financial_resources) = False",
+                        "DES(Neighbor_3,find_a_way_to_afford_evacuation) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Start, Neighbor3Intro, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Neighbor_3, knows_about_hurricane) = True",
+                        "BEL(Neighbor_3, house_is_not_safe) = True",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3, wants_to_evacuate) = True",
+                        "DES(Neighbor_3, find_a_way_to_afford_evacuation) = True",
+                        "DES(Neighbor_3, get_help_from_neighbors) = True",
+                        "DES(Neighbor_3, reach_out_to_rescue_workers) = True",
+                        "DES(Neighbor_3, secure_their_property) = True",
+                        "Speak(Neighbor3Intro, End, Neutral, \"Hi, I'm your neighbor. I heard we need to evacuate. Can you help me?\")"
+                    ],
+                    "occ_emotion": [
+                        "Neutral",
+                        "Start, Neighbor3Intro, Introduction, Neutral"
+                    ]
+                },
+                "Speak(Neighbor3Intro, EmilyApproach, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Neighbor_3,knows_about_hurricane) = True",
+                        "DES(Neighbor_3,secure_their_property) = True",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3,wants_to_evacuate) = True",
+                        "DES(Neighbor_3,find_a_way_to_afford_evacuation) = True",
+                        "DES(Neighbor_3,get_help_from_neighbors) = True",
+                        "DES(Neighbor_3,reach_out_to_rescue_workers) = True",
+                        "DES(Neighbor_3,secure_their_property) = False",
+                        "BEL(Neighbor_3,house_is_not_safe) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Speak(EmilyApproach, Neighbor3Grateful, Initiative, Helpful)": {
+                    "conditions": [
+                        "BEL(Neighbor_3, limited_financial_resources) = True",
+                        "BEL(Neighbor_3, house_is_not_safe) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3, secure_their_property) = True",
+                        "BEL(Neighbor_3, reach_out_to_rescue_workers) = True",
+                        "BEL(EmilyApproach, knows_about_neighbor_3_situation) = True",
+                        "BEL(Neighbor3Grateful, knows_about_emily_help) = True",
+                        "DES(Neighbor_3, find_a_way_to_afford_evacuation) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(Neighbor3Grateful, EmilyCarry, Grateful, Appreciative)": {
+                    "conditions": [
+                        "BEL(Neighbor_3,wants_to_evacuate) = True",
+                        "BEL(Neighbor_3,limited_financial_resources) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Neighbor_3,wants_to_evacuate) = False",
+                        "BEL(Neighbor_3,grateful_for_assistance) = True",
+                        "DES(Neighbor_3,find_a_way_to_afford_evacuation) = False",
+                        "DES(Neighbor_3,get_help_from_neighbors) = False",
+                        "DES(Neighbor_3,reach_out_to_rescue_workers) = False"
+                    ],
+                    "occ_emotion": [
+                        "Neighbor3Grateful, EmilyCarry, Grateful, Appreciative, \"Thank you so much for helping me carry this. I couldn't have done it without you.\"",
+                        "Gratitude"
+                    ]
+                },
+                "Speak(EmilyCarry, Neighbor3Safe, Initiative, Helpful)": {
+                    "conditions": [
+                        "BEL(Neighbor_3, house_is_not_safe) = True",
+                        "BEL(Neighbor_3, knows_about_hurricane) = True",
+                        "BEL(Neighbor_3, limited_financial_resources) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(EmilyCarry, Neighbor3Safe) = True",
+                        "DES(Neighbor_3, find_a_way_to_afford_evacuation) = False",
+                        "DES(Neighbor_3, get_help_from_neighbors) = False",
+                        "DES(Neighbor_3, reach_out_to_rescue_workers) = False",
+                        "DES(Neighbor_3, secure_their_property) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(Neighbor3Safe, End, Gratitude, Appreciative)": {
+                    "conditions": [
+                        "BEL(Neighbor_3, house_is_not_safe) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Neighbor_3, secure_their_property) = False",
+                        "BEL(Neighbor_3, knows_about_hurricane) = True",
+                        "BEL(Neighbor_3, wants_to_evacuate) = True",
+                        "BEL(Neighbor_3, limited_financial_resources) = True",
+                        "DES(Neighbor_3, find_a_way_to_afford_evacuation) = True",
+                        "DES(Neighbor_3, get_help_from_neighbors) = True",
+                        "DES(Neighbor_3, reach_out_to_rescue_workers) = True",
+                        "BEL(Neighbor3Safe, knows_about_hurricane) = True",
+                        "BEL(Neighbor3Safe, house_is_safe) = True",
+                        "BEL(Neighbor3Safe, has_evacuated_safely) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, EmilyIntro, Introduction, Neutral, \"Hey, Mom. What's going on?\">",
+        "<EmilyIntro, MorganPanic, Introduction, Neutral, \"Why are we packing all our stuff?\">",
+        "<MorganPanic, EmilyCalm, Confusion, Urgent, \"Mom, what's going on? Why are we packing?\">",
+        "<EmilyCalm, MorganPanic, Explanation, Calm, \"There's a hurricane coming, Mom. We need to evacuate.\">",
+        "<MorganPanic, EmilyHelp, Panic, Emotional, \"Oh no! What should we do?\">",
+        "<EmilyHelp, GraceFear, Concern, Helpful, \"Grace, are you okay? Can I help with anything?\">",
+        "<GraceFear, EmilyComfort, Fear, Emotional, \"I'm so scared, Emily. What's going to happen?\">",
+        "<EmilyComfort, GraceCalm, Support, Comforting, \"It's okay, Grace. We're all together and we'll be safe.\">",
+        "<GraceCalm, EmilyRescueWorker, Gratitude, Appreciative, \"Thank you, Emily. You always know how to make me feel better.\">",
+        "<EmilyRescueWorker, NeighborApproach, Initiative, Appreciative, \"Hi, I can help you evacuate. Do you need any assistance?\">",
+        "<NeighborApproach, EmilyThankYou, Gratitude, Appreciative, \"Thank you so much for your help, Emily.\">",
+        "<EmilyThankYou, End, Gratitude, Appreciative, \"You're welcome. I'm glad I could help.\">"
+    ]
+}

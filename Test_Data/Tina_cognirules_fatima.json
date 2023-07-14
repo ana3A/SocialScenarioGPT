@@ -1,0 +1,1146 @@
+[
+  "EmotionalDecisionMakingAsset",
+  {
+    "root": {
+      "classId": 0,
+      "ActionTendencies": [
+        {
+          "Action": "Talk(Tina, Tinas_boyfriend, subject_Spaghetti)",
+          "Target": "Tina's_boyfriend",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+              "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+              "DES(Tina, Boyfriend_Honesty) = False",
+              "INTENT(Tina, Convince_Boyfriend_To_Be_Honest) = False"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Ask(Tina, Tinas_boyfriend, question_Did_you_really_like_the_spaghetti)",
+          "Target": "Tina's_boyfriend",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Cooked_Spaghetti) = True",
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = False",
+              "INTENT(Tina, Convince_Boyfriend_To_Be_Honest) = False"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Listen(Tinas_boyfriend, Tina)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, Chose_To_Pretend_Spaghetti_Was_Good) = True",
+              "INTENT(Tina, Convince_Boyfriend_To_Be_Honest) = False"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Explain(Tinas_boyfriend, Tina, explanation_I_wanted_to_spare_your_feelings)",
+          "Target": "Tina",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "INTENT(Tina, Convince_Boyfriend_To_Be_Honest) = False"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Thank(Tina, Tinas_boyfriend)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+              "INTENT(Tina, Convince_Boyfriend_To_Be_Honest) = False"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Apologize(Tinas_boyfriend, Tina, reason_I_should_have_been_honest)",
+          "Target": "Tina",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+              "DES(Tina, Boyfriend_Honesty) = False",
+              "INTENT(Tina, Convince_Boyfriend_To_Be_Honest) = False"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Discuss(Tina, Tinas_boyfriend, subject_Cooking, solution_Cook_together_in_the_future)",
+          "Target": "Tina's_boyfriend",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+              "BEL(Tina, Cooked_Spaghetti) = True",
+              "DES(Tina, Cook_Delicious_Spaghetti) = True",
+              "INTENT(Tina, Convince_Boyfriend_To_Be_Honest) = False"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "GetIngredients(Tina, Pantry)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Has_Key_for_Pantry) = True",
+              "INTENT(Tina, Cook_Delicious_Spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "BoilWater(Tina, Stove)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Cooked_Spaghetti) = True",
+              "BEL(Tina, Boiling_Water) = False",
+              "INTENT(Tina, Cook_Delicious_Spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "CookSpaghetti(Tina, Pot)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Cooked_Spaghetti) = False",
+              "BEL(Tina, Spaghetti_Was_Disgusting) = False",
+              "BEL(Tina, Pot) = Available",
+              "INTENT(Tina, Cook_Delicious_Spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "PrepareSauce(Tina, Saucepan, Ingredients)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Cooked_Spaghetti) = True",
+              "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+              "BEL(Tina, Ingredients_Are_Available) = True",
+              "INTENT(Tina, Cook_Delicious_Spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "HeatSauce(Tina, Saucepan)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Saucepan) = True",
+              "BEL(Tina, Sauce) = True",
+              "BEL(Tina, Sauce_Is_Raw) = True",
+              "INTENT(Tina, Cook_Delicious_Spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "DrainSpaghetti(Tina, Strainer)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Cooked_Spaghetti) = True",
+              "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+              "DES(Tina, Cook_Delicious_Spaghetti) = True",
+              "INTENT(Tina, Cook_Delicious_Spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "CombineSpaghettiAndSauce(Tina, Plate)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Cooked_Spaghetti) = True",
+              "BEL(Tina, Spaghetti_Was_Disgusting) = False",
+              "BEL(Tina, Plate) = Empty",
+              "BEL(Tina, Sauce) = Ready",
+              "INTENT(Tina, Cook_Delicious_Spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ServeSpaghetti(Tina, Table)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tina, Cooked_Spaghetti) = True",
+              "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+              "INTENT(Tina, Cook_Delicious_Spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start, A, Greeting, Friendly)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Tina, Cooked_Spaghetti) = True",
+              "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+              "DES(Tina, Boyfriend_Honesty) = False"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(B, C, Disclosure, Guilty)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Tina, Cooked_Spaghetti) = True",
+              "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(D, End, Gratefulness, Touching)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Tina, Cooked_Spaghetti) = True",
+              "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+              "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Pretend_to_enjoy_spaghetti(Tinas_boyfriend, Tina, )",
+          "Target": "Tina",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, likes_spaghetti) = True",
+              "BEL(Tinas_boyfriend, wants_to_please_Tina) = True",
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = True",
+              "INTENT(Tinas_boyfriend, make_Tina_happy) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Thank_Tina_for_the_meal(Tinas_boyfriend, Tina, )",
+          "Target": "Tina",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = True",
+              "BEL(Tinas_boyfriend, wants_to_please_Tina) = True",
+              "INTENT(Tinas_boyfriend, make_Tina_happy) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Offer_to_make_tomorrows_dinner(Tinas_boyfriend, Tina, )",
+          "Target": "Tina",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference) = True",
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+              "INTENT(Tinas_boyfriend, make_Tina_happy) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Approach(Tinas_boyfriend, Plate_of_Spaghetti)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+              "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Taste(Tinas_boyfriend, Plate_of_Spaghetti)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = True",
+              "BEL(Tinas_boyfriend, likes_spaghetti) = True",
+              "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Realize(Tinas_boyfriend, Dislikes_Spaghetti)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, likes_spaghetti) = True",
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = True",
+              "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Internal_State_Change(Tinas_boyfriend, DES(Tinas_boyfriend, spare_Tinas_feelings), False)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "DES(Tinas_boyfriend, spare_Tinas_feelings) = True",
+              "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Internal_State_Change(Tinas_boyfriend, DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference), True)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference) = False",
+              "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Tinas_boyfriend, Tina, This_is_delicious_You_did_a_great_job)",
+          "Target": "Tina",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = True",
+              "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Internal_State_Change(Tinas_boyfriend, BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti), True)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = False",
+              "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Internal_State_Change(Tinas_boyfriend, BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort), True)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = False",
+              "INTENT(Tinas_boyfriend, pretend_spaghetti_is_good) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Pretend_Like_The_Spaghetti_Is_Good(Tinas_boyfriend, Tina)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+              "INTENT(Tinas_boyfriend, prioritize_Tinas_feelings_over_his_own_preferences) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Compliment_Tinas_Spaghetti(Tinas_boyfriend, Tina)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, likes_spaghetti) = True",
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = True",
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+              "INTENT(Tinas_boyfriend, prioritize_Tinas_feelings_over_his_own_preferences) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Offer_To_Help_Cook_Next_Time(Tinas_boyfriend, Tina)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+              "INTENT(Tinas_boyfriend, prioritize_Tinas_feelings_over_his_own_preferences) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start, A, PositiveFeedback, Grateful)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Tinas_boyfriend, likes_spaghetti) = True",
+              "BEL(Tinas_boyfriend, wants_to_please_Tina) = True",
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = True",
+              "DES(Tinas_boyfriend, spare_Tinas_feelings) = True",
+              "DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference) = True",
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(A, B, Concern, Caring)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Tinas_boyfriend, wants_to_please_Tina) = True",
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+              "DES(Tinas_boyfriend, spare_Tinas_feelings) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(B, C, Validation, Understanding)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Tinas_boyfriend, likes_spaghetti) = True",
+              "BEL(Tinas_boyfriend, wants_to_please_Tina) = True",
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = True",
+              "DES(Tinas_boyfriend, spare_Tinas_feelings) = True",
+              "DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference) = True",
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(C, D, Encouragement, Supportive)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Tinas_boyfriend, likes_spaghetti) = True",
+              "BEL(Tinas_boyfriend, wants_to_please_Tina) = True",
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = True",
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+              "DES(Tinas_boyfriend, spare_Tinas_feelings) = True",
+              "INTENT(Tinas_boyfriend, prioritize_Tinas_feelings_over_his_own_preferences) = True",
+              "INTENT(Tinas_boyfriend, make_Tina_happy) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(D, E, Suggestion, Helpful)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Tinas_boyfriend, likes_spaghetti) = True",
+              "BEL(Tinas_boyfriend, wants_to_please_Tina) = True",
+              "BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort) = True",
+              "DES(Tinas_boyfriend, spare_Tinas_feelings) = True",
+              "DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference) = True",
+              "BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(E, End, Offer, Considerate)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        }
+      ]
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "EmotionalDecisionMaking.EmotionalDecisionMakingAsset, EmotionalDecisionMaking, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "EmotionalAppraisalAsset",
+  {
+    "root": {
+      "classId": 0,
+      "Description": null,
+      "AppraisalRules": {
+        "AppraisalWeight": 1,
+        "Rules": [
+          {
+            "EventName": "Event(Action-End, Tina, Talk(Tina, Tinas_boyfriend, subject_Spaghetti), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, Ask(Tina, Tinas_boyfriend, question_Did_you_really_like_the_spaghetti), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, Listen(Tinas_boyfriend, Tina), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, Explain(Tinas_boyfriend, Tina, explanation_I_wanted_to_spare_your_feelings), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, Thank(Tina, Tinas_boyfriend), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, Discuss(Tina, Tinas_boyfriend, subject_Cooking, solution_Cook_together_in_the_future), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, GetIngredients(Tina, Pantry), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, BoilWater(Tina, Stove), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, CookSpaghetti(Tina, Pot), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, PrepareSauce(Tina, Saucepan, Ingredients), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, HeatSauce(Tina, Saucepan), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, DrainSpaghetti(Tina, Strainer), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, CombineSpaghettiAndSauce(Tina, Plate), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, ServeSpaghetti(Tina, Table), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, Speak(Start, A, Greeting, Friendly), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina, Speak(D, End, Gratefulness, Touching), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Pretend_to_enjoy_spaghetti(Tinas_boyfriend, Tina, ), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Thank_Tina_for_the_meal(Tinas_boyfriend, Tina, ), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Offer_to_make_tomorrows_dinner(Tinas_boyfriend, Tina, ), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Approach(Tinas_boyfriend, Plate_of_Spaghetti), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Taste(Tinas_boyfriend, Plate_of_Spaghetti), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Realize(Tinas_boyfriend, Dislikes_Spaghetti), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, DES(Tinas_boyfriend, prioritize_Tinas_happiness_over_food_preference), True), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Like",
+                  "Value": 5
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Speak(Tinas_boyfriend, Tina, This_is_delicious_You_did_a_great_job), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, BEL(Tinas_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti), True), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                },
+                {
+                  "Name": "Desirability for others",
+                  "Value": -5,
+                  "Target": "[target]"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Internal_State_Change(Tinas_boyfriend, BEL(Tinas_boyfriend, believes_Tinas_spaghetti_took_effort), True), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "SELF"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Pretend_Like_The_Spaghetti_Is_Good(Tinas_boyfriend, Tina), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Compliment_Tinas_Spaghetti(Tinas_boyfriend, Tina), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Offer_To_Help_Cook_Next_Time(Tinas_boyfriend, Tina), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Speak(Start, A, PositiveFeedback, Grateful), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Speak(C, D, Encouragement, Supportive), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Speak(D, E, Suggestion, Helpful), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Tina's_boyfriend, Speak(E, End, Offer, Considerate), *)",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "EmotionalAppraisal.EmotionalAppraisalAsset, EmotionalAppraisal, Version=1.4.1.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "SocialImportanceAsset",
+  {
+    "root": {
+      "classId": 0,
+      "AttributionRules": []
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "SocialImportance.SocialImportanceAsset, SocialImportance, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "CommeillFautAsset",
+  {
+    "root": {
+      "classId": 0,
+      "SocialExchanges": []
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "CommeillFaut.CommeillFautAsset, CommeillFaut, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  }
+]

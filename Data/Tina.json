@@ -1,0 +1,802 @@
+{
+    "scenario_name": "Tina",
+    "scenario_description": "Tina baked a cake for her boyfriend because he likes cakes.",
+    "last_ended": "end",
+    "agents": {
+        "Tina": {
+            "knowledge_base": [
+                "BEL(Tina, knows-how-to-bake-cake) = True",
+                "DES(Tina, make-boyfriend-happy) = True",
+                "BEL(Tina, believes-boyfriend-likes-cake) = True",
+                "BEL(Tina, has-ingredients-to-bake-cake) = True",
+                "BEL(Tina, has-time-to-bake-cake) = True"
+            ],
+            "intentions": {
+                "INTENT(Tina, make_cake(Tina's-boyfriend)) = True": {
+                    "action_plan": [
+                        "Tina's-boyfriend",
+                        "GATHER_INGREDIENTS(Tina, Kitchen, Recipe)",
+                        "PREPARE_INGREDIENTS(Tina, Kitchen, Recipe)",
+                        "PREHEAT_OVEN(Tina, Oven)",
+                        "PREPARE_PAN(Tina, Kitchen, CakePan)",
+                        "MIX_INGREDIENTS(Tina, Kitchen, CakeMix)",
+                        "POUR_BATTER(Tina, CakePan, CakeMix)",
+                        "BAKE_CAKE(Tina, Oven, CakePan)",
+                        "REMOVE_CAkE(Tina, Oven, CakePan)",
+                        "DECORATE_CAkE(Tina, Kitchen, Cake)",
+                        "SURPRISE_BOYFRIEND(Tina, Bedroom, Cake)"
+                    ]
+                }
+            },
+            "actions": {
+                "Tina's-boyfriend": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, likes-cake) = True",
+                        "BEL(Tina, knows-how-to-bake-cake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has-made-cake) = True",
+                        "DES(Tina, make-boyfriend-happy) = False",
+                        "BEL(Tina's-boyfriend, received-cake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "GATHER_INGREDIENTS(Tina, Kitchen, Recipe)": {
+                    "conditions": [
+                        "BEL(Tina, has-ingredients-to-bake-cake) = False",
+                        "BEL(Tina, knows-how-to-bake-cake) = True",
+                        "BEL(Tina, has-time-to-bake-cake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has-ingredients-to-bake-cake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PREPARE_INGREDIENTS(Tina, Kitchen, Recipe)": {
+                    "conditions": [
+                        "BEL(Tina, has-ingredients-to-bake-cake) = True",
+                        "BEL(Tina, knows-how-to-bake-cake) = True",
+                        "BEL(Tina, has-time-to-bake-cake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, prepared-ingredients) = True",
+                        "BEL(Tina, used-ingredients-from-recipe) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PREHEAT_OVEN(Tina, Oven)": {
+                    "conditions": [
+                        "BEL(Tina, has-oven) = True",
+                        "BEL(Oven, is-functional) = True",
+                        "BEL(Oven, is-off) = True"
+                    ],
+                    "effects": [
+                        "BEL(Oven, is-heated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PREPARE_PAN(Tina, Kitchen, CakePan)": {
+                    "conditions": [
+                        "BEL(Tina, has-pan)",
+                        "BEL(Kitchen, has-cakepan)"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has-prepared-pan(CakePan)) = True",
+                        "BEL(CakePan, is-prepared-by(Tina)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MIX_INGREDIENTS(Tina, Kitchen, CakeMix)": {
+                    "conditions": [
+                        "BEL(Tina, has-mix-bowl(Kitchen)) = True",
+                        "BEL(Tina, has-ingredients(Kitchen, CakeMix)) = True",
+                        "BEL(Tina, knows-how-to-mix-ingredients) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, mixed-ingredients(Kitchen, CakeMix)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "POUR_BATTER(Tina, CakePan, CakeMix)": {
+                    "conditions": [
+                        "BEL(Tina, knows-how-to-bake-cake) = True",
+                        "BEL(Tina, has-ingredients-to-bake-cake) = True",
+                        "BEL(Tina, has-CakePan(CakePan)) = True",
+                        "BEL(Tina, has-CakeMix(CakeMix)) = True",
+                        "BEL(CakePan, clean) = True",
+                        "BEL(Kitchen, is-clean) = True"
+                    ],
+                    "effects": [
+                        "BEL(CakePan, contains_batter) = True",
+                        "BEL(CakeMix, is-mixed) = True",
+                        "BEL(Kitchen, is-dirty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BAKE_CAKE(Tina, Oven, CakePan)": {
+                    "conditions": [
+                        "BEL(Tina, has-ingredients-to-bake-cake) = True",
+                        "BEL(Tina, has-time-to-bake-cake) = True",
+                        "BEL(Tina, knows-how-to-bake-cake) = True",
+                        "BEL(Tina, Oven_is_available) = True",
+                        "BEL(Tina, Cake_Pan_is_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, cake_is_baking) = True",
+                        "DES(Tina, wants-to-bake-cake) = False",
+                        "BEL(Tina, CakePan_holds_batter) = True",
+                        "BEL(Tina, Oven_took_cake_pan) = True",
+                        "BEL(Tina, oven_is_occupied) = True",
+                        "BEL(Tina, Oven_time_left) = 30"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "REMOVE_CAkE(Tina, Oven, CakePan)": {
+                    "conditions": [
+                        "BEL(Tina, cake_is_baked) = True",
+                        "BEL(Tina, cake_is_in_cake_pan) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, cake_is_in_oven) = False",
+                        "BEL(Tina, cake_is_baked) = True",
+                        "BEL(Tina, cake_is_in_cake_pan) = False",
+                        "BEL(Tina, cake_is_decorated) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "DECORATE_CAkE(Tina, Kitchen, Cake)": {
+                    "conditions": [
+                        "BEL(Tina, knows-how-to-decorate-cakes) = True",
+                        "BEL(Tina, has-frosting-and-decorations) = True",
+                        "BEL(Tina, has-cake) = True",
+                        "BEL(Tina, has-frosting-knowledge) = True",
+                        "INTENT(Tina, make_cake(Tina's-boyfriend)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has-frosted-cake) = True",
+                        "BEL(Tina, is-proud-of-her-cake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "SURPRISE_BOYFRIEND(Tina, Bedroom, Cake)": {
+                    "conditions": [
+                        "BEL(Tina, make-boyfriend-happy) = True",
+                        "BEL(Tina, has-baked-cake) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has-baked-cake) = True",
+                        "DES(Tina's-boyfriend, feel-grateful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, TinaHappy, Neutral, Greeting)": {
+                    "conditions": [
+                        "BEL(Tina, knows-how-to-bake-cake) = True",
+                        "BEL(Tina, believes-boyfriend-likes-cake) = True",
+                        "BEL(Tina, has-ingredients-to-bake-cake) = True",
+                        "BEL(Tina, has-time-to-bake-cake) = True",
+                        "DES(Tina, make-boyfriend-happy) = True",
+                        "INTENT(Tina, make_cake(Tina's-boyfriend)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has-baked-cake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(TinaHappy, BoyfriendTexting, Neutral, Excitement)": {
+                    "conditions": [
+                        "BEL(Tina, knows-how-to-bake-cake) = True",
+                        "BEL(Tina, believes-boyfriend-likes-cake) = True",
+                        "BEL(Tina, has-ingredients-to-bake-cake) = True",
+                        "BEL(Tina, has-time-to-bake-cake) = True",
+                        "DES(Tina, make-boyfriend-happy) = True",
+                        "INTENT(Tina, make_cake(Tina's-boyfriend)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, cake-is-baked) = True",
+                        "BEL(Tina, cake-is-ready-to-be-served) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(BoyfriendTexting, BoyfriendReply, Neutral, Excitement)": {
+                    "conditions": [
+                        "BEL(Tina, knows-how-to-bake-cake) = True",
+                        "BEL(Tina, believes-boyfriend-likes-cake) = True",
+                        "BEL(Tina, has-ingredients-to-bake-cake) = True",
+                        "BEL(Tina, has-time-to-bake-cake) = True",
+                        "DES(Tina, make-boyfriend-happy) = True",
+                        "INTENT(Tina, make_cake(Tina's-boyfriend)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has-made-a-cake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(BoyfriendReply, BoyfriendHappy, Neutral, Excitement)": {
+                    "conditions": [
+                        "BEL(Tina, knows-how-to-bake-cake) = True",
+                        "DES(Tina, make-boyfriend-happy) = True",
+                        "BEL(Tina, believes-boyfriend-likes-cake) = True",
+                        "BEL(Tina, has-ingredients-to-bake-cake) = True",
+                        "BEL(Tina, has-time-to-bake-cake) = True",
+                        "INTENT(Tina, make_cake(Tina's-boyfriend)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, baked-cake-for-boyfriend) = True",
+                        "BEL(Tina, is-happy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(BoyfriendHappy, KnockAtTheDoor, Neutral, Excitement)": {
+                    "conditions": [
+                        "BEL(Tina, knows-how-to-bake-cake) = True",
+                        "BEL(Tina, believes-boyfriend-likes-cake) = True",
+                        "BEL(Tina, has-ingredients-to-bake-cake) = True",
+                        "BEL(Tina, has-time-to-bake-cake) = True",
+                        "DES(Tina, make-boyfriend-happy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has-made-cake) = True",
+                        "INTENT(Tina, make_cake(Tina's-boyfriend)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(KnockAtTheDoor, End, Neutral, Greeting)": {
+                    "conditions": [
+                        "BEL(Tina, knows-how-to-bake-cake) = True",
+                        "BEL(Tina, believes-boyfriend-likes-cake) = True",
+                        "BEL(Tina, has-ingredients-to-bake-cake) = True",
+                        "BEL(Tina, has-time-to-bake-cake) = True",
+                        "DES(Tina, make-boyfriend-happy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, cake-is-ready) = True",
+                        "BEL(Tina, has-baked-cake) = True",
+                        "INTENT(Tina, make_cake(Tina's-boyfriend)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy",
+                        "KnockAtTheDoor"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            }
+        },
+        "Tina's-boyfriend": {
+            "knowledge_base": [
+                "BEL(Tina's-boyfriend, likes_cakes) = True",
+                "BEL(Tina's-boyfriend, happy) = False",
+                "DES(Tina's-boyfriend, get_cake) = True",
+                "DES(Tina's-boyfriend, feel_loved) = True",
+                "BEL(Tina's-boyfriend, appreciates_Tina) = True",
+                "BEL(Tina's-boyfriend, allergic_to_nuts) = False"
+            ],
+            "intentions": {
+                "INTENT(Tina's-boyfriend, eat_cake) = True": {
+                    "action_plan": [
+                        "CheckIngredients(Tina, cake, nuts)",
+                        "Thank(Tina, Tina's-boyfriend)",
+                        "TakeSlice(Tina's-boyfriend, cake)",
+                        "EatSlice(Tina's-boyfriend, cake)",
+                        "ExpressGratitude(Tina's-boyfriend, Tina)",
+                        "Hug(Tina, Tina's-boyfriend)"
+                    ]
+                },
+                "INTENT(Tina's-boyfriend, feel_happy) = True": {
+                    "action_plan": [
+                        "Request(Tina, Cake, 1)",
+                        "BEL(Tina's-boyfriend, likes_cakes) = True",
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = False",
+                        "Inspect(Cake, AllergyInfo)",
+                        "BEL(AllergyInfo, contains_nuts) = True",
+                        "ActionNotPossible(Tina's-boyfriend, get_cake)",
+                        "BEL(Tina's-boyfriend, gets_cake) = True",
+                        "BEL(Tina's-boyfriend, gets_cake) = True",
+                        "Receive(Tina, Cake, 1)",
+                        "BEL(Tina's-boyfriend, feel_happy) = True"
+                    ]
+                },
+                "INTENT(Tina's-boyfriend, express_gratitude_for_Tina) = True": {
+                    "action_plan": [
+                        "INTENT(Tina's-boyfriend, express_gratitude_for_Tina) = True",
+                        "Search_Cake(Tina's-boyfriend, kitchen)",
+                        "Rumor_Mill(Tina's-boyfriend, ask_friends_about_cake)",
+                        "Ask_Tina(Tina's-boyfriend, Tina, \"Did you bake this cake for me?\")",
+                        "Eat_Cake(Tina's-boyfriend, cake)",
+                        "Express_Gratitude(Tina's-boyfriend, Tina, \"Thank you so much for baking this cake for me. It's delicious and means a lot to me. You're amazing!\")",
+                        "Kiss(Tina's-boyfriend, Tina)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Tina's-boyfriend, express_gratitude_for_Tina) = True": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, likes_cakes) = True",
+                        "DES(Tina's-boyfriend, get_cake) = True",
+                        "BEL(Tina's-boyfriend, appreciates_Tina) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, happy) = True",
+                        "BEL(Tina's-boyfriend, grateful_to_Tina) = True",
+                        "DES(Tina's-boyfriend, feel_loved) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Search_Cake(Tina's-boyfriend, kitchen)": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, searched_kitchen) = False",
+                        "BEL(kitchen, has_cake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, searched_kitchen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Rumor_Mill(Tina's-boyfriend, ask_friends_about_cake)": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, appreciates_Tina) = True",
+                        "BEL(Tina's-boyfriend, likes_cakes) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's-boyfriend, find_out_more_about_cake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Uncertainty"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Ask_Tina(Tina's-boyfriend, Tina, \"Did you bake this cake for me?\")": {
+                    "conditions": [
+                        "BEL(Tina, baking_cake) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Eat_Cake(Tina's-boyfriend, cake)": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = False",
+                        "BEL(Tina, baked_a_cake) = True",
+                        "BEL(cake, is_fresh) = True",
+                        "BEL(cake, has_no_nuts) = True",
+                        "BEL(cake, is_delicious) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, hungry) = False",
+                        "BEL(Tina's-boyfriend, happy) = True",
+                        "DES(Tina's-boyfriend, feel_loved) = False",
+                        "BEL(cake, is_fresh) = False",
+                        "BEL(cake, has_no_nuts) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Express_Gratitude(Tina's-boyfriend, Tina, \"Thank you so much for baking this cake for me. It's delicious and means a lot to me. You're amazing!\")": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, appreciates_Tina) = True",
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, happy) = True",
+                        "DES(Tina's-boyfriend, feel_loved) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Kiss(Tina's-boyfriend, Tina)": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, happy) = False",
+                        "BEL(Tina's-boyfriend, appreciates_Tina) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, happy) = True",
+                        "DES(Tina's-boyfriend, feel_loved) = True"
+                    ],
+                    "occ_emotion": [
+                        "Love"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "CheckIngredients(Tina, cake, nuts)": {
+                    "conditions": [
+                        "BEL(Tina, baked_cake) = True",
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = False",
+                        "BEL(Tina, cake_contains_nuts) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, has_information_about_cake_ingredients) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Thank(Tina, Tina's-boyfriend)": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, happy) = False",
+                        "BEL(Tina, appreciates_Tina's-boyfriend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, happy) = True",
+                        "DES(Tina's-boyfriend, feel_grateful) = True",
+                        "BEL(Tina, has_reinforced_relationship) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "TakeSlice(Tina's-boyfriend, cake)": {
+                    "conditions": [
+                        "BEL(Tina, has_cake) = True",
+                        "BEL(Tina, cake_has_slices) = True",
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has_cake) = False",
+                        "BEL(Tina, cake_has_slices) = False",
+                        "BEL(Tina's-boyfriend, has_cake_slice) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "EatSlice(Tina's-boyfriend, cake)": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, has_cake_slice) = True",
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, has_cake_slice) = False",
+                        "BEL(Tina's-boyfriend, satisfied) = True",
+                        "DES(Tina's-boyfriend, feel_loved) = False",
+                        "BEL(Tina's-boyfriend, full) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "ExpressGratitude(Tina's-boyfriend, Tina)": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, appreciate_Tina) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's-boyfriend, feel_grateful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Hug(Tina, Tina's-boyfriend)": {
+                    "conditions": [
+                        "BEL(Tina, present) = True",
+                        "BEL(Tina's-boyfriend, appreciates_Tina) = True",
+                        "DES(Tina's-boyfriend, feel_loved) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, happy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Love"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Request(Tina, Cake, 1)": {
+                    "conditions": [
+                        "BEL(Tina, has_cake) = False",
+                        "BEL(Tina, can_bake) = True",
+                        "BEL(Tina's-boyfriend, gets_cake) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has_cake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Tina's-boyfriend, likes_cakes) = True": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "BEL(Tina's-boyfriend, allergic_to_nuts) = False": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Inspect(Cake, AllergyInfo)": {
+                    "conditions": [
+                        "BEL(AllergyInfo, contains_nuts) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(AllergyInfo, contains_nuts) = True": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = False",
+                        "Inspect(Cake, AllergyInfo)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ActionNotPossible(Tina's-boyfriend, get_cake)": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, likes_cakes) = True",
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = False",
+                        "BEL(AllergyInfo, contains_nuts) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, gets_cake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Frustration"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "BEL(Tina's-boyfriend, gets_cake) = True": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, get_cake) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Receive(Tina, Cake, 1)": {
+                    "conditions": [
+                        "BEL(Tina, has_cake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, has_cake) = False",
+                        "BEL(Tina's-boyfriend, received_cake) = True",
+                        "BEL(Tina's-boyfriend, likes_cake) = True",
+                        "BEL(Tina's-boyfriend, feel_happy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "BEL(Tina's-boyfriend, feel_happy) = True": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, gets_cake) = True",
+                        "BEL(Tina's-boyfriend, feel_happy) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(BoyfriendTexting, BoyfriendHappy, Neutral, Excitement)": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, feels_grateful_for_Tina) = True",
+                        "BEL(Tina's-boyfriend, happy) != True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, happy) = True",
+                        "INTENT(Tina's-boyfriend, express_gratitude_for_Tina) = True"
+                    ],
+                    "occ_emotion": [
+                        "[BoyfriendHappy",
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "[Joy"
+                    ]
+                },
+                "Speak(BoyfriendHappy, KnockAtTheDoor, Neutral, Excitement)": {
+                    "conditions": [
+                        "BEL(Tina's-boyfriend, likes_cakes) = True",
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = False",
+                        "INTENT(Tina's-boyfriend, eat_cake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, happy) = True",
+                        "DES(Tina's-boyfriend, feel_loved) = True",
+                        "INTENT(Tina's-boyfriend, express_gratitude_for_Tina) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(KnockAtTheDoor, End, Neutral, Greeting)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Tina's-boyfriend, get_cake) = True",
+                        "BEL(Tina's-boyfriend, likes_cakes) = True",
+                        "BEL(Tina's-boyfriend, allergic_to_nuts) = False",
+                        "BEL(Tina's-boyfriend, happy) = True",
+                        "INTENT(Tina's-boyfriend, eat_cake) = True",
+                        "INTENT(Tina's-boyfriend, feel_happy) = True",
+                        "INTENT(Tina's-boyfriend, express_gratitude_for_Tina) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, TinaHappy, Neutral, Greeting, \"Tina stands in her kitchen and looks at the cake she just baked.\">",
+        "<TinaHappy, BoyfriendTexting, Neutral, Excitement, \"Tina texts her boyfriend to come over and get the cake.\">",
+        "<BoyfriendTexting, BoyfriendReply, Neutral, Excitement, \"Tina receives a reply from her boyfriend saying he is on the way.\">",
+        "<BoyfriendReply, BoyfriendHappy, Neutral, Excitement, \"Tina starts to feel a sense of happiness as she anticipates her boyfriend's arrival.\">",
+        "<BoyfriendHappy, KnockAtTheDoor, Neutral, Excitement, \"Tina hears a knock at the door and rushes to answer it.\">",
+        "<KnockAtTheDoor, End, Neutral, Greeting, \"Tina's boyfriend thanks her for the cake and they enjoy it together.\">"
+    ]
+}

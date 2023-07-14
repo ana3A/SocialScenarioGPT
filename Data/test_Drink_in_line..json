@@ -1,0 +1,653 @@
+{
+    "scenario_name": "test_Drink in line.",
+    "scenario_description": "Jacob works at a convenience store. He has a long line. Jacob thought the line would never end. He finally made it to the last customer. The customer paid for their drink and left.",
+    "last_ended": "end",
+    "agents": {
+        "Jacob": {
+            "knowledge_base": [],
+            "intentions": {
+                "INTENT(Jacob, ServeCustomer) = True": {
+                    "action_plan": [
+                        "GreetCustomer(Jacob, Customer, null)",
+                        "TakeOrder(Jacob, Customer, null)",
+                        "HandlePayment(Jacob, Customer, null)",
+                        "ThankCustomer(Jacob, Customer, null)",
+                        "UpdateBeliefs(Jacob, null, null)"
+                    ]
+                },
+                "INTENT(Jacob, FinishFast) = True": {
+                    "action_plan": [
+                        "ScanItems(Jacob, Customer, Drink)",
+                        "TakePayment(Jacob, Customer, Cash)",
+                        "CompleteTransaction(Jacob, Customer)",
+                        "UpdateInventory(Jacob, Store, Drink)",
+                        "CheckLineLength(Jacob, Store)",
+                        "INTENT(Jacob, FinishFast) = False"
+                    ]
+                }
+            },
+            "actions": {
+                "ScanItems(Jacob, Customer, Drink)": {
+                    "conditions": [
+                        "BEL(Customer, HasPurchasedDrink) = False",
+                        "BEL(Jacob, IsBusy) = True",
+                        "BEL(Store, HasDrinkInInventory) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, HasPurchasedDrink) = True",
+                        "BEL(Jacob, IsBusy) = True",
+                        "BEL(Jacob, ScannedItems) = True",
+                        "BEL(Store, HasDrinkInInventory) = True",
+                        "BEL(Jacob, ItemBeingScanned) = Drink"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TakePayment(Jacob, Customer, Cash)": {
+                    "conditions": [
+                        "BEL(Jacob, has_scanned_items(Customer, Drink)) = True",
+                        "BEL(Customer, has_given_cash(Jacob)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, has_received_cash(Customer)) = True",
+                        "BEL(Jacob, has_completed_transaction(Customer)) = False",
+                        "BEL(Jacob, has_updated_inventory(Store, Drink)) = False",
+                        "DES(Jacob, FinishFast) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "CompleteTransaction(Jacob, Customer)": {
+                    "conditions": [
+                        "BEL(Jacob, \"TransactionInProgress\") = True",
+                        "BEL(Customer, \"TransactionInProgress\") = True",
+                        "BEL(Jacob, \"Customer\") = Customer",
+                        "BEL(Jacob, \"CustomerPaid\") = True"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, \"TransactionInProgress\") = False",
+                        "BEL(Customer, \"TransactionInProgress\") = False",
+                        "BEL(Jacob, \"Customer\") = None",
+                        "BEL(Jacob, \"CustomerPaid\") = False",
+                        "DES(Jacob, \"Satisfaction\") = True",
+                        "DES(Jacob, \"EarnedMoney\", Cash) = True",
+                        "BEL(Jacob, \"Money\") = OLD_VALUE(Jacob, \"Money\") + Cash"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "UpdateInventory(Jacob, Store, Drink)": {
+                    "conditions": [
+                        "BEL(Jacob, Inventory(Drink)) >= 1"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, Inventory(Drink)) = BEL(Jacob, Inventory(Drink)) - 1",
+                        "BEL(Store, Stock(Drink)) = BEL(Store, Stock(Drink)) - 1"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckLineLength(Jacob, Store)": {
+                    "conditions": [
+                        "BEL(Jacob, LineLength) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, LineLength) == 0",
+                        "BEL(Jacob, FinishFast) = True",
+                        "BEL(Jacob, LineLength) > 0",
+                        "BEL(Jacob, FinishFast) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "INTENT(Jacob, FinishFast) = False": {
+                    "conditions": [
+                        "BEL(Jacob, last_customer_left) = True",
+                        "BEL(Jacob, long_line) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "GreetCustomer(Jacob, Customer, null)": {
+                    "conditions": [
+                        "BEL(Jacob, Working) = True",
+                        "BEL(Jacob, CustomerInLine) = True",
+                        "BEL(Jacob, LastCustomer) = False",
+                        "BEL(Customer, PaymentMade) = False"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, GreetedCustomer) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TakeOrder(Jacob, Customer, null)": {
+                    "conditions": [
+                        "BEL(Jacob, IsBusy) = False",
+                        "BEL(Customer, HasPaid) = False",
+                        "DES(Jacob, SatisfyCustomer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, IsBusy) = True",
+                        "BEL(Customer, WantsToOrder) = False",
+                        "BEL(Customer, OrderTaken) = True",
+                        "BEL(Customer, OrderReceivedByJacob) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "HandlePayment(Jacob, Customer, null)": {
+                    "conditions": [
+                        "BEL(Jacob, has_customer) = True",
+                        "BEL(Jacob, has_change) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, paid) = True",
+                        "BEL(Jacob, revenue) = BEL(Jacob, revenue) + BEL(Customer, purchase_price)",
+                        "BEL(Jacob, has_change) = BEL(Jacob, has_change) - BEL(Customer, purchase_price)",
+                        "BEL(Jacob, has_customer) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "ThankCustomer(Jacob, Customer, null)": {
+                    "conditions": [
+                        "BEL(Jacob, ServedAllCustomers) = False",
+                        "BEL(Jacob, LineIsEmpty) = True",
+                        "DES(Jacob, ServeCustomer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, ExpressedGratitude) = True"
+                    ],
+                    "occ_emotion": [
+                        "gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "UpdateBeliefs(Jacob, null, null)": {
+                    "conditions": [
+                        "BEL(Jacob, hasLongLine) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, hasLongLine) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, AwaitingCustomer, None, None)": {
+                    "conditions": [
+                        "BEL(Jacob, line_ended) = False",
+                        "BEL(Jacob, has_customer) = True",
+                        "BEL(Jacob, customer_paid) = False",
+                        "INTENT(Jacob, ServeCustomer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, customer_paid) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(AwaitingCustomer, ScanningProducts, None, None)": {
+                    "conditions": [
+                        "BEL(Jacob, KnowsHowToOperateRegister) = True",
+                        "DES(Jacob, ServeCustomer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, LineInProgress) = True",
+                        "BEL(Jacob, Busy) = True",
+                        "BEL(Jacob, KnowsHowToOperateRegister) = True",
+                        "INTENT(Jacob, ServeCustomer) = True",
+                        "INTENT(Jacob, FinishFast) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(AwaitingCustomer, ScanningProducts, None, None)], [UpdateBeliefs(Jacob, null, null), null, \"Hope\", null, null"
+                    ],
+                    "emotion_condition": [
+                        "Speak(AwaitingCustomer, ScanningProducts, Hope, None)"
+                    ]
+                },
+                "Speak(ScanningProducts, WaitingForPayment, None, None)": {
+                    "conditions": [
+                        "BEL(Jacob, HasCustomer) = True",
+                        "INTENT(Jacob, ServeCustomer) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, AwaitingCustomer) = False",
+                        "BEL(Jacob, ScanningProducts) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(WaitingForPayment, CompletedTransaction, Satisfaction, None)"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(WaitingForPayment, CompletedTransaction, None, None)": {
+                    "conditions": [
+                        "BEL(Jacob, LineLong) = True",
+                        "INTENT(Jacob, ServeCustomer) = True",
+                        "INTENT(Jacob, FinishFast) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jacob, LineLong) = False"
+                    ],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Speak(CompletedTransaction, Start, None, None)": {
+                    "conditions": [
+                        "BEL(Jacob, KnowsCustomerPayment) = True",
+                        "DES(Jacob, ServeCustomer) = True",
+                        "INTENT(Jacob, FinishFast) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Jacob feels Satisfaction after completing the transaction successfully."
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                }
+            }
+        },
+        "Customer": {
+            "knowledge_base": [
+                "BEL(Customer, at_convenience_store) = True",
+                "BEL(Customer, has_money) = True",
+                "BEL(Customer, thirsty) = True",
+                "DES(Customer, quench_thirst) = True",
+                "DES(Customer, leave_store) = True"
+            ],
+            "intentions": {
+                "INTENT(Customer, pay_for_drink) = True": {
+                    "action_plan": [
+                        "Move(Customer, towards_cashier)",
+                        "Wait(Customer, in_line)",
+                        "Pay(Customer, cashier, amount=1.50)",
+                        "Take(Customer, drink)",
+                        "Leave(Customer, store)"
+                    ]
+                },
+                "INTENT(Customer, quench_thirst) = True": {
+                    "action_plan": [
+                        "GoTo(Customer, ConvenienceStore)",
+                        "Pay(Customer, ConvenienceStore, Drinks)",
+                        "Drink(Customer, Drinks)",
+                        "Leave(Customer, ConvenienceStore)"
+                    ]
+                },
+                "INTENT(Customer, leave_store) = True": {
+                    "action_plan": [
+                        "CheckWallet(Customer)",
+                        "PayForDrink(Customer, Jacob)",
+                        "QuenchThirst(Customer, Drink)",
+                        "LeaveStore(Customer)",
+                        "CheckWallet(Customer)",
+                        "PayForDrink(Customer, Jacob)",
+                        "QuenchThirst(Customer, Drink)",
+                        "LeaveStore(Customer)"
+                    ]
+                }
+            },
+            "actions": {
+                "CheckWallet(Customer)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, has_money) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PayForDrink(Customer, Jacob)": {
+                    "conditions": [
+                        "BEL(Customer, has_money) = True",
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Jacob, drink_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, paid_for_drink) = True",
+                        "BEL(Jacob, received_payment) = True",
+                        "BEL(Customer, has_money) = False",
+                        "BEL(Customer, purchasing) = False",
+                        "DES(Customer, quench_thirst) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "QuenchThirst(Customer, Drink)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, has_money) = True",
+                        "BEL(Customer, thirsty) = True",
+                        "BEL(Drink, available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, quenched_thirst) = True",
+                        "DES(Customer, not_thirsty_anymore) = True",
+                        "BEL(Drink, empty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "LeaveStore(Customer)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "DES(Customer, leave_store) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, at_convenience_store) = False",
+                        "DES(Customer, leave_store) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Move(Customer, towards_cashier)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, near_cashier) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Wait(Customer, in_line)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, thirsty) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Patience"
+                    ]
+                },
+                "Pay(Customer, cashier, amount=1.50)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, has_money) = True",
+                        "BEL(Customer, thirsty) = True",
+                        "BEL(cashier, available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, has_drink) = True",
+                        "BEL(Customer, purchased_drink) = True",
+                        "BEL(Customer, funds) -= 1.50",
+                        "BEL(cashier, available) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Take(Customer, drink)": {
+                    "conditions": [
+                        "BEL(Customer, has_paid) = True",
+                        "BEL(Customer, has_drink) = False"
+                    ],
+                    "effects": [
+                        "BEL(Customer, has_drink) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Leave(Customer, store)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, has_money) = True",
+                        "BEL(Customer, has_drink) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, at_convenience_store) = False",
+                        "DES(Customer, quench_thirst) = False",
+                        "DES(Customer, leave_store) = False",
+                        "BEL(Customer, has_money) = True",
+                        "BEL(Customer, has_drink) = True",
+                        "BEL(Customer, thirsty) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "GoTo(Customer, ConvenienceStore)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = False"
+                    ],
+                    "effects": [
+                        "BEL(Customer, at_convenience_store) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Pay(Customer, ConvenienceStore, Drinks)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, has_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, purchased_drink) = True",
+                        "BEL(Customer, has_money) = False",
+                        "BEL(ConvenienceStore, has_money) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Drink(Customer, Drinks)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, thirsty) = True",
+                        "BEL(Customer, has_money) = True",
+                        "BEL(ConvenienceStore, has_drinks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, hydrated) = True",
+                        "DES(Customer, satisfied) = True",
+                        "DES(Customer, leave_store) = True",
+                        "DES(ConvenienceStore, increase_sales) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Leave(Customer, ConvenienceStore)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "DES(Customer, leave_store) = True"
+                    ],
+                    "effects": [
+                        "BEL(Customer, at_convenience_store) = False",
+                        "DES(Customer, leave_store) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [],
+            "speak_actions": {
+                "Speak(Start, AwaitingCustomer, None, None)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, has_money) = True",
+                        "BEL(Customer, thirsty) = True",
+                        "DES(Customer, quench_thirst) = True",
+                        "DES(Customer, leave_store) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(AwaitingCustomer, ScanningProducts, None, None)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, has_money) = True",
+                        "BEL(Customer, thirsty) = True",
+                        "DES(Customer, quench_thirst) = True",
+                        "DES(Customer, leave_store) = True",
+                        "INTENT(Customer, pay_for_drink) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Customer, pay_for_drink) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(AwaitingCustomer, ScanningProducts, None, None)], [ScanningProducts, None, \"Joy\", None, \"I found the drink I was looking for.\""
+                    ],
+                    "emotion_condition": [
+                        "ScanningProducts, WaitingForPayment, None, None, \"That will be $5.50. How would you like to pay?\"",
+                        "Fear"
+                    ]
+                },
+                "Speak(ScanningProducts, WaitingForPayment, None, None)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, has_money) = True",
+                        "BEL(Customer, thirsty) = True",
+                        "DES(Customer, quench_thirst) = True",
+                        "INTENT(Customer, leave_store) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Customer, quench_thirst) = True",
+                        "INTENT(Customer, leave_store) = True"
+                    ],
+                    "occ_emotion": [
+                        "ScanningProducts, WaitingForPayment, None, None",
+                        "ScanningProducts, WaitingForPayment, Joy, None"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(WaitingForPayment, CompletedTransaction, None, None)": {
+                    "conditions": [
+                        "BEL(Customer, at_convenience_store) = True",
+                        "BEL(Customer, has_money) = True",
+                        "BEL(Customer, thirsty) = True",
+                        "DES(Customer, quench_thirst) = True",
+                        "DES(Customer, leave_store) = True",
+                        "INTENT(Customer, completed_transaction) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Customer, pay_for_drink) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(WaitingForPayment, CompletedTransaction, None, None)], [Emotion(Customer, Joy)"
+                    ],
+                    "emotion_condition": [
+                        "Fear(Paying), WaitingForPayment, \"Customer fears not having enough money to pay for the drink\", None, None",
+                        "Joy(Paying), CompletedTransaction, \"Customer is pleased to have quenched their thirst\", None, \"Thanks for the drink\""
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, AwaitingCustomer, None, None, \"Jacob greets the next customer in line.\">",
+        "<AwaitingCustomer, ScanningProducts, None, None, \"Hi, how are you doing today?\">",
+        "<ScanningProducts, WaitingForPayment, None, None, \"That will be $5.50. How would you like to pay?\">",
+        "<WaitingForPayment, CompletedTransaction, None, None, \"Thanks for coming in today.\">"
+    ]
+}

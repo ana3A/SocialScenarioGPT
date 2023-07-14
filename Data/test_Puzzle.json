@@ -1,0 +1,332 @@
+{
+    "scenario_name": "test_Puzzle",
+    "scenario_description": "Lucas was working a puzzle. When he was almost done, he searched in vain for the final pieces. He got on ebay to try to buy the missing pieces. They weren't available. Lucas tore apart the puzzle in despair.",
+    "last_ended": "end",
+    "agents": {
+        "Lucas": {
+            "knowledge_base": [
+                "BEL(Lucas, knows(puzzle_is_missing_pieces)) = True",
+                "BEL(Lucas, searched_for_missing_pieces_on_ebay) = True",
+                "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True",
+                "BEL(Lucas, puzzle_is_not_complete) = True",
+                "DES(Lucas, find_missing_pieces) = True",
+                "DES(Lucas, complete_puzzle) = False"
+            ],
+            "intentions": {
+                "INTENT(Lucas, give up on finding missing pieces) = True": {
+                    "action_plan": [
+                        "StopWorkingPuzzle(Lucas, puzzle, None)",
+                        "SearchOnEbay(Lucas, internet, missing_pieces)",
+                        "CheckForAvailability(Lucas, Ebay, missing_pieces)",
+                        "GiveUpOnFindingPieces(Lucas, puzzle, None)"
+                    ]
+                },
+                "INTENT(Lucas, destroy puzzle) = True": {
+                    "action_plan": [
+                        "INTENT(Lucas, destroy puzzle) = True",
+                        "Move(Lucas, puzzle, None)",
+                        "Grab(Lucas, puzzle, None)",
+                        "RipApart(Lucas, puzzle, None)",
+                        "ThrowAway(Lucas, puzzle, None)",
+                        "Cry(Lucas, None, None)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Lucas, destroy puzzle) = True": {
+                    "conditions": [
+                        "BEL(Lucas, puzzle_is_not_complete) = True",
+                        "DES(Lucas, find_missing_pieces) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, puzzle_is_complete) = False",
+                        "BEL(Lucas, puzzle_is_destroyed) = True",
+                        "DES(Lucas, find_missing_pieces) = False",
+                        "DES(Lucas, complete_puzzle) = False",
+                        "DES(Lucas, give_up_on_puzzle) = True",
+                        "BEL(Lucas, is_crying) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Move(Lucas, puzzle, None)": {
+                    "conditions": [
+                        "BEL(Lucas, knows(puzzle_is_missing_pieces)) = True",
+                        "BEL(Lucas, puzzle_not_nearby) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, knows(puzzle_is_missing_pieces)) = True",
+                        "BEL(Lucas, puzzle_not_nearby) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Grab(Lucas, puzzle, None)": {
+                    "conditions": [
+                        "BEL(Lucas, puzzle_is_not_complete)",
+                        "BEL(Lucas, knows(puzzle_is_missing_pieces))",
+                        "BEL(Lucas, searched_for_missing_pieces_on_ebay)",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay)"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, is_holding_puzzle)",
+                        "DES(Lucas, destroy_puzzle)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "RipApart(Lucas, puzzle, None)": {
+                    "conditions": [
+                        "BEL(Lucas, puzzle_is_not_complete) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, puzzle_is_not_complete) = False",
+                        "BEL(Lucas, puzzle_is_ripped_apart) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "ThrowAway(Lucas, puzzle, None)": {
+                    "conditions": [
+                        "BEL(Lucas, has_puzzle) = True",
+                        "BEL(Lucas, puzzle_is_destroyed) = False",
+                        "BEL(Lucas, puzzle_was_not_found) = False",
+                        "BEL(Lucas, puzzle_is_not_complete) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, has_puzzle) = False",
+                        "BEL(Lucas, puzzle_is_destroyed) = True",
+                        "DES(Lucas, complete_puzzle) = False",
+                        "DES(Lucas, find_missing_pieces) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Cry(Lucas, None, None)": {
+                    "conditions": [
+                        "BEL(Lucas, puzzle_is_not_complete) = True",
+                        "INTENT(Lucas, destroy puzzle) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, puzzle_is_not_complete) = False",
+                        "BEL(Lucas, puzzle_is_destroyed) = True",
+                        "DES(Lucas, complete_puzzle) = False",
+                        "DES(Lucas, find_missing_pieces) = False",
+                        "BEL(Lucas, sad) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "StopWorkingPuzzle(Lucas, puzzle, None)": {
+                    "conditions": [
+                        "BEL(Lucas, puzzle_is_not_complete) = True",
+                        "BEL(Lucas, knows(puzzle_is_missing_pieces)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, puzzle_is_not_complete) = False",
+                        "BEL(Lucas, knows(puzzle_is_missing_pieces)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "SearchOnEbay(Lucas, internet, missing_pieces)": {
+                    "conditions": [
+                        "BEL(Lucas, searched_for_missing_pieces_on_ebay) = False",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = False"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, searched_for_missing_pieces_on_ebay) = True",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckForAvailability(Lucas, Ebay, missing_pieces)": {
+                    "conditions": [
+                        "BEL(Lucas, searched_for_missing_pieces_on_ebay) = True",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = False"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GiveUpOnFindingPieces(Lucas, puzzle, None)": {
+                    "conditions": [
+                        "BEL(Lucas, puzzle_is_not_complete) = True",
+                        "DES(Lucas, find_missing_pieces) = True",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, give_up_on_finding_missing_pieces) = True",
+                        "DES(Lucas, complete_puzzle) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, A1, None, None)": {
+                    "conditions": [
+                        "BEL(Lucas, knows(puzzle_is_missing_pieces)) = True",
+                        "BEL(Lucas, searched_for_missing_pieces_on_ebay) = True",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True",
+                        "DES(Lucas, find_missing_pieces) = True",
+                        "INTENT(Lucas, give up on finding missing pieces) = False",
+                        "INTENT(Lucas, destroy puzzle) = False"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, puzzle_is_not_complete) = True",
+                        "DES(Lucas, find_missing_pieces) = False",
+                        "INTENT(Lucas, give up on finding missing pieces) = True",
+                        "INTENT(Lucas, destroy puzzle) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": []
+                },
+                "Speak(A1, A2, None, None)": {
+                    "conditions": [
+                        "BEL(Lucas, knows(puzzle_is_missing_pieces)) = True",
+                        "BEL(Lucas, searched_for_missing_pieces_on_ebay) = True",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True",
+                        "DES(Lucas, find_missing_pieces) = True",
+                        "INTENT(Lucas, give up on finding missing pieces) = False"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, searched_for_missing_pieces_on_ebay) = True",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True",
+                        "INTENT(Lucas, give up on finding missing pieces) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Distress",
+                        "Hope",
+                        "Fears-confirmed",
+                        "Anger",
+                        "Disappointment",
+                        "Shame",
+                        "Remorse"
+                    ]
+                },
+                "Speak(A2, A3, None, None)": {
+                    "conditions": [
+                        "BEL(Lucas, knows(puzzle_is_missing_pieces)) = True",
+                        "BEL(Lucas, searched_for_missing_pieces_on_ebay) = True",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True",
+                        "DES(Lucas, find_missing_pieces) = True",
+                        "DES(Lucas, complete_puzzle) = False",
+                        "INTENT(Lucas, give up on finding missing pieces) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, knows(puzzle_is_not_complete)) = True",
+                        "DES(Lucas, find_missing_pieces) = False",
+                        "DES(Lucas, complete_puzzle) = False",
+                        "INTENT(Lucas, destroy puzzle) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": []
+                },
+                "Speak(A3, A4, None, None)": {
+                    "conditions": [
+                        "BEL(Lucas, knows(puzzle_is_missing_pieces)) = True",
+                        "BEL(Lucas, searched_for_missing_pieces_on_ebay) = True",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True",
+                        "BEL(Lucas, puzzle_is_not_complete) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Distress",
+                        "Distress",
+                        "Distress",
+                        "Sadness",
+                        "Distress",
+                        "Frustration"
+                    ]
+                },
+                "Speak(A4, A5, None, None)": {
+                    "conditions": [
+                        "BEL(Lucas, knows(puzzle_is_missing_pieces)) = True",
+                        "BEL(Lucas, searched_for_missing_pieces_on_ebay) = True",
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, puzzle_is_not_complete) = True",
+                        "DES(Lucas, complete_puzzle) = False",
+                        "DES(Lucas, find_missing_pieces) = False",
+                        "INTENT(Lucas, give up on finding missing pieces) = True",
+                        "INTENT(Lucas, destroy puzzle) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": []
+                },
+                "Speak(A5, End, Sadness, None)": {
+                    "conditions": [
+                        "BEL(Lucas, missing_pieces_are_not_available_on_ebay) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lucas, puzzle_is_not_complete) = True",
+                        "DES(Lucas, complete_puzzle) = False",
+                        "INTENT(Lucas, destroy_puzzle) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": []
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, A1, None, None, \"Lucas is working on a puzzle\">",
+        "<A1, A2, None, None, \"Lucas is struggling to find the last pieces\">",
+        "<A2, A3, None, None, \"Lucas goes to ebay to search for the pieces\">",
+        "<A3, A4, None, None, \"Lucas can't find the pieces on ebay\">",
+        "<A4, A5, None, None, \"Lucas becomes sad and disappointed\">",
+        "<A5, End, Sadness, None, \"Lucas tears apart the puzzle in despair.\">"
+    ]
+}

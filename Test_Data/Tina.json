@@ -1,0 +1,724 @@
+{
+    "scenario_name": "Tina",
+    "scenario_description": "Tina made spaghetti for her boyfriend. It took a lot of work, but she was very proud. Her boyfriend ate the whole plate and said it was good. Tina tried it herself, and realized it was disgusting. She was touched that he pretended it was good to spare her feelings.",
+    "last_ended": "end",
+    "agents": {
+        "Tina": {
+            "knowledge_base": [
+                "BEL(Tina, Cooked_Spaghetti) = True",
+                "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+                "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+                "DES(Tina, Cook_Delicious_Spaghetti) = True",
+                "DES(Tina, Boyfriend_Honesty) = False"
+            ],
+            "intentions": {
+                "INTENT(Tina, Cook_Delicious_Spaghetti) = True": {
+                    "action_plan": [
+                        "GetIngredients(Tina, Pantry)",
+                        "BoilWater(Tina, Stove)",
+                        "CookSpaghetti(Tina, Pot)",
+                        "PrepareSauce(Tina, Saucepan, Ingredients)",
+                        "HeatSauce(Tina, Saucepan)",
+                        "DrainSpaghetti(Tina, Strainer)",
+                        "CombineSpaghettiAndSauce(Tina, Plate)",
+                        "ServeSpaghetti(Tina, Table)"
+                    ]
+                },
+                "INTENT(Tina, Convince_Boyfriend_To_Be_Honest) = False": {
+                    "action_plan": [
+                        "Talk(Tina, Tina's_boyfriend, {subject: Spaghetti})",
+                        "Ask(Tina, Tina's_boyfriend, {question: Did you really like the spaghetti?})",
+                        "Listen(Tina's_boyfriend, Tina)",
+                        "Explain(Tina's_boyfriend, Tina, {explanation: I wanted to spare your feelings})",
+                        "Thank(Tina, Tina's_boyfriend)",
+                        "Apologize(Tina's_boyfriend, Tina, {reason: I should have been honest})",
+                        "Discuss(Tina, Tina's_boyfriend, {subject: Cooking, solution: Cook together in the future})"
+                    ]
+                }
+            },
+            "actions": {
+                "Talk(Tina, Tina's_boyfriend, {subject: Spaghetti})": {
+                    "conditions": [
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+                        "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+                        "DES(Tina, Boyfriend_Honesty) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Ask(Tina, Tina's_boyfriend, {question: Did you really like the spaghetti?})": {
+                    "conditions": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = False"
+                    ],
+                    "effects": [
+                        "DES(Tina, Boyfriend_Honesty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Listen(Tina's_boyfriend, Tina)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, Chose_To_Pretend_Spaghetti_Was_Good) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Explain(Tina's_boyfriend, Tina, {explanation: I wanted to spare your feelings})": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, Spaghetti_Was_Disgusting) = True], [BEL(Tina's_boyfriend, Boyfriend_Enjoyed_Spaghetti) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, Boyfriend_Honesty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Thank(Tina, Tina's_boyfriend)": {
+                    "conditions": [
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina, Boyfriend_Honesty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Apologize(Tina's_boyfriend, Tina, {reason: I should have been honest})": {
+                    "conditions": [
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+                        "DES(Tina, Boyfriend_Honesty) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, Tina_Apologized) = True",
+                        "BEL(Tina, Boyfriend_Honesty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Shame"
+                    ]
+                },
+                "Discuss(Tina, Tina's_boyfriend, {subject: Cooking, solution: Cook together in the future})": {
+                    "conditions": [
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "DES(Tina, Cook_Delicious_Spaghetti) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina, Cook_With_Boyfriend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GetIngredients(Tina, Pantry)": {
+                    "conditions": [
+                        "BEL(Tina, Has_Key_for_Pantry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, Found_Ingredients_in_Pantry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BoilWater(Tina, Stove)": {
+                    "conditions": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Boiling_Water) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina, Boiling_Water) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CookSpaghetti(Tina, Pot)": {
+                    "conditions": [
+                        "BEL(Tina, Cooked_Spaghetti) = False",
+                        "BEL(Tina, Spaghetti_Was_Disgusting) = False",
+                        "BEL(Tina, Pot) = Available"
+                    ],
+                    "effects": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Pot) = Unavailable"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PrepareSauce(Tina, Saucepan, Ingredients)": {
+                    "conditions": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+                        "BEL(Tina, Ingredients_Are_Available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, Sauce_Is_Prepared) = True",
+                        "BEL(Tina, Ingredients_Are_Used) = True",
+                        "BEL(Tina, Spaghetti_Was_Improved) = True",
+                        "DES(Tina, Cook_Delicious_Spaghetti) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "HeatSauce(Tina, Saucepan)": {
+                    "conditions": [
+                        "BEL(Tina, Saucepan) = True",
+                        "BEL(Tina, Sauce) = True",
+                        "BEL(Tina, Sauce_Is_Raw) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, Sauce_Is_Cooked) = True",
+                        "BEL(Tina, Sauce_Is_Raw) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "DrainSpaghetti(Tina, Strainer)": {
+                    "conditions": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+                        "DES(Tina, Cook_Delicious_Spaghetti) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+                        "DES(Tina, Cook_Delicious_Spaghetti) = True",
+                        "BEL(Tina, Spaghetti_Is_Drained) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "CombineSpaghettiAndSauce(Tina, Plate)": {
+                    "conditions": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Spaghetti_Was_Disgusting) = False",
+                        "BEL(Tina, Plate) = Empty",
+                        "BEL(Tina, Sauce) = Ready"
+                    ],
+                    "effects": [
+                        "BEL(Tina, Plate) = Full",
+                        "BEL(Tina, Spaghetti_With_Sauce) = True",
+                        "DES(Tina, Cook_Delicious_Spaghetti) = False",
+                        "DES(Tina, Boyfriend_Honesty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "ServeSpaghetti(Tina, Table)": {
+                    "conditions": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina, Served_Spaghetti) = True",
+                        "DES(Tina, Boyfriend_Honesty) = True",
+                        "DES(Tina, Boyfriend_Approval) = True",
+                        "BEL(Tina, Boyfriend_Knows_Spaghetti_Was_Disgusting) = True",
+                        "BEL(Tina, Boyfriend_Tried_To_Spare_Feelings) = True",
+                        "BEL(Tina, Boyfriend_Appreciates_Efforts) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, A, Greeting, Friendly)": {
+                    "conditions": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True",
+                        "DES(Tina, Boyfriend_Honesty) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(B, C, Disclosure, Guilty)": {
+                    "conditions": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina, Boyfriend_Honesty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Speak(D, End, Gratefulness, Touching)": {
+                    "conditions": [
+                        "BEL(Tina, Cooked_Spaghetti) = True",
+                        "BEL(Tina, Spaghetti_Was_Disgusting) = True",
+                        "BEL(Tina, Boyfriend_Enjoyed_Spaghetti) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina, Boyfriend_Honesty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        },
+        "Tina's_boyfriend": {
+            "knowledge_base": [
+                "BEL(Tina's_boyfriend, likes_spaghetti) = True",
+                "BEL(Tina's_boyfriend, wants_to_please_Tina) = True",
+                "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True",
+                "DES(Tina's_boyfriend, spare_Tina's_feelings) = True",
+                "DES(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference) = True",
+                "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+            ],
+            "intentions": {
+                "INTENT(Tina's_boyfriend, pretend_spaghetti_is_good) = True": {
+                    "action_plan": [
+                        "Approach(Tina's_boyfriend, Plate_of_Spaghetti)",
+                        "Taste(Tina's_boyfriend, Plate_of_Spaghetti)",
+                        "Realize(Tina's_boyfriend, Dislikes_Spaghetti)",
+                        "Internal_State_Change(Tina's_boyfriend, DES(Tina's_boyfriend, spare_Tina's_feelings), False)",
+                        "Internal_State_Change(Tina's_boyfriend, DES(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference), True)",
+                        "Speak(Tina's_boyfriend, Tina, \"This is delicious! You did a great job!\")",
+                        "Internal_State_Change(Tina's_boyfriend, BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti), True)",
+                        "Internal_State_Change(Tina's_boyfriend, BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort), True)"
+                    ]
+                },
+                "INTENT(Tina's_boyfriend, prioritize_Tina's_feelings_over_his_own_preferences) = True": {
+                    "action_plan": [
+                        "Pretend_Like_The_Spaghetti_Is_Good(Tina's_boyfriend, Tina)",
+                        "Compliment_Tina's_Spaghetti(Tina's_boyfriend, Tina)",
+                        "Offer_To_Help_Cook_Next_Time(Tina's_boyfriend, Tina)"
+                    ]
+                },
+                "INTENT(Tina's_boyfriend, make_Tina_happy) = True": {
+                    "action_plan": [
+                        "Pretend_to_enjoy_spaghetti(Tina's_boyfriend, Tina, '')",
+                        "Thank_Tina_for_the_meal(Tina's_boyfriend, Tina, '')",
+                        "Offer_to_make_tomorrow's_dinner(Tina's_boyfriend, Tina, '')"
+                    ]
+                }
+            },
+            "actions": {
+                "Pretend_to_enjoy_spaghetti(Tina's_boyfriend, Tina, '')": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, likes_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, wants_to_please_Tina) = True",
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+                        "BEL(Tina, believes_Tina's_boyfriend_enjoys_spaghetti) = True",
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = Satisfied"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Thank_Tina_for_the_meal(Tina's_boyfriend, Tina, '')": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True",
+                        "BEL(Tina's_boyfriend, wants_to_please_Tina) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, show_gratitude_for_Tina's_effort) = True",
+                        "BEL(Tina's_boyfriend, knows_Tina_feels_appreciated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Offer_to_make_tomorrow's_dinner(Tina's_boyfriend, Tina, '')": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference) = True",
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, show_Tina_he_cares_about_her_happiness) = True",
+                        "BEL(Tina's_boyfriend, willing_to_spend_time_cooking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Approach(Tina's_boyfriend, Plate_of_Spaghetti)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Taste(Tina's_boyfriend, Plate_of_Spaghetti)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True",
+                        "BEL(Tina's_boyfriend, likes_spaghetti) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Realize(Tina's_boyfriend, Dislikes_Spaghetti)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, likes_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, likes_spaghetti) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Internal_State_Change(Tina's_boyfriend, DES(Tina's_boyfriend, spare_Tina's_feelings), False)": {
+                    "conditions": [
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = False"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Internal_State_Change(Tina's_boyfriend, DES(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference), True)": {
+                    "conditions": [
+                        "DES(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference) = False"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference) = True"
+                    ],
+                    "occ_emotion": [
+                        "Love"
+                    ],
+                    "emotion_condition": [
+                        "Love"
+                    ]
+                },
+                "Speak(Tina's_boyfriend, Tina, \"This is delicious! You did a great job!\")": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True",
+                        "DES(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference) = True",
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = False",
+                        "BEL(Tina's_boyfriend, likes_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, wants_to_please_Tina) = True",
+                        "BEL(Tina, feels_happy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Internal_State_Change(Tina's_boyfriend, BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti), True)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Pity"
+                    ]
+                },
+                "Internal_State_Change(Tina's_boyfriend, BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort), True)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = False"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Pretend_Like_The_Spaghetti_Is_Good(Tina's_boyfriend, Tina)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Resentment"
+                    ]
+                },
+                "Compliment_Tina's_Spaghetti(Tina's_boyfriend, Tina)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, likes_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True",
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = True",
+                        "BEL(Tina, feels_happy_about_her_cooking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Offer_To_Help_Cook_Next_Time(Tina's_boyfriend, Tina)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+                    ],
+                    "effects": [
+                        "DES(Tina's_boyfriend, offers_to_help_cook_next_time) = True",
+                        "BEL(Tina's_boyfriend, wants_to_improve_cooking_skills) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, A, PositiveFeedback, Grateful)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, likes_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, wants_to_please_Tina) = True",
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True",
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = True",
+                        "DES(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference) = True",
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Tina's_boyfriend, pretend_spaghetti_is_good) = True",
+                        "INTENT(Tina's_boyfriend, prioritize_Tina's_feelings_over_his_own_preferences) = True",
+                        "INTENT(Tina's_boyfriend, make_Tina_happy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(A, B, Concern, Caring)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, wants_to_please_Tina) = True",
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True",
+                        "INTENT(Tina's_boyfriend, prioritize_Tina's_feelings_over_his_own_preferences) = True",
+                        "INTENT(Tina's_boyfriend, make_Tina_happy) = True",
+                        "INTENT(Tina's_boyfriend, pretend_spaghetti_is_good) = True"
+                    ],
+                    "occ_emotion": [
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti), DES(Tina's_boyfriend, spare_Tina's_feelings), Joy"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(B, C, Validation, Understanding)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, likes_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, wants_to_please_Tina) = True",
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True",
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = True",
+                        "DES(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference) = True",
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Speak(B, C, Validation, Understanding), C, '', '', ''",
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "B, C, Validation, Understanding, Relief"
+                    ]
+                },
+                "Speak(C, D, Encouragement, Supportive)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, likes_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, wants_to_please_Tina) = True",
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True",
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True",
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = True",
+                        "INTENT(Tina's_boyfriend, prioritize_Tina's_feelings_over_his_own_preferences) = True",
+                        "INTENT(Tina's_boyfriend, make_Tina_happy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Tina's_boyfriend, has_spoken_about_Tina's_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, said_spaghetti_was_good) = True",
+                        "INTENT(Tina's_boyfriend, pretend_spaghetti_is_good) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(D, E, Suggestion, Helpful)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, likes_spaghetti) = True",
+                        "BEL(Tina's_boyfriend, wants_to_please_Tina) = True",
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort) = True",
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings) = True",
+                        "DES(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference) = True",
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(E, End, Offer, Considerate)": {
+                    "conditions": [
+                        "BEL(Tina's_boyfriend, likes_spaghetti)",
+                        "BEL(Tina's_boyfriend, wants_to_please_Tina)",
+                        "BEL(Tina's_boyfriend, believes_Tina's_spaghetti_took_effort)",
+                        "DES(Tina's_boyfriend, spare_Tina's_feelings)",
+                        "DES(Tina's_boyfriend, prioritize_Tina's_happiness_over_food_preference)",
+                        "BEL(Tina's_boyfriend, knows_Tina_would_feel_bad_if_he_dislikes_spaghetti)"
+                    ],
+                    "effects": [
+                        "INTENT(Tina's_boyfriend, pretend_spaghetti_is_good)",
+                        "INTENT(Tina's_boyfriend, prioritize_Tina's_feelings_over_his_own_preferences)",
+                        "INTENT(Tina's_boyfriend, make_Tina_happy)"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, A, Greeting, Friendly, \"Hey, how did you like the spaghetti?\">",
+        "<A, B, PositiveFeedback, Kind, \"It was good, thanks for making it.\">",
+        "<B, C, Disclosure, Guilty, \"Really? I didn't like it when I tasted it.\">",
+        "<C, D, Compliment, Understanding, \"Oh, but I didn't want to hurt your feelings. You put so much effort into it.\">",
+        "<D, End, Gratefulness, Touching, \"Thank you, I appreciate it. I'll try to make it better next time.\">"
+    ]
+}

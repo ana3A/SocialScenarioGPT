@@ -1,0 +1,502 @@
+{
+    "scenario_name": "test_Rides",
+    "scenario_description": "Paul likes theme park rides. Paul went to a theme park to ride rides. Paul decided to ride the largest roller coaster in the park. Paul was amazed by the ride. From that day forward, Paul only went to that theme park.",
+    "last_ended": "end",
+    "agents": {
+        "Paul": {
+            "knowledge_base": [
+                "BEL(Paul,likes_theme_park_rides)=True",
+                "BEL(Paul,went_to_theme_park)=True",
+                "BEL(Paul,ridden_largest_roller_coaster)=True",
+                "BEL(Paul,has_been_to_theme_park_again)=False",
+                "DES(Paul,wants_to_ride_largest_roller_coaster)=True",
+                "DES(Paul,likes_theme_park)=True"
+            ],
+            "intentions": {
+                "INTENT(Paul, ride_largest_roller_coaster) = True": {
+                    "action_plan": [
+                        "Move(Paul, theme_park)",
+                        "Enter(Paul, roller_coaster)",
+                        "Sit(Paul, roller_coaster_seat)",
+                        "Fasten(Paul, roller_coaster_seat_belt)",
+                        "Enjoy_Ride(Paul, largest_roller_coaster)",
+                        "Get_Off_Ride(Paul)",
+                        "Exit(Paul, theme_park)",
+                        "BEL(Paul,has_been_to_theme_park_again)= True"
+                    ]
+                },
+                "INTENT(Paul, go_to_theme_park) = False": {
+                    "action_plan": [
+                        "Decide(Paul,ride_largest_roller_coaster)",
+                        "Go(Paul,to_roller_coaster_area)",
+                        "Get_On(Paul,largest_roller_coaster)",
+                        "Ride(Paul,largest_roller_coaster)",
+                        "Leave(Paul,roller_coaster_area)",
+                        "Go(Paul,to_theme_park_exit)"
+                    ]
+                },
+                "INTENT(Paul, visit_theme_park_again) = False": {
+                    "action_plan": [
+                        "SearchForThemeParks(Paul)",
+                        "SelectThemePark(Paul, ThemePark)",
+                        "BuyTickets(Paul, ThemePark)",
+                        "PlanRoute(Paul, LargestRollerCoaster)",
+                        "RideRollerCoaster(Paul, LargestRollerCoaster)",
+                        "ExploreRestOfPark(Paul)",
+                        "TakeNoteOfParkName(Paul)",
+                        "VisitParkAgain(Paul, ThemePark)"
+                    ]
+                }
+            },
+            "actions": {
+                "SearchForThemeParks(Paul)": {
+                    "conditions": [
+                        "BEL(Paul,has_been_to_theme_park_again)=False"
+                    ],
+                    "effects": [
+                        "DES(Paul,wants_to_visit_theme_park)=True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SelectThemePark(Paul, ThemePark)": {
+                    "conditions": [
+                        "BEL(Paul, likes_theme_park)=True",
+                        "BEL(Paul, went_to_theme_park)=True",
+                        "BEL(Paul,has_been_to_theme_park_again)=False"
+                    ],
+                    "effects": [
+                        "BEL(Paul,selected_theme_park)=ThemePark"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BuyTickets(Paul, ThemePark)": {
+                    "conditions": [
+                        "BEL(Paul,went_to_theme_park) = True",
+                        "BEL(Paul,has_themepark_tickets) = False",
+                        "BEL(ThemePark,is_open) = True"
+                    ],
+                    "effects": [
+                        "BEL(Paul,has_themepark_tickets) = True",
+                        "BEL(Paul,has_enough_money_to_buy_tickets) = True/False",
+                        "DES(Paul,wants_to_buy_tickets) = False",
+                        "BEL(ThemePark,number_of_tickets) = Number_of_tickets - 1"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PlanRoute(Paul, LargestRollerCoaster)": {
+                    "conditions": [
+                        "BEL(Paul, has_been_to_theme_park_again) = False",
+                        "BEL(Paul, ridden_largest_roller_coaster) = True",
+                        "BEL(Paul, went_to_theme_park) = True"
+                    ],
+                    "effects": [
+                        "BEL(Paul, has_planned_route) = True",
+                        "BEL(Paul, knows_how_to_get_to_largest_roller_coaster) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "RideRollerCoaster(Paul, LargestRollerCoaster)": {
+                    "conditions": [
+                        "BEL(Paul,has_been_to_theme_park_again)=False",
+                        "BEL(Paul,ridden_largest_roller_coaster)=False",
+                        "BEL(Paul,wants_to_ride_largest_roller_coaster)=True"
+                    ],
+                    "effects": [
+                        "DES(Paul,likes_roller_coasters)=True",
+                        "BEL(Paul,ridden_largest_roller_coaster)=True",
+                        "DES(Paul,satisfied)=True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ExploreRestOfPark(Paul)": {
+                    "conditions": [
+                        "BEL(Paul,ridden_largest_roller_coaster)=True"
+                    ],
+                    "effects": [
+                        "BEL(Paul,explored_rest_of_park)=True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "TakeNoteOfParkName(Paul)": {
+                    "conditions": [
+                        "BEL(Paul, visited_park_again) = True"
+                    ],
+                    "effects": [
+                        "BEL(Paul, liked_park) = True",
+                        "BEL(Paul, visited_park_again) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "VisitParkAgain(Paul, ThemePark)": {
+                    "conditions": [
+                        "BEL(Paul, has_been_to_theme_park_again) = False",
+                        "BEL(Paul, likes_theme_park) = True",
+                        "BEL(Paul, taken_note_of_park_name) = True"
+                    ],
+                    "effects": [
+                        "BEL(Paul, has_been_to_theme_park_again) = True",
+                        "DES(Paul, wants_to_ride_largest_roller_coaster) = True",
+                        "BEL(Paul, visited_park_name) = ThemePark"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Move(Paul, theme_park)": {
+                    "conditions": [
+                        "BEL(Paul, has_been_to_theme_park_again) = False"
+                    ],
+                    "effects": [
+                        "BEL(Paul, at_theme_park) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Enter(Paul, roller_coaster)": {
+                    "conditions": [
+                        "BEL(Paul, ridden_largest_roller_coaster) = False",
+                        "BEL(Paul, went_to_theme_park) = True",
+                        "BEL(Paul, likes_theme_park_rides) = True",
+                        "DES(Paul, wants_to_ride_largest_roller_coaster) = True"
+                    ],
+                    "effects": [
+                        "BEL(Paul, ridden_largest_roller_coaster) = True",
+                        "DES(Paul, wants_to_ride_largest_roller_coaster) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Sit(Paul, roller_coaster_seat)": {
+                    "conditions": [
+                        "BEL(Paul,has_boarded_roller_coaster)= False",
+                        "BEL(roller_coaster_seat, is_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Paul,has_boarded_roller_coaster)= True",
+                        "BEL(roller_coaster_seat, is_available) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Fasten(Paul, roller_coaster_seat_belt)": {
+                    "conditions": [
+                        "BEL(Paul,riding_roller_coaster)=True",
+                        "BEL(Paul,roller_coaster_seat_belt_fastened)=False"
+                    ],
+                    "effects": [
+                        "BEL(Paul,roller_coaster_seat_belt_fastened)=True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Enjoy_Ride(Paul, largest_roller_coaster)": {
+                    "conditions": [
+                        "BEL(Paul, ridden_largest_roller_coaster) = False"
+                    ],
+                    "effects": [
+                        "BEL(Paul, ridden_largest_roller_coaster) = True",
+                        "DES(Paul, wants_to_ride_largest_roller_coaster) = False",
+                        "DES(Paul, likes_theme_park) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Get_Off_Ride(Paul)": {
+                    "conditions": [
+                        "BEL(Paul,has_ridden_largest_roller_coaster)=True",
+                        "BEL(Paul,is_sitting_on_roller_coaster_seat)=True"
+                    ],
+                    "effects": [
+                        "DES(Paul,wants_to_ride_largest_roller_coaster)=False",
+                        "BEL(Paul,has_ridden_largest_roller_coaster_again)=True",
+                        "BEL(Paul,has_been_to_theme_park_again)=True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Exit(Paul, theme_park)": {
+                    "conditions": [
+                        "BEL(Paul,has_been_to_theme_park_again)=False"
+                    ],
+                    "effects": [
+                        "BEL(Paul,has_been_to_theme_park_again)=True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "BEL(Paul,has_been_to_theme_park_again)= True": {
+                    "conditions": [
+                        "BEL(Paul,ridden_largest_roller_coaster)=True",
+                        "BEL(Paul,has_been_to_theme_park_again)=False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Decide(Paul,ride_largest_roller_coaster)": {
+                    "conditions": [
+                        "BEL(Paul,likes_theme_park_rides)=True",
+                        "BEL(Paul,went_to_theme_park)=True",
+                        "DES(Paul,wants_to_ride_largest_roller_coaster)=True"
+                    ],
+                    "effects": [
+                        "DES(Paul,wants_to_ride_largest_roller_coaster)=True",
+                        "INTENT(Paul, go_to_theme_park) = False",
+                        "DES(Paul,likes_theme_park)=True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Go(Paul,to_roller_coaster_area)": {
+                    "conditions": [
+                        "BEL(Paul, went_to_theme_park) = True",
+                        "BEL(Paul, has_left_entrance) = True",
+                        "BEL(Paul, has_left_roller_coaster_area) = True",
+                        "BEL(ThemePark, has_roller_coaster_area) = True",
+                        "BEL(ThemePark, roller_coaster_area_has_largest_roller_coaster) = True"
+                    ],
+                    "effects": [
+                        "BEL(Paul, is_in_roller_coaster_area) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Get_On(Paul,largest_roller_coaster)": {
+                    "conditions": [
+                        "BEL(Paul,ridden_largest_roller_coaster) = False",
+                        "BEL(Paul,at_roller_coaster_area) = True",
+                        "BEL(Paul,able_to_board_largest_roller_coaster) = True"
+                    ],
+                    "effects": [
+                        "BEL(Paul,ridden_largest_roller_coaster) = True",
+                        "DES(Paul,wants_to_ride_largest_roller_coaster) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ride(Paul,largest_roller_coaster)": {
+                    "conditions": [
+                        "BEL(Paul,ridden_largest_roller_coaster)=False",
+                        "BEL(Paul,at_roller_coaster_area)=True",
+                        "BEL(Paul,on_largest_roller_coaster)=False",
+                        "DES(Paul,wants_to_ride_largest_roller_coaster)=True"
+                    ],
+                    "effects": [
+                        "BEL(Paul,ridden_largest_roller_coaster)=True",
+                        "BEL(Paul,at_roller_coaster_area)=True",
+                        "BEL(Paul,on_largest_roller_coaster)=True",
+                        "DES(Paul,wants_to_ride_largest_roller_coaster)=False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Leave(Paul,roller_coaster_area)": {
+                    "conditions": [
+                        "BEL(Paul, has_been_to_theme_park_again)=False",
+                        "BEL(Paul, ridden_largest_roller_coaster)=True",
+                        "BEL(Paul,went_to_theme_park)=True"
+                    ],
+                    "effects": [
+                        "BEL(Paul, has_been_to_theme_park_again) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Go(Paul,to_theme_park_exit)": {
+                    "conditions": [
+                        "BEL(Paul, has_been_to_theme_park_again)=False"
+                    ],
+                    "effects": [
+                        "BEL(Paul, has_been_to_theme_park_again)=True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(start, PaulIntroducesHimself, introduction, friendly)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(PaulIntroducesHimself, startRandomChatter, smallTalk, friendly)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(start, startRandomChatter, smallTalk, friendly)": {
+                    "conditions": [
+                        "SPEAK ACTION"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Speak(startRandomChatter, PaulMentionsRollercoasters, themePark, interested)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Paul,likes_theme_park_rides) = True",
+                        "BEL(Paul,went_to_theme_park) = True",
+                        "BEL(Paul,ridden_largest_roller_coaster) = True",
+                        "DES(Paul,wants_to_ride_largest_roller_coaster) = True",
+                        "DES(Paul,likes_theme_park) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy",
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(PaulMentionsRollercoasters, startRollerCoasterConversation, themePark, interested)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Speak(startRollerCoasterConversation, endRollerCoasterConversation, themePark, curious)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope",
+                        "Joy"
+                    ]
+                },
+                "Speak(startRandomChatter, PaulMentionsOnlyGoingToThemePark, themePark, content)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy",
+                        "Satisfaction",
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(PaulMentionsOnlyGoingToThemePark, end, themePark, content)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": []
+}

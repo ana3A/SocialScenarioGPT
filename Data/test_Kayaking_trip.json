@@ -1,0 +1,1110 @@
+{
+    "scenario_name": "test_Kayaking trip",
+    "scenario_description": "Allie was about to go kayaking. When she got to the lake they needed her ID. Unfortunately she forgot hers. So she couldn't go kayaking. She then had to walk home.",
+    "last_ended": "end",
+    "agents": {
+        "Allie": {
+            "knowledge_base": [
+                "BEL(Allie, has_ID) = False",
+                "DES(Allie, go_kayaking) = True",
+                "BEL(Lake_attendant, requires_ID) = True",
+                "BEL(Allie_friend, is_able_to_go) = True"
+            ],
+            "intentions": {
+                "INTENT(Allie, look_for_alternatives) = True": {
+                    "action_plan": [
+                        "FindAlternative(Allie, null)",
+                        "SearchPhone(Allie, null)",
+                        "CallFriend(Allie, Allie_friend, null)",
+                        "ReceiveInformation(Allie, Allie_friend, ID=yes)",
+                        "GoToLake(Allie, Lake_attendant, ID=yes)",
+                        "Kayak(Allie, Lake, null)"
+                    ]
+                },
+                "INTENT(Allie, ask_Lake_attendant) = True": {
+                    "action_plan": [
+                        "Move(Allie, Lake_attendant, location_of_Lake_attendant)",
+                        "Ask(Allie, Lake_attendant, ID_requirement)",
+                        "Receive(Allie, Lake_attendant, ID_requirement_confirmation)",
+                        "Check_ID(Allie, Allie, has_ID)",
+                        "If(Allie, Allie, has_ID, true)",
+                        "Start_activity(Allie, Allie, go_kayaking)",
+                        "Else(Allie, Allie, has_ID, false)",
+                        "Move(Allie, Allie_friend, location_of_Allie_friend)",
+                        "Ask(Allie, Allie_friend, lend_ID)",
+                        "Receive(Allie, Allie_friend, ID_lending_confirmation)",
+                        "Check_ID(Allie, Allie, has_ID)",
+                        "If(Allie, Allie, has_ID, true)",
+                        "Start_activity(Allie, Allie, go_kayaking)",
+                        "Else(Allie, Allie, has_ID, false)",
+                        "Move(Allie, home, location_of_home)"
+                    ]
+                },
+                "INTENT(Allie, request_help_from_Allie_friend) = True": {
+                    "action_plan": [
+                        "Ask(Lake_attendant, about_ID_requirements)",
+                        "INTEND(Allie, request_help_from_Allie_friend) = True",
+                        "Call(Allie_friend, ask_for_help)",
+                        "BEL(Allie_friend, is_able_to_help) = True",
+                        "INTEND(Allie, borrow_ID_from_Allie_friend) = True",
+                        "Take(Allie_friend, ID_card)",
+                        "Give(Allie, ID_card)",
+                        "BEL(Allie, has_ID) = True",
+                        "INTEND(Allie, go_kayaking) = True",
+                        "Request(Lake_attendant, to go kayaking)",
+                        "BEL(Allie, successful_kayaking) = True",
+                        "Leave(Lake_attendant, location)",
+                        "Walk(Allie, home)"
+                    ]
+                },
+                "INTENT(Allie, walk_home) = True": {
+                    "action_plan": [
+                        "Check_ID(Allie, Lake_attendant)",
+                        "Receive_information(Allie, Lake_attendant, {no_alternatives: True})",
+                        "Contact_AllieFriend(Allie, Allie_friend)",
+                        "Receive_information(Allie, Allie_friend, {is_able_to_go: True})",
+                        "Express_intent(Allie, Allie_friend, go_with_me)",
+                        "Receive_affirmation(Allie, Allie_friend, {agree: True})",
+                        "Start_walking(Allie, Allie_friend)"
+                    ]
+                }
+            },
+            "actions": {
+                "Check_ID(Allie, Lake_attendant)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False",
+                        "BEL(Lake_attendant, requires_ID) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, has_ID) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Receive_information(Allie, Lake_attendant, {no_alternatives: True})": {
+                    "conditions": [
+                        "BEL(Lake_attendant, requires_ID) = True",
+                        "BEL(Allie, has_ID) = False"
+                    ],
+                    "effects": [
+                        "BEL(Allie, has_information) = True",
+                        "BEL(Allie, information_received_from) = Lake_attendant",
+                        "BEL(Allie, information_received) = {no_alternatives: True}"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Contact_AllieFriend(Allie, Allie_friend)": {
+                    "conditions": [
+                        "BEL(Allie, go_kayaking) = True",
+                        "BEL(Allie_friend, is_able_to_go) = True",
+                        "DES(Allie, ask_for_help) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, help_available) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Receive_information(Allie, Allie_friend, {is_able_to_go: True})": {
+                    "conditions": [
+                        "BEL(Allie_friend, is_able_to_go) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, received_information) = True",
+                        "BEL(Allie, information_received_from) = Allie_friend",
+                        "BEL(Allie, friend_can_go_with_me) = True",
+                        "DES(Allie, confirm_friend_going) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Express_intent(Allie, Allie_friend, go_with_me)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False",
+                        "DES(Allie, go_kayaking) = True",
+                        "BEL(Allie_friend, is_able_to_go) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, wants_companionship) = True",
+                        "BEL(Allie, has_companion) = True",
+                        "BEL(Allie_friend, wants_to_go_with_Allie) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Receive_affirmation(Allie, Allie_friend, {agree: True})": {
+                    "conditions": [
+                        "BEL(Allie_friend, is_able_to_go) = True",
+                        "Allie_friend"
+                    ],
+                    "effects": [
+                        "DES(Allie, go_with_AllieFriend) = True",
+                        "Allie_friend",
+                        "DES(Allie_friend, go_kayaking) = False",
+                        "Allie_friend",
+                        "BEL(Allie, is_not_alone) = True",
+                        "BEL(Allie_friend, is_not_alone) = True",
+                        "Allie_friend"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Start_walking(Allie, Allie_friend)": {
+                    "conditions": [
+                        "BEL(Allie, has_reached_lake) = True",
+                        "BEL(Allie_friend, is_going_with_allie) = True",
+                        "BEL(Lake_attendant, requires_ID) = True",
+                        "BEL(Allie, has_ID) = False"
+                    ],
+                    "effects": [
+                        "BEL(Allie, is_walking_home) = True",
+                        "DES(Allie, reach_home) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "FindAlternative(Allie, null)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID)",
+                        "DES(Allie, go_kayaking)"
+                    ],
+                    "effects": [
+                        "BEL(Allie, found_alternative)"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "SearchPhone(Allie, null)": {
+                    "conditions": [
+                        "BEL(Allie, has_phone) = False"
+                    ],
+                    "effects": [
+                        "BEL(Allie, has_phone) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CallFriend(Allie, Allie_friend, null)": {
+                    "conditions": [
+                        "BEL(Allie_friend, is_able_to_go) = True"
+                    ],
+                    "effects": [
+                        "DES(Allie, get_her_ID) = False",
+                        "BEL(Allie, has_ID) = True",
+                        "BEL(Allie_friend, knows_about_the_situation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ReceiveInformation(Allie, Allie_friend, ID=yes)": {
+                    "conditions": [
+                        "BEL(Allie_friend, is_able_to_go) = True",
+                        "BEL(Allie, has_ID) = False"
+                    ],
+                    "effects": [
+                        "BEL(Allie_friend, is_able_to_go) = True",
+                        "BEL(Allie_friend, knows_ID_requirements) = True",
+                        "BEL(Allie_friend, knows(Allie, requires_ID)) = True",
+                        "BEL(Allie, has_ID) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "GoToLake(Allie, Lake_attendant, ID=yes)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False",
+                        "BEL(Lake_attendant, requires_ID) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, has_ID) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Kayak(Allie, Lake, null)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = True",
+                        "BEL(Lake_attendant, requires_ID) = False"
+                    ],
+                    "effects": [
+                        "BEL(Allie, is_kayaking) = True",
+                        "DES(Allie, go_kayaking) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Move(Allie, Lake_attendant, location_of_Lake_attendant)": {
+                    "conditions": [
+                        "BEL(Allie, current_location) = location_A",
+                        "BEL(location_of_Lake_attendant, is_accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, current_location) = location_of_Lake_attendant"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ask(Allie, Lake_attendant, ID_requirement)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False",
+                        "BEL(Lake_attendant, requires_ID) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Allie, ask_Lake_attendant) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Receive(Allie, Lake_attendant, ID_requirement_confirmation)": {
+                    "conditions": [
+                        "BEL(Lake_attendant, requires_ID) = True",
+                        "BEL(Allie, has_ID) = CurrentState",
+                        "BEL(Allie, ID_requirement_confirmation) = None"
+                    ],
+                    "effects": [
+                        "BEL(Allie, ID_requirement_confirmation) = True/False",
+                        "BEL(Lake_attendant, ID_presence_confirmation) = CurrentState"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Check_ID(Allie, Allie, has_ID)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False"
+                    ],
+                    "effects": [
+                        "If(Allie, Allie, has_ID, true)",
+                        "If(Allie, Allie, has_ID, false)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "If(Allie, Allie, has_ID, true)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID)"
+                    ],
+                    "effects": [
+                        "INTENT(Allie, go_kayaking)"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Start_activity(Allie, Allie, go_kayaking)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = True",
+                        "DES(Allie, go_kayaking) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, is_kayaking) = True",
+                        "BEL(Allie, has_ID) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Else(Allie, Allie, has_ID, false)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Move(Allie, Allie_friend, location_of_Allie_friend)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False",
+                        "BEL(Allie_friend, is_able_to_go) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, location_of_Allie) = location_of_Allie_friend",
+                        "BEL(Allie_friend, location_of_Allie_friend) = location_of_Allie"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ask(Allie, Allie_friend, lend_ID)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False",
+                        "BEL(Allie_friend, is_able_to_go) = True"
+                    ],
+                    "effects": [
+                        "DES(Allie, lend_ID) = True",
+                        "BEL(Allie, asked_lend_ID_from) = Allie_friend"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Receive(Allie, Allie_friend, ID_lending_confirmation)": {
+                    "conditions": [
+                        "BEL(Allie_friend, is_able_to_go) = True",
+                        "BEL(Allie_friend, has_ID) = True",
+                        "BEL(Allie, has_ID) = False"
+                    ],
+                    "effects": [
+                        "BEL(Allie, has_ID) = True",
+                        "DES(Allie, go_kayaking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(Allie, home, location_of_home)": {
+                    "conditions": [
+                        "BEL(Allie, is_active) = True",
+                        "BEL(Allie, location) = location_of_Lake",
+                        "BEL(home, is_accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, location) = location_of_home"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Ask(Lake_attendant, about_ID_requirements)": {
+                    "conditions": [
+                        "BEL(Lake_attendant, requires_ID) = True",
+                        "BEL(Allie, has_ID) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "INTEND(Allie, request_help_from_Allie_friend) = True": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False",
+                        "BEL(Lake_attendant, requires_ID) = True",
+                        "BEL(Allie_friend, is_able_to_go) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Call(Allie_friend, ask_for_help)": {
+                    "conditions": [
+                        "BEL(Allie_friend, is_able_to_help) = False"
+                    ],
+                    "effects": [
+                        "BEL(Allie, contacted_Allie_friend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Allie_friend, is_able_to_help) = True": {
+                    "conditions": [
+                        "DES(Allie, go_kayaking) = True",
+                        "BEL(Allie_friend, is_able_to_go) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "INTEND(Allie, borrow_ID_from_Allie_friend) = True": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False",
+                        "BEL(Allie_friend, is_able_to_help) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Take(Allie_friend, ID_card)": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = False",
+                        "BEL(Allie_friend, is_able_to_help) = True",
+                        "BEL(Allie_friend, has_ID_card) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, has_ID) = True",
+                        "BEL(Allie_friend, has_ID_card) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Give(Allie, ID_card)": {
+                    "conditions": [
+                        "BEL(Allie_friend, is_able_to_help) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, has_ID) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "BEL(Allie, has_ID) = True": {
+                    "conditions": [
+                        "INTENT(Allie, borrow_ID_from_Allie_friend) = True",
+                        "Take(Allie_friend, ID_card)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "INTEND(Allie, go_kayaking) = True": {
+                    "conditions": [
+                        "BEL(Allie, has_ID) = True",
+                        "DES(Allie, go_kayaking) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Request(Lake_attendant, to go kayaking)": {
+                    "conditions": [
+                        "BEL(Allie, successful_kayaking) = False",
+                        "BEL(Allie, has_ID) = True",
+                        "BEL(Lake_attendant, requires_ID) = True",
+                        "DES(Allie, go_kayaking) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, successful_kayaking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Allie, successful_kayaking) = True": {
+                    "conditions": [
+                        "INTENT(Allie, go_kayaking) = True",
+                        "BEL(Allie, has_ID) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Leave(Lake_attendant, location)": {
+                    "conditions": [
+                        "BEL(Allie, successful_kayaking) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lake_attendant, no_longer_interacting_with_Allie) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Walk(Allie, home)": {
+                    "conditions": [
+                        "BEL(Allie, successful_kayaking) = False"
+                    ],
+                    "effects": [
+                        "BEL(Allie, reached_home) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {}
+        },
+        "Lake_attendant": {
+            "knowledge_base": [],
+            "intentions": {
+                "CHECK_ID(Lake_attendant) = True": {
+                    "action_plan": [
+                        "VERIFY_ID(Lake_attendant, Allie, None)",
+                        "INFORM_ID_REQUIRED(Lake_attendant, Allie, None)",
+                        "ENSURE_SAFETY(Lake_attendant, Allie, None)",
+                        "WAIT_FOR_ALLIE(Lake_attendant, Allie, None)"
+                    ]
+                },
+                "PREVENT_KAYAKING(Lake_attendant) = True": {
+                    "action_plan": []
+                }
+            },
+            "actions": {
+                "VERIFY_ID(Lake_attendant, Allie, None)": {
+                    "conditions": [
+                        "BEL(Lake_attendant, CHECK_ID(Lake_attendant)) = True",
+                        "BEL(Allie, HAS_ID(Allie)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lake_attendant, VERIFIED_ID(Allie)) = True",
+                        "BEL(Allie, ALLOWED_TO_KAYAK(Allie)) = True"
+                    ],
+                    "occ_emotion": [
+                        "pity"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "INFORM_ID_REQUIRED(Lake_attendant, Allie, None)": {
+                    "conditions": [
+                        "BEL(Lake_attendant, AT_LAKE) = True",
+                        "BEL(Allie, FORGOT_ID) = True",
+                        "BEL(Lake_attendant, CHECK_ID(Lake_attendant)) = False"
+                    ],
+                    "effects": [
+                        "DES(Lake_attendant, INFORM_ID_REQUIRED(Lake_attendant, Allie, None)) = False",
+                        "BEL(Allie, ID_REQUIRED) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ENSURE_SAFETY(Lake_attendant, Allie, None)": {
+                    "conditions": [
+                        "BEL(Lake_attendant, safety_procedures) = True",
+                        "BEL(Lake_attendant, safety_equipment) = Available",
+                        "BEL(Allie, safety_instructions) = Received"
+                    ],
+                    "effects": [
+                        "BEL(Lake_attendant, safety_check) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WAIT_FOR_ALLIE(Lake_attendant, Allie, None)": {
+                    "conditions": [
+                        "BEL(Lake_attendant, WAITING_FOR_ALLIE) = False",
+                        "BEL(Allie, AT_LAKE) = True"
+                    ],
+                    "effects": [
+                        "BEL(Lake_attendant, WAITING_FOR_ALLIE) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Neutral"
+            ],
+            "speak_actions": {
+                "Speak(B, C, Neutral, Information)": {
+                    "conditions": [
+                        "BEL(Lake_attendant, CHECK_ID) = True",
+                        "DES(Lake_attendant, PREVENT_KAYAKING) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, HAS_ID) = False",
+                        "DES(Allie, GO_KAYAKING) = False"
+                    ],
+                    "occ_emotion": [
+                        "Verify_ID(B, C, None)"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(C, D, Neutral, Apology)": {
+                    "conditions": [
+                        "BEL(Lake_attendant, CHECK_ID) = True",
+                        "DES(Lake_attendant, PREVENT_KAYAKING) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, ID_PRESENT) = False",
+                        "BEL(Lake_attendant, ID_CHECKED) = True",
+                        "DES(Allie, GO_KAYAKING) = False",
+                        "DES(Allie, TAKE_A_WALK) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Apology, D, Shame, None, None"
+                    ]
+                },
+                "Speak(E, End, Neutral, Gratefulness)": {
+                    "conditions": [
+                        "CHECK_ID(Lake_attendant) = True",
+                        "PREVENT_KAYAKING(Lake_attendant) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        },
+        "Allie_friend": {
+            "knowledge_base": [
+                "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True",
+                "DES(Allie_friend, help_Allie_find_alternative_activity) = True",
+                "DES(Allie_friend, comfort_Allie) = True"
+            ],
+            "intentions": {
+                "INTENT(Allie_friend, find_alternative_activity) = True": {
+                    "action_plan": [
+                        "Comfort(Allie_friend, Allie)",
+                        "Allie",
+                        "Ask(Allie_friend, Allie, \"Do you want me to help you find something else to do?\")",
+                        "Allie",
+                        "Listen(Allie_friend, Allie, \"What activities do you like to do?\")",
+                        "Allie",
+                        "Propose(Allie_friend, Allie, \"Would you like to go on a hike instead?\")",
+                        "Allie",
+                        "Agree(Allie_friend, Allie, hike)",
+                        "Allie",
+                        "Perform(ActionName, AgentOfAction, TargetOfAction, Arguments*)",
+                        "Allie"
+                    ]
+                },
+                "INTENT(Allie_friend, comfort_Allie) = True": {
+                    "action_plan": [
+                        "Allie",
+                        "OfferToAccompany(Allie_friend, Allie)",
+                        "Empathize(Allie_friend, Allie)",
+                        "BrainstormAlternativeActivities(Allie_friend, None)",
+                        "AssistWithAlternativeActivityPlanning(Allie_friend, Allie, arguments)",
+                        "ListenToAllie(Allie_friend, Allie)"
+                    ]
+                }
+            },
+            "actions": {
+                "Allie": {
+                    "conditions": [
+                        "BEL(Allie, at_lake) = False",
+                        "BEL(Allie, has_no_ID) = True",
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, at_home) = True",
+                        "BEL(Allie_friend, helped_Allie_find_alternative_activity) = True",
+                        "BEL(Allie_friend, comforted_Allie) = True"
+                    ],
+                    "occ_emotion": [
+                        "Empathy"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "OfferToAccompany(Allie_friend, Allie)": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie_friend, accompanying_Allie) = True",
+                        "BEL(Allie, accompanied_by_Allie_friend) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "Empathize(Allie_friend, Allie)": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Allie_is_feeling_sad) = False"
+                    ],
+                    "effects": [
+                        "BEL(Allie_friend, believes_Allie_is_feeling_sad) = True"
+                    ],
+                    "occ_emotion": [
+                        "Empathy"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "BrainstormAlternativeActivities(Allie_friend, None)": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True",
+                        "DES(Allie_friend, help_Allie_find_alternative_activity) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie_friend, has_brainstormed_alternative_activities) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AssistWithAlternativeActivityPlanning(Allie_friend, Allie, arguments)": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, has_alternative_activity_plan) = True",
+                        "BEL(Allie, alternative_activity_plan) = arguments",
+                        "BEL(Allie_friend, helped_Allie_with_alternative_activity_plan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ListenToAllie(Allie_friend, Allie)": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True",
+                        "INTENT(Allie_friend, comfort_Allie) = True",
+                        "BEL(Allie, needs_to_talk) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie_friend, listened_to_Allie) = True",
+                        "BEL(Allie, feels_listened_to) = True"
+                    ],
+                    "occ_emotion": [
+                        "Empathy"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "Comfort(Allie_friend, Allie)": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie_friend, feels_empowered_to_help) = True",
+                        "BEL(Allie_friend, perceives_Allie_as_sad) = True",
+                        "BEL(Allie, perceives_Allie_friend_as_caring) = True",
+                        "BEL(Allie, feels_comforted) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "Ask(Allie_friend, Allie, \"Do you want me to help you find something else to do?\")": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Empathy"
+                    ]
+                },
+                "Listen(Allie_friend, Allie, \"What activities do you like to do?\")": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True",
+                        "DES(Allie_friend, find_alternative_activity) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie_friend, knows_Allie_activities_preferences) = True"
+                    ],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Propose(Allie_friend, Allie, \"Would you like to go on a hike instead?\")": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True",
+                        "DES(Allie_friend, find_alternative_activity) = True",
+                        "BEL(Allie_friend, likes_hiking) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie_friend, proposes_hiking_as_an_alternative_activity) = True",
+                        "DES(Allie_friend, help_Allie_find_alternative_activity) = False",
+                        "DES(Allie_friend, comfort_Allie) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Agree(Allie_friend, Allie, hike)": {
+                    "conditions": [
+                        "BEL(Allie_friend, agrees_go_on_hike) = False",
+                        "BEL(Allie, wants_to_go_on_hike) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie_friend, agrees_go_on_hike) = True",
+                        "BEL(Allie, wants_to_go_on_hike) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Perform(ActionName, AgentOfAction, TargetOfAction, Arguments*)": {
+                    "conditions": [
+                        "BEL(Allie_friend, find_alternative_activity) = True",
+                        "BEL(Allie_friend, agrees_to_find_alternative_activity) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie_friend, successfully_found_alternative_activity) = True",
+                        "BEL(Allie_friend, feels_good_about_helping) = True",
+                        "DES(Allie_friend, comforted_Allie) = False",
+                        "DES(Allie_friend, help_Allie_find_alternative_activity) = False",
+                        "INTENT(Allie_friend, find_alternative_activity) = False",
+                        "INTENT(Allie_friend, comfort_Allie) = True",
+                        "INTENT(Allie_friend, ask_to_help) = False",
+                        "INTENT(Allie_friend, listen_for_Alternative_Activities) = False",
+                        "INTENT(Allie_friend, propose_alternative_activity) = False",
+                        "INTENT(Allie_friend, agrees_to_alternative_activity) = False",
+                        "INTENT(Allie_friend, Perform_action) = True",
+                        "BEL(Allie, is_comforted) = True",
+                        "BEL(Allie, going_on_a_hike) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy",
+                        "Empathy",
+                        "Hope",
+                        "Satisfaction",
+                        "Empathy",
+                        "Relief",
+                        "Hope",
+                        "Curiosity",
+                        "Hope",
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy",
+                        "Distress",
+                        "Hope",
+                        "Gratification",
+                        "Love",
+                        "Pity",
+                        "Hope",
+                        "Love",
+                        "Joy",
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Pity"
+            ],
+            "speak_actions": {
+                "Speak(B, C, Neutral, Empathy)": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True",
+                        "DES(Allie_friend, comfort_Allie) = True"
+                    ],
+                    "effects": [
+                        "DES(Allie_friend, help_Allie_find_alternative_activity) = True",
+                        "INTENT(Allie_friend, comfort_Allie) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(B, C, Neutral, Empathy)], [Perform(Comfort, Allie_friend, Allie)], [Joy"
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(C, D, Neutral, Sympathy)": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Allie_friend, find_alternative_activity) = True",
+                        "DES(Allie_friend, help_Allie_find_alternative_activity) = False",
+                        "BEL(Allie_friend, suggests_walking_around_lake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Empathy"
+                    ],
+                    "emotion_condition": [
+                        "C, D, Distress, Sympathy, \"Allie's friend empathizes with Allie's disappointment.\""
+                    ]
+                },
+                "Speak(D, E, Neutral, Suggestion)": {
+                    "conditions": [
+                        "BEL(Allie_friend, knows_Allie_forgot_ID) = True",
+                        "BEL(Allie_friend, believes_Lake_attendant_requires_ID_to_kayak) = True",
+                        "DES(Allie_friend, help_Allie_find_alternative_activity) = True",
+                        "DES(Allie_friend, comfort_Allie) = True"
+                    ],
+                    "effects": [
+                        "BEL(Allie, knows_Allie_friend_suggested_alternative_activity) = True",
+                        "BEL(Allie, knows_Allie_friend_comforted_her) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak, Propose, Neutral, Suggestion, \"Would you like to go on a hike instead?\"], [Perform, Allie_friend, hike, None, Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, A, Neutral, Greeting, \"Allie arrives at the lake and goes to rent a kayak.\">",
+        "<A, B, Neutral, Information, \"The staff at the rental asks for Allie's ID.\">",
+        "<B, C, Neutral, Apology, \"Allie realizes she left her ID at home.\">",
+        "<C, D, Neutral, Disappointment, \"Allie expresses her disappointment that she can't go kayaking.\">",
+        "<D, E, Neutral, Suggestion, \"The staff suggests Allie walks around the lake instead.\">",
+        "<E, End, Neutral, Gratefulness, \"Allie thanks the staff and decides to take a walk instead.\">"
+    ]
+}

@@ -1,0 +1,2014 @@
+{
+    "scenario_name": "test_Early Bird",
+    "scenario_description": "I woke up early for work. I took the dog outside for a while. I made a large pot of coffee. I took a long, hot shower. I got dressed and started my day.",
+    "last_ended": "end",
+    "agents": {
+        "person": {
+            "knowledge_base": [
+                "BEL(Me, awake) = True",
+                "BEL(Me, have to work) = True",
+                "BEL(Me, dog outside) = True",
+                "BEL(Me, pot of coffee) = True",
+                "BEL(Me, hot shower) = True",
+                "BEL(Me, dressed) = True",
+                "DES(Me, be productive) = True",
+                "DES(Me, have a good day) = True",
+                "DES(Me, not be late) = True",
+                "DES(Me, enjoy my coffee) = True",
+                "DES(Me, feel refreshed) = True"
+            ],
+            "intentions": {
+                "INTENT(Me, take the dog outside) = True": {
+                    "action_plan": [
+                        "INTENT(Me, take the dog outside) = True",
+                        "Move(Me, dog, to_door)",
+                        "Open(Me, door, None)",
+                        "Move(Me, dog, outside)",
+                        "Close(Me, door, None)"
+                    ]
+                },
+                "INTENT(Me, make coffee) = True": {
+                    "action_plan": [
+                        "GoOutside(Me, Dog)",
+                        "MakeCoffee(Me, CoffeePot)",
+                        "TakeShower(Me, None)",
+                        "GetDressed(Me, None)",
+                        "StartDay(Me, None)"
+                    ]
+                },
+                "INTENT(Me, take a shower) = True": {
+                    "action_plan": [
+                        "Move(AGENT, dog, outside)",
+                        "Fill(AGENT, coffee machine, pot)",
+                        "TurnOn(AGENT, coffee machine)",
+                        "Take(AGENT, towel)",
+                        "Undress(AGENT, self)",
+                        "TurnOn(AGENT, shower)",
+                        "Wait(AGENT, shower, time=10 minutes)",
+                        "TurnOff(AGENT, shower)",
+                        "Dry(AGENT, self, towel)",
+                        "GetDressed(AGENT, self)"
+                    ]
+                },
+                "INTENT(Me, get dressed) = True": {
+                    "action_plan": [
+                        "Move(Me, Dog, Outside)",
+                        "Make(Me, Coffee, Large)",
+                        "Take(Me, Shower, Long, Hot)",
+                        "Wear(Me, WorkClothes)",
+                        "Confirm(Me, Schedule)",
+                        "Leave(Me, Home, Work)"
+                    ]
+                },
+                "INTENT(Me, be productive) = True": {
+                    "action_plan": [
+                        "WakeUp(Me)",
+                        "TakeDogOutside(Me, dog)",
+                        "MakeCoffee(Me, coffeePot)",
+                        "TakeShower(Me, bathroom)",
+                        "GetDressed(Me, closet)",
+                        "LeaveHouse(Me, frontDoor)"
+                    ]
+                },
+                "INTENT(Me, not be late for work) = True": {
+                    "action_plan": [
+                        "WakeUp(Me)",
+                        "BEL(Me, awake)",
+                        "TakeDogOut(Me, Dog)",
+                        "BEL(Me, dog outside)",
+                        "MakeCoffee(Me, CoffeePot)",
+                        "BEL(Me, pot of coffee)",
+                        "TakeShower(Me, Bathroom)",
+                        "BEL(Me, hot shower)",
+                        "DES(Me, feel refreshed)",
+                        "GetDressed(Me, Closet)",
+                        "BEL(Me, dressed)",
+                        "DrinkCoffee(Me, CoffeeMug)",
+                        "DES(Me, enjoy my coffee)",
+                        "LeaveForWork(Me, FrontDoor)",
+                        "INTENT(Me, not be late for work)",
+                        "BEL(Me, have to work)"
+                    ]
+                },
+                "INTENT(Me, enjoy my coffee) = True": {
+                    "action_plan": [
+                        "AGENT",
+                        "Move(Me, Dog, Outdoors)",
+                        "Pour(Me, CoffeePot, Cup)",
+                        "Sit(Me, Chair)",
+                        "Sip(Me, Cup)",
+                        "BEL(Me, coffee pot)"
+                    ]
+                }
+            },
+            "actions": {
+                "AGENT": {
+                    "conditions": [
+                        "BEL(Me, dog outside) = True",
+                        "BEL(Me, coffee pot) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, enjoyed coffee) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief",
+                        "Joy",
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Move(Me, Dog, Outdoors)": {
+                    "conditions": [
+                        "BEL(Me, dog outside) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Pour(Me, CoffeePot, Cup)": {
+                    "conditions": [
+                        "BEL(Me, pot of coffee) = True",
+                        "BEL(CoffeePot, empty) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, have coffee) = True",
+                        "BEL(Me, coffee pot) = False",
+                        "BEL(CoffeePot, empty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Sit(Me, Chair)": {
+                    "conditions": [
+                        "BEL(Me, dressed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, sitting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Sip(Me, Cup)": {
+                    "conditions": [
+                        "BEL(Me, cup) = True",
+                        "BEL(Me, coffee) = True",
+                        "DES(Me, enjoy my coffee) = True"
+                    ],
+                    "effects": [
+                        "DES(Me, feel satisfied) = True",
+                        "BEL(Me, sip of coffee) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "BEL(Me, coffee pot)": {
+                    "conditions": [
+                        "BEL(Me, pot of coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, coffee pot) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "INTENT(Me, take the dog outside) = True": {
+                    "conditions": [
+                        "BEL(Me, awake) = True",
+                        "BEL(Me, dog outside) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Love"
+                    ]
+                },
+                "Move(Me, dog, to_door)": {
+                    "conditions": [
+                        "BEL(Me, awake) = True",
+                        "BEL(Me, dog outside) = False",
+                        "BEL(dog, inside) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True",
+                        "BEL(dog, inside) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "@Fear"
+                    ]
+                },
+                "Open(Me, door, None)": {
+                    "conditions": [
+                        "BEL(Me, dog outside) = False",
+                        "BEL(Me, dressed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True",
+                        "BEL(Me, have to work) = False",
+                        "DES(Me, be productive) = True",
+                        "DES(Me, have a good day) = True",
+                        "DES(Me, not be late) = True",
+                        "DES(Me, enjoy my coffee) = True",
+                        "DES(Me, feel refreshed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(Me, dog, outside)": {
+                    "conditions": [
+                        "BEL(Me, awake) = True",
+                        "BEL(Me, dog outside) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True"
+                    ],
+                    "occ_emotion": [
+                        "Happiness"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Close(Me, door, None)": {
+                    "conditions": [
+                        "BEL(Me, dog outside) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "GoOutside(Me, Dog)": {
+                    "conditions": [
+                        "BEL(Me, dog outside) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MakeCoffee(Me, CoffeePot)": {
+                    "conditions": [
+                        "BEL(Me, pot of coffee) = False",
+                        "BEL(Me, have to work) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, pot of coffee) = True",
+                        "DES(Me, enjoy my coffee) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TakeShower(Me, None)": {
+                    "conditions": [
+                        "BEL(Me, hot shower) = True",
+                        "DES(Me, feel refreshed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, hot shower) = False",
+                        "BEL(Me, clean) = True",
+                        "DES(Me, feel refreshed) = False",
+                        "DES(Me, be on time) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GetDressed(Me, None)": {
+                    "conditions": [
+                        "BEL(Me, dressed) = False",
+                        "DES(Me, be productive) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, dressed) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "StartDay(Me, None)": {
+                    "conditions": [
+                        "BEL(Me, dressed) = True",
+                        "BEL(Me, have to work) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, at work) = True",
+                        "DES(Me, have a good day) += 1",
+                        "DES(Me, be productive) += 1"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(AGENT, dog, outside)": {
+                    "conditions": [
+                        "BEL(Me, dog outside) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Fill(AGENT, coffee machine, pot)": {
+                    "conditions": [
+                        "BEL(Me, pot of coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, coffee machine filled) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TurnOn(AGENT, coffee machine)": {
+                    "conditions": [
+                        "BEL(Me, pot of coffee) = True",
+                        "BEL(Coffee machine, plugged in) = True",
+                        "BEL(Coffee machine, water level) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Coffee machine, turned on) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Take(AGENT, towel)": {
+                    "conditions": [
+                        "BEL(Me, towel available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, holding towel) = True",
+                        "BEL(Me, towel available) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Undress(AGENT, self)": {
+                    "conditions": [
+                        "BEL(Me, dressed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, undressed) = True",
+                        "BEL(Me, dressed) = False",
+                        "DES(Me, feel refreshed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Shame"
+                    ],
+                    "emotion_condition": [
+                        "None"
+                    ]
+                },
+                "TurnOn(AGENT, shower)": {
+                    "conditions": [
+                        "BEL(Me, hot shower) = True",
+                        "BEL(Me, dressed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, taking a shower) = True",
+                        "DES(Me, feel refreshed) = True",
+                        "DES(Me, be productive) = True",
+                        "BEL(Me, hot shower) = False",
+                        "BEL(Me, wet) = True",
+                        "BEL(Me, clean) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Anticipation"
+                    ]
+                },
+                "Wait(AGENT, shower, time=10 minutes)": {
+                    "conditions": [
+                        "BEL(AGENT, hot shower) = True",
+                        "BEL(AGENT, dressed) = False",
+                        "BEL(AGENT, wet skin) = True",
+                        "BEL(AGENT, dry towel) = True"
+                    ],
+                    "effects": [
+                        "BEL(AGENT, hot shower) = False",
+                        "BEL(AGENT, dressed) = True",
+                        "BEL(AGENT, wet skin) = False",
+                        "BEL(AGENT, dry towel) = False",
+                        "DES(AGENT, feel refreshed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TurnOff(AGENT, shower)": {
+                    "conditions": [
+                        "BEL(Me, shower on) = True",
+                        "BEL(Me, dressed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, feel refreshed) = True",
+                        "BEL(Me, shower on) = False",
+                        "BEL(Me, wet skin) = True",
+                        "DES(Me, get dressed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Dry(AGENT, self, towel)": {
+                    "conditions": [
+                        "BEL(Me, towel) = True",
+                        "BEL(Me, wet) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, dry) = True",
+                        "BEL(Me, wet) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "GetDressed(AGENT, self)": {
+                    "conditions": [
+                        "BEL(Me, undressed) = True",
+                        "BEL(Me, dressed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dressed) = True",
+                        "BEL(Me, undressed) = False"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Move(Me, Dog, Outside)": {
+                    "conditions": [
+                        "BEL(Me, dog outside) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "\"Hope\""
+                    ]
+                },
+                "Make(Me, Coffee, Large)": {
+                    "conditions": [
+                        "BEL(Me, awake) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, haveCoffee) = True",
+                        "BEL(Me, feelAlert) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Take(Me, Shower, Long, Hot)": {
+                    "conditions": [
+                        "BEL(Me, awake) = True",
+                        "BEL(Me, hot shower) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, hot shower) = True",
+                        "DES(Me, feel refreshed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Wear(Me, WorkClothes)": {
+                    "conditions": [
+                        "BEL(Me, dressed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dressed) = True",
+                        "DES(Me, have a good day) = True",
+                        "DES(Me, not be late) = True",
+                        "DES(Me, feel confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Confirm(Me, Schedule)": {
+                    "conditions": [
+                        "BEL(Me, have to work) = True",
+                        "BEL(Me, dressed) = False",
+                        "BEL(Me, Schedule, Confirmed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, Schedule, Confirmed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Leave(Me, Home, Work)": {
+                    "conditions": [
+                        "BEL(Me, have to work) = True",
+                        "BEL(Me, dressed) = True",
+                        "BEL(Me, schedule confirmed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, at work) = True",
+                        "DES(Me, be productive) = True",
+                        "DES(Me, have a good day) = True",
+                        "DES(Me, not be late) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "WakeUp(Me)": {
+                    "conditions": [
+                        "BEL(Me, awake) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, awake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TakeDogOutside(Me, dog)": {
+                    "conditions": [
+                        "BEL(Me, awake) = True",
+                        "BEL(Me, dog outside) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True",
+                        "BEL(dog, outside) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MakeCoffee(Me, coffeePot)": {
+                    "conditions": [
+                        "BEL(Me, awake) = True",
+                        "BEL(Me, pot of coffee) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, pot of coffee) = True",
+                        "DES(Me, enjoy my coffee) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TakeShower(Me, bathroom)": {
+                    "conditions": [
+                        "BEL(Me, awake) = True",
+                        "BEL(Me, hot shower) = False",
+                        "BEL(Me, dressed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, hot shower) = True",
+                        "BEL(Me, feel refreshed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GetDressed(Me, closet)": {
+                    "conditions": [
+                        "BEL(Me, dressed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dressed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "LeaveHouse(Me, frontDoor)": {
+                    "conditions": [
+                        "BEL(Me, dressed) = True",
+                        "BEL(Me, have to work) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, outside) = True",
+                        "BEL(Me, at work) = True",
+                        "BEL(Me, late) = False",
+                        "DES(Me, have a good day) = True",
+                        "DES(Me, be productive) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BEL(Me, awake)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Me, awake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "TakeDogOut(Me, Dog)": {
+                    "conditions": [
+                        "BEL(Me, awake) = True",
+                        "BEL(Dog, needs to go outside) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True",
+                        "BEL(Dog, needs to go outside) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Me, dog outside)": {
+                    "conditions": [
+                        "BEL(Me, dog outside) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dog outside) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "BEL(Me, pot of coffee)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Me, pot of coffee) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "TakeShower(Me, Bathroom)": {
+                    "conditions": [
+                        "BEL(Me, awake)=True",
+                        "BEL(Me, hot shower)=False"
+                    ],
+                    "effects": [
+                        "BEL(Me, hot shower)=True",
+                        "BEL(Me, feel refreshed)=True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Desire"
+                    ]
+                },
+                "BEL(Me, hot shower)": {
+                    "conditions": [
+                        "BEL(Me, have to take a shower) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, clean) = True",
+                        "BEL(Me, refreshed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "DES(Me, feel refreshed)": {
+                    "conditions": [
+                        "BEL(Me, hot shower) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, feel refreshed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "GetDressed(Me, Closet)": {
+                    "conditions": [
+                        "BEL(Me, awake) = True",
+                        "BEL(Me, dressed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Me, dressed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "BEL(Me, dressed)": {
+                    "conditions": [
+                        "BEL(Me, awake) = True",
+                        "BEL(Me, not dressed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, dressed) = True",
+                        "BEL(Me, not dressed) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "DrinkCoffee(Me, CoffeeMug)": {
+                    "conditions": [
+                        "BEL(Me, pot of coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, feel more awake) = True",
+                        "DES(Me, enjoy my coffee) = False",
+                        "DES(Me, be productive) = True",
+                        "BEL(Me, finished coffee) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "DES(Me, enjoy my coffee)": {
+                    "conditions": [
+                        "BEL(Me, pot of coffee) = True",
+                        "BEL(Me, dressed) = True"
+                    ],
+                    "effects": [
+                        "DES(Me, feel energized) = True",
+                        "BEL(Me, full of energy) = True",
+                        "BEL(Me, need to refill coffee) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "LeaveForWork(Me, FrontDoor)": {
+                    "conditions": [
+                        "BEL(Me, dressed) = True",
+                        "BEL(Me, have to work) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, at work) = True",
+                        "BEL(Me, dressed) = False",
+                        "BEL(Me, not at home) = True",
+                        "DES(Me, be productive) = True",
+                        "DES(Me, have a good day) = True",
+                        "DES(Me, not be late) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "INTENT(Me, not be late for work)": {
+                    "conditions": [
+                        "BEL(Me, have to work) = True",
+                        "BEL(Me, dressed) = True",
+                        "BEL(Me, pot of coffee) = True",
+                        "BEL(Me, dog outside) = True"
+                    ],
+                    "effects": [
+                        "BEL(Me, not be late for work) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BEL(Me, have to work)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [],
+            "speak_actions": {}
+        },
+        "dog": {
+            "knowledge_base": [
+                "BEL(Dog, wants_to_play) = True",
+                "BEL(Dog, needs_to_potty) = False",
+                "BEL(Dog, hungry) = False",
+                "DES(Dog, play_with_owner) = True",
+                "DES(Dog, get_praise_or_treats) = True",
+                "DES(Dog, sleep_near_owner) = False",
+                "DES(Dog, explore_outdoors) = False"
+            ],
+            "intentions": {
+                "INTENT(Dog, play_with_owner) = True": {
+                    "action_plan": [
+                        "MoveToLocation(Dog, LivingRoom, None)",
+                        "Bark(Dog, Owner, \"Play with me!\")",
+                        "WagTail(Dog, Owner, None)",
+                        "FetchToy(Dog, Owner, None)",
+                        "Wait(Dog, Owner, None)",
+                        "RunAfterToy(Dog, Toy, None)",
+                        "DropToy(Dog, Owner, None)",
+                        "JumpOverObstacle(Dog, Obstacle, None)",
+                        "ReceivePraise(Dog, Owner, None)",
+                        "RestBesideOwner(Dog, Owner, None)"
+                    ]
+                },
+                "INTENT(Dog, get_praise_or_treats) = True": {
+                    "action_plan": [
+                        "GoToLocation(Dog, Owner)",
+                        "Sit(Dog, Owner)",
+                        "LookAtOwner(Dog, Owner)",
+                        "Bark(Dog, Owner, ExcitementLevel=High)",
+                        "Wait(Dog, Owner, Time=5)",
+                        "GiveTreats(Owner, Dog, TreatType=Favorite)",
+                        "Praise(Dog, Owner, PraiseType=GoodBoy)"
+                    ]
+                }
+            },
+            "actions": {
+                "GoToLocation(Dog, Owner)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Dog, needs_to_potty) = False",
+                        "BEL(Dog, hungry) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dog, at_Location) = Owner",
+                        "BEL(Dog, wants_to_play) = False",
+                        "BEL(Dog, needs_to_potty) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Love"
+                    ]
+                },
+                "Sit(Dog, Owner)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Dog, needs_to_potty) = False",
+                        "BEL(Dog, hungry) = False",
+                        "BEL(Owner, sitting) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dog, wants_to_play) = False",
+                        "BEL(Dog, needs_to_potty) = False",
+                        "BEL(Dog, hungry) = False",
+                        "BEL(Owner, sitting) = True",
+                        "BEL(Dog, obeyed_command) = True"
+                    ],
+                    "occ_emotion": [
+                        "Love"
+                    ],
+                    "emotion_condition": [
+                        "Love"
+                    ]
+                },
+                "LookAtOwner(Dog, Owner)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Dog, needs_to_potty) = False",
+                        "BEL(Dog, hungry) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dog, sees_Owner) = True",
+                        "BEL(Dog, facing_Owner) = True"
+                    ],
+                    "occ_emotion": [
+                        "Love"
+                    ],
+                    "emotion_condition": [
+                        "Love"
+                    ]
+                },
+                "Bark(Dog, Owner, ExcitementLevel=High)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Owner, is_nearby) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dog, excitement_level) = High",
+                        "BEL(Owner, is_awake) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Wait(Dog, Owner, Time=5)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Dog, needs_to_potty) = False",
+                        "BEL(Dog, hungry) = False",
+                        "DES(Dog, play_with_owner) = True",
+                        "DES(Dog, get_praise_or_treats) = True",
+                        "DES(Dog, sleep_near_owner) = False",
+                        "DES(Dog, explore_outdoors) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Dog, needs_to_potty) = False",
+                        "BEL(Dog, hungry) = False",
+                        "DES(Dog, play_with_owner) = True",
+                        "DES(Dog, get_praise_or_treats) = True",
+                        "DES(Dog, sleep_near_owner) = False",
+                        "DES(Dog, explore_outdoors) = False"
+                    ],
+                    "occ_emotion": [
+                        "Boredom"
+                    ],
+                    "emotion_condition": [
+                        "Boredom"
+                    ]
+                },
+                "GiveTreats(Owner, Dog, TreatType=Favorite)": {
+                    "conditions": [
+                        "BEL(Owner, has_favorite_treat) = True",
+                        "BEL(Dog, hungry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Owner, has_favorite_treat) = False",
+                        "BEL(Dog, not_hungry) = True",
+                        "DES(Dog, happy) = True",
+                        "DES(Dog, satisfied) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Praise(Dog, Owner, PraiseType=GoodBoy)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "DES(Dog, get_praise_or_treats) = True"
+                    ],
+                    "effects": [
+                        "BEL(Owner, feels_happy) = True",
+                        "BEL(Dog, pleased) = True",
+                        "BEL(Dog, wants_to_play) = False",
+                        "DES(Dog, get_praise_or_treats) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "MoveToLocation(Dog, LivingRoom, None)": {
+                    "conditions": [
+                        "BEL(Dog, at_location LivingRoom) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dog, at_location LivingRoom) = True",
+                        "BEL(Dog, at_location Bathroom) = False",
+                        "BEL(Dog, at_location Kitchen) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Bark(Dog, Owner, \"Play with me!\")": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Owner, in_LivingRoom) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dog, expressed_want_to_play) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WagTail(Dog, Owner, None)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Owner, in_living_room) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dog, expresses_happiness) = True",
+                        "BEL(Dog, wags_tail) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "FetchToy(Dog, Owner, None)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Owner, has_toy) = True",
+                        "BEL(Toy, is_nearby) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dog, holding_toy) = True",
+                        "BEL(Owner, no_longer_has_toy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Wait(Dog, Owner, None)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Dog, needs_to_potty) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dog, wants_to_play) = False",
+                        "DES(Dog, get_praise_or_treats) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "RunAfterToy(Dog, Toy, None)": {
+                    "conditions": [
+                        "BEL(Dog, needs_to_potty) = False",
+                        "BEL(Dog, tired) = False",
+                        "BEL(Toy, in_reach) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dog, happy) = True",
+                        "DES(Dog, get_praise_or_treats) = True",
+                        "BEL(Toy, in_reach) = False",
+                        "BEL(Toy, held_by_dog) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "DropToy(Dog, Owner, None)": {
+                    "conditions": [
+                        "BEL(Dog, holding_toy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dog, holding_toy) = False",
+                        "DES(Dog, get_praise_or_treats) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "JumpOverObstacle(Dog, Obstacle, None)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "BEL(Obstacle, obstacle_present) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dog, tired) = True",
+                        "BEL(Dog, wants_to_play) = False",
+                        "DES(Dog, get_praise_or_treats) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ReceivePraise(Dog, Owner, None)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "DES(Dog, get_praise_or_treats) = True",
+                        "BEL(Owner, happy_with_Dog) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dog, wants_to_play) = False",
+                        "BEL(Dog, more_confident) = True",
+                        "DES(Dog, get_praise_or_treats) = False",
+                        "BEL(Owner, happy_with_Dog) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "RestBesideOwner(Dog, Owner, None)": {
+                    "conditions": [
+                        "BEL(Dog, sleepy) = True",
+                        "BEL(Dog, near_owner) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dog, sleepy) = False",
+                        "BEL(Dog, near_owner) = True"
+                    ],
+                    "occ_emotion": [
+                        "Love"
+                    ],
+                    "emotion_condition": [
+                        "Love"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, State1, Greeting, Friendly)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "DES(Dog, play_with_owner) = True",
+                        "DES(Dog, get_praise_or_treats) = True",
+                        "INTENT(Dog, play_with_owner) = True",
+                        "INTENT(Dog, get_praise_or_treats) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dog, wants_to_play) = False",
+                        "DES(Dog, play_with_owner) = False",
+                        "DES(Dog, get_praise_or_treats) = False",
+                        "INTENT(Dog, play_with_owner) = False",
+                        "INTENT(Dog, get_praise_or_treats) = False"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Speak(Start, State1, Greeting, Friendly)],[State1, State2, Joy, Excited], \"Oh hello there, owner! I'm so happy to see you!\""
+                    ]
+                },
+                "Speak(State1, State2, Request, Assertive)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "DES(Dog, play_with_owner) = True",
+                        "DES(Dog, get_praise_or_treats) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope, Speak(State1, State2, \"Can we go for a walk?\", Assertive)",
+                        "Joy, MoveToLocation(Dog, LivingRoom, None)",
+                        "Fear, Bark(Dog, Owner, \"Play with me!\", ExcitementLevel=High)",
+                        "Pride, FetchToy(Dog, Owner, None)",
+                        "Shame, DropToy(Dog, Owner, None)",
+                        "Admiration, JumpOverObstacle(Dog, Obstacle, None)",
+                        "Gratitude, ReceivePraise(Dog, Owner, None)",
+                        "Anger, Bark(Dog, Owner, \"Stop doing that!\", ExcitementLevel=High)",
+                        "Love, Sit(Dog, Owner)"
+                    ]
+                },
+                "Speak(State2, End, Agreement, Excited)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "DES(Dog, play_with_owner) = True",
+                        "DES(Dog, get_praise_or_treats) = True",
+                        "INTENT(Dog, play_with_owner) = True",
+                        "INTENT(Dog, get_praise_or_treats) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Excitement, End, Joy, High, Bark(Dog, Owner, ExcitementLevel=High)"
+                    ],
+                    "emotion_condition": [
+                        "Start, State1, None, None, \"The dog sees the owner and wags its tail.\"",
+                        "State1, State2, Love, Excited, \"The dog runs towards the owner and jumps on him, showing affection.\"",
+                        "State2, State3, Hope, Excited, \"The dog sits in front of the owner and looks up at him, expecting treats.\"",
+                        "State3, State4, Distress, None, \"The owner doesn't give the dog a treat immediately, making the dog whine.\"",
+                        "State4, State5, Fear, Worried, \"The owner raises a hand to scold the dog, but then quickly scratches behind its ears instead.\"",
+                        "State5, End, Satisfaction, Happy, \"The dog receives praise and a treat, feeling rewarded and happy.\""
+                    ]
+                },
+                "Speak(State1, End, Disappointment, Whiny)": {
+                    "conditions": [
+                        "BEL(Dog, wants_to_play) = True",
+                        "DES(Dog, play_with_owner) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dog, wants_to_play) = False",
+                        "DES(Dog, get_praise_or_treats) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Playful, End, Joy, None, \"I'm so excited to play fetch, let's go!\"",
+                        "Eat, End, Joy, None, \"Yummy, these treats are my favorite!\"",
+                        "Sleeping, End, Distress, Whiny, \"Please don't make me move, I'm so comfy here.\"",
+                        "Waiting, End, Hope, Excited, \"I can't wait to play with my toy, come on!\"",
+                        "Excited, End, Fear, Fearful, \"I really want to fetch my toy but I'm scared of that loud noise.\""
+                    ]
+                }
+            }
+        },
+        "coffee_machine": {
+            "knowledge_base": [
+                "BEL(coffee_machine, is_plugged_in) = True",
+                "BEL(coffee_machine, water_level) = Full",
+                "BEL(coffee_machine, coffee_level) = Sufficient",
+                "DES(coffee_machine, make_coffee) = True"
+            ],
+            "intentions": {
+                "INTENT(coffee_machine, heat_plate) = True": {
+                    "action_plan": [
+                        "Move(AGENT, coffee_machine, Location(kitchen_counter))",
+                        "Check(BEL(coffee_machine, is_plugged_in), coffee_machine)",
+                        "Check(BEL(coffee_machine, water_level), coffee_machine)",
+                        "Fill(AGENT, coffee_machine, water, Volume(full))",
+                        "Check(BEL(coffee_machine, coffee_level), coffee_machine)",
+                        "Refill(AGENT, coffee_machine, coffee_bag)",
+                        "Check(DES(coffee_machine, make_coffee), coffee_machine)",
+                        "Press(AGENT, coffee_machine, Start_button)",
+                        "Check(BEL(coffee_machine, is_heating_plate), coffee_machine)",
+                        "Wait(AGENT, coffee_machine, Time(5, minutes))",
+                        "Activate(AGENT, coffee_machine, Heat_plate)",
+                        "Check(INTENT(coffee_machine, heat_plate), coffee_machine)"
+                    ]
+                },
+                "INTENT(coffee_machine, pour_water) = True": {
+                    "action_plan": [
+                        "FillWaterTub(coffee_machine, WaterSource, volume)",
+                        "PlugIn(coffee_machine, electrical_socket)",
+                        "HeatWater(coffee_machine, heating_element)",
+                        "GrindCoffee(coffee_machine, coffee_grinder)",
+                        "MixCoffeeAndWater(coffee_machine, cup)",
+                        "ServeCoffee(coffee_machine, cup, person)"
+                    ]
+                },
+                "INTENT(coffee_machine, add_coffee) = True": {
+                    "action_plan": [
+                        "CheckPluggedInStatus(coffee_machine, coffee_machine)",
+                        "CheckWaterLevel(coffee_machine, coffee_machine)",
+                        "CheckCoffeeLevel(coffee_machine, coffee_machine)",
+                        "AddCoffee(coffee_machine, coffee_machine, amount=1)",
+                        "StartBrewing(coffee_machine, coffee_machine)",
+                        "Wait(coffee_machine, time=5)",
+                        "PourCoffee(coffee_machine, cup, amount=1)"
+                    ]
+                },
+                "INTENT(coffee_machine, brew_coffee) = True": {
+                    "action_plan": [
+                        "PlugIn(AGENT, coffee_machine)",
+                        "CheckWaterLevel(AGENT, coffee_machine)",
+                        "CheckCoffeeLevel(AGENT, coffee_machine)",
+                        "AddWater(AGENT, coffee_machine, Full)",
+                        "AddCoffee(AGENT, coffee_machine, Sufficient)",
+                        "PressButton(AGENT, coffee_machine)",
+                        "Wait(AGENT, coffee_machine, 5)",
+                        "PourCoffee(AGENT, coffee_machine)"
+                    ]
+                }
+            },
+            "actions": {
+                "PlugIn(AGENT, coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = False"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, is_plugged_in) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "CheckWaterLevel(AGENT, coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) != Full"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckCoffeeLevel(AGENT, coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, coffee_level) = Null/Undefined",
+                        "BEL(coffee_machine, coffee_level) < Sufficient"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, coffee_level) = Insufficient"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AddWater(AGENT, coffee_machine, Full)": {
+                    "conditions": [
+                        "BEL(coffee_machine, water_level) = Insufficient",
+                        "BEL(coffee_machine, is_plugged_in) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, water_level) = Full"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AddCoffee(AGENT, coffee_machine, Sufficient)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, coffee_level) = Insufficient"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, coffee_level) = Sufficient"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "PressButton(AGENT, coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Full",
+                        "BEL(coffee_machine, coffee_level) = Sufficient",
+                        "DES(coffee_machine, make_coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, brewing) = True",
+                        "BEL(coffee_machine, water_level) = Low",
+                        "BEL(coffee_machine, coffee_level) = Empty",
+                        "DES(coffee_machine, make_coffee) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Wait(AGENT, coffee_machine, 5)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(AGENT, time) <= 5"
+                    ],
+                    "effects": [
+                        "BEL(AGENT, time) = 5"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PourCoffee(AGENT, coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, brewed_coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, coffee_level) = Low",
+                        "BEL(coffee_machine, brewed_coffee) = False",
+                        "BEL(coffee_machine, is_full) = False",
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Full",
+                        "DES(coffee_machine, make_coffee) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Move(AGENT, coffee_machine, Location(kitchen_counter))": {
+                    "conditions": [
+                        "BEL(coffee_machine, location) = Location(not_in_kitchen)"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, location) = Location(kitchen_counter)"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Check(BEL(coffee_machine, is_plugged_in), coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check(BEL(coffee_machine, water_level), coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, water_level) = Full"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Fill(AGENT, coffee_machine, water, Volume(full))": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) != Full"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, water_level) = Full"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check(BEL(coffee_machine, coffee_level), coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, coffee_level)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Refill(AGENT, coffee_machine, coffee_bag)": {
+                    "conditions": [
+                        "BEL(coffee_machine, coffee_level) = Insufficient"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, coffee_level) = Sufficient"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check(DES(coffee_machine, make_coffee), coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Full",
+                        "BEL(coffee_machine, coffee_level) = Sufficient"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Press(AGENT, coffee_machine, Start_button)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Full",
+                        "BEL(coffee_machine, coffee_level) = Sufficient",
+                        "DES(coffee_machine, make_coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, is_heating_plate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check(BEL(coffee_machine, is_heating_plate), coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Full",
+                        "BEL(coffee_machine, coffee_level) = Sufficient",
+                        "BEL(coffee_machine, is_heating_plate) = False"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, is_heating_plate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Wait(AGENT, coffee_machine, Time(5, minutes))": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_heating_plate) = False"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, is_heating_plate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Activate(AGENT, coffee_machine, Heat_plate)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_heating_plate) = False"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, is_heating_plate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Check(INTENT(coffee_machine, heat_plate), coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_heating_plate) = False"
+                    ],
+                    "effects": [
+                        "INTENT(coffee_machine, heat_plate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "FillWaterTub(coffee_machine, WaterSource, volume)": {
+                    "conditions": [
+                        "BEL(coffee_machine, water_level) = Empty",
+                        "BEL(WaterSource, water_level) = Sufficient",
+                        "BEL(coffee_machine, is_plugged_in) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, water_level) = volume",
+                        "BEL(WaterSource, water_level) = initial_water_level - volume"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PlugIn(coffee_machine, electrical_socket)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = False"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, is_plugged_in) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "HeatWater(coffee_machine, heating_element)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) > 0"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, water_level) = \"None\"",
+                        "BEL(coffee_machine, temperature) = \"High\"",
+                        "BEL(coffee_machine, heating_element, is_on) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GrindCoffee(coffee_machine, coffee_grinder)": {
+                    "conditions": [
+                        "BEL(coffee_machine, coffee_grinder) = Operational",
+                        "BEL(coffee_machine, coffee_level) > 0",
+                        "DES(coffee_machine, make_coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, ground_coffee_level) > 0",
+                        "BEL(coffee_machine, coffee_level) = decreased by one portion"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MixCoffeeAndWater(coffee_machine, cup)": {
+                    "conditions": [
+                        "BEL(coffee_machine, water_level) > 0",
+                        "BEL(coffee_machine, coffee_level) > 0",
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "DES(coffee_machine, make_coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(cup, contains_coffee) = True",
+                        "BEL(cup, has_milk) = False",
+                        "BEL(cup, has_sugar) = False",
+                        "BEL(coffee_machine, coffee_level) = 0",
+                        "BEL(coffee_machine, water_level) = initial_water_level - volume_used"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "ServeCoffee(coffee_machine, cup, person)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Full",
+                        "BEL(coffee_machine, coffee_level) = Sufficient",
+                        "BEL(person, wants_coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, water_level) = Empty",
+                        "BEL(coffee_machine, coffee_level) = Very_Low",
+                        "DES(person, drink_coffee) = True",
+                        "BEL(person, has_coffee) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "CheckPluggedInStatus(coffee_machine, coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = False"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, is_plugged_in) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckWaterLevel(coffee_machine, coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) != Full"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckCoffeeLevel(coffee_machine, coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, coffee_level) < Sufficient"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, make_coffee) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "AddCoffee(coffee_machine, coffee_machine, amount=1)": {
+                    "conditions": [
+                        "BEL(coffee_machine, coffee_level) = Sufficient"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, coffee_level) = Sufficient + 1"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "StartBrewing(coffee_machine, coffee_machine)": {
+                    "conditions": [
+                        "BEL(coffee_machine, coffee_level) >= 1",
+                        "BEL(coffee_machine, water_level) >= 2",
+                        "BEL(coffee_machine, is_plugged_in) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, brewing) = True",
+                        "BEL(coffee_machine, coffee_level) = BEL(coffee_machine, coffee_level) - 1",
+                        "BEL(coffee_machine, water_level) = BEL(coffee_machine, water_level) - 2"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Wait(coffee_machine, time=5)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PourCoffee(coffee_machine, cup, amount=1)": {
+                    "conditions": [
+                        "BEL(coffee_machine, coffee_level) = Sufficient",
+                        "BEL(cup, is_empty) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, coffee_level) = Insufficient",
+                        "BEL(cup, is_empty) = False",
+                        "BEL(cup, coffee_level) = 1"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Hope"
+            ],
+            "speak_actions": {
+                "Speak(Initial, Greeting, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Full",
+                        "BEL(coffee_machine, coffee_level) = Sufficient",
+                        "DES(coffee_machine, make_coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Empty",
+                        "BEL(coffee_machine, coffee_level) = Empty",
+                        "DES(coffee_machine, make_coffee) = False",
+                        "BEL(coffee_machine, coffee_ready) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Initial, Greeting, Introduction, Neutral, \"Hello there! I'm the coffee machine. Nice to meet you!\"",
+                        "Greeting, ActionStart, None, Neutral, \"What type of coffee would you like me to make for you?\""
+                    ]
+                },
+                "Speak(Greeting, AskOrder, AskForOrder, Neutral)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Full",
+                        "BEL(coffee_machine, coffee_level) = Sufficient",
+                        "DES(coffee_machine, make_coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, heated_plate) = True",
+                        "BEL(coffee_machine, water_level) = Empty",
+                        "BEL(coffee_machine, coffee_level) = Empty",
+                        "DES(coffee_machine, make_coffee) = False",
+                        "INTENT(coffee_machine, pour_coffee) = True"
+                    ],
+                    "occ_emotion": [
+                        "StartBrewing(coffee_machine, coffee_machine)",
+                        "StartBrewing(coffee_machine, coffee_machine), Check(INTENT(coffee_machine, make_coffee), coffee_machine), Satisfaction, Neutral, Coffee is being made."
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(AskOrder, OrderTaken, OrderConfirmation, Neutral)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Full",
+                        "BEL(coffee_machine, coffee_level) = Sufficient",
+                        "DES(coffee_machine, make_coffee) = True",
+                        "INTENT(coffee_machine, heat_plate) = True",
+                        "INTENT(coffee_machine, pour_water) = True",
+                        "INTENT(coffee_machine, add_coffee) = True",
+                        "INTENT(coffee_machine, brew_coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, water_level) = Empty",
+                        "BEL(coffee_machine, coffee_level) = Empty",
+                        "BEL(coffee_machine, cup_ready) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Speak(OrderConfirmation, End, EndOfConversation, Neutral)": {
+                    "conditions": [
+                        "BEL(coffee_machine, is_plugged_in) = True",
+                        "BEL(coffee_machine, water_level) = Full",
+                        "BEL(coffee_machine, coffee_level) = Sufficient",
+                        "DES(coffee_machine, make_coffee) = True"
+                    ],
+                    "effects": [
+                        "BEL(coffee_machine, heating_plate_on) = True",
+                        "INTENT(coffee_machine, heat_plate) = False",
+                        "BEL(coffee_machine, water_level) = Empty",
+                        "INTENT(coffee_machine, pour_water) = False",
+                        "BEL(coffee_machine, coffee_level) = None",
+                        "INTENT(coffee_machine, add_coffee) = False",
+                        "BEL(coffee_machine, coffee_ready) = True",
+                        "INTENT(coffee_machine, brew_coffee) = False",
+                        "DES(coffee_machine, make_coffee) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": []
+}

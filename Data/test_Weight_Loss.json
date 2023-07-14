@@ -1,0 +1,968 @@
+{
+    "scenario_name": "test_Weight Loss",
+    "scenario_description": "Sara looked in the mirror and she was unhappy. The doctor told her today that she needed to lose 100 pounds. Sara decided to lose weight to make herself more confident. Sara worked out and watched what she ate. A year later Sarah was happy and the doctor said her weight was good.",
+    "last_ended": "end",
+    "agents": {
+        "Sara": {
+            "knowledge_base": [
+                "BEL(Sara, overweight) = True",
+                "BEL(Sara, unhappy) = True",
+                "BEL(Sara, confident) = False",
+                "DES(Sara, lose_weight) = True",
+                "DES(Sara, be_confident) = True"
+            ],
+            "intentions": {
+                "INTENT(Sara, workout) = True": {
+                    "action_plan": [
+                        "CheckWeight(Sara, Doctor)",
+                        "SetGoalWeight(Sara, Doctor, 100)",
+                        "BuyHealthyFood(Sara, GroceryStore)",
+                        "JoinGym(Sara, Gym)",
+                        "CreateWorkoutPlan(Sara, Trainer, Cardio, 30Mins)",
+                        "FollowWorkoutPlan(Sara, Gym)",
+                        "TrackProgress(Sara, Journal)",
+                        "MonitorWeight(Sara, Doctor, biweekly)",
+                        "CelebrateSuccess(Sara, FriendsAndFamily)",
+                        "MaintainHealthyLifestyle(Sara, daily)"
+                    ]
+                },
+                "INTENT(Sara, watch_what_she_eats) = True": {
+                    "action_plan": [
+                        "Go_to_doctor(Sara, Doctor)",
+                        "Research_weight_loss(Sara, *internet)",
+                        "Create_diet_plan(Sara, *dietitian)",
+                        "Buy_healthy_food(Sara, *grocery_store)",
+                        "Prepare_meals(Sara, kitchen)",
+                        "Exercise(Sara, gym)",
+                        "Track_progress(Sara, *weight_scale)"
+                    ]
+                },
+                "INTENT(Sara, lose_100_pounds) = True": {
+                    "action_plan": [
+                        "Workout(Sara, Gym)",
+                        "Follow_diet(Sara, Nutritionist)",
+                        "Track_progress(Sara, Scale)",
+                        "Reward(Sara, Herself, Treat)"
+                    ]
+                },
+                "INTENT(Sara, be_happy) = True": {
+                    "action_plan": [
+                        "SetGoal(Sara, lose_100_pounds)",
+                        "Exercise(Sara, gym)",
+                        "EatHealthy(Sara, kitchen)",
+                        "CheckWeight(Sara, weighing_scale)",
+                        "SetGoal(Sara, be_confident)",
+                        "EngageInPositiveSelfTalk(Sara, mirror)",
+                        "CheckInWithDoctor(Sara, doctor's_office)",
+                        "Rejoice(Sara, home)"
+                    ]
+                },
+                "INTENT(Sara, gain_confidence) = True": {
+                    "action_plan": [
+                        "Exercise(Sara, gym)",
+                        "Eat_healthily(Sara, self)",
+                        "Track_progress(Sara, self)",
+                        "Reward_progress(Sara, self, healthy_food)",
+                        "Visualize_success(Sara, self)",
+                        "Create_support_system(Sara, friends)"
+                    ]
+                }
+            },
+            "actions": {
+                "Exercise(Sara, gym)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, overweight) = False",
+                        "BEL(Sara, confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Eat_healthily(Sara, self)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "BEL(Sara, hungry) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, healthy_diet) = True",
+                        "BEL(Sara, full) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Track_progress(Sara, self)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "BEL(Sara, confident) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, weight_progress) = True",
+                        "DES(Sara, feel_accomplished) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Reward_progress(Sara, self, healthy_food)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "BEL(Sara, confident) = False"
+                    ],
+                    "effects": [
+                        "DES(Sara, be_health-conscious) = True",
+                        "BEL(Sara, likes_healthy_food) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Visualize_success(Sara, self)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "BEL(Sara, confident) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, visualized_success) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Create_support_system(Sara, friends)": {
+                    "conditions": [
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, friends) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, friends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckWeight(Sara, Doctor)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True",
+                        "BEL(Sara, unhappy) = True",
+                        "BEL(Sara, confident) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "SetGoalWeight(Sara, Doctor, 100)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True",
+                        "BEL(Sara, confident) = False"
+                    ],
+                    "effects": [
+                        "DES(Sara, lose_weight) = True",
+                        "DES(Sara, be_confident) = True",
+                        "BEL(Sara, target_weight, 100) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BuyHealthyFood(Sara, GroceryStore)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, HealthyFood) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, HealthyFood) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "JoinGym(Sara, Gym)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True",
+                        "BEL(Sara, confident) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, joined_gym) = True",
+                        "DES(Sara, be_active) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CreateWorkoutPlan(Sara, Trainer, Cardio, 30Mins)": {
+                    "conditions": [
+                        "BEL(Sara, join_gym) = True",
+                        "BEL(Sara, create_workout_plan) = False",
+                        "BEL(Trainer, experienced) = True",
+                        "DES(Sara, lose_weight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, workout_plan) = True",
+                        "BEL(Sara, cardio_exercises) = True",
+                        "BEL(Sara, exercise_duration) = 30",
+                        "BEL(Sara, exercise_intensity) = Medium",
+                        "DES(Sara, be_active) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "FollowWorkoutPlan(Sara, Gym)": {
+                    "conditions": [
+                        "BEL(Sara, joined_gym) = True",
+                        "BEL(Sara, created_workout_plan) = True",
+                        "BEL(Sara, has_time_for_workout) = True",
+                        "DES(Sara, be_fit) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, improved_fitness) = True",
+                        "BEL(Sara, achieving_fitness_goal) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "TrackProgress(Sara, Journal)": {
+                    "conditions": [
+                        "BEL(Sara, confident) = False",
+                        "DES(Sara, lose_weight) = True",
+                        "BEL(Sara, overweight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, progress_in_weight_loss_journal) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "MonitorWeight(Sara, Doctor, biweekly)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True",
+                        "DES(Sara, lose_weight) = True",
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, Doctor) = Doctor",
+                        "BEL(Sara, MonitorWeight) != biweekly"
+                    ],
+                    "effects": [
+                        "BEL(Sara, MonitorWeight) = biweekly"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CelebrateSuccess(Sara, FriendsAndFamily)": {
+                    "conditions": [
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, lose_weight) = True",
+                        "DES(Sara, be_confident) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, happy) = True",
+                        "BEL(Sara, confident) = True",
+                        "DES(Sara, be_confident) = False",
+                        "BEL(Friends, happy_for_Sara) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "MaintainHealthyLifestyle(Sara, daily)": {
+                    "conditions": [
+                        "BEL(Sara, confident) = True",
+                        "DES(Sara, maintain_healthy_lifestyle) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, healthy_lifestyle) = True",
+                        "DES(Sara, lose_weight) = False",
+                        "DES(Sara, be_healthier) = True",
+                        "BEL(Sara, happy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Go_to_doctor(Sara, Doctor)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True",
+                        "BEL(Sara, unhappy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, overweight) = False",
+                        "BEL(Sara, unhappy) = False",
+                        "BEL(Sara, confident) = False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Research_weight_loss(Sara, *internet)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True",
+                        "DES(Sara, lose_weight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, researched_weight_loss) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Create_diet_plan(Sara, *dietitian)": {
+                    "conditions": [
+                        "DES(Sara, lose_weight) = True",
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, overweight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, has_diet_plan) = True",
+                        "BEL(Sara, knowledgeable_about_nutrition) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Buy_healthy_food(Sara, *grocery_store)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, overweight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, healthy_food) = True",
+                        "BEL(Sara, money_spent) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Prepare_meals(Sara, kitchen)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True",
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, has_ingredients) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, has_prepared_meals) = True",
+                        "BEL(Sara, is_full) = True",
+                        "DES(Sara, lose_weight) = True",
+                        "DES(Sara, be_confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Track_progress(Sara, *weight_scale)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "DES(Sara, be_confident) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, overweight) = False",
+                        "BEL(Sara, confident) = True",
+                        "DES(Sara, lose_weight) = False",
+                        "DES(Sara, be_confident) = False",
+                        "BEL(Sara, successful_weight_loss) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Workout(Sara, Gym)": {
+                    "conditions": [
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, overweight) = True",
+                        "BEL(Sara, workout, done) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, workout, done) = True",
+                        "BEL(Sara, fitness_level, increased) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Follow_diet(Sara, Nutritionist)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, Nutritionist) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, follow_diet) = True",
+                        "BEL(Sara, eat_healthy) = True",
+                        "BEL(Sara, measure_portions) = True",
+                        "DES(Sara, lose_weight) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Track_progress(Sara, Scale)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "BEL(Sara, overweight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, progress_on_weight_loss) = True",
+                        "BEL(Sara, overweight) = False",
+                        "DES(Sara, be_confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Reward(Sara, Herself, Treat)": {
+                    "conditions": [
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, unhappy) = False",
+                        "DES(Sara, lose_weight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, confident) = True",
+                        "DES(Sara, be_happy) = True",
+                        "DES(Sara, lose_weight) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "SetGoal(Sara, lose_100_pounds)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True",
+                        "BEL(Sara, lose_weight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, overweight) = False",
+                        "DES(Sara, lose_weight) = False",
+                        "BEL(Sara, closer_to_healthy_weight) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EatHealthy(Sara, kitchen)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "BEL(Sara, confident) = False",
+                        "BEL(Sara, unhappy) = True",
+                        "BEL(Sara, overweight) = True"
+                    ],
+                    "effects": [
+                        "DES(Sara, be_healthier) = True",
+                        "BEL(Sara, eating_healthy) = True",
+                        "BEL(Sara, eating_junk) = False",
+                        "DES(Sara, lose_weight) = True",
+                        "BEL(Sara, weight_loss_progress) = Increased"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "CheckWeight(Sara, weighing_scale)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True",
+                        "DES(Sara, lose_weight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, overweight) = False",
+                        "DES(Sara, lose_weight) = False",
+                        "BEL(Sara, confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "SetGoal(Sara, be_confident)": {
+                    "conditions": [
+                        "BEL(Sara, lose_100_pounds) = True",
+                        "DES(Sara, be_confident) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EngageInPositiveSelfTalk(Sara, mirror)": {
+                    "conditions": [
+                        "BEL(Sara, confident) = False"
+                    ],
+                    "effects": [
+                        "DES(Sara, be_confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Shame"
+                    ]
+                },
+                "CheckInWithDoctor(Sara, doctor's_office)": {
+                    "conditions": [
+                        "BEL(Sara, lose_weight) = True",
+                        "BEL(Sara, overweight) = True",
+                        "BEL(Sara, unhappy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, lose_weight) = False",
+                        "BEL(Sara, healthy) = True",
+                        "BEL(Sara, confident) = True",
+                        "DES(Sara, be_happy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Rejoice(Sara, home)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = False",
+                        "BEL(Sara, confident) = True",
+                        "DES(Sara, be_happy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, happy) = True",
+                        "DES(Sara, celebrate) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, Intro, Smalltalk, Friendly)": {
+                    "conditions": [
+                        "BEL(Sara, can_speak) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "[Start, Intro, Smalltalk, Friendly], [Intro, Beliefs, Goal, Neutral], Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Intro, Beliefs, Goal, Neutral)": {
+                    "conditions": [
+                        "BEL(Sara, mute) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, spoke) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Intro, Beliefs, Goal, Neutral)], [Beliefs, Desires, Smalltalk, Neutral, \"Wow, you really seem to be working hard on achieving your goals!\"], Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Beliefs, Desires, Smalltalk, Neutral)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True",
+                        "BEL(Sara, unhappy) = True",
+                        "DES(Sara, be_confident) = True",
+                        "INTENT(Sara, gain_confidence) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Beliefs, Desires, Smalltalk, Neutral, \"Wow, you really seem to be working hard on achieving your goals!\"",
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Speak(Beliefs, Desires, Smalltalk, Neutral), None, Neutral, None, Fear"
+                    ]
+                },
+                "Speak(Desires, Intentions, Goal, Admirative)": {
+                    "conditions": [
+                        "BEL(Sara, confident) = False",
+                        "DES(Sara, be_confident) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Intentions, Actions, Goal, Encouraging, \"Keep up the great work, Sara!\"",
+                        "Actions, End, Goal, Neutral, \"Congratulations, Sara! You did it!\"",
+                        "End, None, Joy, None, \"I'm so proud of myself!\""
+                    ],
+                    "emotion_condition": [
+                        "Speak(Desires, Intentions, Goal, Admirative), Emotion(Admiration)"
+                    ]
+                },
+                "Speak(Intentions, Actions, Goal, Encouraging)": {
+                    "conditions": [
+                        "BEL(Sara, confident) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Actions, End, Satisfaction, Neutral, \"Congratulations, Sara! You did it!\""
+                    ],
+                    "emotion_condition": [
+                        "Distress",
+                        "Hope",
+                        "Joy",
+                        "Satisfaction",
+                        "Gratification",
+                        "Relief"
+                    ]
+                },
+                "Speak(Actions, End, Goal, Neutral)": {
+                    "conditions": [
+                        "BEL(Sara, overweight) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Speak(Actions, End, Goal, Neutral)], [Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Follow_diet(Sara, Nutritionist), Track_progress(Sara, Scale), Satisfaction, Positive",
+                        "MaintainHealthyLifestyle(Sara, daily), Workout(Sara, Gym), Joy, Positive",
+                        "CheckWeight(Sara, weighing_scale), SetGoal(Sara, be_confident), Hope, Positive",
+                        "EatHealthy(Sara, kitchen), Track_progress(Sara, Journal), Gratification, Positive",
+                        "JoinGym(Sara, Gym), CreateWorkoutPlan(Sara, Trainer, Cardio, 30Mins), EngageInPositiveSelfTalk(Sara, mirror), Love, Positive",
+                        "SetGoalWeight(Sara, Doctor, 100), CheckInWithDoctor(Sara, doctor's_office), Relief, Positive",
+                        "Create_diet_plan(Sara, *dietitian), Buy_healthy_food(Sara, *grocery_store), Prepare_meals(Sara, kitchen), Disappointment, Negative",
+                        "Track_progress(Sara, *weight_scale), Reward(Sara, Herself, Treat), Satisfaction, Positive",
+                        "Research_weight_loss(Sara, *internet), Create_diet_plan(Sara, *dietitian), Work_out(Sara, Gym), Hope, Positive"
+                    ]
+                }
+            }
+        },
+        "Doctor": {
+            "knowledge_base": [
+                "BEL(Doctor, said_Sara_needs_to_lose_weight) = True",
+                "BEL(Doctor, has_expertise_in_weight_loss) = True",
+                "DES(Doctor, wants_Sara_to_lose_weight) = True",
+                "BEL(Doctor, Sara_has_a_high_risk_for_health_issues) = True",
+                "BEL(Doctor, Sara_is_motivated_to_lose_weight) = True",
+                "BEL(Doctor, weight_loss_requires_diet_and_exercise) = True",
+                "DES(Doctor, wants_to_give_Sara_advice) = True"
+            ],
+            "intentions": {
+                "INTENT(Doctor, give_advice_to_Sara) = True": {
+                    "action_plan": [
+                        "Advising(Doctor, Sara, \u201cDiet and Exercise\u201d)",
+                        "Inform(Doctor, Sara, \u201cRisks of staying overweight\u201d)",
+                        "Recommend(Doctor, Sara, \u201cWeight-loss program\u201d)",
+                        "Refer(Doctor, Sara, \u201cNutritionist\u201d)",
+                        "Follow_up(Doctor, Sara, \u201cMonitoring progress\u201d)"
+                    ]
+                }
+            },
+            "actions": {
+                "Advising(Doctor, Sara, \u201cDiet and Exercise\u201d)": {
+                    "conditions": [
+                        "BEL(Doctor, Sara_is_motivated_to_lose_weight) = True",
+                        "BEL(Doctor, weight_loss_requires_diet_and_exercise) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, knows_doctor_advice) = True",
+                        "BEL(Doctor, gave_advice_to_Sara) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Inform(Doctor, Sara, \u201cRisks of staying overweight\u201d)": {
+                    "conditions": [
+                        "BEL(Doctor, Sara_has_a_high_risk_for_health_issues) = True"
+                    ],
+                    "effects": [
+                        "DES(Sara, knows_risks_of_staying_overweight) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Recommend(Doctor, Sara, \u201cWeight-loss program\u201d)": {
+                    "conditions": [
+                        "BEL(Doctor, weight_loss_requires_diet_and_exercise) = True",
+                        "BEL(Doctor, Sara_is_motivated_to_lose_weight) = True",
+                        "DES(Sara, wants_a_weight_loss_program) = True"
+                    ],
+                    "effects": [
+                        "DES(Sara, finds_a_suitable_weight_loss_program) = True",
+                        "BEL(Sara, has_knowledge_of_a_recommended_weight_loss_program) = True",
+                        "BEL(Sara, recommended_weight_loss_program_is_effective) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Refer(Doctor, Sara, \u201cNutritionist\u201d)": {
+                    "conditions": [
+                        "BEL(Doctor, Sara_is_motivated_to_lose_weight) = True",
+                        "BEL(Doctor, weight_loss_requires_diet_and_exercise) = True",
+                        "BEL(Doctor, has_expertise_in_weight_loss) = True",
+                        "DES(Doctor, wants_to_give_Sara_advice) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, referred_Sara_to_nutritionist) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Follow_up(Doctor, Sara, \u201cMonitoring progress\u201d)": {
+                    "conditions": [
+                        "BEL(Doctor, Sara_is_motivated_to_lose_weight) = True",
+                        "BEL(Doctor, Sara_has_a_high_risk_for_health_issues) = True",
+                        "BEL(Doctor, recommended_weight-loss_program_has_started) = True"
+                    ],
+                    "effects": [
+                        "DES(Doctor, wants_to_monitor_Sara_progress) = True",
+                        "BEL(Doctor, Sara_is_following_the_weight-loss_program) = True",
+                        "BEL(Doctor, Sara_has_made_progress) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "concern"
+            ],
+            "speak_actions": {
+                "Speak(Start, Intro, Smalltalk, Neutral)": {
+                    "conditions": [
+                        "BEL(Doctor, has_expertise_in_weight_loss) = True",
+                        "BEL(Doctor, said_Sara_needs_to_lose_weight) = True",
+                        "BEL(Doctor, Sara_is_motivated_to_lose_weight) = True",
+                        "DES(Doctor, wants_to_give_Sara_advice) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, gave_advice_to_Sara) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(Intro, Beliefs, Neutral, Neutral)": {
+                    "conditions": [
+                        "BEL(Doctor, has_expertise_in_weight_loss) = True",
+                        "BEL(Doctor, said_Sara_needs_to_lose_weight) = True",
+                        "BEL(Doctor, Sara_is_motivated_to_lose_weight) = True",
+                        "DES(Doctor, wants_to_give_Sara_advice) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, advice_given_to_Sara) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Intro, Beliefs, Neutral, Neutral) -> Fear"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Beliefs, Desires, Neutral, Neutral)": {
+                    "conditions": [
+                        "BEL(Doctor, has_expertise_in_weight_loss) = True",
+                        "BEL(Doctor, Sara_has_a_high_risk_for_health_issues) = True",
+                        "BEL(Doctor, said_Sara_needs_to_lose_weight) = True",
+                        "BEL(Doctor, weight_loss_requires_diet_and_exercise) = True",
+                        "DES(Doctor, wants_to_give_Sara_advice) = True",
+                        "BEL(Doctor, Sara_is_motivated_to_lose_weight) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, gave_advice_to_Sara) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(Desires, Intentions, Neutral, Neutral)": {
+                    "conditions": [
+                        "BEL(Doctor, said_Sara_needs_to_lose_weight) = True",
+                        "BEL(Doctor, has_expertise_in_weight_loss) = True",
+                        "BEL(Doctor, Sara_has_a_high_risk_for_health_issues) = True",
+                        "DES(Doctor, wants_to_give_Sara_advice) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, gave_advice_to_Sara) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Intentions, Actions, Neutral, Advice)": {
+                    "conditions": [
+                        "BEL(Doctor, said_Sara_needs_to_lose_weight) = True",
+                        "BEL(Doctor, has_expertise_in_weight_loss) = True",
+                        "BEL(Doctor, Sara_has_a_high_risk_for_health_issues) = True",
+                        "BEL(Doctor, weight_loss_requires_diet_and_exercise) = True"
+                    ],
+                    "effects": [
+                        "DES(Doctor, wants_to_give_Sara_advice) = False",
+                        "BEL(Sara, received_weight_loss_advice_from_Doctor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Actions, Intentions, Neutral, Advice, \"Lose weight by following a diet and exercise routine.\"",
+                        "Intentions, Emotions, Neutral, Hope, \"I hope my advice will help Sara reach her weight loss goals.\"",
+                        "Emotions, End, Neutral, Goal, \"I'm glad I was able to offer helpful advice to Sara.\""
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Actions, End, Neutral, Encouraging)": {
+                    "conditions": [
+                        "BEL(Doctor, has_expertise_in_weight_loss) = True",
+                        "BEL(Doctor, said_Sara_needs_to_lose_weight) = True",
+                        "BEL(Doctor, Sara_has_a_high_risk_for_health_issues) = True",
+                        "BEL(Doctor, Sara_is_motivated_to_lose_weight) = True",
+                        "BEL(Doctor, weight_loss_requires_diet_and_exercise) = True",
+                        "DES(Doctor, wants_to_give_Sara_advice) = True"
+                    ],
+                    "effects": [
+                        "DES(Doctor, has_given_advice_to_Sara) = True"
+                    ],
+                    "occ_emotion": [
+                        "Approval"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, Intro, Smalltalk, Friendly, \"Hi Sara, how are you doing today?\">",
+        "<Intro, Beliefs, Goal, Neutral, \"So, what have you been up to lately?\">",
+        "<Beliefs, Desires, Smalltalk, Neutral, \"Wow, you really seem to be working hard on achieving your goals!\">",
+        "<Desires, Intentions, Goal, Admirative, \"I really admire your commitment to lose weight and become healthier!\">",
+        "<Intentions, Actions, Goal, Encouraging, \"Keep up the great work, Sara!\">",
+        "<Actions, End, Goal, Neutral, \"Congratulations, Sara! You did it!\">"
+    ]
+}

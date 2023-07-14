@@ -1,0 +1,1314 @@
+{
+    "scenario_name": "test_The Lost Job",
+    "scenario_description": "Joan hated her boss. She made nasty remarks about her boss on her social media account. Joan's co-worker showed the remarks to Joan's boss. Joan got fired from her job. Joan started to be more careful using social media.",
+    "last_ended": "end",
+    "agents": {
+        "Joan": {
+            "knowledge_base": [
+                "BEL(Joan, hates_boss) = True",
+                "BEL(Joan, made_nasty_remarks) = True",
+                "BEL(Joan, got_fired) = False",
+                "BEL(Joan, needs_income) = True",
+                "BEL(Joan, should_be_careful) = False",
+                "DES(Joan, express_dislike) = True",
+                "DES(Joan, keep_job) = True"
+            ],
+            "intentions": {
+                "INTENT(Joan, make_nasty_remarks_on_social_media) = True": {
+                    "action_plan": []
+                },
+                "INTENT(Joan, keep_job) = True": {
+                    "action_plan": [
+                        "Think(Joan, null, null)",
+                        "Filter(ContentFilter, Joan's_Social_Media, nasty_remarks)",
+                        "Post(Joan, Joan's_Social_Media, positive_remarks)",
+                        "Avoid(Joan, Joan's_co-worker, discussing_boss)",
+                        "Work(HumanResources, Joan, performance_improvement_plan)",
+                        "Monitor(HumanResources, Joan, progress)",
+                        "Adapt(Joan, beliefs, new_information)",
+                        "Cancel(Joan, DES(Joan, express_dislike))",
+                        "Confirm(Joan, BEL(Joan, should_be_careful) = True)"
+                    ]
+                },
+                "INTENT(Joan, be less careful_on_social_media) = False": {
+                    "action_plan": [
+                        "Think(Joan, , \"I need to be more careful using social media\")",
+                        "CheckPrivacySettings(Joan, social_media_account\\)]",
+                        "ReviewPastPosts(Joan, social_media_account, \"delete any inappropriate or negative posts\")",
+                        "Think(Joan, , \"I should refrain from making public negative remarks about my boss or job\")",
+                        "ControlEmotions(Joan, self, \"Find healthy ways to manage emotions and negative feelings\")",
+                        "FindNewJob(Joan, job_search_engine, \"Apply for jobs that fit my skills and requirements\")",
+                        "Think(Joan, , \"I need to maintain a positive attitude to maintain my job and work relationships\")",
+                        "BeProfessional(Joan, workplace, \"Be punctual, dress appropriately, and remain focused and productive\")",
+                        "CommunicateWithBoss(Joan, Joan's_boss, \"Discuss concerns and goals, and ask for feedback\")"
+                    ]
+                }
+            },
+            "actions": {
+                "Think(Joan, , \"I need to be more careful using social media\")": {
+                    "conditions": [
+                        "BEL(Joan, should_be_careful) = False"
+                    ],
+                    "effects": [
+                        "BEL(Joan, should_be_careful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "CheckPrivacySettings(Joan, social_media_account\\)]": {
+                    "conditions": [
+                        "BEL(Joan, social_media_account) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan, privacy_settings_checked) = True",
+                        "BEL(Joan, should_be_careful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear(Joan, null, \"I might have posted inappropriate or negative content that could get me in trouble with my boss\")"
+                    ]
+                },
+                "ReviewPastPosts(Joan, social_media_account, \"delete any inappropriate or negative posts\")": {
+                    "conditions": [
+                        "BEL(Joan, made_nasty_remarks) = True",
+                        "BEL(Joan, should_be_careful) = False"
+                    ],
+                    "effects": [
+                        "BEL(Joan, made_nasty_remarks) = False",
+                        "BEL(Joan, should_be_careful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Think(Joan, , \"I should refrain from making public negative remarks about my boss or job\")": {
+                    "conditions": [
+                        "BEL(Joan, hates_boss) = True",
+                        "DES(Joan, express_dislike) = True"
+                    ],
+                    "effects": [
+                        "DES(Joan, express_dislike) = False",
+                        "DES(Joan, keep_job) = True"
+                    ],
+                    "occ_emotion": [
+                        "Shame"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "ControlEmotions(Joan, self, \"Find healthy ways to manage emotions and negative feelings\")": {
+                    "conditions": [
+                        "BEL(Joan, control_emotions) = False",
+                        "BEL(Joan, needs_to_manage_emotions) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan, control_emotions) = True",
+                        "DES(Joan, manage_emotions) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "FindNewJob(Joan, job_search_engine, \"Apply for jobs that fit my skills and requirements\")": {
+                    "conditions": [
+                        "BEL(Joan, needs_income) = True",
+                        "BEL(Joan, keep_job) = False",
+                        "BEL(Joan, found_job) = False",
+                        "BEL(job_search_engine, has_open_positions) = True"
+                    ],
+                    "effects": [
+                        "DES(Joan, find_new_job) = False",
+                        "INTENT(Joan, apply_for_job) = True",
+                        "BEL(Joan, job_applications_submitted) += 1",
+                        "BEL(Joan, found_job) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Think(Joan, , \"I need to maintain a positive attitude to maintain my job and work relationships\")": {
+                    "conditions": [
+                        "BEL(Joan, got_fired) = True",
+                        "DES(Joan, keep_job) = True"
+                    ],
+                    "effects": [
+                        "DES(Joan, have_positive_attitude) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BeProfessional(Joan, workplace, \"Be punctual, dress appropriately, and remain focused and productive\")": {
+                    "conditions": [
+                        "BEL(Joan, got_fired) = False",
+                        "BEL(Joan, should_be_careful) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan, remains_employed) = True",
+                        "BEL(Joan, behaves_professionally) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "CommunicateWithBoss(Joan, Joan's_boss, \"Discuss concerns and goals, and ask for feedback\")": {
+                    "conditions": [
+                        "BEL(Joan, got_fired) = True",
+                        "DES(Joan, keep_job) = True",
+                        "BEL(Joan's_boss, is_approachable) = True",
+                        "BEL(Joan's_boss, has_time_for_conversation) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan, got_fired) = False",
+                        "DES(Joan, keep_job) = True",
+                        "DES(Joan, improve_working_relationship) = True",
+                        "BEL(Joan's_boss, is_impressed_with_Joan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Think(Joan, null, null)": {
+                    "conditions": [
+                        "BEL(Joan, needs_income) = True",
+                        "DES(Joan, keep_job) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Filter(ContentFilter, Joan's_Social_Media, nasty_remarks)": {
+                    "conditions": [
+                        "BEL(Joan, made_nasty_remarks) = True",
+                        "BEL(Joan's_Social_Media, posts)",
+                        "BEL(ContentFilter, enabled) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_Social_Media, posts_filtered) = True",
+                        "BEL(Joan's_Social_Media, positive_remarks)",
+                        "BEL(ContentFilter, applied) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Post(Joan, Joan's_Social_Media, positive_remarks)": {
+                    "conditions": [
+                        "BEL(Joan, made_nasty_remarks) = True",
+                        "BEL(Joan, should_be_careful) = False"
+                    ],
+                    "effects": [
+                        "BEL(Joan, made_nasty_remarks) = False",
+                        "BEL(Joan, should_be_careful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Avoid(Joan, Joan's_co-worker, discussing_boss)": {
+                    "conditions": [
+                        "BEL(Joan's_co-worker, has_nasty_remarks) = True",
+                        "BEL(Joan, needs_to_avoid) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan, avoids_co-worker) = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Resentment"
+                    ]
+                },
+                "Work(HumanResources, Joan, performance_improvement_plan)": {
+                    "conditions": [
+                        "BEL(HumanResources, has_authority) = True",
+                        "BEL(Joan, needs_income) = True",
+                        "BEL(Joan, got_fired) = True",
+                        "BEL(Joan, performance) < 100"
+                    ],
+                    "effects": [
+                        "BEL(Joan, performance_improvement_needed) = True",
+                        "BEL(Joan, performance_improvement_plan) = True",
+                        "BEL(HumanResources, monitors_Joan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Monitor(HumanResources, Joan, progress)": {
+                    "conditions": [
+                        "BEL(Joan, got_fired) = False",
+                        "BEL(HumanResources, performance_improvement_plan, Joan) = True"
+                    ],
+                    "effects": [
+                        "BEL(HumanResources, monitoring, Joan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Adapt(Joan, beliefs, new_information)": {
+                    "conditions": [
+                        "BEL(Joan, needs_income) = True",
+                        "BEL(Joan, got_fired) = False",
+                        "BEL(Joan, should_be_careful) = False"
+                    ],
+                    "effects": [
+                        "BEL(Joan, should_be_careful) = True",
+                        "BEL(Joan, made_nasty_remarks) = True",
+                        "DES(Joan, express_dislike) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Cancel(Joan, DES(Joan, express_dislike))": {
+                    "conditions": [
+                        "BEL(Joan, hates_boss) = True",
+                        "DES(Joan, express_dislike) = True"
+                    ],
+                    "effects": [
+                        "DES(Joan, express_dislike) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Confirm(Joan, BEL(Joan, should_be_careful) = True)": {
+                    "conditions": [
+                        "BEL(Joan, should_be_careful) = False",
+                        "BEL(Joan, got_fired) = False"
+                    ],
+                    "effects": [
+                        "BEL(Joan, should_be_careful) = True",
+                        "DES(Joan, express_dislike) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Resentment",
+                "Joan's_boss"
+            ],
+            "speak_actions": {
+                "Speak(start, S1, small-talk, neutral)": {
+                    "conditions": [
+                        "BEL(Joan, made_nasty_remarks) = True",
+                        "DES(Joan, express_dislike) = True",
+                        "INTENT(Joan, make_nasty_remarks_on_social_media) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan, should_be_careful) = True",
+                        "DES(Joan, keep_job) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(S2, S3, topic-shifting, neutral)": {
+                    "conditions": [
+                        "BEL(Joan, needs_income) = True",
+                        "INTENT(Joan, keep_job) = True",
+                        "BEL(Joan, should_be_careful) = False"
+                    ],
+                    "effects": [
+                        "BEL(Joan, made_nasty_remarks) = True",
+                        "BEL(Joan, should_be_careful) = True",
+                        "DES(Joan, express_dislike) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(S3, S4, personal-reveal, neutral)": {
+                    "conditions": [
+                        "BEL(Joan, made_nasty_remarks) = True",
+                        "BEL(Joan, should_be_careful) = False"
+                    ],
+                    "effects": [
+                        "BEL(Joan, should_be_careful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Shame"
+                    ]
+                },
+                "Speak(S6, S7, regret, sad)": {
+                    "conditions": [
+                        "BEL(Joan, made_nasty_remarks) = True",
+                        "BEL(Joan, should_be_careful) = False"
+                    ],
+                    "effects": [
+                        "BEL(Joan, should_be_careful) = True"
+                    ],
+                    "occ_emotion": [
+                        "[Remorse"
+                    ],
+                    "emotion_condition": [
+                        "[Remorse"
+                    ]
+                }
+            }
+        },
+        "Joan's_boss": {
+            "knowledge_base": [
+                "BEL(Joan_hates_boss)=True",
+                "BEL(Social_media_existence)=True",
+                "BEL(Joan_has_social_media_account)=True",
+                "BEL(Joan_posted_nasty_remarks)=True",
+                "BEL(Co-worker_has_nasty_remarks)=True",
+                "BEL(Co-worker_shares_nasty_remarks)=True",
+                "BEL(Joan_got_fired)=True",
+                "BEL(Joan_has_careful_social_media_behavior)=True",
+                "DES(Fair_employee_behavior)=True",
+                "DES(Respectful_employee_behavior)=True",
+                "DES(Monitor_employee_social_media_activity)=True",
+                "DES(Enforce_social_media_policy)=True"
+            ],
+            "intentions": {
+                "INTENT(Joan's_boss, monitor_employee_social_media_activity) = True": {
+                    "action_plan": [
+                        "Inform(Joan's_co-worker, monitor_employee_social_media_activity)",
+                        "Remind(Joan, follow_social_media_policy)",
+                        "Monitor(Joan's_social_media_account)",
+                        "Review(Social_media_policy)",
+                        "Educate(Joan, appropriate_social_media_behavior)",
+                        "Enforce(Social_media_policy)"
+                    ]
+                },
+                "INTENT(Joan's_boss, enforce_social_media_policy) = True": {
+                    "action_plan": [
+                        "Inform_employee(Joan's_boss, Joan, \"Arrange a meeting\")",
+                        "Joan",
+                        "Remind_social_media_policy(Joan's_boss, Joan)",
+                        "Joan",
+                        "Monitor_social_media_activity(Joan's_boss, Joan)",
+                        "Joan",
+                        "Inform_co-worker(Joan's_boss, Joan's_co-worker, \"Arrange a meeting\")",
+                        "Joan's_co-worker",
+                        "Review_company_social_media_policy(Joan's_boss)",
+                        "Organize_social_media_training(Joan's_boss)",
+                        "Assign_social_media_monitoring(Joan's_boss, Human_Resources, \"Request regular social media monitoring\")"
+                    ]
+                },
+                "INTENT(Joan's_boss, maintain_fair_employee_behavior) = True": {
+                    "action_plan": [
+                        "Monitor(Joan's_boss, Joan, Social_Media)",
+                        "Investigate(Joan's_boss, Joan, Co-worker)",
+                        "Enforce_Policy(Joan's_boss, Joan)",
+                        "Have_a_Meeting(Joan's_boss, Joan)",
+                        "Document_Behavior(Joan's_boss, Joan)",
+                        "Encourage_Positive_Behavior(Joan's_boss, Joan)",
+                        "Reward_Positive_Behavior(Joan's_boss, Joan)"
+                    ]
+                },
+                "INTENT(Joan's_boss, maintain_respectful_employee_behavior) = True": {
+                    "action_plan": [
+                        "MonitorSocialMediaActivity(Joan's_boss, Joan, None)",
+                        "RemindSocialMediaPolicy(Joan's_boss, Joan, None)",
+                        "EnforceSocialMediaPolicy(Joan's_boss, Joan, None)",
+                        "EducateEmployees(Joan's_boss, AllEmployees, None)"
+                    ]
+                }
+            },
+            "actions": {
+                "MonitorSocialMediaActivity(Joan's_boss, Joan, None)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Social_media_existence) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "RemindSocialMediaPolicy(Joan's_boss, Joan, None)": {
+                    "conditions": [
+                        "BEL(Social_media_existence) = True",
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan_posted_nasty_remarks) = True",
+                        "BEL(Joan_has_careful_social_media_behavior) = False",
+                        "BEL(Social_media_policy_reminder) = False"
+                    ],
+                    "effects": [
+                        "BEL(Social_media_policy_reminder) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope",
+                        "Joan",
+                        "Joan"
+                    ],
+                    "emotion_condition": [
+                        "Reproach"
+                    ]
+                },
+                "EnforceSocialMediaPolicy(Joan's_boss, Joan, None)": {
+                    "conditions": [
+                        "BEL(Joan_has_violated_social_media_policy) = True",
+                        "BEL(Joan_is_an_employee) = True"
+                    ],
+                    "effects": [
+                        "DES(Joan_is_punished) = True",
+                        "BEL(Joan_knows_social_media_policy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Reproach"
+                    ]
+                },
+                "EducateEmployees(Joan's_boss, AllEmployees, None)": {
+                    "conditions": [
+                        "BEL(Joan_got_fired)=True",
+                        "BEL(Joan's_boss_knows_about_social_media_incident)=False",
+                        "DES(Employees_need_education)=True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_boss_knows_about_social_media_incident)=True",
+                        "BEL(Joan_has_careful_social_media_behavior)=True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Inform(Joan's_co-worker, monitor_employee_social_media_activity)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Co-worker_has_nasty_remarks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_co-worker_knows_about_social_media_monitoring) = True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Remind(Joan, follow_social_media_policy)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account)=True",
+                        "BEL(Joan_posted_nasty_remarks)=False",
+                        "DES(Follow_social_media_policy)=False"
+                    ],
+                    "effects": [
+                        "DES(Follow_social_media_policy)=True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Monitor(Joan's_social_media_account)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan_posted_nasty_remarks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_has_careful_social_media_behavior) = True"
+                    ],
+                    "occ_emotion": [
+                        "Surveillance-induced_fear"
+                    ],
+                    "emotion_condition": [
+                        "Suspicion"
+                    ]
+                },
+                "Review(Social_media_policy)": {
+                    "conditions": [
+                        "BEL(Joan_got_fired)=True",
+                        "BEL(Social_media_policy_not_up_to_date)=True"
+                    ],
+                    "effects": [
+                        "BEL(Social_media_policy_updated)=True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Educate(Joan, appropriate_social_media_behavior)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan_has_careful_social_media_behavior) = False"
+                    ],
+                    "effects": [
+                        "BEL(Joan_has_careful_social_media_behavior) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Enforce(Social_media_policy)": {
+                    "conditions": [
+                        "BEL(Social_media_policy_exists) = True",
+                        "BEL(Social_media_policy_enforced) = False",
+                        "BEL(Joan_has_violated_social_media_policy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Social_media_policy_enforced) = True",
+                        "BEL(Joan_has_careful_social_media_behavior) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Inform_employee(Joan's_boss, Joan, \"Arrange a meeting\")": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan_posted_nasty_remarks) = True",
+                        "BEL(Joan_trusts_Joan's_boss) = False",
+                        "BEL(Joan_considers_Joan's_boss_authority_figure) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_has_upcoming_meeting_with_Joan's_boss) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Joan": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan_posted_nasty_remarks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_has_careful_social_media_behavior) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Anger",
+                        "Disappointment",
+                        "Relief",
+                        "Gratification"
+                    ]
+                },
+                "Remind_social_media_policy(Joan's_boss, Joan)": {
+                    "conditions": [
+                        "BEL(Social_media_existence) = True",
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan's_boss_has_reminded_social_media_policy) = False"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_boss_has_reminded_social_media_policy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Reminder",
+                        "Joan"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Monitor_social_media_activity(Joan's_boss, Joan)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Company_has_social_media_policy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_is_being_monitored) = True"
+                    ],
+                    "occ_emotion": [
+                        "Suspicion"
+                    ],
+                    "emotion_condition": [
+                        "Distrust"
+                    ]
+                },
+                "Inform_co-worker(Joan's_boss, Joan's_co-worker, \"Arrange a meeting\")": {
+                    "conditions": [
+                        "BEL(Joan_got_fired)=True",
+                        "BEL(Co-worker_has_nasty_remarks)=True",
+                        "BEL(Co-worker_shares_nasty_remarks)=True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_co-worker_is_informed)=True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Joan's_co-worker": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account)=True",
+                        "BEL(Co-worker_has_nasty_remarks)=True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_got_fired)=True",
+                        "BEL(Joan_has_careful_social_media_behavior)=True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Disapproval"
+                    ]
+                },
+                "Review_company_social_media_policy(Joan's_boss)": {
+                    "conditions": [
+                        "BEL(Joan_got_fired)=True",
+                        "BEL(Social_media_existence)=True",
+                        "BEL(Joan_has_social_media_account)=True",
+                        "BEL(Joan_posted_nasty_remarks)=True",
+                        "BEL(Joan_has_careful_social_media_behavior)=False",
+                        "BEL(Company_social_media_policy_existence)=True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_has_careful_social_media_behavior)=True",
+                        "BEL(Company_social_media_policy_reviewed)=True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Organize_social_media_training(Joan's_boss)": {
+                    "conditions": [
+                        "BEL(Joan_got_fired) = True",
+                        "BEL(Company_has_social_media_policy) = True",
+                        "BEL(Joan's_boss_knowledgeable_social_media) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_has_careful_social_media_behavior) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Assign_social_media_monitoring(Joan's_boss, Human_Resources, \"Request regular social media monitoring\")": {
+                    "conditions": [
+                        "BEL(Social_media_existence)=True",
+                        "BEL(Joan_has_social_media_account)=True",
+                        "BEL(Joan_got_fired)=True",
+                        "DES(Monitor_employee_social_media_activity)=True",
+                        "DES(Enforce_social_media_policy)=True"
+                    ],
+                    "effects": [
+                        "BEL(HR_has_social_media_monitors)=True"
+                    ],
+                    "occ_emotion": [
+                        "Suspicion"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Monitor(Joan's_boss, Joan, Social_Media)": {
+                    "conditions": [
+                        "BEL(Social_media_existence)=True",
+                        "BEL(Joan_has_social_media_account)=True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_boss_knows_about_Joan_social_media_activity)=True",
+                        "DES(Monitor_employee_social_media_activity)=False"
+                    ],
+                    "occ_emotion": [
+                        "Suspicion"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Investigate(Joan's_boss, Joan, Co-worker)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Co-worker_has_nasty_remarks) = True",
+                        "BEL(Co-worker_shares_nasty_remarks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_has_violated_social_media_policy) = True",
+                        "BEL(Joan_is_untrustworthy) = True",
+                        "DES(Maintain_fair_employee_behavior) = False",
+                        "DES(Maintain_respectful_employee_behavior) = False",
+                        "DES(Monitor_employee_social_media_activity) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Enforce_Policy(Joan's_boss, Joan)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan_posted_nasty_remarks) = True",
+                        "DES(Enforce_social_media_policy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_has_careful_social_media_behavior) = True",
+                        "BEL(Joan_posted_nasty_remarks) = False"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Have_a_Meeting(Joan's_boss, Joan)": {
+                    "conditions": [
+                        "BEL(Joan_got_fired) = False",
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan_posted_nasty_remarks) = True",
+                        "BEL(Joan_hates_boss) = True",
+                        "BEL(Social_media_existence) = True",
+                        "DES(Fair_employee_behavior) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_has_careful_social_media_behavior) = True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Reproach"
+                    ]
+                },
+                "Document_Behavior(Joan's_boss, Joan)": {
+                    "conditions": [
+                        "BEL(Joan_got_fired)=True",
+                        "BEL(Joan_has_careful_social_media_behavior)=False"
+                    ],
+                    "effects": [
+                        "BEL(Joan_has_careful_social_media_behavior)=True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Reproach"
+                    ]
+                },
+                "Encourage_Positive_Behavior(Joan's_boss, Joan)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account)=True",
+                        "BEL(Joan_has_careful_social_media_behavior)=False",
+                        "BEL(Joan_hates_boss)=True"
+                    ],
+                    "effects": [
+                        "DES(Encourage_positive_social_media_behavior(Joan))=True",
+                        "BEL(Joan_has_careful_social_media_behavior)=True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Reward_Positive_Behavior(Joan's_boss, Joan)": {
+                    "conditions": [
+                        "BEL(Joan_got_fired)=True",
+                        "DES(Reward_Positive_Behavior)=True"
+                    ],
+                    "effects": [
+                        "DES(Joan_has_positive_behavior)=True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [],
+            "speak_actions": {
+                "Speak(start, S1, small-talk, neutral)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan_posted_nasty_remarks) = True",
+                        "BEL(Co-worker_has_nasty_remarks) = True",
+                        "BEL(Co-worker_shares_nasty_remarks) = True",
+                        "INTENT(Joan's_boss, monitor_employee_social_media_activity) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_hates_boss) = True",
+                        "BEL(Joan_got_fired) = True",
+                        "BEL(Joan_has_careful_social_media_behavior) = True"
+                    ],
+                    "occ_emotion": [
+                        "neutral"
+                    ],
+                    "emotion_condition": [
+                        "neutral"
+                    ]
+                },
+                "Speak(S1, S2, task, neutral)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Social_media_existence) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_is_monitored_on_social_media) = True",
+                        "DES(Maintain_fair_employee_behavior) = True",
+                        "DES(Maintain_respectful_employee_behavior) = True",
+                        "DES(Enforce_social_media_policy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(S2, S3, reminder, neutral)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan_posted_nasty_remarks) = True",
+                        "BEL(Co-worker_shares_nasty_remarks) = True",
+                        "INTENT(Joan's_boss, monitor_employee_social_media_activity) = True",
+                        "INTENT(Joan's_boss, maintain_respectful_employee_behavior) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_got_fired) = True",
+                        "BEL(Co-worker_has_nasty_remarks) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(S4, S5, concern, concerned)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Joan_posted_nasty_remarks) = True",
+                        "BEL(Co-worker_has_nasty_remarks) = True",
+                        "BEL(Co-worker_shares_nasty_remarks) = True",
+                        "INTENT(Joan's_boss, monitor_employee_social_media_activity) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_hates_boss) = True",
+                        "BEL(Joan_got_fired) = True",
+                        "DES(Fair_employee_behavior) = True",
+                        "DES(Respectful_employee_behavior) = True"
+                    ],
+                    "occ_emotion": [
+                        "concern"
+                    ],
+                    "emotion_condition": [
+                        "Concerned"
+                    ]
+                },
+                "Speak(S5, end, consequence, neutral)": {
+                    "conditions": [
+                        "BEL(Joan_has_social_media_account) = True",
+                        "BEL(Social_media_existence) = True",
+                        "BEL(Co-worker_has_nasty_remarks) = True",
+                        "BEL(Co-worker_shares_nasty_remarks)=True"
+                    ],
+                    "effects": [
+                        "BEL(Joan_got_fired) = True",
+                        "INTENT(Joan's_boss, monitor_employee_social_media_activity) = True",
+                        "INTENT(Joan's_boss, enforce_social_media_policy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                }
+            }
+        },
+        "Joan's_co-worker": {
+            "knowledge_base": [],
+            "intentions": {
+                "Joan": {
+                    "action_plan": [
+                        "Joan",
+                        "Joan's",
+                        "Joan's_boss",
+                        "Access(SocialMediaAccount, Joan)",
+                        "Copy(Remarks, Joan)",
+                        "Share(Remarks, Joan's_boss)"
+                    ]
+                },
+                "Joan's_boss": {
+                    "action_plan": [
+                        "Joan",
+                        "Joan's_boss",
+                        "Joan",
+                        "Joan",
+                        "Joan's_boss",
+                        "Joan",
+                        "Joan's_boss",
+                        "Joan",
+                        "Joan",
+                        "Joan",
+                        "Joan",
+                        "Joan's_boss"
+                    ]
+                },
+                "INTENDS(Joan's_co-worker, show_remarks(Joan, Joan's_boss)) = True": {
+                    "action_plan": [
+                        "AccessSocialMediaAccount(Joan's_co-worker, Joan)",
+                        "ScreenshotRemarks(Joan's_co-worker, Joan's_boss, Remarks)",
+                        "ShowRemarks(Joan's_co-worker, Joan's_boss, Remarks)",
+                        "InformJoan(Joan's_co-worker, Joan, Disapproval)"
+                    ]
+                }
+            },
+            "actions": {
+                "AccessSocialMediaAccount(Joan's_co-worker, Joan)": {
+                    "conditions": [
+                        "BEL(Joan's_co-worker, knows(SocialMediaAccountCredentials, Joan)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_co-worker, accessed(SocialMediaAccount, Joan)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Curiosity"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "ScreenshotRemarks(Joan's_co-worker, Joan's_boss, Remarks)": {
+                    "conditions": [
+                        "BEL(Joan, uses_social_media) = True",
+                        "BEL(Joan's_co-worker, knows_social_media_account(Joan)) = True",
+                        "BEL(Joan's_boss, exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_co-worker, has_screenshot(Remarks)) = True",
+                        "BEL(Joan's_boss, knows_about_remarks(Joan)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Guilt"
+                    ],
+                    "emotion_condition": [
+                        "Guilt"
+                    ]
+                },
+                "ShowRemarks(Joan's_co-worker, Joan's_boss, Remarks)": {
+                    "conditions": [
+                        "BEL(Joan's_co-worker, Access(SocialMediaAccount, Joan)) = True",
+                        "BEL(Joan, Exists(Remarks)) = True",
+                        "DES(Joan's_co-worker, Intends(show_remarks(Joan, Joan's_boss))) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_boss, Knows(Remarks)) = True",
+                        "BEL(Joan's_boss, Disapproves(Remarks)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Guilt"
+                    ],
+                    "emotion_condition": [
+                        "Disapproval"
+                    ]
+                },
+                "InformJoan(Joan's_co-worker, Joan, Disapproval)": {
+                    "conditions": [
+                        "BEL(Joan, is_co-worker_of(Joan's_co-worker)) = True",
+                        "BEL(Joan's_co-worker, knows_Joan_said_nasty_remarks) = True",
+                        "DES(Joan's_co-worker, disapproves_of_Joan_saying_nasty_remarks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan, knows_others_disapprove_of_her_remarks) = True",
+                        "BEL(Joan's_boss, has_information_about_Joan_saying_nasty_remarks) = True",
+                        "DES(Joan, regrets_saying_nasty_remarks) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Disapproval"
+                    ]
+                },
+                "Joan": {
+                    "conditions": [
+                        "BEL(Joan, has_social_media_account) = True",
+                        "BEL(Joan's_co-worker, knows_about_Joan's_remarks) = True",
+                        "BEL(Joan's_boss, has_authority_to_fire) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan, has_job) = False",
+                        "DES(Joan, should_be_careful_on_social_media) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disapproval"
+                    ],
+                    "emotion_condition": [
+                        "Disapproval"
+                    ]
+                },
+                "Joan's": {
+                    "conditions": [
+                        "BEL(CharacterWithBelief, Joan's_boss) = True",
+                        "BEL(CharacterWithBelief, Joan) = True",
+                        "BEL(CharacterWithBelief, SocialMediaAccount) = True",
+                        "Access(SocialMediaAccount, Joan) = True"
+                    ],
+                    "effects": [
+                        "DES(CharacterWithGoal, Joan's_co-worker) =~ Share(Remarks, Joan's_boss)"
+                    ],
+                    "occ_emotion": [
+                        "Disapproval"
+                    ],
+                    "emotion_condition": [
+                        "Disapproval"
+                    ]
+                },
+                "Joan's_boss": {
+                    "conditions": [
+                        "BEL(Joan, has_social_media_account) = True",
+                        "BEL(Joan, made_nasty_remarks_about_boss) = True",
+                        "BEL(Joan's_co-worker, has_access_to_nasty_remarks) = True",
+                        "DES(Joan's_co-worker, show_nasty_remarks_to_boss) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_boss, discovered_nasty_remarks) = True",
+                        "BEL(Joan, got_fired_from_job) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disapproval"
+                    ],
+                    "emotion_condition": [
+                        "Disapproval"
+                    ]
+                },
+                "Access(SocialMediaAccount, Joan)": {
+                    "conditions": [
+                        "BEL(Exists(SocialMediaAccount, Joan), ) = True"
+                    ],
+                    "effects": [
+                        "BEL(Accessed(SocialMediaAccount, Joan), ) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Curiosity"
+                    ]
+                },
+                "Copy(Remarks, Joan)": {
+                    "conditions": [
+                        "BEL(Access(SocialMediaAccount, Joan), True)"
+                    ],
+                    "effects": [
+                        "BEL(CopiedRemarks, Joan's_co-worker), True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Disapproval"
+                    ]
+                },
+                "Share(Remarks, Joan's_boss)": {
+                    "conditions": [
+                        "BEL(Exist(SocialMediaAccount, Joan)) = True",
+                        "BEL(Exist(Remarks, Joan)) = True",
+                        "BEL(Exist(Joan's_co-worker, Joan)) = True",
+                        "BEL(Exist(Joan's_boss)) = True"
+                    ],
+                    "effects": [
+                        "DES(Angry(Joan's_boss)) = True",
+                        "BEL(Know(Remarks, Joan's_boss)) = True",
+                        "DES(Satisfied(Joan's_co-worker)) = True",
+                        "DES(Afraid(Joan)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gloating"
+                    ],
+                    "emotion_condition": [
+                        "Disapproval"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "disapproval"
+            ],
+            "speak_actions": {
+                "Speak(S1, S2, topic-shifting, neutral)": {
+                    "conditions": [
+                        "BEL(Joan's_co-worker, knows_about_post(Joan)) = True",
+                        "INTENDS(Joan's_co-worker, show_remarks(Joan, Joan's_boss)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_co-worker, feels_guilty)"
+                    ],
+                    "occ_emotion": [
+                        "Disapproval"
+                    ],
+                    "emotion_condition": [
+                        "Resentment"
+                    ]
+                },
+                "Speak(S2, S3, topic-shifting, neutral)": {
+                    "conditions": [
+                        "BEL(Joan, made_nasty_post_on_social_media) = True",
+                        "BEL(Joan's_co-worker, present_at_the_party) = True",
+                        "BEL(Joan's_co-worker, curious_about_social_media_drama) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_boss, seen_nasty_post_about_her) = True",
+                        "INTEND(Joan's_co-worker, show_remarks(Joan, Joan's_boss)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Speak(S3, S4, personal-reveal, neutral)": {
+                    "conditions": [
+                        "BEL(Joan's_co-worker, know_remarks(Joan)) = True",
+                        "BEL(Joan's_boss, want_to_know_remarks(Joan)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_co-worker, show_remarks(Joan, Joan's_boss)) = True",
+                        "BEL(Joan's_boss, know_remarks(Joan)) = True",
+                        "BEL(Joan, get_fired) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disapproval"
+                    ],
+                    "emotion_condition": [
+                        "Disapproval"
+                    ]
+                },
+                "Speak(S5, S6, guilt, regretful)": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Joan's_co-worker, showed_post(Joan)) = True",
+                        "BEL(Joan's_co-worker, knows_about_Joan_post) = True",
+                        "BEL(Joan's_boss, not_aware_of_Joan_post) = True",
+                        "BEL(Joan, not_know_co-worker_will_show_post) = True",
+                        "DES(Joan's_co-worker, expose_Joan_post) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "guilt",
+                        "Speak(S5,S6, guilt, regretful)"
+                    ]
+                },
+                "Speak(S6, S7, forgiveness, sincere)": {
+                    "conditions": [
+                        "BEL(Joan, made_nasty_remarks_on_social_media) = True",
+                        "BEL(Joan's_co-worker, present_at_work) = True",
+                        "DES(Joan's_co-worker, show_remarks(Joan, Joan's_boss)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Joan's_co-worker, revealed_nasty_remarks_to_Joan's_boss) = True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<start, S1, small-talk, neutral, \"Joan greets her co-worker\">",
+        "<S1, S2, topic-shifting, neutral, \"Joan's co-worker mentions the party they went to over the weekend\">",
+        "<S2, S3, topic-shifting, neutral, \"Joan's co-worker talks about the latest drama on social media\">",
+        "<S3, S4, personal-reveal, neutral, \"Joan admits she made a post about her boss on social media\">",
+        "<S4, S5, betrayal, neutral, \"Joan's co-worker reveals they showed the post to Joan's boss\">",
+        "<S5, S6, anger, angry, \"Joan confronts her co-worker about betraying her trust\">",
+        "<S6, S7, regret, sad, \"Joan blames herself for being careless on social media\">",
+        "<S7, end, conclusion, neutral, \"Joan realizes the consequences she faced and decides to be more careful using social media in the future\">"
+    ]
+}

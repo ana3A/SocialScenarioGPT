@@ -1,0 +1,1249 @@
+[
+  "EmotionalDecisionMakingAsset",
+  {
+    "root": {
+      "classId": 0,
+      "ActionTendencies": [
+        {
+          "Action": "Believes(Agent_A, service_job)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Bartender) = True",
+              "BEL(Agent_A, Service) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Believes(Agent_A, objective__provide_customers_good_time)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Service) = True",
+              "BEL(Agent_A, Good_time) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Believes(Agent_A, objective_increase_sales)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Bartender) = True",
+              "BEL(Agent_A, Increase_sales) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Wants(Agent_A, objective_provide_excellent_service)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Service) = True",
+              "BEL(Agent_A, Excellent_service) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "OfferRecommendation(Agent_A, Agent_B, drink_type)",
+          "Target": "Agent_B",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Bartender) = True",
+              "BEL(Agent_B, Customer) = True",
+              "BEL(Agent_A, Service) = True",
+              "BEL(Agent_A, Good_service) = False",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "EngageInConversation(Agent_A, Agent_B)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Bartender) = True",
+              "BEL(Agent_A, Service) = True",
+              "BEL(Agent_A, Good_time) = True",
+              "BEL(Agent_B, Customer) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ListenAndSupport(Agent_A, Agent_C, sensitive_topic)",
+          "Target": "Agent_C",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Service) = True",
+              "BEL(Agent_C, AtBar) = True",
+              "DES(Agent_C, ExpressEmotion) = True",
+              "BEL(Agent_A, Controlled_environment) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "MonitorAndDiffuse(Agent_A, Agent_B, disturbance_caused_by_intoxication)",
+          "Target": "Agent_B",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Controlled_environment) = True",
+              "BEL(Agent_A, Good_service) = True",
+              "BEL(Agent_A, Good_time) = True",
+              "BEL(Agent_B, Intoxicated) = True",
+              "BEL(Agent_B, Disturbance_caused) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "CallForBackup(Agent_A, security, belligerent_customer)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Controlled_environment) = True",
+              "BEL(security, Available) = True",
+              "BEL(belligerent_customer, Present) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "AccommodateNeeds(Agent_A, Agent_B, intoxicated_customer)",
+          "Target": "Agent_B",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Bartender) = True",
+              "BEL(Agent_A, Busy) = True",
+              "BEL(Agent_A, Service) = True",
+              "BEL(Agent_A, Controlled_environment) = True",
+              "BEL(Agent_B, Wants_service) = True",
+              "BEL(intoxicated_customer, Ability_to_pay) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "EnforceBarRules(Agent_A, Agent_B)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Bartender) = True",
+              "BEL(Agent_B, Customer) = True",
+              "BEL(Agent_B, Intoxicated) = True",
+              "BEL(Agent_B, Causing_disturbance) = True",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "RemoveFromPremises(Agent_A, Agent_C, belligerent_customer)",
+          "Target": "Agent_C",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Controlled_environment) = True",
+              "BEL(Agent_A, Good_service) = True",
+              "BEL(Agent_C, belligerent_customer) = True",
+              "Mood(SELF) = 5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "FeelRelieved(Agent_A)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Customers_satisfied) = True",
+              "BEL(Agent_A, Controlled_environment) = True",
+              "BEL(Agent_A, Increase_sales) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "FeelHappy(Agent_A)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Good_service) = True",
+              "BEL(Agent_A, Service) = True",
+              "DES(Agent_A, Excellent_service) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "FeelAccomplished(Agent_A)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Good_service) = True",
+              "BEL(Agent_A, Service) = True",
+              "DES(Agent_A, Excellent_service) = True",
+              "Mood(SELF) = 1"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "FeelGrateful(Agent_A)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_A, Good_service) = True",
+              "DES(Agent_A, Excellent_service) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "AskForDrinkRecommendation(Agent_B, Agent_A)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_B, at_bar) = True",
+              "BEL(Agent_A, bartender) = True",
+              "BEL(Agent_A, knows_drinks) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ExpressGratitude(Agent_B, Agent_A)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_B, served_by_Agent_A) = True",
+              "BEL(Agent_A, provided_good_service) = True",
+              "DES(Agent_A, be_appreciated) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "OrderAnotherDrink(Agent_B, Agent_A)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_B, at_bar) = True",
+              "BEL(Agent_A, is_bartender) = True",
+              "BEL(Agent_A, can_serve_another_drink) = True",
+              "Mood(SELF) = 2"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "DanceWithFriends(Agent_B)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_B, at_bar) = True",
+              "BEL(Agent_B, with_friends) = True",
+              "BEL(Agent_B, wants_to_socialize) = True",
+              "BEL(Agent_B, avoid_conflict) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "LaughAndMakeJokes(Agent_B)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_B, at_bar) = True",
+              "BEL(Agent_B, with_friends) = True",
+              "BEL(Agent_B, wants_to_socialize) = True",
+              "DES(Agent_B, be_entertained) = True",
+              "DES(Agent_B, avoid_conflict) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "PayTheBill(Agent_B, Agent_A)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_B, at_bar) = True",
+              "BEL(Agent_B, with_friends) = True",
+              "BEL(Agent_A, accepts_payment) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ApologizeForAccidentallySpillingDrink(Agent_B, Agent_A)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_B, at_bar) = True",
+              "BEL(Agent_B, knows_Agent_A) = True",
+              "BEL(Agent_B, accidentally_spilled_drink) = False",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "OrderDrink(Agent_C, Agent_A, Whiskey_Soda)",
+          "Target": "Agent_A",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, prefers_solitude) = True",
+              "BEL(Agent_A, can_serve_drink) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ActivatePhone(Agent_C)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, prefers_solitude) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "LookAround(Agent_C, None)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_C, is_at_bar) = True",
+              "DES(Agent_C, avoid_interactions) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Sigh(Agent_C, None)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "PayBill(Agent_C, Agent_A, Amount)",
+          "Target": "Agent_A",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_C, has_enough_money) = True",
+              "BEL(Agent_A, is_ready_to_receive_payment) = True",
+              "BEL(Agent_A, has_provided_service) = True",
+              "BEL(Agent_A, service_cost) = Amount",
+              "Mood(SELF) = -5"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "LeaveBar(Agent_C, None)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, prefers_solitude) = True",
+              "Mood(SELF) = -5",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start, Greeting2, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, prefers_solitude) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "BEL(Agent_C, reason_for_drinking) = breakup",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Greeting2, DrinkOrder, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, prefers_solitude) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(DrinkOrder, Sad, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "DES(Agent_C, avoid_interactions) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Sad, Concerned, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "BEL(Agent_C, reason_for_drinking) = breakup",
+              "DES(Agent_C, avoid_interactions) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Concerned, Empathetic, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "DES(Agent_C, avoid_interactions) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Empathetic, Goodbye2, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(DrinkOrder, Intoxicated, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "BEL(Agent_C, prefers_solitude) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Intoxicated, Concerned2, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "DES(Agent_C, avoid_interactions) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Concerned2, Observant, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Observant, Angry, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, prefers_solitude) = True",
+              "Mood(SELF) = -6"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Angry, Calming, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "BEL(Agent_C, prefers_solitude) = True",
+              "Mood(SELF) = 0"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Calming, Goodbye3, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "BEL(Agent_C, prefers_solitude) = True",
+              "Mood(SELF) = -2"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Observant, Goodbye, None, None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True",
+              "BEL(Agent_C, is_at_bar) = True",
+              "BEL(Agent_C, emotional_state) = sad",
+              "BEL(Agent_C, reason_for_drinking) = breakup",
+              "DES(Agent_C, avoid_interactions) = True",
+              "DES(Agent_C, anonymity) = True",
+              "Mood(SELF) = -10"
+            ]
+          },
+          "Priority": 1
+        }
+      ]
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "EmotionalDecisionMaking.EmotionalDecisionMakingAsset, EmotionalDecisionMaking, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "EmotionalAppraisalAsset",
+  {
+    "root": {
+      "classId": 0,
+      "Description": null,
+      "AppraisalRules": {
+        "AppraisalWeight": 1,
+        "Rules": [
+          {
+            "EventName": "Event(Action-End, Agent_A, Believes(Agent_A, service_job), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, Believes(Agent_A, objective__provide_customers_good_time), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, Believes(Agent_A, objective_increase_sales), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "SELF"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, Wants(Agent_A, objective_provide_excellent_service), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, OfferRecommendation(Agent_A, Agent_B, drink_type), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, EngageInConversation(Agent_A, Agent_B), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, MonitorAndDiffuse(Agent_A, Agent_B, disturbance_caused_by_intoxication), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, CallForBackup(Agent_A, security, belligerent_customer), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, EnforceBarRules(Agent_A, Agent_B), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": -5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, FeelRelieved(Agent_A), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, FeelHappy(Agent_A), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, FeelAccomplished(Agent_A), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "SELF"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_A, FeelGrateful(Agent_A), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_B, AskForDrinkRecommendation(Agent_B, Agent_A), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_B, ExpressGratitude(Agent_B, Agent_A), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_B, OrderAnotherDrink(Agent_B, Agent_A), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_B, DanceWithFriends(Agent_B), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_B, LaughAndMakeJokes(Agent_B), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_B, PayTheBill(Agent_B, Agent_A), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, OrderDrink(Agent_C, Agent_A, Whiskey_Soda), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, LookAround(Agent_C, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Sigh(Agent_C, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, PayBill(Agent_C, Agent_A, Amount), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, LeaveBar(Agent_C, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Speak(Greeting2, DrinkOrder, None, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Speak(DrinkOrder, Sad, None, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Speak(Sad, Concerned, None, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Speak(Concerned, Empathetic, None, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                },
+                {
+                  "Name": "Desirability for others",
+                  "Value": -5,
+                  "Target": "[target]"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Speak(Empathetic, Goodbye2, None, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Speak(DrinkOrder, Intoxicated, None, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Speak(Intoxicated, Concerned2, None, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.4,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Speak(Concerned2, Observant, None, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": -5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Speak(Angry, Calming, None, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": -5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Agent_C, Speak(Calming, Goodbye3, None, None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "EmotionalAppraisal.EmotionalAppraisalAsset, EmotionalAppraisal, Version=1.4.1.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "SocialImportanceAsset",
+  {
+    "root": {
+      "classId": 0,
+      "AttributionRules": []
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "SocialImportance.SocialImportanceAsset, SocialImportance, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "CommeillFautAsset",
+  {
+    "root": {
+      "classId": 0,
+      "SocialExchanges": []
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "CommeillFaut.CommeillFautAsset, CommeillFaut, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  }
+]

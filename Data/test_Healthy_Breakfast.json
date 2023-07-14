@@ -1,0 +1,632 @@
+{
+    "scenario_name": "test_Healthy Breakfast",
+    "scenario_description": "John felt lethargic and out of it throughout the day. His doctor said it was due to his poor breakfast eating habits. John decided to eat a healthier breakfast. After only a few days John noticed a big difference. He kept eating properly for as long as he could.",
+    "last_ended": "end",
+    "agents": {
+        "John": {
+            "knowledge_base": [
+                "BEL(John, breakfastWasUnhealthy) = True",
+                "BEL(John, feltLethargic) = True",
+                "BEL(John, noticedDifference) = False",
+                "BEL(John, eatingProperly) = False",
+                "DES(John, eatHealthierBreakfast) = True",
+                "DES(John, feelEnergetic) = True"
+            ],
+            "intentions": {
+                "INTENT(John, choose to eat a healthier breakfast) = True": {
+                    "action_plan": [
+                        "GoTo(Kitchen)",
+                        "ObserveFoodItems(Kitchen)",
+                        "SelectHealthyBreakfast(JOHN)",
+                        "PrepareBreakfast(JOHN, Kitchen)",
+                        "EatBreakfast(JOHN)",
+                        "NoticeDifference(JOHN)",
+                        "UpdateBeliefs(JOHN, noticedDifference=True)",
+                        "DecideToContinue(JOHN)",
+                        "UpdateDesires(JOHN, eatingProperly=True, feelEnergetic=True)"
+                    ]
+                },
+                "INTENT(John, choose to feel more energetic) = True": {
+                    "action_plan": [
+                        "Decide(John, to eat a healthier breakfast)",
+                        "Buy(John, healthy breakfast items)",
+                        "Prepare(John, a healthy breakfast)",
+                        "Eat(John, the healthy breakfast)",
+                        "Monitor(John, how he feels)",
+                        "Identify(John, if he feels more energetic)",
+                        "Update(John, his beliefs based on the results)",
+                        "Decide(John, to keep eating properly)",
+                        "Persist(John, with his new breakfast habit)"
+                    ]
+                }
+            },
+            "actions": {
+                "Decide(John, to eat a healthier breakfast)": {
+                    "conditions": [
+                        "BEL(John, breakfastWasUnhealthy) = True"
+                    ],
+                    "effects": [
+                        "DES(John, feelEnergetic) = True",
+                        "DES(John, eatHealthierBreakfast) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Buy(John, healthy breakfast items)": {
+                    "conditions": [
+                        "BEL(John, eatingProperly) = False"
+                    ],
+                    "effects": [
+                        "BEL(John, hasHealthyBreakfastItems) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Prepare(John, a healthy breakfast)": {
+                    "conditions": [
+                        "BEL(John, breakfastWasUnhealthy) = True",
+                        "DES(John, eatHealthierBreakfast) = True",
+                        "BEL(John, noticedDifference) = False"
+                    ],
+                    "effects": [
+                        "BEL(John, eatingProperly) = True",
+                        "BEL(John, breakfastWasUnhealthy) = False",
+                        "DES(John, feelEnergetic) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Eat(John, the healthy breakfast)": {
+                    "conditions": [
+                        "BEL(John, eatingProperly) = False",
+                        "BEL(John, noticedDifference) = False"
+                    ],
+                    "effects": [
+                        "BEL(John, eatingProperly) = True",
+                        "BEL(John, noticedDifference) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Monitor(John, how he feels)": {
+                    "conditions": [
+                        "BEL(John, eatingProperly) = False"
+                    ],
+                    "effects": [
+                        "BEL(John, noticedDifference) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Identify(John, if he feels more energetic)": {
+                    "conditions": [
+                        "BEL(John, eatHealthierBreakfast) = True",
+                        "BEL(John, feelEnergetic) = True"
+                    ],
+                    "effects": [
+                        "BEL(John, noticedDifference) = True",
+                        "BEL(John, noticedDifference) = False",
+                        "BEL(John, feltLethargic) = True",
+                        "BEL(John, feltLethargic) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Update(John, his beliefs based on the results)": {
+                    "conditions": [
+                        "BEL(John, noticedDifference) = False"
+                    ],
+                    "effects": [
+                        "BEL(John, noticedDifference) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Decide(John, to keep eating properly)": {
+                    "conditions": [
+                        "BEL(John, eatingProperly) = False"
+                    ],
+                    "effects": [
+                        "DES(John, persistWithHealthyEating) = True",
+                        "BEL(John, eatingProperly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Persist(John, with his new breakfast habit)": {
+                    "conditions": [
+                        "BEL(John, noticedDifference) = True",
+                        "BEL(John, eatingProperly) = True"
+                    ],
+                    "effects": [
+                        "DES(John, feelEnergetic) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "GoTo(Kitchen)": {
+                    "conditions": [
+                        "BEL(John, breakfastWasUnhealthy) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ObserveFoodItems(Kitchen)": {
+                    "conditions": [
+                        "BEL(John, breakfastWasUnhealthy) = True",
+                        "BEL(John, feltLethargic) = True"
+                    ],
+                    "effects": [
+                        "BEL(John, observedFoodItems) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": [
+                        "Anticipation"
+                    ]
+                },
+                "SelectHealthyBreakfast(JOHN)": {
+                    "conditions": [
+                        "BEL(JOHN, breakfastWasUnhealthy) = True"
+                    ],
+                    "effects": [
+                        "BEL(JOHN, selectedHealthyBreakfast) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PrepareBreakfast(JOHN, Kitchen)": {
+                    "conditions": [
+                        "BEL(JOHN, breakfastWasUnhealthy) = True",
+                        "BEL(JOHN, observedHealthyOptions) = True",
+                        "BEL(Kitchen, hasHealthyFoodItems) = True"
+                    ],
+                    "effects": [
+                        "BEL(JOHN, selectedHealthyBreakfast) = True",
+                        "BEL(Kitchen, healthyFoodItemsUsed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EatBreakfast(JOHN)": {
+                    "conditions": [
+                        "BEL(John, selectedHealthyBreakfast) = True",
+                        "BEL(John, preparedBreakfast) = True"
+                    ],
+                    "effects": [
+                        "BEL(John, breakfastWasUnhealthy) = False",
+                        "BEL(John, feltLethargic) = False",
+                        "BEL(John, eatingProperly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "NoticeDifference(JOHN)": {
+                    "conditions": [
+                        "BEL(John, noticedDifference) = False"
+                    ],
+                    "effects": [
+                        "BEL(John, noticedDifference) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "UpdateBeliefs(JOHN, noticedDifference=True)": {
+                    "conditions": [
+                        "BEL(John, noticedDifference) = False"
+                    ],
+                    "effects": [
+                        "BEL(John, noticedDifference) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "DecideToContinue(JOHN)": {
+                    "conditions": [
+                        "BEL(John, noticedDifference) = True",
+                        "BEL(John, eatingProperly) = False"
+                    ],
+                    "effects": [
+                        "DES(John, eatingProperly) = True",
+                        "DES(John, feelEnergetic) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "UpdateDesires(JOHN, eatingProperly=True, feelEnergetic=True)": {
+                    "conditions": [
+                        "INTENT(John, choose to eat a healthier breakfast) = True",
+                        "BEL(John, noticedDifference) = False"
+                    ],
+                    "effects": [
+                        "DES(John, eatingProperly) = True",
+                        "DES(John, feelEnergetic) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, A1, Neutral, Casual)": {
+                    "conditions": [
+                        "BEL(John, breakfastWasUnhealthy) = True",
+                        "BEL(John, feltLethargic) = True"
+                    ],
+                    "effects": [
+                        "BEL(John, breakfastWasUnhealthy) = False",
+                        "DES(John, eatHealthierBreakfast) = False",
+                        "BEL(John, noticedDifference) = True",
+                        "BEL(John, eatingProperly) = True",
+                        "DES(John, feelEnergetic) = True",
+                        "INTENT(John, choose to eat a healthier breakfast) = True",
+                        "INTENT(John, choose to feel more energetic) = True"
+                    ],
+                    "occ_emotion": [
+                        "Start, A1, Neutral, Casual"
+                    ],
+                    "emotion_condition": [
+                        "Start, A1, Neutral, Casual, [Hope] \"Hi John, how are you feeling today?\""
+                    ]
+                },
+                "Speak(A2, B1, Neutral, Casual)": {
+                    "conditions": [
+                        "BEL(John, eatingProperly) = False",
+                        "INTENT(John, choose to eat a healthier breakfast) = True",
+                        "BEL(John, breakfastWasUnhealthy) = True"
+                    ],
+                    "effects": [
+                        "BEL(John, eatingProperly) = True",
+                        "BEL(John, breakfastWasUnhealthy) = False",
+                        "INTENT(John, choose to eat a healthier breakfast) = False"
+                    ],
+                    "occ_emotion": [
+                        "B2, C1, Neutral, Casual, \"That's a good combination, any plans for lunch?\"",
+                        "Neutral, Neutral, Neutral, Neutral, Pride"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(B2, C1, Neutral, Casual)": {
+                    "conditions": [
+                        "BEL(John, noticedDifference) = False"
+                    ],
+                    "effects": [
+                        "BEL(John, noticedDifference) = True",
+                        "BEL(John, eatingProperly) = True"
+                    ],
+                    "occ_emotion": [
+                        "B1, B2, Neutral, Casual, \"I had a boiled egg, toast and a banana.\"",
+                        "B2, C1, Neutral, Casual, \"That's a good combination, any plans for lunch?\"",
+                        "C1, C2, Neutral, Casual, \"I haven't decided yet, I might grab a salad.\"",
+                        "C2, End, Neutral, Casual, \"Sounds like a good plan, keep it up!\"",
+                        "End, End, Satisfaction, Casual, \"John feels satisfied about the positive reinforcement and encouragement from the conversation\""
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                }
+            }
+        },
+        "Doctor": {
+            "knowledge_base": [],
+            "intentions": {
+                "INFORM(Doctor, [John, 'poor breakfast eating habits causing lethargy']) = True": {
+                    "action_plan": []
+                },
+                "PROMPT(Doctor, [John, \"to eat a healthier breakfast\"]) = True": {
+                    "action_plan": []
+                },
+                "ADVISE(Doctor, [John, \"to eat a healthier breakfast\"]) = True": {
+                    "action_plan": [
+                        "John",
+                        "John",
+                        "John",
+                        "ADVISE(Doctor, [John, \"to eat a healthier breakfast\"])",
+                        "EXPLAIN(Doctor, [John, \"why a healthier breakfast is important\"])",
+                        "SUGGEST(Doctor, [John, \"specific healthy breakfast options\"])",
+                        "ENCOURAGE(Doctor, [John, \"to stick to the new breakfast plan\"])",
+                        "MONITOR(Doctor, [John, \"to see if the new breakfast is making a difference\"])"
+                    ]
+                }
+            },
+            "actions": {
+                "John": {
+                    "conditions": [
+                        "BEL(John, \"feeling lethargic\") = True",
+                        "DES(Doctor, [John, \"to advise on healthier breakfast\"]) = True",
+                        "BEL(Doctor, \"breakfast eating habits influence energy levels\") = True"
+                    ],
+                    "effects": [
+                        "BEL(John, \"feeling better\") = True",
+                        "BEL(John, \"eating healthy breakfast\") = True",
+                        "DES(John, \"to continue eating healthy breakfast\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope",
+                        "Admiration",
+                        "Love",
+                        "Hope",
+                        "Gratitude"
+                    ]
+                },
+                "ADVISE(Doctor, [John, \"to eat a healthier breakfast\"])": {
+                    "conditions": [
+                        "BEL(John, \"poor breakfast eating habits\") = True",
+                        "DES(Doctor, [John, \"to improve his health\"]) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, [John, \"received advice\"]) = True"
+                    ],
+                    "occ_emotion": [
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "EXPLAIN(Doctor, [John, \"why a healthier breakfast is important\"])": {
+                    "conditions": [
+                        "BEL(Doctor, [knows, \"the importance of healthy breakfast\"]) = True",
+                        "BEL(John, [has, \"poor breakfast eating habits\"]) = True",
+                        "BEL(Doctor, [believes, \"explaining the importance of a healthy breakfast can motivate John to change his eating habits\"]) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, [has, \"explained why a healthier breakfast is important\"]) = True",
+                        "BEL(John, [knows, \"why a healthier breakfast is important\"]) = True",
+                        "DES(Doctor, [motivate John to change his eating habits]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SUGGEST(Doctor, [John, \"specific healthy breakfast options\"])": {
+                    "conditions": [
+                        "BEL(Doctor, knows_about_healthy_breakfast_options) = True",
+                        "BEL(John, wants_healthier_breakfast) = True",
+                        "BEL(Doctor, trusts_that_SUGGEST_will_help_John) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor, has_suggested_breakfast_options_to_John) = True",
+                        "DES(John, considers_trying_suggested_breakfast_options) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ENCOURAGE(Doctor, [John, \"to stick to the new breakfast plan\"])": {
+                    "conditions": [
+                        "BEL(John, \"eating_healthily\") = True",
+                        "DES(Doctor, [John, \"to stick to the new breakfast plan\"]) = True"
+                    ],
+                    "effects": [
+                        "DES(John, \"to continue eating healthily\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MONITOR(Doctor, [John, \"to see if the new breakfast is making a difference\"])": {
+                    "conditions": [
+                        "BEL(John, \"has been eating a healthier breakfast\") = True"
+                    ],
+                    "effects": [
+                        "DES(Doctor, \"satisfaction in John's improved health\") = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "concern"
+            ],
+            "speak_actions": {
+                "Speak(Start, A1, Neutral, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor, [John, 'poor breakfast eating habits causing lethargy']) = True"
+                    ],
+                    "effects": [
+                        "PROMPT(Doctor, [John, \"to eat a healthier breakfast\"]) = True",
+                        "ADVISE(Doctor, [John, \"to eat a healthier breakfast\"]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(A1, A2, Neutral, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor, [John, 'poor breakfast eating habits causing lethargy']) = True"
+                    ],
+                    "effects": [
+                        "PROMPT(Doctor, [John, \"to eat a healthier breakfast\"]) = True",
+                        "ADVISE(Doctor, [John, \"to eat a healthier breakfast\"]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(A2, B1, Neutral, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor,[John, 'poor breakfast eating habits causing lethargy']) = True"
+                    ],
+                    "effects": [
+                        "BEL(Doctor,[John, 'poor breakfast eating habits causing lethargy']) = False",
+                        "PROMPT(Doctor,[John, \"to eat a healthier breakfast\"]) = True",
+                        "ADVISE(Doctor,[John, \"to eat a healthier breakfast\"]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(B1, B2, Neutral, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor, [John, 'poor breakfast eating habits causing lethargy']) = True",
+                        "PROMPT(Doctor, [John, \"to eat a healthier breakfast\"]) = False"
+                    ],
+                    "effects": [
+                        "PROMPT(Doctor, [John, \"to eat a healthier breakfast\"]) = True",
+                        "ADVISE(Doctor, [John, \"to eat a healthier breakfast\"]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pity"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(B2, C1, Neutral, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor, [John, 'poor breakfast eating habits causing lethargy']) = True"
+                    ],
+                    "effects": [
+                        "PROMPT(Doctor, [John, \"to eat a healthier breakfast\"]) = True",
+                        "ADVISE(Doctor, [John, \"to eat a healthier breakfast\"]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(C1, C2, Neutral, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor, [John, 'poor breakfast eating habits causing lethargy']) = True"
+                    ],
+                    "effects": [
+                        "PROMPT(Doctor, [John, \"to eat a healthier breakfast\"]) = True",
+                        "ADVISE(Doctor, [John, \"to eat a healthier breakfast\"]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Encourage, Speak(C1, C2, Neutral, Professional), Hope"
+                    ]
+                },
+                "Speak(C2, End, Neutral, Professional)": {
+                    "conditions": [
+                        "BEL(Doctor, [John, 'poor breakfast eating habits causing lethargy']) = True"
+                    ],
+                    "effects": [
+                        "PROMPT(Doctor, [John, \"to eat a healthier breakfast\"]) = True",
+                        "ADVISE(Doctor, [John, \"to eat a healthier breakfast\"]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, A1, Neutral, Casual, \"Hi John, how are you feeling today?\">",
+        "<A1, A2, Neutral, Casual, \"I feel a bit better today, I had a healthier breakfast.\">",
+        "<A2, B1, Neutral, Casual, \"That's great to hear, what did you have for breakfast?\">",
+        "<B1, B2, Neutral, Casual, \"I had a boiled egg, toast and a banana.\">",
+        "<B2, C1, Neutral, Casual, \"That's a good combination, any plans for lunch?\">",
+        "<C1, C2, Neutral, Casual, \"I haven't decided yet, I might grab a salad.\">",
+        "<C2, End, Neutral, Casual, \"Sounds like a good plan, keep it up!\">"
+    ]
+}

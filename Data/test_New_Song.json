@@ -1,0 +1,546 @@
+{
+    "scenario_name": "test_New Song",
+    "scenario_description": "Sara was in a good mood so she sang her favorite song. She forgot some of the words so she made them up. Sara liked her new version so she made up more words. She wrote down the words to remember them. Sara posted this song on her facebook to show her friends.",
+    "last_ended": "end",
+    "agents": {
+        "Sara": {
+            "knowledge_base": [
+                "BEL(Sara, goodMood) = True",
+                "BEL(Sara, remembersSongWords) = False",
+                "BEL(Sara, likesNewVersion) = True",
+                "BEL(Sara, postedSongOnFacebook) = False",
+                "DES(Sara, singFavoriteSong) = True",
+                "DES(Sara, rememberNewSongVersion) = True",
+                "DES(Sara, shareNewSongOnFacebook) = True"
+            ],
+            "intentions": {
+                "INTENT(Sara, choose to sing favorite song) = True": {
+                    "action_plan": [
+                        "SingSong(Sara, None, None)",
+                        "MakeUpWords(Sara, None, None)",
+                        "WriteDownWords(Sara, None, None)",
+                        "PostSongOnFacebook(Sara, Facebook, None)"
+                    ]
+                },
+                "INTENT(Sara, choose to create new song version) = True": {
+                    "action_plan": [
+                        "SingSong(Sara, None)",
+                        "MakeUpNewWords(Sara, None)",
+                        "WriteDownNewWords(Sara, paper)",
+                        "RememberNewSongVersion(Sara, None)",
+                        "PostSongOnFacebook(Sara, self)"
+                    ]
+                },
+                "INTENT(Sara, choose to write down new song version) = True": {
+                    "action_plan": [
+                        "Think(Sara, self)",
+                        "Write(Sara, paper, newSongVersion)",
+                        "Sing(Sara, self, newSongVersion)",
+                        "PostOnFacebook(Sara, Facebook, newSongVersion)"
+                    ]
+                },
+                "INTENT(Sara, choose to share new song on Facebook) = True": {
+                    "action_plan": [
+                        "SingSong(Sara)",
+                        "MakeUpNewWords(Sara)",
+                        "WriteDownNewWords(Sara)",
+                        "LikeNewVersion(Sara)",
+                        "ChooseToShareOnFacebook(Sara)",
+                        "PostSongOnFacebook(Sara)"
+                    ]
+                }
+            },
+            "actions": {
+                "SingSong(Sara)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "MakeUpNewWords(Sara)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True"
+                    ],
+                    "effects": [
+                        "DES(Sara, rememberNewSongVersion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "WriteDownNewWords(Sara)": {
+                    "conditions": [
+                        "BEL(Sara, likesNewVersion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords) = True",
+                        "DES(Sara, shareNewSongOnFacebook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "LikeNewVersion(Sara)": {
+                    "conditions": [
+                        "BEL(Sara, likesNewVersion) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, likesNewVersion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "ChooseToShareOnFacebook(Sara)": {
+                    "conditions": [
+                        "BEL(Sara, likesNewVersion) = True",
+                        "BEL(Sara, remembersSongWords) = False",
+                        "DES(Sara, shareNewSongOnFacebook) = True",
+                        "BEL(Sara, postedSongOnFacebook) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, postedSongOnFacebook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PostSongOnFacebook(Sara)": {
+                    "conditions": [
+                        "BEL(Sara, postedSongOnFacebook) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, postedSongOnFacebook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "SingSong(Sara, None, None)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True",
+                        "DES(Sara, singFavoriteSong) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "MakeUpWords(Sara, None, None)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, likesNewVersion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "WriteDownWords(Sara, None, None)": {
+                    "conditions": [
+                        "BEL(Sara, likesNewVersion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords) = True",
+                        "DES(Sara, rememberNewSongVersion) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "PostSongOnFacebook(Sara, Facebook, None)": {
+                    "conditions": [
+                        "BEL(Sara, postedSongOnFacebook) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, postedSongOnFacebook) = True",
+                        "BEL(Sara, shareNewSongOnFacebook) = False",
+                        "DES(Sara, singFavoriteSong) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "SingSong(Sara, None)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "MakeUpNewWords(Sara, None)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, likesNewVersion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WriteDownNewWords(Sara, paper)": {
+                    "conditions": [
+                        "BEL(Sara, remembersSongWords) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "RememberNewSongVersion(Sara, None)": {
+                    "conditions": [
+                        "BEL(Sara, likesNewVersion) = True",
+                        "BEL(Sara, remembersSongWords) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PostSongOnFacebook(Sara, self)": {
+                    "conditions": [
+                        "BEL(Sara, postedSongOnFacebook) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sara, postedSongOnFacebook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Think(Sara, self)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Write(Sara, paper, newSongVersion)": {
+                    "conditions": [
+                        "BEL(Sara, remembersSongWords) = False",
+                        "DES(Sara, rememberNewSongVersion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords) = True",
+                        "DES(Sara, rememberNewSongVersion) = False",
+                        "BEL(Sara, wroteDownNewSongVersion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "Sing(Sara, self, newSongVersion)": {
+                    "conditions": [
+                        "BEL(Sara, remembersSongWords) = False",
+                        "BEL(Sara, likesNewVersion) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords) = True",
+                        "DES(Sara, singFavoriteSong) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "PostOnFacebook(Sara, Facebook, newSongVersion)": {
+                    "conditions": [
+                        "BEL(Sara, postedSongOnFacebook) = False",
+                        "DES(Sara, shareNewSongOnFacebook) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, postedSongOnFacebook) = True",
+                        "DES(Sara, shareNewSongOnFacebook) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Joy"
+            ],
+            "speak_actions": {
+                "Speak(Start, Belief1, null, null)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True",
+                        "DES(Sara, singFavoriteSong) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Excitement"
+                    ],
+                    "emotion_condition": [
+                        "Start, Belief1, Hope, null, \"Sara hums a melody as she walks down the street.\""
+                    ]
+                },
+                "Speak(Belief1, Belief2, null, null)": {
+                    "conditions": [
+                        "SPEAK ACTION",
+                        "BEL(Sara, goodMood) = True",
+                        "DES(Sara, singFavoriteSong) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords) = False",
+                        "INTENT(Sara, choose to create new song version) = True",
+                        "INTENT(Sara, choose to write down new song version) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "null, Start, null, null",
+                        "Start, Belief1, null, null",
+                        "Belief1, Belief2, null, null",
+                        "Belief2, Belief3, Belief, Curious",
+                        "Curious",
+                        "Belief3, Desire1, null, null",
+                        "Desire1, Despair, null, null",
+                        "Distress",
+                        "Despair, Intention1, null, null",
+                        "Intention1, Intention2, Intention, Determined",
+                        "Hope",
+                        "Intention2, Desire2, null, null",
+                        "Desire2, Intention3, null, null",
+                        "Intention3, End, null, null",
+                        "Joy"
+                    ]
+                },
+                "Speak(Belief2, Belief3, Belief, Curious)": {
+                    "conditions": [
+                        "SPEAK ACTION",
+                        "BEL(Sara, goodMood) = True",
+                        "BEL(Sara, remembersSongWords) = False",
+                        "BEL(Sara, likesNewVersion) = True",
+                        "BEL(Sara, postedSongOnFacebook) = False"
+                    ],
+                    "effects": [
+                        "DES(Sara, singFavoriteSong) = False",
+                        "DES(Sara, rememberNewSongVersion) = False",
+                        "DES(Sara, shareNewSongOnFacebook) = False",
+                        "BEL(Sara, postedSongOnFacebook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(Belief3, Desire1, null, null)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True",
+                        "DES(Sara, singFavoriteSong) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords) = False",
+                        "BEL(Sara, likesNewVersion) = True",
+                        "INTENT(Sara, choose to create new song version) = True",
+                        "BEL(Sara, remembersSongWords) = False",
+                        "DES(Sara, rememberNewSongVersion) = True",
+                        "INTENT(Sara, choose to create new song version) = True",
+                        "INTENT(Sara, choose to write down new song version) = True",
+                        "BEL(Sara, remembersSongWords) = True",
+                        "BEL(Sara, likesNewVersion) = True",
+                        "DES(Sara, shareNewSongOnFacebook) = True",
+                        "INTENT(Sara, choose to write down new song version) = True",
+                        "DES(Sara, shareNewSongOnFacebook) = False",
+                        "INTENT(Sara, choose to share new song on Facebook) = True",
+                        "BEL(Sara, postedSongOnFacebook) = False",
+                        "INTENT(Sara, choose to share new song on Facebook) = True",
+                        "BEL(Sara, postedSongOnFacebook) = False",
+                        "BEL(Sara, postedSongOnFacebook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Desire1, Despair, null, null)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True",
+                        "BEL(Sara, remembersSongWords) = False",
+                        "DES(Sara, singFavoriteSong) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Sara, choose to create new song version) = True",
+                        "BEL(Sara, remembersSongWords) = False",
+                        "DES(Sara, rememberNewSongVersion) = True",
+                        "DES(Sara, shareNewSongOnFacebook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Despair, Intention1, null, null)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True",
+                        "BEL(Sara, remembersSongWords) = False",
+                        "DES(Sara, singFavoriteSong) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords) = True",
+                        "INTENT(Sara, choose to create new song version) = True",
+                        "BEL(Sara, likesNewVersion) = True",
+                        "DES(Sara, rememberNewSongVersion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Speak(Intention1, Intention2, Intention, Determined)": {
+                    "conditions": [
+                        "BEL(Sara, remembersSongWords) = False",
+                        "DES(Sara, singFavoriteSong) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords) = True",
+                        "BEL(Sara, postedSongOnFacebook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Intention2, Desire2, null, null)": {
+                    "conditions": [
+                        "BEL(Sara, postedSongOnFacebook) = False",
+                        "DES(Sara, shareNewSongOnFacebook) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, postedSongOnFacebook) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Desire2, Intention3, null, null)": {
+                    "conditions": [
+                        "BEL(Sara, goodMood) = True",
+                        "DES(Sara, singFavoriteSong) = True",
+                        "BEL(Sara, remembersSongWords) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Sara, choose to create new song version) = True",
+                        "INTENT(Sara, choose to write down new song version) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Intention3, End, null, null)": {
+                    "conditions": [
+                        "DES(Sara, singFavoriteSong) = True",
+                        "BEL(Sara, goodMood) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sara, remembersSongWords)",
+                        "DES(Sara, rememberNewSongVersion)",
+                        "INTENT(Sara, choose to create new song version)"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, Belief1, null, null, \"Sara hums a melody as she walks down the street.\">",
+        "<Belief1, Belief2, null, null, \"Sara thinks about the lyrics to her favorite song.\">",
+        "<Belief2, Belief3, Belief, Curious, \"Sara wonders what would happen if she made up some lyrics.\">",
+        "<Belief3, Desire1, null, null, \"Sara decides to make up some new lyrics for her song.\">",
+        "<Desire1, Despair, null, null, \"Sara forgot some of the original lyrics.\">",
+        "<Despair, Intention1, null, null, \"Sara decides to make up new lyrics for the forgotten part.\">",
+        "<Intention1, Intention2, Intention, Determined, \"Sara writes down the new lyrics so she won't forget them.\">",
+        "<Intention2, Desire2, null, null, \"Sara is happy with her new song.\">",
+        "<Desire2, Intention3, null, null, \"Sara decides to post her new song on her Facebook.\">",
+        "<Intention3, End, null, null, \"Sara posts her new song on Facebook.\">"
+    ]
+}

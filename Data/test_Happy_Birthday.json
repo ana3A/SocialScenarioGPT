@@ -1,0 +1,1916 @@
+{
+    "scenario_name": "test_Happy Birthday",
+    "scenario_description": "Sophie's birthday is coming up. She asks her mom if she can have a party. Her mom says no. On her birthday she decides to go shopping with a friend. When she gets home she walks into a surprise party!",
+    "last_ended": "conditions_effects",
+    "agents": {
+        "Sophie": {
+            "knowledge_base": [
+                "BEL(Sophie, wants_party) = True",
+                "BEL(Sophie, denied_party_by_mom) = True",
+                "BEL(Sophie, surprised_by_party) = False",
+                "BEL(Sophie, likes_to_shop) = True",
+                "BEL(Sophie, expects_no_party) = True",
+                "DES(Sophie, have_party_on_birthday) = False",
+                "DES(Sophie, have_surprise_party) = True",
+                "DES(Sophie, have_fun_with_friend_on_birthday) = True"
+            ],
+            "intentions": {
+                "INTENT(Sophie, have_surprise_party) = True": {
+                    "action_plan": [
+                        "GoShopping(Sophie, Sophie's_friend)",
+                        "ReturnHome(Sophie, None)",
+                        "EnterHouse(Sophie, None)",
+                        "ExpressGratitude(Sophie, Party_planner)",
+                        "Party_planner",
+                        "Party_planner"
+                    ]
+                },
+                "INTENT(Sophie, go_shopping_with_friend) = True": {
+                    "action_plan": [
+                        "CheckBelief(Sophie, expects_no_party)",
+                        "GoShopping(Sophie, Sophie's_friend, mall)",
+                        "CheckBelief(Sophie, surprised_by_party)",
+                        "ReturnHome(Sophie, Sophie's_home)",
+                        "ReactToSurpriseParty(Sophie, Party_planner)",
+                        "HaveFun(Sophie, Party_planner)"
+                    ]
+                },
+                "INTENT(Sophie, expect_no_party) = True": {
+                    "action_plan": [
+                        "Think(Sophie, None, BEL(Sophie, expects_no_party))",
+                        "Call(Sophie, Sophie's mom, discuss_party_denial)",
+                        "Listen(Sophie's mom, Sophie, listen_to_conversation)",
+                        "Accept(Sophie, Sophie's mom, denial_of_party)",
+                        "Go(Sophie, Sophie's friend, go_shopping)"
+                    ]
+                }
+            },
+            "actions": {
+                "Think(Sophie, None, BEL(Sophie, expects_no_party))": {
+                    "conditions": [
+                        "BEL(Sophie, expects_no_party) = True"
+                    ],
+                    "effects": []
+                },
+                "Call(Sophie, Sophie's mom, discuss_party_denial)": {
+                    "conditions": [
+                        "BEL(Sophie, denied_party_by_mom) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, denied_party_by_mom) = True",
+                        "BEL(Sophie, expects_no_party) = True"
+                    ]
+                },
+                "Listen(Sophie's mom, Sophie, listen_to_conversation)": {
+                    "conditions": [
+                        "BEL(Sophie's mom, denies_party_on_birthday) = True",
+                        "BEL(Sophie, wants_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, denied_party_by_mom) = True"
+                    ]
+                },
+                "Accept(Sophie, Sophie's mom, denial_of_party)": {
+                    "conditions": [
+                        "BEL(Sophie, wants_party) = True",
+                        "BEL(Sophie, denied_party_by_mom) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, expects_no_party) = True"
+                    ]
+                },
+                "Go(Sophie, Sophie's friend, go_shopping)": {
+                    "conditions": [
+                        "BEL(Sophie, likes_to_shop) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, went_shopping) = True"
+                    ]
+                },
+                "GoShopping(Sophie, Sophie's_friend)": {
+                    "conditions": [
+                        "BEL(Sophie, likes_to_shop) = True",
+                        "BEL(Sophie, expects_no_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, expects_no_party) = False",
+                        "BEL(Sophie, shopping_with_friend) = True"
+                    ]
+                },
+                "ReturnHome(Sophie, None)": {
+                    "conditions": [
+                        "BEL(Sophie, likes_to_shop) = True",
+                        "BEL(Sophie, expects_no_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, surprised_by_party) = False",
+                        "BEL(Sophie, likes_to_shop) = True",
+                        "BEL(Sophie, expects_no_party) = False"
+                    ]
+                },
+                "EnterHouse(Sophie, None)": {
+                    "conditions": [
+                        "BEL(Sophie, expects_no_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, surprised_by_party) = True"
+                    ]
+                },
+                "ExpressGratitude(Sophie, Party_planner)": {
+                    "conditions": [
+                        "BEL(Sophie, surprised_by_party) = False",
+                        "BEL(Sophie, wants_party) = True",
+                        "DES(Sophie, have_surprise_party) = True",
+                        "BEL(Party_planner, is_there_to_plan) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, surprised_by_party) = True",
+                        "DES(Sophie, have_surprise_party) = False",
+                        "DES(Sophie, have_fun_with_friend_on_birthday) = False",
+                        "BEL(Party_planner, feeling_appreciated_by_Sophie) = True"
+                    ]
+                },
+                "Party_planner": {
+                    "conditions": [
+                        "BEL(Sophie, surprised_by_party) = False",
+                        "BEL(Sophie, expects_no_party) = True",
+                        "DES(Sophie, have_surprise_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, surprised_by_party) = True",
+                        "BEL(Sophie, expects_no_party) = False"
+                    ]
+                },
+                "CheckBelief(Sophie, expects_no_party)": {
+                    "conditions": [
+                        "BEL(Sophie, expects_no_party) = True"
+                    ],
+                    "effects": []
+                },
+                "GoShopping(Sophie, Sophie's_friend, mall)": {
+                    "conditions": [
+                        "BEL(Sophie, expects_no_party) = True",
+                        "BEL(Sophie, likes_to_shop) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, expects_no_party) = False",
+                        "BEL(Sophie, went_shopping_with_friend) = True"
+                    ]
+                },
+                "CheckBelief(Sophie, surprised_by_party)": {
+                    "conditions": [
+                        "BEL(Sophie, wants_party) = True",
+                        "BEL(Sophie, denied_party_by_mom) = True",
+                        "BEL(Sophie, surprised_by_party) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, expected_no_party) = False",
+                        "DES(Sophie, have_surprise_party) = True"
+                    ]
+                },
+                "ReturnHome(Sophie, Sophie's_home)": {
+                    "conditions": [
+                        "BEL(Sophie, expects_no_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, surprised_by_party) = True"
+                    ]
+                },
+                "ReactToSurpriseParty(Sophie, Party_planner)": {
+                    "conditions": [
+                        "BEL(Sophie, surprised_by_party) = False",
+                        "DES(Sophie, have_surprise_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, surprised_by_party) = True",
+                        "DES(Sophie, have_surprise_party) = False",
+                        "BEL(Party_planner, made_Sophie_happy) = True"
+                    ]
+                },
+                "HaveFun(Sophie, Party_planner)": {
+                    "conditions": [
+                        "BEL(Sophie, surprised_by_party) = True",
+                        "DES(Sophie, have_fun_with_friend_on_birthday) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, happy_at_party) = True",
+                        "BEL(Sophie, grateful_to_party_planner) = True",
+                        "DES(Sophie, have_surprise_party) = False",
+                        "DES(Sophie, have_fun_with_friend_on_birthday) = False",
+                        "BEL(Party_planner, made_Sophie_happy) = True"
+                    ]
+                }
+            }
+        },
+        "Sophie's_mom": {
+            "knowledge_base": [
+                "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                "BEL(Sophies_mom, Party_costs_are_too_high) = True",
+                "DES(Sophies_mom, Sophie_does_not_get_hurt) = True",
+                "DES(Sophies_mom, Celebrate_Sophie's_birthday) = False",
+                "DES(Sophies_mom, Save_money) = True"
+            ],
+            "intentions": {
+                "INTENT(Sophies_mom, Save_money) = True": {
+                    "action_plan": [
+                        "Check_budget(Sophie's_mom)",
+                        "Consult_with_party_planner(Sophie's_mom, Party_planner)",
+                        "Inform_Sophie_of_the_decision(Sophie's_mom, Sophie)",
+                        "Plan_birthday_with_Sophie(Sophie's_mom, Sophie)",
+                        "Go_shopping_with_Sophie's_friend(Sophie's_mom, Sophie's_friend)",
+                        "Prepare_a_small_birthday_treat(Sophie's_mom)"
+                    ]
+                },
+                "INTENT(Sophies_mom, Ensure_Sophie_does_not_get_hurt) = True": {
+                    "action_plan": [
+                        "INTENT(Sophies_mom, Ensure_Sophie_does_not_get_hurt) = True",
+                        "Monitor(Sophies_mom, Sophie, None)",
+                        "Organize_activity(Sophies_mom, Sophie's_friend, {\"shopping\": True})",
+                        "Set_budget(Sophies_mom, Party_planner, {\"high_budget\": False})",
+                        "Cooperate(Sophies_mom, Party_planner, {\"surprise_party\": True})"
+                    ]
+                },
+                "INTENT(Sophies_mom, Do_not_throw_a_party) = True": {
+                    "action_plan": [
+                        "Inform(Sophies_mom, Sophie)",
+                        "Inform(Sophies_mom, Sophie)",
+                        "DES(Sophies_mom, Sophie_does_not_get_hurt)",
+                        "INTEND(Sophies_mom, Do_not_throw_a_party)",
+                        "ACTION(Sophies_mom, None, None)",
+                        "ACTION(Sophies_mom, None, None)",
+                        "DES(Sophies_mom, Save_money)",
+                        "ACTION(Sophies_mom, None, None)",
+                        "DES(Sophies_mom, Celebrate_Sophie's_birthday)"
+                    ]
+                },
+                "INTENT(Sophies_mom, Deny_Sophie's_request_for_a_party) = True": {
+                    "action_plan": [
+                        "SearchForInformation(Sophies_mom, Party_cost)",
+                        "Communicate(Sophies_mom, Sophie, \"Apologize for not being able to grant request for party due to budget constraints\")",
+                        "Communicate(Sophies_mom, Sophie, \"Apologize for not being able to grant request for party due to reasons beyond your control\")",
+                        "ProvideAlternativeCelebration(Sophies_mom, Sophie)",
+                        "RecordExpenses(Sophies_mom, BudgetChange)",
+                        "UpdateBudget(Sophies_mom, Party_cost, BudgetChange)"
+                    ]
+                }
+            },
+            "actions": {
+                "SearchForInformation(Sophies_mom, Party_cost)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophies_mom, Party_cost) = Party_cost"
+                    ]
+                },
+                "Communicate(Sophies_mom, Sophie, \"Apologize for not being able to grant request for party due to budget constraints\")": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = True",
+                        "BEL(Sophie, Sophie_asked_for_a_party) = True"
+                    ],
+                    "effects": [
+                        "DES(Sophies_mom, Celebrate_Sophie's_birthday) = False",
+                        "DES(Sophies_mom, Save_money) = True",
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, Party_cost) = Party_cost",
+                        "BEL(Sophies_mom, BudgetChange) = BudgetChange",
+                        "BEL(Sophie, Sophie_was_apologized_to_for_not_having_a_party) = True"
+                    ]
+                },
+                "Communicate(Sophies_mom, Sophie, \"Apologize for not being able to grant request for party due to reasons beyond your control\")": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, Sophie_feels_disappointed) = True",
+                        "BEL(Sophie's_mom, Sophie_is_aware_of_budget_constraints) = True",
+                        "BEL(Sophie's_mom, Sophie_is_aware_of_reasons_for_denial) = True"
+                    ]
+                },
+                "ProvideAlternativeCelebration(Sophies_mom, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Celebrate_Sophie's_birthday) = False",
+                        "DES(Sophies_mom, Save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophies_mom, Celebrate_Sophie's_birthday) = True",
+                        "DES(Sophies_mom, Save_money) = False",
+                        "DES(Sophies_mom, Find_an_alternative_to_a_party) = True",
+                        "DES(Sophie, Have_a_special_celebration) = True"
+                    ]
+                },
+                "RecordExpenses(Sophies_mom, BudgetChange)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Party_cost) = True",
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sophies_mom, Party_cost_was_recorded) = True",
+                        "DES(Sophies_mom, Save_money) = True",
+                        "BEL(Sophies_mom, BudgetChange) = BudgetChange"
+                    ]
+                },
+                "UpdateBudget(Sophies_mom, Party_cost, BudgetChange)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = True",
+                        "BEL(Sophies_mom, BudgetChange) = NumericValue"
+                    ],
+                    "effects": [
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = False",
+                        "BEL(Sophies_mom, Budget) = OldBudgetValue - BudgetChange"
+                    ]
+                },
+                "Check_budget(Sophie's_mom)": {
+                    "conditions": [
+                        "BEL(Sophie's_mom, Save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_mom, Enough_money_for_a_party) = True",
+                        "BEL(Sophie's_mom, Enough_money_for_a_small_treat) = True",
+                        "BEL(Sophie's_mom, Not_enough_money_for_a_party) = True"
+                    ]
+                },
+                "Consult_with_party_planner(Sophie's_mom, Party_planner)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = True",
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Party_planner, Has_organized_a_party_before) = True"
+                    ],
+                    "effects": [
+                        "DES(Sophies_mom, Celebrate_Sophie's_birthday) = True",
+                        "BEL(Sophies_mom, Sophie_is_happy) = True",
+                        "BEL(Sophies_mom, Party_is_within_budget) = True",
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = False",
+                        "BEL(Sophie, Surprise_party) = True"
+                    ]
+                },
+                "Inform_Sophie_of_the_decision(Sophie's_mom, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "DES(Sophies_mom, Celebrate_Sophie's_birthday) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, Mom_decided_not_to_throw_a_party) = True",
+                        "DES(Sophies_mom, Sophie_does_not_get_hurt) = True"
+                    ]
+                },
+                "Plan_birthday_with_Sophie(Sophie's_mom, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophie, Sophies_mom_will_help_plan_birthday) = True",
+                        "DES(Sophies_mom, Celebrate_Sophie's_birthday) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sophies_mom, Party_planning_in_progress) = True",
+                        "DES(Sophies_mom, Save_money) = True"
+                    ]
+                },
+                "Go_shopping_with_Sophie's_friend(Sophie's_mom, Sophie's_friend)": {
+                    "conditions": [
+                        "BEL(Sophie's_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "BEL(Sophie's_mom, Save_money) = True",
+                        "BEL(Sophie's_mom, Sophie_asked_for_a_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_mom, Went_shopping_with_Sophie) = True",
+                        "BEL(Sophie's_mom, Saved_money_on_the_party) = True",
+                        "BEL(Sophie's_mom, Sophie_enjoyed_shopping) = True"
+                    ]
+                },
+                "Prepare_a_small_birthday_treat(Sophie's_mom)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Celebrate_Sophie's_birthday) = False",
+                        "DES(Sophies_mom, Save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophies_mom, Sophie_is_happy) = True",
+                        "BEL(Sophies_mom, Prepare_a_small_birthday_treat) = True"
+                    ]
+                },
+                "INTENT(Sophies_mom, Ensure_Sophie_does_not_get_hurt) = True": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "DES(Sophies_mom, Sophie_does_not_get_hurt) = True"
+                    ],
+                    "effects": [
+                        "MONITOR(Sophies_mom, Sophie, None)",
+                        "ORGANIZE_ACTIVITY(Sophies_mom, Sophie's_friend, {\"shopping\": True})",
+                        "SET_BUDGET(Sophies_mom, Party_planner, {\"high_budget\": False})",
+                        "COOPERATE(Sophies_mom, Party_planner, {\"surprise_party\": True})"
+                    ]
+                },
+                "Monitor(Sophies_mom, Sophie, None)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, Celebrate_Sophie's_birthday) = False"
+                    ],
+                    "effects": []
+                },
+                "Organize_activity(Sophies_mom, Sophie's_friend, {\"shopping\": True})": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "DES(Sophies_mom, Save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = False",
+                        "DES(Sophies_mom, Save_money) = False",
+                        "BEL(Sophies_mom, Organize_activity(Sophie's_friend, \"shopping\")) = True"
+                    ]
+                },
+                "Set_budget(Sophies_mom, Party_planner, {\"high_budget\": False})": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Party_planner_present) = True",
+                        "BEL(Party_planner, High_budget_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, High_budget_available) = False",
+                        "BEL(Party_planner, Low_budget_available) = True",
+                        "BEL(Party_planner, Budget_set) = True"
+                    ]
+                },
+                "Cooperate(Sophies_mom, Party_planner, {\"surprise_party\": True})": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = False",
+                        "DES(Sophies_mom, Celebrate_Sophie's_birthday) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = True",
+                        "DES(Sophies_mom, Celebrate_Sophie's_birthday) = True"
+                    ]
+                },
+                "Inform(Sophies_mom, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = False"
+                    ]
+                },
+                "DES(Sophies_mom, Sophie_does_not_get_hurt)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = True"
+                    ],
+                    "effects": [
+                        "DES(Sophies_mom, Sophie_does_not_get_hurt) = True"
+                    ]
+                },
+                "INTEND(Sophies_mom, Do_not_throw_a_party)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = True",
+                        "DES(Sophies_mom, Sophie_does_not_get_hurt) = True",
+                        "DES(Sophies_mom, Celebrate_Sophie's_birthday) = False",
+                        "DES(Sophies_mom, Save_money) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Sophies_mom, Do_not_throw_a_party) = True"
+                    ]
+                },
+                "ACTION(Sophies_mom, None, None)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = True"
+                    ],
+                    "effects": []
+                },
+                "DES(Sophies_mom, Save_money)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = True",
+                        "DES(Sophies_mom, Save_money) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophies_mom, Saved_money) = True"
+                    ]
+                },
+                "DES(Sophies_mom, Celebrate_Sophie's_birthday)": {
+                    "conditions": [
+                        "BEL(Sophies_mom, Sophie_asked_for_a_party) = True",
+                        "BEL(Sophies_mom, It_is_not_possible_to_throw_a_party) = True",
+                        "BEL(Sophies_mom, Party_costs_are_too_high) = True",
+                        "INTENT(Sophies_mom, Do_not_throw_a_party) = False",
+                        "DES(Sophies_mom, Celebrate_Sophie's_birthday) = True"
+                    ],
+                    "effects": [
+                        "DES(Sophies_mom, Celebrate_Sophie's_birthday) = False",
+                        "BEL(Sophies_mom, Sophie_had_a_surprise_party) = True",
+                        "BEL(Sophies_mom, Party_costs_were_worth_it) = True"
+                    ]
+                }
+            }
+        },
+        "Sophie's_friend": {
+            "knowledge_base": [],
+            "intentions": {
+                "Ask_if_Sophie_would_like_to_go_shopping(Sophie's_friend, Sophie)": {
+                    "action_plan": [
+                        "Sophie",
+                        "Sophie",
+                        "Sophie",
+                        "Go_to_Sophie's_house(Sophie's_friend, Sophie's_mom)",
+                        "Greet(Sophie's_friend, Sophie)",
+                        "Ask_if_Sophie_would_like_to_go_shopping(Sophie's_friend, Sophie)",
+                        "Listen_for_Sophie's_response(Sophie's_friend, Sophie)",
+                        "Go_shopping(Sophie's_friend, Sophie)"
+                    ]
+                },
+                "Plan_surprise_party(Party_planner, Sophie's_friend, Sophie)": {
+                    "action_plan": [
+                        "Check_Store_Availability(Sophie's_friend, Store)",
+                        "Buy_Decorations(Sophie's_friend, Store)",
+                        "Hide_Decorations(Sophie's_friend, Sophie)",
+                        "Call_Party_Planner(Sophie's_friend, Party_planner)",
+                        "Discuss_Surprise_Party_Details(Sophie's_friend, Party_planner, Sophie)",
+                        "Invite_Guests(Party_planner, Sophie's_friend, Sophie)",
+                        "Set_Up_Party(Party_planner, Sophie's_friend, Sophie)",
+                        "Surprise_Sophie(Party_planner, Sophie's_friend, Sophie)"
+                    ]
+                }
+            },
+            "actions": {
+                "Check_Store_Availability(Sophie's_friend, Store)": {
+                    "conditions": [
+                        "BEL(Store, Availability) = True"
+                    ],
+                    "effects": [
+                        "DES(Sophie's_friend, Store_Availability) = True"
+                    ]
+                },
+                "Buy_Decorations(Sophie's_friend, Store)": {
+                    "conditions": [
+                        "BEL(Store, availability)=True",
+                        "DES(Sophie's_friend, buy_decorations)=True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_friend, has_decorations)=True",
+                        "BEL(Store, availability)=False",
+                        "DES(Sophie's_friend, buy_decorations)=False"
+                    ]
+                },
+                "Hide_Decorations(Sophie's_friend, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophie, isAtHome) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, decorationsHidden) = True"
+                    ]
+                },
+                "Call_Party_Planner(Sophie's_friend, Party_planner)": {
+                    "conditions": [
+                        "BEL(Sophie, isBirthday) = True",
+                        "BEL(Sophie, wantsParty) = True",
+                        "BEL(Sophie's_mom, allowsParty) = False",
+                        "BEL(Sophie's_friend, knowsPartyPlanner) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_friend, Party_plannerKnown) = True"
+                    ]
+                },
+                "Discuss_Surprise_Party_Details(Sophie's_friend, Party_planner, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophie_mom, [approved_party]) = False",
+                        "BEL(Store, [decorations_available]) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, [planning_surprise_for_Sophie]) = True",
+                        "BEL(Sophie, [surprise_party_planned]) = True",
+                        "BEL(Party_planner, [knows_Sophie_birthday]) = True",
+                        "BEL(Sophie's_friend, [knows_Party_planner]) = True",
+                        "DES(Party_planner, [plan_surprise_party]) = True"
+                    ]
+                },
+                "Invite_Guests(Party_planner, Sophie's_friend, Sophie)": {
+                    "conditions": [
+                        "BEL(Party_Planner, available) = True",
+                        "BEL(Sophie, wants_party) = True",
+                        "BEL(Sophie's_friend, knows_guests) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, guests_invited) = True",
+                        "BEL(Sophie's_friend, invited_guests) = True"
+                    ]
+                },
+                "Set_Up_Party(Party_planner, Sophie's_friend, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophie's_friend, available_decorations) = True",
+                        "DES(Sophie's_friend, Plan_surprise_party(Party_planner, Sophie's_friend, Sophie)) = True",
+                        "BEL(Party_planner, available_party_supplies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_friend, party_preparations_complete) = True",
+                        "BEL(Party_planner, party_set_up_complete) = True",
+                        "DES(Sophie, surprised_at_party) = True"
+                    ]
+                },
+                "Surprise_Sophie(Party_planner, Sophie's_friend, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophie, birthday_today) = True",
+                        "BEL(Party_planner, surprise_party_planned) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, surprise_party) = True",
+                        "DES(Party_planner, make_Sophie_happy) = True"
+                    ]
+                },
+                "Sophie": {
+                    "conditions": [
+                        "BEL(Sophie's_mom, 'allow_party') = False",
+                        "BEL(Sophie, 'has_birthday') = True"
+                    ],
+                    "effects": [
+                        "DES(Sophie's_friend, 'go_to_shopping') = True"
+                    ]
+                },
+                "Go_to_Sophie's_house(Sophie's_friend, Sophie's_mom)": {
+                    "conditions": [
+                        "BEL(Sophie's_mom, is_at_home) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_friend, is_at_Sophie's_house) = True",
+                        "BEL(Sophie's_friend, is_waiting_for_Sophie) = True"
+                    ]
+                },
+                "Greet(Sophie's_friend, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophie, Present_at_home) = True",
+                        "BEL(Sophie's_friend, Present_at_home) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, Greeted_by_Sophie's_friend) = True",
+                        "BEL(Sophie's_friend, Greeted_Sophie) = True"
+                    ]
+                },
+                "Ask_if_Sophie_would_like_to_go_shopping(Sophie's_friend, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophie's_friend, knows(Sophie, Sophie's_mom)) = True",
+                        "BEL(Sophie, at_home) = True",
+                        "DES(Sophie's_friend, go_shopping) = True",
+                        "BEL(Sophie's_mom, allowed_Sophie_to_go_shopping) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_friend, asked_Sophie_to_go_shopping) = True"
+                    ]
+                },
+                "Listen_for_Sophie's_response(Sophie's_friend, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophie's_mom, 'Party Permission') = False"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_friend, 'Waiting for Response') = True",
+                        "BEL(Sophie, 'Asked to go Shopping') = True"
+                    ]
+                },
+                "Go_shopping(Sophie's_friend, Sophie)": {
+                    "conditions": [
+                        "BEL(Sophie's_mom, [approval_party]) = False",
+                        "BEL(Sophie, [birthday]) = True",
+                        "DES(Sophie's_friend, [go_shopping]) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_friend, [shopping_partner, Sophie]) = True",
+                        "BEL(Sophie, [shopping_partner, Sophie's_friend]) = True",
+                        "DES(Sophie's_friend, [go_shopping]) = False",
+                        "BEL(Sophie's_friend, [at_shopping_mall]) = True"
+                    ]
+                }
+            }
+        },
+        "Party_planner": {
+            "knowledge_base": [
+                "BEL(Party_planner, knows_sophie_birthday) = True",
+                "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                "BEL(Party_planner, can_involve_other_people) = True",
+                "DES(Party_planner, make_sophie_happy) = True",
+                "DES(Party_planner, plan_a_surprise_party) = True",
+                "DES(Party_planner, involve_sophie's_friend) = True",
+                "DES(Party_planner, make_sure_the_party_is_a_success) = True"
+            ],
+            "intentions": {
+                "INTENT(Party_planner, invite guests, Sophie's_friend) = True": {
+                    "action_plan": [
+                        "GatherInfo(Party_planner, Sophie's_friend, Availability)",
+                        "GatherInfo(Party_planner, Sophie's_friend, Preferences)",
+                        "CreateListOfGuests(Party_planner, Guests)",
+                        "DecideOnMethodOfInvitation(Party_planner, Guests)",
+                        "ChooseLocation(Party_planner, Party_location)",
+                        "DecideOnFoodAndDrinks(Party_planner, Menu)",
+                        "PlanGamesAndActivities(Party_planner, Activities)",
+                        "CoordinateWithGuests(Party_planner, Guests)",
+                        "CoordinateWithSurpriseTeam(Party_planner, Surprise_Team)",
+                        "ExecuteParty(Party_planner, Sophie, Guests, Surprise_Team)"
+                    ]
+                },
+                "INTENT(Party_planner, decorate the house) = True": {
+                    "action_plan": [
+                        "Ask(Sophie's_friend, if she can keep a secret)",
+                        "BEL(Party_planner, knows_sophie's_friend_can_keep_a_secret) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True",
+                        "Ask(Party_planner, other people he can involve)",
+                        "BEL(Party_planner, knows_people_to_involve) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "Plan(Party_planner, a surprise party)",
+                        "BEL(Party_planner, knows_how_to_plan_a_surprise_party) = True",
+                        "BEL(Party_planner, knows_sophie_will_be_surprised) = True",
+                        "BEL(Party_planner, knows_what_decorations_to_use) = True",
+                        "Arrange(Party_planner, decorations)",
+                        "BEL(Party_planner, knows_how_to_decorate_the_house) = True",
+                        "Prepare(Party_planner, games)",
+                        "Arrange(Party_planner, food)",
+                        "Tell(Party_planner, people he involved, what their role will be)",
+                        "BEL(Party_planner, knows_everyone's_role) = True",
+                        "Hide(Party_planner, decorations, food and games)",
+                        "BEL(Party_planner, knows_where_everything_is_hidden) = True",
+                        "Invite(Sophie's_friend, to come with her to the mall)",
+                        "Ask(Sophie's_mom, when she will not be home next week)",
+                        "BEL(Party_planner, knows_when_sophie's_mom_will_not_be_home) = True",
+                        "Make(Sophie's_friend, stay with her while Party_planner decorates the house)"
+                    ]
+                },
+                "INTENT(Party_planner, prepare food and drinks) = True": {
+                    "action_plan": [
+                        "INTENT(Party_planner, prepare food and drinks) = True",
+                        "CheckSupplies(Party_planner, Kitchen, None)",
+                        "BuySupplies(Party_planner, GroceryStore, None)",
+                        "PrepareItems(Party_planner, Kitchen, None)",
+                        "Decorate(Party_planner, LivingRoom, None)",
+                        "CoordinateWithFriend(Party_planner, Sophie's_friend, None)",
+                        "SetUp(Party_planner, LivingRoom, None)",
+                        "WelcomeSophie(Party_planner, LivingRoom, None)"
+                    ]
+                },
+                "INTENT(Party_planner, coordinate with other agents) = True": {
+                    "action_plan": [
+                        "Inform(Party_planner, Sophie's_mom, \"I want to plan a surprise party for Sophie even though she doesn't know it. Can you help me set it up?\")",
+                        "Inform(Party_planner, Sophie's_friend, \"I am planning a surprise party for Sophie. Would you like to help me with the preparations?\")",
+                        "Believe(Party_planner, Sophie's_mom, \"She will help me plan the party\")",
+                        "Believe(Party_planner, Sophie's_friend, \"She will help me prepare everything for the party\")",
+                        "Desire(Party_planner, acquire party supplies)",
+                        "Plan(Party_planner, acquire party supplies)",
+                        "Do(Party_planner, Party_store, \"Buy balloons, streamers, cake, and other supplies for the party\")",
+                        "Believe(Party_planner, Party_store, \"The store has everything I need for the party\")",
+                        "Desire(Party_planner, decorate the house for the party)",
+                        "Plan(Party_planner, decorate the house for the party)",
+                        "Do(Party_planner, Sophie's_house, \"Decorate the living room, kitchen, and backyard with party supplies and decorations\")",
+                        "Believe(Party_planner, Sophie's_house, \"The decorations will make the party more fun and enjoyable\")",
+                        "Desire(Party_planner, prepare and set up food and drinks)",
+                        "Plan(Party_planner, prepare and set up food and drinks)",
+                        "Do(Party_planner, Sophie's_kitchen, \"Cook and set up food and drinks for the party\")",
+                        "Believe(Party_planner, Sophie's_friend, \"The food and drinks will be enough to feed all the guests and make the party more enjoyable\")",
+                        "Desire(Party_planner, coordinate arrival and hiding of guests)",
+                        "Plan(Party_planner, coordinate arrival and hiding of guests)",
+                        "Do(Party_planner, Hidden_locations, \"Call and text guests with instructions to arrive early and hide until Sophia comes home. Coordinate guest arrivals and hiding spots\")",
+                        "Believe(Party_planner, Hidden_locations, \"Guests will arrive on time and the surprise will be successful\")",
+                        "Believe(Party_planner, Sophie, \"She will be happy and enjoy the party\")",
+                        "Do(Party_planner, Sophie's_house, \"Surprise Sophie with the party and enjoy the celebration with everyone\")",
+                        "Happy(Party_planner)"
+                    ]
+                },
+                "INTENT(Party_planner, keep the surprise a secret) = True": {
+                    "action_plan": [
+                        "DecideOnTheGuestList(Party_planner, self, [Sophie, Sophie's_friend])",
+                        "ChooseTheLocation(Party_planner, self, Sophie's_house)",
+                        "InviteOtherGuests(Party_planner, self, None)",
+                        "CoordinateWithSophie'sFriend(Party_planner, Sophie's_friend, Sophie)",
+                        "DecorateTheHouse(Party_planner, self, Sophie's_house)",
+                        "PrepareTheFood(Party_planner, self, Sophie's_house, None)",
+                        "KeepThePartyASecret(Party_planner, self, None)",
+                        "SignalEveryone(Party_planner, self, None)",
+                        "SurpriseSophieAndCelebrate(Party_planner, Sophie, Sophie's_house)",
+                        "CleanUpAfterTheParty(Party_planner, self, Sophie's_house)"
+                    ]
+                },
+                "INTENT(Party_planner, make sure Sophie has a great time) = True": {
+                    "action_plan": [
+                        "Invite_friends(Party_planner, Sophie's_friend)",
+                        "Buy_party_supplies(Party_planner, Party_store)",
+                        "Decorate_location(Party_planner, Sophie's_house)",
+                        "Instruct_Guests(Party_planner, Sophie's_friend, Sophie)",
+                        "Start_the_party(Party_planner, Sophie, Guests)"
+                    ]
+                },
+                "INTENT(Party_planner, monitor the party and attend to any issues) = True": {
+                    "action_plan": [
+                        "SendInvitations(Party_planner, Guests, Venue, Time)",
+                        "PrepareDecorations(Party_planner, Venue)",
+                        "CoordinateWithSophie'sFriend(Party_planner, Sophie's_friend, Venue)",
+                        "KeepWatchfulEye(Party_planner, Venue)",
+                        "HideInTheVenue(Party_planner, Venue)",
+                        "SignalOtherGuests(Party_planner, Guests)",
+                        "EnjoyTheParty(Party_planner, Guests)",
+                        "HandleCleanup(Party_planner, Guests, Venue)"
+                    ]
+                }
+            },
+            "actions": {
+                "SendInvitations(Party_planner, Guests, Venue, Time)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, sent_invitations_to_Guests_at_Venue_Time) = True"
+                    ]
+                },
+                "PrepareDecorations(Party_planner, Venue)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, decorated_venue) = True",
+                        "DES(Party_planner, create_a_welcoming_atmosphere) = True"
+                    ]
+                },
+                "CoordinateWithSophie'sFriend(Party_planner, Sophie's_friend, Venue)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True",
+                        "BEL(Sophie's_friend, available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, coordinated_with_sophie_friend) = True",
+                        "BEL(Sophie's_friend, invited_to_the_party) = True",
+                        "BEL(Sophie's_friend, knows_about_the_party) = True"
+                    ]
+                },
+                "KeepWatchfulEye(Party_planner, Venue)": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "BEL(Party_planner, Guests) = True",
+                        "BEL(Party_planner, Venue) = True",
+                        "BEL(Party_planner, Sophie's_friend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, is_watchful) = True",
+                        "BEL(Party_planner, notices_guests_behavior) = True",
+                        "BEL(Party_planner, detects_potential_issues) = True"
+                    ]
+                },
+                "HideInTheVenue(Party_planner, Venue)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "BEL(Venue, is_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, is_hidden) = True",
+                        "BEL(Party_planner, is_safe) = True",
+                        "BEL(Venue, is_decorated) = True",
+                        "DES(Party_planner, monitor_the_party) = True"
+                    ]
+                },
+                "SignalOtherGuests(Party_planner, Guests)": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Guests, informed_about_party) = True",
+                        "DES(Guests, excited_to_attend_party) = True"
+                    ]
+                },
+                "EnjoyTheParty(Party_planner, Guests)": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "DES(Party_planner, make_sophie_happy) = True"
+                    ],
+                    "effects": [
+                        "DES(Party_planner, have_had_a_good_time) = True",
+                        "DES(Party_planner, feel_positive_about_party) = True",
+                        "DES(Party_planner, improved_relationship_with_guests) = True",
+                        "BEL(Guests, had_a_good_time_at_party) = True"
+                    ]
+                },
+                "HandleCleanup(Party_planner, Guests, Venue)": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Venue, needs_cleanup) = True",
+                        "BEL(Guests, party_is_over) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, organizing_is_done) = True",
+                        "DES(Party_planner, clean_the_venue) = False",
+                        "BEL(Party_planner, task_completed) = True",
+                        "BEL(Venue, needs_cleanup) = False",
+                        "BEL(Guests, had_a_good_time) = True"
+                    ]
+                },
+                "GatherInfo(Party_planner, Sophie's_friend, Availability)": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Sophie's_friend, knows_Sophie) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_Sophie's_friend_availability) = True"
+                    ]
+                },
+                "GatherInfo(Party_planner, Sophie's_friend, Preferences)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Sophie's_friend, knows_how_to_plan_a_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_friend, Sophie's_preferences) = Updated_Preferences"
+                    ]
+                },
+                "CreateListOfGuests(Party_planner, Guests)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_friend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_guests_invited) = True",
+                        "BEL(Party_planner, knows_guests_not_invited) = False",
+                        "BEL(Party_planner, knows_guests_accepted) = False",
+                        "BEL(Party_planner, knows_guests_declined) = False",
+                        "DES(Party_planner, create_invitations) = True"
+                    ]
+                },
+                "DecideOnMethodOfInvitation(Party_planner, Guests)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "BEL(Guests, exists) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_invitation_method) = True",
+                        "BEL(Party_planner, has_sent_invitations) = True"
+                    ]
+                },
+                "ChooseLocation(Party_planner, Party_location)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Party_location) = Party_location"
+                    ]
+                },
+                "DecideOnFoodAndDrinks(Party_planner, Menu)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_decided_on_menu) = True",
+                        "DES(Party_planner, ensure_menu_fits_budget) = True"
+                    ]
+                },
+                "PlanGamesAndActivities(Party_planner, Activities)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True"
+                    ],
+                    "effects": [
+                        "DES(Party_planner, ensure_activities_meet_guests_preferences) = True",
+                        "DES(Party_planner, activities_planned) = Activities"
+                    ]
+                },
+                "CoordinateWithGuests(Party_planner, Guests)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, informed_guests) = True",
+                        "BEL(Party_planner, knows_guest_availability) = True",
+                        "BEL(Party_planner, knows_guest_preferences) = True",
+                        "DES(Party_planner, choose_appropriate_food_and_drinks) = True",
+                        "DES(Party_planner, plan_appropriate_games_and_activities) = True"
+                    ]
+                },
+                "CoordinateWithSurpriseTeam(Party_planner, Surprise_Team)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "DES(Surprise_Team, collaborate_with_Party_planner) = True",
+                        "BEL(Surprise_Team, knows_when_the_party_is) = True",
+                        "BEL(Surprise_Team, knows_the_location_of_the_party) = True",
+                        "BEL(Surprise_Team, knows_what_to_bring_to_the_party) = True"
+                    ]
+                },
+                "ExecuteParty(Party_planner, Sophie, Guests, Surprise_Team)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, make_sophie_happy) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "BEL(Party_planner, has_coordinated_with_guests) = True",
+                        "BEL(Party_planner, has_coordinated_with_surprise_team) = True",
+                        "BEL(Party_planner, has_executed_party) = False"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_executed_party) = True",
+                        "BEL(Sophie, is_happy) = True",
+                        "BEL(Guests, have_enjoyed_party) = True"
+                    ]
+                },
+                "Ask(Sophie's_friend, if she can keep a secret)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie's_friend) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_friend, has_been_asked_to_keep_a_secret) = True"
+                    ]
+                },
+                "BEL(Party_planner, knows_sophie's_friend_can_keep_a_secret) = True": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Party_planner, knows_sophie's_friend_can_keep_a_secret) = True"
+                    ]
+                },
+                "DES(Party_planner, involve_sophie's_friend) = True": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie's_friend_can_keep_a_secret) = False",
+                        "DES(Party_planner, involve_sophie's_friend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_sophie's_friend_can_keep_a_secret) = True"
+                    ]
+                },
+                "Ask(Party_planner, other people he can involve)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_people_to_involve) = False"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_people_to_involve) = True"
+                    ]
+                },
+                "BEL(Party_planner, knows_people_to_involve) = True": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_people_to_involve) = True"
+                    ]
+                },
+                "DES(Party_planner, make_sure_the_party_is_a_success) = True": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_people_to_involve) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True"
+                    ],
+                    "effects": [
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True"
+                    ]
+                },
+                "Plan(Party_planner, a surprise party)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_surprise_party) = True",
+                        "BEL(Party_planner, knows_what_decorations_to_use) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_sophie_will_be_surprised) = True",
+                        "BEL(Party_planner, can_invite_people) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True"
+                    ]
+                },
+                "BEL(Party_planner, knows_how_to_plan_a_surprise_party) = True": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_how_to_plan_a_surprise_party) = True",
+                        "BEL(Party_planner, knows_sophie_will_be_surprised) = True",
+                        "BEL(Party_planner, knows_what_decorations_to_use) = True"
+                    ]
+                },
+                "BEL(Party_planner, knows_sophie_will_be_surprised) = True": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_surprise_party) = True",
+                        "BEL(Party_planner, knows_what_decorations_to_use) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_sophie_will_be_surprised) = True"
+                    ]
+                },
+                "BEL(Party_planner, knows_what_decorations_to_use) = True": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_surprise_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_what_decorations_to_use) = True"
+                    ]
+                },
+                "Arrange(Party_planner, decorations)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_decorate_the_house) = True",
+                        "BEL(Party_planner, knows_what_decorations_to_use) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, decorations_are_arranged) = True"
+                    ]
+                },
+                "BEL(Party_planner, knows_how_to_decorate_the_house) = True": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_surprise_party) = True",
+                        "BEL(Party_planner, knows_sophie_will_be_surprised) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_how_to_decorate_the_house) = True"
+                    ]
+                },
+                "Prepare(Party_planner, games)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_what_games_to_prepare) = True",
+                        "BEL(Party_planner, knows_how_to_prepare_games) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, games_are_prepared) = True"
+                    ]
+                },
+                "Arrange(Party_planner, food)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_what_food_to_prepare) = True",
+                        "BEL(Party_planner, can_obtain_food) = True",
+                        "BEL(Party_planner, knows_how_to_prepare_food) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, food_prepared) = True"
+                    ]
+                },
+                "Tell(Party_planner, people he involved, what their role will be)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_people_to_involve) = True",
+                        "BEL(Party_planner, knows_everyone's_role) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True"
+                    ],
+                    "effects": [
+                        "BEL(PersonInvolved, informed_about_role) = True",
+                        "BEL(PersonInvolved, knows_party_details) = True",
+                        "DES(PersonInvolved, Perform_assigned_role) = True"
+                    ]
+                },
+                "BEL(Party_planner, knows_everyone's_role) = True": {
+                    "conditions": [
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_everyone's_role) = True"
+                    ]
+                },
+                "Hide(Party_planner, decorations, food and games)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_where_everything_is_hidden) = True",
+                        "BEL(Party_planner, knows_how_to_decorate_the_house) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, decorations_hidden) = True",
+                        "BEL(Party_planner, food_hidden) = True",
+                        "BEL(Party_planner, games_hidden) = True"
+                    ]
+                },
+                "BEL(Party_planner, knows_where_everything_is_hidden) = True": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_what_decorations_to_use) = True",
+                        "BEL(Party_planner, knows_how_to_decorate_the_house) = True",
+                        "BEL(Party_planner, knows_everyone's_role) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_where_everything_is_hidden) = True"
+                    ]
+                },
+                "Invite(Sophie's_friend, to come with her to the mall)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True",
+                        "BEL(Sophie's_friend, can_keep_a_secret) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_when_Sophie's_friend_is_available) = True",
+                        "DES(Sophie's_friend, go_to_mall_with_Sophie) = True"
+                    ]
+                },
+                "Ask(Sophie's_mom, when she will not be home next week)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_when_sophie's_mom_will_not_be_home) = True"
+                    ]
+                },
+                "BEL(Party_planner, knows_when_sophie's_mom_will_not_be_home) = True": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Party_planner, knows_when_sophie's_mom_will_not_be_home) = True"
+                    ]
+                },
+                "Make(Sophie's_friend, stay with her while Party_planner decorates the house)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, knows_how_to_decorate_the_house) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True",
+                        "BEL(Sophie's_friend, can_keep_a_secret) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_sophie_will_be_surprised) = True",
+                        "BEL(Party_planner, knows_everything_is_under_control) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "DES(Sophie's_friend, help_with_party) = True"
+                    ]
+                },
+                "INTENT(Party_planner, prepare food and drinks) = True": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True or None"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, prepared_food_and_drinks) = True",
+                        "BEL(Party_planner, checked_supplies) = True",
+                        "BEL(Party_planner, bought_supplies) = True",
+                        "BEL(Party_planner, prepared_items) = True",
+                        "BEL(Party_planner, decorated_LivingRoom) = True",
+                        "BEL(Party_planner, coordinated_with_Sophie's_friend) = True",
+                        "BEL(Party_planner, set_up_LivingRoom) = True",
+                        "BEL(Party_planner, welcomed_Sophie) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True"
+                    ]
+                },
+                "CheckSupplies(Party_planner, Kitchen, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_kitchen_supplies) = True",
+                        "BEL(Party_planner, has_kitchen_supplies) = False"
+                    ]
+                },
+                "BuySupplies(Party_planner, GroceryStore, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_groceries) = True"
+                    ]
+                },
+                "PrepareItems(Party_planner, Kitchen, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_grocery_list) = True",
+                        "BEL(Party_planner, knows_what_to_prepare) = True"
+                    ]
+                },
+                "Decorate(Party_planner, LivingRoom, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_decorate) = True",
+                        "BEL(Party_planner, knows_sophie's_decorating_style) = True",
+                        "BEL(Party_planner, party_location=LivingRoom) = True",
+                        "BEL(Party_planner, can_access_party_supplies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, LivingRoom_decorated_properly) = True"
+                    ]
+                },
+                "CoordinateWithFriend(Party_planner, Sophie's_friend, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Sophie's_friend_involved) = True",
+                        "BEL(Sophie's_friend, invited_to_Sophie's_birthday) = True",
+                        "BEL(Sophie's_friend, knows_about_Sophie's_surprise_party) = True"
+                    ]
+                },
+                "SetUp(Party_planner, LivingRoom, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True",
+                        "BEL(Party_planner, has_decorations) = True",
+                        "BEL(Party_planner, has_supplies) = True",
+                        "BEL(Party_planner, has_food_and_drinks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, living_room_is_decorated) = True",
+                        "BEL(Party_planner, party_set_up) = True"
+                    ]
+                },
+                "WelcomeSophie(Party_planner, LivingRoom, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, party_space_decorated) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, party_started) = True",
+                        "DES(Sophie, feels_surprised_and_happy) = True",
+                        "BEL(Sophie, knows_party_planner_cares_about_her) = True",
+                        "BEL(Sophie, party_decorated) = True",
+                        "BEL(Sophie, has_party_supplies) = True",
+                        "BEL(Sophie, party_ready_to_start) = True"
+                    ]
+                },
+                "Inform(Party_planner, Sophie's_mom, \"I want to plan a surprise party for Sophie even though she doesn't know it. Can you help me set it up?\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, conveyed_party_plan_to_Sophie's_mom) = True"
+                    ]
+                },
+                "Inform(Party_planner, Sophie's_friend, \"I am planning a surprise party for Sophie. Would you like to help me with the preparations?\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie's_friend) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Sophie's_friend) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True"
+                    ]
+                },
+                "Believe(Party_planner, Sophie's_mom, \"She will help me plan the party\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Sophie's_mom_helping_me_plan) = True"
+                    ]
+                },
+                "Believe(Party_planner, Sophie's_friend, \"She will help me prepare everything for the party\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Sophie's_friend) = True"
+                    ]
+                },
+                "Desire(Party_planner, acquire party supplies)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "DES(Party_planner, acquire party supplies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, can_start_planning) = True",
+                        "BEL(Party_planner, has_party_supplies) = True"
+                    ]
+                },
+                "Plan(Party_planner, acquire party supplies)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_acquired_party_supplies) = True"
+                    ]
+                },
+                "Do(Party_planner, Party_store, \"Buy balloons, streamers, cake, and other supplies for the party\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_party_supplies) = True",
+                        "BEL(Party_store, supply_stock) = decreased",
+                        "DES(Party_planner, acquire party supplies) = False",
+                        "DES(Party_planner, decorate the house for the party) = True"
+                    ]
+                },
+                "Believe(Party_planner, Party_store, \"The store has everything I need for the party\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "DES(Party_planner, acquire party supplies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Party_store, The store has everything I need for the party) = True"
+                    ]
+                },
+                "Desire(Party_planner, decorate the house for the party)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, decorate_the_house_for_the_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Sophie's_house_is_decorated) = True",
+                        "BEL(Party_planner, party_supplies_are_used_up) = True",
+                        "DES(Party_planner, prepare_and_set_up_food_and_drinks) = True"
+                    ]
+                },
+                "Plan(Party_planner, decorate the house for the party)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, make_sophie_happy) = True",
+                        "BEL(Party_planner, acquire party supplies) = True",
+                        "BEL(Party_planner, prepare and set up food and drinks) = True",
+                        "DES(Party_planner, decorate the house for the party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Sophie's_house_is_decorated) = True"
+                    ]
+                },
+                "Do(Party_planner, Sophie's_house, \"Decorate the living room, kitchen, and backyard with party supplies and decorations\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, decorate the house for the party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, party_supplies_bought) = True",
+                        "BEL(Party_planner, decorations_set_up) = True",
+                        "BEL(Sophie's_house, living_room_decorated) = True",
+                        "BEL(Sophie's_house, kitchen_decorated) = True",
+                        "BEL(Sophie's_house, backyard_decorated) = True"
+                    ]
+                },
+                "Believe(Party_planner, Sophie's_house, \"The decorations will make the party more fun and enjoyable\")": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Sophie's_house, decorations_make_the_party_fun) = True"
+                    ]
+                },
+                "Desire(Party_planner, prepare and set up food and drinks)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, prepare_and_set_up_food_and_drinks) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, food_and_drinks_are_ready) = True",
+                        "BEL(Party_planner, guests_will_have_enough_to_eat_and_drink) = True",
+                        "BEL(Party_planner, party_will_be_enjoyable) = True"
+                    ]
+                },
+                "Plan(Party_planner, prepare and set up food and drinks)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, prepare and set up food and drinks) = True",
+                        "BEL(Party_planner, acquire party supplies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, food_and_drinks_prepared) = True",
+                        "BEL(Party_planner, food_and_drinks_set_up) = True",
+                        "BEL(Party_planner, party_supplies_used) = True"
+                    ]
+                },
+                "Do(Party_planner, Sophie's_kitchen, \"Cook and set up food and drinks for the party\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, prepare and set up food and drinks) = True",
+                        "BEL(Sophie's_kitchen, has necessary supplies) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_prepared_food_and_drinks) = True",
+                        "BEL(Party_planner, has_set_up_food_and_drinks) = True",
+                        "BEL(Sophie's_kitchen, is_organized_for_the_party) = True"
+                    ]
+                },
+                "Believe(Party_planner, Sophie's_friend, \"The food and drinks will be enough to feed all the guests and make the party more enjoyable\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, acquire party supplies) = True",
+                        "BEL(Party_planner, decorate the house for the party) = True",
+                        "BEL(Party_planner, prepare and set up food and drinks) = True",
+                        "BEL(Party_planner, coordinate arrival and hiding of guests) = True",
+                        "BEL(Party_planner, Sophie's_friend, wants to help) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Sophie's_friend, believes food and drinks will be enough) = True"
+                    ]
+                },
+                "Desire(Party_planner, coordinate arrival and hiding of guests)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_guests_will_hide) = True",
+                        "BEL(Party_planner, guests_arrive_secretly) = True"
+                    ]
+                },
+                "Plan(Party_planner, coordinate arrival and hiding of guests)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_guest_list_with_contact_info) = True",
+                        "BEL(Party_planner, has_hidden_spots_for_guests) = True",
+                        "BEL(Party_planner, guests_are_informed_and_notified) = True",
+                        "DES(Party_planner, make_sure_the_surprise_is_not_ruined) = True"
+                    ]
+                },
+                "Do(Party_planner, Hidden_locations, \"Call and text guests with instructions to arrive early and hide until Sophia comes home. Coordinate guest arrivals and hiding spots\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, acquire_party_supplies) = True",
+                        "BEL(Party_planner, decorate_the_house_for_the_party) = True",
+                        "BEL(Party_planner, prepare_and_set_up_food_and_drinks) = True",
+                        "BEL(Party_planner, coordinate_arrival_and_hiding_of_guests) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_guests_arrival_time_and_hiding_spots) = True",
+                        "BEL(Party_planner, guests_hidden) = True"
+                    ]
+                },
+                "Believe(Party_planner, Hidden_locations, \"Guests will arrive on time and the surprise will be successful\")": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "BEL(Sophie, knows_mom_said_no) = True",
+                        "BEL(Party_planner, Sophie's_mom, agrees_to_help_plan_party) = True",
+                        "BEL(Party_planner, Sophie's_friend, agrees_to_help_prepare_party) = True",
+                        "BEL(Party_planner, Party_store, has_necessary_party_supplies) = True",
+                        "BEL(Party_planner, Sophie's_house, is_a_good_place_to_hold_party) = True",
+                        "BEL(Party_planner, Sophie, doesn't know_about_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Hidden_locations, guests_arrive_on_time) = True",
+                        "BEL(Party_planner, Hidden_locations, guests_successfully_hide) = True",
+                        "BEL(Party_planner, guests_arrive_at_party) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True"
+                    ]
+                },
+                "Believe(Party_planner, Sophie, \"She will be happy and enjoy the party\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, make_sure_the_party_is_a_success) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, Sophie, \"She will be happy and enjoy the party\") = True"
+                    ]
+                },
+                "Do(Party_planner, Sophie's_house, \"Surprise Sophie with the party and enjoy the celebration with everyone\")": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "INTENT(Party_planner, coordinate with other agents) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, happy) = True",
+                        "BEL(Sophie, surprised) = True",
+                        "BEL(Sophie, happy) = True",
+                        "BEL(Party_planner, knows_sophie's_friend_helped) = True",
+                        "BEL(Party_planner, knows_guests_arrived_early) = True",
+                        "BEL(Party_planner, knows_guests_hid_successfully) = True",
+                        "BEL(Party_planner, knows_party_is_a_success) = True"
+                    ]
+                },
+                "Happy(Party_planner)": {
+                    "conditions": [
+                        "INTENT(Party_planner, coordinate with other agents) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, make_sophie_happy) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "BEL(Party_planner, Party_store, has_party_supplies) = True",
+                        "BEL(Party_planner, Sophie's_house, is_decorated) = True",
+                        "BEL(Party_planner, Sophie's_kitchen, has_food_and_drinks) = True",
+                        "BEL(Party_planner, Hidden_locations, has_guests_hidden) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, is_happy) = True"
+                    ]
+                },
+                "DecideOnTheGuestList(Party_planner, self, [Sophie, Sophie's_friend])": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, invited_guests) = [Sophie, Sophie's_friend"
+                    ]
+                },
+                "ChooseTheLocation(Party_planner, self, Sophie's_house)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, chose_location_Sophie's_house) = True",
+                        "BEL(Party_planner, knows_location_Sophie's_house) = True"
+                    ]
+                },
+                "InviteOtherGuests(Party_planner, self, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_invited_guests) = True",
+                        "BEL(Sophie, has_been_invited_to_party) = True",
+                        "BEL(Sophie's_friend, has_been_invited_to_party) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True"
+                    ]
+                },
+                "CoordinateWithSophie'sFriend(Party_planner, Sophie's_friend, Sophie)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True",
+                        "BEL(Sophie, knows_Party_planner_is_planning_a_party) = False"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, knows_Sophie's_friend) = True",
+                        "BEL(Sophie's_friend, knows_Party_planner_is_planning_the_party) = True"
+                    ]
+                },
+                "DecorateTheHouse(Party_planner, self, Sophie's_house)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_decorate) = True",
+                        "BEL(Party_planner, knows_what_Sophie_likes) = True",
+                        "BEL(Party_planner, knows_location_of_Sophie's_house) = True",
+                        "BEL(Party_planner, can_acquire_decorations) = True",
+                        "BEL(Party_planner, has_enough_time) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, decorations_are_set_up_at_Sophie's_house) = True",
+                        "BEL(Party_planner, decorations_are_stylish) = True",
+                        "BEL(Party_planner, decorations_fit_Sophie's_tastes) = True"
+                    ]
+                },
+                "PrepareTheFood(Party_planner, self, Sophie's_house, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_cook) = True",
+                        "BEL(Party_planner, can_get_ingredients) = True",
+                        "BEL(Party_planner, knows_Sophie's_food_preferences) = True",
+                        "BEL(Party_planner, Sophie's_house_has_kitchen) = True",
+                        "DES(Party_planner, prepare_food) = True",
+                        "BEL(None, Party_planner_has_time) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, food_is_ready) = True",
+                        "BEL(Sophie, happy_with_the_food) = True"
+                    ]
+                },
+                "KeepThePartyASecret(Party_planner, self, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "INTENT(Party_planner, plan_a_surprise_party) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, kept_party_a_secret) = True"
+                    ]
+                },
+                "SignalEveryone(Party_planner, self, None)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_signal_everyone) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_guests_at_the_party) = True",
+                        "BEL(Party_planner, Party_planner_has_signal_tools) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, everyone_is_signaled) = True",
+                        "DES(Party_planner, make_sure_everyone_is_here_before_SurpriseSophieAndCelebrate) = True"
+                    ]
+                },
+                "SurpriseSophieAndCelebrate(Party_planner, Sophie, Sophie's_house)": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "DES(Party_planner, make_sophie_happy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, knows_there_is_a_party) = True",
+                        "BEL(Sophie, is_surprised) = True",
+                        "DES(Sophie, be happy) = True",
+                        "DES(Sophie's_friend, be involved) = True",
+                        "DES(Party_planner, having a successful party) = True"
+                    ]
+                },
+                "CleanUpAfterTheParty(Party_planner, self, Sophie's_house)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_clean)",
+                        "BEL(Party_planner, has_cleaning_supplies) = True",
+                        "BEL(Sophie, is_happy) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, needs_to_clean) = False",
+                        "BEL(Party_planner, has_cleaning_supplies) = False",
+                        "BEL(Party_planner, knows_how_to_clean) = False",
+                        "DES(Party_planner, organize_a_cleanup_service) = True"
+                    ]
+                },
+                "Invite_friends(Party_planner, Sophie's_friend)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, knows_about_party) = True",
+                        "BEL(Sophie's_friend, received_invitation) = True"
+                    ]
+                },
+                "Buy_party_supplies(Party_planner, Party_store)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True"
+                    ],
+                    "effects": [
+                        "BEL(Party_planner, has_party_supplies) = True"
+                    ]
+                },
+                "Decorate_location(Party_planner, Sophie's_house)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_how_to_plan_a_party) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "BEL(Sophie's_house, is_not_decorated) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_house, is_decorated) = True"
+                    ]
+                },
+                "Instruct_Guests(Party_planner, Sophie's_friend, Sophie)": {
+                    "conditions": [
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "DES(Party_planner, involve_sophie's_friend) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sophie's_friend, invited_to_party) = True",
+                        "BEL(Sophie, told_about_party_by_friend) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True"
+                    ]
+                },
+                "Start_the_party(Party_planner, Sophie, Guests)": {
+                    "conditions": [
+                        "BEL(Party_planner, knows_sophie_birthday) = True",
+                        "BEL(Party_planner, knows_sophie_wants_a_party) = True",
+                        "BEL(Party_planner, knows_sophie's_mom_said_no) = True",
+                        "BEL(Party_planner, can_involve_other_people) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = True",
+                        "BEL(Sophie, happy) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sophie, happy) = True",
+                        "BEL(Guests, happy) = True",
+                        "DES(Party_planner, make_sure_the_party_is_a_success) = True",
+                        "DES(Party_planner, plan_a_surprise_party) = False",
+                        "BEL(Party_planner, knows_party_was_a_success) = True"
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,2038 @@
+{
+    "scenario_name": "test_The Trapeze",
+    "scenario_description": "Jon was learning a new act. He was going to do the trapeze in the circus. He practiced hard and perfected his moves. When it was time to perform, he was very nervous. He performed the routine flawlessly!",
+    "last_ended": "end",
+    "agents": {
+        "Jon": {
+            "knowledge_base": [
+                "BEL(Jon, practicing_trapeze) = True",
+                "BEL(Jon, nervous) = True",
+                "DES(Jon, perform_trapeze_act) = True",
+                "BEL(Jon, performed_flawlessly) = False",
+                "BEL(Jon, circus_performance) = True",
+                "BEL(Jon, trapeze_expertise) = True",
+                "DES(Jon, get_applause) = True"
+            ],
+            "intentions": {
+                "INTENT(Jon, perform_trapeze_act) = True": {
+                    "action_plan": [
+                        "MoveTo(Jon, Trapeze)",
+                        "AssessSituation(Jon, Trapeze_Coach)",
+                        "ReceiveEncouragement(Jon, Trapeze_Coach)",
+                        "VisualizeSuccess(Jon, Trapeze)",
+                        "Perform(Trapeze_Coach, Trapeze, Jon)",
+                        "ReceiveApplause(Jon, Audience_Members)",
+                        "EvaluatePerformance(Jon, Circus_Manager)",
+                        "UpdateBelief(Jon, performed_flawlessly, True)"
+                    ]
+                },
+                "INTENT(Jon, get_applause) = True": {
+                    "action_plan": [
+                        "AssessEmotionalState(Jon)",
+                        "ReceiveFeedbackFromTrapezeCoach(Jon, Trapeze_Coach)",
+                        "BelieveInOwnSkills(Jon)",
+                        "PerformTrapezeAct(Jon)",
+                        "GetApplause(Jon, Audience_Members)"
+                    ]
+                }
+            },
+            "actions": {
+                "AssessEmotionalState(Jon)": {
+                    "conditions": [
+                        "BEL(Jon, practicing_trapeze) = True",
+                        "BEL(Jon, circus_performance) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, nervous) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ReceiveFeedbackFromTrapezeCoach(Jon, Trapeze_Coach)": {
+                    "conditions": [
+                        "BEL(Jon, practicing_trapeze) = True",
+                        "BEL(Jon, nervous) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, trapeze_feedback_received_with_specifics) = True",
+                        "BEL(Jon, nervous) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BelieveInOwnSkills(Jon)": {
+                    "conditions": [
+                        "BEL(Jon, trapeze_expertise) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PerformTrapezeAct(Jon)": {
+                    "conditions": [
+                        "BEL(Jon, practicing_trapeze) = True",
+                        "BEL(Jon, nervous) = True",
+                        "BEL(Jon, circus_performance) = True",
+                        "BEL(Jon, trapeze_expertise) = True",
+                        "DES(Jon, perform_trapeze_act) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, performed_flawlessly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "GetApplause(Jon, Audience_Members)": {
+                    "conditions": [
+                        "BEL(Jon, circus_performance) = True",
+                        "INTENT(Jon, perform_trapeze_act) = True",
+                        "BEL(Audience_Members, impressed_by_trapeze_act) = False"
+                    ],
+                    "effects": [
+                        "DES(Jon, receive_applause) = True",
+                        "BEL(Audience_Members, impressed_by_trapeze_act) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "MoveTo(Jon, Trapeze)": {
+                    "conditions": [
+                        "BEL(Jon, practicing_trapeze) = True",
+                        "BEL(Jon, circus_performance) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, at_trapeze) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "AssessSituation(Jon, Trapeze_Coach)": {
+                    "conditions": [
+                        "BEL(Jon, practicing_trapeze) = True",
+                        "BEL(Jon, nervous) = True",
+                        "BEL(Jon, trapeze_expertise) = False"
+                    ],
+                    "effects": [
+                        "DES(Jon, receive_advice) = True",
+                        "BEL(Jon, trapeze_coach) = Trapeze_Coach",
+                        "BEL(Jon, trapeze_coach_advice) = Advice_Given"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ReceiveEncouragement(Jon, Trapeze_Coach)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, available) = True"
+                    ],
+                    "effects": [
+                        "DES(Jon, confidence_boost) = True",
+                        "BEL(Jon, encouraged) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "VisualizeSuccess(Jon, Trapeze)": {
+                    "conditions": [
+                        "BEL(Jon, practicing_trapeze) = True",
+                        "BEL(Jon, trapeze_expertise) = True"
+                    ],
+                    "effects": [
+                        "DES(Jon, confident) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Perform(Trapeze_Coach, Trapeze, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, present) = True",
+                        "BEL(Jon, practicing_trapeze) = True",
+                        "BEL(Jon, trapeze_expertise) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, performed_flawlessly) = True",
+                        "DES(Jon, get_applause) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ReceiveApplause(Jon, Audience_Members)": {
+                    "conditions": [
+                        "BEL(Jon, circus_performance) = True",
+                        "BEL(Jon, get_applause) = True"
+                    ],
+                    "effects": [
+                        "DES(Jon, feel_happy) = True",
+                        "BEL(Jon, received_applause) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "EvaluatePerformance(Jon, Circus_Manager)": {
+                    "conditions": [
+                        "BEL(Jon, circus_performance) = True",
+                        "BEL(Jon, performed_flawlessly) = False"
+                    ],
+                    "effects": [
+                        "DES(Jon, get_applause) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "UpdateBelief(Jon, performed_flawlessly, True)": {
+                    "conditions": [
+                        "BEL(Jon, performed_flawlessly) = False",
+                        "INTENT(Jon, perform_trapeze_act) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, performed_flawlessly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Nervousness"
+            ],
+            "speak_actions": {
+                "Speak(Start, State1, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Jon, practicing_trapeze) = True",
+                        "BEL(Jon, nervous) = True",
+                        "INTENT(Jon, perform_trapeze_act) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, performed_flawlessly) = True",
+                        "DES(Jon, get_applause) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(State2, State3, Concern, Worried)": {
+                    "conditions": [
+                        "BEL(Jon, circus_performance) = True",
+                        "INTENT(Jon, perform_trapeze_act) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(State3, State4, Reassurance, Supportive)": {
+                    "conditions": [
+                        "BEL(Jon, circus_performance) = True",
+                        "INTENT(Jon, perform_trapeze_act) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, performed_flawlessly) = True",
+                        "DES(Jon, get_applause) = True"
+                    ],
+                    "occ_emotion": [
+                        "State4, State5, Gratification, Proud, \"Just relax and do your best!\""
+                    ],
+                    "emotion_condition": [
+                        "State3, State4, Reassurance, Supportive, \"Don't worry, you've practiced hard and are ready for this!\"",
+                        "Hope"
+                    ]
+                },
+                "Speak(State5, End, Closing, Neutral)": {
+                    "conditions": [
+                        "BEL(Jon, nervous) = True",
+                        "BEL(Jon, performing_trapeze) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            }
+        },
+        "Circus_Manager": {
+            "knowledge_base": [],
+            "intentions": {
+                "ENCOURAGE(Circus_Manager, Jon) = True": {
+                    "action_plan": [
+                        "CALM_DOWN(Circus_Manager, Jon)",
+                        "PROVIDE_POSITIVE_FEEDBACK(Circus_Manager, Jon)",
+                        "ASSIGN_AN_EXPERIENCED_SPOTTER(Circus_Manager, Jon, Trapeze_Coach)",
+                        "ENSURE_THAT_SAFETY_PROTOCOLS_ARE_FOLLOWED(Circus_Manager)"
+                    ]
+                }
+            },
+            "actions": {
+                "CALM_DOWN(Circus_Manager, Jon)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, already_aware_of_Jon's_nervousness) = False"
+                    ],
+                    "effects": [
+                        "BEL(Circus_Manager, already_aware_of_Jon's_nervousness) = True",
+                        "BEL(Jon, nervous) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PROVIDE_POSITIVE_FEEDBACK(Circus_Manager, Jon)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, knows_the_trapeze) = True",
+                        "BEL(Circus_Manager, has_observed_Jon_practicing) = True",
+                        "BEL(Jon, nervous) = True"
+                    ],
+                    "effects": [
+                        "BEL(Circus_Manager, has_provided_positive_feedback_to_Jon) = True",
+                        "BEL(Jon, motivated) = True and BEL(Jon, more_confident) = True",
+                        "DES(Circus_Manager, ENCOURAGE(Jon)) = False"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "ASSIGN_AN_EXPERIENCED_SPOTTER(Circus_Manager, Jon, Trapeze_Coach)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, experienced) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, has_spotter) = True",
+                        "BEL(Trapeze_Coach, is_spotting) = True",
+                        "DES(Circus_Manager, ensure_safety) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ENSURE_THAT_SAFETY_PROTOCOLS_ARE_FOLLOWED(Circus_Manager)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, safety_protocols_followed) = False"
+                    ],
+                    "effects": [
+                        "BEL(Circus_Manager, safety_protocols_followed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Fear"
+            ],
+            "speak_actions": {
+                "Speak(Start, State1, Neutral, Informational)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, Circus_Manager_knowledge_of_Jon's_performance) = True",
+                        "DES(Circus_Manager, encourage_Jon) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, Jon_is_encouraged) = True",
+                        "BEL(Circus_Manager, Circus_Manager_speaks_to_Jon) = True"
+                    ],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(State1, State2, Admiration, Friendly)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, Jon_Perfects_Trapeze) = True",
+                        "DES(ENCOURAGE(Circus_Manager, Jon)) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Encourage_Jon) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Speak(State2, State3, Concern, Worried)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, Jon_knows_act) = True",
+                        "BEL(Circus_Manager, Jon_nervous) = True",
+                        "DES(Circus_Manager, Jon_relax) = True",
+                        "ENCOURAGE(Circus_Manager, Jon) = True"
+                    ],
+                    "effects": [
+                        "BEL(Circus_Manager, Jon_nervous) = False"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Speak(State3, State4, Reassurance, Supportive)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, Jon_practiced_hard) = True",
+                        "BEL(Circus_Manager, Jon_is_about_to_perform) = True",
+                        "DES(Circus_Manager, ENCOURAGE) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon_is_nervous) = False",
+                        "BEL(Circus_Manager, Jon_performance_successful) = True",
+                        "INTENT(Circus_Manager, CONGRATULATE) = True"
+                    ],
+                    "occ_emotion": [
+                        "Contentment"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(State4, End, Neutral, Informational)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, JonHere) = True",
+                        "BEL(Circus_Manager, EncouragementNeeded) = True",
+                        "INTENT(Circus_Manager, ENCOURAGE(Jon)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, Encouraged) = True",
+                        "BEL(Circus_Manager, EncouragedJon) = True",
+                        "BEL(Circus_Manager, EncouragementNeeded) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                }
+            }
+        },
+        "Trapeze_Coach": {
+            "knowledge_base": [
+                "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                "BEL(Trapeze_Coach, Jon_nervous) = True",
+                "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                "BEL(Trapeze_Coach, audience_will_applaud) = True/False",
+                "DES(Trapeze_Coach, Jon_performs_well) = True",
+                "DES(Trapeze_Coach, Jon_overcomes_his_nervousness) = True",
+                "DES(Trapeze_Coach, Jon_practices_with_safety_equipment) = True",
+                "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True"
+            ],
+            "intentions": {
+                "INTENT(Trapeze_Coach, make sure Jon is practicing with safety equipment) = True": {
+                    "action_plan": [
+                        "check_equipment(Trapeze_Coach, Jon, safety_equipment)",
+                        "review_safety_procedures(Trapeze_Coach, Jon)",
+                        "observe_practice(Trapeze_Coach, Jon)",
+                        "encourage_relaxation_techniques(Trapeze_Coach, Jon)",
+                        "provide_motivation(Trapeze_Coach, Jon, audience_applause)",
+                        "monitor_Jon's_anxiety(Trapeze_Coach, Jon)",
+                        "provide_positive_feedback(Trapeze_Coach, Jon)",
+                        "emphasize_importance_of_safety(Trapeze_Coach, Jon)"
+                    ]
+                },
+                "INTENT(Trapeze_Coach, make Jon overcome his nervousness) = True": {
+                    "action_plan": [
+                        "Encourage(Trapeze_Coach, Jon, message = \"You can do this!\")",
+                        "ProvideSafetyEquipment(Trapeze_Coach, Jon, equipment = \"helmet, harness, ropes\")",
+                        "BEL(Trapeze_Coach, Jon_practices_with_safety_equipment) = True",
+                        "Practice(Trapeze_Coach, Jon, duration = 2 hours)",
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "Remind(Trapeze_Coach, Jon, message = \"Trust your training!\")",
+                        "SimulateCrowd(Trapeze_Coach, Jon, number_of_audience_members = 1000)",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True/False",
+                        "WalkJonThroughPerformance(Trapeze_Coach, Jon, message = \"Remember to breathe, keep focus, and execute with confidence.\")",
+                        "WatchJonPerform(Trapeze_Coach, Jon)",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = False",
+                        "EvaluatePerformance(Trapeze_Coach, Jon, feedback = \"You did great! You overcame your nervousness and executed with confidence.\")",
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True"
+                    ]
+                },
+                "INTENT(Trapeze_Coach, make sure Jon performs well) = True": {
+                    "action_plan": [
+                        "Ensure_Safety_Equipment(Trapeze_Coach, Jon)",
+                        "Encourage_Jon(Trapeze_Coach, Jon)",
+                        "Review_Routine(Trapeze_Coach, Jon)",
+                        "Simulate_Performance(Trapeze_Coach, Jon)",
+                        "Cheer_for_Jon(Trapeze_Coach, Audience_Members)",
+                        "Watch_Performance(Trapeze_Coach, Jon, Audience_Members)",
+                        "Celebrate_Success(Trapeze_Coach, Jon, Audience_Members)"
+                    ]
+                },
+                "INTENT(Trapeze_Coach, make sure Jon and the crowd enjoy the performance) = True/False": {
+                    "action_plan": [
+                        "Remind(Trapeze_Coach, Jon, to practice with safety equipment)",
+                        "Observe(Trapeze_Coach, Jon, Trapeze_Routine)",
+                        "Provide_Feedback(Trapeze_Coach, Jon, Trapeze_Routine)",
+                        "Encourage(Trapeze_Coach, Jon, to overcome his nervousness)",
+                        "Ensure(Trapeze_Coach, Jon, has sufficient rest and nutrition)",
+                        "Ensure(Trapeze_Coach, Jon, properly warms up before the performance)",
+                        "Discuss_with(Circus_Manager, Trapeze_Coach, the importance of safety equipment)",
+                        "Ask(Circus_Manager, Audience_Members, to be supportive of Jon's performance)",
+                        "Watch(Trapeze_Coach, Jon's performance)",
+                        "Provide_Feedback(Trapeze_Coach, Jon, after the performance)",
+                        "Celebrate(Trapeze_Coach, Jon, after the successful performance)",
+                        "Assess(Trapeze_Coach, the effectiveness of the plan and make adjustments for future performances)"
+                    ]
+                },
+                "INTENT(Trapeze_Coach, make sure the audience is respectful during the performance) = True/False": {
+                    "action_plan": [
+                        "Find_Audience_Members(Circus_Manager, Audience_Members*)",
+                        "Ask_Audience_Members_To_Respect_The_Performance(Circus_Manager, Audience_Members)",
+                        "Ensure_Jon_Follows_Safety_Protocol(Trapeze_Coach, Jon)",
+                        "Encourage_Jon(Trapeze_Coach, Jon)",
+                        "Verify_Jon's_Training_Again(Trapeze_Coach, Jon)",
+                        "Start_Performance(Circus_Manager, Jon)",
+                        "Watch_Jon_Perform(Trapeze_Coach, Jon)",
+                        "Ensure_Audience_Respect_During_Performance(Circus_Manager, Audience_Members)",
+                        "End_Performance(Circus_Manager, Jon)",
+                        "Thank_Audience_For_Respecting_Performance(Circus_Manager, Audience_Members)"
+                    ]
+                }
+            },
+            "actions": {
+                "Find_Audience_Members(Circus_Manager, Audience_Members*)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, available_audience_members) = Audience_Members*"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, found_audience_members) = Audience_Members*"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ask_Audience_Members_To_Respect_The_Performance(Circus_Manager, Audience_Members)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, knows_audience_members) = True",
+                        "BEL(Circus_Manager, audience_respectful) = False"
+                    ],
+                    "effects": [
+                        "DES(Circus_Manager, audience_respectful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ensure_Jon_Follows_Safety_Protocol(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, performs_with_safety_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "fear"
+                    ],
+                    "emotion_condition": [
+                        "(Fear)"
+                    ]
+                },
+                "Encourage_Jon(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_overcomes_his_nervousness) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Encouragement"
+                    ]
+                },
+                "Verify_Jon's_Training_Again(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = False",
+                        "BEL(Trapeze_Coach, Jon_has_been_verified) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Start_Performance(Circus_Manager, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_performing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Watch_Jon_Perform(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = False",
+                        "BEL(Trapeze_Coach, Jon_trapeze_performance_successful) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Ensure_Audience_Respect_During_Performance(Circus_Manager, Audience_Members)": {
+                    "conditions": [
+                        "BEL(Circus_Manager, performance_in_progress) = True",
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True",
+                        "BEL(Audience_Member, understands_performance_etiquette) = True"
+                    ],
+                    "effects": [
+                        "BEL(Circus_Manager, audience_respects_performance) = True",
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "End_Performance(Circus_Manager, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = False",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Circus_Manager, performance_has_started) = True",
+                        "BEL(Circus_Manager, audience_is_respectful) = True",
+                        "DES(Circus_Manager, thank_audience_for_respecting_performance) = True"
+                    ],
+                    "effects": [
+                        "BEL(Circus_Manager, performance_has_ended) = True",
+                        "BEL(Jon, performance_is_over) = True",
+                        "DES(Jon, feeling_of_accomplishment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Thank_Audience_For_Respecting_Performance(Circus_Manager, Audience_Members)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Circus_Manager, performance_ended) = True",
+                        "BEL(Circus_Manager, audience_respected_performance) = True",
+                        "BEL(Circus_Manager, Audience_Members*) = True"
+                    ],
+                    "effects": [
+                        "DES(Circus_Manager, audience_feels_appreciated) = True",
+                        "DES(Audience_Members*, feels_respected) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "check_equipment(Trapeze_Coach, Jon, safety_equipment)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Jon, has_safety_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_is_using_appropriate_safety_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "review_safety_procedures(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "DES(Trapeze_Coach, Jon_practices_with_safety_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, safety_procedures_reviewed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "observe_practice(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, gains_knowledge_of_Jon's_progress) = True",
+                        "BEL(Trapeze_Coach, observes_Jon's_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "encourage_relaxation_techniques(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = False",
+                        "BEL(Trapeze_Coach, Jon_relaxed) = True"
+                    ],
+                    "occ_emotion": [
+                        "relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "provide_motivation(Trapeze_Coach, Jon, audience_applause)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "monitor_Jon's_anxiety(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_overcomes_his_nervousness) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "provide_positive_feedback(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_performance) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "emphasize_importance_of_safety(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_and_Trapeze_Coach_understand_the_importance_of_safety) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Encourage(Trapeze_Coach, Jon, message = \"You can do this!\")": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_overcomes_his_nervousness) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "ProvideSafetyEquipment(Trapeze_Coach, Jon, equipment = \"helmet, harness, ropes\")": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "DES(Trapeze_Coach, Jon_practices_with_safety_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, has_helmet) = True",
+                        "BEL(Jon, has_harness) = True",
+                        "BEL(Jon, has_ropes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Trapeze_Coach, Jon_practices_with_safety_equipment) = True": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_practices_with_safety_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Practice(Trapeze_Coach, Jon, duration = 2 hours)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_practices_with_safety_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Jon, improved_trapeze_skill) = True",
+                        "BEL(Jon, tired) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True": {
+                    "conditions": [],
+                    "effects": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Remind(Trapeze_Coach, Jon, message = \"Trust your training!\")": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_trusts_training) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "SimulateCrowd(Trapeze_Coach, Jon, number_of_audience_members = 1000)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True/False"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon) knows_the_feeling_of_being_judged) = True",
+                        "BEL(Trapeze_Coach, Jon) knows_how_to_handle_pressure) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "BEL(Trapeze_Coach, audience_will_applaud) = True/False": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True/False"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WalkJonThroughPerformance(Trapeze_Coach, Jon, message = \"Remember to breathe, keep focus, and execute with confidence.\")": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = False"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "WatchJonPerform(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_practices_with_safety_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_performs_well) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "DES(Trapeze_Coach, Jon_performs_well) = True": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_performs_well) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "BEL(Trapeze_Coach, Jon_nervous) = False": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "EvaluatePerformance(Trapeze_Coach, Jon, feedback = \"You did great! You overcame your nervousness and executed with confidence.\")": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = False",
+                        "BEL(Trapeze_Coach, Jon_practices_with_safety_equipment) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True",
+                        "BEL(Trapeze_Coach, Jon_overcomes_his_nervousness) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True",
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True"
+                    ],
+                    "effects": [
+                        "DES(Jon, enjoyed_performance) = True",
+                        "BEL(Trapeze_Coach, audience_reaction_positive) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "BEL(Trapeze_Coach, audience_will_applaud) = True": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True or BEL(Trapeze_Coach, audience_will_applaud) = False"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ensure_Safety_Equipment(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "DES(Trapeze_Coach, Jon_practices_with_safety_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_has_safety_equipment) = True",
+                        "BEL(Trapeze_Coach, Jon_is_protected) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Review_Routine(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_is_motivated) = True",
+                        "BEL(Trapeze_Coach, needs_to_refine_training) = False",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Simulate_Performance(Trapeze_Coach, Jon)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_performs_well) = True",
+                        "DES(Trapeze_Coach, Jon_overcomes_his_nervousness) = True",
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Cheer_for_Jon(Trapeze_Coach, Audience_Members)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_performance) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Watch_Performance(Trapeze_Coach, Jon, Audience_Members)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_performing) = False",
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_performance) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_performing) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Celebrate_Success(Trapeze_Coach, Jon, Audience_Members)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, Jon_performs_well) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = False"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Remind(Trapeze_Coach, Jon, to practice with safety equipment)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_practices_with_safety_equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Observe(Trapeze_Coach, Jon, Trapeze_Routine)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, observes_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, has_feedback_on_Jon_trapeze_routine) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Provide_Feedback(Trapeze_Coach, Jon, Trapeze_Routine)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Jon, performed_trapeze_practice) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, provided_feedback_to_Jon) = True",
+                        "BEL(Jon, received_feedback_on_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, improved_Jon_trapeze_routine) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Encourage(Trapeze_Coach, Jon, to overcome his nervousness)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_overcomes_his_nervousness) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ensure(Trapeze_Coach, Jon, has sufficient rest and nutrition)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_well_rested) = True",
+                        "BEL(Trapeze_Coach, Jon_ate_healthy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Ensure(Trapeze_Coach, Jon, properly warms up before the performance)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True",
+                        "DES(Trapeze_Coach, Jon_overcomes_his_nervousness) = True",
+                        "DES(Trapeze_Coach, Jon_practices_with_safety_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_is_warmed_up) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Discuss_with(Circus_Manager, Trapeze_Coach, the importance of safety equipment)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, importance_of_safety_equipment_discussed_with_Circus_Manager) = True"
+                    ],
+                    "occ_emotion": [
+                        "Concern"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Ask(Circus_Manager, Audience_Members, to be supportive of Jon's performance)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "BEL(Circus_Manager, knows_Jon) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "BEL(Trapeze_Coach, Jon_performs_well) = True"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, supportive_of_Jon_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Watch(Trapeze_Coach, Jon's performance)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Provide_Feedback(Trapeze_Coach, Jon, after the performance)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_performs_well) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = False"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Celebrate(Trapeze_Coach, Jon, after the successful performance)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = False"
+                    ],
+                    "effects": [
+                        "DES(Trapeze_Coach, Jon_and_Trapeze_Coach_achieve_successful_performance) = True",
+                        "DES(Trapeze_Coach, Jon_and_Trapeze_Coach_feel_happy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Assess(Trapeze_Coach, the effectiveness of the plan and make adjustments for future performances)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, make_adjustments_for_future_performances) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Anxiety"
+            ],
+            "speak_actions": {
+                "Speak(Start, State1, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Trapeze_Coach, make Jon overcome his nervousness) = True"
+                    ],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Start, State1, Introduction, Neutral, \"Hi there!\"",
+                        "Neutral"
+                    ]
+                },
+                "Speak(State1, State2, GoalSetting, Motivating)": {
+                    "conditions": [],
+                    "effects": [
+                        "SPEAK, make sure Jon is practicing with safety equipment",
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "SPEAK, make Jon overcome his nervousness",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "DES(Trapeze_Coach, Jon_overcomes_his_nervousness) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = False",
+                        "SPEAK, make sure Jon performs well",
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True",
+                        "SPEAK, make sure Jon and the crowd enjoy the performance",
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True",
+                        "INTENT(Trapeze_Coach, make sure Jon_overcomes_his_nervousness) = True",
+                        "INTENT(Trapeze_Coach, make sure Jon_performs_well) = True",
+                        "DES(Trapeze_Coach, Jon_and_the_crowd_enjoy_perfomance) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(State1, State2, GoalSetting, Motivating)], [State2, State3, Hope, Encouraging, \"You got this! Keep up the good work!\""
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(State2, State3, TestPerf, Challenging)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "DES(Trapeze_Coach, Jon_overcomes_his_nervousness) = True",
+                        "DES(Trapeze_Coach, Jon_practices_with_safety_equipment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(State3, State4, Feedback, Constructive)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "DES(Trapeze_Coach, Jon_overcomes_his_nervousness) = True",
+                        "INTENT(Trapeze_Coach, make Jon overcome his nervousness) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = False",
+                        "DENY(BEL(Trapeze_Coach, Jon_overcomes_his_nervousness))",
+                        "BEL(Trapeze_Coach, Jon_practices_with_safety_equipment) = True",
+                        "BEL(Trapeze_Coach, audience_will_applaud) = True/False (depending on outcome of performance)"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(State4, State1, PracticeMore, Encouraging)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "DES(Trapeze_Coach, Jon_performs_well) = True",
+                        "INTENT(Trapeze_Coach, make Jon overcome his nervousness) = True"
+                    ],
+                    "effects": [
+                        "BEL(Trapeze_Coach, Jon_nervous) = False"
+                    ],
+                    "occ_emotion": [
+                        "State1, State4, Hope, Encouraging, \"You did a great job! Keep practicing and I'm confident you'll do even better next time!\"",
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Pride, State4, PracticeMore, Encouraging, \"I'm really proud of the improvements you've made. Let's practice more.\""
+                    ]
+                },
+                "Speak(State1, End, Closing, Neutral)": {
+                    "conditions": [
+                        "BEL(Trapeze_Coach, knows_Jon_trapeze_routine) = True",
+                        "BEL(Trapeze_Coach, Jon_nervous) = True",
+                        "BEL(Trapeze_Coach, circus_is_a_high_risk_activity) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Trapeze_Coach, make Jon overcome his nervousness) = True",
+                        "INTENT(Trapeze_Coach, make sure Jon is practicing with safety equipment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Neutral, End, Closing, Neutral",
+                        "Neutral, End, Gratification, Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Hope",
+                        "Encourage(Trapeze_Coach, Jon, message = \"You can do this!\")"
+                    ]
+                }
+            }
+        },
+        "Audience_Members": {
+            "knowledge_base": [
+                "BEL(Audience_Members, enjoys_circus_acts) = True",
+                "BEL(Audience_Members, expects_high_quality_performance) = True",
+                "BEL(Audience_Members, paid_for_ticket) = True",
+                "DES(Audience_Members, be_entertained)",
+                "DES(Audience_Members, applaud_performers)",
+                "DES(Audience_Members, post_about_performance_on_social_media)"
+            ],
+            "intentions": {
+                "INTENT(Audience_Members, enjoy_circus_act) = True": {
+                    "action_plan": [
+                        "Take_seat(Audience_Members, Circus_Tent, Seat_Number)",
+                        "Observe_Performers(Audience_Members, Circus_Ring, Jon)",
+                        "Assess_Performers(Audience_Members, Circus_Ring, Jon), DES(Audience_Members, judge_performance)",
+                        "Enjoy_Performance(Audience_Members, Circus_Ring, Jon), DES(Audience_Members, be_entertained)",
+                        "Applaud_Performance(Audience_Members, Circus_Ring, Jon), DES(Audience_Members, applaud_performers)",
+                        "Take_photo(Audience_Members, Jon), DES(Audience_Members, post_about_performance_on_social_media)"
+                    ]
+                },
+                "INTENT(Audience_Members, applaud_performer) = True": {
+                    "action_plan": [
+                        "Enter_Venue(Audience_Members)",
+                        "Sit_In_Assigned_Seat(Audience_Members)",
+                        "Look_Foward_To_Show(Audience_Members)",
+                        "Pay_Attention_To_Performance(Audience_Members, Jon)",
+                        "Observe_Jon_Perform(Audience_Members, Jon)",
+                        "Perceive_Performance(Audience_Members, Jon)",
+                        "Evaluate_Performance(Audience_Members, Jon)",
+                        "Experience_Entertainment(Audience_Members)",
+                        "Applaud_Performer(Audience_Members, Jon)",
+                        "Post_On_Social_Media(Audience_Members, Jon_Performance)"
+                    ]
+                },
+                "INTENT(Audience_Members, post_on_social_media, performance) = True": {
+                    "action_plan": [
+                        "INTENT(Audience_Members, post_on_social_media, performance)",
+                        "Watch_Performance(Audience_Members, Jon)",
+                        "Observe_Overall_Performance(Audience_Members, Circus_Manager)",
+                        "Make_Attentive_Notes(Audience_Members, performance)",
+                        "Leave_Circus_Tent(Audience_Members)",
+                        "Post_On_Social_Media(Audience_Members, performance)"
+                    ]
+                }
+            },
+            "actions": {
+                "INTENT(Audience_Members, post_on_social_media, performance)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True",
+                        "BEL(Audience_Members, enjoys_circus_acts) = True",
+                        "BEL(Audience_Members, expects_high_quality_performance) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, post_about_performance_on_social_media) = True",
+                        "BEL(Audience_Members, watched_performance, Jon) = True",
+                        "BEL(Audience_Members, observed_overall_performance, Circus_Manager) = True",
+                        "BEL(Audience_Members, made_attentive_notes, performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Watch_Performance(Audience_Members, Jon)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True",
+                        "BEL(Audience_Members, expects_high_quality_performance) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Enjoyment"
+                    ],
+                    "emotion_condition": [
+                        "Anticipation"
+                    ]
+                },
+                "Observe_Overall_Performance(Audience_Members, Circus_Manager)": {
+                    "conditions": [
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, impressed_by_performance) = True",
+                        "BEL(Audience_Members, interested_in_future_circus_events) = True"
+                    ],
+                    "occ_emotion": [
+                        "joy"
+                    ],
+                    "emotion_condition": [
+                        "curiosity"
+                    ]
+                },
+                "Make_Attentive_Notes(Audience_Members, performance)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True",
+                        "BEL(Audience_Members, observes_performance) = True"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, attentive_notes_taken) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Leave_Circus_Tent(Audience_Members)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, paid_for_ticket) = False",
+                        "BEL(Audience_Members, enjoys_circus_acts) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Post_On_Social_Media(Audience_Members, performance)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True",
+                        "BEL(Audience_Members, expects_high_quality_performance) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, share_performance_on_social_media) = True",
+                        "BEL(Audience_Members, shared_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Enjoyment"
+                    ]
+                },
+                "Take_seat(Audience_Members, Circus_Tent, Seat_Number)": {
+                    "conditions": [
+                        "BEL(Circus_Tent, has_available_seats) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, occupies_seat_[Seat_Number]) = True",
+                        "BEL(Circus_Tent, has_available_seats) = False",
+                        "BEL(Circus_Tent, has_occupied_seat_[Seat_Number]) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Excitement"
+                    ]
+                },
+                "Observe_Performers(Audience_Members, Circus_Ring, Jon)": {
+                    "conditions": [
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, observed_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Enjoyment"
+                    ]
+                },
+                "Assess_Performers(Audience_Members, Circus_Ring, Jon), DES(Audience_Members, judge_performance)": {
+                    "conditions": [
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, judge_performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Evaluation"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Enjoy_Performance(Audience_Members, Circus_Ring, Jon), DES(Audience_Members, be_entertained)": {
+                    "conditions": [
+                        "BEL(Audience_Members, enjoys_circus_acts) = True",
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, be_entertained) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Applaud_Performance(Audience_Members, Circus_Ring, Jon), DES(Audience_Members, applaud_performers)": {
+                    "conditions": [
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True",
+                        "BEL(Audience_Members, observes_performance) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, applauded_performers) = True",
+                        "BEL(Audience_Members, entertained) = True"
+                    ],
+                    "occ_emotion": [
+                        "admiration"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Take_photo(Audience_Members, Jon), DES(Audience_Members, post_about_performance_on_social_media)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True",
+                        "BEL(Audience_Members, enjoys_circus_acts) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, post_about_performance_on_social_media) = True",
+                        "BEL(Audience_Members, saw_performance) = Jon",
+                        "BEL(Audience_Members, took_photo_with) = Jon"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Enter_Venue(Audience_Members)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, present_in_venue) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Excitement"
+                    ]
+                },
+                "Sit_In_Assigned_Seat(Audience_Members)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True",
+                        "BEL(Audience_Members, assigned_seat) = False"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, assigned_seat) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Excitement"
+                    ]
+                },
+                "Look_Foward_To_Show(Audience_Members)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, feel_excited) = True",
+                        "BEL(Audience_Members, has_positive_expectations) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Pay_Attention_To_Performance(Audience_Members, Jon)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True",
+                        "BEL(Audience_Members, expects_high_quality_performance) = True"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, paying_attention_to_performance(Jon)) = True",
+                        "DES(Audience_Members, experience_entertainment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Enjoyment"
+                    ],
+                    "emotion_condition": [
+                        "Interest"
+                    ]
+                },
+                "Observe_Jon_Perform(Audience_Members, Jon)": {
+                    "conditions": [
+                        "BEL(Jon, knows_trapeze_routine) = True",
+                        "BEL(Audience_Members, observes_Jon) = False"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, observes_Jon) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Enjoyment"
+                    ]
+                },
+                "Perceive_Performance(Audience_Members, Jon)": {
+                    "conditions": [
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "BEL(Audience_Members, perceives_performance)",
+                        "BEL(Audience_Members, perceives_Jon_performance)",
+                        "DES(Audience_Members, be_entertained) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Evaluation"
+                    ]
+                },
+                "Evaluate_Performance(Audience_Members, Jon)": {
+                    "conditions": [
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, be_entertained) = True",
+                        "BEL(Audience_Members, enjoys_circus_acts) = True",
+                        "BEL(Jon, performs_act_flawlessly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Experience_Entertainment(Audience_Members)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, be_entertained) = True",
+                        "BEL(Audience_Members, enjoyed_circus_acts) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Enjoyment"
+                    ]
+                },
+                "Applaud_Performer(Audience_Members, Jon)": {
+                    "conditions": [
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True",
+                        "BEL(Audience_Members, enjoys_circus_acts) = True",
+                        "Perceive_Performance(Audience_Members, Jon) = True",
+                        "Evaluate_Performance(Audience_Members, Jon) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, be_entertained) = True",
+                        "DES(Audience_Members, applaud_performers) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ],
+                    "emotion_condition": [
+                        "Admiration"
+                    ]
+                },
+                "Post_On_Social_Media(Audience_Members, Jon_Performance)": {
+                    "conditions": [
+                        "BEL(Audience_Members, paid_for_ticket) = True",
+                        "INTENT(Audience_Members, applaud_performer) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, increase_social_media_presence)",
+                        "BEL(Audience_Members, posted_about_Jon_Performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "nervous"
+            ],
+            "speak_actions": {
+                "Speak(Start, State1, Introduction, Neutral)": {
+                    "conditions": [
+                        "BEL(Audience_Members, enjoys_circus_acts) = True",
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Audience_Members, applaud_performer) = True",
+                        "DES(Audience_Members, be_entertained) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(Start, State1, Introduction, Neutral)], [Assess_Performers(Audience_Members, Circus_Ring, Jon), DES(Audience_Members, judge_performance), Fear"
+                    ],
+                    "emotion_condition": [
+                        "Start, State1, Introduction, Neutral, Fear"
+                    ]
+                },
+                "Speak(State1, State2, Small Talk, Friendly)": {
+                    "conditions": [
+                        "BEL(Audience_Members, enjoys_circus_acts) = True",
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Speak(State1, State2, Small Talk, Friendly), - , - , - , Joy"
+                    ],
+                    "emotion_condition": [
+                        "Start, State1, None, None, None",
+                        "State2, State3, Happy-for, None, None",
+                        "State4, State5, Hope, None, None",
+                        "State5, End, Joy, None, None"
+                    ]
+                },
+                "Speak(State2, State3, Compliment, Admiring)": {
+                    "conditions": [
+                        "BEL(Audience_Members, enjoys_circus_acts) = True",
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Audience_Members, enjoy_circus_act) = True",
+                        "DES(Audience_Members, applaud_performers) = True",
+                        "DES(Audience_Members, post_about_performance_on_social_media) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(State2, State3, Compliment, Admiring)], [State3, State3, Joy, Happy, \"Thank you. I'm glad you enjoyed it!\""
+                    ],
+                    "emotion_condition": [
+                        "DES(Audience_Members, be_entertained), Speak(State2, State3, Compliment, Admiring), Admiration, Neutral, \"That was a fantastic performance!\""
+                    ]
+                },
+                "Speak(State3, State4, Engagement, Supportive)": {
+                    "conditions": [
+                        "BEL(Audience_Members, enjoys_circus_acts) = True",
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Audience_Members, enjoy_circus_act) = True",
+                        "INTENT(Audience_Members, applaud_performer) = True",
+                        "INTENT(Audience_Members, post_on_social_media, performance) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(State3, State4, Engagement, Supportive)], [Joy"
+                    ],
+                    "emotion_condition": [
+                        "Speak, State4, Engagement, Supportive, Hope",
+                        "Evaluate_Performance, N/A, Judgment, Critique, Disappointment",
+                        "Applaud_Performance, N/A, Appreciation, Approval, Gratification",
+                        "Post_On_Social_Media, N/A, Communication, Informative, Joy"
+                    ]
+                },
+                "Speak(State4, End, Ending, Neutral)": {
+                    "conditions": [
+                        "BEL(Audience_Members, enjoys_circus_acts) = True",
+                        "BEL(Audience_Members, expects_high_quality_performance) = True",
+                        "BEL(Audience_Members, paid_for_ticket) = True"
+                    ],
+                    "effects": [
+                        "DES(Audience_Members, be_entertained) = True",
+                        "DES(Audience_Members, applaud_performers) = True",
+                        "DES(Audience_Members, post_about_performance_on_social_media) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Joy",
+                        "Joy",
+                        "Gratitude",
+                        "Happiness",
+                        "Enjoymen",
+                        "Admiration",
+                        "Interest",
+                        "Admiration",
+                        "Excitement",
+                        "Hope",
+                        "Interest",
+                        "Fascination",
+                        "Enjoyment",
+                        "Interest"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, State1, Introduction, Neutral, \"Hi there!\">",
+        "<State1, State2, Small Talk, Friendly, \"What brings you here today?\">",
+        "<State2, State3, Concern, Worried, \"Are you nervous about your performance?\">",
+        "<State3, State4, Reassurance, Supportive, \"Don't worry, you've practiced hard and are ready for this!\">",
+        "<State4, State5, Reassurance, Supportive, \"Just relax and do your best!\">",
+        "<State5, End, Closing, Neutral, \"Good luck and break a leg!\">"
+    ]
+}

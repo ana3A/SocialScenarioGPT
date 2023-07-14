@@ -1,0 +1,2414 @@
+{
+    "scenario_name": "test_Dishes",
+    "scenario_description": "A couple of weeks ago I got sick. At the same time my husband started working 6-day weeks. The dishes just piled up and piled up. Now I'm feeling better and his hours are fewer. But the kitchen is so scary we don't have the will to catch up.",
+    "last_ended": "end",
+    "agents": {
+        "sick_person": {
+            "knowledge_base": [
+                "BEL(sick_person, is_sick) = True",
+                "BEL(sick_person, recovered) = False",
+                "DES(sick_person, clean_kitchen) = True",
+                "BEL(kitchen, dirty) = True",
+                "BEL(sick_person, scared_of_kitchen) = True",
+                "BEL(husband, working_many_hours) = True"
+            ],
+            "intentions": {
+                "INTENT(sick_person, clean_kitchen)=True": {
+                    "action_plan": [
+                        "Retrieve(sick_person, gloves, cleaning_supplies)",
+                        "Assess(sick_person, kitchen)",
+                        "Break_down_task(sick_person, clean_kitchen, washing, wiping, organizing)",
+                        "Prioritize_tasks(sick_person, clean_kitchen, washing, wiping, organizing)",
+                        "Start_task(sick_person, washing)",
+                        "Assess_progress(sick_person, clean_kitchen)",
+                        "Continue_task(sick_person, wiping)",
+                        "Assess_progress(sick_person, clean_kitchen)",
+                        "Complete_task(sick_person, organizing)",
+                        "Assess_outcome(sick_person, clean_kitchen)",
+                        "Reflect(sick_person, actions_taken)",
+                        "Reward(sick_person, self)"
+                    ]
+                }
+            },
+            "actions": {
+                "Retrieve(sick_person, gloves, cleaning_supplies)": {
+                    "conditions": [
+                        "BEL(sick_person, recovered) = False"
+                    ],
+                    "effects": [
+                        "BEL(sick_person, has_gloves) = True",
+                        "BEL(sick_person, has_cleaning_supplies) = True",
+                        "BEL(sick_person, scared_of_kitchen) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Assess(sick_person, kitchen)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty) = True"
+                    ],
+                    "effects": [
+                        "BEL(sick_person, scared_of_kitchen) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Break_down_task(sick_person, clean_kitchen, washing, wiping, organizing)": {
+                    "conditions": [
+                        "BEL(sick_person, scared_of_kitchen) = True",
+                        "BEL(sick_person, clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "DES(sick_person, washing) = True",
+                        "DES(sick_person, wiping) = True",
+                        "DES(sick_person, organizing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Prioritize_tasks(sick_person, clean_kitchen, washing, wiping, organizing)": {
+                    "conditions": [
+                        "BEL(sick_person, clean_kitchen) = True",
+                        "BEL(kitchen, dirty) = True",
+                        "DES(sick_person, clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "DES(sick_person, washing) = True",
+                        "DES(sick_person, wiping) = True",
+                        "DES(sick_person, organizing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Start_task(sick_person, washing)": {
+                    "conditions": [
+                        "INTENT(sick_person, clean_kitchen) = True",
+                        "BEL(sick_person, scared_of_kitchen) = False",
+                        "BEL(kitchen, dirty) = True"
+                    ],
+                    "effects": [
+                        "BEL(sick_person, doing_task) = washing",
+                        "BEL(sick_person, energy_level) = energy_level - 2",
+                        "BEL(kitchen, dirt_level) = dirt_level - 2"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Assess_progress(sick_person, clean_kitchen)": {
+                    "conditions": [
+                        "BEL(sick_person, recovered) = True",
+                        "BEL(sick_person, scared_of_kitchen) = True",
+                        "BEL(kitchen, dirty) = True"
+                    ],
+                    "effects": [
+                        "BEL(sick_person, progress_made) = True",
+                        "BEL(sick_person, progress_made) = False",
+                        "BEL(kitchen, dirty) = False",
+                        "DES(sick_person, clean_kitchen) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Continue_task(sick_person, wiping)": {
+                    "conditions": [
+                        "BEL(sick_person, recovered) = True",
+                        "BEL(sick_person, scared_of_kitchen) = False",
+                        "BEL(kitchen, dirty) = True",
+                        "INTENT(sick_person, clean_kitchen) = True",
+                        "INTENT(sick_person, washing) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty) = False",
+                        "BEL(kitchen, clean) = True",
+                        "INTENT(sick_person, wiping) = True",
+                        "INTENT(sick_person, organizing) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Complete_task(sick_person, organizing)": {
+                    "conditions": [
+                        "BEL(sick_person, clean_kitchen)=True",
+                        "INTENT(sick_person, complete_task_organizing)=True"
+                    ],
+                    "effects": [
+                        "BEL(sick_person, kitchen_organized)=True",
+                        "BEL(kitchen, dirty)=False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Assess_outcome(sick_person, clean_kitchen)": {
+                    "conditions": [
+                        "BEL(sick_person, is_sick) = True",
+                        "BEL(sick_person, recovered) = True",
+                        "BEL(kitchen, dirty) = False",
+                        "BEL(sick_person, scared_of_kitchen) = False",
+                        "DES(sick_person, clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(sick_person, recovered) = True",
+                        "BEL(kitchen, dirty) = False",
+                        "DES(sick_person, clean_kitchen) = False",
+                        "BEL(sick_person, scared_of_kitchen) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Reflect(sick_person, actions_taken)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Reward(sick_person, self)": {
+                    "conditions": [
+                        "INTENT(sick_person, clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "DES(sick_person, sense_of_accomplishment) = True",
+                        "BEL(sick_person, motivation) += 1"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, 1, Introduce, Neutral)": {
+                    "conditions": [
+                        "INTENT(sick_person, clean_kitchen) = True",
+                        "BEL(kitchen, dirty) = True",
+                        "BEL(sick_person, scared_of_kitchen) = True",
+                        "BEL(sick_person, recovered) = True",
+                        "BEL(husband, working_many_hours) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Speak(1, 2, Introduce, Neutral)": {
+                    "conditions": [
+                        "BEL(sick_person, scared_of_kitchen) = True",
+                        "DES(sick_person, clean_kitchen) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(2, 3, Problem Raise, Neutral)": {
+                    "conditions": [
+                        "BEL(sick_person, recovered) = False",
+                        "DES(sick_person, clean_kitchen) = True",
+                        "BEL(kitchen, dirty) = True",
+                        "BEL(sick_person, scared_of_kitchen) = True",
+                        "BEL(husband, working_many_hours) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Speak(5, 6, Option Explore, Neutral)": {
+                    "conditions": [
+                        "BEL(sick_person, scared_of_kitchen) = True",
+                        "DES(sick_person, clean_kitchen) = True",
+                        "INTENT(sick_person, clean_kitchen) = False"
+                    ],
+                    "effects": [
+                        "INTENT(sick_person, clean_kitchen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        ""
+                    ]
+                },
+                "Speak(6, 7, Option Evaluate, Neutral)": {
+                    "conditions": [
+                        "BEL(sick_person, is_sick) = True",
+                        "DES(sick_person, clean_kitchen) = True",
+                        "BEL(kitchen, dirty) = True",
+                        "BEL(sick_person, scared_of_kitchen) = True",
+                        "BEL(husband, working_many_hours) = True"
+                    ],
+                    "effects": [
+                        "INTENT(sick_person, clean_kitchen) = True",
+                        "BEL(sick_person, recovered) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "]Resentment["
+                    ]
+                },
+                "Speak(9, 10, Option Agree, Neutral)": {
+                    "conditions": [
+                        "BEL(sick_person, scared_of_kitchen) = True",
+                        "BEL(sick_person, recovered) = False",
+                        "DES(sick_person, clean_kitchen) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Fear",
+                        "Hope",
+                        "Joy",
+                        "Joy",
+                        "Satisfaction",
+                        "Gratification",
+                        "Pride",
+                        "Gratification"
+                    ]
+                },
+                "Speak(10, End, Gratitude, Grateful)": {
+                    "conditions": [
+                        "BEL(sick_person, is_sick) = True",
+                        "BEL(sick_person, recovered) = False",
+                        "DES(sick_person, clean_kitchen) = True",
+                        "BEL(kitchen, dirty) = True",
+                        "BEL(sick_person, scared_of_kitchen) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        },
+        "husband": {
+            "knowledge_base": [
+                "BEL(husband,has_worked_6_day_week) = True",
+                "BEL(husband,has_fewer_work_hours) = True",
+                "BEL(husband,is_aware_of_dirty_kitchen) = True",
+                "DES(husband,wants_clean_kitchen) = True",
+                "DES(husband,wants_to_help_wife) = True"
+            ],
+            "intentions": {
+                "INTENT(husband, clean_kitchen) = True": {
+                    "action_plan": [
+                        "Look(Agent(husband),Target(kitchen))",
+                        "Communicate(Agent(husband), Target(wife), \"Let's clean the kitchen together\")",
+                        "Agree(Agent(wife), Target(husband), \"Yes, let's do it\")",
+                        "Divide(Agent(husband), Target(kitchen), \"I will wash the dishes and wipe counters, you can sweep and mop the floor\")",
+                        "Execute(Agent(husband), Target(kitchen), \"wash dishes and wipe counters\")",
+                        "Execute(Agent(wife), Target(kitchen), \"sweep and mop floor\")",
+                        "Evaluate(Agent(husband), Target(kitchen))",
+                        "Communicate(Agent(husband), Target(wife), \"Nice job, the kitchen looks great\")"
+                    ]
+                },
+                "INTENT(husband, help_wife_clean_kitchen) = True": {
+                    "action_plan": [
+                        "RetrieveCleaningSupplies(husband, kitchen)",
+                        "RemoveTrash(husband, kitchen)",
+                        "WipeDownCountertops(husband, kitchen)",
+                        "WashDishes(husband, sink)",
+                        "SweepFloor(husband, kitchen)",
+                        "MopFloor(husband, kitchen)",
+                        "CleanAppliances(husband, kitchen)",
+                        "PutAwayCleaningSupplies(husband, storage)"
+                    ]
+                }
+            },
+            "actions": {
+                "RetrieveCleaningSupplies(husband, kitchen)": {
+                    "conditions": [
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband,has_cleaning_supplies) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "RemoveTrash(husband, kitchen)": {
+                    "conditions": [
+                        "BEL(husband, is_aware_of_dirty_kitchen) = True",
+                        "BEL(husband, has_fewer_work_hours) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, has_trash) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "WipeDownCountertops(husband, kitchen)": {
+                    "conditions": [
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True",
+                        "BEL(husband,has_worked_6_day_week) = True",
+                        "BEL(husband,has_fewer_work_hours) = True",
+                        "DES(husband,wants_clean_kitchen) = True",
+                        "DES(husband,wants_to_help_wife) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband,kitchen_countertops_are_clean) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "WashDishes(husband, sink)": {
+                    "conditions": [
+                        "BEL(husband, is_aware_of_dirty_kitchen) = True",
+                        "BEL(husband, has_fewer_work_hours) = True",
+                        "BEL(husband, has_worked_6_day_week) = True",
+                        "DES(husband, wants_clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband, is_aware_of_dirty_kitchen) = False",
+                        "BEL(husband, kitchen_is_clean) = True",
+                        "DES(husband, wants_clean_kitchen) = False",
+                        "DES(husband, feels_good_about_helping_wife) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "SweepFloor(husband, kitchen)": {
+                    "conditions": [
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True",
+                        "BEL(husband,has_fewer_work_hours) = True",
+                        "BEL(husband,has_worked_6_day_week) = True",
+                        "DES(husband,wants_clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband,kitchen_is_swept) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "MopFloor(husband, kitchen)": {
+                    "conditions": [
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True",
+                        "BEL(husband,has_fewer_work_hours) = True",
+                        "BEL(husband,has_worked_6_day_week) = True",
+                        "DES(husband,wants_clean_kitchen) = True",
+                        "INTENT(husband, help_wife_clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband,kitchen_is_clean) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "CleanAppliances(husband, kitchen)": {
+                    "conditions": [
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True",
+                        "BEL(husband,has_worked_6_day_week) = True",
+                        "BEL(husband,has_fewer_work_hours) = True",
+                        "DES(husband,wants_clean_kitchen) = True",
+                        "DES(husband,wants_to_help_wife) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband,appliances_are_clean) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "PutAwayCleaningSupplies(husband, storage)": {
+                    "conditions": [
+                        "DES(husband,wants_clean_kitchen) = True",
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband,is_cooking_supplies_put_away) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Look(Agent(husband),Target(kitchen))": {
+                    "conditions": [
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Communicate(Agent(husband), Target(wife), \"Let's clean the kitchen together\")": {
+                    "conditions": [
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True",
+                        "DES(husband,wants_clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband,communicated_wife_clean_kitchen) = True",
+                        "BEL(wife,communicated_husband_clean_kitchen) = True",
+                        "DES(wife,wants_clean_kitchen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Agree(Agent(wife), Target(husband), \"Yes, let's do it\")": {
+                    "conditions": [
+                        "BEL(wife,is_available) = True",
+                        "DES(wife,wants_clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband,kitchen_cleaning_agreement) = True",
+                        "BEL(wife,kitchen_cleaning_agreement) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Divide(Agent(husband), Target(kitchen), \"I will wash the dishes and wipe counters, you can sweep and mop the floor\")": {
+                    "conditions": [
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True",
+                        "DES(husband,wants_clean_kitchen) = True",
+                        "DES(husband,wants_to_help_wife) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband,currently_washing_dishes) = True",
+                        "BEL(husband,currently_wiping_counters) = True",
+                        "BEL(wife,currently_sweeping_floor) = True",
+                        "BEL(wife,currently_mopping_floor) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Execute(Agent(husband), Target(kitchen), \"wash dishes and wipe counters\")": {
+                    "conditions": [
+                        "BEL(husband, has_worked_6_day_week) = True",
+                        "BEL(husband, has_fewer_work_hours) = True",
+                        "BEL(husband, is_aware_of_dirty_kitchen) = True",
+                        "DES(husband, wants_clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "BEL(husband, has_washed_dishes) = True",
+                        "BEL(husband, has_wiped_counters) = True",
+                        "DES(husband, wants_clean_kitchen) = False",
+                        "BEL(husband, has_cleaned_kitchen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Execute(Agent(wife), Target(kitchen), \"sweep and mop floor\")": {
+                    "conditions": [
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True",
+                        "BEL(husband,has_worked_6_day_week) = True",
+                        "BEL(husband,has_fewer_work_hours) = True",
+                        "DES(husband,wants_clean_kitchen) = True",
+                        "DES(husband,wants_to_help_wife) = True"
+                    ],
+                    "effects": [
+                        "BEL(wife,has_cleaned_kitchen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "Evaluate(Agent(husband), Target(kitchen))": {
+                    "conditions": [
+                        "BEL(husband, is_aware_of_dirty_kitchen) = True",
+                        "INTENT(husband, clean_kitchen) = True",
+                        "Execute(Agent(husband), Target(kitchen), \"wash dishes and wipe counters\") = True"
+                    ],
+                    "effects": [
+                        "DES(husband, wants_clean_kitchen) = False",
+                        "BEL(husband, kitchen_clean) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Communicate(Agent(husband), Target(wife), \"Nice job, the kitchen looks great\")": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, 1, Introduce, Neutral)": {
+                    "conditions": [
+                        "BEL(husband, is_aware_of_dirty_kitchen) = True",
+                        "DES(husband, wants_clean_kitchen) = True",
+                        "DES(husband, wants_to_help_wife) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": []
+                },
+                "Speak(1, 2, Introduce, Neutral)": {
+                    "conditions": [
+                        "BEL(husband,has_worked_6_day_week)",
+                        "BEL(husband,has_fewer_work_hours)",
+                        "BEL(husband,is_aware_of_dirty_kitchen)",
+                        "DES(husband,wants_clean_kitchen)",
+                        "DES(husband,wants_to_help_wife)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope",
+                        "Joy",
+                        "Satisfaction",
+                        "Satisfaction",
+                        "Satisfaction",
+                        "Satisfaction",
+                        "Gratitude"
+                    ]
+                },
+                "Speak(2, 3, Problem Raise, Neutral)": {
+                    "conditions": [
+                        "BEL(husband, has_worked_6_day_week) = True",
+                        "BEL(husband, has_fewer_work_hours) = True",
+                        "BEL(husband, is_aware_of_dirty_kitchen) = True",
+                        "DES(husband, wants_clean_kitchen) = True",
+                        "DES(husband, wants_to_help_wife) = True",
+                        "INTENT(husband, clean_kitchen) = False",
+                        "INTENT(husband, help_wife_clean_kitchen) = False"
+                    ],
+                    "effects": [
+                        "INTENT(husband, clean_kitchen) = True",
+                        "INTENT(husband, help_wife_clean_kitchen) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Speak(3, 4, Problem Clarify, Neutral)": {
+                    "conditions": [
+                        "BEL(husband, is_aware_of_dirty_kitchen) = True",
+                        "DES(husband, wants_clean_kitchen) = True",
+                        "DES(husband, wants_to_help_wife) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(4, 5, Problem Explain, Neutral)": {
+                    "conditions": [
+                        "BEL(husband, is_aware_of_dirty_kitchen) = True",
+                        "DES(husband, wants_clean_kitchen) = True",
+                        "DES(husband, wants_to_help_wife) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Embarrassment"
+                    ]
+                },
+                "Speak(6, 7, Option Evaluate, Neutral)": {
+                    "conditions": [
+                        "BEL(husband,has_fewer_work_hours) = True",
+                        "BEL(husband,is_aware_of_dirty_kitchen) = True",
+                        "DES(husband,wants_clean_kitchen) = True"
+                    ],
+                    "effects": [
+                        "INTENT(husband,clean_kitchen) = True",
+                        "INTENT(husband,help_wife_clean_kitchen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "hope",
+                        "satisfaction",
+                        "gratitude"
+                    ]
+                },
+                "Speak(8, 9, Option Evaluate, Neutral)": {
+                    "conditions": [
+                        "BEL(husband, has_fewer_work_hours) = True",
+                        "BEL(husband, is_aware_of_dirty_kitchen) = True",
+                        "DES(husband, wants_clean_kitchen) = True",
+                        "DES(husband, wants_to_help_wife) = True"
+                    ],
+                    "effects": [
+                        "INTENT(husband, clean_kitchen) = True",
+                        "INTENT(husband, help_wife_clean_kitchen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope",
+                        "Satisfaction",
+                        "Gratitude",
+                        "Relief"
+                    ]
+                }
+            }
+        },
+        "kitchen": {
+            "knowledge_base": [
+                "BEL(kitchen, dirty_dishes) = True",
+                "BEL(kitchen, scary) = True",
+                "DES(kitchen, cleaned) = True",
+                "DES(kitchen, organized) = True",
+                "DES(kitchen, accessible) = True"
+            ],
+            "intentions": {
+                "INTENT(kitchen, clean_dishes) = True": {
+                    "action_plan": [
+                        "Check(Agent, kitchen, dirty_dishes)",
+                        "Analyze(Agent, kitchen, scary)",
+                        "Reason(Agent, kitchen, dirty_dishes, scary)",
+                        "Plan(Agent, kitchen, clean_dishes)",
+                        "Search(Agent, kitchen, dish_soap)",
+                        "Acquire(Agent, kitchen, dish_soap)",
+                        "Search(Agent, kitchen, sponge)",
+                        "Acquire(Agent, kitchen, sponge)",
+                        "Fill(Agent, kitchen, sink, water)",
+                        "Scrub(Agent, kitchen, dirty_dishes, dish_soap, sponge)",
+                        "Rinse(Agent, kitchen, clean_dishes, water)",
+                        "Dry(Agent, kitchen, clean_dishes)",
+                        "Organize(Agent, kitchen, clean_dishes)",
+                        "Clean(Agent, kitchen, counter)",
+                        "Sweep(Agent, kitchen, floor)",
+                        "Mop(Agent, kitchen, floor)",
+                        "Evaluate(Agent, kitchen, clean_dishes)",
+                        "Desire(Agent, kitchen, organized)",
+                        "Plan(Agent, kitchen, organize)"
+                    ]
+                },
+                "INTENT(kitchen, organize_kitchen) = True": {
+                    "action_plan": [
+                        "InspectKitchen(AGENT, kitchen)",
+                        "EmptySink(AGENT, sink)",
+                        "SortDishes(AGENT, dishes_area)",
+                        "WashDishes(AGENT, dirty_dishes)",
+                        "DryDishes(AGENT, dishes_pile)",
+                        "CleanCounters(AGENT, counters)",
+                        "OrganizePantry(AGENT, pantry)",
+                        "SweepFloor(AGENT, floor)",
+                        "MopFloor(AGENT, floor)",
+                        "AdmireKitchen(AGENT, kitchen)"
+                    ]
+                },
+                "INTENT(kitchen, make_accessible) = True": {
+                    "action_plan": [
+                        "Clean(Agent, kitchen, dirty_dishes)",
+                        "Organize(Agent, kitchen)",
+                        "Sweep(Agent, kitchen)",
+                        "Mop(Agent, kitchen)",
+                        "Trash(Agent, kitchen)",
+                        "Disinfect(Agent, kitchen)",
+                        "Decorate(Agent, kitchen)"
+                    ]
+                }
+            },
+            "actions": {
+                "Clean(Agent, kitchen, dirty_dishes)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Organize(Agent, kitchen)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(kitchen, scary) = True",
+                        "BEL(kitchen, organized) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Desire(Agent, kitchen, organized)",
+                        "Hope"
+                    ]
+                },
+                "Sweep(Agent, kitchen)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Displeased about"
+                    ]
+                },
+                "Mop(Agent, kitchen)": {
+                    "conditions": [
+                        "BEL(kitchen, scary) = False",
+                        "BEL(kitchen, dirty_dishes) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, cleaned) = True",
+                        "BEL(kitchen, scary) = False",
+                        "DES(kitchen, accessible) = True",
+                        "DES(kitchen, organized) = True",
+                        "DES(kitchen, cleaned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Trash(Agent, kitchen)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "BEL(kitchen, organized) = False",
+                        "BEL(kitchen, scary) = True",
+                        "DES(kitchen, cleaned) = True",
+                        "DES(kitchen, organized) = True",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Disinfect(Agent, kitchen)": {
+                    "conditions": [
+                        "BEL(kitchen, cleaned) = True",
+                        "BEL(kitchen, disinfectant_available) = True",
+                        "BEL(kitchen, dirty_dishes) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, disinfected) = True",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Discomfort"
+                    ]
+                },
+                "Decorate(Agent, kitchen)": {
+                    "conditions": [
+                        "BEL(kitchen, cleaned) = True",
+                        "BEL(kitchen, organized) = True",
+                        "BEL(kitchen, disinfected) = True",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, decorated) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Pride"
+                    ]
+                },
+                "Check(Agent, kitchen, dirty_dishes)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Analyze(Agent, kitchen, scary)": {
+                    "conditions": [
+                        "BEL(kitchen, scary) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, organization_needed) = True",
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Reason(Agent, kitchen, dirty_dishes, scary)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(kitchen, scary) = True"
+                    ],
+                    "effects": [
+                        "DES(kitchen, cleaned) = True",
+                        "DES(kitchen, organized) = True",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Plan(Agent, kitchen, clean_dishes)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "DES(kitchen, cleaned) = False"
+                    ],
+                    "effects": [
+                        "INTENT(kitchen, clean_dishes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Search(Agent, kitchen, dish_soap)": {
+                    "conditions": [
+                        "BEL(kitchen, dish_soap) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dish_soap) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Acquire(Agent, kitchen, dish_soap)": {
+                    "conditions": [
+                        "BEL(kitchen, accessible) = True",
+                        "DES(kitchen, cleaned) = False",
+                        "BEL(kitchen, dish_soap) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dish_soap) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Search(Agent, kitchen, sponge)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(kitchen, scary) = False",
+                        "BEL(kitchen, sponge) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, sponge) = True",
+                        "DES(kitchen, clean_dishes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Acquire(Agent, kitchen, sponge)": {
+                    "conditions": [
+                        "BEL(kitchen, sponge_available) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, sponge_available) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Fill(Agent, kitchen, sink, water)": {
+                    "conditions": [
+                        "BEL(kitchen, accessible) = True",
+                        "BEL(kitchen, clean_dishes) = False",
+                        "BEL(kitchen, sink) = empty"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, sink) = filled_with_water"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Scrub(Agent, kitchen, dirty_dishes, dish_soap, sponge)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(kitchen, scary) = False",
+                        "BEL(kitchen, dish_soap) = True",
+                        "BEL(kitchen, sponge) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "BEL(kitchen, clean_dishes) = True",
+                        "DES(kitchen, organized) = True",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Rinse(Agent, kitchen, clean_dishes, water)": {
+                    "conditions": [
+                        "BEL(kitchen, clean_dishes) = True",
+                        "BEL(kitchen, water) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "BEL(kitchen, clean_dishes) = True",
+                        "BEL(kitchen, water) = False",
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Dry(Agent, kitchen, clean_dishes)": {
+                    "conditions": [
+                        "BEL(kitchen, clean_dishes) = True",
+                        "BEL(kitchen, sponge) = True",
+                        "BEL(kitchen, clean_dishes, dry) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, clean_dishes, dry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Organize(Agent, kitchen, clean_dishes)": {
+                    "conditions": [
+                        "BEL(kitchen, clean_dishes) = True",
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, clean_dishes) = False",
+                        "BEL(kitchen, organized_dishes) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Desire(Agent, kitchen, organized)",
+                        "Hope"
+                    ]
+                },
+                "Clean(Agent, kitchen, counter)": {
+                    "conditions": [
+                        "BEL(kitchen, scary) = False",
+                        "BEL(kitchen, clean_counter) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, scary) = True",
+                        "BEL(kitchen, clean_counter) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Desire"
+                    ]
+                },
+                "Sweep(Agent, kitchen, floor)": {
+                    "conditions": [
+                        "BEL(kitchen, floor_dirty) = True",
+                        "DES(kitchen, clean_floor) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, floor_dirty) = False",
+                        "BEL(kitchen, floor_clean) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Mop(Agent, kitchen, floor)": {
+                    "conditions": [
+                        "BEL(kitchen, scary) = False",
+                        "BEL(kitchen, clean_dishes) = True",
+                        "BEL(kitchen, mop_available) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, clean_floor) = True",
+                        "BEL(kitchen, wet_floor) = True",
+                        "BEL(kitchen, mop_available) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Evaluate(Agent, kitchen, clean_dishes)": {
+                    "conditions": [
+                        "BEL(kitchen, clean_dishes) = True"
+                    ],
+                    "effects": [
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Desire(Agent, kitchen, organized)": {
+                    "conditions": [
+                        "BEL(kitchen, clean_dishes) = True",
+                        "DES(kitchen, organized) = False"
+                    ],
+                    "effects": [
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Plan(Agent, kitchen, organize)": {
+                    "conditions": [
+                        "BEL(kitchen, clean_dishes) = True",
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "effects": [
+                        "DES(kitchen, organize) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "InspectKitchen(AGENT, kitchen)": {
+                    "conditions": [
+                        "BEL(kitchen, scary) = True",
+                        "BEL(kitchen, dirty_dishes) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, scary) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "EmptySink(AGENT, sink)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(sink, full) = True"
+                    ],
+                    "effects": [
+                        "BEL(sink, full) = False",
+                        "BEL(sink, empty) = True",
+                        "DES(kitchen, cleaned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "SortDishes(AGENT, dishes_area)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "DES(kitchen, organized) = False",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(dishes_area, sorted) = True",
+                        "BEL(dishes_area, dirty_dishes) = False",
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                },
+                "WashDishes(AGENT, dirty_dishes)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "DES(kitchen, cleaned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "DryDishes(AGENT, dishes_pile)": {
+                    "conditions": [
+                        "BEL(kitchen, clean) = False",
+                        "BEL(kitchen, dry_dishes) = False",
+                        "BEL(dishes_pile, wet) = True",
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "effects": [
+                        "BEL(dishes_pile, wet) = False",
+                        "BEL(dishes_pile, dry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "CleanCounters(AGENT, counters)": {
+                    "conditions": [
+                        "BEL(kitchen, scary) = False"
+                    ],
+                    "effects": [
+                        "DES(kitchen, organized) = True",
+                        "BEL(counters, dirty) = False",
+                        "BEL(counters, cluttered) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "OrganizePantry(AGENT, pantry)": {
+                    "conditions": [
+                        "BEL(kitchen, organized) = False",
+                        "BEL(pantry, messy) = True",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, organized) = True",
+                        "BEL(pantry, messy) = False",
+                        "DES(pantry, accessible) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                },
+                "SweepFloor(AGENT, floor)": {
+                    "conditions": [
+                        "BEL(floor, dirty) = True",
+                        "BEL(kitchen, scary) = False"
+                    ],
+                    "effects": [
+                        "BEL(floor, dirty) = False",
+                        "BEL(floor, clean) = True",
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "MopFloor(AGENT, floor)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_floor) = True",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, clean_floor) = True",
+                        "DES(kitchen, organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "AdmireKitchen(AGENT, kitchen)": {
+                    "conditions": [
+                        "BEL(kitchen, cleaned) = True",
+                        "BEL(kitchen, organized) = True"
+                    ],
+                    "effects": [
+                        "DES(kitchen, accessible) = True",
+                        "DES(kitchen, admired) = True",
+                        "BEL(kitchen, scary) = False"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ],
+                    "emotion_condition": [
+                        "Gratification"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, 1, Introduce, Neutral)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(kitchen, scary) = True",
+                        "INTENT(kitchen, clean_dishes) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "DES(kitchen, cleaned) = True",
+                        "DES(kitchen, organized) = True",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Speak(1, 2, Problem Clarify, Neutral)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(kitchen, scary) = True",
+                        "INTENT(kitchen, clean_dishes) = True",
+                        "DES(kitchen, cleaned) = False",
+                        "DES(kitchen, organized) = False",
+                        "DES(kitchen, accessible) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, scary) = False",
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "DES(kitchen, cleaned) = True",
+                        "DES(kitchen, organized) = True",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "occ_emotion": [
+                        "Neutral"
+                    ],
+                    "emotion_condition": [
+                        "Hope",
+                        "Fear",
+                        "Fear",
+                        "Hope",
+                        "Hope",
+                        "Pride"
+                    ]
+                },
+                "Speak(2, 3, Goal State, Demanding)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(kitchen, scary) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "BEL(kitchen, organized) = True",
+                        "BEL(kitchen, accessible) = True",
+                        "DES(kitchen, cleaned) = False",
+                        "DES(kitchen, organized) = True",
+                        "DES(kitchen, accessible) = True",
+                        "INTENT(kitchen, clean_dishes) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Speak(3, 4, Progress, Encouraging)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(kitchen, scary) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "BEL(kitchen, scary) = False",
+                        "DES(kitchen, cleaned) = True",
+                        "DES(kitchen, organized) = True",
+                        "DES(kitchen, accessible) = True",
+                        "INTENT(kitchen, clean_dishes) = True",
+                        "INTENT(kitchen, organize_kitchen) = True",
+                        "INTENT(kitchen, make_accessible) = True"
+                    ],
+                    "occ_emotion": [
+                        "joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope",
+                        "Joy"
+                    ]
+                },
+                "Speak(4, 5, Progress, Encouraging)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "DES(kitchen, cleaned) = True",
+                        "INTENT(kitchen, clean_dishes) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "DES(kitchen, cleaned) = False",
+                        "BEL(kitchen, organized) = True",
+                        "DES(kitchen, organized) = False",
+                        "BEL(kitchen, accessible) = True",
+                        "DES(kitchen, accessible) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "hope",
+                        "satisfaction",
+                        "joy",
+                        "hope",
+                        "gratification",
+                        "joy"
+                    ]
+                },
+                "Speak(5, 6, Progress, Encouraging)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes)",
+                        "BEL(kitchen, scary)"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes)",
+                        "DES(kitchen, cleaned)",
+                        "INTENT(kitchen, clean_dishes)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear",
+                        "Disgust",
+                        "Joy",
+                        "Hope",
+                        "Gratification",
+                        "Admiration"
+                    ]
+                },
+                "Speak(6, 7, Lack of Progress, Annoyed)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(kitchen, scary) = True",
+                        "INTENT(kitchen, clean_dishes) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "BEL(kitchen, scary) = False",
+                        "DES(kitchen, cleaned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Speak(7, 8, Lack of Progress, Annoyed)": {
+                    "conditions": [
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "BEL(kitchen, scary) = True",
+                        "INTENT(kitchen, clean_dishes) = True",
+                        "INTENT(kitchen, organize_kitchen) = True",
+                        "INTENT(kitchen, make_accessible) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "BEL(kitchen, scary) = False",
+                        "DES(kitchen, cleaned) = True",
+                        "DES(kitchen, organized) = True",
+                        "DES(kitchen, accessible) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Frustration"
+                    ]
+                },
+                "Speak(8, End, Gratitude, Grateful)": {
+                    "conditions": [
+                        "BEL(kitchen, scary) = True",
+                        "BEL(kitchen, dirty_dishes) = True",
+                        "INTENT(kitchen, clean_dishes) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen, scary) = False",
+                        "BEL(kitchen, dirty_dishes) = False",
+                        "DES(kitchen, cleaned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        },
+        "dishes": {
+            "knowledge_base": [
+                "BEL(dishes_dirty) = True",
+                "BEL(dishes_piled_up) = True",
+                "BEL(dishes_overwhelming) = True",
+                "DES(dishes_cleaned) = False",
+                "DES(kitchen_organized) = False",
+                "DES(dishes_cleared) = False"
+            ],
+            "intentions": {
+                "INTENT(dishes, clean_dishes) = False": {
+                    "action_plan": [
+                        "Examine(AGENT, kitchen)",
+                        "Assess_Dishes(AGENT, dirty_dishes)",
+                        "Make_Plan(AGENT, clean_dishes)",
+                        "Gather_Supplies(AGENT, cleaning_supplies)",
+                        "Sort_Dishes(AGENT, dirty_dishes, organized_pile)",
+                        "Wash_Dishes(AGENT, dirty_dishes, clean_dishes)",
+                        "Dry_Dishes(AGENT, clean_dishes, drying_rack)",
+                        "Put_Away_Dishes(AGENT, clean_dishes, cabinets)",
+                        "Assess_Kitchen(AGENT, organized_kitchen)"
+                    ]
+                },
+                "INTENT(dishes, organize_kitchen) = False": {
+                    "action_plan": [
+                        "Take(Agent, Dish)",
+                        "Move(Agent, Dish, Sink)",
+                        "Examine(Agent, Dish)",
+                        "Determine(Agent, Dish, Soap)",
+                        "PickUp(Agent, Sponge)",
+                        "Wet(Agent, Sponge)",
+                        "Scrub(Agent, Dish, Sponge)",
+                        "Inspect(Agent, Dish)",
+                        "Rinse(Agent, Dish, Water)",
+                        "Dry(Agent, Dish, Towel)",
+                        "Repeat(Agent, Steps 1-10)",
+                        "Sort(Agent, Dishes, Organized)",
+                        "Clear(Agent, Table, Dishes)",
+                        "Celebrate(Agent, Accomplishment)"
+                    ]
+                },
+                "INTENT(dishes, clear_dishes) = False": {
+                    "action_plan": [
+                        "Look(Agent, Kitchen)",
+                        "Assess(Agent, Dishes)",
+                        "Prioritize(Agent, Dishes)",
+                        "Start(Agent, Dishes)",
+                        "Coordinate(Agent, Husband)",
+                        "Delegate(Agent, Husband)",
+                        "Motivate(Agent, Husband)",
+                        "Finish(Agent, Dishes)",
+                        "Reward(Agent, Husband)",
+                        "Relax(Agent, Husband)"
+                    ]
+                }
+            },
+            "actions": {
+                "Look(Agent, Kitchen)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Assess(Agent, Dishes)": {
+                    "conditions": [
+                        "BEL(dishes_piled_up) = True"
+                    ],
+                    "effects": [
+                        "BEL(dishes_overwhelming) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_dirty) = True",
+                        "DES(dishes_cleared) = False",
+                        "DES(dishes_cleaned) = False",
+                        "DES(kitchen_organized) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Prioritize(Agent, Dishes)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True"
+                    ],
+                    "effects": [
+                        "DES(dishes_cleared) = False",
+                        "DES(dishes_cleaned) = False",
+                        "DES(kitchen_organized) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Start(Agent, Dishes)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "DES(dishes_cleaned) = False"
+                    ],
+                    "effects": [
+                        "BEL(dishes_piled_up) = False",
+                        "DES(dishes_cleared) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Coordinate(Agent, Husband)": {
+                    "conditions": [
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_overwhelming) = True",
+                        "DES(dishes_cleaned) = False",
+                        "DES(dishes_cleared) = False"
+                    ],
+                    "effects": [
+                        "DES(coordinate_husband) = True",
+                        "BEL(husband_not_busy) = True",
+                        "BEL(husband_willing_to_help) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Delegate(Agent, Husband)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True",
+                        "DES(dishes_cleared) = False",
+                        "DES(dishes_cleaned) = False",
+                        "DES(kitchen_organized) = False",
+                        "BEL(husband_available) = True",
+                        "DES(husband_willing) = True"
+                    ],
+                    "effects": [
+                        "DES(dishes_cleared) = True",
+                        "BEL(dishes_dirty) = False",
+                        "BEL(dishes_piled_up) = False",
+                        "DES(husband_willing) = False",
+                        "DES(husband_appreciated) = True",
+                        "BEL(husband_mood_happy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Motivate(Agent, Husband)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "DES(dishes_cleaned) = False"
+                    ],
+                    "effects": [
+                        "DES(dishes_cleared) = True",
+                        "DES(kitchen_organized) = True",
+                        "DES(dishes_cleaned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Finish(Agent, Dishes)": {
+                    "conditions": [
+                        "BEL(dishes_cleaned) = False",
+                        "BEL(dishes_piled_up) = True",
+                        "DES(dishes_cleared) = False"
+                    ],
+                    "effects": [
+                        "BEL(dishes_cleaned) = True",
+                        "BEL(dishes_piled_up) = False",
+                        "DES(kitchen_organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Reward(Agent, Husband)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = False",
+                        "BEL(dishes_piled_up) = False",
+                        "BEL(dishes_overwhelming) = False",
+                        "DES(dishes_cleaned) = True",
+                        "DES(kitchen_organized) = True",
+                        "DES(dishes_cleared) = True"
+                    ],
+                    "effects": [
+                        "DES(reward_husband) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Relax(Agent, Husband)": {
+                    "conditions": [
+                        "BEL(Husband, dishes_cleaned) = True",
+                        "DES(Husband, relax) = True"
+                    ],
+                    "effects": [
+                        "DES(Husband, relax) = False",
+                        "BEL(dishes_dirty) = False",
+                        "BEL(dishes_piled_up) = False",
+                        "BEL(dishes_overwhelming) = False",
+                        "DES(dishes_cleared) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Examine(AGENT, kitchen)": {
+                    "conditions": [
+                        "BEL(dishes_overwhelming) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_dirty) = True"
+                    ],
+                    "effects": [
+                        "BEL(kitchen_examined) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Assess_Dishes(AGENT, dirty_dishes)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True"
+                    ],
+                    "effects": [
+                        "BEL(dirty_dishes_seen) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Make_Plan(AGENT, clean_dishes)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True",
+                        "DES(dishes_cleaned) = False",
+                        "DES(kitchen_organized) = False"
+                    ],
+                    "effects": [
+                        "DES(clean_dishes_plan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Gather_Supplies(AGENT, cleaning_supplies)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True",
+                        "DES(dishes_cleaned) = False",
+                        "DES(kitchen_organized) = False"
+                    ],
+                    "effects": [
+                        "BEL(cleaning_supplies_collected) = True",
+                        "BEL(cleaning_supplies) = cleaning_supplies",
+                        "DES(cleaning_supplies_collected) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Sort_Dishes(AGENT, dirty_dishes, organized_pile)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "DES(dishes_cleared) = False"
+                    ],
+                    "effects": [
+                        "BEL(organized_pile, Arguments*) = True",
+                        "BEL(dishes_dirty) = False",
+                        "BEL(dishes_piled_up) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Wash_Dishes(AGENT, dirty_dishes, clean_dishes)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "DES(dishes_cleaned) = False"
+                    ],
+                    "effects": [
+                        "BEL(dishes_dirty) = False",
+                        "BEL(dishes_piled_up) = False",
+                        "BEL(dishes_overwhelming) = False",
+                        "DES(dishes_cleaned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Dry_Dishes(AGENT, clean_dishes, drying_rack)": {
+                    "conditions": [
+                        "BEL(drying_rack_available) = True",
+                        "DES(clean_dishes) = [dish for dish in Arguments[1] if dish not in Arguments[2"
+                    ],
+                    "effects": [
+                        "BEL(drying_rack_available) = False",
+                        "DES(dishes_drying) = Arguments[1",
+                        "DES(dishes_cleared) = Arguments[2"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Put_Away_Dishes(AGENT, clean_dishes, cabinets)": {
+                    "conditions": [
+                        "BEL(dishes_cleaned) = True",
+                        "BEL(cabinets_open) = True"
+                    ],
+                    "effects": [
+                        "BEL(clear_counter) = True",
+                        "BEL(cabinets_full) = True",
+                        "BEL(drying_rack_empty) = True",
+                        "DES(dishes_cleared) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Assess_Kitchen(AGENT, organized_kitchen)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = False",
+                        "BEL(dishes_piled_up) = False",
+                        "BEL(dishes_overwhelming) = False",
+                        "DES(dishes_cleaned) = True",
+                        "DES(kitchen_organized) = False"
+                    ],
+                    "effects": [
+                        "BEL(kitchen_clean) = True",
+                        "BEL(kitchen_organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Take(Agent, Dish)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True"
+                    ],
+                    "effects": [
+                        "BEL(got_dish) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Move(Agent, Dish, Sink)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True",
+                        "BEL(Agent, holding_dish) = True"
+                    ],
+                    "effects": [
+                        "BEL(dish_clean) = True",
+                        "BEL(dish_dirty) = False",
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True",
+                        "DES(dishes_cleared) = False",
+                        "DES(dishes_cleaned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Examine(Agent, Dish)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dish_in_hand) = True",
+                        "BEL(dish_examined) = False"
+                    ],
+                    "effects": [
+                        "BEL(dish_examined) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "None"
+                    ]
+                },
+                "Determine(Agent, Dish, Soap)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True"
+                    ],
+                    "effects": [
+                        "BEL(dish_has_soap, Dish) = True",
+                        "BEL(dish_has_soap, Dish) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "PickUp(Agent, Sponge)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True",
+                        "BEL(Sponge, available) = True"
+                    ],
+                    "effects": [
+                        "BEL(Sponge, in_hand) = True",
+                        "BEL(Sponge, available) = False"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Wet(Agent, Sponge)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True",
+                        "BEL(Sponge, wet) = False"
+                    ],
+                    "effects": [
+                        "BEL(Sponge, wet) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Scrub(Agent, Dish, Sponge)": {
+                    "conditions": [
+                        "BEL(Dish, Clean) = False",
+                        "BEL(Dish, Dirty) = True",
+                        "BEL(Sponge, Wet) = True",
+                        "DES(Dishes_Cleaned) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dish, Clean) = True",
+                        "BEL(Dish, Dirty) = False",
+                        "BEL(Sponge, Dirty) = True",
+                        "DES(Dishes_Cleaned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Inspect(Agent, Dish)": {
+                    "conditions": [
+                        "BEL(Agent, dishes_dirty) = True",
+                        "BEL(Agent, dishes_piled_up) = True",
+                        "BEL(Agent, dishes_overwhelming) = True",
+                        "BEL(Agent, Dish, clean) = False"
+                    ],
+                    "effects": [
+                        "BEL(Agent, Dish, inspected) = True",
+                        "DES(Agent, dishes_cleaned) = True",
+                        "DES(Agent, kitchen_organized) = True",
+                        "DES(Agent, dishes_cleared) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Rinse(Agent, Dish, Water)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(Dish, rinse_needed) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dish, rinse_needed) = False",
+                        "BEL(Dish, dried) = False",
+                        "BEL(Dish, clean) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Dry(Agent, Dish, Towel)": {
+                    "conditions": [
+                        "BEL(dish_dry, Dish) = False",
+                        "BEL(dish_rinsed, Dish) = True",
+                        "DES(dish_cleaned, Dish) = True"
+                    ],
+                    "effects": [
+                        "BEL(dish_dry, Dish) = True",
+                        "DES(dish_cleaned, Dish) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Satisfaction"
+                    ]
+                },
+                "Repeat(Agent, Steps 1-10)": {
+                    "conditions": [
+                        "DES(dishes_cleaned) = False"
+                    ],
+                    "effects": [
+                        "DES(dishes_cleaned) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Sort(Agent, Dishes, Organized)": {
+                    "conditions": [
+                        "BEL(dishes_cleaned) = False",
+                        "BEL(dishes_piled_up) = True",
+                        "DES(kitchen_organized) = False"
+                    ],
+                    "effects": [
+                        "BEL(dishes_cleaned) = True",
+                        "BEL(dishes_piled_up) = False",
+                        "DES(kitchen_organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Clear(Agent, Table, Dishes)": {
+                    "conditions": [
+                        "BEL(dishes_cleaned) = False",
+                        "BEL(dishes_piled_up) = True"
+                    ],
+                    "effects": [
+                        "DES(dishes_cleaned) = True",
+                        "DES(dishes_cleared) = True",
+                        "BEL(dishes_piled_up) = False",
+                        "BEL(kitchen_organized) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Celebrate(Agent, Accomplishment)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = False",
+                        "BEL(dishes_piled_up) = False",
+                        "BEL(dishes_overwhelming) = False",
+                        "DES(dishes_cleaned) = True",
+                        "DES(kitchen_organized) = True",
+                        "DES(dishes_cleared) = True"
+                    ],
+                    "effects": [
+                        "DES(dishes_cleaned) = False",
+                        "DES(kitchen_organized) = False",
+                        "DES(dishes_cleared) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ],
+                    "emotion_condition": [
+                        "Joy"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(Start, 1, Introduce, Neutral)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True"
+                    ],
+                    "effects": [
+                        "INTENT(dishes, clean_dishes) = True"
+                    ],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Neutral"
+                    ]
+                },
+                "Speak(1, 2, Comment, Neutral)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True",
+                        "DES(dishes_cleaned) = False",
+                        "DES(kitchen_organized) = False",
+                        "DES(dishes_cleared) = False",
+                        "INTENT(dishes, clean_dishes) = False",
+                        "INTENT(dishes, organize_kitchen) = False",
+                        "INTENT(dishes, clear_dishes) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Pride",
+                        "Distress",
+                        "Joy, Gratification"
+                    ],
+                    "emotion_condition": [
+                        "Neutral",
+                        "Distress",
+                        "Hope",
+                        "Joy",
+                        "Hope",
+                        "Neutral",
+                        "Hope",
+                        "Satisfaction",
+                        "Gratitude",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Hope",
+                        "Joy",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Neutral",
+                        "Joy"
+                    ]
+                },
+                "Speak(2, 3, Comment, Neutral)": {
+                    "conditions": [
+                        "BEL(dishes_dirty)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Speak(3, 4, Apology, Regretful)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True",
+                        "DES(dishes_cleaned) = False",
+                        "DES(kitchen_organized) = False",
+                        "DES(dishes_cleared) = False",
+                        "INTENT(dishes, clean_dishes) = False",
+                        "INTENT(dishes, organize_kitchen) = False",
+                        "INTENT(dishes, clear_dishes) = False"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Speak(4, 5, Appeal, Polite)": {
+                    "conditions": [
+                        "BEL(dishes_dirty)",
+                        "BEL(dishes_piled_up)",
+                        "BEL(dishes_overwhelming)",
+                        "DES(dishes_cleaned)",
+                        "DES(kitchen_organized)",
+                        "DES(dishes_cleared)",
+                        "INTENT(dishes, clean_dishes)",
+                        "INTENT(dishes, organize_kitchen)",
+                        "INTENT(dishes, clear_dishes)"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Speak(5, End, Gratitude, Thankful)": {
+                    "conditions": [
+                        "BEL(dishes_dirty) = True",
+                        "BEL(dishes_piled_up) = True",
+                        "BEL(dishes_overwhelming) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, 1, Introduce, Neutral, \"Hey, how was work today? We need to talk about something really important.\">",
+        "<1, 2, Introduce, Neutral, \"Do you remember the sink and the dishes we left behind because of my illness?\">",
+        "<2, 3, Problem Raise, Neutral, \"They are still waiting in the kitchen and it's really scary to start cleaning up. Do you think you can help me out tomorrow?\">",
+        "<3, 4, Problem Clarify, Neutral, \"I'm so sorry for letting it get this bad. Especially when you are sick. I was working so much lately that I couldn't take care of these myself.\">",
+        "<4, 5, Problem Explain, Neutral, \"But to be honest, these days are still tough and I'm not sure if I can physically do this tomorrow. I'm afraid I might fall asleep and not help you in the end.\">",
+        "<5, 6, Option Explore, Neutral, \"I understand how's it's hard for you. Let me see if I can think of a solution. Do you think we can ask our neighbor?\">",
+        "<6, 7, Option Evaluate, Neutral, \"But when was the last time they came over and helped us? What else can we do?\">",
+        "<7, 8, Option Suggest, Neutral, \"Maybe we can make it work if we divide the work? You know, one of us can wash and the  other can dry?\">",
+        "<8, 9, Option Evaluate, Neutral, \"What do you think?\">",
+        "<9, 10, Option Agree, Neutral, \"That might work. Thank you for being cooperative. I really appreciate it.\">",
+        "<10, End, Gratitude, Grateful, \"I feel better already. Thank you!\">"
+    ]
+}

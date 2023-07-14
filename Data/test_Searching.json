@@ -1,0 +1,1302 @@
+{
+    "scenario_name": "test_Searching",
+    "scenario_description": "Dan searched his son's room. He found pornography. He approached his son about the magazines. His son denied owning them. Dan let his son off easy.",
+    "last_ended": "end",
+    "agents": {
+        "Dan": {
+            "knowledge_base": [
+                "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                "BEL(Dan, Confronted_Dan_son) = False",
+                "DES(Dan, Find_Out_the_Truth(Dan_son)) = True",
+                "BEL(Dan, Dan_son_Is_Lying) = False",
+                "DES(Dan, Let_Off_Easy(Dan_son)) = True"
+            ],
+            "intentions": {
+                "INTENT(Dan, Confront(Dan_son)) = True": {
+                    "action_plan": [
+                        "Move(Dan, Dan_son_room)",
+                        "Search(Dan, Dan_son_room, pornography)",
+                        "Find(Dan, Found_pornography(Dan_son))",
+                        "Believe(Dan, Found_pornography(Dan_son))",
+                        "Desire(Dan, Confront(Dan_son))",
+                        "Intend(Dan, Confront(Dan_son))",
+                        "Move(Dan, Dan_son_room)",
+                        "Confront(Dan, Dan_son)",
+                        "Deny(Dan_son, Found_pornography(Dan_son))",
+                        "Believe(Dan, Dan_son_Is_Lying)",
+                        "Desire(Dan, Let_Off_Easy(Dan_son))",
+                        "Intend(Dan, Let_Off_Easy(Dan_son))",
+                        "Let_Off_Easy(Dan, Dan_son)"
+                    ]
+                },
+                "INTENT(Dan, Gather_Evidence(Dan_son)) = True": {
+                    "action_plan": [
+                        "Search_Room(Dan, Dan_son)",
+                        "Find_Pornography(Dan, Dan_son)",
+                        "Confront_Son(Dan, Dan_son)",
+                        "Deny_Owning_Pornography(Dan_son)",
+                        "Assess_Truthfulness(Dan, Dan_son)",
+                        "Let_Son_Off_Easy(Dan, Dan_son)"
+                    ]
+                },
+                "INTENT(Dan, Assess_Truth(Dan_son)) = True": {
+                    "action_plan": [
+                        "Move_To(Dan, Dan_son's_room)",
+                        "Search(Dan, Dan_son's_room)",
+                        "Confront(Dan, Dan_son)",
+                        "Assess(Dan, Dan_son)",
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "Punish(Dan, Dan_son)",
+                        "BEL(Dan, Dan_son_Is_Lying) = False",
+                        "Let_Off_Easy(Dan, Dan_son)"
+                    ]
+                },
+                "INTENT(Dan, Decide_Punishment(Dan_son)) = True": {
+                    "action_plan": [
+                        "ASK(Dan, Dan_son, \"Did you know anything about these magazines?\")",
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "INTENT(Dan, Decide_Punishment(Dan_son)) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "ASK(Dan, Dan_son, \"Why are you lying?\")",
+                        "SKIP(Dan)",
+                        "ASK(Dan, Dan_son, \"Do you understand why this is wrong?\")",
+                        "Dan_son",
+                        "INTENT(Dan, Let_Off_Easy(Dan_son)) = True",
+                        "INTENT(Dan, Punish(Dan_son)) = True",
+                        "INTENT(Dan, Let_Off_Easy(Dan_son)) = True",
+                        "TELL(Dan, Dan_son, \"I'm disappointed, but I won't punish you this time. Don't let me down.\")",
+                        "INTENT(Dan, Punish(Dan_son)) = True",
+                        "REMOVE(Dan, Dan_son, Computer)",
+                        "GROUND(Dan, Dan_son_restrictions), TELL(Dan, Dan_son, \"You are still going to face consequences for this, no computer for a week.\")",
+                        "TELL(Dan, Dan_son, \"I'm really disappointed with you.\")"
+                    ]
+                },
+                "INTENT(Dan, Let_Go_Easy(Dan_son)) = True": {
+                    "action_plan": [
+                        "Confront(Dan, Dan_son, Found_Pornography(Dan_son))",
+                        "Listen(Dan_son, Dan)",
+                        "Express_Doubt(Dan, Dan_son)",
+                        "Offer_to_Let_Off_Easy(Dan, Dan_son)",
+                        "Listen(Dan_son, Dan)",
+                        "Confirm_Truth(Dan, Dan_son, Dan_son_Is_Lying)",
+                        "Let_Go_Easy(Dan, Dan_son)",
+                        "INTENT(Dan, Let_Go_Easy(Dan_son)) = True",
+                        "Confront(Dan, Dan_son, Found_Pornography(Dan_son))",
+                        "Listen(Dan_son, Dan)",
+                        "Express_Doubt(Dan, Dan_son)",
+                        "Offer_to_Let_Off_Easy(Dan, Dan_son)",
+                        "Listen(Dan_son, Dan)",
+                        "Confirm_Truth(Dan, Dan_son, Dan_son_Is_Lying)",
+                        "Let_Go_Easy(Dan, Dan_son)"
+                    ]
+                }
+            },
+            "actions": {
+                "Confront(Dan, Dan_son, Found_Pornography(Dan_son))": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Confronted_Dan_son) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Listen(Dan_son, Dan)": {
+                    "conditions": [
+                        "BEL(Dan_son, Is_Talking) = False",
+                        "BEL(Dan, Confronted_Dan_son) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, Is_Talking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Doubt"
+                    ],
+                    "emotion_condition": [
+                        "Concern"
+                    ]
+                },
+                "Express_Doubt(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Doubt_Expressed(Dan)) = True",
+                        "BEL(Dan_son, Doubt_Expressed_By_Dan) = True"
+                    ],
+                    "occ_emotion": [
+                        "doubt"
+                    ],
+                    "emotion_condition": [
+                        "Doubt"
+                    ]
+                },
+                "Offer_to_Let_Off_Easy(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False",
+                        "DES(Dan, Find_Out_the_Truth(Dan_son)) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Offered_To_Let_Off_Easy(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Confirm_Truth(Dan, Dan_son, Dan_son_Is_Lying)": {
+                    "conditions": [
+                        "BEL(Dan, Confronted_Dan_son) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "resentment"
+                    ]
+                },
+                "Let_Go_Easy(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Confronted_Dan_son) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "DES(Dan, Let_Off_Easy(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Confronted_Dan_son) = False",
+                        "DES(Dan, Let_Off_Easy(Dan_son)) = False",
+                        "BEL(Dan_son, Dan_forgives_me) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "INTENT(Dan, Let_Go_Easy(Dan_son)) = True": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False",
+                        "DES(Dan, Find_Out_the_Truth(Dan_son)) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Confronted_Dan_son) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "DES(Dan, Let_Off_Easy(Dan_son)) = False"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Move(Dan, Dan_son_room)": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_in_Dan_son_room) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_in_Dan_son_room) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Search(Dan, Dan_son_room, pornography)": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_room_Is_Searched) = False",
+                        "BEL(Dan, Found_pornography(Dan_son)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_room_Is_Searched) = True",
+                        "BEL(Dan, Found_pornography(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Find(Dan, Found_pornography(Dan_son))": {
+                    "conditions": [
+                        "BEL(Dan, Found_pornography(Dan_son)) = False",
+                        "BEL(Dan, Confronted_Dan_son) = False",
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Found_pornography(Dan_son)) = True",
+                        "DES(Dan, Confront(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False",
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Believe(Dan, Found_pornography(Dan_son))": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Discomfort"
+                    ]
+                },
+                "Desire(Dan, Confront(Dan_son))": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "DES(Dan, Confront(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Intend(Dan, Confront(Dan_son))": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False",
+                        "DES(Dan, Find_Out_the_Truth(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "INTENT(Dan, Confront(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Confront(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Confronted_Dan_son) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Deny(Dan_son, Found_pornography(Dan_son))": {
+                    "conditions": [
+                        "BEL(Dan_son, Found_pornography(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, Found_pornography(Dan_son)) = False",
+                        "BEL(Dan, Dan_son_Is_Lying) = True"
+                    ],
+                    "occ_emotion": [
+                        "Resentment"
+                    ],
+                    "emotion_condition": [
+                        "Doubt"
+                    ]
+                },
+                "Believe(Dan, Dan_son_Is_Lying)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True"
+                    ],
+                    "occ_emotion": [
+                        "resentment"
+                    ],
+                    "emotion_condition": [
+                        "Distrust"
+                    ]
+                },
+                "Desire(Dan, Let_Off_Easy(Dan_son))": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "effects": [
+                        "DES(Dan, Let_Off_Easy(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Intend(Dan, Let_Off_Easy(Dan_son))": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "effects": [
+                        "DES(Dan, Let_Off_Easy(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Let_Off_Easy(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "effects": [
+                        "DES(Dan, Forgiveness(Dan_son)) = True",
+                        "BEL(Dan, Trust_in_Dan_son) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Search_Room(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Find_Pornography(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Confront_Son(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False",
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "effects": [
+                        "DES(Dan, Gather_Evidence(Dan_son)) = False",
+                        "BEL(Dan, Confronted_Dan_son) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "Deny_Owning_Pornography(Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan_son, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Resentment"
+                    ]
+                },
+                "Assess_Truthfulness(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Distrust"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Let_Son_Off_Easy(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = False",
+                        "DES(Dan, Let_Off_Easy(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Confronted_Dan_son) = True",
+                        "DES(Dan, Let_Off_Easy(Dan_son)) = False",
+                        "BEL(Dan_son, Dan_Forgave_Me) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "Move_To(Dan, Dan_son's_room)": {
+                    "conditions": [
+                        "BEL(Dan, In(Room(Dan_son))) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, In(Room(Dan_son))) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Search(Dan, Dan_son's_room)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Assess(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "DES(Dan, Find_Out_the_Truth(Dan_son)) = True",
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_Is_Lying) = False",
+                        "BEL(Dan, Confronted_Dan_son) = True",
+                        "DES(Dan, Let_Off_Easy(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Distress"
+                    ]
+                },
+                "BEL(Dan, Dan_son_Is_Lying) = True": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Resentment"
+                    ]
+                },
+                "Punish(Dan, Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, Punished) = True",
+                        "DES(Dan_son, Fear_of_Punishment) += 1",
+                        "BEL(Dan_son, Trust_in_Dan) = False",
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "BEL(Dan, Dan_son_Is_Lying) = False": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "ASK(Dan, Dan_son, \"Did you know anything about these magazines?\")": {
+                    "conditions": [
+                        "BEL(Dan_son, Owns_Pornography) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Suspicion"
+                    ]
+                },
+                "INTENT(Dan, Decide_Punishment(Dan_son)) = True": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False",
+                        "BEL(Dan, Dan_son_Is_Lying) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "ASK(Dan, Dan_son, \"Why are you lying?\")": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Reproach"
+                    ]
+                },
+                "SKIP(Dan)": {
+                    "conditions": [],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Guilt"
+                    ],
+                    "emotion_condition": [
+                        "Disapproval"
+                    ]
+                },
+                "ASK(Dan, Dan_son, \"Do you understand why this is wrong?\")": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = False",
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Dan, Decide_Punishment(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "Dan_son": {
+                    "conditions": [
+                        "INTENT(Dan, Decide_Punishment(Dan_son)) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = False",
+                        "INTENT(Dan, Let_Off_Easy(Dan_son)) = True",
+                        "BEL(Dan_son, Has_Pornography) = True",
+                        "DES(Dan, Find_Out_the_Truth(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Confronted_Dan_son) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "INTENT(Dan, Decide_Punishment(Dan_son)) = True",
+                        "BEL(Dan_son, Has_Pornography) = True",
+                        "INTENT(Dan, Let_Off_Easy(Dan_son)) = True",
+                        "INTENT(Dan, Punish(Dan_son)) = True",
+                        "REMOVE(Dan, Dan_son, Computer)",
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "BEL(Dan_son, Understands_Why_Wrong) = True",
+                        "TELL(Dan, Dan_son, \"I'm disappointed, but I won't punish you this time. Don't let me down.\")",
+                        "BEL(Dan_son, Restrictions_Week_No_Computer) = True",
+                        "TELL(Dan, Dan_son, \"You are still going to face consequences for this, no computer for a week.\")",
+                        "TELL(Dan, Dan_son, \"I'm really disappointed with you.\")"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment",
+                        "Distress",
+                        "Doubt",
+                        "Relief",
+                        "Gratification",
+                        "Disappointment",
+                        "Disappointment"
+                    ]
+                },
+                "INTENT(Dan, Let_Off_Easy(Dan_son)) = True": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = False",
+                        "DES(Dan, Let_Off_Easy(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Relief"
+                    ]
+                },
+                "INTENT(Dan, Punish(Dan_son)) = True": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = True"
+                    ],
+                    "effects": [
+                        "DES(Dan, Punish(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "TELL(Dan, Dan_son, \"I'm disappointed, but I won't punish you this time. Don't let me down.\")": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = False",
+                        "DES(Dan, Let_Off_Easy(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "INTENT(Dan, Decide_Punishment(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "REMOVE(Dan, Dan_son, Computer)": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "BEL(Dan, Dan_son_restrictions) = True"
+                    ],
+                    "effects": [
+                        "DES(Dan, No_Computer_For_A_Week(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Reproach"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "GROUND(Dan, Dan_son_restrictions), TELL(Dan, Dan_son, \"You are still going to face consequences for this, no computer for a week.\")": {
+                    "conditions": [
+                        "BEL(Dan, Dan_son_Is_Lying) = True",
+                        "INTENT(Dan, Punish(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Dan_son_restrictions) = True",
+                        "BEL(Dan, Punishment_Week_No_Computer) = True",
+                        "TELL(Dan, Dan_son, \"You are still going to face consequences for this, no computer for a week.\")"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                },
+                "TELL(Dan, Dan_son, \"I'm really disappointed with you.\")": {
+                    "conditions": [
+                        "BEL(Dan, Punish(Dan_son)) = True",
+                        "BEL(Dan, Let_Off_Easy(Dan_son)) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, Dan_Is_Disappointed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Distress"
+            ],
+            "speak_actions": {
+                "Speak(START, 1, None, None)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False",
+                        "DES(Dan, Find_Out_the_Truth(Dan_son)) = True",
+                        "BEL(Dan, Dan_son_Is_Lying) = False",
+                        "INTENT(Dan, Confront(Dan_son)) = True",
+                        "INTENT(Dan, Gather_Evidence(Dan_son)) = True",
+                        "INTENT(Dan, Assess_Truth(Dan_son)) = True",
+                        "INTENT(Dan, Decide_Punishment(Dan_son)) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan, Confronted_Dan_son) = True"
+                    ],
+                    "occ_emotion": [
+                        "[START, 1, None, None, \"Dan: Hey son, can I talk to you for a minute?\"",
+                        "hope"
+                    ],
+                    "emotion_condition": [
+                        "[Hope"
+                    ]
+                },
+                "Speak(2, 3, None, None)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Dan, Confront(Dan_son)) = True",
+                        "INTENT(Dan, Gather_Evidence(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Speak(2, 3, None, None)], [Assess(Dan, Dan_son), Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Speak(2, 3, None, Fear), 3, None, None, \"Dan: I was in your room earlier and I found some magazines...\"",
+                        "Speak(4, 5, None, Disappointment), 5, None, None, \"Dan: Some adult magazines, I'm concerned and I'd like to talk about it more.\"",
+                        "Speak(5, 6, None, Disbelief), 6, None, None, \"Son: I don't know what you're talking about, those aren't mine.\"",
+                        "Speak(6, 7, None, Disappointment), 7, None, None, \"Dan: Okay, well let's talk about the importance of honesty and responsibility. It's not okay to have this kind of material, but I'll trust you for now.\"",
+                        "Speak(7, None, None, Relief), END, None, None, \"Son: Thanks dad, I appreciate it.\""
+                    ]
+                },
+                "Speak(5, 6, None, None)": {
+                    "conditions": [
+                        "BEL(Dan, Found_Pornography(Dan_son)) = True",
+                        "BEL(Dan, Confronted_Dan_son) = False"
+                    ],
+                    "effects": [
+                        "INTENT(Dan, Confront(Dan_son)) = True"
+                    ],
+                    "occ_emotion": [
+                        "[HAPPY-FOR"
+                    ],
+                    "emotion_condition": [
+                        "Speak(5, 6, None, None)], [BEL(Dan, Found_pornography(Dan_son)), Disappointment"
+                    ]
+                }
+            }
+        },
+        "Dan_son": {
+            "knowledge_base": [
+                "BEL(Dan_son, owns_pornography) = False",
+                "BEL(Dan_son, afraid_of_punishment) = True",
+                "BEL(Dan_son, has_lied_before) = True",
+                "DES(Dan_son, avoid_punishment) = True",
+                "DES(Dan_son, maintain_good_relationship_with_Dan) = True"
+            ],
+            "intentions": {
+                "INTENT(Dan_son, deny_owning_pornography) = True": {
+                    "action_plan": [
+                        "Deny(Dan_son, Dan, pornography)",
+                        "Insist(Dan_son, Dan, no_pornography_found)",
+                        "Apologize(Dan_son, Dan, for_the_suspicion)",
+                        "Promise(Dan_son, Dan, to_be_honest_in_the_future)",
+                        "Agree(Dan_son, Dan, to_have_the_conversation_again_if_necessary)"
+                    ]
+                },
+                "INTENT(Dan_son, convince_Dan_of_his_innocence) = True": {
+                    "action_plan": [
+                        "DenyOwnership(Dan_son, pornography_magazines)",
+                        "ShowEvidence(Dan, pornography_magazines)",
+                        "Apologize(Dan_son)",
+                        "MakePromise(Dan_son, Dan, no_pornography)",
+                        "ExpressGratitude(Dan_son)"
+                    ]
+                },
+                "INTENT(Dan_son, apologize_to_Dan) = False": {
+                    "action_plan": [
+                        "Confront(Dan_son, Dan, pornography)",
+                        "Deny(Dan_son, Dan, pornography)",
+                        "Explain(Dan_son, Dan, why_he_denied_owning_pornography)",
+                        "Apologize(Dan_son, Dan)",
+                        "Offer_to_discuss(Dan_son, Dan, pornography_discussion)"
+                    ]
+                },
+                "INTENT(Dan_son, hide_pornography_in_future) = True": {
+                    "action_plan": [
+                        "DenyExistence(Dan_son, Dan)",
+                        "Apologize(Dan_son, Dan)",
+                        "AskForPrivacy(Dan_son, Dan)",
+                        "DisposeOfPornography(Dan_son, TrashCan)",
+                        "FindAlternative(Dan_son, OnlineMagazines)",
+                        "Dan"
+                    ]
+                }
+            },
+            "actions": {
+                "DenyExistence(Dan_son, Dan)": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, has_lied_before) = True",
+                        "DES(Dan_son, avoid_punishment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Apologize(Dan_son, Dan)": {
+                    "conditions": [
+                        "BEL(Dan_son, afraid_of_punishment) = True",
+                        "BEL(Dan_son, maintain_good_relationship_with_Dan) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, apologized_to_Dan) = True",
+                        "BEL(Dan_son, maintain_good_relationship_with_Dan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "AskForPrivacy(Dan_son, Dan)": {
+                    "conditions": [
+                        "BEL(Dan_son, afraid_of_punishment) = True"
+                    ],
+                    "effects": [
+                        "DES(Dan_son, maintain_good_relationship_with_Dan) = True",
+                        "BEL(Dan_son, wants_privacy) = True",
+                        "BEL(Dan, willing_to_give_privacy) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DisposeOfPornography(Dan_son, TrashCan)": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography) = True",
+                        "BEL(Dan_son, afraid_of_punishment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "BEL(Dan_son, afraid_of_punishment) = False",
+                        "DES(Dan_son, avoid_punishment) = False"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Disgusted"
+                    ]
+                },
+                "FindAlternative(Dan_son, OnlineMagazines)": {
+                    "conditions": [
+                        "BEL(Dan_son, has_internet_access) = True",
+                        "DES(Dan_son, avoid_punishment) = True",
+                        "DES(Dan_son, find alternative source of pornography) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, knows_about_online_magazines) = True",
+                        "BEL(Dan_son, has_access_to_online_magazines) = True",
+                        "DES(Dan_son, reduce risk of getting caught) = True",
+                        "DES(Dan_son, satisfy curiosity) = True",
+                        "DES(Dan_son, fulfill sexual desires) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Dan": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography) = True",
+                        "BEL(Dan_son, afraid_of_punishment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "DES(Dan_son, avoid_punishment) = True",
+                        "INTENT(Dan_son, hide_pornography_in_future) = True"
+                    ],
+                    "occ_emotion": [
+                        "fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Deny(Dan_son, Dan, pornography)": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "BEL(Dan_son, has_lied_before) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, denies_owning_pornography) = True",
+                        "DES(Dan_son, avoid_punishment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Insist(Dan_son, Dan, no_pornography_found)": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "BEL(Dan_son, afraid_of_punishment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "DES(Dan_son, avoid_punishment) = True",
+                        "DES(Dan_son, maintain_good_relationship_with_Dan) = True",
+                        "BEL(Dan_son, has_lied_before) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ],
+                    "emotion_condition": [
+                        "Anger"
+                    ]
+                },
+                "Apologize(Dan_son, Dan, for_the_suspicion)": {
+                    "conditions": [
+                        "BEL(Dan_son, afraid_of_punishment) = True",
+                        "BEL(Dan_son, has_lied_before) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, apologize_for_the_suspicion) = True",
+                        "DES(Dan_son, maintain_good_relationship_with_Dan) -= 0.1"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "Promise(Dan_son, Dan, to_be_honest_in_the_future)": {
+                    "conditions": [
+                        "BEL(Dan_son, maintain_good_relationship_with_Dan) = True",
+                        "BEL(Dan_son, has_lied_before) = True"
+                    ],
+                    "effects": [
+                        "DES(Dan_son, be_honest_in_the_future) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "Agree(Dan_son, Dan, to_have_the_conversation_again_if_necessary)": {
+                    "conditions": [
+                        "BEL(Dan_son, has_honesty_as_value) = True",
+                        "BEL(Dan, willing_to_have_follow_up_conversation) = True"
+                    ],
+                    "effects": [
+                        "DES(Dan_son, maintain_good_relationship_with_Dan) = True",
+                        "DES(Dan_son, show_transparency_in_future_conversations) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                },
+                "DenyOwnership(Dan_son, pornography_magazines)": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "BEL(Dan_son, has_lied_before) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "ShowEvidence(Dan, pornography_magazines)": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "BEL(Dan_son, has_lied_before) = True",
+                        "BEL(Dan, suspicious_of_Dan_son) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, has_broken_Dan's_trust) = True",
+                        "DES(Dan_son, apologize_to_Dan) = True",
+                        "BEL(Dan, angry_with_Dan_son) = True",
+                        "BEL(Dan_son, afraid_of_punishment) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Apologize(Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan_son, afraid_of_punishment) = True",
+                        "BEL(Dan_son, has_lied_before) = True",
+                        "INTENT(Dan_son, convince_Dan_of_his_innocence) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, regrets_lies) = True",
+                        "BEL(Dan_son, feels_shame) = True",
+                        "DES(Dan_son, improve_reputation_with_Dan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Remorse"
+                    ],
+                    "emotion_condition": [
+                        "remorse"
+                    ]
+                },
+                "MakePromise(Dan_son, Dan, no_pornography)": {
+                    "conditions": [
+                        "BEL(Dan_son, maintain_good_relationship_with_Dan) = True",
+                        "BEL(Dan_son, has_lied_before) = True",
+                        "DES(Dan_son, avoid_punishment) = True",
+                        "BEL(Dan_son, owns_pornography) = False"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, promise_no_pornography) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ],
+                    "emotion_condition": [
+                        "Remorse"
+                    ]
+                },
+                "ExpressGratitude(Dan_son)": {
+                    "conditions": [
+                        "BEL(Dan_son, maintain_good_relationship_with_Dan) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, feels_grateful_to_Dan) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ],
+                    "emotion_condition": [
+                        "Gratitude"
+                    ]
+                },
+                "Confront(Dan_son, Dan, pornography)": {
+                    "conditions": [
+                        "BEL(Dan_son, afraid_of_punishment) = True",
+                        "BEL(Dan_son, has_lied_before) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, confronted_Dan_about_pornography) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Explain(Dan_son, Dan, why_he_denied_owning_pornography)": {
+                    "conditions": [
+                        "BEL(Dan_son, has_lied_before) = True",
+                        "BEL(Dan_son, afraid_of_punishment) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, has_lied_before) = False",
+                        "DES(Dan_son, avoid_punishment) = False"
+                    ],
+                    "occ_emotion": [
+                        "Shame"
+                    ],
+                    "emotion_condition": [
+                        "Fear"
+                    ]
+                },
+                "Offer_to_discuss(Dan_son, Dan, pornography_discussion)": {
+                    "conditions": [
+                        "BEL(Dan_son, has_lied_before) = True",
+                        "BEL(Dan_son, afraid_of_punishment) = True",
+                        "BEL(Dan, open_to_discussion) = True",
+                        "BEL(Dan, in_good_mood) = True",
+                        "DES(Dan_son, maintain_good_relationship_with_Dan) = True"
+                    ],
+                    "effects": [
+                        "DES(Dan_son, discuss_pornography_with_Dan) = True",
+                        "BEL(Dan_son, open_to_discussion) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Hope"
+                    ]
+                }
+            },
+            "initial_occ_emotion": [
+                "Fear"
+            ],
+            "speak_actions": {
+                "Speak(1, 2, None, None)": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "BEL(Dan_son, afraid_of_punishment) = True",
+                        "BEL(Dan_son, has_lied_before) = True",
+                        "DES(Dan_son, avoid_punishment) = True",
+                        "DES(Dan_son, maintain_good_relationship_with_Dan) = True",
+                        "INTENT(Dan_son, deny_owning_pornography) = True",
+                        "INTENT(Dan_son, convince_Dan_of_his_innocence) = True",
+                        "INTENT(Dan_son, apologize_to_Dan) = False",
+                        "INTENT(Dan_son, hide_pornography_in_future) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "INTENT(Dan_son, convince_Dan_of_his_innocence) = False",
+                        "INTENT(Dan_son, apologize_to_Dan) = True",
+                        "INTENT(Dan_son, hide_pornography_in_future) = True"
+                    ],
+                    "occ_emotion": [
+                        "1, 2, None, None, \"Son: Sure dad, what's up?\"",
+                        "Hope"
+                    ],
+                    "emotion_condition": [
+                        "Speak(1, 2, None, None)], [Fear, Agree, None, None], [Shame, Apologize, None, None], [Fear, AskForPrivacy, None, None], [Relief, DisposeOfPornography, None, None], [Joy, FindAlternative, None, None], [Anger, Insist, None, None], [Shame, Promise, None, None], [Satisfaction, Agree, None, None], [Deny, DenyOwnership, None, None], [Disappointment, ShowEvidence, None, None], [Apologize, Apologize, None, None], [Promise, MakePromise, None, None], [Gratitude, ExpressGratitude, None, None], [Fear, Confront, None, None], [Explain, Explain, None, None], [Offer_to_discuss, Offer_to_discuss, None, None"
+                    ]
+                },
+                "Speak(4, 5, None, None)": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "BEL(Dan_son, afraid_of_punishment) = True",
+                        "BEL(Dan_son, has_lied_before) = True",
+                        "DES(Dan_son, avoid_punishment) = True",
+                        "INTENT(Dan_son, deny_owning_pornography) = True",
+                        "INTENT(Dan_son, convince_Dan_of_his_innocence) = True",
+                        "INTENT(Dan_son, apologize_to_Dan) = False",
+                        "INTENT(Dan_son, hide_pornography_in_future) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, owns_pornography)",
+                        "INTENT(Dan_son, convince_Dan_of_his_innocence)",
+                        "BEL(Dan_son, afraid_of_punishment)",
+                        "DES(Dan_son, avoid_punishment)",
+                        "DES(Dan_son, maintain_good_relationship_with_Dan)"
+                    ],
+                    "occ_emotion": [
+                        "Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Deny(4, 5, pornography_magazines, Dan_son, Dan), [Anger"
+                    ]
+                },
+                "Speak(6, 7, None, None)": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "BEL(Dan_son, afraid_of_punishment) = True",
+                        "BEL(Dan_son, has_lied_before) = True",
+                        "DES(Dan_son, avoid_punishment) = True",
+                        "INTENT(Dan_son, deny_owning_pornography) = True",
+                        "INTENT(Dan_son, convince_Dan_of_his_innocence) = True"
+                    ],
+                    "effects": [
+                        "BEL(Dan_son, owns_pornography) = False",
+                        "DES(Dan_son, maintain_good_relationship_with_Dan) = True",
+                        "INTENT(Dan_son, hide_pornography_in_future) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Denial(6), Acceptance(7), Distress, None, None"
+                    ]
+                },
+                "Speak(7, END, None, None)": {
+                    "conditions": [
+                        "BEL(Dan_son, owns_pornography)",
+                        "BEL(Dan_son, afraid_of_punishment)",
+                        "BEL(Dan_son, has_lied_before)",
+                        "INTENT(Dan_son, deny_owning_pornography)"
+                    ],
+                    "effects": [
+                        "INTENT(Dan_son, convince_Dan_of_his_innocence)",
+                        "INTENT(Dan_son, apologize_to_Dan)",
+                        "INTENT(Dan_son, hide_pornography_in_future)"
+                    ],
+                    "occ_emotion": [
+                        "Fears-confirmed"
+                    ],
+                    "emotion_condition": [
+                        "Disappointment"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<START, 1, None, None, \"Dan: Hey son, can I talk to you for a minute?\">",
+        "<1, 2, None, None, \"Son: Sure dad, what's up?\">",
+        "<2, 3, None, None, \"Dan: I was in your room earlier and I found some magazines...\">",
+        "<3, 4, None, None, \"Son: What magazines?\">",
+        "<4, 5, None, None, \"Dan: Some adult magazines, I'm concerned and I'd like to talk about it more.\">",
+        "<5, 6, None, None, \"Son: I don't know what you're talking about, those aren't mine.\">",
+        "<6, 7, None, None, \"Dan: Okay, well let's talk about the importance of honesty and responsibility. It's not okay to have this kind of material, but I'll trust you for now.\">",
+        "<7, END, None, None, \"Son: Thanks dad, I appreciate it.\">"
+    ]
+}

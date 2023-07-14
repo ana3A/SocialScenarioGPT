@@ -1,0 +1,1157 @@
+{
+    "scenario_name": "batender scenario",
+    "scenario_description": "social scenario with a bartender and two customers",
+    "agents": {
+        "Mark": {
+            "knowledge_base": [
+                "BEL(Mark, FriendlyBar) = True",
+                "BEL(Mark, GoodConversations) = True",
+                "BEL(Mark, InterestedInSarah) = False",
+                "DES(Mark, HaveGoodTime) = True",
+                "DES(Mark, MakeNewFriends) = True",
+                "DES(Mark, OrderBeer) = True",
+                "DES(Mark, OrderWhiskey) = True"
+            ],
+            "initial_mood": [
+                "Mood(SELF)=0"
+            ],
+            "actions": {
+                "StartConversation(Mark, Sarah)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "BEL(Mark, InterestedInSarah) = False",
+                        "BEL(Sarah, FriendlyBar) = True",
+                        "BEL(Sarah, GoodConversations) = True",
+                        "Mood(SELF) > 0",
+                        "Sarah"
+                    ],
+                    "effects": [
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "BEL(Sarah, InterestedInMark) = True",
+                        "DES(Mark, MakeNewFriends) = False",
+                        "DES(Mark, OrderBeer) = False",
+                        "DES(Mark, OrderWhiskey) = False",
+                        "DES(Mark, HaveGoodTime) = True",
+                        "DES(Mark, HaveConversationWithSarah) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "OrderDrink(Mark, Beer)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "DES(Mark, OrderBeer) = True",
+                        "Mood(SELF) >= 0",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "BEL(Mark, DrankBeer) = True",
+                        "DES(Mark, OrderWhiskey) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "OrderDrink(Mark, Whiskey)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, OrderWhiskey) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Mark, OrderWhiskey) = False",
+                        "BEL(Mark, OrderBeer) = False",
+                        "BEL(Mark, HaveWhiskey) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "OfferDrink(Mark, Sarah, Wine)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Sarah, Customer) = True",
+                        "BEL(Sarah, PreferWhiteWine) = True",
+                        "BEL(Mark, InterestedInSarah) = False",
+                        "DES(Mark, HaveGoodTime) = True",
+                        "DES(Mark, MakeNewFriends) = True",
+                        "DES(Mark, OrderBeer) = True",
+                        "DES(Mark, OrderWhiskey) = True",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [
+                        "BEL(Mark, OfferedSarahWine) = True",
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "DES(Mark, OrderWine) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Compliment(Sarah, Dress)": {
+                    "conditions": [
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "BEL(Sarah, Upset) = False",
+                        "BEL(Sarah, DressedNice) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, FeelingGood) = True",
+                        "BEL(Mark, ImpressSarah) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ]
+                },
+                "PayBill(Mark, Bartender)": {
+                    "conditions": [
+                        "BEL(Mark, HaveGoodTime) = True",
+                        "BEL(Mark, FriendlyBar) = True",
+                        "Mood(SELF) > 0",
+                        "Mood(SELF) < 0",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "BEL(Mark, HaveGoodTime) = False",
+                        "BEL(Mark, PaidBill) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "WaveGoodbye(Mark, Sarah)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "BEL(Sarah, WantToContinueConversation) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Mark, InterestedInSarah) = False",
+                        "DES(Mark, MakeNewFriends) = True",
+                        "DES(Mark, OrderBeer) = True",
+                        "DES(Mark, OrderWhiskey) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Drinking, Flirt1, Flirting, None)": {
+                    "conditions": [
+                        "BEL(Mark, GoodConversations) = True",
+                        "BEL(Mark, InterestedInSarah) = False",
+                        "BEL(Mark, FriendlyBar) = True",
+                        "DES(Mark, HaveGoodTime) = True",
+                        "Mood(SELF) > 2"
+                    ],
+                    "effects": [
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "DES(Mark, OrderWhiskey) = False",
+                        "DES(Mark, OrderBeer) = False",
+                        "DES(Mark, FlirtWithSarah) = True"
+                    ],
+                    "occ_emotion": [
+                        "Flirt1",
+                        "Love"
+                    ]
+                },
+                "Speak(Flirt1, Flirt2, Flirting, None)": {
+                    "conditions": [
+                        "BEL(Mark, InterestedInSarah) = False",
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "Mood(SELF) > 4"
+                    ],
+                    "effects": [
+                        "DES(Mark, FlirtingWithSarah) = True",
+                        "BEL(Mark, InterestedInSarah) = True"
+                    ],
+                    "occ_emotion": [
+                        "Flirt1, Flirt2, Flirting, None, \"Mark flirts with Sarah, telling her she looks stunning tonight.\"",
+                        "Flirt1, Flirt2, Love, None"
+                    ]
+                },
+                "Speak(Flirt2, Drinking, Flirting, None)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "DES(Mark, HaveGoodTime) = True",
+                        "DES(Mark, MakeNewFriends) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Mark, FlirtingWithSarah) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gloating"
+                    ]
+                },
+                "Speak(Drinking, Job1, Personal, None)": {
+                    "conditions": [
+                        "BEL(Drinking, OngoingConversation) = True",
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Mark, Job) = Job1",
+                        "BEL(Mark, GoodConversations) = False",
+                        "BEL(Mark, Boredom) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "Speak(Job1, Drinking, Personal, None)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Mark, HaveGoodTime) = True",
+                        "DES(Mark, MakeNewFriends) = True",
+                        "DES(Mark, OrderBeer) = True",
+                        "DES(Mark, OrderWhiskey) = True",
+                        "BEL(Mark, PersonalConversation) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "Speak(Drinking, RudeCustomer1, Anger, None)": {
+                    "conditions": [
+                        "BEL(Drinking, RudeCustomer1Present) = True",
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "BEL(Mark, InterestedInSarah) = False",
+                        "Mood(SELF) > -3"
+                    ],
+                    "effects": [
+                        "BEL(Mark, GoodConversations) = False",
+                        "BEL(Mark, InterestedInSarah) = False",
+                        "DES(Mark, HaveGoodTime) = False",
+                        "DES(Mark, MakeNewFriends) = False",
+                        "DES(Mark, OrderBeer) = False",
+                        "DES(Mark, OrderWhiskey) = False",
+                        "DES(Mark, LeaveBar) = True",
+                        "BEL(Drinking, RudeCustomer1Present) = False"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ]
+                },
+                "Speak(RudeCustomer1, RudeCustomer2, Anger, None)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "BEL(RudeCustomer1, Annoying) = True",
+                        "BEL(RudeCustomer2, Aggressive) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Mark, CalmDown) = True",
+                        "BEL(RudeCustomer1, Annoying) = False",
+                        "BEL(RudeCustomer2, Aggressive) = False"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ]
+                },
+                "Speak(RudeCustomer2, Drinking, Anger, None)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Mark, GoodConversations) = True",
+                        "DES(Mark, HaveGoodTime) = True",
+                        "DES(Mark, MakeNewFriends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ]
+                },
+                "Speak(Drinking, Hobby1, Personal, None)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Mark, Hobby) = \"Playing guitar\"",
+                        "DES(Mark, ShareHobby) = True"
+                    ],
+                    "occ_emotion": [
+                        "Happy-for"
+                    ]
+                },
+                "Speak(Hobby1, Drinking, Personal, None)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "Mood(SELF) > -4"
+                    ],
+                    "effects": [
+                        "BEL(Mark, Hobby1) = True",
+                        "DES(Mark, HaveGoodTime) = True",
+                        "DES(Mark, MakeNewFriends) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy",
+                        "Satisfaction"
+                    ]
+                },
+                "Speak(Drinking, Birthday1, Planning, None)": {
+                    "conditions": [
+                        "BEL(Drinking, CelebratingBirthday) = True",
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "DES(Mark, HaveGoodTime) = True",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [
+                        "BEL(Mark, InterestedInSarah) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "Speak(Birthday1, Birthday2, Planning, None)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Mark, PlanBirthday) = True",
+                        "BEL(Birthday1, Mark) = True",
+                        "BEL(Birthday2, Sarah) = True",
+                        "BEL(Bar, Decorations) = True"
+                    ],
+                    "occ_emotion": [
+                        "No emotion triggered"
+                    ]
+                },
+                "Speak(Birthday2, Drinking, Planning, None)": {
+                    "conditions": [
+                        "BEL(Mark, FriendlyBar) = True",
+                        "BEL(Mark, GoodConversations) = True",
+                        "BEL(Mark, InterestedInSarah) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Mark, Planning) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                }
+            }
+        },
+        "Sarah": {
+            "knowledge_base": [
+                "BEL(Sarah, likes_white_wine) = True",
+                "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                "DES(Sarah, wants_to_relax) = True",
+                "DES(Sarah, wants_to_enjoy_her_wine) = True",
+                "DES(Sarah, does_not_want_to_be_disturbed) = True"
+            ],
+            "initial_mood": [],
+            "actions": {
+                "OrderDrink(Sarah, Bartender, white_wine)": {
+                    "conditions": [
+                        "BEL(Sarah, does_not_have_a_drink) = True",
+                        "BEL(Bartender, has_white_wine) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, has_a_white_wine)",
+                        "BEL(Sarah, does_not_want_to_be_disturbed) = False",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = False",
+                        "DES(Sarah, wants_to_relax) = False"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Sit(Sarah, Chair1)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_free_chair) = True",
+                        "BEL(Sarah, the_chair_is_suitable_for_sitting) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) < 0",
+                        "Mood(SELF) > 0",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, sitting) = True",
+                        "DES(Sarah, wants_to_relax) = False",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Relax(Sarah, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "DES(Sarah, wants_to_relax) = True",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Sarah, does_not_want_to_be_disturbed) = False",
+                        "DES(Sarah, is_feeling_calm) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Pay(Bartender, Sarah, 10)": {
+                    "conditions": [
+                        "BEL(Sarah, is_holding_enough_money) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Bartender, receives_payment_from_Sarah) = True",
+                        "BEL(Sarah, has_spent_money) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Chat(Sarah, Mark)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "DES(Sarah, wants_to_relax) = True",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = True",
+                        "BEL(Sarah, knows_Mark) = False",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, knows_Mark) = True",
+                        "DES(Sarah, wants_to_get_to_know_Mark_better) = True",
+                        "DES(Sarah, wants_to_continue_talking_to_Mark) = True",
+                        "DES(Sarah, is_enjoying_her_time_at_the_bar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ]
+                },
+                "RefuseDrinkOffer(Sarah, Mark)": {
+                    "conditions": [
+                        "BEL(Sarah, wants_to_relax) = True",
+                        "BEL(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, feels_uncomfortable_around_Mark) = True",
+                        "BEL(Sarah, doesn't_trust_Mark) = True",
+                        "DES(Sarah, wants_to_leave_the_bar) = True",
+                        "DES(Sarah, wants_to_avoid_Mark) = True"
+                    ],
+                    "occ_emotion": [
+                        "Disappointment"
+                    ]
+                },
+                "ExpressAnger(Sarah, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, is_angry) = True",
+                        "DES(Sarah, wants_to_leave_the_bar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ]
+                },
+                "Leave(Sarah, None)": {
+                    "conditions": [
+                        "BEL(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) < 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, the_bar_is_not_a_relaxing_place_anymore) = True",
+                        "DES(Sarah, wants_to_leave_the_bar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Distress"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Drinking, TalktoBartender1, Interest, None)": {
+                    "conditions": [
+                        "BEL(Sarah, likes_white_wine) = True",
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, enjoys_talking_to_the_bartender) = True"
+                    ],
+                    "occ_emotion": [
+                        "Admiration"
+                    ]
+                },
+                "Speak(TalktoBartender1, TalktoBartender2, Interest, None)": {
+                    "conditions": [
+                        "BEL(Sarah, wants_to_enjoy_her_wine) = True",
+                        "BEL(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, wants_to_talk_to_bartender) = True",
+                        "BEL(Sarah, bartender_is_interested) = True/False",
+                        "BEL(Sarah, enjoyed_talking_to_bartender) = True/False"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Speak(TalktoBartender2, Drinking, Interest, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "BEL(Sarah, wants_to_relax) = True",
+                        "BEL(Sarah, likes_white_wine) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, has_spoken_to_the_bartender) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Drinking, Job1, Interest, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "DES(Sarah, wants_to_relax) = True",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, talked_about_job) = True"
+                    ],
+                    "occ_emotion": [
+                        "Pride"
+                    ]
+                },
+                "Speak(Job1, Job2, Interest, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "DES(Sarah, wants_to_relax) = True",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, interested_in_Job1) = True",
+                        "DES(Sarah, wants_to_know_more_about_Job1) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = False"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Job2, Drinking, Interest, None)": {
+                    "conditions": [
+                        "BEL(Sarah, enjoys_conversations_with_friends)",
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment)",
+                        "DES(Sarah, wants_to_enjoy_her_wine)",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, enjoys_conversations_with_friends)",
+                        "DES(Sarah, wants_to_relax)",
+                        "BEL(Job2, Drinking)",
+                        "BEL(Job2, Interest)"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Drinking, Story1, Humor, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "BEL(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Sarah, wants_to_hear_stories) = True",
+                        "BEL(Sarah, likes_to_laugh) = True",
+                        "BEL(Sarah, feels_more_comfortable) = True",
+                        "BEL(Sarah, finds_the_bar_even_more_interesting) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ]
+                },
+                "Speak(Story1, Story2, Humor, None)": {
+                    "conditions": [
+                        "BEL(Sarah, does_not_want_to_be_disturbed) = True",
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Sarah, wants_to_relax) = False",
+                        "BEL(Sarah, likes_funny_stories) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Story2, Drinking, Humor, None)": {
+                    "conditions": [
+                        "BEL(Sarah, likes_white_wine) = True",
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "DES(Sarah, wants_to_relax) = True",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) > 2"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, likes_funny_stories) = True",
+                        "DES(Sarah, wants_to_hear_more_stories) = True",
+                        "DES(Sarah, does_not_want_to_be_interrupted) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Drinking, Music1, Passion, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "DES(Sarah, wants_to_relax) = True",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, likes_music) = True",
+                        "DES(Sarah, wants_to_talk_about_music) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "Speak(Music1, Music2, Passion, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "DES(Sarah, wants_to_relax) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, likes_Music1) = True",
+                        "BEL(Sarah, dislikes_Music2) = True",
+                        "DES(Sarah, wants_to_listen_to_Music1) = True",
+                        "DES(Sarah, does_not_want_to_listen_to_Music2) = True"
+                    ],
+                    "occ_emotion": [
+                        "Love"
+                    ]
+                },
+                "Speak(Music2, Drinking, Passion, None)": {
+                    "conditions": [
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "BEL(Sarah, does_not_want_to_be_disturbed) = True",
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, enjoys_music) = True",
+                        "DES(Sarah, wants_to_listen_to_music) = True",
+                        "BEL(Music2, creates_passion) = True",
+                        "BEL(Sarah, the_bar_has_a_fun_environment) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "Speak(Drinking, Hike1, Interest, None)": {
+                    "conditions": [
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "BEL(Sarah, likes_hiking) = False",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Sarah, wants_to_talk_about_hiking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Hike1, Hike2, Interest, None)": {
+                    "conditions": [
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "DES(Sarah, wants_to_relax) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, interested_in_hiking) = True",
+                        "BEL(Sarah, enjoys_nature) = True",
+                        "DES(Sarah, wants_to_plan_a_hiking_trip) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "Speak(Hike2, Drinking, Interest, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, interested_in_hiking) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ]
+                },
+                "Speak(Drinking, CurrentEvent1, Opinion, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "DES(Sarah, wants_to_relax) = True",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = True",
+                        "DES(Sarah, does_not_want_to_be_disturbed) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, has_expressed_opinion) = True",
+                        "BEL(Sarah, the_bar_has_noisy_customers) = True",
+                        "DES(Sarah, wants_to_stay_longer_at_the_bar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Speak(CurrentEvent1, CurrentEvent2, Opinion, None)": {
+                    "conditions": [
+                        "BEL(Sarah, the_bar_has_a_relaxing_environment) = True",
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Sarah, wants_to_talk_to_someone_new) = True",
+                        "BEL(Sarah, speaking_to_someone_new) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "Speak(CurrentEvent2, Drinking, Opinion, None)": {
+                    "conditions": [
+                        "BEL(CurrentEvent2, is_about_a_non-controversial_topic) = True",
+                        "BEL(CurrentEvent2, speaker_will_not_bring_up_a_topic_that_makes_Sarah_uncomfortable) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, enjoys_conversations_with_friends) = True",
+                        "BEL(Sarah, does_not_want_to_be_disturbed) = True",
+                        "DES(Sarah, wants_to_relax) = True",
+                        "DES(Sarah, wants_to_enjoy_her_wine) = True"
+                    ],
+                    "occ_emotion": []
+                }
+            }
+        },
+        "Bartender": {
+            "knowledge_base": [
+                "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                "BEL(Bartender, ItIsImportantToMaintainACleanBar) = True",
+                "BEL(Bartender, SocializingWithCustomersIsImportant) = True",
+                "DES(Bartender, ServeDrinksAccordingly) = True",
+                "DES(Bartender, KeepCustomersHappy) = True",
+                "DES(Bartender, MaintainACleanBar) = True",
+                "DES(Bartender, CreateAThrivingSocialEnvironment) = True"
+            ],
+            "initial_mood": [],
+            "actions": {
+                "ServeDrink(Bartender, Mark, Beer)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [
+                        "BEL(Mark, WantsAnotherBeer) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "ServeDrink(Bartender, Sarah, WhiteWine)": {
+                    "conditions": [
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, ItIsImportantToMaintainACleanBar) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Bartender, ServeDrinksAccordingly) = True",
+                        "BEL(Sarah, PrefersWhiteWine) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "RememberDrinkPreference(Bartender, Mark, Beer, Whiskey)": {
+                    "conditions": [
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Mark, IsARelgularCustomer) = True",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [
+                        "BEL(Mark, DrinkPreference(Beer, Whiskey)) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "RememberDrinkPreference(Bartender, Sarah, WhiteWine)": {
+                    "conditions": [
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, PrefersWhiteWine) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ]
+                },
+                "OfferToClean(Bartender, Sarah, Dress)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Bartender, ItIsImportantToMaintainACleanBar) = True",
+                        "BEL(Sarah, DressIsDirty) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Bartender, SocializingWithCustomersIsImportant) = True",
+                        "DES(Bartender, KeepCustomersHappy) = True",
+                        "BEL(Sarah, DressIsClean) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "OfferAnotherDrink(Bartender, Sarah)": {
+                    "conditions": [
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences)",
+                        "BEL(Bartender, BarIsAProfessionalEnvironment)",
+                        "BEL(Bartender, SocializingWithCustomersIsImportant)",
+                        "BEL(Sarah, WantsAnotherDrink)",
+                        "BEL(Sarah, UpsetAboutDrinkBeingSpilled)",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Bartender, ServeDrinksAccordingly)",
+                        "DES(Bartender, KeepCustomersHappy)",
+                        "BEL(Sarah, WantsAnotherDrink)",
+                        "BEL(Sarah, UpsetAboutDrinkBeingSpilled)",
+                        "BEL(Sarah, FeelingGratefulToBartender)",
+                        "BEL(Sarah, PleasedWithService)",
+                        "BEL(Sarah, InterestedInSittingAtBar)"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "FacilitateConversation(Bartender, Mark, Sarah)": {
+                    "conditions": [
+                        "BEL(Bartender, SocializingWithCustomersIsImportant) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Mark, GoodConversationsAreImportant) = True",
+                        "BEL(Sarah, RelaxingIsImportant) = True",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [
+                        "DES(Bartender, CreateAThrivingSocialEnvironment) = True",
+                        "BEL(Bartender, MarkAndSarahAreGettingAlong) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "PlayMusic(Bartender, Jazz)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "Mood(SELF) > 5",
+                        "Mood(SELF) < -5",
+                        "Mood(SELF) = 0"
+                    ],
+                    "effects": [
+                        "BEL(Bartender, MusicPlaying) = Jazz",
+                        "DES(Bartender, CreateAmbianceWithMusic) = True"
+                    ],
+                    "occ_emotion": [
+                        "Joy"
+                    ]
+                },
+                "ServeSnacks(Bartender, Mark, Peanuts)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Mark, WantsToOrderMoreDrinks) = True",
+                        "BEL(Bartender, KnowsMarkLikesPeanuts) = True",
+                        "BEL(Mark, IsSatisfiedWithPeanuts) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "ServeSnacks(Bartender, Sarah, CheesePlatter)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Bartender, SocializingWithCustomersIsImportant) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Sarah, EnjoysTheCheesePlatter) = True",
+                        "BEL(Bartender, CheesePlatterHasBeenServed) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratification"
+                    ]
+                }
+            },
+            "speak_actions": {
+                "Speak(Start, Greeting, Introduction, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "Mood(SELF) >= 0"
+                    ],
+                    "effects": [],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Speak(Drinking, Order, Request, None)": {
+                    "conditions": [
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Bartender, ServeDrinksAccordingly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Relief"
+                    ]
+                },
+                "Speak(Start, Recommend1, None, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Bartender, ServeDrinksAccordingly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ]
+                },
+                "Speak(Recommend1, Recommend2, None, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Bartender, ServeDrinksAccordingly) = True",
+                        "BEL(Bartender, CustomersAreInterestedInTryingNewDrinks) = True"
+                    ],
+                    "occ_emotion": [
+                        "Interest"
+                    ]
+                },
+                "Speak(Start, SmallTalk1, Interest, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Bartender, SocializingWithCustomersIsImportant) = True",
+                        "Mood(SELF) >= -5"
+                    ],
+                    "effects": [
+                        "DES(Bartender, ServeDrinksAccordingly) = True",
+                        "DES(Bartender, KeepCustomersHappy) = True",
+                        "DES(Bartender, MaintainACleanBar) = True",
+                        "DES(Bartender, CreateAThrivingSocialEnvironment) = True",
+                        "BEL(Bartender, CustomersAreEngagedInConversation) = True"
+                    ],
+                    "occ_emotion": [
+                        "Hope"
+                    ]
+                },
+                "Speak(SmallTalk1, SmallTalk2, Interest, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, SocializingWithCustomersIsImportant) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "DES(Bartender, KeepCustomersHappy) = True",
+                        "BEL(Bartender, CustomersHaveANewTopicToDiscuss) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Speak(SmallTalk2, Drinking, Interest, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, SocializingWithCustomersIsImportant) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Bartender, ServeDrinksAccordingly) = True",
+                        "BEL(Bartender, CustomersHavePositiveExperience) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                },
+                "Speak(Drinking, Incident1, Incident, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Bartender, KeepCustomersHappy) = True",
+                        "BEL(Bartender, ItIsImportantToMaintainACleanBar) = True"
+                    ],
+                    "occ_emotion": [
+                        "Anger"
+                    ]
+                },
+                "Speak(Incident1, Incident2, Incident, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Bartender, MaintainACleanBar) = True",
+                        "BEL(Bartender, CreateAThrivingSocialEnvironment) = True",
+                        "DES(Bartender, ServeDrinksAccordingly) = True",
+                        "DES(Bartender, KeepCustomersHappy) = True",
+                        "BEL(Incident1, SpillOnCustomerDress) = True",
+                        "BEL(Incident2, CustomerIsUpset) = True"
+                    ],
+                    "occ_emotion": []
+                },
+                "Speak(Incident2, Drinking, Incident, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "BEL(Bartender, MaintainACleanBar) = True",
+                        "DES(Bartender, KeepCustomersHappy) = True",
+                        "DES(Bartender, ServeDrinksAccordingly) = True"
+                    ],
+                    "occ_emotion": [
+                        "Fear"
+                    ]
+                },
+                "Speak(Drinking, Snack, Offer, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Bartender, ItIsImportantToMaintainACleanBar) = True",
+                        "BEL(Bartender, SocializingWithCustomersIsImportant) = True",
+                        "DES(Bartender, ServeDrinksAccordingly) = True",
+                        "DES(Bartender, KeepCustomersHappy) = True",
+                        "DES(Bartender, MaintainACleanBar) = True",
+                        "DES(Bartender, CreateAThrivingSocialEnvironment) = True",
+                        "Mood(SELF) > 0"
+                    ],
+                    "effects": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Bartender, ItIsImportantToMaintainACleanBar) = True",
+                        "BEL(Bartender, SocializingWithCustomersIsImportant) = True",
+                        "DES(Bartender, ServeDrinksAccordingly) = True",
+                        "DES(Bartender, KeepCustomersHappy) = True",
+                        "DES(Bartender, MaintainACleanBar) = True",
+                        "DES(Bartender, CreateAThrivingSocialEnvironment) = True",
+                        "DES(Bartender, OfferSnacks) = True",
+                        "BEL(Bartender, CustomersMayBeHungry) = True"
+                    ],
+                    "occ_emotion": [
+                        "Gratitude"
+                    ]
+                },
+                "Speak(Snack, Drinking, Offer, None)": {
+                    "conditions": [
+                        "BEL(Bartender, BarIsAProfessionalEnvironment) = True",
+                        "BEL(Bartender, CustomersHaveSpecificDrinkPreferences) = True",
+                        "BEL(Bartender, SocializingWithCustomersIsImportant) = True",
+                        "Mood(SELF) > -5"
+                    ],
+                    "effects": [
+                        "DES(Bartender, MaintainACleanBar) = True",
+                        "DES(Bartender, CreateAThrivingSocialEnvironment) = True",
+                        "BEL(Snack, BartenderOfferedSnack) = True"
+                    ],
+                    "occ_emotion": [
+                        "Satisfaction"
+                    ]
+                }
+            }
+        }
+    },
+    "dialogue_tree": [
+        "<Start, Greeting, Introduction, None, \"Mark and Sarah enter the bar and take a seat.\">",
+        "<Greeting, Ordering, Introduction, None, \"Mark greets Sarah and asks her what she would like to drink.\">",
+        "<Ordering, Drinking, Purchase, None, \"Sarah thanks Mark and begins sipping her wine.\">",
+        "<Ordering, Drinking, Purchase, None, \"Mark begins drinking his beer.\">",
+        "<Drinking, TVShow1, Interest, None, \"Mark asks Sarah if she has seen any good TV shows lately.\">",
+        "<TVShow1, TVShow2, Interest, None, \"Sarah mentions that she has been binge-watching a show on streaming service.\">",
+        "<TVShow2, Drinking, Interest, None, \"Mark says he has heard of that show and the two agree to continue the conversation later.\">",
+        "<Drinking, Politics1, Controversy, None, \"Sarah brings up a political issue and asks Mark his thoughts.\">",
+        "<Politics1, Politics2, Controversy, None, \"Mark disagrees with Sarah's perspective and they begin to debate the issue.\">",
+        "<Politics2, Drinking, Controversy, None, \"Sarah and Mark both calm down and agree to disagree after a while.\">",
+        "<Drinking, Accident1, Incident, None, \"Sarah spills wine on her dress and becomes upset.\">",
+        "<Accident1, Accident2, Incident, None, \"Mark notices and offers to help Sarah clean the stain.\">",
+        "<Accident2, Drinking, Incident, None, \"Sarah accepts Mark's offer and the two continue to drink.\">",
+        "<Start, Recommend1, None, None, \"The bartender approaches Mark and Sarah and asks if they want to try a new drink.\">",
+        "<Recommend1, Recommend2, None, None, \"The bartender describes the drink and the ingredients.\">",
+        "<Recommend2, Drinking, Purchase, None, \"Mark and Sarah both decide to try the drink.\">",
+        "<Drinking, Travel1, Interest, None, \"Sarah asks Mark where he would like to travel.\">",
+        "<Travel1, Travel2, Interest, None, \"Mark mentions his dream destination and asks Sarah the same question.\">",
+        "<Travel2, Drinking, Interest, None, \"Sarah tells Mark about her favorite trip and the discussion continues.\">"
+    ]
+}

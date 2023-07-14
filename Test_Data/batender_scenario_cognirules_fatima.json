@@ -1,0 +1,1750 @@
+[
+  "EmotionalDecisionMakingAsset",
+  {
+    "root": {
+      "classId": 0,
+      "ActionTendencies": [
+        {
+          "Action": "StartConversation(Mark,Sarah)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "OrderDrink(Mark,Beer)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "OrderDrink(Mark,Whiskey)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "OfferDrink(Mark,Sarah,Wine)",
+          "Target": "Sarah",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Compliment(Sarah,Dress)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "PayBill(Mark,Bartender)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "WaveGoodbye(Mark,Sarah)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Flirt1,Flirting,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Flirt1,Flirt2,Flirting,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Flirt2,Drinking,Flirting,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Job1,Personal,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Job1,Drinking,Personal,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,RudeCustomer1,Anger,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(RudeCustomer1,RudeCustomer2,Anger,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(RudeCustomer2,Drinking,Anger,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Hobby1,Personal,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Hobby1,Drinking,Personal,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Birthday1,Planning,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Birthday1,Birthday2,Planning,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Birthday2,Drinking,Planning,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "OrderDrink(Sarah,Bartender,white_wine)",
+          "Target": "Bartender",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Sit(Sarah,Chair1)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Relax(Sarah,None)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Pay(Bartender,Sarah,10)",
+          "Target": "Sarah",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Chat(Sarah,Mark)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "RefuseDrinkOffer(Sarah,Mark)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ExpressAnger(Sarah,None)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Leave(Sarah,None)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,TalktoBartender1,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(TalktoBartender1,TalktoBartender2,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(TalktoBartender2,Drinking,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Job1,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Job1,Job2,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Job2,Drinking,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Story1,Humor,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Story1,Story2,Humor,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Story2,Drinking,Humor,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Music1,Passion,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Music1,Music2,Passion,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Music2,Drinking,Passion,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Hike1,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Hike1,Hike2,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Hike2,Drinking,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,CurrentEvent1,Opinion,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(CurrentEvent1,CurrentEvent2,Opinion,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(CurrentEvent2,Drinking,Opinion,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ServeDrink(Bartender,Mark,Beer)",
+          "Target": "Mark",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ServeDrink(Bartender,Sarah,WhiteWine)",
+          "Target": "Sarah",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "RememberDrinkPreference(Bartender,Mark,Beer,Whiskey)",
+          "Target": "Mark",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "RememberDrinkPreference(Bartender,Sarah,WhiteWine)",
+          "Target": "Sarah",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "OfferToClean(Bartender,Sarah,Dress)",
+          "Target": "Sarah",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "OfferAnotherDrink(Bartender,Sarah)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "FacilitateConversation(Bartender,Mark,Sarah)",
+          "Target": "Mark",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "PlayMusic(Bartender,Jazz)",
+          "Target": "-",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ServeSnacks(Bartender,Mark,Peanuts)",
+          "Target": "Mark",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "ServeSnacks(Bartender,Sarah,CheesePlatter)",
+          "Target": "Sarah",
+          "Layer": "-",
+          "Conditions": {
+            "Set": []
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start,Greeting,Introduction,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Order,Request,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start,Recommend1,None,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Recommend1,Recommend2,None,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Start,SmallTalk1,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(SmallTalk1,SmallTalk2,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(SmallTalk2,Drinking,Interest,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Incident1,Incident,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Incident1,Incident2,Incident,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Incident2,Drinking,Incident,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Drinking,Snack,Offer,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        },
+        {
+          "Action": "Speak(Snack,Drinking,Offer,None)",
+          "Target": "[target]",
+          "Layer": "-",
+          "Conditions": {
+            "Set": [
+              "Has(Floor) = SELF",
+              "DialogueState([target]) = [currentState]",
+              "IsAgent([target]) = True",
+              "ValidDialogue([currentState], [nextState], [meaning], [style]) = True"
+            ]
+          },
+          "Priority": 1
+        }
+      ]
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "EmotionalDecisionMaking.EmotionalDecisionMakingAsset, EmotionalDecisionMaking, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "EmotionalAppraisalAsset",
+  {
+    "root": {
+      "classId": 0,
+      "Description": null,
+      "AppraisalRules": {
+        "AppraisalWeight": 1,
+        "Rules": [
+          {
+            "EventName": "Event(Action-End, Mark, StartConversation(Mark,Sarah), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, OrderDrink(Mark,Beer), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, OrderDrink(Mark,Whiskey), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, OfferDrink(Mark,Sarah,Wine), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, Compliment(Sarah,Dress), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, PayBill(Mark,Bartender), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, WaveGoodbye(Mark,Sarah), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, Speak(Flirt2,Drinking,Flirting,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                },
+                {
+                  "Name": "Desirability for others",
+                  "Value": -5,
+                  "Target": "[target]"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, Speak(Drinking,RudeCustomer1,Anger,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": -5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, Speak(RudeCustomer1,RudeCustomer2,Anger,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": -5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, Speak(RudeCustomer2,Drinking,Anger,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": -5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, Speak(Drinking,Hobby1,Personal,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": []
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, Speak(Hobby1,Drinking,Personal,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Mark, Speak(Birthday2,Drinking,Planning,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, OrderDrink(Sarah,Bartender,white_wine), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Sit(Sarah,Chair1), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Relax(Sarah,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Pay(Bartender,Sarah,10), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Chat(Sarah,Mark), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, RefuseDrinkOffer(Sarah,Mark), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, ExpressAnger(Sarah,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": -5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Leave(Sarah,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Drinking,TalktoBartender1,Interest,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(TalktoBartender1,TalktoBartender2,Interest,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(TalktoBartender2,Drinking,Interest,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Drinking,Job1,Interest,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "SELF"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Job1,Job2,Interest,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Job2,Drinking,Interest,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Drinking,Story1,Humor,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "SELF"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Story1,Story2,Humor,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Story2,Drinking,Humor,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Drinking,Music1,Passion,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Music1,Music2,Passion,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Like",
+                  "Value": 5
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Drinking,Hike1,Interest,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Sarah, Speak(Drinking,CurrentEvent1,Opinion,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, ServeDrink(Bartender,Mark,Beer), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, ServeDrink(Bartender,Sarah,WhiteWine), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, RememberDrinkPreference(Bartender,Mark,Beer,Whiskey), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, RememberDrinkPreference(Bartender,Sarah,WhiteWine), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "SELF"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, OfferToClean(Bartender,Sarah,Dress), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, OfferAnotherDrink(Bartender,Sarah), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, FacilitateConversation(Bartender,Mark,Sarah), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, PlayMusic(Bartender,Jazz), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, ServeSnacks(Bartender,Mark,Peanuts), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, ServeSnacks(Bartender,Sarah,CheesePlatter), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "SELF"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, Speak(Start,Greeting,Introduction,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, Speak(Drinking,Order,Request,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, Speak(Start,SmallTalk1,Interest,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.6,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, Speak(SmallTalk1,SmallTalk2,Interest,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, Speak(SmallTalk2,Drinking,Interest,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, Speak(Drinking,Incident1,Incident,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": -5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": -5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, Speak(Incident2,Drinking,Incident,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 0.4,
+                  "Target": "BadGoalName"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, Speak(Drinking,Snack,Offer,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Praiseworthiness",
+                  "Value": 5,
+                  "Target": "[target]"
+                },
+                {
+                  "Name": "Desirability",
+                  "Value": 5,
+                  "Target": "-"
+                }
+              ]
+            }
+          },
+          {
+            "EventName": "Event(Action-End, Bartender, Speak(Snack,Drinking,Offer,None), [t])",
+            "Conditions": {
+              "Set": []
+            },
+            "AppraisalVariables": {
+              "AppraisalVariables": [
+                {
+                  "Name": "Goal Success Probablity",
+                  "Value": 1,
+                  "Target": "GoodGoalName"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "EmotionalAppraisal.EmotionalAppraisalAsset, EmotionalAppraisal, Version=1.4.1.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "SocialImportanceAsset",
+  {
+    "root": {
+      "classId": 0,
+      "AttributionRules": []
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "SocialImportance.SocialImportanceAsset, SocialImportance, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  "CommeillFautAsset",
+  {
+    "root": {
+      "classId": 0,
+      "SocialExchanges": []
+    },
+    "types": [
+      {
+        "TypeId": 0,
+        "ClassName": "CommeillFaut.CommeillFautAsset, CommeillFaut, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  }
+]
